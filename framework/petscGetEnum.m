@@ -9,6 +9,8 @@ function val = petscGetEnum(name)
 %
 % MatAssemblyType: MAT_FINAL_ASSEMBLY, MAT_FLUSH_ASSEMBLY
 %
+% MatInfoType: MAT_LOCAL,MAT_GLOBAL_MAX,MAT_GLOBAL_SUM
+%
 % MatOption: MAT_ROW_ORIENTED, MAT_SYMMETRIC, MAT_STRUCTURALLY_SYMMETRIC,
 %      MAT_NEW_DIAGONALS, MAT_IGNORE_OFF_PROC_ENTRIES, 
 %      MAT_USE_HASH_TABLE, MAT_KEEP_NONZERO_PATTERN, 
@@ -28,7 +30,7 @@ function val = petscGetEnum(name)
 %#codegen -args {coder.typeof(char(0),[1,inf])}
 
 if coder.target('MATLAB')
-    return;
+    error('Function petscGetEnum must be compiled.');
 end
 
 val = int32(intmin);
@@ -54,6 +56,12 @@ elseif isequal(name, 'MAT_FINAL_ASSEMBLY')
     val = coder.ceval(' ', coder.opaque('MatAssemblyType', 'MAT_FINAL_ASSEMBLY'));
 elseif isequal(name, 'MAT_FLUSH_ASSEMBLY')
     val = coder.ceval(' ', coder.opaque('MatAssemblyType', 'MAT_FLUSH_ASSEMBLY'));
+elseif isequal(name, 'MAT_LOCAL')
+    val = coder.ceval(' ', coder.opaque('MatInfoType', 'MAT_LOCAL'));
+elseif isequal(name, 'MAT_GLOBAL_MAX')
+    val = coder.ceval(' ', coder.opaque('MatInfoType', 'MAT_GLOBAL_MAX'));
+elseif isequal(name, 'MAT_GLOBAL_SUM')
+    val = coder.ceval(' ', coder.opaque('MatInfoType', 'MAT_GLOBAL_SUM'));
 elseif isequal(name, 'MAT_ROW_ORIENTED')
     val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_ROW_ORIENTED'));
 elseif isequal(name, 'MAT_SYMMETRIC')

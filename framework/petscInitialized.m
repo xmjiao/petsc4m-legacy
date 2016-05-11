@@ -21,7 +21,7 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('PetscInitialized', coder.wref(b));
     initialized = coder.ceval(' ', b);
 
-    if errCode && (nargout==1 || coder.ismatlabthread)
+    if errCode && (nargout<2 || coder.ismatlabthread)
         m2c_error('petsc:RuntimeError', 'PetscInitialized returned error code %d\n', errCode)
     end
 end

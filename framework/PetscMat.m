@@ -3,7 +3,7 @@ function mat = PetscMat(arg) %#codegen
 %
 % mat = PetscMat(arg)
 %
-% See also petscAssembleMat, petscDestroyMat
+% See also PescVec
 
 coder.inline('always');
 

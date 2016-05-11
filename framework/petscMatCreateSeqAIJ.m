@@ -1,4 +1,4 @@
-function [mat, errCode] = petscMatCreateSeqAIJ(m, n, nz, nnz, varargin)
+function [mat, errCode, toplevel] = petscMatCreateSeqAIJ(m, n, nz, nnz, varargin)
 %Creates a sparse matrix in AIJ (compressed row) format.
 %
 %  [mat, errCode] = petscMatCreateSeqAIJ(m, n, nz)
@@ -38,27 +38,25 @@ errCode = int32(-1);
 if ~coder.target('MATLAB')
     t_mat = coder.opaque('Mat');
     
-    comm = PETSC_COMM_SELF;
+    comm = MPI_Comm(PETSC_COMM_SELF);
     if nargin==3
         % When petscMatCreateSeqAIJ is used as a top-level function for code
         % generation, we need to wrap the result into an MATLAB opaque object.
         nnz = coder.opaque('PetscInt *', 'NULL');
         errCode = coder.ceval('MatCreateSeqAIJ', comm, m, n, nz, nnz, coder.wref(t_mat));
-        mat = opaque_obj('Mat', t_mat);
+
     else
         errCode = coder.ceval('MatCreateSeqAIJ', comm, m, n, nz, coder.rref(nnz), coder.wref(t_mat));
-        if nargin==4
-            % When petscMatCreateSeqAIJ is used as a top-level function for code
-            % generation, we need to wrap the result into an MATLAB opaque object.
-            mat = opaque_obj('Mat', t_mat);
-        else
-            % When petscMatCreateSeqAIJ is used as an internal function for code
-            % generation, return the opaque Mat object directly.
-            mat = t_mat;
-        end
     end
 
-    if errCode && (nargout==1 || coder.ismatlabthread)
+    if nargout>2
+        mat = opaque_obj('Mat', t_mat);
+        toplevel = true;
+    else
+        mat = t_mat;
+    end
+    
+    if errCode && (nargout<2 || coder.ismatlabthread)
         m2c_error('petsc:RuntimeError', 'MatCreateSeqAIJ returned error code %d\n', errCode)
     end
 end

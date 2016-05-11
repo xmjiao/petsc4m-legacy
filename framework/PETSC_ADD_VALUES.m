@@ -1,4 +1,4 @@
-function val = petscADD_VALUES %#codegen
+function val = PETSC_ADD_VALUES %#codegen
 % Obtain PETSC constant ADD_VALUES
 
 coder.inline('always');

@@ -1,4 +1,4 @@
-function [vec, errCode] = petscVecDestroy(vec)
+function [vec, errCode, toplevel] = petscVecDestroy(vec)
 %Frees space taken by a vector.
 %
 %  [vec, errCode] = petscVecDestroy(vec)
@@ -18,13 +18,13 @@ if ~coder.target('MATLAB')
     
     errCode = coder.ceval('VecDestroy', coder.ref(t_vec));
     
-    if errCode && (nargout==1 || coder.ismatlabthread)
+    if errCode && (nargout<2 || coder.ismatlabthread)
         m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode)
     end
-    
-    if isstruct(vec)
-        % Create a MATLAB opaque object if the req is a MATLAB opaque object.
+
+    if nargout>2
         vec = opaque_obj('Vec', t_vec);
+        toplevel = true;
     else
         vec = t_vec;
     end

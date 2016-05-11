@@ -31,7 +31,7 @@ if ~coder.target('MATLAB')
     t_vec = PetscVec(vec);
     errCode = coder.ceval('VecGetValues', t_vec, ni, coder.rref(ix), coder.ref(y));
 
-    if errCode && (nargout==1 || coder.ismatlabthread)
+    if errCode && (nargout<2 || coder.ismatlabthread)
         m2c_error('petsc:RuntimeError', 'VecGetValues returned error code %d\n', errCode)
     end
 end

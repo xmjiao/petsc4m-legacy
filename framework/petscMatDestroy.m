@@ -1,4 +1,4 @@
-function [mat, errCode] = petscMatDestroy(mat)
+function [mat, errCode, toplevel] = petscMatDestroy(mat)
 %Frees space taken by a matrix.
 %
 %  [mat, errCode] = petscMatDestroy(mat)
@@ -18,13 +18,14 @@ if ~coder.target('MATLAB')
     
     errCode = coder.ceval('MatDestroy', coder.ref(t_mat));
     
-    if errCode && (nargout==1 || coder.ismatlabthread)
+    if errCode && (nargout<2 || coder.ismatlabthread)
         m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode)
     end
     
-    if isstruct(mat)
+    if nargout>2
         % Create a MATLAB opaque object if the req is a MATLAB opaque object.
         mat = opaque_obj('Mat', t_mat);
+        toplevel = true;
     else
         mat = t_mat;
     end

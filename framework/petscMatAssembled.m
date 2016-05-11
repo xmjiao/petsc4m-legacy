@@ -22,7 +22,7 @@ if ~coder.target('MATLAB')
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('MatAssembled', t_mat, coder.wref(b));
     
-    if errCode && (nargout==1 || coder.ismatlabthread)
+    if errCode && (nargout<2 || coder.ismatlabthread)
         m2c_error('petsc:RuntimeError', 'MatAssembled returned error code %d\n', errCode)
     end
     assembled = coder.ceval(' ', b);

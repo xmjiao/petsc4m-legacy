@@ -20,7 +20,7 @@ if ~coder.target('MATLAB')
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('PetscFinalized', coder.wref(b));
     
-    if errCode && (nargout==1 || coder.ismatlabthread)
+    if errCode && (nargout<2 || coder.ismatlabthread)
         m2c_error('petsc:RuntimeError', 'PetscFinalized returned error code %d\n', errCode)
     end
 

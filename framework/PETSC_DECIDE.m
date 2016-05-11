@@ -1,4 +1,4 @@
-function val = petscDECIDE %#codegen
+function val = PETSC_DECIDE %#codegen
 % Obtain PETSC constant PETSC_DECIDE
 
 coder.inline('always');

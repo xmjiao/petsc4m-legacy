@@ -6,10 +6,9 @@ function errCode = petscMatSetOption(mat, op, flg)
 %
 %   errCode = petscMatSetOption(mat, op, flg)
 %
-%   assembled(int)
 %   errCode(int) return code (0 indicates OK)
 %
-% SEE ALSO: petscMatAssemblyEnd, petscMatSetValues, petscMatAssemblyBegin
+% SEE ALSO: petscMatSetValues, petscMatAssemblyBegin, petscMatAssemblyEnd
 %
 % PETSc C interface:
 %   PetscErrorCode MatSetOption(Mat mat,MatOption op,PetscBool flg)
