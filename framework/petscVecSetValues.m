@@ -1,4 +1,4 @@
-function errCode = petscVecSetValues(vec, ni, ix, y, iroa)
+function [errCode, toplevel] = petscVecSetValues(vec, ni, ix, y, iroa)
 %Inserts or adds values into certain locations of a vector.
 %
 %  errCode = petscVecSetValues(vec, ni, ix, y)
@@ -33,8 +33,9 @@ if ~coder.target('MATLAB')
     
     errCode = coder.ceval('VecSetValues', t_vec, ni, coder.rref(ix), coder.rref(y), iroa);
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
-        m2c_error('petsc:RuntimeError', 'VecSetValues returned error code %d\n', errCode)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
+        m2c_error('petsc:RuntimeError', 'VecSetValues returned error code %d\n', errCode);
     end
 end
 end

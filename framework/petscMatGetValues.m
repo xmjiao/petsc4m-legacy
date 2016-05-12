@@ -34,8 +34,9 @@ if ~coder.target('MATLAB')
     
     errCode = coder.ceval('MatGetValues', t_mat, ni, coder.rref(ix), ...
         nj, coder.rref(jx), coder.ref(v));
-    
-    if errCode && (nargout<2 || coder.ismatlabthread)
+
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatGetValues returned error code %d\n', errCode)
     end
 end

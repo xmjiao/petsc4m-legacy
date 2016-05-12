@@ -1,4 +1,4 @@
-function errCode = petscMatSetFromOptions(mat)
+function [errCode, toplevel] = petscMatSetFromOptions(mat)
 %Configures the matrix from the options database.
 %
 %   errCode = petscMatSetFromOptions(mat)
@@ -19,7 +19,8 @@ if ~coder.target('MATLAB')
     t_mat = PetscMat(mat);
     errCode = coder.ceval('MatSetFromOptions', t_mat);
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatSetFromOptions returned error code %d\n', errCode)
     end
 end

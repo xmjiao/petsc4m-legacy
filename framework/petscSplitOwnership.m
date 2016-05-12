@@ -1,4 +1,4 @@
-function [n, N, errCode] = petscSplitOwnership(comm, n, N)
+function [n, N, errCode, toplevel] = petscSplitOwnership(comm, n, N)
 %Given a global (or local) length determines a local (or global) length.
 %
 %   [n, ~, errCode] = petscSplitOwnership(comm, PETSC_DECIDE, N)
@@ -23,8 +23,9 @@ if ~coder.target('MATLAB')
         N = PETSC_DECIDE;
     end
     errCode = coder.ceval('PetscSplitOwnership', t_comm, coder.ref(n), coder.ref(N));
-    
-    if errCode && (nargout<3 || coder.ismatlabthread)
+
+    toplevel = nargout > 3;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscSplitOwnership returned error code %d\n', errCode)
     end
 end

@@ -1,4 +1,4 @@
-function [n, errCode] = petscVecGetLocalSize(vec)
+function [n, errCode, toplevel] = petscVecGetLocalSize(vec)
 %Returns the local number of elements of the vector.
 %
 %[n, errCode] = petscVecGetLocalSize(vec)
@@ -21,7 +21,8 @@ if ~coder.target('MATLAB')
     n = int32(0);
     errCode = coder.ceval('VecGetLocalSize', t_vec, coder.wref(n));
     
-    if errCode && (nargout<2 || coder.ismatlabthread)
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecGetLocalSize returned error code %d\n', errCode)
     end
 end

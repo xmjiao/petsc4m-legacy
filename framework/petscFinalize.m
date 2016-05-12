@@ -1,4 +1,4 @@
-function errCode = petscFinalize
+function [errCode, toplevel] = petscFinalize
 % Finalize PETSc by calling PetscFinalize()
 %   errCode = petscFinalize
 %
@@ -22,7 +22,8 @@ errCode = int32(-1);
 if ~coder.target('MATLAB')
     errCode = coder.ceval('PetscFinalize');
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscFinalize returned error code %d\n', errCode)
     end
 end

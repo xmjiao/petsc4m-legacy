@@ -1,4 +1,4 @@
-function errCode = petscVecSetSizes(vec, n, N)
+function [errCode, toplevel] = petscVecSetSizes(vec, n, N)
 %Sets the local and global sizes, and checks to determine compatibility.
 %
 %errCode = petscVecSetSizes(vec, n)
@@ -28,7 +28,8 @@ if ~coder.target('MATLAB')
     end
     errCode = coder.ceval('VecSetSizes', t_vec, n, N);
     
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecSetSizes returned error code %d\n', errCode)
     end
 end

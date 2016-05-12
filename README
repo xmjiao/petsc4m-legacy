@@ -1,0 +1,60 @@
+OVERVIEW
+========
+
+MPETSc is the MATLAB Interface for PETSc. It is m2c-compatible, which means
+it can be converted into C codes and also be compiled into MEX functions 
+or standalone applications.
+
+MPETSc is implemented on top of PETSc. It offers about 20 top-level functions
+and more than 100 low-level functions. The top-level MPETSc functions support 
+accessing iterative solvers in PETSc with high-level interfaces. Two 
+matrix formats are supported: Sequential AIJ and MPI AIJ. These formats 
+tend to deliver good performance and offer better inseparability with MATLAB.
+Other matrix formats, such as dense and MPI Block AIJ, are accessible through
+the low-level functions.
+
+MPETSc supports Linux, and Mac OS X. Microsoft Windows is currently not 
+supported (to be added).
+
+NAMING AND NUMBERING CONVENTIONS
+================================
+
+Top-Level Functions
+-----------------------
+
+All the top-level functions in MPETSc start with mpt and are in the top-level 
+directory of MPETSc. The array indices of top-level functions are 1-based.
+
+The top-level functions are all implemented using low-level PETSc function
+and basic MATLAB language features. These functions can be compiled into 
+MEX functions by themselves or be used in other M2C-compatible codes.
+
+Low-Level Functions
+-----------------------
+
+The low-level functions allow accessing virtually all features in PETSc
+in MATLAB through MPETSc. The indices for all low-level functions are 0-based. 
+
+There are three different types of PETSc functions:
+  * Data Types: All data types have prefix Petsc, such as PetscMat, PetscVec, 
+                PetscKSP, etc.
+  * Constants: All constants have prefix PETSC_, such as PETSC_COMM_WORLD.
+  * Functions: All functions have prefix petsc, such as petscMatCreate.
+
+These functions are all located in the framework sub-directory. 
+
+In most cases, the low-level functions do not need to be used directly.
+However, they are useful when prototyping other matrix formats.
+
+LIMITATIONS
+===========
+
+Currently, when running MPETSc-based codes within MATLAB, you must disable
+JVM by starting MATLAB using the command "matlab -nojvm". This is because 
+PETSc's memory management seems to conflict with those of JVM and causes 
+errors. (This may be fixed in the future by setting PETSc's error handler.)
+For best practice, start one MATLAB session with JVM and Desktop enabled for
+code development, and start another MATLAB session for running the code.
+
+MPETSc does not support KSPRegister and PCRegister. You need to implement
+these functions directly in C.

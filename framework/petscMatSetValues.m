@@ -1,4 +1,4 @@
-function errCode = petscMatSetValues(mat, ni, ix, nj, jx, v, iroa)
+function [errCode, toplevel] = petscMatSetValues(mat, ni, ix, nj, jx, v, iroa)
 %Inserts or adds a block of values into a matrix. These values may be cached,
 %so MatAssemblyBegin() and MatAssemblyEnd() must be called after all calls
 %to MatSetValues() have been completed.
@@ -38,7 +38,8 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('MatSetValues', t_mat, ni, coder.rref(ix), ...
         nj, coder.rref(jx), coder.rref(v), iroa);
     
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatSetValues returned error code %d\n', errCode)
     end
 end

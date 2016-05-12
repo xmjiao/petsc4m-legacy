@@ -1,4 +1,4 @@
-function [ncols, cols, vals, errCode] = petscMatGetRow(mat, row)
+function [ncols, cols, vals, errCode, toplevel] = petscMatGetRow(mat, row)
 %Gets a row of a matrix. The indices are 0-based.
 %
 %  [ncols, cols, vals, errCode] = petscMatGetRow(mat, ni)
@@ -25,8 +25,9 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('MatGetRow', t_mat, row, coder.ref(t_ncols), ...
         coder.wref(t_cols), coder.wref(t_vals));
     
-    if errCode && (nargout<4 || coder.ismatlabthread)
-        m2c_error('petsc:RuntimeError', 'MatGetValues returned error code %d\n', errCode)
+    toplevel = nargout>4;
+    if errCode && (toplevel || m2c_debug)
+        m2c_error('petsc:RuntimeError', 'MatGetRow returned error code %d\n', errCode)
     end
     
     % Copy data out
@@ -40,5 +41,9 @@ if ~coder.target('MATLAB')
     % Free PETSc internal storage
     errCode = coder.ceval('MatRestoreRow', t_mat, row, coder.ref(t_ncols), ...
         coder.ref(t_cols), coder.ref(t_vals));
+    
+    if errCode && (toplevel || m2c_debug)
+        m2c_error('petsc:RuntimeError', 'MatRestoreRow returned error code %d\n', errCode)
+    end    
 end
 end

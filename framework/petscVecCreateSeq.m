@@ -21,15 +21,15 @@ if ~coder.target('MATLAB')
     comm = MPI_Comm(PETSC_COMM_SELF);
     errCode = coder.ceval('VecCreateSeq', comm, n, coder.wref(t_vec));
     
-    if errCode && (nargout<2 || coder.ismatlabthread)
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecCreateSeq returned error code %d\n', errCode)
     end
     
-    if nargout>2
+    if toplevel
         % When petscVecCreateSeq is used as a top-level function for code
         % generation, we need to wrap the result into an MATLAB opaque object.
         vec = opaque_obj('Vec', t_vec);
-        toplevel = true;
     else
         % When petscVecCreateSeq is used as an internal function for code
         % generation, return the opaque Vec object directly.

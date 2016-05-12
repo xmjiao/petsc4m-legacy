@@ -1,4 +1,4 @@
-function errCode = petscMatAssemblyBegin(mat,type)
+function [errCode, toplevel] = petscMatAssemblyBegin(mat,type)
 %Begins assembling the matrix. This routine should be called after 
 %completing all calls to petscMatSetValues().
 %
@@ -21,7 +21,8 @@ if ~coder.target('MATLAB')
     
     errCode = coder.ceval('MatAssemblyBegin',t_mat,type);
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatAssemblyBegin returned error code %d\n', errCode)
     end
 end

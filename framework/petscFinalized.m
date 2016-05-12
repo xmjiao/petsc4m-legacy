@@ -1,4 +1,4 @@
-function [finalized, errCode] = petscFinalized
+function [finalized, errCode, toplevel] = petscFinalized
 %Determine whether PetscFinalize() has been called yet.
 %   [finalized, errCode] = petscFinalized
 %
@@ -20,7 +20,8 @@ if ~coder.target('MATLAB')
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('PetscFinalized', coder.wref(b));
     
-    if errCode && (nargout<2 || coder.ismatlabthread)
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscFinalized returned error code %d\n', errCode)
     end
 

@@ -1,4 +1,4 @@
-function errCode = petscVecSetFromOptions(vec)
+function [errCode, toplevel] = petscVecSetFromOptions(vec)
 %Configures the vector from the options database.
 %
 %   errCode = petscVecSetFromOptions(vec)
@@ -19,7 +19,8 @@ if ~coder.target('MATLAB')
     t_vec = PetscVec(vec);
     errCode = coder.ceval('VecSetFromOptions', t_vec);
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecSetFromOptions returned error code %d\n', errCode)
     end
 end

@@ -1,4 +1,4 @@
-function [n, errCode] = petscVecGetSize(vec)
+function [n, errCode, toplevel] = petscVecGetSize(vec)
 %Returns the global number of elements of the vector.
 %
 %[n, errCode] = petscVecGetSize(vec)
@@ -20,8 +20,9 @@ if ~coder.target('MATLAB')
     
     n = int32(0);
     errCode = coder.ceval('VecGetSize', t_vec, coder.wref(n));
-    
-    if errCode && (nargout<2 || coder.ismatlabthread)
+       
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecGetSize returned error code %d\n', errCode)
     end
 end

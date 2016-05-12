@@ -1,12 +1,13 @@
-function errCode = petscVecSetOptionsPrefix(vec, in_str)
+function [errCode, toplevel] = petscVecSetOptionsPrefix(vec, in_str)
 %Sets the prefix used for searching for all Vec options in the database.
-%   errCode = petscVecSetOptionsPrefix(vec, in_str)
 %
-%   vec    - the Vec context
-%   in_str - string that contains options separated by blanks
+%   errCode = petscVecSetOptionsPrefix(vec, str)
+%
+%   vec - the Vec context
+%   str - the prefix string to prepend to all Mat option requests
 %   errCode(int) return code (0 indicates OK)
 %
-% SEE ALSO: VecSetFromOptions
+% SEE ALSO: petscVecSetFromOptions
 %
 % PETSc C interface:
 %   PetscErrorCode  VecSetOptionsPrefix(Vec v,const char prefix[])
@@ -22,8 +23,9 @@ if ~coder.target('MATLAB')
     str0 = [in_str char(0)];
     
     errCode = coder.ceval('VecSetOptionsPrefix', t_vec, coder.rref(str0));
-
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecSetOptionsPrefix returned error code %d\n', errCode)
     end
 end

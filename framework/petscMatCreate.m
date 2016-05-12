@@ -31,14 +31,14 @@ if ~coder.target('MATLAB')
     
     errCode = coder.ceval('MatCreate', t_comm, coder.wref(t_mat));
     
-    if nargout>2
+    toplevel = nargout>2;
+    if toplevel
         mat = opaque_obj('Mat', t_mat);
-        toplevel = true;
     else
         mat = t_mat;
     end
     
-    if errCode && (nargout<2 || coder.ismatlabthread)
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatCreate returned error code %d\n', errCode)
     end
 end

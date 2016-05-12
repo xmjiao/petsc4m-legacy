@@ -1,4 +1,4 @@
-function [assembled, errCode] = petscMatAssembled(mat)
+function [assembled, errCode, toplevel] = petscMatAssembled(mat)
 %Indicates if a matrix has been assembled and is ready for use.
 %
 %   [assembled, errCode] = MatAssemblyEnd(mat)
@@ -21,8 +21,9 @@ if ~coder.target('MATLAB')
     t_mat = PetscMat(mat);
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('MatAssembled', t_mat, coder.wref(b));
-    
-    if errCode && (nargout<2 || coder.ismatlabthread)
+
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatAssembled returned error code %d\n', errCode)
     end
     assembled = coder.ceval(' ', b);

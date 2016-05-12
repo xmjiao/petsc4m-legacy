@@ -1,4 +1,4 @@
-function [initialized, errCode] = petscInitialized
+function [initialized, errCode, toplevel] = petscInitialized
 %Determine whether PETSc is initialized.
 %   [initialized, errCode] = petscInitialized
 %
@@ -21,7 +21,8 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('PetscInitialized', coder.wref(b));
     initialized = coder.ceval(' ', b);
 
-    if errCode && (nargout<2 || coder.ismatlabthread)
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscInitialized returned error code %d\n', errCode)
     end
 end

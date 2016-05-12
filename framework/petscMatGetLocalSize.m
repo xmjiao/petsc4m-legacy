@@ -1,4 +1,4 @@
-function [m, n, errCode] = petscMatGetLocalSize(mat)
+function [m, n, errCode, toplevel] = petscMatGetLocalSize(mat)
 %Returns the number of rows and columns in a matrix stored locally. 
 %This information may be implementation dependent, so use with care.
 %
@@ -24,7 +24,8 @@ if ~coder.target('MATLAB')
     n = int32(0);
     errCode = coder.ceval('MatGetLocalSize', t_mat, coder.wref(m), coder.wref(n));
     
-    if errCode && (nargout<3 || coder.ismatlabthread)
+    toplevel = nargout>3;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatGetLocalSize returned error code %d\n', errCode)
     end
 end

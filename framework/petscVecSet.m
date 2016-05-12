@@ -1,4 +1,4 @@
-function errCode = petscVecSet(vec, val)
+function [errCode, toplevel] = petscVecSet(vec, val)
 %Sets all components of a vector to a single scalar value.
 %
 %  errCode = petscVecSet(vec, val)
@@ -18,7 +18,8 @@ if ~coder.target('MATLAB')
     
     errCode = coder.ceval('VecSet', t_vec, val);
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecSet returned error code %d\n', errCode)
     end
 end

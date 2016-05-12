@@ -1,4 +1,4 @@
-function errCode = petscOptionsInsertString(in_str)
+function [errCode, toplevel] = petscOptionsInsertString(in_str)
 %Inserts options into the database from a string
 %   errCode = petscOptionsInsertString(in_str)
 %
@@ -22,7 +22,8 @@ if ~coder.target('MATLAB')
     options = coder.opaque('PetscOptions', 'NULL');
     errCode = coder.ceval('PetscOptionsInsertString', options, coder.rref(str0));
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsInsertString returned error code %d\n', errCode)
     end
 end

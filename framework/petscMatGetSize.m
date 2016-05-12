@@ -1,4 +1,4 @@
-function [m, n, errCode] = petscMatGetSize(mat)
+function [m, n, errCode, toplevel] = petscMatGetSize(mat)
 %Returns the numbers of global rows and columns in a matrix.
 %
 %[m, n, errCode] = petscMatGetSize(mat)
@@ -23,7 +23,8 @@ if ~coder.target('MATLAB')
     n = int32(0);
     errCode = coder.ceval('MatGetSize', t_mat, coder.wref(m), coder.wref(n));
     
-    if errCode && (nargout<3 || coder.ismatlabthread)
+    toplevel = nargout>3;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatGetSize returned error code %d\n', errCode)
     end
 end

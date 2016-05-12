@@ -28,16 +28,16 @@ if ~coder.target('MATLAB')
     end
     
     errCode = coder.ceval('VecCreate', t_comm, coder.wref(t_vec));
-    
-    if nargout>2
+
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
+        m2c_error('petsc:RuntimeError', 'VecCreate returned error code %d\n', errCode)
+    end
+
+    if toplevel
         vec = opaque_obj('Vec', t_vec);
-        toplevel = true;
     else
         vec = t_vec;
-    end
-    
-    if errCode && (nargout<2 || coder.ismatlabthread)
-        m2c_error('petsc:RuntimeError', 'VecCreate returned error code %d\n', errCode)
     end
 end
 end

@@ -1,19 +1,18 @@
-function val = petscGetEnum(name)
+function [val, toplevel] = petscGetEnum(name)
 %petscGetEnum Obtain an enumerate value in PETSC
 %
 %    val = petscGetEnum(name)
 %
 %The supported names include:
-% InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, 
-%      INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES
 %
-% MatAssemblyType: MAT_FINAL_ASSEMBLY, MAT_FLUSH_ASSEMBLY
+% PetscBool:  PETSC_TRUE, PETSC_FALSE
 %
-% MatInfoType: MAT_LOCAL,MAT_GLOBAL_MAX,MAT_GLOBAL_SUM
+% VecOption: VEC_IGNORE_OFF_PROC_ENTRIES, VEC_IGNORE_NEGATIVE_INDICES,
+%      VEC_SUBSET_OFF_PROC_ENTRIES
 %
 % MatOption: MAT_ROW_ORIENTED, MAT_SYMMETRIC, MAT_STRUCTURALLY_SYMMETRIC,
-%      MAT_NEW_DIAGONALS, MAT_IGNORE_OFF_PROC_ENTRIES, 
-%      MAT_USE_HASH_TABLE, MAT_KEEP_NONZERO_PATTERN, 
+%      MAT_NEW_DIAGONALS, MAT_IGNORE_OFF_PROC_ENTRIES,
+%      MAT_USE_HASH_TABLE, MAT_KEEP_NONZERO_PATTERN,
 %      MAT_IGNORE_ZERO_ENTRIES, MAT_USE_INODES, MAT_HERMITIAN,
 %      MAT_SYMMETRY_ETERNAL, MAT_NEW_NONZERO_LOCATION_ERR,
 %      MAT_IGNORE_LOWER_TRIANGULAR, MAT_ERROR_LOWER_TRIANGULAR,
@@ -22,8 +21,18 @@ function val = petscGetEnum(name)
 %      MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR,
 %      MAT_SUBSET_OFF_PROC_ENTRIES
 %
-% VecOption: VEC_IGNORE_OFF_PROC_ENTRIES, VEC_IGNORE_NEGATIVE_INDICES, 
-%      VEC_SUBSET_OFF_PROC_ENTRIES
+% MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN
+%
+% MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN
+%
+% MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX
+%
+% InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES,
+%      INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES
+%
+% MatAssemblyType: MAT_FINAL_ASSEMBLY, MAT_FLUSH_ASSEMBLY
+%
+% MatInfoType: MAT_LOCAL,MAT_GLOBAL_MAX,MAT_GLOBAL_SUM
 %
 % Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT
 
@@ -33,83 +42,116 @@ if coder.target('MATLAB')
     error('Function petscGetEnum must be compiled.');
 end
 
-val = int32(intmin);
-
 %% InsertMode
-if isequal(name, 'NOT_SET_VALUES')
-    val = coder.ceval(' ', coder.opaque('InsertMode', 'NOT_SET_VALUES'));
-elseif isequal(name, 'INSERT_VALUES')
-    val = coder.ceval(' ', coder.opaque('InsertMode', 'INSERT_VALUES'));
-elseif isequal(name, 'ADD_VALUES')
-    val = coder.ceval(' ', coder.opaque('InsertMode', 'ADD_VALUES'));
-elseif isequal(name, 'MAX_VALUES')
-    val = coder.ceval(' ', coder.opaque('InsertMode', 'MAX_VALUES'));
-elseif isequal(name, 'INSERT_ALL_VALUES')
-    val = coder.ceval(' ', coder.opaque('InsertMode', 'INSERT_ALL_VALUES'));
-elseif isequal(name, 'ADD_ALL_VALUES')
-    val = coder.ceval(' ', coder.opaque('InsertMode', 'ADD_ALL_VALUES'));
-elseif isequal(name, 'INSERT_BC_VALUES')
-    val = coder.ceval(' ', coder.opaque('InsertMode', 'INSERT_BC_VALUES'));
-elseif isequal(name, 'ADD_BC_VALUES')
-    val = coder.ceval(' ', coder.opaque('InsertMode', 'ADD_BC_VALUES'));
-elseif isequal(name, 'MAT_FINAL_ASSEMBLY')
-    val = coder.ceval(' ', coder.opaque('MatAssemblyType', 'MAT_FINAL_ASSEMBLY'));
-elseif isequal(name, 'MAT_FLUSH_ASSEMBLY')
-    val = coder.ceval(' ', coder.opaque('MatAssemblyType', 'MAT_FLUSH_ASSEMBLY'));
-elseif isequal(name, 'MAT_LOCAL')
-    val = coder.ceval(' ', coder.opaque('MatInfoType', 'MAT_LOCAL'));
-elseif isequal(name, 'MAT_GLOBAL_MAX')
-    val = coder.ceval(' ', coder.opaque('MatInfoType', 'MAT_GLOBAL_MAX'));
-elseif isequal(name, 'MAT_GLOBAL_SUM')
-    val = coder.ceval(' ', coder.opaque('MatInfoType', 'MAT_GLOBAL_SUM'));
-elseif isequal(name, 'MAT_ROW_ORIENTED')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_ROW_ORIENTED'));
-elseif isequal(name, 'MAT_SYMMETRIC')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_SYMMETRIC'));
-elseif isequal(name, 'MAT_STRUCTURALLY_SYMMETRIC')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_STRUCTURALLY_SYMMETRIC'));
-elseif isequal(name, 'MAT_NEW_DIAGONALS')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_NEW_DIAGONALS'));
-elseif isequal(name, 'MAT_IGNORE_OFF_PROC_ENTRIES')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_IGNORE_OFF_PROC_ENTRIES'));
-elseif isequal(name, 'MAT_USE_HASH_TABLE')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_USE_HASH_TABLE'));
-elseif isequal(name, 'MAT_KEEP_NONZERO_PATTERN')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_KEEP_NONZERO_PATTERN'));
-elseif isequal(name, 'MAT_IGNORE_ZERO_ENTRIES')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_IGNORE_ZERO_ENTRIES'));
-elseif isequal(name, 'MAT_USE_INODES')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_USE_INODES'));
-elseif isequal(name, 'MAT_HERMITIAN')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_HERMITIAN'));
-elseif isequal(name, 'MAT_SYMMETRY_ETERNAL')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_SYMMETRY_ETERNAL'));
-elseif isequal(name, 'MAT_NEW_NONZERO_LOCATION_ERR')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_NEW_NONZERO_LOCATION_ERR'));
-elseif isequal(name, 'MAT_IGNORE_LOWER_TRIANGULAR')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_IGNORE_LOWER_TRIANGULAR'));
-elseif isequal(name, 'MAT_ERROR_LOWER_TRIANGULAR')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_ERROR_LOWER_TRIANGULAR'));
-elseif isequal(name, 'MAT_GETROW_UPPERTRIANGULAR')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_GETROW_UPPERTRIANGULAR'));
-elseif isequal(name, 'MAT_SPD')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_SPD'));
-elseif isequal(name, 'MAT_NO_OFF_PROC_ZERO_ROWS')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_NO_OFF_PROC_ZERO_ROWS'));
-elseif isequal(name, 'MAT_NO_OFF_PROC_ENTRIES')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_NO_OFF_PROC_ENTRIES'));
-elseif isequal(name, 'MAT_NEW_NONZERO_ALLOCATION_ERR')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_NEW_NONZERO_ALLOCATION_ERR'));
-elseif isequal(name, 'MAT_SUBSET_OFF_PROC_ENTRIES')
-    val = coder.ceval(' ', coder.opaque('MatOption', 'MAT_SUBSET_OFF_PROC_ENTRIES'));
-elseif isequal(name, 'PETSC_DETERMINE')
-    val = coder.ceval(' ', coder.opaque('PetscInt', 'PETSC_DETERMINE'));
-elseif isequal(name, 'PETSC_DECIDE')
-    val = coder.ceval(' ', coder.opaque('PetscInt', 'PETSC_DECIDE'));
-elseif isequal(name, 'PETSC_DEFAULT')
-    val = coder.ceval(' ', coder.opaque('PetscInt', 'PETSC_DEFAULT'));
-else
-    m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
+switch name
+    case 'PETSC_TRUE'
+        [val, toplevel] = get_val('PetscBool', 'PETSC_TRUE', nargin>1);
+    case 'PETSC_FALSE'
+        [val, toplevel] = get_val('PetscBool', 'PETSC_FALSE', nargin>1);
+    case 'DIFFERENT_NONZERO_PATTERN'
+        [val, toplevel] = get_val('MatStructure', 'DIFFERENT_NONZERO_PATTERN', nargin>1);
+    case 'SUBSET_NONZERO_PATTERN'
+        [val, toplevel] = get_val('MatStructure', 'SUBSET_NONZERO_PATTERN', nargin>1);
+    case 'SAME_NONZERO_PATTERN'
+        [val, toplevel] = get_val('MatStructure', 'SAME_NONZERO_PATTERN', nargin>1);
+    case 'MAT_DO_NOT_COPY_VALUES'
+        [val, toplevel] = get_val('MatDuplicateOption', 'MAT_DO_NOT_COPY_VALUES', nargin>1);
+    case 'MAT_COPY_VALUES'
+        [val, toplevel] = get_val('MatDuplicateOption', 'MAT_COPY_VALUES', nargin>1);
+    case 'MAT_SHARE_NONZERO_PATTERN'
+        [val, toplevel] = get_val('MatDuplicateOption', 'MAT_SHARE_NONZERO_PATTERN', nargin>1);
+    case 'MAT_INITIAL_MATRIX'
+        [val, toplevel] = get_val('MatReuse', 'MAT_INITIAL_MATRIX', nargin>1);
+    case 'MAT_REUSE_MATRIX'
+        [val, toplevel] = get_val('MatReuse', 'MAT_REUSE_MATRIX', nargin>1);
+    case 'MAT_IGNORE_MATRIX'
+        [val, toplevel] = get_val('MatReuse', 'MAT_IGNORE_MATRIX', nargin>1);
+    case 'MAT_INPLACE_MATRIX'
+        [val, toplevel] = get_val('MatReuse', 'MAT_INPLACE_MATRIX', nargin>1);
+    case 'NOT_SET_VALUES'
+        [val, toplevel] = get_val('InsertMode', 'NOT_SET_VALUES', nargin>1);
+    case 'INSERT_VALUES'
+        [val, toplevel] = get_val('InsertMode', 'INSERT_VALUES', nargin>1);
+    case 'ADD_VALUES'
+        [val, toplevel] = get_val('InsertMode', 'ADD_VALUES', nargin>1);
+    case 'MAX_VALUES'
+        [val, toplevel] = get_val('InsertMode', 'MAX_VALUES', nargin>1);
+    case 'INSERT_ALL_VALUES'
+        [val, toplevel] = get_val('InsertMode', 'INSERT_ALL_VALUES', nargin>1);
+    case 'ADD_ALL_VALUES'
+        [val, toplevel] = get_val('InsertMode', 'ADD_ALL_VALUES', nargin>1);
+    case 'INSERT_BC_VALUES'
+        [val, toplevel] = get_val('InsertMode', 'INSERT_BC_VALUES', nargin>1);
+    case 'ADD_BC_VALUES'
+        [val, toplevel] = get_val('InsertMode', 'ADD_BC_VALUES', nargin>1);
+    case 'MAT_FINAL_ASSEMBLY'
+        [val, toplevel] = get_val('MatAssemblyType', 'MAT_FINAL_ASSEMBLY', nargin>1);
+    case 'MAT_FLUSH_ASSEMBLY'
+        [val, toplevel] = get_val('MatAssemblyType', 'MAT_FLUSH_ASSEMBLY', nargin>1);
+    case 'MAT_LOCAL'
+        [val, toplevel] = get_val('MatInfoType', 'MAT_LOCAL', nargin>1);
+    case 'MAT_GLOBAL_MAX'
+        [val, toplevel] = get_val('MatInfoType', 'MAT_GLOBAL_MAX', nargin>1);
+    case 'MAT_GLOBAL_SUM'
+        [val, toplevel] = get_val('MatInfoType', 'MAT_GLOBAL_SUM', nargin>1);
+    case 'MAT_ROW_ORIENTED'
+        [val, toplevel] = get_val('MatOption', 'MAT_ROW_ORIENTED', nargin>1);
+    case 'MAT_SYMMETRIC'
+        [val, toplevel] = get_val('MatOption', 'MAT_SYMMETRIC', nargin>1);
+    case 'MAT_STRUCTURALLY_SYMMETRIC'
+        [val, toplevel] = get_val('MatOption', 'MAT_STRUCTURALLY_SYMMETRIC', nargin>1);
+    case 'MAT_NEW_DIAGONALS'
+        [val, toplevel] = get_val('MatOption', 'MAT_NEW_DIAGONALS', nargin>1);
+    case 'MAT_IGNORE_OFF_PROC_ENTRIES'
+        [val, toplevel] = get_val('MatOption', 'MAT_IGNORE_OFF_PROC_ENTRIES', nargin>1);
+    case 'MAT_USE_HASH_TABLE'
+        [val, toplevel] = get_val('MatOption', 'MAT_USE_HASH_TABLE', nargin>1);
+    case 'MAT_KEEP_NONZERO_PATTERN'
+        [val, toplevel] = get_val('MatOption', 'MAT_KEEP_NONZERO_PATTERN', nargin>1);
+    case 'MAT_IGNORE_ZERO_ENTRIES'
+        [val, toplevel] = get_val('MatOption', 'MAT_IGNORE_ZERO_ENTRIES', nargin>1);
+    case 'MAT_USE_INODES'
+        [val, toplevel] = get_val('MatOption', 'MAT_USE_INODES', nargin>1);
+    case 'MAT_HERMITIAN'
+        [val, toplevel] = get_val('MatOption', 'MAT_HERMITIAN', nargin>1);
+    case 'MAT_SYMMETRY_ETERNAL'
+        [val, toplevel] = get_val('MatOption', 'MAT_SYMMETRY_ETERNAL', nargin>1);
+    case 'MAT_NEW_NONZERO_LOCATION_ERR'
+        [val, toplevel] = get_val('MatOption', 'MAT_NEW_NONZERO_LOCATION_ERR', nargin>1);
+    case 'MAT_IGNORE_LOWER_TRIANGULAR'
+        [val, toplevel] = get_val('MatOption', 'MAT_IGNORE_LOWER_TRIANGULAR', nargin>1);
+    case 'MAT_ERROR_LOWER_TRIANGULAR'
+        [val, toplevel] = get_val('MatOption', 'MAT_ERROR_LOWER_TRIANGULAR', nargin>1);
+    case 'MAT_GETROW_UPPERTRIANGULAR'
+        [val, toplevel] = get_val('MatOption', 'MAT_GETROW_UPPERTRIANGULAR', nargin>1);
+    case 'MAT_SPD'
+        [val, toplevel] = get_val('MatOption', 'MAT_SPD', nargin>1);
+    case 'MAT_NO_OFF_PROC_ZERO_ROWS'
+        [val, toplevel] = get_val('MatOption', 'MAT_NO_OFF_PROC_ZERO_ROWS', nargin>1);
+    case 'MAT_NO_OFF_PROC_ENTRIES'
+        [val, toplevel] = get_val('MatOption', 'MAT_NO_OFF_PROC_ENTRIES', nargin>1);
+    case 'MAT_NEW_NONZERO_ALLOCATION_ERR'
+        [val, toplevel] = get_val('MatOption', 'MAT_NEW_NONZERO_ALLOCATION_ERR', nargin>1);
+    case 'MAT_SUBSET_OFF_PROC_ENTRIES'
+        [val, toplevel] = get_val('MatOption', 'MAT_SUBSET_OFF_PROC_ENTRIES', nargin>1);
+    case 'PETSC_DETERMINE'
+        [val, toplevel] = get_val('PetscInt', 'PETSC_DETERMINE', nargin>1);
+    case 'PETSC_DECIDE'
+        [val, toplevel] = get_val('PetscInt', 'PETSC_DECIDE', nargin>1);
+    case 'PETSC_DEFAULT'
+        [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1);
+    otherwise
+        toplevel = nargin>1;
+        val = int32(intmin);
+        if toplevel
+            m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
+        end
+end
 end
 
+function [val, toplevel] = get_val(type, name, toplevel)
+coder.inline('always');
+
+val = int32(intmin);             %#ok<NASGU>
+val = coder.ceval(' ', coder.opaque(type, name));
 end

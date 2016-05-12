@@ -1,5 +1,5 @@
 % This script is called automatically when MATLAB and Octave exists.
 
-if petscInitialized && ~petscFinalized
+if ~usejava('jvm') && petscInitialized && ~petscFinalized
     petscFinalize;
 end

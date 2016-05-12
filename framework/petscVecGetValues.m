@@ -1,4 +1,4 @@
-function [y, errCode] = petscVecGetValues(vec, ni, ix, y)
+function [y, errCode, toplevel] = petscVecGetValues(vec, ni, ix, y)
 %Gets values from certain locations of a vector. 
 %Currently can only get values on the same processor
 %
@@ -31,7 +31,8 @@ if ~coder.target('MATLAB')
     t_vec = PetscVec(vec);
     errCode = coder.ceval('VecGetValues', t_vec, ni, coder.rref(ix), coder.ref(y));
 
-    if errCode && (nargout<2 || coder.ismatlabthread)
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecGetValues returned error code %d\n', errCode)
     end
 end

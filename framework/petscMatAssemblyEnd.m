@@ -1,4 +1,4 @@
-function errCode = petscMatAssemblyEnd(mat, type)
+function [errCode, toplevel] = petscMatAssemblyEnd(mat, type)
 %Completes assembling the matrix. This routine should be called after 
 %petscMatAssemblyBegin().
 %
@@ -21,7 +21,8 @@ if ~coder.target('MATLAB')
 
     errCode = coder.ceval('MatAssemblyEnd', t_mat, type);
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatAssemblyEnd returned error code %d\n', errCode)
     end
 end

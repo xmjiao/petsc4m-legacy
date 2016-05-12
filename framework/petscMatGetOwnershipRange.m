@@ -1,4 +1,4 @@
-function [first_row, last_row, errCode] = petscMatGetOwnershipRange(mat)
+function [first_row, last_row, errCode, toplevel] = petscMatGetOwnershipRange(mat)
 %Returns the range of matrix rows owned by this processor, assuming that 
 %the matrix is laid out with the first n1 rows on the first processor, 
 %the next n2 rows on the second, etc.
@@ -22,10 +22,10 @@ if ~coder.target('MATLAB')
     first_row = int32(0);
     last_row = int32(0);
 
-    errCode = coder.ceval('MatGetOwnershipRange', t_mat, ...
-        coder.wref(first_row), coder.wref(last_row));
+    errCode = coder.ceval('MatGetOwnershipRange', t_mat, coder.wref(first_row), coder.wref(last_row));
     
-    if errCode && (nargout<3 || coder.ismatlabthread)
+    toplevel = nargout>3;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatGetOwnershipRange returned error code %d\first_row', errCode)
     end
 end

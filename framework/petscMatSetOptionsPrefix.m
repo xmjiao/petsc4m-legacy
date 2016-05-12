@@ -1,12 +1,12 @@
-function errCode = petscMatSetOptionsPrefix(mat, in_str)
+function [errCode, toplevel] = petscMatSetOptionsPrefix(mat, in_str)
 %Sets the prefix used for searching for all Mat options in the database.
 %   errCode = petscMatSetOptionsPrefix(mat, in_str)
 %
 %   mat    - the Mat context
-%   in_str - string that contains options separated by blanks
+%   in_str - the prefix string to prepend to all Mat option requests
 %   errCode(int) return code (0 indicates OK)
 %
-% SEE ALSO: MatSetFromOptions
+% SEE ALSO: petscMatSetFromOptions
 %
 % PETSc C interface:
 %   PetscErrorCode MatSetOptionsPrefix(Mat A,const char prefix[])
@@ -22,8 +22,9 @@ if ~coder.target('MATLAB')
     str0 = [in_str char(0)];
     
     errCode = coder.ceval('MatSetOptionsPrefix', t_mat, coder.rref(str0));
-
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatSetOptionsPrefix returned error code %d\n', errCode)
     end
 end

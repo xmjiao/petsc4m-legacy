@@ -1,4 +1,4 @@
-function errCode = petscMatSetType(mat, type)
+function [errCode, toplevel] = petscMatSetType(mat, type)
 %Builds matrix object for a particular matrix type.
 %
 %   errCode = petscMatSetType(mat, type)
@@ -20,8 +20,9 @@ if ~coder.target('MATLAB')
     t_type = PetscMatType(type);
     
     errCode = coder.ceval('MatSetType', t_mat, t_type);
-    
-    if errCode && (nargout==0 || coder.ismatlabthread)
+
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatSetType returned error code %d\n', errCode)
     end
 end

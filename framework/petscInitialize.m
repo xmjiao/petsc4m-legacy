@@ -1,4 +1,4 @@
-function errCode = petscInitialize
+function [errCode, toplevel] = petscInitialize
 %Initialize PETSc by calling PetscInitializeNoArguments()
 %   errCode = petscInitialize
 %
@@ -24,9 +24,10 @@ errCode = int32(0);
 
 if ~coder.target('MATLAB')
     errCode = coder.ceval('PetscInitializeNoArguments');
-end
 
-if errCode && (nargout==0 || coder.ismatlabthread)
-    m2c_error('petsc:RuntimeError', 'PetscInitializeNoArguments returned error code %d\n', errCode)
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
+        m2c_error('petsc:RuntimeError', 'PetscInitializeNoArguments returned error code %d\n', errCode)
+    end
 end
 end

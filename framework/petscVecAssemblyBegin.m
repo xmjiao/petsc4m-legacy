@@ -1,4 +1,4 @@
-function errCode = petscVecAssemblyBegin(vec)
+function [errCode, toplevel] = petscVecAssemblyBegin(vec)
 %Frees space taken by a vector.
 %
 %  errCode = petscVecAssemblyBegin(vec)
@@ -18,7 +18,8 @@ if ~coder.target('MATLAB')
     
     errCode = coder.ceval('VecAssemblyBegin', t_vec);
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecAssemblyBegin returned error code %d\n', errCode)
     end
 end

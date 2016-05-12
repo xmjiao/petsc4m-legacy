@@ -1,4 +1,4 @@
-function errCode = petscVecSetOption(vec, op, flg)
+function [errCode, toplevel] = petscVecSetOption(vec, op, flg)
 %Sets an option for controling a vector's behavior.
 %
 %   errCode = petscVecSetOption(vec, op, flg)
@@ -19,7 +19,8 @@ if ~coder.target('MATLAB')
     t_vec = PetscVec(vec);
     errCode = coder.ceval('VecSetOption', t_vec, op, flg);
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecSetOptions returned error code %d\n', errCode)
     end
 end

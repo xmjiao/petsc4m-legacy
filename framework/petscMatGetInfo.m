@@ -1,4 +1,4 @@
-function [info, errCode] = petscMatGetInfo(mat, flag)
+function [info, errCode, toplevel] = petscMatGetInfo(mat, flag)
 %Returns information about matrix storage (number of nonzeros, memory, etc.).
 %
 %  [info, errCode] = petscMatGetInfo(mat)
@@ -30,7 +30,8 @@ if ~coder.target('MATLAB')
     t_info = coder.opaque('MatInfo');
     errCode = coder.ceval('MatGetInfo', t_mat, flag, coder.wref(t_info));
     
-    if errCode && (nargout<2 || coder.ismatlabthread)
+    toplevel = nargout>2;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'petscMatGetInfo returned error code %d\n', errCode)
     end
     
@@ -39,7 +40,7 @@ if ~coder.target('MATLAB')
     
     [info, nfields] = PetscMatInfo;
     
-    if nfields*8 < nbytes
+    if nfields*8 < nbytes && m2c_debug
         m2c_error('petscMatGetInfo:WrongSize', ...
             'There are %d fields in PetscMatInfo but %d fields in MatInfo.', ...
             nfields, bitshift(nbytes, -3));

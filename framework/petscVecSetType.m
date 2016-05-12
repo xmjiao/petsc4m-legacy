@@ -1,4 +1,4 @@
-function errCode = petscVecSetType(vec, type)
+function [errCode, toplevel] = petscVecSetType(vec, type)
 %Builds a vector, for a particular vector implementation.
 %
 %   errCode = petscVecSetType(vec, type)
@@ -21,7 +21,8 @@ if ~coder.target('MATLAB')
     
     errCode = coder.ceval('VecSetType', t_vec, t_type);
     
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecSetType returned error code %d\n', errCode)
     end
 end

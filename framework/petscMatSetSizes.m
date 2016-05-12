@@ -1,4 +1,4 @@
-function errCode = petscMatSetSizes(mat, m, n, M, N)
+function [errCode, toplevel] = petscMatSetSizes(mat, m, n, M, N)
 %Sets the local and global sizes, and checks to determine compatibility.
 %
 %errCode = petscMatSetSizes(mat, m, n)
@@ -31,7 +31,8 @@ if ~coder.target('MATLAB')
     end
     errCode = coder.ceval('MatSetSizes', t_mat, m, n, M, N);
 
-    if errCode && (nargout==0 || coder.ismatlabthread)
+    toplevel = nargout>1;
+    if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatSetSizes returned error code %d\n', errCode)
     end
 end
