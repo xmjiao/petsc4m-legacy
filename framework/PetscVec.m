@@ -33,6 +33,8 @@ if ~isstruct(arg) || isempty(coder.target)
     else
         vec = opaque_obj('Vec', arg);
     end
-else
+elseif nargin==1 || ~opaque
     vec = castdata('Vec', arg.data);
+else % The argument is already an opaque object.
+    vec = arg;
 end

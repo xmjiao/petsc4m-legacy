@@ -3,14 +3,22 @@
 addpath(pwd); %#ok<*MCAP>
 addpath([pwd '/framework']);
 
-if ~exist('m2c', 'file')
+if ~exist('m2c', 'file') && exist('../M2C', 'dir')
+    % Starting from the current directory with M2C. Load M2C and compile.
     run ../M2C/startup
+
+    if usejava('jvm')
+        run('util/build_mpetsc');
+    end
 end
 
-build
-
+% Initialize PETSc only when running without JVM
 if ismac && ~usejava('jvm')
-    petscInitialize;
-else
-    warning('PETSc cannot be used when Java is enabled.');
+    try
+        if exist(['petscInitialize.' mexext], 'file')
+            petscInitialize;
+        end
+    catch
+        warning('petscInitialize failed.');
+    end
 end
