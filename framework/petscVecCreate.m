@@ -34,10 +34,6 @@ if ~coder.target('MATLAB')
         m2c_error('petsc:RuntimeError', 'VecCreate returned error code %d\n', errCode)
     end
 
-    if toplevel
-        vec = opaque_obj('Vec', t_vec);
-    else
-        vec = t_vec;
-    end
+    vec = PetscVec(t_vec, toplevel);
 end
 end

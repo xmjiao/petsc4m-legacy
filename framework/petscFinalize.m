@@ -20,6 +20,7 @@ function [errCode, toplevel] = petscFinalize
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')
+    coder.cinclude('petscsys.h');
     errCode = coder.ceval('PetscFinalize');
 
     toplevel = nargout>1;

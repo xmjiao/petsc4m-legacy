@@ -1,0 +1,46 @@
+function [str, found, errCode, toplevel] = petscOptionsGetString(opts, pre, name)
+% Gets the string value for a particular option in the database. 
+%
+%   [str, found, errCode, toplevel] = petscOptionsGetString(opts, pre, name)
+%   obtains a string in the data base. The flag found is PETSC_TRUE
+%   if the attribute was found.
+%
+% SEE ALSO: petscOptionsInsertString, petscOptionsHasName, 
+%           PetscOptionsGetInt, PetscOptionsGetString
+%
+% PETSc C interface:
+%   PetscErrorCode  PetscOptionsGetString(PetscOptions options,const char pre[],const char name[],char string[],size_t len,PetscBool  *set)
+
+% http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscOptionsGetString.html
+
+%#codegen -args {PetscOptions, coder.typeof(char(0), [1,inf]), coder.typeof(char(0), [1,inf])}
+
+errCode = int32(-1);
+
+if ~coder.target('MATLAB')
+    pre0 = [pre char(0)];
+    name0 = [name char(0)];
+    b_flag = coder.opaque('PetscBool');
+    
+    str0 = char(zeros(1, 21));
+    errCode = coder.ceval('PetscOptionsGetString', PetscOptions(opts), ...
+        coder.rref(pre0), coder.rref(name0), coder.wref(str0), int32(20), coder.wref(b_flag));
+
+    found = int32(0); %#ok<NASGU>
+    found = coder.ceval('(int)', b_flag);
+    
+    str = '';
+    for i=1:21
+        if str0(i)==0
+            str = str0(1:i-1);
+            break;
+        end
+    end
+    
+    toplevel = nargout>3;
+    if errCode && (toplevel || m2c_debug)
+        m2c_error('petsc:RuntimeError', 'PetscOptionsGetString returned error code %d\n', errCode)
+    end
+end
+
+end

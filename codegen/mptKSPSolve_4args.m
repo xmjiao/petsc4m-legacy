@@ -1,2 +1,2 @@
-function [x,flag,relres,iter,toplevel] = mptKSPSolve_4args(ksp, b, rtol, maxit) %#codegen
-[x,flag,relres,iter,toplevel] = mptKSPSolve(ksp, b, rtol, maxit);
+function [flag,relres,iter] = mptKSPSolve_4args(ksp, b, x, rtol) %#codegen
+[flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol);

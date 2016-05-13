@@ -18,14 +18,10 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('KSPGetType', PetscKSP(ksp), coder.wref(t_type));
     
     toplevel = nargout>2;
+    type = PetscKSPType(t_type, toplevel);
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'KSPGetType returned error code %d\n', errCode)
-    end
-    
-    if toplevel
-        type = opaque_obj('KSPType', t_type);
-    else
-        type = t_type;
     end
 end
 end

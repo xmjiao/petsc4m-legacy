@@ -19,14 +19,10 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('VecDestroy', coder.ref(t_vec));
     
     toplevel = nargout>2;
+    vec = PetscVec(t_vec, toplevel);
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode)
-    end
-
-    if toplevel
-        vec = opaque_obj('Vec', t_vec);
-    else
-        vec = t_vec;
     end
 end
 end

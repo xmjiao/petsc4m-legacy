@@ -21,14 +21,10 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out));
     
     toplevel = nargout>2;
+    vec_out = PetscVec(t_vec_out, toplevel);
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecDuplicate returned error code %d\n', errCode)
-    end
-    
-    if toplevel
-        vec_out = opaque_obj('Vec', t_vec_out);
-    else
-        vec_out = t_vec_out;
     end
 end
 end

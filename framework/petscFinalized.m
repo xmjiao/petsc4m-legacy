@@ -17,6 +17,7 @@ finalized = int32(0);
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')
+    coder.cinclude('petscsys.h');
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('PetscFinalized', coder.wref(b));
     

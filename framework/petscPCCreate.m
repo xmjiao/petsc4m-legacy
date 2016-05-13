@@ -29,11 +29,7 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('PCCreate', t_comm, coder.wref(t_pc));
     
     toplevel = nargout>2;
-    if toplevel
-        pc = opaque_obj('PC', t_pc);
-    else
-        pc = t_pc;
-    end
+    pc = PetscPC(t_pc, toplevel);
     
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PCCreate returned error code %d\n', errCode)

@@ -1,2 +1,2 @@
-function [ksp, toplevel] = mptKSPSetup_3args(Amat, PMat, ksptype) %#codegen
-[ksp, toplevel] = mptKSPSetup(Amat, PMat, ksptype);
+function [ksp, toplevel] = mptKSPSetup_3args(Amat, ksptype, pctype) %#codegen
+[ksp, toplevel] = mptKSPSetup(Amat, ksptype, pctype);

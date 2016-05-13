@@ -18,14 +18,11 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('KSPGetPC', PetscKSP(ksp), coder.wref(t_pc));
     
     toplevel = nargout>2;
+    pc = PetscPC(t_pc, toplevel);
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'KSPGetPC returned error code %d\n', errCode)
     end
     
-    if toplevel
-        pc = opaque_obj('PC', t_pc);
-    else
-        pc = t_pc;
-    end
 end
 end

@@ -19,15 +19,10 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('PCDestroy', coder.ref(t_pc));
 
     toplevel = nargout>2;
+    pc = PetscPC(t_pc, toplevel);
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PCDestroy returned error code %d\n', errCode)
-    end
-    
-    if toplevel
-        % Create a MATLAB opaque object if the req is a MATLAB opaque object.
-        pc = opaque_obj('PC', t_pc);
-    else
-        pc = t_pc;
     end
 end
 end

@@ -22,12 +22,7 @@ if ~coder.target('MATLAB')
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode)
     end
-    
-    if toplevel
-        % Create a MATLAB opaque object if the req is a MATLAB opaque object.
-        mat = opaque_obj('Mat', t_mat);
-    else
-        mat = t_mat;
-    end
+
+    mat = PetscMat(t_mat, toplevel);
 end
 end

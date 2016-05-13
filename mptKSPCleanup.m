@@ -10,10 +10,9 @@ function [ksp, toplevel] = mptKSPCleanup(ksp)
 %#codegen -args {PetscKSP}
 
 % Destroy the KSP and solution vector
-if nargout>1
-    [ksp, ~, toplevel] = petscKSPDestroy(ksp);
-else
-    ksp = petscKSPDestroy(ksp);
-end
+t_ksp = petscKSPDestroy(ksp);
+
+toplevel = nargout>1;
+ksp = PetscKSP(t_ksp, toplevel);
 
 end

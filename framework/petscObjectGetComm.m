@@ -22,11 +22,7 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('PetscObjectGetComm', t_obj, coder.wref(t_comm));
     
     toplevel = nargout>2;
-    if toplevel
-        comm = opaque_obj('MPI_Comm', t_comm);
-    else
-        comm = t_comm;
-    end
+    comm = MPI_Comm(t_comm, toplevel);
     
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscObjectGetComm returned error code %d\n', errCode)

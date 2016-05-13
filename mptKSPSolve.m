@@ -1,76 +1,75 @@
-function [x,flag,relres,iter,toplevel] = mptKSPSolve(ksp, b, rtol, maxit, x, nzig)
+function [flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxit, varargin)
 % Solves linear system.
 %
 % Syntax:
-%    [x, flag, reslres, iter] = mptKSPSolve(ksp, b)
-%    [x, flag, reslres, iter] = mptKSPSolve(ksp, b, rtol)
-%    [x, flag, reslres, iter] = mptKSPSolve(ksp, b, rtol, maxit)
-%    [x, flag, reslres, iter] = mptKSPSolve(ksp, b, rtol, maxit, x)
-%    [x, flag, reslres, iter] = mptKSPSolve(ksp, b, rtol, maxit, x, nzig)
+%    [flag, reslres, iter] = mptKSPSolve(ksp, b)
+%    [flag, reslres, iter] = mptKSPSolve(ksp, b, x)
+%    [flag, reslres, iter] = mptKSPSolve(ksp, b, x, rtol)
+%    [flag, reslres, iter] = mptKSPSolve(ksp, b, x, rtol, maxit)
+%    [flag, reslres, iter] = mptKSPSolve(ksp, b, x, rtol, maxit, x0)
+%    [flag, reslres, iter] = mptKSPSolve(ksp, b, x, rtol, maxit, x0, resvec)
 %
 % Description:
 %    mptKSPSolve(ksp, b) solves the linear system using the tolerances
-%    that have been set previously by the user or by PETSc.
+%    that have been set previously by the user or by PETSc. The solution
+%    overwrites b.
 %
-%    mptKSPSolve(ksp, b, rtol) uses the given relative tolerances.
+%    mptKSPSolve(ksp, b, x) solves the linear system and saves the solution
+%    into x.
 %
-%    mptKSPSolve(ksp, b, rtol, maxit) uses the given relative tolerances
-%    and maximum iteration count.
+%    mptKSPSolve(ksp, b, x, rtol) solves with the given relative tolerance.
 %
-%    x = mptKSPSolve(ksp, b, rtol, maxit, x) uses the vector preallocated
-%    in x to store the solution. x is reset to 0 before solving.
+%    mptKSPSolve(ksp, b, x, rtol, maxit) solves with the given relative 
+%    tolerances and maximum iteration count.
 %
-%    x = mptKSPSolve(ksp, b, rtol, maxit, x, true) uses the vector
-%    preallocated in x for the solution, and uses its initial value
-%    as the nonzero initial guesses.
+%    mptKSPSolve(ksp, b, rtol, maxit, x0) uses x0 as the initial guess
+%
+%    mptKSPSolve(ksp, b, rtol, maxit, x0, resvec) also computes the
+%    residual vector.
 %
 % See also mptKSPSetup, mptKSPCleanup
 
-%#codegen -args {PetscKSP, PetscVec, 0, int32(0), PetscVec, int32(0)}
+%#codegen -args {PetscKSP, PetscVec, PetscVec, 0, int32(0)}
 %#codegen mptKSPSolve_2args -args {PetscKSP, PetscVec}
-%#codegen mptKSPSolve_3args -args {PetscKSP, PetscVec, 0}
-%#codegen mptKSPSolve_4args -args {PetscKSP, PetscVec, 0, int32(0)}
-%#codegen mptKSPSolve_5args -args {PetscKSP, PetscVec, 0, int32(0), PetscVec}
+%#codegen mptKSPSolve_3args -args {PetscKSP, PetscVec, PetscVec}
+%#codegen mptKSPSolve_4args -args {PetscKSP, PetscVec, PetscVec, 0}
+%#codegen mptKSPSolve_6args -args {PetscKSP, PetscVec, PetscVec, 0, int32(0), PetscVec}
+%#codegen mptKSPSolve_7args -args {PetscKSP, PetscVec, PetscVec, 0, int32(0), PetscVec, PetscVec}
 
-
-% Set tolerances
-if nargin==4
-    petscKSPSetTolerances(ksp, rtol, maxit);
-elseif nargin==3
-    petscKSPSetTolerances(ksp, rtol);
-end
-
-% Process initial guess
-if nargin<5
-    if nargout>4
-        [x, ~, toplevel] = petscVecDuplicate(b);
-        t_x = PetscVec(x);
-    else
-        x = petscVecDuplicate(b);
-        t_x = x;
-    end
-    petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
-else
-    t_x = PetscVec(x);
-    toplevel = nargout>4;
-end
-
-if nargin>5 && nzig
-    petscKSPSetInitialGuessNonzero(ksp, PETSC_TRUE);
-else
-    petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
-end
 
 % Solve the linear system
-petscKSPSolve(ksp, b, t_x);
+if nargin==2
+    petscKSPSolve(ksp, b);
+    petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
+else
+    % Set tolerances
+    if nargin<4; rtol = PETSC_DEFAULT; end
+    if nargin<5; maxit = PETSC_DEFAULT; end
+    petscKSPSetTolerances(ksp, rtol, maxit);
+    
+    % Process initial guess
+    if ~isempty(varargin)
+        petscVecCopy(varargin{1}, x);
+        petscKSPSetInitialGuessNonzero(ksp, PETSC_TRUE);
+    else
+        petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
+    end
 
-if nargout>1
+    petscKSPSolve(ksp, b, x);
+end
+
+if nargout>0
     flag = petscKSPGetConvergedReason(ksp);
 end
-if nargout>2
+if nargout>1
     relres = petscKSPGetResidualNorm(ksp);
 end
-if nargout>3
+if nargout>2
     iter = petscKSPGetIterationNumber(ksp);
 end
+
+if nargin>6
+    petscKSPBuildResidual(ksp, varargin{2});
+end
+
 end

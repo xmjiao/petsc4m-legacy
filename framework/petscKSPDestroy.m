@@ -1,4 +1,4 @@
-function [ksp, errCode, toplevel] = petscKSPDestroy(ksp)
+function [ksp_out, errCode, toplevel] = petscKSPDestroy(ksp)
 %Destroys KSP context.
 %
 %  [ksp, errCode] = petscKSPDestroy(ksp)
@@ -19,15 +19,10 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('KSPDestroy', coder.ref(t_ksp));
 
     toplevel = nargout>2;
+    ksp_out = PetscKSP(t_ksp, toplevel);
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'KSPDestroy returned error code %d\n', errCode)
-    end
-    
-    if toplevel
-        % Create a MATLAB opaque object if the req is a MATLAB opaque object.
-        ksp = opaque_obj('KSP', t_ksp);
-    else
-        ksp = t_ksp;
     end
 end
 end

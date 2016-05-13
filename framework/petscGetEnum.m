@@ -42,6 +42,9 @@ if coder.target('MATLAB')
     error('Function petscGetEnum must be compiled.');
 end
 
+coder.cinclude('petscsys.h');
+coder.cinclude('petscksp.h');
+
 %% InsertMode
 switch name
     case 'PETSC_TRUE'

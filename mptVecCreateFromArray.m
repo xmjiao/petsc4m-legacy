@@ -1,16 +1,16 @@
-function vec = petscVecCreateFromArray(arr, options, prefix)
-%Creates a vector in PETSc from a MATLAB array.
+function [vec_out, toplevel] = mptVecCreateFromArray(arr, varargin)
+%Creates a vector in PETSc from a MATLAB column vector.
 %
-%  vec = petscVecCreateFromArray(arr)
+%  vec = mptVecCreateFromArray(arr)
 %     arr:   A column vector in MATLAB
 %
-%  vec = petscVecCreateFromArray(arr, options, prefix)
-%     options:   a character string containing options for the vector
-%     prefix:    a character string specifics the prefix for the options
+%  vec = petscVecCreateFromArray(arr, prefix)
+%     prefix: if present, set options of the vector from the options database.
 %
-%  SEE ALSO: petscMatCreateFromCRS, petscVecToArray
+%  SEE ALSO: mptVecToArray
 
-%#codegen
+%#codegen -args {coder.typeof(0, [inf, 1])} mptVecCreateFromArray_2args -args
+%#codegen {coder.typeof(0, [inf, 1]), coder.typeof(char(0), [inf,1])}
 
 if nargin<1
     error('At least one argument is required.');
@@ -22,10 +22,7 @@ if nargin==1
     vec = petscVecCreateSeq(n);
 else
     vec = petscVecCreate;
-    if nargin>=5
-        petscVecSetOptionsPrefix(vec, prefix);
-    end
-    petscOptionsInsertString(options)
+    petscVecSetOptionsPrefix(vec, varargin{1});
     petscVecSetFromOptions(vec);
     petscVecSetSizes(vec, n);
 end
@@ -38,13 +35,16 @@ petscVecSetValues(vec, n, idx, arr);
 petscVecAssemblyBegin(vec);
 petscVecAssemblyEnd(vec);
 
+toplevel = nargout>1;
+vec_out = PetscVec(vec, toplevel);
+
 end
 
 function test %#ok<DEFNU>
 %!test
 %! b = rand(10,1);
-%! vec = petscVecCreateFromArray(b);
-%! arr = petscVecToArray(vec);
+%! vec = mptVecCreateFromArray(b);
+%! arr = mptVecToArray(vec);
 %! assert(isequal(b, arr));
 end
 

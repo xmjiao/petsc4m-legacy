@@ -1,14 +1,14 @@
-function [row_ptr, col_ind, val] = petscMatToCRS(mat)
+function [row_ptr, col_ind, val] = mptMatAIJToCRS(mat)
 % Exports a sparse matrix in PETSc into CRS format.
 %
-%    [row_ptr, col_ind, val] = petscMatToCRS(mat)
+%    [row_ptr, col_ind, val] = mptMatAIJToCRS(mat)
 %      row_ptr:   starting pointers for each row (1-based)
 %      col_ind:   column indices in each row (1-based)
 %      vals:      values in each row
 %
-% SEE ALSO: petscMatCreateFromCRS
+% SEE ALSO: mptMatAIJCreateFromCRS
 
-%#codegen
+%#codegen -args {PetscMat}
 
 [first_row, last_row] = petscMatGetOwnershipRange(mat);
 
@@ -40,8 +40,8 @@ function test %#ok<DEFNU>
 %!test
 %! b = sprand(100,100,0.3);
 %! [rowptr, colind, val] = crs_createFromSparse(b);  % This requires NumGeom
-%! mat = petscMatCreateFromCRS(rowptr, colind, val);
-%! [rowptr2, colind2, val2] = petscMatToCRS(mat);
+%! mat = mptMatAIJCreateFromCRS(rowptr, colind, val);
+%! [rowptr2, colind2, val2] = mptMatAIJToCRS(mat);
 %! assert(isequal(rowptr, rowptr2) && isequal(colind, colind2) && isequal(val, val2) );
 end
 

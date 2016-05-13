@@ -23,14 +23,10 @@ if ~coder.target('MATLAB')
         coder.wref(t_mat_out));
     
     toplevel = nargout>3;
+    mat_out = PetscMat(t_mat_out, toplevel);
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatDuplicate returned error code %d\n', errCode)
-    end
-    
-    if toplevel
-        mat_out = opaque_obj('Mat', t_mat_out);
-    else
-        mat_out = t_mat_out;
     end
 end
 end

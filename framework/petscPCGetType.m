@@ -18,14 +18,10 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('PCGetType', PetscPC(pc), coder.wref(t_type));
     
     toplevel = nargout>2;
+    type = PetscPCType(t_type, toplevel);
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PCGetType returned error code %d\n', errCode)
-    end
-    
-    if toplevel
-        type = opaque_obj('PCType', t_type);
-    else
-        type = t_type;
     end
 end
 end

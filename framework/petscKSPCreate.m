@@ -29,12 +29,8 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('KSPCreate', t_comm, coder.wref(t_ksp));
     
     toplevel = nargout>2;
-    if toplevel
-        ksp = opaque_obj('KSP', t_ksp);
-    else
-        ksp = t_ksp;
-    end
-    
+    ksp = PetscKSP(t_ksp, toplevel);
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'KSPCreate returned error code %d\n', errCode)
     end

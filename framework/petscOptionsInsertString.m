@@ -5,7 +5,7 @@ function [errCode, toplevel] = petscOptionsInsertString(in_str)
 %   in_str -string that contains options separated by blanks 
 %   errCode(int) return code (0 indicates OK)
 %
-% SEE ALSO: petscAssembleMat, petscAssembleVec, petscSolve
+% SEE ALSO: petscOptionsInsertFile
 %
 % PETSc C interface:
 %   PetscErrorCode  PetscOptionsInsertString(PetscOptions options,const char in_str[])

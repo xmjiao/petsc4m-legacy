@@ -25,7 +25,7 @@ errCode = int32(0);
 if ~coder.target('MATLAB')
     errCode = coder.ceval('PetscInitializeNoArguments');
 
-    toplevel = nargout>2;
+    toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscInitializeNoArguments returned error code %d\n', errCode)
     end
