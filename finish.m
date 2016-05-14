@@ -8,6 +8,13 @@ if ~usejava('jvm')
                 petscInitialized && ~petscFinalized
             petscFinalize;
         end
+
+        if exist(['mpi_Finialize' mexext], 'file') && ...
+                exist(['mpi_Initialized' mexext], 'file') && ...
+                exist(['mpi_Finialize' mexext], 'file') && ...
+                mpi_Initialized && ~mpi_Finialized
+            mpi_Finialize;
+        end
     catch
     end
 end

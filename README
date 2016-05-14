@@ -41,10 +41,14 @@ There are three different types of PETSc functions:
   * Constants: All constants have prefix PETSC_, such as PETSC_COMM_WORLD.
   * Functions: All functions have prefix petsc, such as petscMatCreate.
 
-These functions are all located in the petsc sub-directory. 
-
+The functions for Mat, Vec, KSP, and PC are all located in the petsc sub-directory.
 In most cases, the low-level functions do not need to be used directly.
 However, they are useful when prototyping other matrix formats.
+
+The functions related initialization, finalization, options and MPI communicators
+are all undert the sys subdirectory. These functions are often useful for
+implementing applications.
+
 
 Basic MPI Functions
 -------------------

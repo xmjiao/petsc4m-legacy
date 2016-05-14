@@ -3,10 +3,7 @@
 addpath(pwd); %#ok<*MCAP>
 addpath([pwd '/petsc']);
 addpath([pwd '/util'])
-
-if ~exist('MMPI_Init')
-    addpath([pwd '/mpi'])
-end
+addpath([pwd '/sys'])
 
 if ~exist('m2c', 'file') && exist('../M2C', 'dir')
     % Starting from the current directory with M2C. Load M2C and compile.
@@ -20,6 +17,11 @@ end
 % Initialize PETSc only when running without JVM
 if ismac && ~usejava('jvm')
     try
+        if exist(['mpi_Init' mexext], 'file') && ...
+                exist(['mpi_Initialized' mexext], 'file') && ...
+                ~mpi_Initialized
+            mpi_Init;
+        end
         if exist(['petscInitialize.' mexext], 'file')
             petscInitialize;
         end
