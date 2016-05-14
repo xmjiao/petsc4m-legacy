@@ -41,10 +41,22 @@ There are three different types of PETSc functions:
   * Constants: All constants have prefix PETSC_, such as PETSC_COMM_WORLD.
   * Functions: All functions have prefix petsc, such as petscMatCreate.
 
-These functions are all located in the framework sub-directory. 
+These functions are all located in the petsc sub-directory. 
 
 In most cases, the low-level functions do not need to be used directly.
 However, they are useful when prototyping other matrix formats.
+
+Basic MPI Functions
+-------------------
+
+MPETSc includes six basic MPI calls:
+   mpi_Init mpi_Initialized 
+   mpi_Comm_size mpi_Comm_rank 
+   mpi_Finalize mpi_Finalized
+
+Note that these functions all start with lowercase mpi_ to avoid conflict
+with the C MPI interface and the MATLAB's built-in MPI calls. These functions
+are under the mpi sub-directory.
 
 LIMITATIONS
 ===========

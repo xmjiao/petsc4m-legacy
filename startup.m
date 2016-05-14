@@ -1,7 +1,7 @@
 % This script is called automatically when MATLAB and Octave exists.
 
 addpath(pwd); %#ok<*MCAP>
-addpath([pwd '/framework']);
+addpath([pwd '/petsc']);
 addpath([pwd '/util'])
 
 if ~exist('MMPI_Init')
