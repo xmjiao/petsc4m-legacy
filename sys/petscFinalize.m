@@ -8,8 +8,8 @@ function [errCode, toplevel] = petscFinalize
 %automatically when the MATLAB session terminates if petscInitialized is 
 %true. 
 %
-%In a parallel setting, MMPI_Finalize should be called explicitly after
-%petscFinalize if MMPI_Init was called explicitly before petscInitialize.
+%In a parallel setting, mpi_Finalize should be called explicitly after
+%petscFinalize if mpi_Init was called explicitly before petscInitialize.
 %
 % PETSc C interface:
 %   PetscErrorCode  PetscFinalize(void)
