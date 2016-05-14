@@ -2,6 +2,11 @@
 
 addpath(pwd); %#ok<*MCAP>
 addpath([pwd '/framework']);
+addpath([pwd '/util'])
+
+if ~exist('MMPI_Init')
+    addpath([pwd '/mpi'])
+end
 
 if ~exist('m2c', 'file') && exist('../M2C', 'dir')
     % Starting from the current directory with M2C. Load M2C and compile.
