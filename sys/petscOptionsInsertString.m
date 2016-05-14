@@ -2,7 +2,8 @@ function [errCode, toplevel] = petscOptionsInsertString(in_str)
 %Inserts options into the database from a string
 %   errCode = petscOptionsInsertString(in_str)
 %
-%   in_str -string that contains options separated by blanks 
+%   in_str -string that contains options separated by blanks and
+%           must be null-terminated
 %   errCode(int) return code (0 indicates OK)
 %
 % SEE ALSO: petscOptionsInsertFile
@@ -16,13 +17,15 @@ function [errCode, toplevel] = petscOptionsInsertString(in_str)
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')
-    % null-terminate the string.
-    str0 = [in_str char(0)];
+    toplevel = nargout>1;
+    if ~isempty(in_str) && in_str(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsInsertString:InputError', ...
+            'The argument must be a null-terminated string.')
+    end
 
     options = coder.opaque('PetscOptions', 'NULL');
-    errCode = coder.ceval('PetscOptionsInsertString', options, coder.rref(str0));
+    errCode = coder.ceval('PetscOptionsInsertString', options, coder.rref(in_str));
 
-    toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsInsertString returned error code %d\n', errCode)
     end

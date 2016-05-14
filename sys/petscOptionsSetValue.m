@@ -4,11 +4,11 @@ function [errCode, toplevel] = petscOptionsSetValue(opts, iname, value)
 %
 %   errCode = petscOptionsSetValue(opts, iname, value) sets the option
 %   iname in the option database to a string value. The iname must start
-%   with '-'. The strings iname and value do not need to be null-terminated.
+%   with '-'. The strings must be null-terminated.
 %
 %   errCode(int) return code (0 indicates OK)
 %
-% SEE ALSO: petscOptionsInsertString, petscOptionsHasName petscOptionsGetInt, 
+% SEE ALSO: petscOptionsInsertString, petscOptionsHasName petscOptionsGetInt,
 %      PetscOptionsGetReal, PetscOptionsGetString
 %
 % PETSc C interface:
@@ -20,10 +20,18 @@ function [errCode, toplevel] = petscOptionsSetValue(opts, iname, value)
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')
-    iname0 = [iname char(0)];
-    value0 = [value char(0)];
+    toplevel = nargout>1;
+    if ~isempty(iname) && iname(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsSetValue:InputError', ...
+            'Argument name must be a null-terminated string.')
+    end
+    if ~isempty(value) && value(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsSetValue:InputError', ...
+            'Argument value must be a null-terminated string.')
+    end
+    
     errCode = coder.ceval('PetscOptionsSetValue', PetscOptions(opts), ...
-        coder.rref(iname0), coder.rref(value0));
+        coder.rref(iname), coder.rref(value));
     
     toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)

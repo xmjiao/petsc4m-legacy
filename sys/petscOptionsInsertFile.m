@@ -13,12 +13,15 @@ function [errCode, toplevel] = petscOptionsInsertFile(comm, opts, file, req)
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')
-    % null-terminate the string.
+    toplevel = nargout>1;
+    if ~isempty(file) && file(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsInsertFile:InputError', ...
+            'Argument file must be a null-terminated string.')
+    end
     
     errCode = coder.ceval('PetscOptionsInsertFile', MPI_Comm(comm), ...
         PetscOptions(opts), file, req);
     
-    toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsInsertFile returned error code %d\n', errCode)
     end

@@ -19,7 +19,7 @@ function [flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxit, varargin)
 %
 %    mptKSPSolve(ksp, b, x, rtol) solves with the given relative tolerance.
 %
-%    mptKSPSolve(ksp, b, x, rtol, maxit) solves with the given relative 
+%    mptKSPSolve(ksp, b, x, rtol, maxit) solves with the given relative
 %    tolerances and maximum iteration count.
 %
 %    mptKSPSolve(ksp, b, rtol, maxit, x0) uses x0 as the initial guess
@@ -45,16 +45,16 @@ else
     % Set tolerances
     if nargin<4; rtol = PETSC_DEFAULT; end
     if nargin<5; maxit = PETSC_DEFAULT; end
-    petscKSPSetTolerances(ksp, rtol, maxit);
+    petscKSPSetTolerances(ksp, double(rtol), int32(maxit));
     
     % Process initial guess
-    if ~isempty(varargin)
+    if ~isempty(varargin) && ~petscIsNULL(varargin{1})
         petscVecCopy(varargin{1}, x);
         petscKSPSetInitialGuessNonzero(ksp, PETSC_TRUE);
     else
         petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
     end
-
+    
     petscKSPSolve(ksp, b, x);
 end
 

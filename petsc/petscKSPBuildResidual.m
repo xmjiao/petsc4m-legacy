@@ -17,7 +17,7 @@ if ~coder.target('MATLAB')
     t_ksp = PetscKSP(ksp);
     t_v = PetscVec(v);
     
-    errCode = coder.ceval('KSPBuildResidual', t_ksp, PETSC_NULL, PETSC_NULL, coder.ref(t_v));
+    errCode = coder.ceval('KSPBuildResidual', t_ksp, PETSC_NULL_VEC, PETSC_NULL_VEC, coder.ref(t_v));
     
     toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)

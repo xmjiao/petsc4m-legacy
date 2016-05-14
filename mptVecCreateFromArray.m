@@ -22,7 +22,14 @@ if nargin==1
     vec = petscVecCreateSeq(n);
 else
     vec = petscVecCreate;
-    petscVecSetOptionsPrefix(vec, varargin{1});
+    if isempty(varargin{1}) || ~varargin{1}(end)
+        opts = varargin{1};
+    else
+        % Null-terminate the string
+        opts = [varargin{1} char(0)];
+    end
+
+    petscVecSetOptionsPrefix(vec, opts);
     petscVecSetFromOptions(vec);
     petscVecSetSizes(vec, n);
 end

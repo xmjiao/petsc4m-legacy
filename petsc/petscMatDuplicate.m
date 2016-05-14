@@ -22,11 +22,11 @@ if ~coder.target('MATLAB')
     errCode = coder.ceval('MatDuplicate', PetscMat(mat_in), op, ...
         coder.wref(t_mat_out));
     
-    toplevel = nargout>3;
+    toplevel = nargout>2;
     mat_out = PetscMat(t_mat_out, toplevel);
 
     if errCode && (toplevel || m2c_debug)
-        m2c_error('petsc:RuntimeError', 'MatDuplicate returned error code %d\n', errCode)
+        m2c_error('MPETSc:petscMatDuplicate:RuntimeError', 'MatDuplicate returned error code %d\n', errCode)
     end
 end
 end

@@ -40,7 +40,7 @@ function [obj, toplevel] = petscGetObject(name)
 %     PCBDDC, PCKACZMARZ, PCTELESCOPE
 %
 % Other:
-%     PETSC_IGNORE
+%     PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC
 
 %#codegen -args {coder.typeof(char(0),[1,inf])}
 
@@ -343,6 +343,18 @@ switch name
         [obj, toplevel] = get_obj('PCType', 'PCKACZMARZ', nargout>1);
     case 'PCTELESCOPE'
         [obj, toplevel] = get_obj('PCType', 'PCTELESCOPE', nargout>1);
+    case 'PETSC_NULL_OPTIONS'
+        [obj, toplevel] = get_obj('PetscOptions', 'NULL', nargout>1);
+    case 'PETSC_NULL_MAT'
+        [obj, toplevel] = get_obj('Mat', 'NULL', nargout>1);
+    case 'PETSC_NULL_VEC'
+        [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1);
+    case 'PETSC_NULL_INT'
+        [obj, toplevel] = get_obj('int *', 'NULL', nargout>1);
+    case 'PETSC_NULL_REAL'
+        [obj, toplevel] = get_obj('double *', 'NULL', nargout>1);
+    case 'PETSC_NULL_STRING'
+        [obj, toplevel] = get_obj('char *', 'NULL', nargout>1);
     otherwise
         m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
         if nargout>1

@@ -3,7 +3,7 @@ function [str, found, errCode, toplevel] = petscOptionsGetString(opts, pre, name
 %
 %   [str, found, errCode, toplevel] = petscOptionsGetString(opts, pre, name)
 %   obtains a string in the data base. The flag found is PETSC_TRUE
-%   if the attribute was found.
+%   if the attribute was found. The strings must be null-terminated.
 %
 % SEE ALSO: petscOptionsInsertString, petscOptionsHasName, 
 %           PetscOptionsGetInt, PetscOptionsGetString
@@ -18,13 +18,21 @@ function [str, found, errCode, toplevel] = petscOptionsGetString(opts, pre, name
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')
-    pre0 = [pre char(0)];
-    name0 = [name char(0)];
+    toplevel = nargout>3;
+    if ~isempty(pre) && pre(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsGetString:InputError', ...
+            'Argument pre must be a null-terminated string.')
+    end
+    if ~isempty(name) && name(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsGetString:InputError', ...
+            'Argument name must be a null-terminated character string.')
+    end
+    
     b_flag = coder.opaque('PetscBool');
     
     str0 = char(zeros(1, 21));
     errCode = coder.ceval('PetscOptionsGetString', PetscOptions(opts), ...
-        coder.rref(pre0), coder.rref(name0), coder.wref(str0), int32(20), coder.wref(b_flag));
+        coder.rref(pre), coder.rref(name), coder.wref(str0), int32(20), coder.wref(b_flag));
 
     found = int32(0); %#ok<NASGU>
     found = coder.ceval('(int)', b_flag);
@@ -32,12 +40,11 @@ if ~coder.target('MATLAB')
     str = '';
     for i=1:21
         if str0(i)==0
-            str = str0(1:i-1);
+            str = str0(1:i);
             break;
         end
     end
     
-    toplevel = nargout>3;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsGetString returned error code %d\n', errCode)
     end

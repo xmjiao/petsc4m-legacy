@@ -51,7 +51,14 @@ if nargin<5
     first_row = int32(0);
 else
     mat = petscMatCreate;
-    petscMatSetOptionsPrefix(mat, varargin{2});
+
+    if isempty(varargin{2}) || ~varargin{2}(end)
+        opts = varargin{2};
+    else
+        % Null-terminate the string
+        opts = [varargin{2} char(0)];
+    end
+    petscMatSetOptionsPrefix(mat, opts);
     petscMatSetFromOptions(mat);
     petscMatSetSizes(mat, n, PETSC_DECIDE, PETSC_DETERMINE, ncols);
     % Since the matrix is may be parallel,
@@ -70,16 +77,16 @@ end
 petscMatAssemblyBegin(mat);
 petscMatAssemblyEnd(mat);
 
-toplevel = nargin>1;
+toplevel = nargout>1;
 mat_out = PetscMat(mat, toplevel);
 
 end
 
 function test %#ok<DEFNU>
 %!test
-%! b = sprand(100,100,0.3);
-%! [rowptr, colind, val] = crs_createFromSparse(b); % This requires NumGeom
+%! A = sprand(100,100,0.3);
+%! [rowptr, colind, val] = crs_createFromSparse(A); % This requires NumGeom
 %! mat = mptMatCreateAIJFromCRS(rowptr, colind, val);
 %! [rowptr2, colind2, val2] = mptMatAIJToCRS(mat);
-%! assert(isequal(rowptr, rowptr2) && isequal(colind, colind2) && isequal(val, val2) );
+%! assert(isequal(rowptr, rowptr2) && isequal(colind, colind2) && isequal(val, val2));
 end

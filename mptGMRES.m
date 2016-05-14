@@ -47,7 +47,7 @@ function [flag,relres,iter] = mptGMRES(A, b, x, restart, rtol, maxit, ...
 %    mptGMRES(A_hdl, b_hdl, x_hdl, restart, rtol, maxit, pctype, pcprefix, x0_handle, resvec_hdl)
 %    also computes the residual vector and saves it into resvec.
 %
-% See also: mptCG, mptMINRES, mptBCGS, mptTFQMR, mptQMRCGS,
+% See also: mptGMRES_crs, mptCG, mptMINRES, mptBCGS, mptTFQMR, mptQMRCGS,
 %           mptKSPSetup, mptKSPSolve, mptKSPCleanup
 %
 % PETSC: http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPGMRES.html
@@ -56,17 +56,17 @@ function [flag,relres,iter] = mptGMRES(A, b, x, restart, rtol, maxit, ...
 
 % Setup KSP
 if nargin<3; x = b; end
-if nargin<4; restart = PETSC_DEFAULT; end
-if nargin<4; rtol = PETSC_DEFAULT; end
-if nargin<5; maxit = PETSC_DEFAULT; end
-if nargin<6; pctype = PETSC_PCNONE; end
-if nargin<7; pcprefix = ''; end
-
-petscOptionsSetValue(PETSC_NULL, '-ksp_gmres_restart', num2str(restart));
+if nargin>=4 && restart>0
+    petscOptionsSetInt(PETSC_NULL_OPTIONS, ['-ksp_gmres_restart' char(0)], int32(restart));
+end
+if nargin<5; rtol = PETSC_DEFAULT; end
+if nargin<6; maxit = PETSC_DEFAULT; end
+if nargin<7; pctype = PETSC_PCNONE; end
+if nargin<8; pcprefix = ''; end
 
 ksp = mptKSPSetup(A, PETSC_KSPGMRES, pctype, pcprefix);
 
-[flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxit, varargin{:});
+[flag,relres,iter] = mptKSPSolve(ksp, b, x, double(rtol), int32(maxit), varargin{:});
 
 mptKSPCleanup(ksp);
 

@@ -1,9 +1,10 @@
-function [errCode, toplevel] = petscMatSetOptionsPrefix(mat, in_str)
+function [errCode, toplevel] = petscMatSetOptionsPrefix(mat, prefix)
 %Sets the prefix used for searching for all Mat options in the database.
-%   errCode = petscMatSetOptionsPrefix(mat, in_str)
+%   errCode = petscMatSetOptionsPrefix(mat, prefix)
 %
 %   mat    - the Mat context
-%   in_str - the prefix string to prepend to all Mat option requests
+%   prefix - the prefix string to prepend to all Mat option requests.
+%            It must be null-terminated.
 %   errCode(int) return code (0 indicates OK)
 %
 % SEE ALSO: petscMatSetFromOptions
@@ -18,12 +19,15 @@ errCode = int32(-1);
 
 if ~coder.target('MATLAB')
     t_mat = PetscMat(mat);
-    % null-terminate the string.
-    str0 = [in_str char(0)];
-    
-    errCode = coder.ceval('MatSetOptionsPrefix', t_mat, coder.rref(str0));
-    
+
     toplevel = nargout>1;
+    if ~isempty(prefix) && prefix(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscMatSetOptionsPrefix:InputError', ...
+            'The 2nd argument must be a null-terminated string.')
+    end
+
+    errCode = coder.ceval('MatSetOptionsPrefix', t_mat, coder.rref(prefix));
+    
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatSetOptionsPrefix returned error code %d\n', errCode)
     end

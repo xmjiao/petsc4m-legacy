@@ -33,7 +33,8 @@ Low-Level Functions
 -----------------------
 
 The low-level functions allow accessing virtually all features in PETSc
-in MATLAB through MPETSc. The indices for all low-level functions are 0-based. 
+in MATLAB through MPETSc. The indices for all low-level functions are 0-based,
+and all the strings must be null-terminated.
 
 There are three different types of PETSc functions:
   * Data Types: All data types have prefix Petsc, such as PetscMat, PetscVec, 

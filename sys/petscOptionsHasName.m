@@ -4,7 +4,8 @@ function [found, errCode, toplevel] = petscOptionsHasName(options, pre, name)
 % even its value is set to false.
 %
 %   [found, errCode, toplevel] = petscOptionsHasName(options, pre, name)
-%   Set options to [] for default global database.
+%   Set options to [] for default global database. The arguments
+%   pre and name must be null-terminated.
 %
 % SEE ALSO: petscOptionsInsertString, PetscOptionsGetInt, petscOptionsGetReal, 
 %           PetscOptionsGetString
@@ -18,19 +19,26 @@ function [found, errCode, toplevel] = petscOptionsHasName(options, pre, name)
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')
-    pre0 = [pre char(0)];
-    name0 = [name char(0)];
+    toplevel = nargout>2;
+    if ~isempty(pre) && pre(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsHasName:InputError', ...
+            'Argument pre must be a null-terminated string.')
+    end
+    if ~isempty(name) && name(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsHasName:InputError', ...
+            'Argument name must be a null-terminated string.')
+    end
+
     b_flag = coder.opaque('PetscBool');
     
     errCode = coder.ceval('PetscOptionsHasName', PetscOptions(options), ...
-        coder.rref(pre0), coder.rref(name0), coder.wref(b_flag));
+        coder.rref(pre), coder.rref(name), coder.wref(b_flag));
     
     if nargout>1
         found = int32(0); %#ok<NASGU>
         found = coder.ceval('(int)', b_flag);
     end
     
-    toplevel = nargout>3;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsHasName returned error code %d\n', errCode)
     end

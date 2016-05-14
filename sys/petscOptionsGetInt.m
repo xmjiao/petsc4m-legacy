@@ -3,9 +3,9 @@ function [ivalue, found, errCode, toplevel] = petscOptionsGetInt(opts, pre, name
 %
 %   [ivalue, found, errCode, toplevel] = petscOptionsGetInt(opts, pre, name)
 %   obtains an integer value in the data base. The flag found is PETSC_TRUE
-%   if the attribute was found.
+%   if the attribute was found. The strings must be null-terminated.
 %
-% SEE ALSO: petscOptionsInsertString, petscOptionsHasName, 
+% SEE ALSO: petscOptionsInsertString, petscOptionsHasName,
 %           PetscOptionsGetReal, PetscOptionsGetString
 %
 % PETSc C interface:
@@ -17,20 +17,27 @@ function [ivalue, found, errCode, toplevel] = petscOptionsGetInt(opts, pre, name
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')
-    pre0 = [pre char(0)];
-    name0 = [name char(0)];
+    toplevel = nargout>3;
+    if ~isempty(pre) && pre(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsGetInt:InputError', ...
+            'Argument prefix must be a null-terminated string.')
+    end
+    if ~isempty(name) && name(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscOptionsGetInt:InputError', ...
+            'Argument name must be a null-terminated character string.')
+    end
+    
     ivalue = int32(0);
     b_flag = coder.opaque('PetscBool');
     
     errCode = coder.ceval('PetscOptionsGetInt', PetscOptions(opts), ...
-        coder.rref(pre0), coder.rref(name0), coder.wref(ivalue), coder.wref(b_flag));
+        coder.rref(pre), coder.rref(name), coder.wref(ivalue), coder.wref(b_flag));
     
     if nargout>1
         found = int32(0); %#ok<NASGU>
         found = coder.ceval('(int)', b_flag);
     end
     
-    toplevel = nargout>3;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsGetInt returned error code %d\n', errCode)
     end

@@ -3,7 +3,6 @@ function [str, errCode, toplevel] = petscPCGetOptionsPrefix(pc)
 %   errCode = petscPCGetOptionsPrefix(pc, in_str)
 %
 %   pc    - the PC context
-%   in_str - the prefix string to prepend to all PC option requests
 %   errCode(int) return code (0 indicates OK)
 %
 % SEE ALSO: petscPCGetFromOptions
@@ -18,7 +17,7 @@ errCode = int32(-1);
 
 if ~coder.target('MATLAB')
     t_pc = PetscPC(pc);
-    % null-terminate the string.
+    
     str0 = coder.opaque('const char *');    
     errCode = coder.ceval('PCGetOptionsPrefix', t_pc, coder.wref(str0));
     
@@ -27,11 +26,18 @@ if ~coder.target('MATLAB')
         m2c_error('petsc:RuntimeError', 'PCGetOptionsPrefix returned error code %d\n', errCode)
     end
 
+    hasprefx = int32(0); %#ok<NASGU>
+    hasprefx = coder.ceval('!', str0);
     n = int32(0); %#ok<NASGU>
-    n = coder.ceval('strlen', str0);
-    str1 = zeros(1, n, 'uint8');
-    coder.ceval('memcpy', coder.ref(str1), str0, n);
     
+    if hasprefx
+        n = coder.ceval('strlen', str0);
+        str1 = zeros(1, n+1, 'uint8');
+        coder.ceval('memcpy', coder.ref(str1), str0, n+1);
+    else
+        str1 = zeros(1, 0, 'uint8');
+    end
+        
     str = char(str1);
 end
 end

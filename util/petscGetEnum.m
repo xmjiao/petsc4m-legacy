@@ -144,7 +144,7 @@ switch name
     case 'PETSC_DEFAULT'
         [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1);
     otherwise
-        toplevel = nargin>1;
+        toplevel = nargout>1;
         val = int32(intmin);
         if toplevel
             m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);

@@ -1,9 +1,10 @@
-function [errCode, toplevel] = petscPCSetOptionsPrefix(pc, in_str)
+function [errCode, toplevel] = petscPCSetOptionsPrefix(pc, prefix)
 %Sets the prefix used for searching for all PC options in the database. 
-%   errCode = petscPCSetOptionsPrefix(pc, in_str)
+%   errCode = petscPCSetOptionsPrefix(pc, prefix)
 %
 %   pc    - the PC context
-%   in_str - the prefix string to prepend to all PC option requests
+%   prefix - the prefix string to prepend to all PC option requests.
+%            It must be null-terminated.
 %   errCode(int) return code (0 indicates OK)
 %
 % SEE ALSO: petscPCSetFromOptions
@@ -18,12 +19,15 @@ errCode = int32(-1);
 
 if ~coder.target('MATLAB')
     t_pc = PetscPC(pc);
-    % null-terminate the string.
-    str0 = [in_str char(0)];
-    
-    errCode = coder.ceval('PCSetOptionsPrefix', t_pc, coder.rref(str0));
 
     toplevel = nargout>1;
+    if ~isempty(prefix) && prefix(end) && (toplevel || m2c_debug)
+        m2c_error('MPETSc:petscPCSetOptionsPrefix:InputError', ...
+            'The argument must be a null-terminated string.')
+    end
+    
+    errCode = coder.ceval('PCSetOptionsPrefix', t_pc, coder.rref(prefix));
+
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PCSetOptionsPrefix returned error code %d\n', errCode)
     end
