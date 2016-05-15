@@ -2,7 +2,7 @@ function opts = PetscOptions(arg, opaque) %#codegen
 %Map an opaque object into a PETSc PetscOptions object
 %
 %  opts = PetscOptions() simply returns a definition of the
-%  opaque_obj_type definition, suitable in the argument
+%  m2c_opaque_type definition, suitable in the argument
 %  specification for codegen.
 %
 %  opts = PetscOptions(arg) or opts = PetscOptions(arg, false) converts arg
@@ -18,7 +18,7 @@ function opts = PetscOptions(arg, opaque) %#codegen
 coder.inline('always');
 
 if nargin==0 && isempty(coder.target)
-    opts = opaque_obj_type; 
+    opts = m2c_opaque_type; 
     return;
 end
 
@@ -31,7 +31,7 @@ if ~isstruct(arg) || isempty(coder.target)
     if nargin==1 || ~opaque
         opts = arg;
     else
-        opts = opaque_obj('PetscOptions', arg);
+        opts = m2c_opaque_obj('PetscOptions', arg);
     end
 else
     opts = castdata('PetscOptions', arg.data);

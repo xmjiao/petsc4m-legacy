@@ -3,5 +3,5 @@ function val = PETSC_PCSOR %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('PCSOR');
+val = petscGetString('PCSOR');
 end

@@ -3,5 +3,5 @@ function obj = PETSC_NULL_STRING %#codegen
 
 coder.inline('always');
 
-obj = petscGetObject('PETSC_NULL_STRING');
+obj = petscGetString('PETSC_NULL_STRING');
 end

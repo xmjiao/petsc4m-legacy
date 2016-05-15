@@ -17,9 +17,8 @@ errCode = int32(-1);
 
 if ~coder.target('MATLAB')
     t_mat = PetscMat(mat);
-    t_type = PetscMatType(type);
     
-    errCode = coder.ceval('MatSetType', t_mat, t_type);
+    errCode = coder.ceval('MatSetType', t_mat, coder.rref(type));
 
     toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)

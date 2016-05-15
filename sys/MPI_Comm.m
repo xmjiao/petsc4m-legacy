@@ -2,7 +2,7 @@ function comm = MPI_Comm(arg, opaque) %#codegen
 %Map an opaque object into a PETSc MPI_Comm object
 %
 %  comm = MPI_Comm() simply returns a definition of the
-%  opaque_obj_type definition, suitable in the argument
+%  m2c_opaque_type definition, suitable in the argument
 %  specification for codegen.
 %
 %  comm = MPI_Comm(arg) or comm = MPI_Comm(arg, false) converts arg
@@ -18,7 +18,7 @@ function comm = MPI_Comm(arg, opaque) %#codegen
 coder.inline('always');
 
 if nargin==0 && isempty(coder.target)
-    comm = opaque_obj_type; 
+    comm = m2c_opaque_type; 
     return;
 end
 
@@ -31,7 +31,7 @@ if ~isstruct(arg) || isempty(coder.target)
     if nargin==1 || ~opaque
         comm = arg;
     else
-        comm = opaque_obj('MPI_Comm', arg);
+        comm = m2c_opaque_obj('MPI_Comm', arg);
     end
 else
     comm = castdata('MPI_Comm', arg.data);

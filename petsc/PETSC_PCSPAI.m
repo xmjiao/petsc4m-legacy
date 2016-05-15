@@ -3,5 +3,5 @@ function val = PETSC_PCSPAI %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('PCSPAI');
+val = petscGetString('PCSPAI');
 end

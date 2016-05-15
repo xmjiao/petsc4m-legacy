@@ -11,8 +11,7 @@ function [flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxit, varargin)
 %
 % Description:
 %    mptKSPSolve(ksp, b) solves the linear system using the tolerances
-%    that have been set previously by the user or by PETSc. The solution
-%    overwrites b.
+%    that have been set previously by the user. The solution overwrites b.
 %
 %    mptKSPSolve(ksp, b, x) solves the linear system and saves the solution
 %    into x.
@@ -39,13 +38,14 @@ function [flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxit, varargin)
 
 % Solve the linear system
 if nargin==2
-    petscKSPSolve(ksp, b);
     petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
+    petscKSPSolve(ksp, b);
 else
     % Set tolerances
-    if nargin<4; rtol = PETSC_DEFAULT; end
-    if nargin<5; maxit = PETSC_DEFAULT; end
-    petscKSPSetTolerances(ksp, double(rtol), int32(maxit));
+    if nargin>=4
+        if nargin<5; maxit = PETSC_DEFAULT; end
+        petscKSPSetTolerances(ksp, double(rtol), int32(maxit));
+    end
     
     % Process initial guess
     if ~isempty(varargin) && ~petscIsNULL(varargin{1})
@@ -58,14 +58,25 @@ else
     petscKSPSolve(ksp, b, x);
 end
 
-if nargout>0
-    flag = petscKSPGetConvergedReason(ksp);
+flag = petscKSPGetConvergedReason(ksp);
+relres = petscKSPGetResidualNorm(ksp);
+iter = petscKSPGetIterationNumber(ksp);
+
+if nargin<4 || rtol < 0;
+    rtol = petscOptionsGetReal(PETSC_NULL_OPTIONS, '', ['-ksp-rtol', char(0)]);
 end
-if nargout>1
-    relres = petscKSPGetResidualNorm(ksp);
+if nargin<5 || maxit < 0;
+    maxit = petscOptionsGetInt(PETSC_NULL_OPTIONS, '', ['-ksp_max_it', char(0)]);
 end
-if nargout>2
-    iter = petscKSPGetIterationNumber(ksp);
+
+if relres>rtol
+    pc = petscKSPGetPC(ksp);
+    
+    m2c_printf('### %s with %s stopped with relative residual %g after %d iterations.\n', ...
+        petscKSPGetType(ksp), petscPCGetType(pc), relres, iter);
+    m2c_printf('The relative convergence tolerance was %g. The max-iter was %d.\n', rtol, maxit);
+    m2c_printf(['The return flag was %d. See http://www.mcs.anl.gov/petsc/' ...
+        'petsc-current/docs/manualpages/KSP/KSPConvergedReason.html for explanations of the flag.\n'], flag); 
 end
 
 if nargin>6

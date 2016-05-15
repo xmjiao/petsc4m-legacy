@@ -19,11 +19,11 @@ errCode = int32(-1);
 if ~coder.target('MATLAB')
     toplevel = nargout>3;
     
-    if ~isempty(pre) && pre(end) && (toplevel || m2c_debug)
+    if ischar(pre) && ~isempty(pre) && pre(end) && (toplevel || m2c_debug)
         m2c_error('MPETSc:petscOptionsGetInt:InputError', ...
             'Argument prefix must be a null-terminated string.')
     end
-    if ~isempty(name) && name(end) && (toplevel || m2c_debug)
+    if ischar(name) && ~isempty(name) && name(end) && (toplevel || m2c_debug)
         m2c_error('MPETSc:petscOptionsGetInt:InputError', ...
             'Argument name must be a null-terminated character string.')
     end

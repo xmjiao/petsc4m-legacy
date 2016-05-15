@@ -3,5 +3,5 @@ function val = PETSC_PCILU %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('PCILU');
+val = petscGetString('PCILU');
 end

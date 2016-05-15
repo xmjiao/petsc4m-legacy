@@ -20,7 +20,7 @@ if ismac && ~usejava('jvm')
         if exist(['mpi_Init' mexext], 'file') && ...
                 exist(['mpi_Initialized' mexext], 'file') && ...
                 ~mpi_Initialized
-            mpi_Init;
+%            mpi_Init;
         end
         if exist(['petscInitialize.' mexext], 'file')
             petscInitialize;

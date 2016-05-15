@@ -3,5 +3,5 @@ function val = PETSC_PCAINVCUSP %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('PCAINVCUSP');
+val = petscGetString('PCAINVCUSP');
 end

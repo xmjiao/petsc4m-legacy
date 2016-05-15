@@ -17,6 +17,13 @@ for i=1:length(files)
     m2c(opts{:}, files{i}{1});
 end
 
+%Add timing for top-level functions
+files = {'mptKSPCleanup' 'mptKSPSetup' 'mptKSPSolve'};
+for i=1:length(files)
+    m2c(opts{:}, '-time', files{i});
+end
+
+
 % TODO:
 % MatGetDiagonal, MatAXPY, MatMult, MatMultAdd,
 % MatMultTranspose, MatMultTransposeAdd, MatNorm, MatDiagonalScale,

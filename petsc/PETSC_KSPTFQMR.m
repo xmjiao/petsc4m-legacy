@@ -3,5 +3,5 @@ function val = PETSC_KSPTFQMR %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('KSPTFQMR');
+val = petscGetString('KSPTFQMR');
 end

@@ -3,5 +3,5 @@ function val = PETSC_MATDENSE %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('MATDENSE');
+val = petscGetString('MATDENSE');
 end

@@ -3,5 +3,5 @@ function val = PETSC_MATMPIDENSE %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('MATMPIDENSE');
+val = petscGetString('MATMPIDENSE');
 end

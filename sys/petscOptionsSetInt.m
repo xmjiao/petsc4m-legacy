@@ -24,16 +24,9 @@ if ~coder.target('MATLAB')
             'Argument name must be a null-terminated string.')
     end
     
-    str = coder.nullcopy(zeros(20, 1, 'int8'));
-    
-    ptr = coder.opaque('char *'); %#ok<NASGU>
-    ptr = coder.ceval('(char *)', coder.wref(str));
-    
-    coder.ceval('sprintf', ptr, ...
-        coder.opaque('const char *', '"%d"'), int32(value));
+    str = m2c_int2str(int32(value));
     errCode = coder.ceval('PetscOptionsSetValue', PetscOptions(opts), ...
-        coder.rref(iname), ptr);
-    str = refv(str); %#ok<NASGU>
+        coder.rref(iname), coder.rref(str));
     
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsSetValue returned error code %d\n', errCode)

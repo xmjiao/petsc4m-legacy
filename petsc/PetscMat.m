@@ -2,7 +2,7 @@ function mat = PetscMat(arg, opaque) %#codegen
 %Map an opaque object into a PETSc Mat object
 %
 %  mat = PetscMat() simply returns a definition of the
-%  opaque_obj_type definition, suitable in the argument
+%  m2c_opaque_type definition, suitable in the argument
 %  specification for codegen.
 %
 %  mat = PetscMat(arg) or mat = PetscMat(arg, false) converts arg
@@ -18,7 +18,7 @@ function mat = PetscMat(arg, opaque) %#codegen
 coder.inline('always');
 
 if nargin==0 && isempty(coder.target)
-    mat = opaque_obj_type; 
+    mat = m2c_opaque_type; 
     return;
 end
 
@@ -31,7 +31,7 @@ if ~isstruct(arg) || isempty(coder.target)
     if nargin==1 || ~opaque
         mat = arg;
     else
-        mat = opaque_obj('Mat', arg);
+        mat = m2c_opaque_obj('Mat', arg);
     end
 else
     mat = castdata('Mat', arg.data);

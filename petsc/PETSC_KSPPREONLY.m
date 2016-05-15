@@ -3,5 +3,5 @@ function val = PETSC_KSPPREONLY %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('KSPPREONLY');
+val = petscGetString('KSPPREONLY');
 end

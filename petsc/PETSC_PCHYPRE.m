@@ -3,5 +3,5 @@ function val = PETSC_PCHYPRE %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('PCHYPRE');
+val = petscGetString('PCHYPRE');
 end

@@ -3,5 +3,5 @@ function val = PETSC_PCGALERKIN %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('PCGALERKIN');
+val = petscGetString('PCGALERKIN');
 end

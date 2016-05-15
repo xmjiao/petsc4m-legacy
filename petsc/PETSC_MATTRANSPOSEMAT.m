@@ -3,5 +3,5 @@ function val = PETSC_MATTRANSPOSEMAT %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('MATTRANSPOSEMAT');
+val = petscGetString('MATTRANSPOSEMAT');
 end

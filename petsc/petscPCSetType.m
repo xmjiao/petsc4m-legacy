@@ -14,7 +14,7 @@ function [errCode, toplevel] = petscPCSetType(pc, type)
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')    
-    errCode = coder.ceval('PCSetType', PetscPC(pc), PetscPCType(type));
+    errCode = coder.ceval('PCSetType', PetscPC(pc), coder.rref(type));
     
     toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)

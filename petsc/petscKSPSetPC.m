@@ -10,7 +10,7 @@ function [errCode, toplevel] = petscKSPSetPC(ksp, pc)
 %   PetscErrorCode  KSPSetPC(KSP ksp, PC pc)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetPC.html
 
-%#codegen -args {PetscKSP, PetscPCType}
+%#codegen -args {PetscKSP, PetscPC}
 
 errCode = int32(-1);
 

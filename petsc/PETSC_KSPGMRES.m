@@ -3,5 +3,5 @@ function val = PETSC_KSPGMRES %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('KSPGMRES');
+val = petscGetString('KSPGMRES');
 end

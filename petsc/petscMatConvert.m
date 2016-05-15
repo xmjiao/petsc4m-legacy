@@ -20,8 +20,8 @@ errCode = int32(-1);
 if ~coder.target('MATLAB')
     t_mat_out = coder.opaque('Mat');
     
-    errCode = coder.ceval('MatConvert', PetscMat(mat_in), PetscMatType(newtype), reuse, ...
-        coder.wref(t_mat_out));
+    errCode = coder.ceval('MatConvert', PetscMat(mat_in), coder.rref(newtype), ...
+        reuse, coder.wref(t_mat_out));
     
     toplevel = nargout>2;
     mat_out = PetscMat(t_mat_out, toplevel);

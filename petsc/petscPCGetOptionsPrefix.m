@@ -26,11 +26,11 @@ if ~coder.target('MATLAB')
         m2c_error('petsc:RuntimeError', 'PCGetOptionsPrefix returned error code %d\n', errCode)
     end
 
-    hasprefx = int32(0); %#ok<NASGU>
-    hasprefx = coder.ceval('!', str0);
-    n = int32(0); %#ok<NASGU>
+    noprefx = int32(0); %#ok<NASGU>
+    noprefx = coder.ceval('!', str0);
     
-    if hasprefx
+    if ~noprefx
+        n = int32(0); %#ok<NASGU>
         n = coder.ceval('strlen', str0);
         str1 = zeros(1, n+1, 'uint8');
         coder.ceval('memcpy', coder.ref(str1), str0, n+1);

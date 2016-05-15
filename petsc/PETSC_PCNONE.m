@@ -3,5 +3,5 @@ function val = PETSC_PCNONE %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('PCNONE');
+val = petscGetString('PCNONE');
 end

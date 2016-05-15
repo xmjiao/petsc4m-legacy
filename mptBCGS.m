@@ -1,4 +1,4 @@
-function [flag,relres,iter] = mptBCGS(A, b, x, rtol, maxit, pctype, pcprefix, varargin)
+function [flag,relres,iter] = mptBCGS(A, b, x, rtol, maxit, pctype, solpack, varargin)
 % Solves a linear system using the BiCGStab (Stabilized version of BiConjugate Gradient Squared) method.
 %
 % Syntax:
@@ -7,9 +7,9 @@ function [flag,relres,iter] = mptBCGS(A, b, x, rtol, maxit, pctype, pcprefix, va
 %    mptBCGS(A_hdl, b_hdl, x_hdl, rtol)
 %    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit)
 %    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype)
-%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix)
-%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix, x0_hdl)
-%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix, x0_hdl, resvec_hdl)
+%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack)
+%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack, x0_hdl)
+%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack, x0_hdl, resvec_hdl)
 %
 %    [flag, reslres, iter] = mptBCGS(A_hdl, b_hdl, x_hdl, ...)
 %
@@ -34,13 +34,13 @@ function [flag,relres,iter] = mptBCGS(A, b, x, rtol, maxit, pctype, pcprefix, va
 %    specified preconditioner. The preconditioner can be controlled by
 %    the PETSc option database.
 %
-%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix) specifies
-%    the prefix for the options in the PETSc option database.
+%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack) specifies
+%    the solver packages for factorization.
 %
-%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix, x0_handle)
+%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack, x0_handle)
 %    usee x0 for the initial guess. x0 can be the same as x.
 %
-%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix, x0_handle, resvec_hdl)
+%    mptBCGS(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack, x0_handle, resvec_hdl)
 %    also computes the residual vector and saves it into resvec.
 %
 % See also: mptCG, mptMINRES, mptGMRES, mptTFQMR, mptQMRCGS,
@@ -51,15 +51,15 @@ function [flag,relres,iter] = mptBCGS(A, b, x, rtol, maxit, pctype, pcprefix, va
 %#codegen
 
 % Setup KSP
-if nargin<2; x = b; end
-if nargin<3; rtol = PETSC_DEFAULT; end
-if nargin<4; maxit = PETSC_DEFAULT; end
-if nargin<5; pctype = PETSC_PCNONE; end
-if nargin<6; pcprefix = ''; end
+if nargin<3; x = b; end
+if nargin<4; rtol = PETSC_DEFAULT; end
+if nargin<5; maxit = PETSC_DEFAULT; end
+if nargin<6; pctype = ''; end
+if nargin<7; solpack = ''; end
 
-ksp = mptKSPSetup(A, PETSC_KSPBCGS, pctype, pcprefix);
+ksp = mptKSPSetup(A, PETSC_KSPBCGS, pctype, solpack);
 
-[flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxit, varargin{:});
+[flag,relres,iter] = mptKSPSolve(ksp, b, x, double(rtol), int32(maxit), varargin{:});
 
 mptKSPCleanup(ksp);
 

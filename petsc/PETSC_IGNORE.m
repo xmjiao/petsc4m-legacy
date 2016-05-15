@@ -3,5 +3,5 @@ function val = PETSC_IGNORE %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('PETSC_IGNORE');
+val = petscGetString('PETSC_IGNORE');
 end

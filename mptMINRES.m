@@ -1,4 +1,4 @@
-function [flag,relres,iter] = mptMINRES(A, b, x, rtol, maxit, pctype, pcprefix, varargin)
+function [flag,relres,iter] = mptMINRES(A, b, x, rtol, maxit, pctype, solpack, varargin)
 % Solves a symmetric/Hermitian linear system using the Minimal Residual method.
 %
 % Syntax:
@@ -7,9 +7,9 @@ function [flag,relres,iter] = mptMINRES(A, b, x, rtol, maxit, pctype, pcprefix, 
 %    mptMINRES(A_hdl, b_hdl, x_hdl, rtol)
 %    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit)
 %    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype)
-%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix)
-%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix, x0_hdl)
-%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix, x0_hdl, resvec_hdl)
+%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack)
+%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack, x0_hdl)
+%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack, x0_hdl, resvec_hdl)
 %
 %    [flag, reslres, iter] = mptMINRES(A_hdl, b_hdl, x_hdl, ...)
 %
@@ -34,13 +34,13 @@ function [flag,relres,iter] = mptMINRES(A, b, x, rtol, maxit, pctype, pcprefix, 
 %    specified preconditioner. The preconditioner can be controlled by
 %    the PETSc option database.
 %
-%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix) specifies
-%    the prefix for the options in the PETSc option database.
+%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack) specifies
+%    the solver packages for factorization.
 %
-%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix, x0_handle)
+%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack, x0_handle)
 %    usee x0 for the initial guess. x0 can be the same as x.
 %
-%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, pcprefix, x0_handle, resvec_hdl)
+%    mptMINRES(A_hdl, b_hdl, x_hdl, rtol, maxit, pctype, solpack, x0_handle, resvec_hdl)
 %    also computes the residual vector and saves it into resvec.
 %
 % See also: mptCG, mptGMRES, mptBCGS, mptTFQMR, mptQMRCGS
@@ -51,15 +51,15 @@ function [flag,relres,iter] = mptMINRES(A, b, x, rtol, maxit, pctype, pcprefix, 
 %#codegen
 
 % Setup KSP
-if nargin<2; x = b; end
-if nargin<3; rtol = PETSC_DEFAULT; end
-if nargin<4; maxit = PETSC_DEFAULT; end
-if nargin<5; pctype = PETSC_PCNONE; end
-if nargin<6; pcprefix = ''; end
+if nargin<3; x = b; end
+if nargin<4; rtol = PETSC_DEFAULT; end
+if nargin<5; maxit = PETSC_DEFAULT; end
+if nargin<6; pctype = ''; end
+if nargin<7; solpack = ''; end
 
-ksp = mptKSPSetup(A, PETSC_KSPMINRES, pctype, pcprefix);
+ksp = mptKSPSetup(A, PETSC_KSPMINRES, pctype, solpack);
 
-[flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxit, varargin{:});
+[flag,relres,iter] = mptKSPSolve(ksp, b, x, double(rtol), int32(maxit), varargin{:});
 
 mptKSPCleanup(ksp);
 

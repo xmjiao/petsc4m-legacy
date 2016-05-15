@@ -2,7 +2,7 @@ function pc = PetscPC(arg, opaque) %#codegen
 %Map an opaque object into a PETSc PC object
 %
 %  pc = PetscPC() simply returns a definition of the
-%  opaque_obj_type definition, suitable in the argument
+%  m2c_opaque_type definition, suitable in the argument
 %  specification for codegen.
 %
 %  pc = PetscPC(arg) or pc = PetscPC(arg, false) converts arg
@@ -18,7 +18,7 @@ function pc = PetscPC(arg, opaque) %#codegen
 coder.inline('always');
 
 if nargin==0 && isempty(coder.target)
-    pc = opaque_obj_type; 
+    pc = m2c_opaque_type; 
     return;
 end
 
@@ -31,7 +31,7 @@ if ~isstruct(arg) || isempty(coder.target)
     if nargin==1 || ~opaque
         pc = arg;
     else
-        pc = opaque_obj('PC', arg);
+        pc = m2c_opaque_obj('PC', arg);
     end
 else
     pc = castdata('PC', arg.data);

@@ -2,7 +2,7 @@ function ksp = PetscKSP(arg, opaque) %#codegen
 %Map an opaque object into a PETSc KSP object
 %
 %  ksp = PetscKSP() simply returns a definition of the
-%  opaque_obj_type definition, suitable in the argument
+%  m2c_opaque_type definition, suitable in the argument
 %  specification for codegen.
 %
 %  ksp = PetscKSP(arg) or ksp = PetscKSP(arg, false) converts arg
@@ -18,7 +18,7 @@ function ksp = PetscKSP(arg, opaque) %#codegen
 coder.inline('always');
 
 if nargin==0 && isempty(coder.target)
-    ksp = opaque_obj_type; 
+    ksp = m2c_opaque_type; 
     return;
 end
 
@@ -31,7 +31,7 @@ if ~isstruct(arg) || isempty(coder.target)
     if nargin==1 || ~opaque
         ksp = arg;
     else
-        ksp = opaque_obj('KSP', arg);
+        ksp = m2c_opaque_obj('KSP', arg);
     end
 else
     ksp = castdata('KSP', arg.data);

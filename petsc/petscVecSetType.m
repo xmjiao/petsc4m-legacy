@@ -17,9 +17,8 @@ errCode = int32(-1);
 
 if ~coder.target('MATLAB')
     t_vec = PetscVec(vec);
-    t_type = PetscVecType(type);
     
-    errCode = coder.ceval('VecSetType', t_vec, t_type);
+    errCode = coder.ceval('VecSetType', t_vec, coder.rref(type));
     
     toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)

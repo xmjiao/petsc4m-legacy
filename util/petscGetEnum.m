@@ -34,6 +34,8 @@ function [val, toplevel] = petscGetEnum(name)
 %
 % MatInfoType: MAT_LOCAL,MAT_GLOBAL_MAX,MAT_GLOBAL_SUM
 %
+% MatFactorType: MAT_FACTOR_NONE, MAT_FACTOR_LU, MAT_FACTOR_CHOLESKY, MAT_FACTOR_ILU, MAT_FACTOR_ICC,MAT_FACTOR_ILUDT
+%
 % Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT
 
 %#codegen -args {coder.typeof(char(0),[1,inf])}
@@ -137,6 +139,18 @@ switch name
         [val, toplevel] = get_val('MatOption', 'MAT_NEW_NONZERO_ALLOCATION_ERR', nargin>1);
     case 'MAT_SUBSET_OFF_PROC_ENTRIES'
         [val, toplevel] = get_val('MatOption', 'MAT_SUBSET_OFF_PROC_ENTRIES', nargin>1);
+    case 'MAT_FACTOR_NONE'
+        [val, toplevel] = get_val('MatFactorType', 'MAT_FACTOR_NONE', nargin>1);
+    case 'MAT_FACTOR_LU'
+        [val, toplevel] = get_val('MatFactorType', 'MAT_FACTOR_LU', nargin>1);
+    case 'MAT_FACTOR_CHOLESKY'
+        [val, toplevel] = get_val('MatFactorType', 'MAT_FACTOR_CHOLESKY', nargin>1);
+    case 'MAT_FACTOR_ILU'
+        [val, toplevel] = get_val('MatFactorType', 'MAT_FACTOR_ILU', nargin>1);
+    case 'MAT_FACTOR_ICC'
+        [val, toplevel] = get_val('MatFactorType', 'MAT_FACTOR_ICC', nargin>1);
+    case 'MAT_FACTOR_ILUDT'
+        [val, toplevel] = get_val('MatFactorType', 'MAT_FACTOR_ILUDT', nargin>1);
     case 'PETSC_DETERMINE'
         [val, toplevel] = get_val('PetscInt', 'PETSC_DETERMINE', nargin>1);
     case 'PETSC_DECIDE'

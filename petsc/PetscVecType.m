@@ -1,38 +1,32 @@
-function type = VecType(arg, opaque) %#codegen
-%Map an opaque object into a PETSc VecType object
+function type = PetscVecType(arg, opaque) %#codegen
+%Map a null-terminated C string into a PETSc VecType handle
 %
-%  type = VecType() simply returns a definition of the
-%  opaque_obj_type definition, suitable in the argument
-%  specification for codegen.
+%  type = PetscVecType() simply returns a definition of a string,
+%  suitable in the argument specification for codegen.
 %
-%  type = VecType(arg) or type = VecType(arg, false) converts arg
+%  type = PetscVecType(arg) or type = PetscVecType(arg, false) converts arg
 %  into a PETSc VecType object.
 %
-%  type = VecType(arg, true) wraps the arg into an opaque object. 
-%  This should be used if the object needs to be returned to
-%  MATLAB. Note that the value of opaque must be determined at
-%  compile time.
+%  type = PetscVecType(arg, true) copies the arg into a VecLAB string.
+%  This should be used if the object needs to be returned to VecLAB.
+%  Note that the value of opaque must be determined at compile time.
 %
 % See also PetscMatType
 
 coder.inline('always');
 
 if nargin==0 && isempty(coder.target)
-    type =opaque_obj_type; 
+    type = coder.typeof(char(0), [1, inf]);
     return;
 end
 
-if isstruct(arg) && ~isequal(arg.type, 'VecType')
-    m2c_error('VecType:WrongType', ...
-        'Incorrect data type %s. Expected VecType.', [arg.type char(0)]);
+if isempty(coder.target) && ~ischar(arg)
+    m2c_error('MPETSc:PetscVecType:WrongType', ...
+        'Incorrect data type of argument. Expected a string.');
 end
 
-if ~isstruct(arg) || isempty(coder.target)
-    if nargin==1 || ~opaque
-        type =arg;
-    else
-        type =opaque_obj('VecType', arg);
-    end
+if nargin==1 || ~opaque
+    type = arg;
 else
-    type =castdata('VecType', arg.data);
+    type = m2c_strcopy(arg, opaque);
 end

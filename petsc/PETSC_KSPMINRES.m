@@ -3,5 +3,5 @@ function val = PETSC_KSPMINRES %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('KSPMINRES');
+val = petscGetString('KSPMINRES');
 end

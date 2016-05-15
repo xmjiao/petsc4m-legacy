@@ -14,7 +14,7 @@ function [errCode, toplevel] = petscKSPSetType(ksp, type)
 errCode = int32(-1);
 
 if ~coder.target('MATLAB')    
-    errCode = coder.ceval('KSPSetType', PetscKSP(ksp), PetscKSPType(type));
+    errCode = coder.ceval('KSPSetType', PetscKSP(ksp), coder.rref(type));
     
     toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)

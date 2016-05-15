@@ -3,5 +3,5 @@ function val = PETSC_MATIS %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('MATIS');
+val = petscGetString('MATIS');
 end

@@ -3,5 +3,5 @@ function val = PETSC_MATMPIBAIJ %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('MATMPIBAIJ');
+val = petscGetString('MATMPIBAIJ');
 end

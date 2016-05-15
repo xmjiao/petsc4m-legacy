@@ -2,7 +2,7 @@ function obj = PetscObject(arg, opaque) %#codegen
 %Map an opaque object into a PETSc PetscObject object
 %
 %  obj = PetscObject() simply returns a definition of the
-%  opaque_obj_type definition, suitable in the argument
+%  m2c_opaque_type definition, suitable in the argument
 %  specification for codegen.
 %
 %  obj = PetscObject(arg) or obj = PetscObject(arg, false) converts arg
@@ -18,7 +18,7 @@ function obj = PetscObject(arg, opaque) %#codegen
 coder.inline('always');
 
 if nargin==0 && isempty(coder.target)
-    obj = opaque_obj_type;
+    obj = m2c_opaque_type;
     return;
 end
 
@@ -33,7 +33,7 @@ if ~isstruct(arg) || isempty(coder.target)
     if nargin==1 || ~opaque
         obj = arg;
     else
-        obj = opaque_obj('PetscObject', arg);
+        obj = m2c_opaque_obj('PetscObject', arg);
     end
 else
     obj = castdata('PetscObject', arg.data);

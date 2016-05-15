@@ -3,5 +3,5 @@ function val = PETSC_PCCOMPOSITE %#codegen
 
 coder.inline('always');
 
-val = petscGetObject('PCCOMPOSITE');
+val = petscGetString('PCCOMPOSITE');
 end

@@ -1,7 +1,13 @@
 function isn = petscIsNULL(obj, type)
-% Determine whether a given object is a null opointer of a given type
+% Determine whether a given object is a null opointer of a particular type.
+%
+%    isn = petscIsNULL(obj)
+%    isn = petscIsNULL(obj, type)
 
-if nargin<2
+
+if ischar(obj)
+    isn = isempty(obj);
+elseif nargin<2
     isn = ~isstruct(obj) && obj || isstruct(obj) && ~any(obj.data);
 else
     switch type
