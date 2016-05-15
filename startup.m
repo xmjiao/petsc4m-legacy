@@ -10,7 +10,7 @@ if ~exist('m2c', 'file') && exist('../M2C', 'dir')
     run ../M2C/startup
 
     if usejava('jvm')
-        run('util/build_mpetsc');
+        build_mpetsc;
     end
 end
 
