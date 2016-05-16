@@ -1,0 +1,6 @@
+The submodules in this directory are proprietary to ParaLab Computing LLC. 
+They may be protected by Copyright and/or U.S. and international patents. 
+
+Deverlopers and collaborators of the NumGeom Group can use these submodules 
+for research and development purposes. Redistribution of these modules 
+without written consent of Professor Xiangmin Jiao is strictly prohibited.

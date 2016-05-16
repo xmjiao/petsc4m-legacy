@@ -6,6 +6,7 @@
 *.mat
 *.exe
 *.o
+*.d
 *.so
 *.7z
 *.dmg
@@ -26,7 +27,15 @@
 Icon?
 ehthumbs.db
 Thumbs.db
-html
 .*.m.swp
+octave-core
 **/*.eps
-**/codegen
+**/codegen/mex
+**/codegen/lib/*/*_exe.c
+**/codegen/lib/*/README
+html
+*.html
+run_*_exe.m
+mex_*.m
+build_*_exe.m
+octave-core
