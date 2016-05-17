@@ -4,6 +4,9 @@
 *.bak
 *.mex*
 *.mat
+*.vtk
+*.inp
+*.cgns
 *.exe
 *.o
 *.d
@@ -30,12 +33,14 @@ Thumbs.db
 .*.m.swp
 octave-core
 **/*.eps
+
+#Code generation
 **/codegen/mex
 **/codegen/lib/*/*_exe.c
 **/codegen/lib/*/README
-html
+**/codegen/lib/*/mex_*.m
+**/codegen/lib/*/build_*_exe.m
+**/codegen/lib/*/html
 *.html
 run_*_exe.m
-mex_*.m
-build_*_exe.m
 octave-core
