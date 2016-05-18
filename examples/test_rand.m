@@ -12,4 +12,4 @@ b = rand(100,1);
 [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPGMRES, 0, int32(0), PETSC_PCJACOBI);
 
 % Solve using SuperLU (assuming SuperLU was installed)
-[x,flag,relres,iter] = mptGMRES_crs(rowptr, colind, val, b, PETSC_KSPPREONLY, 0, int32(0), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
+[x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPPREONLY, 0, int32(0), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
