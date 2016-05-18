@@ -1,4 +1,4 @@
-function [x, flag, relres, iter] = mptSolveCRS(varargin)
+function [x, flag, relres, iter, times] = mptSolveCRS(varargin)
 % Solves a linear system using any PETSc solver for matrix in CRS format.
 %
 % Syntax:
@@ -11,7 +11,7 @@ function [x, flag, relres, iter] = mptSolveCRS(varargin)
 %    mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0)
 %    mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts)
 %
-%    [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...)
+%    [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...)
 %
 %    A is a sparse matrix in CRS format. b, x and resvec are all regular
 %    vectors. Solver is a value of PETSC_KSP*. pctype is a value of
@@ -20,6 +20,9 @@ function [x, flag, relres, iter] = mptSolveCRS(varargin)
 %    For rtol, maxit, use 0 to use default values.
 %    For solver, pctype, solpack and opts, use empty string ('') to use default.
 %    For x0, use zeros(0, 1) to disable initial guess.
+%
+%    When times is given, it returns a 2-vector contaning the times spent
+%    in setup and in solve.
 %
 % Description:
 %    mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without
@@ -115,7 +118,7 @@ end
 
 if nargin<11; opts = ''; else opts = varargin{11}; end
 
-[flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ...
+[flag,relres,iter,times] = mptSolve(AMat, bVec, xVec, solver, ...
     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts);
 
 petscMatDestroy(AMat);
