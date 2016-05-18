@@ -59,12 +59,12 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 {
   boolean_T b_bool;
   int kstr;
-  int exitg8;
-  static const char cv0[15] = { 'P', 'E', 'T', 'S', 'C', '_', 'C', 'O', 'M', 'M',
-    '_', 'S', 'E', 'L', 'F' };
+  int exitg10;
+  static const char cv0[13] = { 'M', 'P', 'I', '_', 'C', 'O', 'M', 'M', '_', 'S',
+    'E', 'L', 'F' };
 
   emxArray_uint8_T *data0;
-  int exitg7;
+  int exitg9;
   emxArray_char_T *b_name;
   MPI_Comm data;
   void * b_data;
@@ -74,12 +74,12 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
   int * f_data;
   double * g_data;
   int sizepe;
-  static const char cv1[16] = { 'P', 'E', 'T', 'S', 'C', '_', 'C', 'O', 'M', 'M',
-    '_', 'W', 'O', 'R', 'L', 'D' };
+  static const char cv1[14] = { 'M', 'P', 'I', '_', 'C', 'O', 'M', 'M', '_', 'W',
+    'O', 'R', 'L', 'D' };
 
-  int exitg6;
-  static const char cv2[12] = { 'P', 'E', 'T', 'S', 'C', '_', 'I', 'G', 'N', 'O',
-    'R', 'E' };
+  int exitg8;
+  static const char cv2[15] = { 'P', 'E', 'T', 'S', 'C', '_', 'C', 'O', 'M', 'M',
+    '_', 'S', 'E', 'L', 'F' };
 
   int loop_ub;
   char t1_type[8];
@@ -87,7 +87,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
   char t2_type[12];
   char t3_type[3];
   char t4_type[5];
-  int exitg5;
+  int exitg7;
   static const char cv3[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
 
   static const char cv4[6] = { 'v', 'o', 'i', 'd', ' ', '*' };
@@ -103,154 +103,162 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
   static const char cv9[8] = { 'd', 'o', 'u', 'b', 'l', 'e', ' ', '*' };
 
-  static const char cv10[18] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
+  static const char cv10[16] = { 'P', 'E', 'T', 'S', 'C', '_', 'C', 'O', 'M',
+    'M', '_', 'W', 'O', 'R', 'L', 'D' };
+
+  int exitg6;
+  static const char cv11[12] = { 'P', 'E', 'T', 'S', 'C', '_', 'I', 'G', 'N',
+    'O', 'R', 'E' };
+
+  int exitg5;
+  static const char cv12[18] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
     'L', '_', 'O', 'P', 'T', 'I', 'O', 'N', 'S' };
 
   int exitg4;
-  static const char cv11[14] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
-    'L', '_', 'M', 'A', 'T' };
-
-  int exitg3;
-  static const char cv12[14] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
-    'L', '_', 'V', 'E', 'C' };
-
-  int exitg2;
   static const char cv13[14] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
-    'L', '_', 'I', 'N', 'T' };
+    'L', '_', 'M', 'A', 'T' };
 
   char * ptr;
   int i;
+  int exitg3;
+  static const char cv14[14] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
+    'L', '_', 'V', 'E', 'C' };
+
+  int exitg2;
+  static const char cv15[14] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
+    'L', '_', 'I', 'N', 'T' };
+
   int exitg1;
-  static const char cv14[15] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
+  static const char cv16[15] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
     'L', '_', 'R', 'E', 'A', 'L' };
 
   b_bool = false;
-  if (name->size[1] != 15) {
+  if (name->size[1] != 13) {
   } else {
     kstr = 0;
     do {
-      exitg8 = 0;
-      if (kstr + 1 < 16) {
+      exitg10 = 0;
+      if (kstr + 1 < 14) {
         if (name->data[kstr] != cv0[kstr]) {
-          exitg8 = 1;
+          exitg10 = 1;
         } else {
           kstr++;
         }
       } else {
         b_bool = true;
-        exitg8 = 1;
+        exitg10 = 1;
       }
-    } while (exitg8 == 0);
+    } while (exitg10 == 0);
   }
 
   if (b_bool) {
     kstr = 0;
   } else {
     b_bool = false;
-    if (name->size[1] != 16) {
+    if (name->size[1] != 14) {
     } else {
       kstr = 0;
       do {
-        exitg7 = 0;
-        if (kstr + 1 < 17) {
+        exitg9 = 0;
+        if (kstr + 1 < 15) {
           if (name->data[kstr] != cv1[kstr]) {
-            exitg7 = 1;
+            exitg9 = 1;
           } else {
             kstr++;
           }
         } else {
           b_bool = true;
-          exitg7 = 1;
+          exitg9 = 1;
         }
-      } while (exitg7 == 0);
+      } while (exitg9 == 0);
     }
 
     if (b_bool) {
       kstr = 1;
     } else {
       b_bool = false;
-      if (name->size[1] != 12) {
+      if (name->size[1] != 15) {
       } else {
         kstr = 0;
         do {
-          exitg6 = 0;
-          if (kstr + 1 < 13) {
+          exitg8 = 0;
+          if (kstr + 1 < 16) {
             if (name->data[kstr] != cv2[kstr]) {
-              exitg6 = 1;
+              exitg8 = 1;
             } else {
               kstr++;
             }
           } else {
             b_bool = true;
-            exitg6 = 1;
+            exitg8 = 1;
           }
-        } while (exitg6 == 0);
+        } while (exitg8 == 0);
       }
 
       if (b_bool) {
         kstr = 2;
       } else {
         b_bool = false;
-        if (name->size[1] != 18) {
+        if (name->size[1] != 16) {
         } else {
           kstr = 0;
           do {
-            exitg5 = 0;
-            if (kstr + 1 < 19) {
+            exitg7 = 0;
+            if (kstr + 1 < 17) {
               if (name->data[kstr] != cv10[kstr]) {
-                exitg5 = 1;
+                exitg7 = 1;
               } else {
                 kstr++;
               }
             } else {
               b_bool = true;
-              exitg5 = 1;
+              exitg7 = 1;
             }
-          } while (exitg5 == 0);
+          } while (exitg7 == 0);
         }
 
         if (b_bool) {
           kstr = 3;
         } else {
           b_bool = false;
-          if (name->size[1] != 14) {
+          if (name->size[1] != 12) {
           } else {
             kstr = 0;
             do {
-              exitg4 = 0;
-              if (kstr + 1 < 15) {
+              exitg6 = 0;
+              if (kstr + 1 < 13) {
                 if (name->data[kstr] != cv11[kstr]) {
-                  exitg4 = 1;
+                  exitg6 = 1;
                 } else {
                   kstr++;
                 }
               } else {
                 b_bool = true;
-                exitg4 = 1;
+                exitg6 = 1;
               }
-            } while (exitg4 == 0);
+            } while (exitg6 == 0);
           }
 
           if (b_bool) {
             kstr = 4;
           } else {
             b_bool = false;
-            if (name->size[1] != 14) {
+            if (name->size[1] != 18) {
             } else {
               kstr = 0;
               do {
-                exitg3 = 0;
-                if (kstr + 1 < 15) {
+                exitg5 = 0;
+                if (kstr + 1 < 19) {
                   if (name->data[kstr] != cv12[kstr]) {
-                    exitg3 = 1;
+                    exitg5 = 1;
                   } else {
                     kstr++;
                   }
                 } else {
                   b_bool = true;
-                  exitg3 = 1;
+                  exitg5 = 1;
                 }
-              } while (exitg3 == 0);
+              } while (exitg5 == 0);
             }
 
             if (b_bool) {
@@ -261,46 +269,92 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
               } else {
                 kstr = 0;
                 do {
-                  exitg2 = 0;
+                  exitg4 = 0;
                   if (kstr + 1 < 15) {
                     if (name->data[kstr] != cv13[kstr]) {
-                      exitg2 = 1;
+                      exitg4 = 1;
                     } else {
                       kstr++;
                     }
                   } else {
                     b_bool = true;
-                    exitg2 = 1;
+                    exitg4 = 1;
                   }
-                } while (exitg2 == 0);
+                } while (exitg4 == 0);
               }
 
               if (b_bool) {
                 kstr = 6;
               } else {
                 b_bool = false;
-                if (name->size[1] != 15) {
+                if (name->size[1] != 14) {
                 } else {
                   kstr = 0;
                   do {
-                    exitg1 = 0;
-                    if (kstr + 1 < 16) {
+                    exitg3 = 0;
+                    if (kstr + 1 < 15) {
                       if (name->data[kstr] != cv14[kstr]) {
-                        exitg1 = 1;
+                        exitg3 = 1;
                       } else {
                         kstr++;
                       }
                     } else {
                       b_bool = true;
-                      exitg1 = 1;
+                      exitg3 = 1;
                     }
-                  } while (exitg1 == 0);
+                  } while (exitg3 == 0);
                 }
 
                 if (b_bool) {
                   kstr = 7;
                 } else {
-                  kstr = -1;
+                  b_bool = false;
+                  if (name->size[1] != 14) {
+                  } else {
+                    kstr = 0;
+                    do {
+                      exitg2 = 0;
+                      if (kstr + 1 < 15) {
+                        if (name->data[kstr] != cv15[kstr]) {
+                          exitg2 = 1;
+                        } else {
+                          kstr++;
+                        }
+                      } else {
+                        b_bool = true;
+                        exitg2 = 1;
+                      }
+                    } while (exitg2 == 0);
+                  }
+
+                  if (b_bool) {
+                    kstr = 8;
+                  } else {
+                    b_bool = false;
+                    if (name->size[1] != 15) {
+                    } else {
+                      kstr = 0;
+                      do {
+                        exitg1 = 0;
+                        if (kstr + 1 < 16) {
+                          if (name->data[kstr] != cv16[kstr]) {
+                            exitg1 = 1;
+                          } else {
+                            kstr++;
+                          }
+                        } else {
+                          b_bool = true;
+                          exitg1 = 1;
+                        }
+                      } while (exitg1 == 0);
+                    }
+
+                    if (b_bool) {
+                      kstr = 9;
+                    } else {
+                      kstr = -1;
+                    }
+                  }
                 }
               }
             }
@@ -313,7 +367,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
   emxInit_uint8_T(&data0, 1);
   switch (kstr) {
    case 0:
-    data = PETSC_COMM_SELF;
+    data = MPI_COMM_SELF;
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -350,7 +404,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 1:
-    data = PETSC_COMM_WORLD;
+    data = MPI_COMM_WORLD;
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -387,6 +441,80 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 2:
+    data = PETSC_COMM_SELF;
+    sizepe = sizeof(MPI_Comm);
+    kstr = data0->size[0];
+    data0->size[0] = sizepe;
+    emxEnsureCapacity((emxArray__common *)data0, kstr, (int)sizeof(unsigned char));
+    for (kstr = 0; kstr < 8; kstr++) {
+      t1_type[kstr] = cv3[kstr];
+    }
+
+    kstr = obj->data->size[0];
+    obj->data->size[0] = data0->size[0];
+    emxEnsureCapacity((emxArray__common *)obj->data, kstr, (int)sizeof(unsigned
+      char));
+    loop_ub = data0->size[0];
+    for (kstr = 0; kstr < loop_ub; kstr++) {
+      obj->data->data[kstr] = data0->data[kstr];
+    }
+
+    kstr = obj->type->size[0] * obj->type->size[1];
+    obj->type->size[0] = 1;
+    obj->type->size[1] = 8;
+    emxEnsureCapacity((emxArray__common *)obj->type, kstr, (int)sizeof(char));
+    for (kstr = 0; kstr < 8; kstr++) {
+      obj->type->data[kstr] = t1_type[kstr];
+    }
+
+    obj->nitems = 1;
+    ptr = (char *)(&data);
+    for (i = 1; i <= sizepe; i++) {
+      obj->data->data[i - 1] = *(ptr);
+      ptr = M2C_OFFSET_PTR(ptr, 1);
+    }
+
+    *toplevel = true;
+    break;
+
+   case 3:
+    data = PETSC_COMM_WORLD;
+    sizepe = sizeof(MPI_Comm);
+    kstr = data0->size[0];
+    data0->size[0] = sizepe;
+    emxEnsureCapacity((emxArray__common *)data0, kstr, (int)sizeof(unsigned char));
+    for (kstr = 0; kstr < 8; kstr++) {
+      t1_type[kstr] = cv3[kstr];
+    }
+
+    kstr = obj->data->size[0];
+    obj->data->size[0] = data0->size[0];
+    emxEnsureCapacity((emxArray__common *)obj->data, kstr, (int)sizeof(unsigned
+      char));
+    loop_ub = data0->size[0];
+    for (kstr = 0; kstr < loop_ub; kstr++) {
+      obj->data->data[kstr] = data0->data[kstr];
+    }
+
+    kstr = obj->type->size[0] * obj->type->size[1];
+    obj->type->size[0] = 1;
+    obj->type->size[1] = 8;
+    emxEnsureCapacity((emxArray__common *)obj->type, kstr, (int)sizeof(char));
+    for (kstr = 0; kstr < 8; kstr++) {
+      obj->type->data[kstr] = t1_type[kstr];
+    }
+
+    obj->nitems = 1;
+    ptr = (char *)(&data);
+    for (i = 1; i <= sizepe; i++) {
+      obj->data->data[i - 1] = *(ptr);
+      ptr = M2C_OFFSET_PTR(ptr, 1);
+    }
+
+    *toplevel = true;
+    break;
+
+   case 4:
     b_data = PETSC_IGNORE;
     sizepe = sizeof(void *);
     kstr = data0->size[0];
@@ -423,7 +551,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     *toplevel = true;
     break;
 
-   case 3:
+   case 5:
     c_data = NULL;
     sizepe = sizeof(PetscOptions);
     kstr = data0->size[0];
@@ -460,7 +588,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     *toplevel = true;
     break;
 
-   case 4:
+   case 6:
     d_data = NULL;
     sizepe = sizeof(Mat);
     kstr = data0->size[0];
@@ -497,7 +625,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     *toplevel = true;
     break;
 
-   case 5:
+   case 7:
     e_data = NULL;
     sizepe = sizeof(Vec);
     kstr = data0->size[0];
@@ -534,7 +662,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     *toplevel = true;
     break;
 
-   case 6:
+   case 8:
     f_data = NULL;
     sizepe = sizeof(int *);
     kstr = data0->size[0];
@@ -571,7 +699,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     *toplevel = true;
     break;
 
-   case 7:
+   case 9:
     g_data = NULL;
     sizepe = sizeof(double *);
     kstr = data0->size[0];

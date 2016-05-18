@@ -1975,13 +1975,12 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -1996,16 +1995,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
-    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:45' if coder.target('MATLAB') */
+    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:54' switch name */
-    /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
-    /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-    /* 'petscGetEnum:183' coder.inline('always'); */
-    /* 'petscGetEnum:185' val = int32(intmin); */
-    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:53' switch name */
+    /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
+    /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+    /* 'petscGetEnum:178' coder.inline('always'); */
+    /* 'petscGetEnum:180' val = int32(intmin); */
+    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
     val = (PETSC_DEFAULT);
     rtol = val;
   }
@@ -2036,13 +2035,12 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2057,16 +2055,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
-    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:45' if coder.target('MATLAB') */
+    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:54' switch name */
-    /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
-    /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-    /* 'petscGetEnum:183' coder.inline('always'); */
-    /* 'petscGetEnum:185' val = int32(intmin); */
-    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:53' switch name */
+    /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
+    /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+    /* 'petscGetEnum:178' coder.inline('always'); */
+    /* 'petscGetEnum:180' val = int32(intmin); */
+    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
     maxits = (PETSC_DEFAULT);
   }
 
@@ -2095,13 +2093,12 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2116,16 +2113,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
-  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:45' if coder.target('MATLAB') */
+  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:54' switch name */
-  /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
-  /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-  /* 'petscGetEnum:183' coder.inline('always'); */
-  /* 'petscGetEnum:185' val = int32(intmin); */
-  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:53' switch name */
+  /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
+  /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+  /* 'petscGetEnum:178' coder.inline('always'); */
+  /* 'petscGetEnum:180' val = int32(intmin); */
+  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
   val = (PETSC_DEFAULT);
 
   /*  Obtain PETSC constant PETSC_DEFAULT */
@@ -2151,13 +2148,12 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2172,16 +2168,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
-  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:45' if coder.target('MATLAB') */
+  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:54' switch name */
-  /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
-  /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-  /* 'petscGetEnum:183' coder.inline('always'); */
-  /* 'petscGetEnum:185' val = int32(intmin); */
-  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:53' switch name */
+  /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
+  /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+  /* 'petscGetEnum:178' coder.inline('always'); */
+  /* 'petscGetEnum:180' val = int32(intmin); */
+  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
   b_val = (PETSC_DEFAULT);
 
   /* Sets the iteration tolerances used by the default KSP convergence testers. */
@@ -2365,13 +2361,12 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2386,16 +2381,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
-    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:45' if coder.target('MATLAB') */
+    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:54' switch name */
-    /* 'petscGetEnum:55' case 'PETSC_TRUE' */
-    /* 'petscGetEnum:56' [val, toplevel] = get_val('PetscBool', 'PETSC_TRUE', nargin>1); */
-    /* 'petscGetEnum:183' coder.inline('always'); */
-    /* 'petscGetEnum:185' val = int32(intmin); */
-    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:53' switch name */
+    /* 'petscGetEnum:54' case 'PETSC_TRUE' */
+    /* 'petscGetEnum:55' [val, toplevel] = get_val('PetscBool', 'PETSC_TRUE', nargin>1); */
+    /* 'petscGetEnum:178' coder.inline('always'); */
+    /* 'petscGetEnum:180' val = int32(intmin); */
+    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
     val = (PETSC_TRUE);
 
     /* Tells the iterative solver that the initial guess is nonzero; otherwise  */
@@ -2481,13 +2476,12 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2502,16 +2496,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
-    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:45' if coder.target('MATLAB') */
+    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:54' switch name */
-    /* 'petscGetEnum:57' case 'PETSC_FALSE' */
-    /* 'petscGetEnum:58' [val, toplevel] = get_val('PetscBool', 'PETSC_FALSE', nargin>1); */
-    /* 'petscGetEnum:183' coder.inline('always'); */
-    /* 'petscGetEnum:185' val = int32(intmin); */
-    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:53' switch name */
+    /* 'petscGetEnum:56' case 'PETSC_FALSE' */
+    /* 'petscGetEnum:57' [val, toplevel] = get_val('PetscBool', 'PETSC_FALSE', nargin>1); */
+    /* 'petscGetEnum:178' coder.inline('always'); */
+    /* 'petscGetEnum:180' val = int32(intmin); */
+    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
     val = (PETSC_FALSE);
 
     /* Tells the iterative solver that the initial guess is nonzero; otherwise  */
@@ -3254,13 +3248,12 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -3275,16 +3268,16 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
-  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:45' if coder.target('MATLAB') */
+  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:54' switch name */
-  /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
-  /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-  /* 'petscGetEnum:183' coder.inline('always'); */
-  /* 'petscGetEnum:185' val = int32(intmin); */
-  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:53' switch name */
+  /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
+  /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+  /* 'petscGetEnum:178' coder.inline('always'); */
+  /* 'petscGetEnum:180' val = int32(intmin); */
+  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
   b_val = (PETSC_DEFAULT);
 
   /* Creates a sparse matrix in AIJ (compressed row) format. */
@@ -3496,13 +3489,12 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -3517,16 +3509,16 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
-    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:45' if coder.target('MATLAB') */
+    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:54' switch name */
-    /* 'petscGetEnum:81' case 'INSERT_VALUES' */
-    /* 'petscGetEnum:82' [val, toplevel] = get_val('InsertMode', 'INSERT_VALUES', nargin>1); */
-    /* 'petscGetEnum:183' coder.inline('always'); */
-    /* 'petscGetEnum:185' val = int32(intmin); */
-    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:53' switch name */
+    /* 'petscGetEnum:78' case 'INSERT_VALUES' */
+    /* 'petscGetEnum:79' [val, toplevel] = get_val('InsertMode', 'INSERT_VALUES', nargin>1); */
+    /* 'petscGetEnum:178' coder.inline('always'); */
+    /* 'petscGetEnum:180' val = int32(intmin); */
+    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
     iroa = (INSERT_VALUES);
 
     /* 'petscMatSetValues:35' if ~coder.target('MATLAB') */
@@ -3644,13 +3636,12 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -3665,16 +3656,16 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
-  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:45' if coder.target('MATLAB') */
+  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:54' switch name */
-  /* 'petscGetEnum:95' case 'MAT_FINAL_ASSEMBLY' */
-  /* 'petscGetEnum:96' [val, toplevel] = get_val('MatAssemblyType', 'MAT_FINAL_ASSEMBLY', nargin>1); */
-  /* 'petscGetEnum:183' coder.inline('always'); */
-  /* 'petscGetEnum:185' val = int32(intmin); */
-  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:53' switch name */
+  /* 'petscGetEnum:92' case 'MAT_FINAL_ASSEMBLY' */
+  /* 'petscGetEnum:93' [val, toplevel] = get_val('MatAssemblyType', 'MAT_FINAL_ASSEMBLY', nargin>1); */
+  /* 'petscGetEnum:178' coder.inline('always'); */
+  /* 'petscGetEnum:180' val = int32(intmin); */
+  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
   type = (MAT_FINAL_ASSEMBLY);
 
   /* 'petscMatAssemblyBegin:22' errCode = coder.ceval('MatAssemblyBegin',t_mat,type); */
@@ -3759,13 +3750,12 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -3780,16 +3770,16 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
-  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:45' if coder.target('MATLAB') */
+  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:54' switch name */
-  /* 'petscGetEnum:95' case 'MAT_FINAL_ASSEMBLY' */
-  /* 'petscGetEnum:96' [val, toplevel] = get_val('MatAssemblyType', 'MAT_FINAL_ASSEMBLY', nargin>1); */
-  /* 'petscGetEnum:183' coder.inline('always'); */
-  /* 'petscGetEnum:185' val = int32(intmin); */
-  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:53' switch name */
+  /* 'petscGetEnum:92' case 'MAT_FINAL_ASSEMBLY' */
+  /* 'petscGetEnum:93' [val, toplevel] = get_val('MatAssemblyType', 'MAT_FINAL_ASSEMBLY', nargin>1); */
+  /* 'petscGetEnum:178' coder.inline('always'); */
+  /* 'petscGetEnum:180' val = int32(intmin); */
+  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
   type = (MAT_FINAL_ASSEMBLY);
 
   /* 'petscMatAssemblyEnd:22' errCode = coder.ceval('MatAssemblyEnd', t_mat, type); */
@@ -4737,13 +4727,12 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
-  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -4758,16 +4747,16 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
-  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:45' if coder.target('MATLAB') */
+  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:54' switch name */
-  /* 'petscGetEnum:81' case 'INSERT_VALUES' */
-  /* 'petscGetEnum:82' [val, toplevel] = get_val('InsertMode', 'INSERT_VALUES', nargin>1); */
-  /* 'petscGetEnum:183' coder.inline('always'); */
-  /* 'petscGetEnum:185' val = int32(intmin); */
-  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:53' switch name */
+  /* 'petscGetEnum:78' case 'INSERT_VALUES' */
+  /* 'petscGetEnum:79' [val, toplevel] = get_val('InsertMode', 'INSERT_VALUES', nargin>1); */
+  /* 'petscGetEnum:178' coder.inline('always'); */
+  /* 'petscGetEnum:180' val = int32(intmin); */
+  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
   iroa = (INSERT_VALUES);
 
   /* 'petscVecSetValues:32' t_vec = PetscVec(vec); */
@@ -5594,7 +5583,7 @@ void mptSolveCRS(int *flag, double *relres, int *iter)
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0) */
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts) */
   /*  */
-  /*     [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
+  /*     [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
   /*  */
   /*     A is a sparse matrix in CRS format. b, x and resvec are all regular */
   /*     vectors. Solver is a value of PETSC_KSP*. pctype is a value of */
@@ -5603,6 +5592,9 @@ void mptSolveCRS(int *flag, double *relres, int *iter)
   /*     For rtol, maxit, use 0 to use default values. */
   /*     For solver, pctype, solpack and opts, use empty string ('') to use default. */
   /*     For x0, use zeros(0, 1) to disable initial guess. */
+  /*  */
+  /*     When times is given, it returns a 2-vector contaning the times spent */
+  /*     in setup and in solve. */
   /*  */
   /*  Description: */
   /*     mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without */
@@ -5635,15 +5627,15 @@ void mptSolveCRS(int *flag, double *relres, int *iter)
   /*  */
   /*  SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray, */
   /*            mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup */
-  /* 'mptSolveCRS:78' if nargin==0 */
-  /* 'mptSolveCRS:79' x = zeros(0,1); */
-  /* 'mptSolveCRS:79' flag=int32(-1); */
+  /* 'mptSolveCRS:81' if nargin==0 */
+  /* 'mptSolveCRS:82' x = zeros(0,1); */
+  /* 'mptSolveCRS:82' flag=int32(-1); */
   *flag = -1;
 
-  /* 'mptSolveCRS:79' relres=realmax; */
+  /* 'mptSolveCRS:82' relres=realmax; */
   *relres = 1.7976931348623157E+308;
 
-  /* 'mptSolveCRS:79' iter=int32(0); */
+  /* 'mptSolveCRS:82' iter=int32(0); */
   *iter = 0;
 }
 
@@ -5684,7 +5676,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0) */
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts) */
   /*  */
-  /*     [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
+  /*     [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
   /*  */
   /*     A is a sparse matrix in CRS format. b, x and resvec are all regular */
   /*     vectors. Solver is a value of PETSC_KSP*. pctype is a value of */
@@ -5693,6 +5685,9 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     For rtol, maxit, use 0 to use default values. */
   /*     For solver, pctype, solpack and opts, use empty string ('') to use default. */
   /*     For x0, use zeros(0, 1) to disable initial guess. */
+  /*  */
+  /*     When times is given, it returns a 2-vector contaning the times spent */
+  /*     in setup and in solve. */
   /*  */
   /*  Description: */
   /*     mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without */
@@ -5725,39 +5720,39 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  */
   /*  SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray, */
   /*            mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup */
-  /* 'mptSolveCRS:78' if nargin==0 */
-  /* 'mptSolveCRS:83' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
-  /* 'mptSolveCRS:84'         exist('run_mptSolveCRS_exe', 'file') */
-  /* 'mptSolveCRS:92' Arows = varargin{1}; */
-  /* 'mptSolveCRS:93' Acols = varargin{2}; */
-  /* 'mptSolveCRS:94' Avals = varargin{3}; */
-  /* 'mptSolveCRS:95' b = varargin{4}; */
+  /* 'mptSolveCRS:81' if nargin==0 */
+  /* 'mptSolveCRS:86' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
+  /* 'mptSolveCRS:87'         exist('run_mptSolveCRS_exe', 'file') */
+  /* 'mptSolveCRS:95' Arows = varargin{1}; */
+  /* 'mptSolveCRS:96' Acols = varargin{2}; */
+  /* 'mptSolveCRS:97' Avals = varargin{3}; */
+  /* 'mptSolveCRS:98' b = varargin{4}; */
   /*  Setup KSP */
-  /* 'mptSolveCRS:98' if nargin<5 */
-  /* 'mptSolveCRS:98' else */
-  /* 'mptSolveCRS:98' solver = varargin{5}; */
-  /*  Use default */
-  /* 'mptSolveCRS:99' if nargin<6 */
-  /* 'mptSolveCRS:99' else */
-  /* 'mptSolveCRS:99' rtol = varargin{6}; */
-  /* 'mptSolveCRS:100' if nargin<7 */
-  /* 'mptSolveCRS:100' else */
-  /* 'mptSolveCRS:100' maxit = varargin{7}; */
-  /* 'mptSolveCRS:101' if nargin<8 */
+  /* 'mptSolveCRS:101' if nargin<5 */
   /* 'mptSolveCRS:101' else */
-  /* 'mptSolveCRS:101' pctype = varargin{8}; */
-  /* 'mptSolveCRS:102' if nargin<9 */
+  /* 'mptSolveCRS:101' solver = varargin{5}; */
+  /*  Use default */
+  /* 'mptSolveCRS:102' if nargin<6 */
   /* 'mptSolveCRS:102' else */
-  /* 'mptSolveCRS:102' solpack = varargin{9}; */
-  /* 'mptSolveCRS:104' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
+  /* 'mptSolveCRS:102' rtol = varargin{6}; */
+  /* 'mptSolveCRS:103' if nargin<7 */
+  /* 'mptSolveCRS:103' else */
+  /* 'mptSolveCRS:103' maxit = varargin{7}; */
+  /* 'mptSolveCRS:104' if nargin<8 */
+  /* 'mptSolveCRS:104' else */
+  /* 'mptSolveCRS:104' pctype = varargin{8}; */
+  /* 'mptSolveCRS:105' if nargin<9 */
+  /* 'mptSolveCRS:105' else */
+  /* 'mptSolveCRS:105' solpack = varargin{9}; */
+  /* 'mptSolveCRS:107' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
   AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals);
 
-  /* 'mptSolveCRS:105' bVec = mptVecCreateFromArray(b); */
+  /* 'mptSolveCRS:108' bVec = mptVecCreateFromArray(b); */
   bVec = mptVecCreateFromArray(b);
 
-  /* 'mptSolveCRS:107' if nargin<10 || isempty(varargin{10}) */
+  /* 'mptSolveCRS:110' if nargin<10 || isempty(varargin{10}) */
   if (x0->size[0] == 0) {
-    /* 'mptSolveCRS:108' x0Vec = PETSC_NULL_VEC; */
+    /* 'mptSolveCRS:111' x0Vec = PETSC_NULL_VEC; */
     /*  Obtain PETSC constant NULL of type Vec */
     /* 'PETSC_NULL_VEC:4' coder.inline('always'); */
     /* 'PETSC_NULL_VEC:6' obj = petscGetObject('PETSC_NULL_VEC'); */
@@ -5778,7 +5773,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
     x0Vec = NULL;
 
-    /* 'mptSolveCRS:109' xVec = petscVecDuplicate(bVec); */
+    /* 'mptSolveCRS:112' xVec = petscVecDuplicate(bVec); */
     /* Creates a new vector of the same type as an existing vector. */
     /*  */
     /*   [vec_out, errCode] = petscVecDuplicate(vec_in) creates a new vector, but */
@@ -5860,19 +5855,19 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
       }
     }
   } else {
-    /* 'mptSolveCRS:110' else */
-    /* 'mptSolveCRS:111' x0 = varargin{10}; */
-    /* 'mptSolveCRS:112' x0Vec = mptVecCreateFromArray(x0); */
+    /* 'mptSolveCRS:113' else */
+    /* 'mptSolveCRS:114' x0 = varargin{10}; */
+    /* 'mptSolveCRS:115' x0Vec = mptVecCreateFromArray(x0); */
     x0Vec = mptVecCreateFromArray(x0);
 
-    /* 'mptSolveCRS:113' xVec = x0Vec; */
+    /* 'mptSolveCRS:116' xVec = x0Vec; */
     xVec = x0Vec;
   }
 
-  /* 'mptSolveCRS:116' if nargin<11 */
-  /* 'mptSolveCRS:116' opts = ''; */
-  /* 'mptSolveCRS:118' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
-  /* 'mptSolveCRS:119'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
+  /* 'mptSolveCRS:119' if nargin<11 */
+  /* 'mptSolveCRS:119' opts = ''; */
+  /* 'mptSolveCRS:121' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
+  /* 'mptSolveCRS:122'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
   /*  Solves a linear system using a given solver in PETSc. */
   /*  */
   /*  Syntax: */
@@ -6031,7 +6026,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   /* 'mptKSPCleanup:15' toplevel = nargout>1; */
   /* 'mptKSPCleanup:16' ksp = PetscKSP(t_ksp, toplevel); */
-  /* 'mptSolveCRS:121' petscMatDestroy(AMat); */
+  /* 'mptSolveCRS:124' petscMatDestroy(AMat); */
   /* Frees space taken by a matrix. */
   /*  */
   /*   [mat, errCode] = petscMatDestroy(mat) */
@@ -6090,7 +6085,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   }
 
   /* 'petscMatDestroy:26' mat = PetscMat(t_mat, toplevel); */
-  /* 'mptSolveCRS:122' petscVecDestroy(bVec); */
+  /* 'mptSolveCRS:125' petscVecDestroy(bVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -6149,10 +6144,10 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:124' x = mptVecToArray(xVec); */
+  /* 'mptSolveCRS:127' x = mptVecToArray(xVec); */
   mptVecToArray(xVec, x);
 
-  /* 'mptSolveCRS:125' petscVecDestroy(xVec); */
+  /* 'mptSolveCRS:128' petscVecDestroy(xVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -6255,7 +6250,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0) */
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts) */
   /*  */
-  /*     [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
+  /*     [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
   /*  */
   /*     A is a sparse matrix in CRS format. b, x and resvec are all regular */
   /*     vectors. Solver is a value of PETSC_KSP*. pctype is a value of */
@@ -6264,6 +6259,9 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     For rtol, maxit, use 0 to use default values. */
   /*     For solver, pctype, solpack and opts, use empty string ('') to use default. */
   /*     For x0, use zeros(0, 1) to disable initial guess. */
+  /*  */
+  /*     When times is given, it returns a 2-vector contaning the times spent */
+  /*     in setup and in solve. */
   /*  */
   /*  Description: */
   /*     mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without */
@@ -6296,39 +6294,39 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  */
   /*  SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray, */
   /*            mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup */
-  /* 'mptSolveCRS:78' if nargin==0 */
-  /* 'mptSolveCRS:83' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
-  /* 'mptSolveCRS:84'         exist('run_mptSolveCRS_exe', 'file') */
-  /* 'mptSolveCRS:92' Arows = varargin{1}; */
-  /* 'mptSolveCRS:93' Acols = varargin{2}; */
-  /* 'mptSolveCRS:94' Avals = varargin{3}; */
-  /* 'mptSolveCRS:95' b = varargin{4}; */
+  /* 'mptSolveCRS:81' if nargin==0 */
+  /* 'mptSolveCRS:86' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
+  /* 'mptSolveCRS:87'         exist('run_mptSolveCRS_exe', 'file') */
+  /* 'mptSolveCRS:95' Arows = varargin{1}; */
+  /* 'mptSolveCRS:96' Acols = varargin{2}; */
+  /* 'mptSolveCRS:97' Avals = varargin{3}; */
+  /* 'mptSolveCRS:98' b = varargin{4}; */
   /*  Setup KSP */
-  /* 'mptSolveCRS:98' if nargin<5 */
-  /* 'mptSolveCRS:98' else */
-  /* 'mptSolveCRS:98' solver = varargin{5}; */
-  /*  Use default */
-  /* 'mptSolveCRS:99' if nargin<6 */
-  /* 'mptSolveCRS:99' else */
-  /* 'mptSolveCRS:99' rtol = varargin{6}; */
-  /* 'mptSolveCRS:100' if nargin<7 */
-  /* 'mptSolveCRS:100' else */
-  /* 'mptSolveCRS:100' maxit = varargin{7}; */
-  /* 'mptSolveCRS:101' if nargin<8 */
+  /* 'mptSolveCRS:101' if nargin<5 */
   /* 'mptSolveCRS:101' else */
-  /* 'mptSolveCRS:101' pctype = varargin{8}; */
-  /* 'mptSolveCRS:102' if nargin<9 */
+  /* 'mptSolveCRS:101' solver = varargin{5}; */
+  /*  Use default */
+  /* 'mptSolveCRS:102' if nargin<6 */
   /* 'mptSolveCRS:102' else */
-  /* 'mptSolveCRS:102' solpack = varargin{9}; */
-  /* 'mptSolveCRS:104' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
+  /* 'mptSolveCRS:102' rtol = varargin{6}; */
+  /* 'mptSolveCRS:103' if nargin<7 */
+  /* 'mptSolveCRS:103' else */
+  /* 'mptSolveCRS:103' maxit = varargin{7}; */
+  /* 'mptSolveCRS:104' if nargin<8 */
+  /* 'mptSolveCRS:104' else */
+  /* 'mptSolveCRS:104' pctype = varargin{8}; */
+  /* 'mptSolveCRS:105' if nargin<9 */
+  /* 'mptSolveCRS:105' else */
+  /* 'mptSolveCRS:105' solpack = varargin{9}; */
+  /* 'mptSolveCRS:107' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
   AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals);
 
-  /* 'mptSolveCRS:105' bVec = mptVecCreateFromArray(b); */
+  /* 'mptSolveCRS:108' bVec = mptVecCreateFromArray(b); */
   bVec = mptVecCreateFromArray(b);
 
-  /* 'mptSolveCRS:107' if nargin<10 || isempty(varargin{10}) */
+  /* 'mptSolveCRS:110' if nargin<10 || isempty(varargin{10}) */
   if (x0->size[0] == 0) {
-    /* 'mptSolveCRS:108' x0Vec = PETSC_NULL_VEC; */
+    /* 'mptSolveCRS:111' x0Vec = PETSC_NULL_VEC; */
     /*  Obtain PETSC constant NULL of type Vec */
     /* 'PETSC_NULL_VEC:4' coder.inline('always'); */
     /* 'PETSC_NULL_VEC:6' obj = petscGetObject('PETSC_NULL_VEC'); */
@@ -6349,7 +6347,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
     x0Vec = NULL;
 
-    /* 'mptSolveCRS:109' xVec = petscVecDuplicate(bVec); */
+    /* 'mptSolveCRS:112' xVec = petscVecDuplicate(bVec); */
     /* Creates a new vector of the same type as an existing vector. */
     /*  */
     /*   [vec_out, errCode] = petscVecDuplicate(vec_in) creates a new vector, but */
@@ -6431,20 +6429,20 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
       }
     }
   } else {
-    /* 'mptSolveCRS:110' else */
-    /* 'mptSolveCRS:111' x0 = varargin{10}; */
-    /* 'mptSolveCRS:112' x0Vec = mptVecCreateFromArray(x0); */
+    /* 'mptSolveCRS:113' else */
+    /* 'mptSolveCRS:114' x0 = varargin{10}; */
+    /* 'mptSolveCRS:115' x0Vec = mptVecCreateFromArray(x0); */
     x0Vec = mptVecCreateFromArray(x0);
 
-    /* 'mptSolveCRS:113' xVec = x0Vec; */
+    /* 'mptSolveCRS:116' xVec = x0Vec; */
     xVec = x0Vec;
   }
 
-  /* 'mptSolveCRS:116' if nargin<11 */
-  /* 'mptSolveCRS:116' else */
-  /* 'mptSolveCRS:116' opts = varargin{11}; */
-  /* 'mptSolveCRS:118' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
-  /* 'mptSolveCRS:119'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
+  /* 'mptSolveCRS:119' if nargin<11 */
+  /* 'mptSolveCRS:119' else */
+  /* 'mptSolveCRS:119' opts = varargin{11}; */
+  /* 'mptSolveCRS:121' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
+  /* 'mptSolveCRS:122'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
   /*  Solves a linear system using a given solver in PETSc. */
   /*  */
   /*  Syntax: */
@@ -6683,7 +6681,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   /* 'mptKSPCleanup:15' toplevel = nargout>1; */
   /* 'mptKSPCleanup:16' ksp = PetscKSP(t_ksp, toplevel); */
-  /* 'mptSolveCRS:121' petscMatDestroy(AMat); */
+  /* 'mptSolveCRS:124' petscMatDestroy(AMat); */
   /* Frees space taken by a matrix. */
   /*  */
   /*   [mat, errCode] = petscMatDestroy(mat) */
@@ -6742,7 +6740,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   }
 
   /* 'petscMatDestroy:26' mat = PetscMat(t_mat, toplevel); */
-  /* 'mptSolveCRS:122' petscVecDestroy(bVec); */
+  /* 'mptSolveCRS:125' petscVecDestroy(bVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -6801,10 +6799,10 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:124' x = mptVecToArray(xVec); */
+  /* 'mptSolveCRS:127' x = mptVecToArray(xVec); */
   mptVecToArray(xVec, x);
 
-  /* 'mptSolveCRS:125' petscVecDestroy(xVec); */
+  /* 'mptSolveCRS:128' petscVecDestroy(xVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -6902,7 +6900,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0) */
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts) */
   /*  */
-  /*     [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
+  /*     [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
   /*  */
   /*     A is a sparse matrix in CRS format. b, x and resvec are all regular */
   /*     vectors. Solver is a value of PETSC_KSP*. pctype is a value of */
@@ -6911,6 +6909,9 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     For rtol, maxit, use 0 to use default values. */
   /*     For solver, pctype, solpack and opts, use empty string ('') to use default. */
   /*     For x0, use zeros(0, 1) to disable initial guess. */
+  /*  */
+  /*     When times is given, it returns a 2-vector contaning the times spent */
+  /*     in setup and in solve. */
   /*  */
   /*  Description: */
   /*     mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without */
@@ -6943,33 +6944,33 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  */
   /*  SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray, */
   /*            mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup */
-  /* 'mptSolveCRS:78' if nargin==0 */
-  /* 'mptSolveCRS:83' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
-  /* 'mptSolveCRS:84'         exist('run_mptSolveCRS_exe', 'file') */
-  /* 'mptSolveCRS:92' Arows = varargin{1}; */
-  /* 'mptSolveCRS:93' Acols = varargin{2}; */
-  /* 'mptSolveCRS:94' Avals = varargin{3}; */
-  /* 'mptSolveCRS:95' b = varargin{4}; */
+  /* 'mptSolveCRS:81' if nargin==0 */
+  /* 'mptSolveCRS:86' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
+  /* 'mptSolveCRS:87'         exist('run_mptSolveCRS_exe', 'file') */
+  /* 'mptSolveCRS:95' Arows = varargin{1}; */
+  /* 'mptSolveCRS:96' Acols = varargin{2}; */
+  /* 'mptSolveCRS:97' Avals = varargin{3}; */
+  /* 'mptSolveCRS:98' b = varargin{4}; */
   /*  Setup KSP */
-  /* 'mptSolveCRS:98' if nargin<5 */
-  /* 'mptSolveCRS:98' solver = ''; */
+  /* 'mptSolveCRS:101' if nargin<5 */
+  /* 'mptSolveCRS:101' solver = ''; */
   /*  Use default */
-  /* 'mptSolveCRS:99' if nargin<6 */
-  /* 'mptSolveCRS:99' rtol = 0; */
-  /* 'mptSolveCRS:100' if nargin<7 */
-  /* 'mptSolveCRS:100' maxit = int32(0); */
-  /* 'mptSolveCRS:101' if nargin<8 */
-  /* 'mptSolveCRS:101' pctype = ''; */
-  /* 'mptSolveCRS:102' if nargin<9 */
-  /* 'mptSolveCRS:102' solpack = ''; */
-  /* 'mptSolveCRS:104' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
+  /* 'mptSolveCRS:102' if nargin<6 */
+  /* 'mptSolveCRS:102' rtol = 0; */
+  /* 'mptSolveCRS:103' if nargin<7 */
+  /* 'mptSolveCRS:103' maxit = int32(0); */
+  /* 'mptSolveCRS:104' if nargin<8 */
+  /* 'mptSolveCRS:104' pctype = ''; */
+  /* 'mptSolveCRS:105' if nargin<9 */
+  /* 'mptSolveCRS:105' solpack = ''; */
+  /* 'mptSolveCRS:107' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
   AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals);
 
-  /* 'mptSolveCRS:105' bVec = mptVecCreateFromArray(b); */
+  /* 'mptSolveCRS:108' bVec = mptVecCreateFromArray(b); */
   bVec = mptVecCreateFromArray(b);
 
-  /* 'mptSolveCRS:107' if nargin<10 || isempty(varargin{10}) */
-  /* 'mptSolveCRS:108' x0Vec = PETSC_NULL_VEC; */
+  /* 'mptSolveCRS:110' if nargin<10 || isempty(varargin{10}) */
+  /* 'mptSolveCRS:111' x0Vec = PETSC_NULL_VEC; */
   /*  Obtain PETSC constant NULL of type Vec */
   /* 'PETSC_NULL_VEC:4' coder.inline('always'); */
   /* 'PETSC_NULL_VEC:6' obj = petscGetObject('PETSC_NULL_VEC'); */
@@ -6988,7 +6989,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
-  /* 'mptSolveCRS:109' xVec = petscVecDuplicate(bVec); */
+  /* 'mptSolveCRS:112' xVec = petscVecDuplicate(bVec); */
   /* Creates a new vector of the same type as an existing vector. */
   /*  */
   /*   [vec_out, errCode] = petscVecDuplicate(vec_in) creates a new vector, but */
@@ -7068,10 +7069,10 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:116' if nargin<11 */
-  /* 'mptSolveCRS:116' opts = ''; */
-  /* 'mptSolveCRS:118' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
-  /* 'mptSolveCRS:119'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
+  /* 'mptSolveCRS:119' if nargin<11 */
+  /* 'mptSolveCRS:119' opts = ''; */
+  /* 'mptSolveCRS:121' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
+  /* 'mptSolveCRS:122'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
   /*  Solves a linear system using a given solver in PETSc. */
   /*  */
   /*  Syntax: */
@@ -7653,7 +7654,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   /* 'mptKSPCleanup:15' toplevel = nargout>1; */
   /* 'mptKSPCleanup:16' ksp = PetscKSP(t_ksp, toplevel); */
-  /* 'mptSolveCRS:121' petscMatDestroy(AMat); */
+  /* 'mptSolveCRS:124' petscMatDestroy(AMat); */
   /* Frees space taken by a matrix. */
   /*  */
   /*   [mat, errCode] = petscMatDestroy(mat) */
@@ -7712,7 +7713,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   }
 
   /* 'petscMatDestroy:26' mat = PetscMat(t_mat, toplevel); */
-  /* 'mptSolveCRS:122' petscVecDestroy(bVec); */
+  /* 'mptSolveCRS:125' petscVecDestroy(bVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -7771,10 +7772,10 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:124' x = mptVecToArray(xVec); */
+  /* 'mptSolveCRS:127' x = mptVecToArray(xVec); */
   mptVecToArray(t_vec_out, x);
 
-  /* 'mptSolveCRS:125' petscVecDestroy(xVec); */
+  /* 'mptSolveCRS:128' petscVecDestroy(xVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -7870,7 +7871,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0) */
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts) */
   /*  */
-  /*     [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
+  /*     [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
   /*  */
   /*     A is a sparse matrix in CRS format. b, x and resvec are all regular */
   /*     vectors. Solver is a value of PETSC_KSP*. pctype is a value of */
@@ -7879,6 +7880,9 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     For rtol, maxit, use 0 to use default values. */
   /*     For solver, pctype, solpack and opts, use empty string ('') to use default. */
   /*     For x0, use zeros(0, 1) to disable initial guess. */
+  /*  */
+  /*     When times is given, it returns a 2-vector contaning the times spent */
+  /*     in setup and in solve. */
   /*  */
   /*  Description: */
   /*     mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without */
@@ -7911,34 +7915,34 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  */
   /*  SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray, */
   /*            mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup */
-  /* 'mptSolveCRS:78' if nargin==0 */
-  /* 'mptSolveCRS:83' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
-  /* 'mptSolveCRS:84'         exist('run_mptSolveCRS_exe', 'file') */
-  /* 'mptSolveCRS:92' Arows = varargin{1}; */
-  /* 'mptSolveCRS:93' Acols = varargin{2}; */
-  /* 'mptSolveCRS:94' Avals = varargin{3}; */
-  /* 'mptSolveCRS:95' b = varargin{4}; */
+  /* 'mptSolveCRS:81' if nargin==0 */
+  /* 'mptSolveCRS:86' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
+  /* 'mptSolveCRS:87'         exist('run_mptSolveCRS_exe', 'file') */
+  /* 'mptSolveCRS:95' Arows = varargin{1}; */
+  /* 'mptSolveCRS:96' Acols = varargin{2}; */
+  /* 'mptSolveCRS:97' Avals = varargin{3}; */
+  /* 'mptSolveCRS:98' b = varargin{4}; */
   /*  Setup KSP */
-  /* 'mptSolveCRS:98' if nargin<5 */
-  /* 'mptSolveCRS:98' else */
-  /* 'mptSolveCRS:98' solver = varargin{5}; */
+  /* 'mptSolveCRS:101' if nargin<5 */
+  /* 'mptSolveCRS:101' else */
+  /* 'mptSolveCRS:101' solver = varargin{5}; */
   /*  Use default */
-  /* 'mptSolveCRS:99' if nargin<6 */
-  /* 'mptSolveCRS:99' rtol = 0; */
-  /* 'mptSolveCRS:100' if nargin<7 */
-  /* 'mptSolveCRS:100' maxit = int32(0); */
-  /* 'mptSolveCRS:101' if nargin<8 */
-  /* 'mptSolveCRS:101' pctype = ''; */
-  /* 'mptSolveCRS:102' if nargin<9 */
-  /* 'mptSolveCRS:102' solpack = ''; */
-  /* 'mptSolveCRS:104' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
+  /* 'mptSolveCRS:102' if nargin<6 */
+  /* 'mptSolveCRS:102' rtol = 0; */
+  /* 'mptSolveCRS:103' if nargin<7 */
+  /* 'mptSolveCRS:103' maxit = int32(0); */
+  /* 'mptSolveCRS:104' if nargin<8 */
+  /* 'mptSolveCRS:104' pctype = ''; */
+  /* 'mptSolveCRS:105' if nargin<9 */
+  /* 'mptSolveCRS:105' solpack = ''; */
+  /* 'mptSolveCRS:107' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
   AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals);
 
-  /* 'mptSolveCRS:105' bVec = mptVecCreateFromArray(b); */
+  /* 'mptSolveCRS:108' bVec = mptVecCreateFromArray(b); */
   bVec = mptVecCreateFromArray(b);
 
-  /* 'mptSolveCRS:107' if nargin<10 || isempty(varargin{10}) */
-  /* 'mptSolveCRS:108' x0Vec = PETSC_NULL_VEC; */
+  /* 'mptSolveCRS:110' if nargin<10 || isempty(varargin{10}) */
+  /* 'mptSolveCRS:111' x0Vec = PETSC_NULL_VEC; */
   /*  Obtain PETSC constant NULL of type Vec */
   /* 'PETSC_NULL_VEC:4' coder.inline('always'); */
   /* 'PETSC_NULL_VEC:6' obj = petscGetObject('PETSC_NULL_VEC'); */
@@ -7957,7 +7961,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
-  /* 'mptSolveCRS:109' xVec = petscVecDuplicate(bVec); */
+  /* 'mptSolveCRS:112' xVec = petscVecDuplicate(bVec); */
   /* Creates a new vector of the same type as an existing vector. */
   /*  */
   /*   [vec_out, errCode] = petscVecDuplicate(vec_in) creates a new vector, but */
@@ -8037,14 +8041,14 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:116' if nargin<11 */
-  /* 'mptSolveCRS:116' opts = ''; */
-  /* 'mptSolveCRS:118' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
-  /* 'mptSolveCRS:119'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
+  /* 'mptSolveCRS:119' if nargin<11 */
+  /* 'mptSolveCRS:119' opts = ''; */
+  /* 'mptSolveCRS:121' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
+  /* 'mptSolveCRS:122'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
   mptSolve(AMat, bVec, t_vec_out, solver, 0.0, 0, NULL, &b_flag, &b_relres,
            &b_iter);
 
-  /* 'mptSolveCRS:121' petscMatDestroy(AMat); */
+  /* 'mptSolveCRS:124' petscMatDestroy(AMat); */
   /* Frees space taken by a matrix. */
   /*  */
   /*   [mat, errCode] = petscMatDestroy(mat) */
@@ -8103,7 +8107,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   }
 
   /* 'petscMatDestroy:26' mat = PetscMat(t_mat, toplevel); */
-  /* 'mptSolveCRS:122' petscVecDestroy(bVec); */
+  /* 'mptSolveCRS:125' petscVecDestroy(bVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -8162,10 +8166,10 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:124' x = mptVecToArray(xVec); */
+  /* 'mptSolveCRS:127' x = mptVecToArray(xVec); */
   mptVecToArray(t_vec_out, x);
 
-  /* 'mptSolveCRS:125' petscVecDestroy(xVec); */
+  /* 'mptSolveCRS:128' petscVecDestroy(xVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -8261,7 +8265,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0) */
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts) */
   /*  */
-  /*     [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
+  /*     [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
   /*  */
   /*     A is a sparse matrix in CRS format. b, x and resvec are all regular */
   /*     vectors. Solver is a value of PETSC_KSP*. pctype is a value of */
@@ -8270,6 +8274,9 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     For rtol, maxit, use 0 to use default values. */
   /*     For solver, pctype, solpack and opts, use empty string ('') to use default. */
   /*     For x0, use zeros(0, 1) to disable initial guess. */
+  /*  */
+  /*     When times is given, it returns a 2-vector contaning the times spent */
+  /*     in setup and in solve. */
   /*  */
   /*  Description: */
   /*     mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without */
@@ -8302,35 +8309,35 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  */
   /*  SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray, */
   /*            mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup */
-  /* 'mptSolveCRS:78' if nargin==0 */
-  /* 'mptSolveCRS:83' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
-  /* 'mptSolveCRS:84'         exist('run_mptSolveCRS_exe', 'file') */
-  /* 'mptSolveCRS:92' Arows = varargin{1}; */
-  /* 'mptSolveCRS:93' Acols = varargin{2}; */
-  /* 'mptSolveCRS:94' Avals = varargin{3}; */
-  /* 'mptSolveCRS:95' b = varargin{4}; */
+  /* 'mptSolveCRS:81' if nargin==0 */
+  /* 'mptSolveCRS:86' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
+  /* 'mptSolveCRS:87'         exist('run_mptSolveCRS_exe', 'file') */
+  /* 'mptSolveCRS:95' Arows = varargin{1}; */
+  /* 'mptSolveCRS:96' Acols = varargin{2}; */
+  /* 'mptSolveCRS:97' Avals = varargin{3}; */
+  /* 'mptSolveCRS:98' b = varargin{4}; */
   /*  Setup KSP */
-  /* 'mptSolveCRS:98' if nargin<5 */
-  /* 'mptSolveCRS:98' else */
-  /* 'mptSolveCRS:98' solver = varargin{5}; */
+  /* 'mptSolveCRS:101' if nargin<5 */
+  /* 'mptSolveCRS:101' else */
+  /* 'mptSolveCRS:101' solver = varargin{5}; */
   /*  Use default */
-  /* 'mptSolveCRS:99' if nargin<6 */
-  /* 'mptSolveCRS:99' else */
-  /* 'mptSolveCRS:99' rtol = varargin{6}; */
-  /* 'mptSolveCRS:100' if nargin<7 */
-  /* 'mptSolveCRS:100' maxit = int32(0); */
-  /* 'mptSolveCRS:101' if nargin<8 */
-  /* 'mptSolveCRS:101' pctype = ''; */
-  /* 'mptSolveCRS:102' if nargin<9 */
-  /* 'mptSolveCRS:102' solpack = ''; */
-  /* 'mptSolveCRS:104' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
+  /* 'mptSolveCRS:102' if nargin<6 */
+  /* 'mptSolveCRS:102' else */
+  /* 'mptSolveCRS:102' rtol = varargin{6}; */
+  /* 'mptSolveCRS:103' if nargin<7 */
+  /* 'mptSolveCRS:103' maxit = int32(0); */
+  /* 'mptSolveCRS:104' if nargin<8 */
+  /* 'mptSolveCRS:104' pctype = ''; */
+  /* 'mptSolveCRS:105' if nargin<9 */
+  /* 'mptSolveCRS:105' solpack = ''; */
+  /* 'mptSolveCRS:107' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
   AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals);
 
-  /* 'mptSolveCRS:105' bVec = mptVecCreateFromArray(b); */
+  /* 'mptSolveCRS:108' bVec = mptVecCreateFromArray(b); */
   bVec = mptVecCreateFromArray(b);
 
-  /* 'mptSolveCRS:107' if nargin<10 || isempty(varargin{10}) */
-  /* 'mptSolveCRS:108' x0Vec = PETSC_NULL_VEC; */
+  /* 'mptSolveCRS:110' if nargin<10 || isempty(varargin{10}) */
+  /* 'mptSolveCRS:111' x0Vec = PETSC_NULL_VEC; */
   /*  Obtain PETSC constant NULL of type Vec */
   /* 'PETSC_NULL_VEC:4' coder.inline('always'); */
   /* 'PETSC_NULL_VEC:6' obj = petscGetObject('PETSC_NULL_VEC'); */
@@ -8349,7 +8356,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
-  /* 'mptSolveCRS:109' xVec = petscVecDuplicate(bVec); */
+  /* 'mptSolveCRS:112' xVec = petscVecDuplicate(bVec); */
   /* Creates a new vector of the same type as an existing vector. */
   /*  */
   /*   [vec_out, errCode] = petscVecDuplicate(vec_in) creates a new vector, but */
@@ -8429,14 +8436,14 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:116' if nargin<11 */
-  /* 'mptSolveCRS:116' opts = ''; */
-  /* 'mptSolveCRS:118' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
-  /* 'mptSolveCRS:119'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
+  /* 'mptSolveCRS:119' if nargin<11 */
+  /* 'mptSolveCRS:119' opts = ''; */
+  /* 'mptSolveCRS:121' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
+  /* 'mptSolveCRS:122'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
   mptSolve(AMat, bVec, t_vec_out, solver, rtol, 0, NULL, &b_flag, &b_relres,
            &b_iter);
 
-  /* 'mptSolveCRS:121' petscMatDestroy(AMat); */
+  /* 'mptSolveCRS:124' petscMatDestroy(AMat); */
   /* Frees space taken by a matrix. */
   /*  */
   /*   [mat, errCode] = petscMatDestroy(mat) */
@@ -8495,7 +8502,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   }
 
   /* 'petscMatDestroy:26' mat = PetscMat(t_mat, toplevel); */
-  /* 'mptSolveCRS:122' petscVecDestroy(bVec); */
+  /* 'mptSolveCRS:125' petscVecDestroy(bVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -8554,10 +8561,10 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:124' x = mptVecToArray(xVec); */
+  /* 'mptSolveCRS:127' x = mptVecToArray(xVec); */
   mptVecToArray(t_vec_out, x);
 
-  /* 'mptSolveCRS:125' petscVecDestroy(xVec); */
+  /* 'mptSolveCRS:128' petscVecDestroy(xVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -8653,7 +8660,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0) */
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts) */
   /*  */
-  /*     [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
+  /*     [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
   /*  */
   /*     A is a sparse matrix in CRS format. b, x and resvec are all regular */
   /*     vectors. Solver is a value of PETSC_KSP*. pctype is a value of */
@@ -8662,6 +8669,9 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     For rtol, maxit, use 0 to use default values. */
   /*     For solver, pctype, solpack and opts, use empty string ('') to use default. */
   /*     For x0, use zeros(0, 1) to disable initial guess. */
+  /*  */
+  /*     When times is given, it returns a 2-vector contaning the times spent */
+  /*     in setup and in solve. */
   /*  */
   /*  Description: */
   /*     mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without */
@@ -8694,36 +8704,36 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  */
   /*  SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray, */
   /*            mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup */
-  /* 'mptSolveCRS:78' if nargin==0 */
-  /* 'mptSolveCRS:83' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
-  /* 'mptSolveCRS:84'         exist('run_mptSolveCRS_exe', 'file') */
-  /* 'mptSolveCRS:92' Arows = varargin{1}; */
-  /* 'mptSolveCRS:93' Acols = varargin{2}; */
-  /* 'mptSolveCRS:94' Avals = varargin{3}; */
-  /* 'mptSolveCRS:95' b = varargin{4}; */
+  /* 'mptSolveCRS:81' if nargin==0 */
+  /* 'mptSolveCRS:86' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
+  /* 'mptSolveCRS:87'         exist('run_mptSolveCRS_exe', 'file') */
+  /* 'mptSolveCRS:95' Arows = varargin{1}; */
+  /* 'mptSolveCRS:96' Acols = varargin{2}; */
+  /* 'mptSolveCRS:97' Avals = varargin{3}; */
+  /* 'mptSolveCRS:98' b = varargin{4}; */
   /*  Setup KSP */
-  /* 'mptSolveCRS:98' if nargin<5 */
-  /* 'mptSolveCRS:98' else */
-  /* 'mptSolveCRS:98' solver = varargin{5}; */
+  /* 'mptSolveCRS:101' if nargin<5 */
+  /* 'mptSolveCRS:101' else */
+  /* 'mptSolveCRS:101' solver = varargin{5}; */
   /*  Use default */
-  /* 'mptSolveCRS:99' if nargin<6 */
-  /* 'mptSolveCRS:99' else */
-  /* 'mptSolveCRS:99' rtol = varargin{6}; */
-  /* 'mptSolveCRS:100' if nargin<7 */
-  /* 'mptSolveCRS:100' else */
-  /* 'mptSolveCRS:100' maxit = varargin{7}; */
-  /* 'mptSolveCRS:101' if nargin<8 */
-  /* 'mptSolveCRS:101' pctype = ''; */
-  /* 'mptSolveCRS:102' if nargin<9 */
-  /* 'mptSolveCRS:102' solpack = ''; */
-  /* 'mptSolveCRS:104' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
+  /* 'mptSolveCRS:102' if nargin<6 */
+  /* 'mptSolveCRS:102' else */
+  /* 'mptSolveCRS:102' rtol = varargin{6}; */
+  /* 'mptSolveCRS:103' if nargin<7 */
+  /* 'mptSolveCRS:103' else */
+  /* 'mptSolveCRS:103' maxit = varargin{7}; */
+  /* 'mptSolveCRS:104' if nargin<8 */
+  /* 'mptSolveCRS:104' pctype = ''; */
+  /* 'mptSolveCRS:105' if nargin<9 */
+  /* 'mptSolveCRS:105' solpack = ''; */
+  /* 'mptSolveCRS:107' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
   AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals);
 
-  /* 'mptSolveCRS:105' bVec = mptVecCreateFromArray(b); */
+  /* 'mptSolveCRS:108' bVec = mptVecCreateFromArray(b); */
   bVec = mptVecCreateFromArray(b);
 
-  /* 'mptSolveCRS:107' if nargin<10 || isempty(varargin{10}) */
-  /* 'mptSolveCRS:108' x0Vec = PETSC_NULL_VEC; */
+  /* 'mptSolveCRS:110' if nargin<10 || isempty(varargin{10}) */
+  /* 'mptSolveCRS:111' x0Vec = PETSC_NULL_VEC; */
   /*  Obtain PETSC constant NULL of type Vec */
   /* 'PETSC_NULL_VEC:4' coder.inline('always'); */
   /* 'PETSC_NULL_VEC:6' obj = petscGetObject('PETSC_NULL_VEC'); */
@@ -8742,7 +8752,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
-  /* 'mptSolveCRS:109' xVec = petscVecDuplicate(bVec); */
+  /* 'mptSolveCRS:112' xVec = petscVecDuplicate(bVec); */
   /* Creates a new vector of the same type as an existing vector. */
   /*  */
   /*   [vec_out, errCode] = petscVecDuplicate(vec_in) creates a new vector, but */
@@ -8822,14 +8832,14 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:116' if nargin<11 */
-  /* 'mptSolveCRS:116' opts = ''; */
-  /* 'mptSolveCRS:118' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
-  /* 'mptSolveCRS:119'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
+  /* 'mptSolveCRS:119' if nargin<11 */
+  /* 'mptSolveCRS:119' opts = ''; */
+  /* 'mptSolveCRS:121' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
+  /* 'mptSolveCRS:122'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
   mptSolve(AMat, bVec, t_vec_out, solver, rtol, maxiter, NULL, &b_flag,
            &b_relres, &b_iter);
 
-  /* 'mptSolveCRS:121' petscMatDestroy(AMat); */
+  /* 'mptSolveCRS:124' petscMatDestroy(AMat); */
   /* Frees space taken by a matrix. */
   /*  */
   /*   [mat, errCode] = petscMatDestroy(mat) */
@@ -8888,7 +8898,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   }
 
   /* 'petscMatDestroy:26' mat = PetscMat(t_mat, toplevel); */
-  /* 'mptSolveCRS:122' petscVecDestroy(bVec); */
+  /* 'mptSolveCRS:125' petscVecDestroy(bVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -8947,10 +8957,10 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:124' x = mptVecToArray(xVec); */
+  /* 'mptSolveCRS:127' x = mptVecToArray(xVec); */
   mptVecToArray(t_vec_out, x);
 
-  /* 'mptSolveCRS:125' petscVecDestroy(xVec); */
+  /* 'mptSolveCRS:128' petscVecDestroy(xVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -9052,7 +9062,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0) */
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts) */
   /*  */
-  /*     [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
+  /*     [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
   /*  */
   /*     A is a sparse matrix in CRS format. b, x and resvec are all regular */
   /*     vectors. Solver is a value of PETSC_KSP*. pctype is a value of */
@@ -9061,6 +9071,9 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     For rtol, maxit, use 0 to use default values. */
   /*     For solver, pctype, solpack and opts, use empty string ('') to use default. */
   /*     For x0, use zeros(0, 1) to disable initial guess. */
+  /*  */
+  /*     When times is given, it returns a 2-vector contaning the times spent */
+  /*     in setup and in solve. */
   /*  */
   /*  Description: */
   /*     mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without */
@@ -9093,37 +9106,37 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  */
   /*  SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray, */
   /*            mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup */
-  /* 'mptSolveCRS:78' if nargin==0 */
-  /* 'mptSolveCRS:83' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
-  /* 'mptSolveCRS:84'         exist('run_mptSolveCRS_exe', 'file') */
-  /* 'mptSolveCRS:92' Arows = varargin{1}; */
-  /* 'mptSolveCRS:93' Acols = varargin{2}; */
-  /* 'mptSolveCRS:94' Avals = varargin{3}; */
-  /* 'mptSolveCRS:95' b = varargin{4}; */
+  /* 'mptSolveCRS:81' if nargin==0 */
+  /* 'mptSolveCRS:86' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
+  /* 'mptSolveCRS:87'         exist('run_mptSolveCRS_exe', 'file') */
+  /* 'mptSolveCRS:95' Arows = varargin{1}; */
+  /* 'mptSolveCRS:96' Acols = varargin{2}; */
+  /* 'mptSolveCRS:97' Avals = varargin{3}; */
+  /* 'mptSolveCRS:98' b = varargin{4}; */
   /*  Setup KSP */
-  /* 'mptSolveCRS:98' if nargin<5 */
-  /* 'mptSolveCRS:98' else */
-  /* 'mptSolveCRS:98' solver = varargin{5}; */
-  /*  Use default */
-  /* 'mptSolveCRS:99' if nargin<6 */
-  /* 'mptSolveCRS:99' else */
-  /* 'mptSolveCRS:99' rtol = varargin{6}; */
-  /* 'mptSolveCRS:100' if nargin<7 */
-  /* 'mptSolveCRS:100' else */
-  /* 'mptSolveCRS:100' maxit = varargin{7}; */
-  /* 'mptSolveCRS:101' if nargin<8 */
+  /* 'mptSolveCRS:101' if nargin<5 */
   /* 'mptSolveCRS:101' else */
-  /* 'mptSolveCRS:101' pctype = varargin{8}; */
-  /* 'mptSolveCRS:102' if nargin<9 */
-  /* 'mptSolveCRS:102' solpack = ''; */
-  /* 'mptSolveCRS:104' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
+  /* 'mptSolveCRS:101' solver = varargin{5}; */
+  /*  Use default */
+  /* 'mptSolveCRS:102' if nargin<6 */
+  /* 'mptSolveCRS:102' else */
+  /* 'mptSolveCRS:102' rtol = varargin{6}; */
+  /* 'mptSolveCRS:103' if nargin<7 */
+  /* 'mptSolveCRS:103' else */
+  /* 'mptSolveCRS:103' maxit = varargin{7}; */
+  /* 'mptSolveCRS:104' if nargin<8 */
+  /* 'mptSolveCRS:104' else */
+  /* 'mptSolveCRS:104' pctype = varargin{8}; */
+  /* 'mptSolveCRS:105' if nargin<9 */
+  /* 'mptSolveCRS:105' solpack = ''; */
+  /* 'mptSolveCRS:107' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
   AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals);
 
-  /* 'mptSolveCRS:105' bVec = mptVecCreateFromArray(b); */
+  /* 'mptSolveCRS:108' bVec = mptVecCreateFromArray(b); */
   bVec = mptVecCreateFromArray(b);
 
-  /* 'mptSolveCRS:107' if nargin<10 || isempty(varargin{10}) */
-  /* 'mptSolveCRS:108' x0Vec = PETSC_NULL_VEC; */
+  /* 'mptSolveCRS:110' if nargin<10 || isempty(varargin{10}) */
+  /* 'mptSolveCRS:111' x0Vec = PETSC_NULL_VEC; */
   /*  Obtain PETSC constant NULL of type Vec */
   /* 'PETSC_NULL_VEC:4' coder.inline('always'); */
   /* 'PETSC_NULL_VEC:6' obj = petscGetObject('PETSC_NULL_VEC'); */
@@ -9142,7 +9155,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
-  /* 'mptSolveCRS:109' xVec = petscVecDuplicate(bVec); */
+  /* 'mptSolveCRS:112' xVec = petscVecDuplicate(bVec); */
   /* Creates a new vector of the same type as an existing vector. */
   /*  */
   /*   [vec_out, errCode] = petscVecDuplicate(vec_in) creates a new vector, but */
@@ -9222,10 +9235,10 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:116' if nargin<11 */
-  /* 'mptSolveCRS:116' opts = ''; */
-  /* 'mptSolveCRS:118' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
-  /* 'mptSolveCRS:119'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
+  /* 'mptSolveCRS:119' if nargin<11 */
+  /* 'mptSolveCRS:119' opts = ''; */
+  /* 'mptSolveCRS:121' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
+  /* 'mptSolveCRS:122'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
   /*  Solves a linear system using a given solver in PETSc. */
   /*  */
   /*  Syntax: */
@@ -10065,7 +10078,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   /* 'mptKSPCleanup:15' toplevel = nargout>1; */
   /* 'mptKSPCleanup:16' ksp = PetscKSP(t_ksp, toplevel); */
-  /* 'mptSolveCRS:121' petscMatDestroy(AMat); */
+  /* 'mptSolveCRS:124' petscMatDestroy(AMat); */
   /* Frees space taken by a matrix. */
   /*  */
   /*   [mat, errCode] = petscMatDestroy(mat) */
@@ -10124,7 +10137,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   }
 
   /* 'petscMatDestroy:26' mat = PetscMat(t_mat, toplevel); */
-  /* 'mptSolveCRS:122' petscVecDestroy(bVec); */
+  /* 'mptSolveCRS:125' petscVecDestroy(bVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -10183,10 +10196,10 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:124' x = mptVecToArray(xVec); */
+  /* 'mptSolveCRS:127' x = mptVecToArray(xVec); */
   mptVecToArray(t_vec_out, x);
 
-  /* 'mptSolveCRS:125' petscVecDestroy(xVec); */
+  /* 'mptSolveCRS:128' petscVecDestroy(xVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -10285,7 +10298,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0) */
   /*     mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts) */
   /*  */
-  /*     [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
+  /*     [x, flag, reslres, iter, times] = mptSolveCRS(Arows, Acols, Avals, b, ...) */
   /*  */
   /*     A is a sparse matrix in CRS format. b, x and resvec are all regular */
   /*     vectors. Solver is a value of PETSC_KSP*. pctype is a value of */
@@ -10294,6 +10307,9 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     For rtol, maxit, use 0 to use default values. */
   /*     For solver, pctype, solpack and opts, use empty string ('') to use default. */
   /*     For x0, use zeros(0, 1) to disable initial guess. */
+  /*  */
+  /*     When times is given, it returns a 2-vector contaning the times spent */
+  /*     in setup and in solve. */
   /*  */
   /*  Description: */
   /*     mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without */
@@ -10326,38 +10342,38 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  */
   /*  SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray, */
   /*            mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup */
-  /* 'mptSolveCRS:78' if nargin==0 */
-  /* 'mptSolveCRS:83' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
-  /* 'mptSolveCRS:84'         exist('run_mptSolveCRS_exe', 'file') */
-  /* 'mptSolveCRS:92' Arows = varargin{1}; */
-  /* 'mptSolveCRS:93' Acols = varargin{2}; */
-  /* 'mptSolveCRS:94' Avals = varargin{3}; */
-  /* 'mptSolveCRS:95' b = varargin{4}; */
+  /* 'mptSolveCRS:81' if nargin==0 */
+  /* 'mptSolveCRS:86' if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ... */
+  /* 'mptSolveCRS:87'         exist('run_mptSolveCRS_exe', 'file') */
+  /* 'mptSolveCRS:95' Arows = varargin{1}; */
+  /* 'mptSolveCRS:96' Acols = varargin{2}; */
+  /* 'mptSolveCRS:97' Avals = varargin{3}; */
+  /* 'mptSolveCRS:98' b = varargin{4}; */
   /*  Setup KSP */
-  /* 'mptSolveCRS:98' if nargin<5 */
-  /* 'mptSolveCRS:98' else */
-  /* 'mptSolveCRS:98' solver = varargin{5}; */
-  /*  Use default */
-  /* 'mptSolveCRS:99' if nargin<6 */
-  /* 'mptSolveCRS:99' else */
-  /* 'mptSolveCRS:99' rtol = varargin{6}; */
-  /* 'mptSolveCRS:100' if nargin<7 */
-  /* 'mptSolveCRS:100' else */
-  /* 'mptSolveCRS:100' maxit = varargin{7}; */
-  /* 'mptSolveCRS:101' if nargin<8 */
+  /* 'mptSolveCRS:101' if nargin<5 */
   /* 'mptSolveCRS:101' else */
-  /* 'mptSolveCRS:101' pctype = varargin{8}; */
-  /* 'mptSolveCRS:102' if nargin<9 */
+  /* 'mptSolveCRS:101' solver = varargin{5}; */
+  /*  Use default */
+  /* 'mptSolveCRS:102' if nargin<6 */
   /* 'mptSolveCRS:102' else */
-  /* 'mptSolveCRS:102' solpack = varargin{9}; */
-  /* 'mptSolveCRS:104' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
+  /* 'mptSolveCRS:102' rtol = varargin{6}; */
+  /* 'mptSolveCRS:103' if nargin<7 */
+  /* 'mptSolveCRS:103' else */
+  /* 'mptSolveCRS:103' maxit = varargin{7}; */
+  /* 'mptSolveCRS:104' if nargin<8 */
+  /* 'mptSolveCRS:104' else */
+  /* 'mptSolveCRS:104' pctype = varargin{8}; */
+  /* 'mptSolveCRS:105' if nargin<9 */
+  /* 'mptSolveCRS:105' else */
+  /* 'mptSolveCRS:105' solpack = varargin{9}; */
+  /* 'mptSolveCRS:107' AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals); */
   AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals);
 
-  /* 'mptSolveCRS:105' bVec = mptVecCreateFromArray(b); */
+  /* 'mptSolveCRS:108' bVec = mptVecCreateFromArray(b); */
   bVec = mptVecCreateFromArray(b);
 
-  /* 'mptSolveCRS:107' if nargin<10 || isempty(varargin{10}) */
-  /* 'mptSolveCRS:108' x0Vec = PETSC_NULL_VEC; */
+  /* 'mptSolveCRS:110' if nargin<10 || isempty(varargin{10}) */
+  /* 'mptSolveCRS:111' x0Vec = PETSC_NULL_VEC; */
   /*  Obtain PETSC constant NULL of type Vec */
   /* 'PETSC_NULL_VEC:4' coder.inline('always'); */
   /* 'PETSC_NULL_VEC:6' obj = petscGetObject('PETSC_NULL_VEC'); */
@@ -10376,7 +10392,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
-  /* 'mptSolveCRS:109' xVec = petscVecDuplicate(bVec); */
+  /* 'mptSolveCRS:112' xVec = petscVecDuplicate(bVec); */
   /* Creates a new vector of the same type as an existing vector. */
   /*  */
   /*   [vec_out, errCode] = petscVecDuplicate(vec_in) creates a new vector, but */
@@ -10456,10 +10472,10 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:116' if nargin<11 */
-  /* 'mptSolveCRS:116' opts = ''; */
-  /* 'mptSolveCRS:118' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
-  /* 'mptSolveCRS:119'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
+  /* 'mptSolveCRS:119' if nargin<11 */
+  /* 'mptSolveCRS:119' opts = ''; */
+  /* 'mptSolveCRS:121' [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ... */
+  /* 'mptSolveCRS:122'     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts); */
   /*  Solves a linear system using a given solver in PETSc. */
   /*  */
   /*  Syntax: */
@@ -10619,7 +10635,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   /* 'mptKSPCleanup:15' toplevel = nargout>1; */
   /* 'mptKSPCleanup:16' ksp = PetscKSP(t_ksp, toplevel); */
-  /* 'mptSolveCRS:121' petscMatDestroy(AMat); */
+  /* 'mptSolveCRS:124' petscMatDestroy(AMat); */
   /* Frees space taken by a matrix. */
   /*  */
   /*   [mat, errCode] = petscMatDestroy(mat) */
@@ -10678,7 +10694,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   }
 
   /* 'petscMatDestroy:26' mat = PetscMat(t_mat, toplevel); */
-  /* 'mptSolveCRS:122' petscVecDestroy(bVec); */
+  /* 'mptSolveCRS:125' petscVecDestroy(bVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */
@@ -10737,10 +10753,10 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptSolveCRS:124' x = mptVecToArray(xVec); */
+  /* 'mptSolveCRS:127' x = mptVecToArray(xVec); */
   mptVecToArray(t_vec_out, x);
 
-  /* 'mptSolveCRS:125' petscVecDestroy(xVec); */
+  /* 'mptSolveCRS:128' petscVecDestroy(xVec); */
   /* Frees space taken by a vector. */
   /*  */
   /*   [vec, errCode] = petscVecDestroy(vec) */

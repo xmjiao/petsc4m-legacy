@@ -19,13 +19,12 @@ function [val, toplevel] = petscGetEnum(name)
 %      MAT_GETROW_UPPERTRIANGULAR, MAT_SPD,
 %      MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES,
 %      MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR,
-%      MAT_SUBSET_OFF_PROC_ENTRIES
 %
 % MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN
 %
 % MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN
 %
-% MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX
+% MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX
 %
 % InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES,
 %      INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES
@@ -74,8 +73,6 @@ switch name
         [val, toplevel] = get_val('MatReuse', 'MAT_REUSE_MATRIX', nargin>1);
     case 'MAT_IGNORE_MATRIX'
         [val, toplevel] = get_val('MatReuse', 'MAT_IGNORE_MATRIX', nargin>1);
-    case 'MAT_INPLACE_MATRIX'
-        [val, toplevel] = get_val('MatReuse', 'MAT_INPLACE_MATRIX', nargin>1);
     case 'NOT_SET_VALUES'
         [val, toplevel] = get_val('InsertMode', 'NOT_SET_VALUES', nargin>1);
     case 'INSERT_VALUES'
@@ -140,8 +137,6 @@ switch name
         [val, toplevel] = get_val('MatOption', 'MAT_NO_OFF_PROC_ENTRIES', nargin>1);
     case 'MAT_NEW_NONZERO_ALLOCATION_ERR'
         [val, toplevel] = get_val('MatOption', 'MAT_NEW_NONZERO_ALLOCATION_ERR', nargin>1);
-    case 'MAT_SUBSET_OFF_PROC_ENTRIES'
-        [val, toplevel] = get_val('MatOption', 'MAT_SUBSET_OFF_PROC_ENTRIES', nargin>1);
     case 'MAT_FACTOR_NONE'
         [val, toplevel] = get_val('MatFactorType', 'MAT_FACTOR_NONE', nargin>1);
     case 'MAT_FACTOR_LU'

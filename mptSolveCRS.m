@@ -1,4 +1,4 @@
-function [x, flag, relres, iter, times] = mptSolveCRS(varargin)
+function [x, flag, relres, iter] = mptSolveCRS(varargin)
 % Solves a linear system using any PETSc solver for matrix in CRS format.
 %
 % Syntax:
@@ -118,7 +118,7 @@ end
 
 if nargin<11; opts = ''; else opts = varargin{11}; end
 
-[flag,relres,iter,times] = mptSolve(AMat, bVec, xVec, solver, ...
+[flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ...
     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts);
 
 petscMatDestroy(AMat);
