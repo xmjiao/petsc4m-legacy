@@ -137,9 +137,9 @@ function test %#ok<DEFNU>
 %! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b);
 %! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '');
 %! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6);
-%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, 100);
-%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, 100);
-%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, 100, PETSC_PCJACOBI);
-%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, 100, PETSC_PCILU, '');
-%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, 100, PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
+%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, int32(100));
+%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, int32(100));
+%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, int32(100), PETSC_PCJACOBI);
+%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, int32(100), PETSC_PCILU, '');
+%! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6, int32(100), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
 end
