@@ -5,7 +5,7 @@ function [obj, toplevel] = petscGetObject(name)
 %
 %The supported names include:
 %
-% MPI_Comm: PETSC_COMM_SELF, PETSC_COMM_WORLD
+% MPI_Comm: PETSC_COMM_SELF, PETSC_COMM_WORLD, MPI_COMM_SELF, MPI_COMM_WORLD
 %
 % Other:
 %     PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC,
@@ -18,6 +18,10 @@ if coder.target('MATLAB')
 end
 
 switch name
+    case 'MPI_COMM_SELF'
+        [obj, toplevel] = get_obj('MPI_Comm', 'MPI_COMM_SELF', nargout>1);
+    case 'MPI_COMM_WORLD'
+        [obj, toplevel] = get_obj('MPI_Comm', 'MPI_COMM_WORLD', nargout>1);
     case 'PETSC_COMM_SELF'
         [obj, toplevel] = get_obj('MPI_Comm', 'PETSC_COMM_SELF', nargout>1);
     case 'PETSC_COMM_WORLD'
