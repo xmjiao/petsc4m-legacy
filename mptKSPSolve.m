@@ -35,7 +35,6 @@ function [flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxit, varargin)
 %#codegen mptKSPSolve_6args -args {PetscKSP, PetscVec, PetscVec, 0, int32(0), PetscVec}
 %#codegen mptKSPSolve_7args -args {PetscKSP, PetscVec, PetscVec, 0, int32(0), PetscVec, PetscVec}
 
-
 % Solve the linear system
 if nargin==2
     petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
@@ -76,10 +75,10 @@ if relres>rtol
         petscKSPGetType(ksp), petscPCGetType(pc), relres, iter);
     m2c_printf('The relative convergence tolerance was %g. The max-iter was %d.\n', rtol, maxit);
     m2c_printf(['The return flag was %d. See http://www.mcs.anl.gov/petsc/' ...
-        'petsc-current/docs/manualpages/KSP/KSPConvergedReason.html for explanations of the flag.\n'], flag); 
+        'petsc-current/docs/manualpages/KSP/KSPConvergedReason.html for explanations of the flag.\n'], flag);
 end
 
-if nargin>6
+if nargin>6 && ~petscIsNULL(varargin{2})
     petscKSPBuildResidual(ksp, varargin{2});
 end
 

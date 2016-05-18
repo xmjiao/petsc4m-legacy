@@ -1,36 +1,58 @@
 function build_mpetsc(varargin)
 
-opts = [{'-mex', '-O', '-petsc'} varargin{:}];
+opts = [{'-petsc', '-g', '-exe', '-exedir', 'exe', ...
+    '-time', '{''mptKSPCleanup'', ''mptKSPSetup'', ''mptKSPSolve''}'}, varargin{:}];
 
-lines = [grep_pattern('petsc/petsc*.m', '\n%#codegen\s+-args') ...
-    grep_pattern('util/petsc*.m', '\n%#codegen\s+-args') ...
-    grep_pattern('sys/petsc*.m', '\n%#codegen\s+-args')];
-
-if strfind(which('mpi_Init'), [pwd '/sys/mpi_Init'])
-    % Add MPI calls
-    lines = [lines, grep_pattern('sys/mpi_*.m', '\n%#codegen\s+-args')];
+%Compile top-level functions for CRS and time top-level KSP functions
+files = {'mptSolveCRS'};
+for i=1:length(files)
+    m2c(opts{:}, files{i});
 end
 
+%Compile top-level wrapper functions and add timing
+opts = [{'-petsc', '-O3', '-time', '-mex', '-mexdir', 'mex'} varargin{:}];
+lines = grep_pattern('mpt[KMV]*.m', '\n%#codegen\s+-args');
+files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
+for i=1:length(files)
+    m2c(opts{:}, files{i}{1});
+end
+
+%Compile utility functions.
+opts = [{'-petsc', '-O', '-mex'} varargin{:}];
+files = {'petscGetEnum.m', 'petscGetObject.m', 'petscGetString.m', ...
+    'petscSplitOwnership.m', 'petscInitialized.m', 'petscFinalized.m'};
+for i=1:length(files)
+    m2c(opts{:}, files{i});
+end
+
+%Compile mpi functions.
+opts = [{'-petsc', '-O', '-mex'} varargin{:}];
+lines = grep_pattern('mpi/*.m', '\n%#codegen\s+-args');
 files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
 
 for i=1:length(files)
     m2c(opts{:}, files{i}{1});
 end
 
-%Add timing for top-level functions
-files = {'mptKSPCleanup' 'mptKSPSetup' 'mptKSPSolve'};
+%Compile all other system-level and low-level functions with hidden mex files
+opts = [{'-petsc', '-O', '-q', '-mex', '-mexdir', '../mex'} varargin{:}];
+lines = [grep_pattern('sys/petsc[IF]*e.m', '\n%#codegen\s+-args'), ...
+    grep_pattern('sys/petsc*Options*.m', '\n%#codegen\s+-args'), ...
+    grep_pattern('Mat/petsc*.m', '\n%#codegen\s+-args'), ...
+    grep_pattern('Vec/petsc*.m', '\n%#codegen\s+-args'), ...
+    grep_pattern('KSP/petsc*.m', '\n%#codegen\s+-args'), ...
+    grep_pattern('PC/petsc*.m', '\n%#codegen\s+-args')];
+files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
 for i=1:length(files)
-    m2c(opts{:}, '-time', files{i});
+    m2c(opts{:}, files{i}{1});
 end
 
-
 % TODO:
-% MatGetDiagonal, MatAXPY, MatMult, MatMultAdd,
-% MatMultTranspose, MatMultTransposeAdd, MatNorm, MatDiagonalScale,
+% MatDiagonalScale,
 % MatScale, MatTranspose, MatZeroEntries, MatShift, MatZeroEntries
 %
-% VecAXPY, VecAYPX, VecWAXPY, VecAXPBY, VecScale,
-% VecDot, VecTDot,  VecDotBegin, VecDotEnd, VecNorm, VecNormBegin,
+% VecWAXPY, VecAXPBY, VecScale,
+% VecDot, VecTDot,  VecDotBegin, VecDotEnd, VecNormBegin,
 % VecNormEnd, VecSum, VecCopy, VecSwap, VecPointwiseMult,
 % VecPointwiseDivide, VecMDot, VecMTDOt, VeccMAXPTY, VecMax, VecMin,
 % VecAbs, VecReciprocal, VecShift, VecSet.

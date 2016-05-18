@@ -31,7 +31,8 @@ end
 
 if ~isstruct(arg) || isempty(coder.target)
     if nargin==1 || ~opaque
-        obj = arg;
+        obj = coder.opaque('PetscObject');
+        obj = coder.ceval('(PetscObject)', arg);
     else
         obj = m2c_opaque_obj('PetscObject', arg);
     end

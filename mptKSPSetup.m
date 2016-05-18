@@ -52,11 +52,13 @@ if nargin>1
         end
     end
     
-    if ischar(ksptype) && ksptype(end)~=0
+    if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0
         m2c_error('KSP type must be a null-terminated string.');
     end
-    % Set KSP Types
-    petscKSPSetType(t_ksp, ksptype);
+    if ischar(ksptype) && ~isempty(ksptype) || ~ischar(ksptype)
+        % Set KSP Types
+        petscKSPSetType(t_ksp, ksptype);
+    end
 end
 
 petscKSPSetFromOptions(t_ksp);

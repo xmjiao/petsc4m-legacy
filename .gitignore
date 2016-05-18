@@ -8,6 +8,7 @@
 *.inp
 *.cgns
 *.exe
+*.exe.dSYM
 *.o
 *.d
 *.so
