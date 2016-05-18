@@ -18,7 +18,9 @@ function [mat_out, toplevel] = mptMatCreateAIJFromCRS(row_ptr, col_ind, val, var
 %           to set the matrix type. This can be used to created a parallel
 %           matrix in PETSC_COMM_WORLD and set the local portion.
 %
-% SEE ALSO: mptMatAIJToCRS
+%  The matrix must be deallocated by calling petscMatDestroy after use.
+%
+% SEE ALSO: petscMatDestroy, mptMatAIJToCRS, mptOptionsInsert
 
 %#codegen -args {coder.typeof(int32(0), [inf, 1]), coder.typeof(int32(0), [inf, 1]),
 %#codegen coder.typeof(0, [inf, 1])} mptMatCreateAIJFromCRS_4args -args
@@ -53,12 +55,12 @@ else
     mat = petscMatCreate;
 
     if isempty(varargin{2}) || ~varargin{2}(end)
-        opts = varargin{2};
+        prefix = varargin{2};
     else
         % Null-terminate the string
-        opts = [varargin{2} char(0)];
+        prefix = [varargin{2} char(0)];
     end
-    petscMatSetOptionsPrefix(mat, opts);
+    petscMatSetOptionsPrefix(mat, prefix);
     petscMatSetFromOptions(mat);
     petscMatSetSizes(mat, n, PETSC_DECIDE, PETSC_DETERMINE, ncols);
     % Since the matrix is may be parallel,

@@ -7,10 +7,12 @@ function [vec_out, toplevel] = mptVecCreateFromArray(arr, varargin)
 %  vec = petscVecCreateFromArray(arr, prefix)
 %     prefix: if present, set options of the vector from the options database.
 %
-%  SEE ALSO: mptVecToArray
+%  The vector must be deallocated by calling petscVecDestroy after use.
+%
+%  SEE ALSO: petscVecDestroy, mptVecToArray, mptOptionsInsert
 
 %#codegen -args {coder.typeof(0, [inf, 1])} mptVecCreateFromArray_2args -args
-%#codegen {coder.typeof(0, [inf, 1]), coder.typeof(char(0), [inf,1])}
+%#codegen {coder.typeof(0, [inf, 1]), coder.typeof(char(0), [1,inf])}
 
 if nargin<1
     error('At least one argument is required.');
@@ -23,13 +25,13 @@ if nargin==1
 else
     vec = petscVecCreate;
     if isempty(varargin{1}) || ~varargin{1}(end)
-        opts = varargin{1};
+        prefix = varargin{1};
     else
         % Null-terminate the string
-        opts = [varargin{1} char(0)];
+        prefix = [varargin{1} char(0)];
     end
 
-    petscVecSetOptionsPrefix(vec, opts);
+    petscVecSetOptionsPrefix(vec, prefix);
     petscVecSetFromOptions(vec);
     petscVecSetSizes(vec, n);
 end

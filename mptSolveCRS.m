@@ -50,7 +50,8 @@ function [x, flag, relres, iter, rv] = mptSolveCRS(varargin)
 %    solpack, x0, opts) can pass additional command-line options in a
 %    string to PETSc.
 %
-% See also: mptSolve, mptKSPSetup, mptKSPSolve, mptKSPCleanup
+% SEE ALSO: mptSolve, mptMatCreateAIJFromCRS, mptVecCreateFromArray,
+%           mptVecToArray, mptKSPSetup, mptKSPSolve, mptKSPCleanup
 
 %#codegen -args {}
 %#codegen mptSolveCRS_4args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),

@@ -55,9 +55,10 @@ function [flag,relres,iter] = mptSolve(A, b, x, solver, rtol, maxit, ...
 %    x0_handle, resvec_hdl, opts) can pass additional command-line options
 %    in a string to PETSc.
 %
-% See also: mptSolve_crs, mptKSPSetup, mptKSPSolve, mptKSPCleanup
+% SEE ALSO: mptSolveCRS, mptMatCreateAIJFromCRS, mptVecCreateFromArray,
+%           mptOptionsInsert, mptKSPSetup, mptKSPSolve, mptKSPCleanup
 
-% No need to compile this function as a top-level function.
+%This function is codegen compatbile, but no need to a top-level function
 %#codegen
 
 % Setup KSP
@@ -71,8 +72,7 @@ if nargin<9; x0 = PETSC_NULL_VEC; end
 if nargin<10; resvec = PETSC_NULL_VEC; end
 
 if nargin==11 && ~isempty(opts)
-    % Insert string and enforce error checking
-    [~, ~] = petscOptionsInsertString([opts, char(0)]);
+    mptOptionsInsert(opts);
 end
 
 ksp = mptKSPSetup(A, solver, pctype, solpack);

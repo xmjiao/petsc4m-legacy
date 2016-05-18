@@ -33,31 +33,43 @@ petscKSPSetOperators(t_ksp, Amat);
 
 if nargin>1
     if nargin>2
-        hasPC = ~petscIsNULL(pctype);
-        hasSolver = nargin>3 && ~petscIsNULL(solpack);
+        hasPC = ~ischar(pctype) || ~isempty(pctype);
+        hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack));
         
         if hasPC || hasSolver
             t_pc = petscKSPGetPC(t_ksp);
             
             if hasPC
-                if ischar(pctype) && pctype(end)~=0
-                    m2c_error('PC type must be a null-terminated string.');
+                if ischar(pctype) && pctype(end)~=char(0)
+                    % null-terminate the string if not terminated properly
+                    pctype0 = [pctype char(0)];
+                else
+                    pctype0 = pctype;
                 end
-                petscPCSetType(t_pc, pctype);
+                petscPCSetType(t_pc, pctype0);
             end
             
             if hasSolver
-                petscPCFactorSetMatSolverPackage(t_pc,solpack);
+                if ischar(solpack) && solpack(end)~=char(0)
+                    % null-terminate the string if not terminated properly
+                    solpack0 = [solpack char(0)];
+                else
+                    solpack0 = solpack;
+                end
+                petscPCFactorSetMatSolverPackage(t_pc,solpack0);
             end
         end
     end
     
     if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0
-        m2c_error('KSP type must be a null-terminated string.');
+        % null-terminate the string if not terminated properly
+        ksptype0 = [ksptype char(0)];
+    else
+        ksptype0 = ksptype;
     end
-    if ischar(ksptype) && ~isempty(ksptype) || ~ischar(ksptype)
+    if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0)
         % Set KSP Types
-        petscKSPSetType(t_ksp, ksptype);
+        petscKSPSetType(t_ksp, ksptype0);
     end
 end
 

@@ -9,7 +9,10 @@ addpath([pwd '/PC'])
 addpath([pwd '/util'])
 addpath([pwd '/sys'])
 addpath([pwd '/exe'])
-addpath([pwd '/mpi'])
+
+if ~exist('mpi_Init', 'file')
+    addpath([pwd '/mpi'])
+end
 
 if ~exist('m2c', 'file') && exist('../M2C', 'dir')
     % Starting from the current directory with M2C. Load M2C and compile.
