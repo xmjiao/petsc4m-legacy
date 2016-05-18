@@ -191,7 +191,7 @@ void mptKSPSetup_1arg_api(const mxArray ** prhs, const mxArray **plhs) {
     mptKSPSetup_1arg(&Amat, &ksp, toplevel);
 
     _timestamp = M2C_wtime() - _timestamp;
-    printf("Function mptKSPSetup_1arg completed in %g seconds.\n", _timestamp);
+    printf("Function mptKSPSetup completed in %g seconds.\n", _timestamp);
 
     mptKSPSetup_terminate();
 
@@ -284,7 +284,7 @@ void mptKSPSetup_2args_api(const mxArray ** prhs, const mxArray **plhs) {
     mptKSPSetup_2args(&Amat, &ksptype, &ksp, toplevel);
 
     _timestamp = M2C_wtime() - _timestamp;
-    printf("Function mptKSPSetup_2args completed in %g seconds.\n", _timestamp);
+    printf("Function mptKSPSetup completed in %g seconds.\n", _timestamp);
 
     mptKSPSetup_terminate();
 
@@ -383,7 +383,7 @@ void mptKSPSetup_3args_api(const mxArray ** prhs, const mxArray **plhs) {
     mptKSPSetup_3args(&Amat, &ksptype, &pctype, &ksp, toplevel);
 
     _timestamp = M2C_wtime() - _timestamp;
-    printf("Function mptKSPSetup_3args completed in %g seconds.\n", _timestamp);
+    printf("Function mptKSPSetup completed in %g seconds.\n", _timestamp);
 
     mptKSPSetup_terminate();
 

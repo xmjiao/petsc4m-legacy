@@ -1,6 +1,4 @@
-#include "petscKSPSetTolerances.h"
-#include "petscksp.h"
-#include "petscsys.h"
+#include "petscKSPGetTolerances.h"
 #include "petscsys.h"
 #include "petscksp.h"
 #include "m2c.h"
@@ -11,7 +9,7 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "KSPSetTolerances returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPGetTolerances returned error code %d\n",
             varargin_3);
 }
 
@@ -57,8 +55,8 @@ void emxInit_struct0_T(struct0_T *pStruct)
   emxInitStruct_struct0_T(pStruct);
 }
 
-void petscKSPSetTolerances(const struct0_T *ksp, double rtol, double abstol,
-  double dtol, int maxits, int *errCode, boolean_T *toplevel)
+void petscKSPGetTolerances(const struct0_T *ksp, double *rtol, double *abstol,
+  double *dtol, int *maxits, int *errCode, boolean_T *toplevel)
 {
   boolean_T p;
   boolean_T b_p;
@@ -133,7 +131,7 @@ void petscKSPSetTolerances(const struct0_T *ksp, double rtol, double abstol,
   }
 
   t_ksp = *(KSP*)(&data->data[0]);
-  *errCode = KSPSetTolerances(t_ksp, rtol, abstol, dtol, maxits);
+  *errCode = KSPGetTolerances(t_ksp, rtol, abstol, dtol, maxits);
   *toplevel = true;
   emxFree_uint8_T(&data);
   if (*errCode != 0) {
@@ -141,100 +139,10 @@ void petscKSPSetTolerances(const struct0_T *ksp, double rtol, double abstol,
   }
 }
 
-void petscKSPSetTolerances_2args(const struct0_T *ksp, double rtol, int *errCode,
-  boolean_T *toplevel)
-{
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  int exitg2;
-  int val;
-  boolean_T exitg1;
-  emxArray_char_T *b_ksp;
-  static const char cv1[3] = { 'K', 'S', 'P' };
-
-  emxArray_uint8_T *data;
-  KSP t_ksp;
-  int maxits;
-  p = false;
-  b_p = false;
-  k = 0;
-  do {
-    exitg2 = 0;
-    if (k < 2) {
-      val = ksp->type->size[k];
-      if (val != (k << 1) + 1) {
-        exitg2 = 1;
-      } else {
-        k++;
-      }
-    } else {
-      b_p = true;
-      exitg2 = 1;
-    }
-  } while (exitg2 == 0);
-
-  if (b_p && (!(ksp->type->size[1] == 0))) {
-    k = 0;
-    exitg1 = false;
-    while ((!exitg1) && (k < 3)) {
-      if (!(ksp->type->data[k] == cv1[k])) {
-        b_p = false;
-        exitg1 = true;
-      } else {
-        k++;
-      }
-    }
-  }
-
-  if (!b_p) {
-  } else {
-    p = true;
-  }
-
-  if (!p) {
-    emxInit_char_T(&b_ksp, 2);
-    val = b_ksp->size[0] * b_ksp->size[1];
-    b_ksp->size[0] = 1;
-    b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_ksp, val, (int)sizeof(char));
-    k = ksp->type->size[1];
-    for (val = 0; val < k; val++) {
-      b_ksp->data[b_ksp->size[0] * val] = ksp->type->data[ksp->type->size[0] *
-        val];
-    }
-
-    b_ksp->data[b_ksp->size[0] * ksp->type->size[1]] = '\x00';
-    m2c_error(b_ksp);
-    emxFree_char_T(&b_ksp);
-  }
-
-  emxInit_uint8_T(&data, 1);
-  val = data->size[0];
-  data->size[0] = ksp->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, val, (int)sizeof(unsigned char));
-  k = ksp->data->size[0];
-  for (val = 0; val < k; val++) {
-    data->data[val] = ksp->data->data[val];
-  }
-
-  t_ksp = *(KSP*)(&data->data[0]);
-  k = (PETSC_DEFAULT);
-  val = (PETSC_DEFAULT);
-  maxits = (PETSC_DEFAULT);
-  *errCode = KSPSetTolerances(t_ksp, rtol, (double)k, (double)val, maxits);
-  emxFree_uint8_T(&data);
-  if (*errCode != 0) {
-    b_m2c_error(*errCode);
-  }
-
-  *toplevel = true;
-}
-
-void petscKSPSetTolerances_initialize(void)
+void petscKSPGetTolerances_initialize(void)
 {
 }
 
-void petscKSPSetTolerances_terminate(void)
+void petscKSPGetTolerances_terminate(void)
 {
 }

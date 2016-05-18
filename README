@@ -43,17 +43,17 @@ The following is an example code:
    rng(100);
    A = sprand(100,100,0.3);
    A = A + eye(100, 'like', A);
-   [rowptr, colind, val] = crs_create(A); % This requires MSPACK
+   [rowptr, colind, val] = crs_matrix(A); % This requires MSPACK
    b = rand(100,1);
 
    % Solve using default KSP solver and preconditioner
    [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b);
 
    % Solve using GMRES with Jacobi preconditioner with default options
-   [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPGMRES, PETSC_DEFAULT, PETSC_DEFAULT, PETSC_PCJACOBI);
+   [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPGMRES, 0, int32(0), PETSC_PCJACOBI);
 
    % Solve using SuperLU (assuming SuperLU was installed)
-   [x,flag,relres,iter] = mptGMRES_crs(rowptr, colind, val, b, PETSC_KSPPREONLY, PETSC_DEFAULT, PETSC_DEFAULT, PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
+   [x,flag,relres,iter] = mptGMRES_crs(rowptr, colind, val, b, PETSC_KSPPREONLY, 0, int32(0), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
 
 When you start MATLAB with JVM enabled, mptSolveCRS will be compiled
 into a standalone executible, and data exchange with MATLAB is done

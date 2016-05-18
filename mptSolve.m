@@ -1,5 +1,5 @@
 function [flag,relres,iter] = mptSolve(A, b, x, solver, rtol, maxit, ...
-    pctype, solpack, x0, resvec, opts)
+    pctype, solpack, x0, opts)
 % Solves a linear system using a given solver in PETSc.
 %
 % Syntax:
@@ -11,8 +11,7 @@ function [flag,relres,iter] = mptSolve(A, b, x, solver, rtol, maxit, ...
 %    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype)
 %    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack)
 %    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack, x0_hdl)
-%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack, x0_hdl,
-%             resvec_hdl, opts)
+%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack, x0_hdl, opts)
 %
 %    [flag, reslres, iter] = mptSolve(A_hdl, b_hdl, x_hdl, ...)
 %
@@ -48,12 +47,7 @@ function [flag,relres,iter] = mptSolve(A, b, x, solver, rtol, maxit, ...
 %    be PETSC_NULL_VEC.
 %
 %    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack,
-%    x0_handle, resvec_hdl) also computes the residual vector and saves
-%    it into resvec. resvec_hdl can be PETSC_NULL_VEC.
-%
-%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack,
-%    x0_handle, resvec_hdl, opts) can pass additional command-line options
-%    in a string to PETSc.
+%    x0_handle, opts) can pass command-line options in a string to PETSc.
 %
 % SEE ALSO: mptSolveCRS, mptMatCreateAIJFromCRS, mptVecCreateFromArray,
 %           mptOptionsInsert, mptKSPSetup, mptKSPSolve, mptKSPCleanup
@@ -64,20 +58,19 @@ function [flag,relres,iter] = mptSolve(A, b, x, solver, rtol, maxit, ...
 % Setup KSP
 if nargin<3; x = b; end
 if nargin<4; solver = ''; end
-if nargin<5; rtol = double(PETSC_DEFAULT); end
-if nargin<6; maxit = PETSC_DEFAULT; end
+if nargin<5; rtol = 0; end
+if nargin<6; maxit = int32(0); end
 if nargin<7; pctype = ''; end
 if nargin<8; solpack = ''; end
 if nargin<9; x0 = PETSC_NULL_VEC; end
-if nargin<10; resvec = PETSC_NULL_VEC; end
 
-if nargin==11 && ~isempty(opts)
+if nargin==10 && ~isempty(opts)
     mptOptionsInsert(opts);
 end
 
 ksp = mptKSPSetup(A, solver, pctype, solpack);
 
-[flag,relres,iter] = mptKSPSolve(ksp, b, x, double(rtol), int32(maxit), x0, resvec);
+[flag,relres,iter] = mptKSPSolve(ksp, b, x, double(rtol), int32(maxit), x0);
 
 mptKSPCleanup(ksp);
 

@@ -1,4 +1,4 @@
-function [x, flag, relres, iter, rv] = mptSolveCRS(varargin)
+function [x, flag, relres, iter] = mptSolveCRS(varargin)
 % Solves a linear system using any PETSc solver for matrix in CRS format.
 %
 % Syntax:
@@ -11,13 +11,13 @@ function [x, flag, relres, iter, rv] = mptSolveCRS(varargin)
 %    mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0)
 %    mptSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit, pctype, solpack, x0, opts)
 %
-%    [x, flag, reslres, iter, resvec] = mptSolveCRS(Arows, Acols, Avals, b, ...)
+%    [x, flag, reslres, iter] = mptSolveCRS(Arows, Acols, Avals, b, ...)
 %
 %    A is a sparse matrix in CRS format. b, x and resvec are all regular
 %    vectors. Solver is a value of PETSC_KSP*. pctype is a value of
 %    PETSC_PC*, and solpack is a value of PETSC_MATSOLVER*.
 %
-%    For rtol, maxit, use PETSC_DEFAULT to use default values.
+%    For rtol, maxit, use 0 to use default values.
 %    For solver, pctype, solpack and opts, use empty string ('') to use default.
 %    For x0, use zeros(0, 1) to disable initial guess.
 %
@@ -73,17 +73,17 @@ function [x, flag, relres, iter, rv] = mptSolveCRS(varargin)
 %#codegen mptSolveCRS_11args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
 %#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType,
 %#codegen 0, int32(0), PetscPCType, PetscMatSolverPackage,
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(char(0), [1,inf])}
+%#codegen coder.typeof(0, [inf,1]), coder.typeof(char(0), [1, inf])}
 
 if nargin==0
-    x = zeros(0,1); flag=int32(-1); relres=realmax; iter=int32(0); rv=zeros(0,1);
+    x = zeros(0,1); flag=int32(-1); relres=realmax; iter=int32(0);
     return;
 end
     
 if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ...
         exist('run_mptSolveCRS_exe', 'file')
     % Is running in MATLAB and mex files are not available
-    [x, flag, relres, iter, rv] = run_mptSolveCRS_exe(varargin{:});
+    [x, flag, relres, iter] = run_mptSolveCRS_exe(varargin{:});
     return;
 elseif isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file')
     error('You must have built either the executible built when running in MATLAB.');
@@ -96,8 +96,8 @@ b = varargin{4};
 
 % Setup KSP
 if nargin<5; solver = ''; else solver = varargin{5}; end % Use default
-if nargin<6; rtol = PETSC_DEFAULT; else rtol = varargin{6}; end
-if nargin<7; maxit = PETSC_DEFAULT; else maxit = varargin{7}; end
+if nargin<6; rtol = 0; else rtol = varargin{6}; end
+if nargin<7; maxit = int32(0); else maxit = varargin{7}; end
 if nargin<8; pctype = ''; else pctype = varargin{8}; end
 if nargin<9; solpack = ''; else solpack = varargin{9}; end
 
@@ -115,16 +115,8 @@ end
 
 if nargin<11; opts = ''; else opts = varargin{11}; end
 
-if nargout==5
-    resVec = petscVecDuplicate(bVec);
-    [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ...
-        double(rtol), int32(maxit), pctype, solpack, x0Vec, resVec, opts);
-    rv = mptVecToArray(resVec);
-    petscVecDestroy(resVec);
-else
-    [flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ...
-        double(rtol), int32(maxit), pctype, solpack, PETSC_NULL_VEC, opts);
-end
+[flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ...
+    double(rtol), int32(maxit), pctype, solpack, x0Vec, opts);
 
 petscMatDestroy(AMat);
 petscVecDestroy(bVec);

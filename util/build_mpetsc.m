@@ -1,13 +1,6 @@
 function build_mpetsc(varargin)
 
-opts = [{'-petsc', '-g', '-q', '-exe', '-exedir', 'exe', ...
-    '-time', '{''mptKSPSetup'', ''mptKSPSolve''}'}, varargin{:}];
-
-%Compile top-level functions for CRS and time top-level KSP functions
-files = {'mptSolveCRS'};
-for i=1:length(files)
-    m2c(opts{:}, files{i});
-end
+build_mpetsc_essential(varargin{:});
 
 %Compile the most most expensive top-level KSP wrapper functions with timing
 opts = [{'-petsc', '-O3', '-time', '-mex', '-mexdir', 'mex'} varargin{:}];
@@ -24,27 +17,11 @@ for i=1:length(files)
     m2c(opts{:}, files{i});
 end
 
-%Compile utility functions into their own directory
-opts = [{'-petsc', '-O', '-mex'} varargin{:}];
-files = {'petscGetEnum.m', 'petscGetObject.m', 'petscGetString.m', ...
-    'petscSplitOwnership.m', 'petscInitialized.m', 'petscFinalized.m'};
-for i=1:length(files)
-    m2c(opts{:}, files{i});
-end
-
-%Compile utility functions into their own directory
-opts = [{'-petsc', '-O', '-mex'} varargin{:}];
-lines = grep_pattern('mpi/*.m', '\n%#codegen\s+-args');
-files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
-
-for i=1:length(files)
-    m2c(opts{:}, files{i}{1});
-end
-
 %Compile all other system-level and low-level functions with hidden mex files
 opts = [{'-petsc', '-O', '-q', '-mex', '-mexdir', '../mex'} varargin{:}];
 lines = [grep_pattern('sys/petscInitialize.m', '\n%#codegen\s+-args'), ...
     grep_pattern('sys/petscFinalize.m', '\n%#codegen\s+-args'), ...
+    grep_pattern('sys/petscSplitOwnership.m', '\n%#codegen\s+-args'), ...
     grep_pattern('sys/petsc*Options*.m', '\n%#codegen\s+-args'), ...
     grep_pattern('Mat/petsc*.m', '\n%#codegen\s+-args'), ...
     grep_pattern('Vec/petsc*.m', '\n%#codegen\s+-args'), ...
