@@ -1,6 +1,5 @@
 #include "petscGetString.h"
-#include "petscsys.h"
-#include "petscksp.h"
+#include "mpetsc.h"
 #include "m2c.h"
 
 #ifndef struct_emxArray_uint8_T

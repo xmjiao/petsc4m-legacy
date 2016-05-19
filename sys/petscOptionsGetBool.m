@@ -1,7 +1,7 @@
-function [value, found, errCode, toplevel] = petscOptionsGetBool(opts, pre, name)
+function [value, found, errCode, toplevel] = petscOptionsGetBool(pre, name)
 % Gets the integer value for a particular option in the database.
 %
-%   [value, found, errCode, toplevel] = petscOptionsGetBool(opts, pre, name)
+%   [value, found, errCode, toplevel] = petscOptionsGetBool(pre, name)
 %   obtains a Boolean value in the data base. The flag found is PETSC_TRUE
 %   if the attribute was found. The strings must be null-terminated.
 %
@@ -13,7 +13,7 @@ function [value, found, errCode, toplevel] = petscOptionsGetBool(opts, pre, name
 %        const char name[],PetscBook *ivalue,PetscBool  *found)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscOptionsGetBool.html
 
-%#codegen -args {PetscOptions, coder.typeof(char(0), [1,inf]), coder.typeof(char(0), [1,inf])}
+%#codegen -args {coder.typeof(char(0), [1,inf]), coder.typeof(char(0), [1,inf])}
 
 errCode = int32(-1);
 
@@ -31,7 +31,7 @@ if ~coder.target('MATLAB')
     b_value = coder.opaque('PetscBool');
     b_flag = coder.opaque('PetscBool');
     
-    errCode = coder.ceval('PetscOptionsGetBool', PetscOptions(opts), ...
+    errCode = coder.ceval('PetscOptionsGetBool', PETSC_NULL_OPTIONS, ...
         coder.rref(pre), coder.rref(name), coder.wref(b_value), coder.wref(b_flag));
     
     value = int32(0); %#ok<NASGU>

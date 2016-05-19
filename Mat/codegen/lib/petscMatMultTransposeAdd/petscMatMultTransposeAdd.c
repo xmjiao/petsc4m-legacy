@@ -1,6 +1,5 @@
 #include "petscMatMultTransposeAdd.h"
-#include "petscsys.h"
-#include "petscksp.h"
+#include "mpetsc.h"
 #include "m2c.h"
 
 static void b_m2c_error(const emxArray_char_T *varargin_3);

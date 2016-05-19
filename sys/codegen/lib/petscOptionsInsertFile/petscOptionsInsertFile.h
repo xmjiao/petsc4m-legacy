@@ -22,8 +22,8 @@ extern void emxDestroyArray_uint8_T(emxArray_uint8_T *emxArray);
 extern void emxDestroy_struct0_T(struct0_T emxArray);
 extern void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions);
 extern void emxInit_struct0_T(struct0_T *pStruct);
-extern void petscOptionsInsertFile(const struct0_T *comm, const struct0_T *opts,
-  const emxArray_char_T *file, int req, int *errCode, boolean_T *toplevel);
+extern void petscOptionsInsertFile(const struct0_T *comm, const emxArray_char_T *
+  file, int req, int *errCode, boolean_T *toplevel);
 extern void petscOptionsInsertFile_initialize(void);
 extern void petscOptionsInsertFile_terminate(void);
 

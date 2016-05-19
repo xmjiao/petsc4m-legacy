@@ -1,6 +1,5 @@
 #include "petscMatCreateSeqAIJ.h"
-#include "petscsys.h"
-#include "petscksp.h"
+#include "mpetsc.h"
 #include "m2c.h"
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct);

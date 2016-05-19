@@ -1,6 +1,5 @@
 #include "petscInitialize.h"
-#include "petscsys.h"
-#include "petscksp.h"
+#include "mpetsc.h"
 #include "m2c.h"
 
 static void m2c_error(int varargin_3);

@@ -1,8 +1,8 @@
-function [errCode, toplevel] = petscOptionsSetValue(opts, iname, value)
+function [errCode, toplevel] = petscOptionsSetValue(iname, value)
 % Sets an option name-value pair in the options database, overriding
 % whatever is already present.
 %
-%   errCode = petscOptionsSetValue(opts, iname, value) sets the option
+%   errCode = petscOptionsSetValue(iname, value) sets the option
 %   iname in the option database to a string value. The iname must start
 %   with '-'. The strings must be null-terminated.
 %
@@ -15,7 +15,7 @@ function [errCode, toplevel] = petscOptionsSetValue(opts, iname, value)
 %   PetscErrorCode OptionsSetValue(Mat opts,MatOption op,PetscBool flg)
 % http://www.mcs.anl.gov/petsc/petsc-3.7/docs/manualpages/Sys/PetscOptionsSetValue.html
 
-%#codegen -args {PetscOptions, coder.typeof(char(0), [1,inf]), coder.typeof(char(0), [1,inf])}
+%#codegen -args {coder.typeof(char(0), [1,inf]), coder.typeof(char(0), [1,inf])}
 
 errCode = int32(-1);
 
@@ -30,7 +30,7 @@ if ~coder.target('MATLAB')
             'Argument value must be a null-terminated string.')
     end
     
-    errCode = coder.ceval('PetscOptionsSetValue', PetscOptions(opts), ...
+    errCode = coder.ceval('PetscOptionsSetValue', PETSC_NULL_OPTIONS, ...
         coder.rref(iname), coder.rref(value));
     
     toplevel = nargout>1;

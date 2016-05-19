@@ -1,7 +1,7 @@
-function [str, found, errCode, toplevel] = petscOptionsGetString(opts, pre, name)
+function [str, found, errCode, toplevel] = petscOptionsGetString(pre, name)
 % Gets the string value for a particular option in the database. 
 %
-%   [str, found, errCode, toplevel] = petscOptionsGetString(opts, pre, name)
+%   [str, found, errCode, toplevel] = petscOptionsGetString(pre, name)
 %   obtains a string in the data base. The flag found is PETSC_TRUE
 %   if the attribute was found. The strings must be null-terminated.
 %
@@ -13,7 +13,7 @@ function [str, found, errCode, toplevel] = petscOptionsGetString(opts, pre, name
 
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscOptionsGetString.html
 
-%#codegen -args {PetscOptions, coder.typeof(char(0), [1,inf]), coder.typeof(char(0), [1,inf])}
+%#codegen -args {coder.typeof(char(0), [1,inf]), coder.typeof(char(0), [1,inf])}
 
 errCode = int32(-1);
 
@@ -31,7 +31,7 @@ if ~coder.target('MATLAB')
     b_flag = coder.opaque('PetscBool');
     
     str0 = char(zeros(1, 21));
-    errCode = coder.ceval('PetscOptionsGetString', PetscOptions(opts), ...
+    errCode = coder.ceval('PetscOptionsGetString', PETSC_NULL_OPTIONS, ...
         coder.rref(pre), coder.rref(name), coder.wref(str0), int32(20), coder.wref(b_flag));
 
     found = int32(0); %#ok<NASGU>

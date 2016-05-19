@@ -1,6 +1,6 @@
-function [errCode, toplevel] = petscOptionsInsertFile(comm, opts, file, req)
+function [errCode, toplevel] = petscOptionsInsertFile(comm, file, req)
 %Inserts options into the database from a file.
-%   errCode = petscOptionsInsertFile(comm, opts, file, req)
+%   errCode = petscOptionsInsertFile(comm, file, req)
 %
 % SEE ALSO: petscOptionsInsertString
 %
@@ -8,7 +8,7 @@ function [errCode, toplevel] = petscOptionsInsertFile(comm, opts, file, req)
 %   PetscErrorCode  PetscOptionsInsertFile(MPI_Comm comm,PetscOptions options,const char file[],PetscBool require)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscOptionsInsertFile.html
 
-%#codegen -args {MPI_Comm, PetscOptions, coder.typeof(char(0), [1, inf]), int32(0)}
+%#codegen -args {MPI_Comm, coder.typeof(char(0), [1, inf]), int32(0)}
 
 errCode = int32(-1);
 
@@ -20,7 +20,7 @@ if ~coder.target('MATLAB')
     end
     
     errCode = coder.ceval('PetscOptionsInsertFile', MPI_Comm(comm), ...
-        PetscOptions(opts), file, req);
+        PETSC_NULL_OPTIONS, file, req);
     
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsInsertFile returned error code %d\n', errCode)

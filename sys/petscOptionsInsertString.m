@@ -23,8 +23,7 @@ if ~coder.target('MATLAB')
             'The argument must be a null-terminated string.')
     end
 
-    options = coder.opaque('PetscOptions', 'NULL');
-    errCode = coder.ceval('PetscOptionsInsertString', options, coder.rref(in_str));
+    errCode = coder.ceval('PetscOptionsInsertString', PETSC_NULL_OPTIONS, coder.rref(in_str));
 
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsInsertString returned error code %d\n', errCode)

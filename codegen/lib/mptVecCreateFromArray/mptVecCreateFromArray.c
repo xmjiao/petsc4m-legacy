@@ -1,8 +1,7 @@
 #include "mptVecCreateFromArray.h"
 #include "petscksp.h"
 #include "petscsys.h"
-#include "petscsys.h"
-#include "petscksp.h"
+#include "mpetsc.h"
 #include "m2c.h"
 
 #ifndef struct_emxArray_int32_T

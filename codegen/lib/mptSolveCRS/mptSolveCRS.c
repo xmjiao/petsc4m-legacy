@@ -15,8 +15,7 @@
 #include "petscsys.h"
 
 /* Custom Source Code */
-#include "petscsys.h"
-#include "petscksp.h"
+#include "mpetsc.h"
 #include "m2c.h"
 
 /* Type Definitions */
@@ -1975,12 +1974,13 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -1995,16 +1995,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:45' if coder.target('MATLAB') */
-    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:53' switch name */
-    /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
-    /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-    /* 'petscGetEnum:178' coder.inline('always'); */
-    /* 'petscGetEnum:180' val = int32(intmin); */
-    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:54' switch name */
+    /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
+    /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+    /* 'petscGetEnum:183' coder.inline('always'); */
+    /* 'petscGetEnum:185' val = int32(intmin); */
+    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
     val = (PETSC_DEFAULT);
     rtol = val;
   }
@@ -2035,12 +2035,13 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2055,16 +2056,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:45' if coder.target('MATLAB') */
-    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:53' switch name */
-    /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
-    /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-    /* 'petscGetEnum:178' coder.inline('always'); */
-    /* 'petscGetEnum:180' val = int32(intmin); */
-    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:54' switch name */
+    /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
+    /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+    /* 'petscGetEnum:183' coder.inline('always'); */
+    /* 'petscGetEnum:185' val = int32(intmin); */
+    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
     maxits = (PETSC_DEFAULT);
   }
 
@@ -2093,12 +2094,13 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2113,16 +2115,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:45' if coder.target('MATLAB') */
-  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:53' switch name */
-  /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
-  /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-  /* 'petscGetEnum:178' coder.inline('always'); */
-  /* 'petscGetEnum:180' val = int32(intmin); */
-  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:54' switch name */
+  /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
+  /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+  /* 'petscGetEnum:183' coder.inline('always'); */
+  /* 'petscGetEnum:185' val = int32(intmin); */
+  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
   val = (PETSC_DEFAULT);
 
   /*  Obtain PETSC constant PETSC_DEFAULT */
@@ -2148,12 +2150,13 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2168,16 +2171,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:45' if coder.target('MATLAB') */
-  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:53' switch name */
-  /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
-  /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-  /* 'petscGetEnum:178' coder.inline('always'); */
-  /* 'petscGetEnum:180' val = int32(intmin); */
-  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:54' switch name */
+  /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
+  /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+  /* 'petscGetEnum:183' coder.inline('always'); */
+  /* 'petscGetEnum:185' val = int32(intmin); */
+  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
   b_val = (PETSC_DEFAULT);
 
   /* Sets the iteration tolerances used by the default KSP convergence testers. */
@@ -2361,12 +2364,13 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2381,16 +2385,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:45' if coder.target('MATLAB') */
-    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:53' switch name */
-    /* 'petscGetEnum:54' case 'PETSC_TRUE' */
-    /* 'petscGetEnum:55' [val, toplevel] = get_val('PetscBool', 'PETSC_TRUE', nargin>1); */
-    /* 'petscGetEnum:178' coder.inline('always'); */
-    /* 'petscGetEnum:180' val = int32(intmin); */
-    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:54' switch name */
+    /* 'petscGetEnum:55' case 'PETSC_TRUE' */
+    /* 'petscGetEnum:56' [val, toplevel] = get_val('PetscBool', 'PETSC_TRUE', nargin>1); */
+    /* 'petscGetEnum:183' coder.inline('always'); */
+    /* 'petscGetEnum:185' val = int32(intmin); */
+    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
     val = (PETSC_TRUE);
 
     /* Tells the iterative solver that the initial guess is nonzero; otherwise  */
@@ -2476,12 +2480,13 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -2496,16 +2501,16 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:45' if coder.target('MATLAB') */
-    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:53' switch name */
-    /* 'petscGetEnum:56' case 'PETSC_FALSE' */
-    /* 'petscGetEnum:57' [val, toplevel] = get_val('PetscBool', 'PETSC_FALSE', nargin>1); */
-    /* 'petscGetEnum:178' coder.inline('always'); */
-    /* 'petscGetEnum:180' val = int32(intmin); */
-    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:54' switch name */
+    /* 'petscGetEnum:57' case 'PETSC_FALSE' */
+    /* 'petscGetEnum:58' [val, toplevel] = get_val('PetscBool', 'PETSC_FALSE', nargin>1); */
+    /* 'petscGetEnum:183' coder.inline('always'); */
+    /* 'petscGetEnum:185' val = int32(intmin); */
+    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
     val = (PETSC_FALSE);
 
     /* Tells the iterative solver that the initial guess is nonzero; otherwise  */
@@ -3248,12 +3253,13 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -3268,16 +3274,16 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:45' if coder.target('MATLAB') */
-  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:53' switch name */
-  /* 'petscGetEnum:166' case 'PETSC_DEFAULT' */
-  /* 'petscGetEnum:167' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
-  /* 'petscGetEnum:178' coder.inline('always'); */
-  /* 'petscGetEnum:180' val = int32(intmin); */
-  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:54' switch name */
+  /* 'petscGetEnum:171' case 'PETSC_DEFAULT' */
+  /* 'petscGetEnum:172' [val, toplevel] = get_val('PetscInt', 'PETSC_DEFAULT', nargin>1); */
+  /* 'petscGetEnum:183' coder.inline('always'); */
+  /* 'petscGetEnum:185' val = int32(intmin); */
+  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
   b_val = (PETSC_DEFAULT);
 
   /* Creates a sparse matrix in AIJ (compressed row) format. */
@@ -3489,12 +3495,13 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
     /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
     /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+    /*       MAT_SUBSET_OFF_PROC_ENTRIES */
     /*  */
     /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
     /*  */
     /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
     /*  */
-    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+    /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
     /*  */
     /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
     /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -3509,16 +3516,16 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:45' if coder.target('MATLAB') */
-    /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-    /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+    /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
-    /* 'petscGetEnum:53' switch name */
-    /* 'petscGetEnum:78' case 'INSERT_VALUES' */
-    /* 'petscGetEnum:79' [val, toplevel] = get_val('InsertMode', 'INSERT_VALUES', nargin>1); */
-    /* 'petscGetEnum:178' coder.inline('always'); */
-    /* 'petscGetEnum:180' val = int32(intmin); */
-    /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+    /* 'petscGetEnum:54' switch name */
+    /* 'petscGetEnum:81' case 'INSERT_VALUES' */
+    /* 'petscGetEnum:82' [val, toplevel] = get_val('InsertMode', 'INSERT_VALUES', nargin>1); */
+    /* 'petscGetEnum:183' coder.inline('always'); */
+    /* 'petscGetEnum:185' val = int32(intmin); */
+    /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
     iroa = (INSERT_VALUES);
 
     /* 'petscMatSetValues:35' if ~coder.target('MATLAB') */
@@ -3636,12 +3643,13 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -3656,16 +3664,16 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:45' if coder.target('MATLAB') */
-  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:53' switch name */
-  /* 'petscGetEnum:92' case 'MAT_FINAL_ASSEMBLY' */
-  /* 'petscGetEnum:93' [val, toplevel] = get_val('MatAssemblyType', 'MAT_FINAL_ASSEMBLY', nargin>1); */
-  /* 'petscGetEnum:178' coder.inline('always'); */
-  /* 'petscGetEnum:180' val = int32(intmin); */
-  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:54' switch name */
+  /* 'petscGetEnum:95' case 'MAT_FINAL_ASSEMBLY' */
+  /* 'petscGetEnum:96' [val, toplevel] = get_val('MatAssemblyType', 'MAT_FINAL_ASSEMBLY', nargin>1); */
+  /* 'petscGetEnum:183' coder.inline('always'); */
+  /* 'petscGetEnum:185' val = int32(intmin); */
+  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
   type = (MAT_FINAL_ASSEMBLY);
 
   /* 'petscMatAssemblyBegin:22' errCode = coder.ceval('MatAssemblyBegin',t_mat,type); */
@@ -3750,12 +3758,13 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -3770,16 +3779,16 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:45' if coder.target('MATLAB') */
-  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:53' switch name */
-  /* 'petscGetEnum:92' case 'MAT_FINAL_ASSEMBLY' */
-  /* 'petscGetEnum:93' [val, toplevel] = get_val('MatAssemblyType', 'MAT_FINAL_ASSEMBLY', nargin>1); */
-  /* 'petscGetEnum:178' coder.inline('always'); */
-  /* 'petscGetEnum:180' val = int32(intmin); */
-  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:54' switch name */
+  /* 'petscGetEnum:95' case 'MAT_FINAL_ASSEMBLY' */
+  /* 'petscGetEnum:96' [val, toplevel] = get_val('MatAssemblyType', 'MAT_FINAL_ASSEMBLY', nargin>1); */
+  /* 'petscGetEnum:183' coder.inline('always'); */
+  /* 'petscGetEnum:185' val = int32(intmin); */
+  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
   type = (MAT_FINAL_ASSEMBLY);
 
   /* 'petscMatAssemblyEnd:22' errCode = coder.ceval('MatAssemblyEnd', t_mat, type); */
@@ -4727,12 +4736,13 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*       MAT_GETROW_UPPERTRIANGULAR, MAT_SPD, */
   /*       MAT_NO_OFF_PROC_ZERO_ROWS, MAT_NO_OFF_PROC_ENTRIES, */
   /*       MAT_NEW_NONZERO_LOCATIONS, MAT_NEW_NONZERO_ALLOCATION_ERR, */
+  /*       MAT_SUBSET_OFF_PROC_ENTRIES */
   /*  */
   /*  MatStructure: DIFFERENT_NONZERO_PATTERN, SUBSET_NONZERO_PATTERN, SAME_NONZERO_PATTERN */
   /*  */
   /*  MatDuplicateOption: MAT_DO_NOT_COPY_VALUES,MAT_COPY_VALUES,MAT_SHARE_NONZERO_PATTERN */
   /*  */
-  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX */
+  /*  MatReuse: MAT_INITIAL_MATRIX,MAT_REUSE_MATRIX,MAT_IGNORE_MATRIX,MAT_INPLACE_MATRIX */
   /*  */
   /*  InsertMode: INSERT_VALUES, ADD_VALUES, MAX_VALUES, */
   /*       INSERT_ALL_VALUES, ADD_ALL_VALUES, INSERT_BC_VALUES, ADD_BC_VALUES */
@@ -4747,16 +4757,16 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:45' if coder.target('MATLAB') */
-  /* 'petscGetEnum:49' coder.cinclude('petscsys.h'); */
-  /* 'petscGetEnum:50' coder.cinclude('petscksp.h'); */
+  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
+  /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
-  /* 'petscGetEnum:53' switch name */
-  /* 'petscGetEnum:78' case 'INSERT_VALUES' */
-  /* 'petscGetEnum:79' [val, toplevel] = get_val('InsertMode', 'INSERT_VALUES', nargin>1); */
-  /* 'petscGetEnum:178' coder.inline('always'); */
-  /* 'petscGetEnum:180' val = int32(intmin); */
-  /* 'petscGetEnum:181' val = coder.ceval(' ', coder.opaque(type, name)); */
+  /* 'petscGetEnum:54' switch name */
+  /* 'petscGetEnum:81' case 'INSERT_VALUES' */
+  /* 'petscGetEnum:82' [val, toplevel] = get_val('InsertMode', 'INSERT_VALUES', nargin>1); */
+  /* 'petscGetEnum:183' coder.inline('always'); */
+  /* 'petscGetEnum:185' val = int32(intmin); */
+  /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
   iroa = (INSERT_VALUES);
 
   /* 'petscVecSetValues:32' t_vec = PetscVec(vec); */
@@ -6569,14 +6579,31 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
       jb_m2c_error();
     }
 
-    /* 'petscOptionsInsertString:26' options = coder.opaque('PetscOptions', 'NULL'); */
-    /* 'petscOptionsInsertString:27' errCode = coder.ceval('PetscOptionsInsertString', options, coder.rref(in_str)); */
+    /* 'petscOptionsInsertString:26' errCode = coder.ceval('PetscOptionsInsertString', PETSC_NULL_OPTIONS, coder.rref(in_str)); */
+    /*  Obtain PETSC constant NULL of type PetscOptions */
+    /* 'PETSC_NULL_OPTIONS:4' coder.inline('always'); */
+    /* 'PETSC_NULL_OPTIONS:6' obj = petscGetObject('PETSC_NULL_OPTIONS'); */
+    /* petscGetObject Obtain an opaque object in PETSC */
+    /*  */
+    /*     obj = petscGetObject(name) */
+    /*  */
+    /* The supported names include: */
+    /*  */
+    /*  MPI_Comm: PETSC_COMM_SELF, PETSC_COMM_WORLD, MPI_COMM_SELF, MPI_COMM_WORLD */
+    /*  */
+    /*  Other: */
+    /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
+    /*      PETSC_NULL_INT, PETSC_NULL_REAL */
+    /* 'petscGetObject:16' if coder.target('MATLAB') */
+    /* 'petscGetObject:20' switch name */
+    /* 'petscGetObject:31' case 'PETSC_NULL_OPTIONS' */
+    /* 'petscGetObject:32' [obj, toplevel] = get_obj('PetscOptions', 'NULL', nargout>1); */
     errCode = PetscOptionsInsertString(NULL, &b_opts->data[0]);
 
-    /* 'petscOptionsInsertString:29' if errCode && (toplevel || m2c_debug) */
+    /* 'petscOptionsInsertString:28' if errCode && (toplevel || m2c_debug) */
     emxFree_char_T(&b_opts);
     if (errCode != 0) {
-      /* 'petscOptionsInsertString:30' m2c_error('petsc:RuntimeError', 'PetscOptionsInsertString returned error code %d\n', errCode) */
+      /* 'petscOptionsInsertString:29' m2c_error('petsc:RuntimeError', 'PetscOptionsInsertString returned error code %d\n', errCode) */
       kb_m2c_error(errCode);
     }
 

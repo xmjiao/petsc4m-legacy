@@ -9,7 +9,8 @@ function [opts, errCode, toplevel] = petscOptionsCreate
 %   PetscErrorCode  PetscOptionsCreate(PetscOptions *options)
 % http://www.mcs.anl.gov/petsc/petsc-dev/docs/manualpages/Sys/PetscOptionsCreate.html
 
-%#codegen -args {}
+%Not supported. Skip compilation.
+%#codegen
 
 errCode = int32(-1);
 

@@ -1,8 +1,8 @@
-function [errCode, toplevel] = petscOptionsSetReal(opts, iname, value)
+function [errCode, toplevel] = petscOptionsSetReal(iname, value)
 % Sets an option name-value pair in the options database, overriding
 % whatever is already present.
 %
-%   errCode = petscOptionsSetReal(opts, iname, value) sets the option
+%   errCode = petscOptionsSetReal(iname, value) sets the option
 %   iname in the option database to the given real value. The iname must start
 %   with '-', and must be null-terminated.
 %
@@ -12,7 +12,7 @@ function [errCode, toplevel] = petscOptionsSetReal(opts, iname, value)
 %
 % SEE ALSO: petscOptionsSetInt, petscOptionsSetValue, petscOptionsGetReal
 
-%#codegen -args {PetscOptions, coder.typeof(char(0), [1,inf]), 0}
+%#codegen -args {coder.typeof(char(0), [1,inf]), 0}
 
 errCode = int32(-1);
 
@@ -24,7 +24,7 @@ if ~coder.target('MATLAB')
     end
     
     str = m2c_num2str(value);
-    errCode = coder.ceval('PetscOptionsSetValue', PetscOptions(opts), ...
+    errCode = coder.ceval('PetscOptionsSetValue', PETSC_NULL_OPTIONS, ...
         coder.rref(iname), coder.rref(str));
     
     if errCode && (toplevel || m2c_debug)

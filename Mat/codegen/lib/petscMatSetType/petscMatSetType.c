@@ -1,6 +1,5 @@
 #include "petscMatSetType.h"
-#include "petscsys.h"
-#include "petscksp.h"
+#include "mpetsc.h"
 #include "m2c.h"
 
 static void b_m2c_error(int varargin_3);
