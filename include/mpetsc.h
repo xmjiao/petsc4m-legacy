@@ -37,7 +37,7 @@
 #define PetscOptionsInsertString(arg1, arg2)   PetscOptionsInsertString(arg2)
 #define PetscOptionsInsertFile(arg1, arg2, arg3 , arg4)   PetscOptionsInsertFile(arg1, arg3, arg4)
 
-#define PetscOptionsSetValue(arg1, arg2, arg3)   PetscOptionsInsertString(arg2, arg3)
+#define PetscOptionsSetValue(arg1, arg2, arg3)   PetscOptionsSetValue(arg2, arg3)
 
 #define PetscOptionsGetBool(arg1, arg2, arg3 , arg4, arg5)  PetscOptionsGetBool(arg2, arg3, arg4, arg5)
 #define PetscOptionsGetInt(arg1, arg2, arg3 , arg4, arg5)  PetscOptionsGetInt(arg2, arg3, arg4, arg5)
