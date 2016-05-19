@@ -6,10 +6,10 @@ A = A + eye(100, 'like', A);
 b = rand(100,1);
 
 % Solve using default KSP solver and preconditioner
-[x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b);
+[x,flag,relres,iter,times] = mptSolveCRS(rowptr, colind, val, b);
 
 % Solve using GMRES with Jacobi preconditioner with default options
-[x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPGMRES, 0, int32(0), PETSC_PCJACOBI);
+[x,flag,relres,iter,times] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPGMRES, 0, int32(0), PETSC_PCJACOBI);
 
 % Solve using SuperLU (assuming SuperLU was installed)
-[x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPPREONLY, 0, int32(0), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
+[x,flag,relres,iter,times] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPPREONLY, 0, int32(0), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);

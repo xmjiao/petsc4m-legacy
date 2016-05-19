@@ -1,4 +1,4 @@
-function [x, flag, relres, iter] = mptSolveCRS(varargin)
+function [x, flag, relres, iter, times] = mptSolveCRS(varargin)
 % Solves a linear system using any PETSc solver for matrix in CRS format.
 %
 % Syntax:
@@ -22,7 +22,7 @@ function [x, flag, relres, iter] = mptSolveCRS(varargin)
 %    For x0, use zeros(0, 1) to disable initial guess.
 %
 %    When times is given, it returns a 2-vector contaning the times spent
-%    in setup and in solve.
+%    in setup and in solve separately.
 %
 % Description:
 %    mptSolveCRS(Arows, Acols, Avals, b) solves the linear system without
@@ -79,14 +79,15 @@ function [x, flag, relres, iter] = mptSolveCRS(varargin)
 %#codegen coder.typeof(0, [inf,1]), coder.typeof(char(0), [1, inf])}
 
 if nargin==0
-    x = zeros(0,1); flag=int32(-1); relres=realmax; iter=int32(0);
+    x = zeros(0,1); flag=int32(-1); relres=realmax; iter=int32(0); times=[0;0];
     return;
 end
     
 if isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file') && ...
         exist('run_mptSolveCRS_exe', 'file')
     % Is running in MATLAB and mex files are not available
-    [x, flag, relres, iter] = run_mptSolveCRS_exe(varargin{:});
+    [x, flag, relres, iter, times] = run_mptSolveCRS_exe(varargin{:});
+    fprintf('Solver setup took %g seconds and solving time took %g seconds\n', times(1), times(2));
     return;
 elseif isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file')
     error('You must have built either the executible built when running in MATLAB.');
@@ -118,7 +119,7 @@ end
 
 if nargin<11; opts = ''; else opts = varargin{11}; end
 
-[flag,relres,iter] = mptSolve(AMat, bVec, xVec, solver, ...
+[flag,relres,iter, times] = mptSolve(AMat, bVec, xVec, solver, ...
     double(rtol), int32(maxit), pctype, solpack, x0Vec, opts);
 
 petscMatDestroy(AMat);

@@ -3,7 +3,7 @@ function build_mpetsc(varargin)
 build_mpetsc_essential(varargin{:});
 
 %Compile the most most expensive top-level KSP wrapper functions with timing
-opts = [{'-petsc', '-O3', '-time', '-mex', '-mexdir', 'mex'} varargin{:}];
+opts = [{'-petsc', '-O3', '-mex', '-mexdir', 'mex'} varargin{:}];
 files = {'mptKSPSetup', 'mptKSPSolve'};
 for i=1:length(files)
     m2c(opts{:}, files{i});

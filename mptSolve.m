@@ -1,4 +1,4 @@
-function [flag,relres,iter] = mptSolve(A, b, x, solver, rtol, maxit, ...
+function [flag,relres,iter, times] = mptSolve(A, b, x, solver, rtol, maxit, ...
     pctype, solpack, x0, opts)
 % Solves a linear system using a given solver in PETSc.
 %
@@ -68,9 +68,13 @@ if nargin==10 && ~isempty(opts)
     mptOptionsInsert(opts);
 end
 
-ksp = mptKSPSetup(A, solver, pctype, solpack);
+[ksp, time_setup] = mptKSPSetup(A, solver, pctype, solpack);
 
-[flag,relres,iter] = mptKSPSolve(ksp, b, x, double(rtol), int32(maxit), x0);
+[flag,relres,iter, time_solve] = mptKSPSolve(ksp, b, x, double(rtol), int32(maxit), x0);
+
+if nargout>3
+    times = [time_setup; time_solve];
+end
 
 mptKSPCleanup(ksp);
 

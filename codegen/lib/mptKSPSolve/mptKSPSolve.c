@@ -1149,22 +1149,24 @@ void emxInit_struct0_T(struct0_T *pStruct)
 
 void mptKSPSolve(const struct0_T *ksp, const struct0_T *b, const struct0_T *x,
                  double rtol, int maxits, const struct0_T *x0, int *flag, double
-                 *relres, int *iter)
+                 *relres, int *iter, double *time)
 {
   int ix;
   int val;
   boolean_T y;
   boolean_T exitg5;
   boolean_T p;
+  double t;
   int exitg4;
+  double b_t;
   double b_rtol;
   double abstol;
   double dtol;
   int b_maxits;
   PC pc;
+  boolean_T exitg3;
   PCType t_type;
   int errCode;
-  boolean_T exitg3;
   emxArray_char_T *b_x0;
   static const char cv0[3] = { 'V', 'e', 'c' };
 
@@ -1339,7 +1341,10 @@ void mptKSPSolve(const struct0_T *ksp, const struct0_T *b, const struct0_T *x,
     petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, ix);
   }
 
+  t = M2C_wtime();
   petscKSPSolve(ksp->data, ksp->type, b->data, b->type, x->data, x->type);
+  b_t = M2C_wtime();
+  *time = b_t - t;
   *flag = petscKSPGetConvergedReason(ksp->data, ksp->type);
   *relres = petscKSPGetResidualNorm(ksp->data, ksp->type);
   *iter = petscKSPGetIterationNumber(ksp->data, ksp->type);
@@ -1363,9 +1368,10 @@ void mptKSPSolve(const struct0_T *ksp, const struct0_T *b, const struct0_T *x,
 }
 
 void mptKSPSolve_2args(const struct0_T *ksp, const struct0_T *b, int *flag,
-  double *relres, int *iter)
+  double *relres, int *iter, double *time)
 {
   int k;
+  double t;
   boolean_T p;
   boolean_T b_p;
   int exitg4;
@@ -1383,6 +1389,7 @@ void mptKSPSolve_2args(const struct0_T *ksp, const struct0_T *b, int *flag,
 
   Vec t_b;
   int errCode;
+  double b_t;
   double rtol;
   double abstol;
   double dtol;
@@ -1391,6 +1398,7 @@ void mptKSPSolve_2args(const struct0_T *ksp, const struct0_T *b, int *flag,
   PCType t_type;
   k = (PETSC_FALSE);
   petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, k);
+  t = M2C_wtime();
   p = false;
   b_p = false;
   k = 0;
@@ -1524,6 +1532,7 @@ void mptKSPSolve_2args(const struct0_T *ksp, const struct0_T *b, int *flag,
     }
   }
 
+  b_t = M2C_wtime();
   *flag = petscKSPGetConvergedReason(ksp->data, ksp->type);
   *relres = petscKSPGetResidualNorm(ksp->data, ksp->type);
   *iter = petscKSPGetIterationNumber(ksp->data, ksp->type);
@@ -1544,12 +1553,16 @@ void mptKSPSolve_2args(const struct0_T *ksp, const struct0_T *b, int *flag,
     d_m2c_printf(maxits, dtol);
     e_m2c_printf();
   }
+
+  *time = b_t - t;
 }
 
 void mptKSPSolve_3args(const struct0_T *ksp, const struct0_T *b, const struct0_T
-  *x, int *flag, double *relres, int *iter)
+  *x, int *flag, double *relres, int *iter, double *time)
 {
   int val;
+  double t;
+  double b_t;
   double rtol;
   double abstol;
   double dtol;
@@ -1559,7 +1572,9 @@ void mptKSPSolve_3args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   int errCode;
   val = (PETSC_FALSE);
   petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, val);
+  t = M2C_wtime();
   petscKSPSolve(ksp->data, ksp->type, b->data, b->type, x->data, x->type);
+  b_t = M2C_wtime();
   *flag = petscKSPGetConvergedReason(ksp->data, ksp->type);
   *relres = petscKSPGetResidualNorm(ksp->data, ksp->type);
   *iter = petscKSPGetIterationNumber(ksp->data, ksp->type);
@@ -1580,15 +1595,19 @@ void mptKSPSolve_3args(const struct0_T *ksp, const struct0_T *b, const struct0_T
     d_m2c_printf(maxits, dtol);
     e_m2c_printf();
   }
+
+  *time = b_t - t;
 }
 
 void mptKSPSolve_4args(const struct0_T *ksp, const struct0_T *b, const struct0_T
-  *x, double rtol, int *flag, double *relres, int *iter)
+  *x, double rtol, int *flag, double *relres, int *iter, double *time)
 {
   double b_rtol;
   int val;
   int maxits;
   int b_val;
+  double t;
+  double b_t;
   double abstol;
   double dtol;
   PC pc;
@@ -1606,7 +1625,9 @@ void mptKSPSolve_4args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   petscKSPSetTolerances(ksp->data, ksp->type, b_rtol, val, b_val, maxits);
   val = (PETSC_FALSE);
   petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, val);
+  t = M2C_wtime();
   petscKSPSolve(ksp->data, ksp->type, b->data, b->type, x->data, x->type);
+  b_t = M2C_wtime();
   *flag = petscKSPGetConvergedReason(ksp->data, ksp->type);
   *relres = petscKSPGetResidualNorm(ksp->data, ksp->type);
   *iter = petscKSPGetIterationNumber(ksp->data, ksp->type);
@@ -1627,15 +1648,20 @@ void mptKSPSolve_4args(const struct0_T *ksp, const struct0_T *b, const struct0_T
     d_m2c_printf(maxits, dtol);
     e_m2c_printf();
   }
+
+  *time = b_t - t;
 }
 
 void mptKSPSolve_5args(const struct0_T *ksp, const struct0_T *b, const struct0_T
-  *x, double rtol, int maxiter, int *flag, double *relres, int *iter)
+  *x, double rtol, int maxiter, int *flag, double *relres, int *iter, double
+  *time)
 {
   double b_rtol;
   int maxits;
   int val;
   int b_val;
+  double t;
+  double b_t;
   double abstol;
   double dtol;
   PC pc;
@@ -1657,7 +1683,9 @@ void mptKSPSolve_5args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   petscKSPSetTolerances(ksp->data, ksp->type, b_rtol, val, b_val, maxits);
   val = (PETSC_FALSE);
   petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, val);
+  t = M2C_wtime();
   petscKSPSolve(ksp->data, ksp->type, b->data, b->type, x->data, x->type);
+  b_t = M2C_wtime();
   *flag = petscKSPGetConvergedReason(ksp->data, ksp->type);
   *relres = petscKSPGetResidualNorm(ksp->data, ksp->type);
   *iter = petscKSPGetIterationNumber(ksp->data, ksp->type);
@@ -1678,6 +1706,8 @@ void mptKSPSolve_5args(const struct0_T *ksp, const struct0_T *b, const struct0_T
     d_m2c_printf(maxits, dtol);
     e_m2c_printf();
   }
+
+  *time = b_t - t;
 }
 
 void mptKSPSolve_initialize(void)

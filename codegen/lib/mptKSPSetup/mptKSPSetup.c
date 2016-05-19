@@ -460,7 +460,7 @@ void emxInit_struct0_T(struct0_T *pStruct)
 
 void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
                  emxArray_char_T *pctype, const emxArray_char_T *solpack,
-                 struct0_T *ksp, boolean_T *toplevel)
+                 struct0_T *ksp, double *time, boolean_T *toplevel)
 {
   MPI_Comm arg;
   KSP t_ksp;
@@ -471,7 +471,9 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   emxArray_char_T *pctype0;
   PC t_pc;
   int loop_ub;
+  double t;
   emxArray_uint8_T *data0;
+  double b_t;
   int sizepe;
   char t3_type[3];
   static const char cv0[3] = { 'K', 'S', 'P' };
@@ -610,6 +612,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     }
   }
 
+  t = M2C_wtime();
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -619,6 +622,8 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   }
 
   emxInit_uint8_T(&data0, 1);
+  b_t = M2C_wtime();
+  *time = b_t - t;
   *toplevel = true;
   sizepe = sizeof(KSP);
   flag = data0->size[0];
@@ -654,13 +659,16 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   }
 }
 
-void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, boolean_T *toplevel)
+void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
+                      boolean_T *toplevel)
 {
   MPI_Comm arg;
   KSP t_ksp;
   int errCode;
   int flag;
+  double t;
   emxArray_uint8_T *data0;
+  double b_t;
   int sizepe;
   char t2_type[3];
   static const char cv6[3] = { 'K', 'S', 'P' };
@@ -686,6 +694,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, boolean_T *toplevel
     }
   }
 
+  t = M2C_wtime();
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -695,6 +704,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, boolean_T *toplevel
   }
 
   emxInit_uint8_T(&data0, 1);
+  b_t = M2C_wtime();
   sizepe = sizeof(KSP);
   flag = data0->size[0];
   data0->size[0] = sizepe;
@@ -728,11 +738,12 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, boolean_T *toplevel
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }
 
+  *time = b_t - t;
   *toplevel = true;
 }
 
 void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
-  struct0_T *ksp, boolean_T *toplevel)
+  struct0_T *ksp, double *time, boolean_T *toplevel)
 {
   MPI_Comm arg;
   KSP t_ksp;
@@ -740,7 +751,9 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   int flag;
   emxArray_char_T *ksptype0;
   int loop_ub;
+  double t;
   emxArray_uint8_T *data0;
+  double b_t;
   int sizepe;
   char t1_type[3];
   static const char cv7[3] = { 'K', 'S', 'P' };
@@ -801,6 +814,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
+  t = M2C_wtime();
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -810,6 +824,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   }
 
   emxInit_uint8_T(&data0, 1);
+  b_t = M2C_wtime();
   sizepe = sizeof(KSP);
   flag = data0->size[0];
   data0->size[0] = sizepe;
@@ -843,11 +858,13 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }
 
+  *time = b_t - t;
   *toplevel = true;
 }
 
 void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
-  const emxArray_char_T *pctype, struct0_T *ksp, boolean_T *toplevel)
+  const emxArray_char_T *pctype, struct0_T *ksp, double *time, boolean_T
+  *toplevel)
 {
   MPI_Comm arg;
   KSP t_ksp;
@@ -857,7 +874,9 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   emxArray_char_T *pctype0;
   PC t_pc;
   int loop_ub;
+  double t;
   emxArray_uint8_T *data0;
+  double b_t;
   int sizepe;
   char t0_type[3];
   static const char cv8[3] = { 'K', 'S', 'P' };
@@ -960,6 +979,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
+  t = M2C_wtime();
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -969,6 +989,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   }
 
   emxInit_uint8_T(&data0, 1);
+  b_t = M2C_wtime();
   sizepe = sizeof(KSP);
   flag = data0->size[0];
   data0->size[0] = sizepe;
@@ -1002,6 +1023,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }
 
+  *time = b_t - t;
   *toplevel = true;
 }
 

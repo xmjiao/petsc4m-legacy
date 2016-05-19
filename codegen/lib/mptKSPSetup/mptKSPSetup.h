@@ -24,13 +24,14 @@ extern void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions);
 extern void emxInit_struct0_T(struct0_T *pStruct);
 extern void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype,
   const emxArray_char_T *pctype, const emxArray_char_T *solpack, struct0_T *ksp,
+  double *time, boolean_T *toplevel);
+extern void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   boolean_T *toplevel);
-extern void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, boolean_T
-  *toplevel);
 extern void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T
-  *ksptype, struct0_T *ksp, boolean_T *toplevel);
+  *ksptype, struct0_T *ksp, double *time, boolean_T *toplevel);
 extern void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T
-  *ksptype, const emxArray_char_T *pctype, struct0_T *ksp, boolean_T *toplevel);
+  *ksptype, const emxArray_char_T *pctype, struct0_T *ksp, double *time,
+  boolean_T *toplevel);
 extern void mptKSPSetup_initialize(void);
 extern void mptKSPSetup_terminate(void);
 

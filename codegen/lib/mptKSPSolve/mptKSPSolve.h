@@ -23,15 +23,16 @@ extern void emxDestroy_struct0_T(struct0_T emxArray);
 extern void emxInit_struct0_T(struct0_T *pStruct);
 extern void mptKSPSolve(const struct0_T *ksp, const struct0_T *b, const
   struct0_T *x, double rtol, int maxits, const struct0_T *x0, int *flag, double *
-  relres, int *iter);
+  relres, int *iter, double *time);
 extern void mptKSPSolve_2args(const struct0_T *ksp, const struct0_T *b, int
-  *flag, double *relres, int *iter);
+  *flag, double *relres, int *iter, double *time);
 extern void mptKSPSolve_3args(const struct0_T *ksp, const struct0_T *b, const
-  struct0_T *x, int *flag, double *relres, int *iter);
+  struct0_T *x, int *flag, double *relres, int *iter, double *time);
 extern void mptKSPSolve_4args(const struct0_T *ksp, const struct0_T *b, const
-  struct0_T *x, double rtol, int *flag, double *relres, int *iter);
+  struct0_T *x, double rtol, int *flag, double *relres, int *iter, double *time);
 extern void mptKSPSolve_5args(const struct0_T *ksp, const struct0_T *b, const
-  struct0_T *x, double rtol, int maxiter, int *flag, double *relres, int *iter);
+  struct0_T *x, double rtol, int maxiter, int *flag, double *relres, int *iter,
+  double *time);
 extern void mptKSPSolve_initialize(void);
 extern void mptKSPSolve_terminate(void);
 

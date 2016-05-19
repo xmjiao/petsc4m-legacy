@@ -1,4 +1,4 @@
-function [ksp, toplevel] = mptKSPSetup(Amat, ksptype, pctype, solpack)
+function [ksp, time, toplevel] = mptKSPSetup(Amat, ksptype, pctype, solpack)
 % Sets up KSP using the given matrix (matrices).
 %
 % Syntax:
@@ -74,9 +74,13 @@ if nargin>1
 end
 
 petscKSPSetFromOptions(t_ksp);
-petscKSPSetUp(t_ksp);
 
-toplevel = nargout>1;
+time = 0;
+if nargout>1; t=m2c_wtime(); end
+petscKSPSetUp(t_ksp);
+if nargout>1; time=m2c_wtime()-t; end
+
+toplevel = nargout>2;
 ksp = PetscKSP(t_ksp, toplevel);
 
 end

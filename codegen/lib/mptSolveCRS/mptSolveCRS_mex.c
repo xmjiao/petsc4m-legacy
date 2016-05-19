@@ -24,6 +24,7 @@ void mptSolveCRS_api(const mxArray ** prhs, const mxArray **plhs) {
     int32_T              *flag;
     real64_T             *relres;
     int32_T              *iter;
+    real64_T             *times;
 
     real64_T   _timestamp;
 
@@ -34,13 +35,15 @@ void mptSolveCRS_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[2], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[3], mxINT32_CLASS, 2, l_size); }
+    {mwSize l_size[] = {2};
+    *(void **)&times = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 1, l_size); }
 
     /* Invoke the target function */
     mptSolveCRS_initialize();
 
     _timestamp = M2C_wtime();
 
-    mptSolveCRS(flag, relres, iter);
+    mptSolveCRS(flag, relres, iter, times);
 
     _timestamp = M2C_wtime() - _timestamp;
     printf("Function mptSolveCRS completed in %g seconds.\n", _timestamp);
@@ -54,6 +57,7 @@ void mptSolveCRS_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
     /* Nothing to do for plhs[3] */
+    /* Nothing to do for plhs[4] */
 
 }
 void mptSolveCRS_4args_api(const mxArray ** prhs, const mxArray **plhs) {
@@ -67,6 +71,7 @@ void mptSolveCRS_4args_api(const mxArray ** prhs, const mxArray **plhs) {
     int32_T              *flag;
     real64_T             *relres;
     int32_T              *iter;
+    real64_T             *times;
 
     real64_T   _timestamp;
 
@@ -96,13 +101,15 @@ void mptSolveCRS_4args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[2], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[3], mxINT32_CLASS, 2, l_size); }
+    {mwSize l_size[] = {2};
+    *(void **)&times = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 1, l_size); }
 
     /* Invoke the target function */
     mptSolveCRS_initialize();
 
     _timestamp = M2C_wtime();
 
-    mptSolveCRS_4args(&Arows, &Acols, &Avals, &b, &x, flag, relres, iter);
+    mptSolveCRS_4args(&Arows, &Acols, &Avals, &b, &x, flag, relres, iter, times);
 
     _timestamp = M2C_wtime() - _timestamp;
     printf("Function mptSolveCRS completed in %g seconds.\n", _timestamp);
@@ -114,6 +121,7 @@ void mptSolveCRS_4args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
     /* Nothing to do for plhs[3] */
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)&Arows);
@@ -134,6 +142,7 @@ void mptSolveCRS_5args_api(const mxArray ** prhs, const mxArray **plhs) {
     int32_T              *flag;
     real64_T             *relres;
     int32_T              *iter;
+    real64_T             *times;
 
     real64_T   _timestamp;
 
@@ -167,13 +176,15 @@ void mptSolveCRS_5args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[2], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[3], mxINT32_CLASS, 2, l_size); }
+    {mwSize l_size[] = {2};
+    *(void **)&times = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 1, l_size); }
 
     /* Invoke the target function */
     mptSolveCRS_initialize();
 
     _timestamp = M2C_wtime();
 
-    mptSolveCRS_5args(&Arows, &Acols, &Avals, &b, &solver, &x, flag, relres, iter);
+    mptSolveCRS_5args(&Arows, &Acols, &Avals, &b, &solver, &x, flag, relres, iter, times);
 
     _timestamp = M2C_wtime() - _timestamp;
     printf("Function mptSolveCRS completed in %g seconds.\n", _timestamp);
@@ -185,6 +196,7 @@ void mptSolveCRS_5args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
     /* Nothing to do for plhs[3] */
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)&Arows);
@@ -207,6 +219,7 @@ void mptSolveCRS_6args_api(const mxArray ** prhs, const mxArray **plhs) {
     int32_T              *flag;
     real64_T             *relres;
     int32_T              *iter;
+    real64_T             *times;
 
     real64_T   _timestamp;
 
@@ -247,13 +260,15 @@ void mptSolveCRS_6args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[2], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[3], mxINT32_CLASS, 2, l_size); }
+    {mwSize l_size[] = {2};
+    *(void **)&times = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 1, l_size); }
 
     /* Invoke the target function */
     mptSolveCRS_initialize();
 
     _timestamp = M2C_wtime();
 
-    mptSolveCRS_6args(&Arows, &Acols, &Avals, &b, &solver, rtol, &x, flag, relres, iter);
+    mptSolveCRS_6args(&Arows, &Acols, &Avals, &b, &solver, rtol, &x, flag, relres, iter, times);
 
     _timestamp = M2C_wtime() - _timestamp;
     printf("Function mptSolveCRS completed in %g seconds.\n", _timestamp);
@@ -265,6 +280,7 @@ void mptSolveCRS_6args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
     /* Nothing to do for plhs[3] */
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)&Arows);
@@ -288,6 +304,7 @@ void mptSolveCRS_7args_api(const mxArray ** prhs, const mxArray **plhs) {
     int32_T              *flag;
     real64_T             *relres;
     int32_T              *iter;
+    real64_T             *times;
 
     real64_T   _timestamp;
 
@@ -335,13 +352,15 @@ void mptSolveCRS_7args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[2], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[3], mxINT32_CLASS, 2, l_size); }
+    {mwSize l_size[] = {2};
+    *(void **)&times = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 1, l_size); }
 
     /* Invoke the target function */
     mptSolveCRS_initialize();
 
     _timestamp = M2C_wtime();
 
-    mptSolveCRS_7args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &x, flag, relres, iter);
+    mptSolveCRS_7args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &x, flag, relres, iter, times);
 
     _timestamp = M2C_wtime() - _timestamp;
     printf("Function mptSolveCRS completed in %g seconds.\n", _timestamp);
@@ -353,6 +372,7 @@ void mptSolveCRS_7args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
     /* Nothing to do for plhs[3] */
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)&Arows);
@@ -377,6 +397,7 @@ void mptSolveCRS_8args_api(const mxArray ** prhs, const mxArray **plhs) {
     int32_T              *flag;
     real64_T             *relres;
     int32_T              *iter;
+    real64_T             *times;
 
     real64_T   _timestamp;
 
@@ -428,13 +449,15 @@ void mptSolveCRS_8args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[2], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[3], mxINT32_CLASS, 2, l_size); }
+    {mwSize l_size[] = {2};
+    *(void **)&times = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 1, l_size); }
 
     /* Invoke the target function */
     mptSolveCRS_initialize();
 
     _timestamp = M2C_wtime();
 
-    mptSolveCRS_8args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &pctype, &x, flag, relres, iter);
+    mptSolveCRS_8args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &pctype, &x, flag, relres, iter, times);
 
     _timestamp = M2C_wtime() - _timestamp;
     printf("Function mptSolveCRS completed in %g seconds.\n", _timestamp);
@@ -446,6 +469,7 @@ void mptSolveCRS_8args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
     /* Nothing to do for plhs[3] */
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)&Arows);
@@ -472,6 +496,7 @@ void mptSolveCRS_9args_api(const mxArray ** prhs, const mxArray **plhs) {
     int32_T              *flag;
     real64_T             *relres;
     int32_T              *iter;
+    real64_T             *times;
 
     real64_T   _timestamp;
 
@@ -527,13 +552,15 @@ void mptSolveCRS_9args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[2], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[3], mxINT32_CLASS, 2, l_size); }
+    {mwSize l_size[] = {2};
+    *(void **)&times = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 1, l_size); }
 
     /* Invoke the target function */
     mptSolveCRS_initialize();
 
     _timestamp = M2C_wtime();
 
-    mptSolveCRS_9args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &pctype, &solpack, &x, flag, relres, iter);
+    mptSolveCRS_9args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &pctype, &solpack, &x, flag, relres, iter, times);
 
     _timestamp = M2C_wtime() - _timestamp;
     printf("Function mptSolveCRS completed in %g seconds.\n", _timestamp);
@@ -545,6 +572,7 @@ void mptSolveCRS_9args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
     /* Nothing to do for plhs[3] */
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)&Arows);
@@ -573,6 +601,7 @@ void mptSolveCRS_10args_api(const mxArray ** prhs, const mxArray **plhs) {
     int32_T              *flag;
     real64_T             *relres;
     int32_T              *iter;
+    real64_T             *times;
 
     real64_T   _timestamp;
 
@@ -632,13 +661,15 @@ void mptSolveCRS_10args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[2], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[3], mxINT32_CLASS, 2, l_size); }
+    {mwSize l_size[] = {2};
+    *(void **)&times = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 1, l_size); }
 
     /* Invoke the target function */
     mptSolveCRS_initialize();
 
     _timestamp = M2C_wtime();
 
-    mptSolveCRS_10args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &pctype, &solpack, &x0, &x, flag, relres, iter);
+    mptSolveCRS_10args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &pctype, &solpack, &x0, &x, flag, relres, iter, times);
 
     _timestamp = M2C_wtime() - _timestamp;
     printf("Function mptSolveCRS completed in %g seconds.\n", _timestamp);
@@ -650,6 +681,7 @@ void mptSolveCRS_10args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
     /* Nothing to do for plhs[3] */
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)&Arows);
@@ -680,6 +712,7 @@ void mptSolveCRS_11args_api(const mxArray ** prhs, const mxArray **plhs) {
     int32_T              *flag;
     real64_T             *relres;
     int32_T              *iter;
+    real64_T             *times;
 
     real64_T   _timestamp;
 
@@ -743,13 +776,15 @@ void mptSolveCRS_11args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[2], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[3], mxINT32_CLASS, 2, l_size); }
+    {mwSize l_size[] = {2};
+    *(void **)&times = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 1, l_size); }
 
     /* Invoke the target function */
     mptSolveCRS_initialize();
 
     _timestamp = M2C_wtime();
 
-    mptSolveCRS_11args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &pctype, &solpack, &x0, &opts, &x, flag, relres, iter);
+    mptSolveCRS_11args(&Arows, &Acols, &Avals, &b, &solver, rtol, maxiter, &pctype, &solpack, &x0, &opts, &x, flag, relres, iter, times);
 
     _timestamp = M2C_wtime() - _timestamp;
     printf("Function mptSolveCRS completed in %g seconds.\n", _timestamp);
@@ -761,6 +796,7 @@ void mptSolveCRS_11args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
     /* Nothing to do for plhs[3] */
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)&Arows);
@@ -777,60 +813,60 @@ void mptSolveCRS_11args_api(const mxArray ** prhs, const mxArray **plhs) {
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */
-    mxArray *outputs[4];
+    mxArray *outputs[5];
     int i;
     int nOutputs = (nlhs < 1 ? 1 : nlhs);
 
     if (nrhs == 0) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptSolveCRS:TooManyOutputArguments","Too many output arguments for entry-point mptSolveCRS.");
         /* Call the API function. */
         mptSolveCRS_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 4) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptSolveCRS_4args:TooManyOutputArguments","Too many output arguments for entry-point mptSolveCRS_4args.");
         /* Call the API function. */
         mptSolveCRS_4args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 5) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptSolveCRS_5args:TooManyOutputArguments","Too many output arguments for entry-point mptSolveCRS_5args.");
         /* Call the API function. */
         mptSolveCRS_5args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 6) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptSolveCRS_6args:TooManyOutputArguments","Too many output arguments for entry-point mptSolveCRS_6args.");
         /* Call the API function. */
         mptSolveCRS_6args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 7) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptSolveCRS_7args:TooManyOutputArguments","Too many output arguments for entry-point mptSolveCRS_7args.");
         /* Call the API function. */
         mptSolveCRS_7args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 8) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptSolveCRS_8args:TooManyOutputArguments","Too many output arguments for entry-point mptSolveCRS_8args.");
         /* Call the API function. */
         mptSolveCRS_8args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 9) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptSolveCRS_9args:TooManyOutputArguments","Too many output arguments for entry-point mptSolveCRS_9args.");
         /* Call the API function. */
         mptSolveCRS_9args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 10) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptSolveCRS_10args:TooManyOutputArguments","Too many output arguments for entry-point mptSolveCRS_10args.");
         /* Call the API function. */
         mptSolveCRS_10args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 11) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptSolveCRS_11args:TooManyOutputArguments","Too many output arguments for entry-point mptSolveCRS_11args.");
         /* Call the API function. */
         mptSolveCRS_11args_api(prhs, (const mxArray**)outputs);

@@ -1,12 +1,16 @@
-function [flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxits, x0)
+function [flag,relres,iter,time] = mptKSPSolve(ksp, b, x, rtol, maxits, x0)
 % Solves linear system.
 %
 % Syntax:
-%    [flag, reslres, iter] = mptKSPSolve(ksp, b)
-%    [flag, reslres, iter] = mptKSPSolve(ksp, b, x)
-%    [flag, reslres, iter] = mptKSPSolve(ksp, b, x, rtol)
-%    [flag, reslres, iter] = mptKSPSolve(ksp, b, x, rtol, maxits)
-%    [flag, reslres, iter] = mptKSPSolve(ksp, b, x, rtol, maxits, x0)
+%    mptKSPSolve(ksp, b)
+%    mptKSPSolve(ksp, b, x)
+%    mptKSPSolve(ksp, b, x, rtol)
+%    mptKSPSolve(ksp, b, x, rtol, maxits)
+%    mptKSPSolve(ksp, b, x, rtol, maxits, x0)
+%
+%    [flag, reslres, iter, time] = mptKSPSolve(...) returns the flag 
+%       (PETSc KSPConvergedReason), relative residual, number of
+%       iterations, and the execution time spent in 
 %
 % Description:
 %    mptKSPSolve(ksp, b) solves the linear system using the tolerances
@@ -30,10 +34,14 @@ function [flag,relres,iter] = mptKSPSolve(ksp, b, x, rtol, maxits, x0)
 %#codegen mptKSPSolve_4args -args {PetscKSP, PetscVec, PetscVec, 0}
 %#codegen mptKSPSolve_5args -args {PetscKSP, PetscVec, PetscVec, 0, int32(0)}
 
+time = 0;
+
 % Solve the linear system
 if nargin==2
     petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
+    if nargout>3; t=m2c_wtime(); end
     petscKSPSolve(ksp, b);
+    if nargout>3; time=m2c_wtime()-t; end
 else
     % Set tolerances
     if nargin>=4
@@ -55,7 +63,9 @@ else
         petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
     end
     
+    if nargout>3; t=m2c_wtime(); end
     petscKSPSolve(ksp, b, x);
+    if nargout>3; time=m2c_wtime()-t; end
 end
 
 flag = petscKSPGetConvergedReason(ksp);
