@@ -38,7 +38,9 @@ try
     for i=1:length(files)
         m2c(opts{:}, files{i}{1});
     end
-catch
+catch ME
+    cd(curpath);
+    rethrow(ME);
 end
 
 cd(curpath);

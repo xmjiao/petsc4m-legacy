@@ -1120,12 +1120,12 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   int errCode;
   int flag;
   KSP t_ksp;
+  double t;
   boolean_T b1;
   boolean_T b2;
   emxArray_char_T *pctype0;
   int loop_ub;
   PC t_pc;
-  double t;
   double b_t;
 
   /*  Sets up KSP using the given matrix (matrices). */
@@ -1319,8 +1319,20 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
+  /* 'mptKSPSetup:31' time = 0; */
+  /* 'mptKSPSetup:32' if nargout>1 */
+  /* 'mptKSPSetup:32' t=m2c_wtime(); */
+  /*  Return ellapsed time */
+  /*    t = m2c_wtime */
+  /* 'm2c_wtime:7' if isempty(coder.target) */
+  /* 'm2c_wtime:10' else */
+  /* 'm2c_wtime:11' coder.inline( 'always'); */
+  /* 'm2c_wtime:13' t = 0; */
+  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
+  t = M2C_wtime();
+
   /*  Setup KSP */
-  /* 'mptKSPSetup:32' petscKSPSetOperators(t_ksp, Amat); */
+  /* 'mptKSPSetup:35' petscKSPSetOperators(t_ksp, Amat); */
   /* Sets the matrix associated with the linear system and a (possibly) */
   /* different one associated with the preconditioner. */
   /*  */
@@ -1410,18 +1422,18 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:34' if nargin>1 */
-  /* 'mptKSPSetup:35' if nargin>2 */
-  /* 'mptKSPSetup:36' hasPC = ~ischar(pctype) || ~isempty(pctype); */
+  /* 'mptKSPSetup:37' if nargin>1 */
+  /* 'mptKSPSetup:38' if nargin>2 */
+  /* 'mptKSPSetup:39' hasPC = ~ischar(pctype) || ~isempty(pctype); */
   b1 = !(pctype->size[1] == 0);
 
-  /* 'mptKSPSetup:37' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
+  /* 'mptKSPSetup:40' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
   b2 = !(solpack->size[1] == 0);
 
-  /* 'mptKSPSetup:39' if hasPC || hasSolver */
+  /* 'mptKSPSetup:42' if hasPC || hasSolver */
   emxInit_char_T(&pctype0, 2);
   if (b1 || b2) {
-    /* 'mptKSPSetup:40' t_pc = petscKSPGetPC(t_ksp); */
+    /* 'mptKSPSetup:43' t_pc = petscKSPGetPC(t_ksp); */
     /* Returns a pointer to the preconditioner context set with petscKSPSetPC. */
     /*  */
     /*   [pc, errCode] = petscKSPGetPC(ksp, pc) gets the PC of the KSP */
@@ -1499,12 +1511,12 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       }
     }
 
-    /* 'mptKSPSetup:42' if hasPC */
+    /* 'mptKSPSetup:45' if hasPC */
     if (b1) {
-      /* 'mptKSPSetup:43' if ischar(pctype) && pctype(end)~=char(0) */
+      /* 'mptKSPSetup:46' if ischar(pctype) && pctype(end)~=char(0) */
       if (pctype->data[pctype->size[1] - 1] != '\x00') {
         /*  null-terminate the string if not terminated properly */
-        /* 'mptKSPSetup:45' pctype0 = [pctype char(0)]; */
+        /* 'mptKSPSetup:48' pctype0 = [pctype char(0)]; */
         flag = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1] + 1;
@@ -1517,8 +1529,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
         pctype0->data[pctype0->size[0] * pctype->size[1]] = '\x00';
       } else {
-        /* 'mptKSPSetup:46' else */
-        /* 'mptKSPSetup:47' pctype0 = pctype; */
+        /* 'mptKSPSetup:49' else */
+        /* 'mptKSPSetup:50' pctype0 = pctype; */
         flag = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1];
@@ -1529,7 +1541,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         }
       }
 
-      /* 'mptKSPSetup:49' petscPCSetType(t_pc, pctype0); */
+      /* 'mptKSPSetup:52' petscPCSetType(t_pc, pctype0); */
       /* Builds PC for a particular solver. */
       /*  */
       /*   errCode = petscPCSetType(pc, type) sets the type of the PC */
@@ -1586,12 +1598,12 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       }
     }
 
-    /* 'mptKSPSetup:52' if hasSolver */
+    /* 'mptKSPSetup:55' if hasSolver */
     if (b2) {
-      /* 'mptKSPSetup:53' if ischar(solpack) && solpack(end)~=char(0) */
+      /* 'mptKSPSetup:56' if ischar(solpack) && solpack(end)~=char(0) */
       if (solpack->data[solpack->size[1] - 1] != '\x00') {
         /*  null-terminate the string if not terminated properly */
-        /* 'mptKSPSetup:55' solpack0 = [solpack char(0)]; */
+        /* 'mptKSPSetup:58' solpack0 = [solpack char(0)]; */
         flag = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = solpack->size[1] + 1;
@@ -1604,8 +1616,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
         pctype0->data[pctype0->size[0] * solpack->size[1]] = '\x00';
       } else {
-        /* 'mptKSPSetup:56' else */
-        /* 'mptKSPSetup:57' solpack0 = solpack; */
+        /* 'mptKSPSetup:59' else */
+        /* 'mptKSPSetup:60' solpack0 = solpack; */
         flag = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = solpack->size[1];
@@ -1616,7 +1628,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         }
       }
 
-      /* 'mptKSPSetup:59' petscPCFactorSetMatSolverPackage(t_pc,solpack0); */
+      /* 'mptKSPSetup:62' petscPCFactorSetMatSolverPackage(t_pc,solpack0); */
       /* Sets the software that is used to perform the factorization */
       /*  */
       /*   errCode = petscpetscPCFactorSetMatSolverPackage(pc, solver) sets the */
@@ -1676,11 +1688,11 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:64' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
+  /* 'mptKSPSetup:67' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
        [1] - 1] != 0)) {
     /*  null-terminate the string if not terminated properly */
-    /* 'mptKSPSetup:66' ksptype0 = [ksptype char(0)]; */
+    /* 'mptKSPSetup:69' ksptype0 = [ksptype char(0)]; */
     flag = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1] + 1;
@@ -1693,8 +1705,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
     pctype0->data[pctype0->size[0] * ksptype->size[1]] = '\x00';
   } else {
-    /* 'mptKSPSetup:67' else */
-    /* 'mptKSPSetup:68' ksptype0 = ksptype; */
+    /* 'mptKSPSetup:70' else */
+    /* 'mptKSPSetup:71' ksptype0 = ksptype; */
     flag = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1];
@@ -1705,10 +1717,10 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:70' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
+  /* 'mptKSPSetup:73' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
   if (!(pctype0->size[1] == 0)) {
     /*  Set KSP Types */
-    /* 'mptKSPSetup:72' petscKSPSetType(t_ksp, ksptype0); */
+    /* 'mptKSPSetup:75' petscKSPSetType(t_ksp, ksptype0); */
     /* Builds KSP for a particular solver. */
     /*  */
     /*   errCode = petscKSPSetType(ksp, type) sets the type of the KSP */
@@ -1767,7 +1779,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
   emxFree_char_T(&pctype0);
 
-  /* 'mptKSPSetup:76' petscKSPSetFromOptions(t_ksp); */
+  /* 'mptKSPSetup:79' petscKSPSetFromOptions(t_ksp); */
   /* Sets KSP options from the options database. This routine must be called */
   /* before KSPSetUp() if the user is to be allowed to set the Krylov type. */
   /*  */
@@ -1824,19 +1836,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:78' time = 0; */
-  /* 'mptKSPSetup:79' if nargout>1 */
-  /* 'mptKSPSetup:79' t=m2c_wtime(); */
-  /*  Return ellapsed time */
-  /*    t = m2c_wtime */
-  /* 'm2c_wtime:7' if isempty(coder.target) */
-  /* 'm2c_wtime:10' else */
-  /* 'm2c_wtime:11' coder.inline( 'always'); */
-  /* 'm2c_wtime:13' t = 0; */
-  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
-  t = M2C_wtime();
-
-  /* 'mptKSPSetup:80' petscKSPSetUp(t_ksp); */
+  /* 'mptKSPSetup:81' petscKSPSetUp(t_ksp); */
   /* Sets up the internal data structures for the later use of an iterative solver. */
   /*  */
   /*   errCode = petscKSPSetUp(ksp) */
@@ -1892,8 +1892,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:81' if nargout>1 */
-  /* 'mptKSPSetup:81' time=m2c_wtime()-t; */
+  /* 'mptKSPSetup:82' if nargout>1 */
+  /* 'mptKSPSetup:82' time=m2c_wtime()-t; */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -1904,8 +1904,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   b_t = M2C_wtime();
   *time = b_t - t;
 
-  /* 'mptKSPSetup:83' toplevel = nargout>2; */
-  /* 'mptKSPSetup:84' ksp = PetscKSP(t_ksp, toplevel); */
+  /* 'mptKSPSetup:84' toplevel = nargout>2; */
+  /* 'mptKSPSetup:85' ksp = PetscKSP(t_ksp, toplevel); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
   /*   ksp = PetscKSP() simply returns a definition of the */
@@ -1936,10 +1936,10 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   int *flag, double *relres, int *iter, double *time)
 {
+  double t;
   int val;
   int b_val;
   int errCode;
-  double t;
   double b_t;
   double b_rtol;
   double abstol;
@@ -1978,14 +1978,25 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*  */
   /*  See also mptKSPSetup, mptKSPCleanup */
   /* 'mptKSPSolve:37' time = 0; */
+  /* 'mptKSPSolve:38' if nargout>3 */
+  /* 'mptKSPSolve:38' t=m2c_wtime(); */
+  /*  Return ellapsed time */
+  /*    t = m2c_wtime */
+  /* 'm2c_wtime:7' if isempty(coder.target) */
+  /* 'm2c_wtime:10' else */
+  /* 'm2c_wtime:11' coder.inline( 'always'); */
+  /* 'm2c_wtime:13' t = 0; */
+  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
+  t = M2C_wtime();
+
   /*  Solve the linear system */
-  /* 'mptKSPSolve:40' if nargin==2 */
-  /* 'mptKSPSolve:45' else */
+  /* 'mptKSPSolve:41' if nargin==2 */
+  /* 'mptKSPSolve:44' else */
   /*  Set tolerances */
-  /* 'mptKSPSolve:47' if nargin>=4 */
-  /* 'mptKSPSolve:48' if rtol==0 */
+  /* 'mptKSPSolve:46' if nargin>=4 */
+  /* 'mptKSPSolve:47' if rtol==0 */
   if (rtol == 0.0) {
-    /* 'mptKSPSolve:49' rtol = double(PETSC_DEFAULT); */
+    /* 'mptKSPSolve:48' rtol = double(PETSC_DEFAULT); */
     /*  Obtain PETSC constant PETSC_DEFAULT */
     /* 'PETSC_DEFAULT:4' coder.inline('always'); */
     /* 'PETSC_DEFAULT:6' val = petscGetEnum('PETSC_DEFAULT'); */
@@ -2044,9 +2055,9 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     rtol = val;
   }
 
-  /* 'mptKSPSolve:51' if nargin<5 || maxits==0 */
+  /* 'mptKSPSolve:50' if nargin<5 || maxits==0 */
   if (maxits == 0) {
-    /* 'mptKSPSolve:52' maxits = PETSC_DEFAULT; */
+    /* 'mptKSPSolve:51' maxits = PETSC_DEFAULT; */
     /*  Obtain PETSC constant PETSC_DEFAULT */
     /* 'PETSC_DEFAULT:4' coder.inline('always'); */
     /* 'PETSC_DEFAULT:6' val = petscGetEnum('PETSC_DEFAULT'); */
@@ -2104,8 +2115,8 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     maxits = (PETSC_DEFAULT);
   }
 
-  /* 'mptKSPSolve:54' petscKSPSetTolerances(ksp, double(rtol), double(PETSC_DEFAULT), ... */
-  /* 'mptKSPSolve:55'             double(PETSC_DEFAULT), int32(maxits)); */
+  /* 'mptKSPSolve:53' petscKSPSetTolerances(ksp, double(rtol), double(PETSC_DEFAULT), ... */
+  /* 'mptKSPSolve:54'             double(PETSC_DEFAULT), int32(maxits)); */
   /*  Obtain PETSC constant PETSC_DEFAULT */
   /* 'PETSC_DEFAULT:4' coder.inline('always'); */
   /* 'PETSC_DEFAULT:6' val = petscGetEnum('PETSC_DEFAULT'); */
@@ -2288,7 +2299,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   }
 
   /*  Process initial guess */
-  /* 'mptKSPSolve:59' if nargin>=6 && ~petscIsNULL(x0) */
+  /* 'mptKSPSolve:58' if nargin>=6 && ~petscIsNULL(x0) */
   /*  Determine whether a given object is a null opointer of a particular type. */
   /*  */
   /*     isn = petscIsNULL(obj) */
@@ -2298,7 +2309,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /* 'petscIsNULL:10' isn = coder.ceval('!', obj); */
   val = !(x0);
   if (!(val != 0)) {
-    /* 'mptKSPSolve:60' petscVecCopy(x0, x); */
+    /* 'mptKSPSolve:59' petscVecCopy(x0, x); */
     /* Creates a vector from x to y. */
     /*  */
     /*   errCode = petscVecCopy(x, y) copies the entries from x to y. Both */
@@ -2375,7 +2386,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       }
     }
 
-    /* 'mptKSPSolve:61' petscKSPSetInitialGuessNonzero(ksp, PETSC_TRUE); */
+    /* 'mptKSPSolve:60' petscKSPSetInitialGuessNonzero(ksp, PETSC_TRUE); */
     /*  Obtain PETSC constant PETSC_TRUE */
     /* 'PETSC_TRUE:4' coder.inline('always'); */
     /* 'PETSC_TRUE:6' val = petscGetEnum('PETSC_TRUE'); */
@@ -2490,8 +2501,8 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       }
     }
   } else {
-    /* 'mptKSPSolve:62' else */
-    /* 'mptKSPSolve:63' petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE); */
+    /* 'mptKSPSolve:61' else */
+    /* 'mptKSPSolve:62' petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE); */
     /*  Obtain PETSC constant PETSC_FALSE */
     /* 'PETSC_FALSE:4' coder.inline('always'); */
     /* 'PETSC_FALSE:6' val = petscGetEnum('PETSC_FALSE'); */
@@ -2607,18 +2618,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:66' if nargout>3 */
-  /* 'mptKSPSolve:66' t=m2c_wtime(); */
-  /*  Return ellapsed time */
-  /*    t = m2c_wtime */
-  /* 'm2c_wtime:7' if isempty(coder.target) */
-  /* 'm2c_wtime:10' else */
-  /* 'm2c_wtime:11' coder.inline( 'always'); */
-  /* 'm2c_wtime:13' t = 0; */
-  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
-  t = M2C_wtime();
-
-  /* 'mptKSPSolve:67' petscKSPSolve(ksp, b, x); */
+  /* 'mptKSPSolve:65' petscKSPSolve(ksp, b, x); */
   /* Solves linear system. */
   /*  */
   /*   errCode = petscKSPSolve(ksp, b) */
@@ -2740,7 +2740,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   b_t = M2C_wtime();
   *time = b_t - t;
 
-  /* 'mptKSPSolve:71' flag = petscKSPGetConvergedReason(ksp); */
+  /* 'mptKSPSolve:70' flag = petscKSPGetConvergedReason(ksp); */
   /* Gets the reason the KSP iteration was stopped. */
   /*  */
   /*   [flag, errCode] = petscKSPGetConvergedReason(ksp) */
@@ -2797,7 +2797,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:72' relres = petscKSPGetResidualNorm(ksp); */
+  /* 'mptKSPSolve:71' relres = petscKSPGetResidualNorm(ksp); */
   /* Gets the last (approximate preconditioned) residual norm that has been computed. */
   /*  */
   /*   [rnorm, errCode] = petscKSPGetResidualNorm(ksp) */
@@ -2854,7 +2854,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:73' iter = petscKSPGetIterationNumber(ksp); */
+  /* 'mptKSPSolve:72' iter = petscKSPGetIterationNumber(ksp); */
   /* Gets the current iteration number. */
   /*  */
   /*   [its, errCode] = petscKSPGetIterationNumber(ksp) */
@@ -2914,7 +2914,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:74' [rtol, abstol, dtol, maxits] = petscKSPGetTolerances(ksp); */
+  /* 'mptKSPSolve:73' [rtol, abstol, dtol, maxits] = petscKSPGetTolerances(ksp); */
   /* Gets the relative, absolute, divergence, and maximum iteration tolerances */
   /* used by the default KSP convergence tests. */
   /*  */
@@ -2979,9 +2979,9 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:76' if flag < 0 || relres>rtol */
+  /* 'mptKSPSolve:75' if flag < 0 || relres>rtol */
   if ((*flag < 0) || (*relres > b_rtol)) {
-    /* 'mptKSPSolve:77' pc = petscKSPGetPC(ksp); */
+    /* 'mptKSPSolve:76' pc = petscKSPGetPC(ksp); */
     /* Returns a pointer to the preconditioner context set with petscKSPSetPC. */
     /*  */
     /*   [pc, errCode] = petscKSPGetPC(ksp, pc) gets the PC of the KSP */
@@ -3059,7 +3059,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       }
     }
 
-    /* 'mptKSPSolve:79' m2c_printf('### %s with %s preconditioner stopped with flag %d.\n', petscKSPGetType(ksp), petscPCGetType(pc), flag); */
+    /* 'mptKSPSolve:78' m2c_printf('### %s with %s preconditioner stopped with flag %d.\n', petscKSPGetType(ksp), petscPCGetType(pc), flag); */
     /* Gets the KSP type as a KSPType object from the KSP object. */
     /*  */
     /*   [type, errCode] = petscKSPGetType(ksp) gets the type of the KSP */
@@ -3210,17 +3210,17 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
 
     m2c_printf(t_type, b_t_type, *flag);
 
-    /* 'mptKSPSolve:80' m2c_printf('### The relative residual was %g after %d iterations.\n', relres, iter); */
+    /* 'mptKSPSolve:79' m2c_printf('### The relative residual was %g after %d iterations.\n', relres, iter); */
     b_m2c_printf(*relres, *iter);
 
-    /* 'mptKSPSolve:81' m2c_printf('### The relative and absolute tolerances were %g and %g.\n', rtol, abstol); */
+    /* 'mptKSPSolve:80' m2c_printf('### The relative and absolute tolerances were %g and %g.\n', rtol, abstol); */
     c_m2c_printf(b_rtol, abstol);
 
-    /* 'mptKSPSolve:82' m2c_printf('### The divergence and max-iter tolerances were %d and %g.\n', maxits, dtol); */
+    /* 'mptKSPSolve:81' m2c_printf('### The divergence and max-iter tolerances were %d and %g.\n', maxits, dtol); */
     d_m2c_printf(b_maxits, dtol);
 
-    /* 'mptKSPSolve:83' m2c_printf(['### For explanation of the flag, see http://www.mcs.anl.gov/petsc/' ... */
-    /* 'mptKSPSolve:84'         'petsc-current/docs/manualpages/KSP/KSPConvergedReason.html.\n']); */
+    /* 'mptKSPSolve:82' m2c_printf(['### For explanation of the flag, see http://www.mcs.anl.gov/petsc/' ... */
+    /* 'mptKSPSolve:83'         'petsc-current/docs/manualpages/KSP/KSPConvergedReason.html.\n']); */
     e_m2c_printf();
   }
 }
@@ -3909,10 +3909,10 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   MPI_Comm t_comm;
   int errCode;
   KSP t_ksp;
+  double t;
   emxArray_char_T *ksptype0;
   int b_flag;
   int loop_ub;
-  double t;
   double b_t;
   double time_solve;
 
@@ -4169,8 +4169,20 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
+  /* 'mptKSPSetup:31' time = 0; */
+  /* 'mptKSPSetup:32' if nargout>1 */
+  /* 'mptKSPSetup:32' t=m2c_wtime(); */
+  /*  Return ellapsed time */
+  /*    t = m2c_wtime */
+  /* 'm2c_wtime:7' if isempty(coder.target) */
+  /* 'm2c_wtime:10' else */
+  /* 'm2c_wtime:11' coder.inline( 'always'); */
+  /* 'm2c_wtime:13' t = 0; */
+  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
+  t = M2C_wtime();
+
   /*  Setup KSP */
-  /* 'mptKSPSetup:32' petscKSPSetOperators(t_ksp, Amat); */
+  /* 'mptKSPSetup:35' petscKSPSetOperators(t_ksp, Amat); */
   /* Sets the matrix associated with the linear system and a (possibly) */
   /* different one associated with the preconditioner. */
   /*  */
@@ -4260,17 +4272,17 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
-  /* 'mptKSPSetup:34' if nargin>1 */
-  /* 'mptKSPSetup:35' if nargin>2 */
-  /* 'mptKSPSetup:36' hasPC = ~ischar(pctype) || ~isempty(pctype); */
-  /* 'mptKSPSetup:37' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
-  /* 'mptKSPSetup:39' if hasPC || hasSolver */
-  /* 'mptKSPSetup:64' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
+  /* 'mptKSPSetup:37' if nargin>1 */
+  /* 'mptKSPSetup:38' if nargin>2 */
+  /* 'mptKSPSetup:39' hasPC = ~ischar(pctype) || ~isempty(pctype); */
+  /* 'mptKSPSetup:40' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
+  /* 'mptKSPSetup:42' if hasPC || hasSolver */
+  /* 'mptKSPSetup:67' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
   emxInit_char_T(&ksptype0, 2);
   if ((!(solver->size[1] == 0)) && ((unsigned char)solver->data[solver->size[1]
        - 1] != 0)) {
     /*  null-terminate the string if not terminated properly */
-    /* 'mptKSPSetup:66' ksptype0 = [ksptype char(0)]; */
+    /* 'mptKSPSetup:69' ksptype0 = [ksptype char(0)]; */
     b_flag = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = solver->size[1] + 1;
@@ -4283,8 +4295,8 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
 
     ksptype0->data[ksptype0->size[0] * solver->size[1]] = '\x00';
   } else {
-    /* 'mptKSPSetup:67' else */
-    /* 'mptKSPSetup:68' ksptype0 = ksptype; */
+    /* 'mptKSPSetup:70' else */
+    /* 'mptKSPSetup:71' ksptype0 = ksptype; */
     b_flag = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = solver->size[1];
@@ -4295,10 +4307,10 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
-  /* 'mptKSPSetup:70' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
+  /* 'mptKSPSetup:73' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
   if (!(ksptype0->size[1] == 0)) {
     /*  Set KSP Types */
-    /* 'mptKSPSetup:72' petscKSPSetType(t_ksp, ksptype0); */
+    /* 'mptKSPSetup:75' petscKSPSetType(t_ksp, ksptype0); */
     /* Builds KSP for a particular solver. */
     /*  */
     /*   errCode = petscKSPSetType(ksp, type) sets the type of the KSP */
@@ -4357,7 +4369,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
 
   emxFree_char_T(&ksptype0);
 
-  /* 'mptKSPSetup:76' petscKSPSetFromOptions(t_ksp); */
+  /* 'mptKSPSetup:79' petscKSPSetFromOptions(t_ksp); */
   /* Sets KSP options from the options database. This routine must be called */
   /* before KSPSetUp() if the user is to be allowed to set the Krylov type. */
   /*  */
@@ -4414,19 +4426,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
-  /* 'mptKSPSetup:78' time = 0; */
-  /* 'mptKSPSetup:79' if nargout>1 */
-  /* 'mptKSPSetup:79' t=m2c_wtime(); */
-  /*  Return ellapsed time */
-  /*    t = m2c_wtime */
-  /* 'm2c_wtime:7' if isempty(coder.target) */
-  /* 'm2c_wtime:10' else */
-  /* 'm2c_wtime:11' coder.inline( 'always'); */
-  /* 'm2c_wtime:13' t = 0; */
-  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
-  t = M2C_wtime();
-
-  /* 'mptKSPSetup:80' petscKSPSetUp(t_ksp); */
+  /* 'mptKSPSetup:81' petscKSPSetUp(t_ksp); */
   /* Sets up the internal data structures for the later use of an iterative solver. */
   /*  */
   /*   errCode = petscKSPSetUp(ksp) */
@@ -4482,8 +4482,8 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
-  /* 'mptKSPSetup:81' if nargout>1 */
-  /* 'mptKSPSetup:81' time=m2c_wtime()-t; */
+  /* 'mptKSPSetup:82' if nargout>1 */
+  /* 'mptKSPSetup:82' time=m2c_wtime()-t; */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -4493,8 +4493,8 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
   b_t = M2C_wtime();
 
-  /* 'mptKSPSetup:83' toplevel = nargout>2; */
-  /* 'mptKSPSetup:84' ksp = PetscKSP(t_ksp, toplevel); */
+  /* 'mptKSPSetup:84' toplevel = nargout>2; */
+  /* 'mptKSPSetup:85' ksp = PetscKSP(t_ksp, toplevel); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
   /*   ksp = PetscKSP() simply returns a definition of the */
@@ -7465,8 +7465,20 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
+  /* 'mptKSPSetup:31' time = 0; */
+  /* 'mptKSPSetup:32' if nargout>1 */
+  /* 'mptKSPSetup:32' t=m2c_wtime(); */
+  /*  Return ellapsed time */
+  /*    t = m2c_wtime */
+  /* 'm2c_wtime:7' if isempty(coder.target) */
+  /* 'm2c_wtime:10' else */
+  /* 'm2c_wtime:11' coder.inline( 'always'); */
+  /* 'm2c_wtime:13' t = 0; */
+  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
+  t = M2C_wtime();
+
   /*  Setup KSP */
-  /* 'mptKSPSetup:32' petscKSPSetOperators(t_ksp, Amat); */
+  /* 'mptKSPSetup:35' petscKSPSetOperators(t_ksp, Amat); */
   /* Sets the matrix associated with the linear system and a (possibly) */
   /* different one associated with the preconditioner. */
   /*  */
@@ -7556,16 +7568,16 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:34' if nargin>1 */
-  /* 'mptKSPSetup:35' if nargin>2 */
-  /* 'mptKSPSetup:36' hasPC = ~ischar(pctype) || ~isempty(pctype); */
-  /* 'mptKSPSetup:37' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
-  /* 'mptKSPSetup:39' if hasPC || hasSolver */
-  /* 'mptKSPSetup:64' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
-  /* 'mptKSPSetup:67' else */
-  /* 'mptKSPSetup:68' ksptype0 = ksptype; */
-  /* 'mptKSPSetup:70' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
-  /* 'mptKSPSetup:76' petscKSPSetFromOptions(t_ksp); */
+  /* 'mptKSPSetup:37' if nargin>1 */
+  /* 'mptKSPSetup:38' if nargin>2 */
+  /* 'mptKSPSetup:39' hasPC = ~ischar(pctype) || ~isempty(pctype); */
+  /* 'mptKSPSetup:40' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
+  /* 'mptKSPSetup:42' if hasPC || hasSolver */
+  /* 'mptKSPSetup:67' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
+  /* 'mptKSPSetup:70' else */
+  /* 'mptKSPSetup:71' ksptype0 = ksptype; */
+  /* 'mptKSPSetup:73' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
+  /* 'mptKSPSetup:79' petscKSPSetFromOptions(t_ksp); */
   /* Sets KSP options from the options database. This routine must be called */
   /* before KSPSetUp() if the user is to be allowed to set the Krylov type. */
   /*  */
@@ -7622,19 +7634,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:78' time = 0; */
-  /* 'mptKSPSetup:79' if nargout>1 */
-  /* 'mptKSPSetup:79' t=m2c_wtime(); */
-  /*  Return ellapsed time */
-  /*    t = m2c_wtime */
-  /* 'm2c_wtime:7' if isempty(coder.target) */
-  /* 'm2c_wtime:10' else */
-  /* 'm2c_wtime:11' coder.inline( 'always'); */
-  /* 'm2c_wtime:13' t = 0; */
-  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
-  t = M2C_wtime();
-
-  /* 'mptKSPSetup:80' petscKSPSetUp(t_ksp); */
+  /* 'mptKSPSetup:81' petscKSPSetUp(t_ksp); */
   /* Sets up the internal data structures for the later use of an iterative solver. */
   /*  */
   /*   errCode = petscKSPSetUp(ksp) */
@@ -7690,8 +7690,8 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:81' if nargout>1 */
-  /* 'mptKSPSetup:81' time=m2c_wtime()-t; */
+  /* 'mptKSPSetup:82' if nargout>1 */
+  /* 'mptKSPSetup:82' time=m2c_wtime()-t; */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -7701,8 +7701,8 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
   b_t = M2C_wtime();
 
-  /* 'mptKSPSetup:83' toplevel = nargout>2; */
-  /* 'mptKSPSetup:84' ksp = PetscKSP(t_ksp, toplevel); */
+  /* 'mptKSPSetup:84' toplevel = nargout>2; */
+  /* 'mptKSPSetup:85' ksp = PetscKSP(t_ksp, toplevel); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
   /*   ksp = PetscKSP() simply returns a definition of the */
@@ -9208,11 +9208,11 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   PetscObject t_obj;
   MPI_Comm t_comm;
   KSP t_ksp;
+  double t;
   boolean_T b0;
   emxArray_char_T *pctype0;
   int loop_ub;
   PC t_pc;
-  double t;
   double b_t;
   double b_relres;
   double time_solve;
@@ -9663,8 +9663,20 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
+  /* 'mptKSPSetup:31' time = 0; */
+  /* 'mptKSPSetup:32' if nargout>1 */
+  /* 'mptKSPSetup:32' t=m2c_wtime(); */
+  /*  Return ellapsed time */
+  /*    t = m2c_wtime */
+  /* 'm2c_wtime:7' if isempty(coder.target) */
+  /* 'm2c_wtime:10' else */
+  /* 'm2c_wtime:11' coder.inline( 'always'); */
+  /* 'm2c_wtime:13' t = 0; */
+  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
+  t = M2C_wtime();
+
   /*  Setup KSP */
-  /* 'mptKSPSetup:32' petscKSPSetOperators(t_ksp, Amat); */
+  /* 'mptKSPSetup:35' petscKSPSetOperators(t_ksp, Amat); */
   /* Sets the matrix associated with the linear system and a (possibly) */
   /* different one associated with the preconditioner. */
   /*  */
@@ -9754,16 +9766,16 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:34' if nargin>1 */
-  /* 'mptKSPSetup:35' if nargin>2 */
-  /* 'mptKSPSetup:36' hasPC = ~ischar(pctype) || ~isempty(pctype); */
+  /* 'mptKSPSetup:37' if nargin>1 */
+  /* 'mptKSPSetup:38' if nargin>2 */
+  /* 'mptKSPSetup:39' hasPC = ~ischar(pctype) || ~isempty(pctype); */
   b0 = !(pctype->size[1] == 0);
 
-  /* 'mptKSPSetup:37' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
-  /* 'mptKSPSetup:39' if hasPC || hasSolver */
+  /* 'mptKSPSetup:40' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
+  /* 'mptKSPSetup:42' if hasPC || hasSolver */
   emxInit_char_T(&pctype0, 2);
   if (b0) {
-    /* 'mptKSPSetup:40' t_pc = petscKSPGetPC(t_ksp); */
+    /* 'mptKSPSetup:43' t_pc = petscKSPGetPC(t_ksp); */
     /* Returns a pointer to the preconditioner context set with petscKSPSetPC. */
     /*  */
     /*   [pc, errCode] = petscKSPGetPC(ksp, pc) gets the PC of the KSP */
@@ -9841,11 +9853,11 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       }
     }
 
-    /* 'mptKSPSetup:42' if hasPC */
-    /* 'mptKSPSetup:43' if ischar(pctype) && pctype(end)~=char(0) */
+    /* 'mptKSPSetup:45' if hasPC */
+    /* 'mptKSPSetup:46' if ischar(pctype) && pctype(end)~=char(0) */
     if (pctype->data[pctype->size[1] - 1] != '\x00') {
       /*  null-terminate the string if not terminated properly */
-      /* 'mptKSPSetup:45' pctype0 = [pctype char(0)]; */
+      /* 'mptKSPSetup:48' pctype0 = [pctype char(0)]; */
       b_flag = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1] + 1;
@@ -9858,8 +9870,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
       pctype0->data[pctype0->size[0] * pctype->size[1]] = '\x00';
     } else {
-      /* 'mptKSPSetup:46' else */
-      /* 'mptKSPSetup:47' pctype0 = pctype; */
+      /* 'mptKSPSetup:49' else */
+      /* 'mptKSPSetup:50' pctype0 = pctype; */
       b_flag = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1];
@@ -9870,7 +9882,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       }
     }
 
-    /* 'mptKSPSetup:49' petscPCSetType(t_pc, pctype0); */
+    /* 'mptKSPSetup:52' petscPCSetType(t_pc, pctype0); */
     /* Builds PC for a particular solver. */
     /*  */
     /*   errCode = petscPCSetType(pc, type) sets the type of the PC */
@@ -9926,14 +9938,14 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       }
     }
 
-    /* 'mptKSPSetup:52' if hasSolver */
+    /* 'mptKSPSetup:55' if hasSolver */
   }
 
-  /* 'mptKSPSetup:64' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
+  /* 'mptKSPSetup:67' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
   if ((!(solver->size[1] == 0)) && ((unsigned char)solver->data[solver->size[1]
        - 1] != 0)) {
     /*  null-terminate the string if not terminated properly */
-    /* 'mptKSPSetup:66' ksptype0 = [ksptype char(0)]; */
+    /* 'mptKSPSetup:69' ksptype0 = [ksptype char(0)]; */
     b_flag = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = solver->size[1] + 1;
@@ -9946,8 +9958,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
     pctype0->data[pctype0->size[0] * solver->size[1]] = '\x00';
   } else {
-    /* 'mptKSPSetup:67' else */
-    /* 'mptKSPSetup:68' ksptype0 = ksptype; */
+    /* 'mptKSPSetup:70' else */
+    /* 'mptKSPSetup:71' ksptype0 = ksptype; */
     b_flag = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = solver->size[1];
@@ -9958,10 +9970,10 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:70' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
+  /* 'mptKSPSetup:73' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
   if (!(pctype0->size[1] == 0)) {
     /*  Set KSP Types */
-    /* 'mptKSPSetup:72' petscKSPSetType(t_ksp, ksptype0); */
+    /* 'mptKSPSetup:75' petscKSPSetType(t_ksp, ksptype0); */
     /* Builds KSP for a particular solver. */
     /*  */
     /*   errCode = petscKSPSetType(ksp, type) sets the type of the KSP */
@@ -10020,7 +10032,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   emxFree_char_T(&pctype0);
 
-  /* 'mptKSPSetup:76' petscKSPSetFromOptions(t_ksp); */
+  /* 'mptKSPSetup:79' petscKSPSetFromOptions(t_ksp); */
   /* Sets KSP options from the options database. This routine must be called */
   /* before KSPSetUp() if the user is to be allowed to set the Krylov type. */
   /*  */
@@ -10077,19 +10089,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:78' time = 0; */
-  /* 'mptKSPSetup:79' if nargout>1 */
-  /* 'mptKSPSetup:79' t=m2c_wtime(); */
-  /*  Return ellapsed time */
-  /*    t = m2c_wtime */
-  /* 'm2c_wtime:7' if isempty(coder.target) */
-  /* 'm2c_wtime:10' else */
-  /* 'm2c_wtime:11' coder.inline( 'always'); */
-  /* 'm2c_wtime:13' t = 0; */
-  /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
-  t = M2C_wtime();
-
-  /* 'mptKSPSetup:80' petscKSPSetUp(t_ksp); */
+  /* 'mptKSPSetup:81' petscKSPSetUp(t_ksp); */
   /* Sets up the internal data structures for the later use of an iterative solver. */
   /*  */
   /*   errCode = petscKSPSetUp(ksp) */
@@ -10145,8 +10145,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:81' if nargout>1 */
-  /* 'mptKSPSetup:81' time=m2c_wtime()-t; */
+  /* 'mptKSPSetup:82' if nargout>1 */
+  /* 'mptKSPSetup:82' time=m2c_wtime()-t; */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -10156,8 +10156,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
   b_t = M2C_wtime();
 
-  /* 'mptKSPSetup:83' toplevel = nargout>2; */
-  /* 'mptKSPSetup:84' ksp = PetscKSP(t_ksp, toplevel); */
+  /* 'mptKSPSetup:84' toplevel = nargout>2; */
+  /* 'mptKSPSetup:85' ksp = PetscKSP(t_ksp, toplevel); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
   /*   ksp = PetscKSP() simply returns a definition of the */

@@ -35,13 +35,12 @@ function [flag,relres,iter,time] = mptKSPSolve(ksp, b, x, rtol, maxits, x0)
 %#codegen mptKSPSolve_5args -args {PetscKSP, PetscVec, PetscVec, 0, int32(0)}
 
 time = 0;
+if nargout>3; t=m2c_wtime(); end
 
 % Solve the linear system
 if nargin==2
     petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
-    if nargout>3; t=m2c_wtime(); end
     petscKSPSolve(ksp, b);
-    if nargout>3; time=m2c_wtime()-t; end
 else
     % Set tolerances
     if nargin>=4
@@ -63,10 +62,10 @@ else
         petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
     end
     
-    if nargout>3; t=m2c_wtime(); end
     petscKSPSolve(ksp, b, x);
-    if nargout>3; time=m2c_wtime()-t; end
 end
+
+if nargout>3; time=m2c_wtime()-t; end
 
 flag = petscKSPGetConvergedReason(ksp);
 relres = petscKSPGetResidualNorm(ksp);

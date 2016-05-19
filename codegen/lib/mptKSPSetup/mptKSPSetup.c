@@ -466,12 +466,12 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   KSP t_ksp;
   int errCode;
   int flag;
+  double t;
   boolean_T b0;
   boolean_T b1;
   emxArray_char_T *pctype0;
   PC t_pc;
   int loop_ub;
-  double t;
   emxArray_uint8_T *data0;
   double b_t;
   int sizepe;
@@ -489,6 +489,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     }
   }
 
+  t = M2C_wtime();
   petscKSPSetOperators(t_ksp, Amat->data, Amat->type);
   b0 = !(pctype->size[1] == 0);
   b1 = !(solpack->size[1] == 0);
@@ -612,7 +613,6 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  t = M2C_wtime();
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -685,6 +685,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
     }
   }
 
+  t = M2C_wtime();
   petscKSPSetOperators(t_ksp, Amat->data, Amat->type);
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
@@ -694,7 +695,6 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
     }
   }
 
-  t = M2C_wtime();
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -749,9 +749,9 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   KSP t_ksp;
   int errCode;
   int flag;
+  double t;
   emxArray_char_T *ksptype0;
   int loop_ub;
-  double t;
   emxArray_uint8_T *data0;
   double b_t;
   int sizepe;
@@ -769,6 +769,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
+  t = M2C_wtime();
   petscKSPSetOperators(t_ksp, Amat->data, Amat->type);
   emxInit_char_T(&ksptype0, 2);
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
@@ -814,7 +815,6 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
-  t = M2C_wtime();
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -870,11 +870,11 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   KSP t_ksp;
   int errCode;
   int flag;
+  double t;
   boolean_T b2;
   emxArray_char_T *pctype0;
   PC t_pc;
   int loop_ub;
-  double t;
   emxArray_uint8_T *data0;
   double b_t;
   int sizepe;
@@ -892,6 +892,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
+  t = M2C_wtime();
   petscKSPSetOperators(t_ksp, Amat->data, Amat->type);
   b2 = !(pctype->size[1] == 0);
   emxInit_char_T(&pctype0, 2);
@@ -979,7 +980,6 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
-  t = M2C_wtime();
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);

@@ -1151,21 +1151,21 @@ void mptKSPSolve(const struct0_T *ksp, const struct0_T *b, const struct0_T *x,
                  double rtol, int maxits, const struct0_T *x0, int *flag, double
                  *relres, int *iter, double *time)
 {
+  double t;
   int ix;
   int val;
   boolean_T y;
   boolean_T exitg5;
   boolean_T p;
-  double t;
-  int exitg4;
   double b_t;
+  int exitg4;
   double b_rtol;
   double abstol;
   double dtol;
   int b_maxits;
   PC pc;
-  boolean_T exitg3;
   PCType t_type;
+  boolean_T exitg3;
   int errCode;
   emxArray_char_T *b_x0;
   static const char cv0[3] = { 'V', 'e', 'c' };
@@ -1176,6 +1176,7 @@ void mptKSPSolve(const struct0_T *ksp, const struct0_T *b, const struct0_T *x,
   boolean_T exitg1;
   emxArray_char_T *b_x;
   Vec b_vec;
+  t = M2C_wtime();
   if (rtol == 0.0) {
     ix = (PETSC_DEFAULT);
     rtol = ix;
@@ -1341,7 +1342,6 @@ void mptKSPSolve(const struct0_T *ksp, const struct0_T *b, const struct0_T *x,
     petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, ix);
   }
 
-  t = M2C_wtime();
   petscKSPSolve(ksp->data, ksp->type, b->data, b->type, x->data, x->type);
   b_t = M2C_wtime();
   *time = b_t - t;
@@ -1370,8 +1370,8 @@ void mptKSPSolve(const struct0_T *ksp, const struct0_T *b, const struct0_T *x,
 void mptKSPSolve_2args(const struct0_T *ksp, const struct0_T *b, int *flag,
   double *relres, int *iter, double *time)
 {
-  int k;
   double t;
+  int k;
   boolean_T p;
   boolean_T b_p;
   int exitg4;
@@ -1396,9 +1396,9 @@ void mptKSPSolve_2args(const struct0_T *ksp, const struct0_T *b, int *flag,
   int maxits;
   PC pc;
   PCType t_type;
+  t = M2C_wtime();
   k = (PETSC_FALSE);
   petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, k);
-  t = M2C_wtime();
   p = false;
   b_p = false;
   k = 0;
@@ -1560,8 +1560,8 @@ void mptKSPSolve_2args(const struct0_T *ksp, const struct0_T *b, int *flag,
 void mptKSPSolve_3args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   *x, int *flag, double *relres, int *iter, double *time)
 {
-  int val;
   double t;
+  int val;
   double b_t;
   double rtol;
   double abstol;
@@ -1570,9 +1570,9 @@ void mptKSPSolve_3args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   PC pc;
   PCType t_type;
   int errCode;
+  t = M2C_wtime();
   val = (PETSC_FALSE);
   petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, val);
-  t = M2C_wtime();
   petscKSPSolve(ksp->data, ksp->type, b->data, b->type, x->data, x->type);
   b_t = M2C_wtime();
   *flag = petscKSPGetConvergedReason(ksp->data, ksp->type);
@@ -1603,10 +1603,10 @@ void mptKSPSolve_4args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   *x, double rtol, int *flag, double *relres, int *iter, double *time)
 {
   double b_rtol;
+  double t;
   int val;
   int maxits;
   int b_val;
-  double t;
   double b_t;
   double abstol;
   double dtol;
@@ -1614,6 +1614,7 @@ void mptKSPSolve_4args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   PCType t_type;
   int errCode;
   b_rtol = rtol;
+  t = M2C_wtime();
   if (rtol == 0.0) {
     val = (PETSC_DEFAULT);
     b_rtol = val;
@@ -1625,7 +1626,6 @@ void mptKSPSolve_4args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   petscKSPSetTolerances(ksp->data, ksp->type, b_rtol, val, b_val, maxits);
   val = (PETSC_FALSE);
   petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, val);
-  t = M2C_wtime();
   petscKSPSolve(ksp->data, ksp->type, b->data, b->type, x->data, x->type);
   b_t = M2C_wtime();
   *flag = petscKSPGetConvergedReason(ksp->data, ksp->type);
@@ -1658,9 +1658,9 @@ void mptKSPSolve_5args(const struct0_T *ksp, const struct0_T *b, const struct0_T
 {
   double b_rtol;
   int maxits;
+  double t;
   int val;
   int b_val;
-  double t;
   double b_t;
   double abstol;
   double dtol;
@@ -1669,6 +1669,7 @@ void mptKSPSolve_5args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   int errCode;
   b_rtol = rtol;
   maxits = maxiter;
+  t = M2C_wtime();
   if (rtol == 0.0) {
     val = (PETSC_DEFAULT);
     b_rtol = val;
@@ -1683,7 +1684,6 @@ void mptKSPSolve_5args(const struct0_T *ksp, const struct0_T *b, const struct0_T
   petscKSPSetTolerances(ksp->data, ksp->type, b_rtol, val, b_val, maxits);
   val = (PETSC_FALSE);
   petscKSPSetInitialGuessNonzero(ksp->data, ksp->type, val);
-  t = M2C_wtime();
   petscKSPSolve(ksp->data, ksp->type, b->data, b->type, x->data, x->type);
   b_t = M2C_wtime();
   *flag = petscKSPGetConvergedReason(ksp->data, ksp->type);

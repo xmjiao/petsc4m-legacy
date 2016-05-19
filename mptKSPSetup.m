@@ -28,6 +28,9 @@ function [ksp, time, toplevel] = mptKSPSetup(Amat, ksptype, pctype, solpack)
 
 t_ksp = petscKSPCreate(petscObjectGetComm(Amat));
 
+time = 0;
+if nargout>1; t=m2c_wtime(); end
+
 % Setup KSP
 petscKSPSetOperators(t_ksp, Amat);
 
@@ -75,8 +78,6 @@ end
 
 petscKSPSetFromOptions(t_ksp);
 
-time = 0;
-if nargout>1; t=m2c_wtime(); end
 petscKSPSetUp(t_ksp);
 if nargout>1; time=m2c_wtime()-t; end
 
