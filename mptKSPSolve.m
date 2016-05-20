@@ -37,10 +37,12 @@ function [flag,relres,iter,time] = mptKSPSolve(ksp, b, x, rtol, maxits, x0)
 time = 0;
 if nargout>3; t=m2c_wtime(); end
 
+t_ksp = PetscKSP(ksp);
+
 % Solve the linear system
 if nargin==2
-    petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
-    petscKSPSolve(ksp, b);
+    petscKSPSetInitialGuessNonzero(t_ksp, PETSC_FALSE);
+    petscKSPSolve(t_ksp, b);
 else
     % Set tolerances
     if nargin>=4
@@ -50,32 +52,32 @@ else
         if nargin<5 || maxits==0
             maxits = PETSC_DEFAULT;
         end
-        petscKSPSetTolerances(ksp, double(rtol), double(PETSC_DEFAULT), ...
+        petscKSPSetTolerances(t_ksp, double(rtol), double(PETSC_DEFAULT), ...
             double(PETSC_DEFAULT), int32(maxits));
     end
     
     % Process initial guess
     if nargin>=6 && ~petscIsNULL(x0)
         petscVecCopy(x0, x);
-        petscKSPSetInitialGuessNonzero(ksp, PETSC_TRUE);
+        petscKSPSetInitialGuessNonzero(t_ksp, PETSC_TRUE);
     else
-        petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE);
+        petscKSPSetInitialGuessNonzero(t_ksp, PETSC_FALSE);
     end
     
-    petscKSPSolve(ksp, b, x);
+    petscKSPSolve(t_ksp, b, x);
 end
 
 if nargout>3; time=m2c_wtime()-t; end
 
-flag = petscKSPGetConvergedReason(ksp);
-relres = petscKSPGetResidualNorm(ksp);
-iter = petscKSPGetIterationNumber(ksp);
-[rtol, abstol, dtol, maxits] = petscKSPGetTolerances(ksp);
+flag = petscKSPGetConvergedReason(t_ksp);
+relres = petscKSPGetResidualNorm(t_ksp);
+iter = petscKSPGetIterationNumber(t_ksp);
+[rtol, abstol, dtol, maxits] = petscKSPGetTolerances(t_ksp);
 
 if flag < 0 || relres>rtol
-    pc = petscKSPGetPC(ksp);
+    pc = petscKSPGetPC(t_ksp);
     
-    m2c_printf('### %s with %s preconditioner stopped with flag %d.\n', petscKSPGetType(ksp), petscPCGetType(pc), flag);
+    m2c_printf('### %s with %s preconditioner stopped with flag %d.\n', petscKSPGetType(t_ksp), petscPCGetType(pc), flag);
     m2c_printf('### The relative residual was %g after %d iterations.\n', relres, iter);
     m2c_printf('### The relative and absolute tolerances were %g and %g.\n', rtol, abstol);
     m2c_printf('### The divergence and max-iter tolerances were %d and %g.\n', maxits, dtol);

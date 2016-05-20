@@ -16,8 +16,6 @@ static boolean_T isequal(const emxArray_char_T *varargin_1);
 static void j_m2c_error(int varargin_3);
 static void k_m2c_error(int varargin_3);
 static void m2c_error(const emxArray_char_T *varargin_3);
-static void petscKSPSetOperators(KSP ksp, const emxArray_uint8_T *Amat_data,
-  const emxArray_char_T *Amat_type);
 static MPI_Comm petscObjectGetComm(const emxArray_uint8_T *obj_data, const
   emxArray_char_T *obj_type);
 static void b_m2c_error(int varargin_3)
@@ -175,52 +173,6 @@ static void m2c_error(const emxArray_char_T *varargin_3)
             "Incorrect data type %s. Expected PetscObject.", &b_varargin_3->
             data[0]);
   emxFree_char_T(&b_varargin_3);
-}
-
-static void petscKSPSetOperators(KSP ksp, const emxArray_uint8_T *Amat_data,
-  const emxArray_char_T *Amat_type)
-{
-  emxArray_char_T *b_Amat_type;
-  emxArray_uint8_T *data;
-  int flag;
-  int loop_ub;
-  Mat t_Amat;
-  int errCode;
-  if (!isequal(Amat_type)) {
-    emxInit_char_T(&b_Amat_type, 2);
-    flag = b_Amat_type->size[0] * b_Amat_type->size[1];
-    b_Amat_type->size[0] = 1;
-    b_Amat_type->size[1] = Amat_type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_Amat_type, flag, (int)sizeof(char));
-    loop_ub = Amat_type->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      b_Amat_type->data[b_Amat_type->size[0] * flag] = Amat_type->data
-        [Amat_type->size[0] * flag];
-    }
-
-    b_Amat_type->data[b_Amat_type->size[0] * Amat_type->size[1]] = '\x00';
-    d_m2c_error(b_Amat_type);
-    emxFree_char_T(&b_Amat_type);
-  }
-
-  emxInit_uint8_T(&data, 1);
-  flag = data->size[0];
-  data->size[0] = Amat_data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, flag, (int)sizeof(unsigned char));
-  loop_ub = Amat_data->size[0];
-  for (flag = 0; flag < loop_ub; flag++) {
-    data->data[flag] = Amat_data->data[flag];
-  }
-
-  t_Amat = *(Mat*)(&data->data[0]);
-  errCode = KSPSetOperators(ksp, t_Amat, t_Amat);
-  emxFree_uint8_T(&data);
-  if (errCode != 0) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
-      e_m2c_error(errCode);
-    }
-  }
 }
 
 static MPI_Comm petscObjectGetComm(const emxArray_uint8_T *obj_data, const
@@ -467,12 +419,14 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   int errCode;
   int flag;
   double t;
+  emxArray_char_T *b_Amat;
+  emxArray_uint8_T *data0;
+  int loop_ub;
+  Mat c_Amat;
   boolean_T b0;
   boolean_T b1;
   emxArray_char_T *pctype0;
   PC t_pc;
-  int loop_ub;
-  emxArray_uint8_T *data0;
   double b_t;
   int sizepe;
   char t3_type[3];
@@ -490,7 +444,41 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   }
 
   t = M2C_wtime();
-  petscKSPSetOperators(t_ksp, Amat->data, Amat->type);
+  if (!isequal(Amat->type)) {
+    emxInit_char_T(&b_Amat, 2);
+    flag = b_Amat->size[0] * b_Amat->size[1];
+    b_Amat->size[0] = 1;
+    b_Amat->size[1] = Amat->type->size[1] + 1;
+    emxEnsureCapacity((emxArray__common *)b_Amat, flag, (int)sizeof(char));
+    loop_ub = Amat->type->size[1];
+    for (flag = 0; flag < loop_ub; flag++) {
+      b_Amat->data[b_Amat->size[0] * flag] = Amat->type->data[Amat->type->size[0]
+        * flag];
+    }
+
+    b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
+    d_m2c_error(b_Amat);
+    emxFree_char_T(&b_Amat);
+  }
+
+  emxInit_uint8_T(&data0, 1);
+  flag = data0->size[0];
+  data0->size[0] = Amat->data->size[0];
+  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
+  loop_ub = Amat->data->size[0];
+  for (flag = 0; flag < loop_ub; flag++) {
+    data0->data[flag] = Amat->data->data[flag];
+  }
+
+  c_Amat = *(Mat*)(&data0->data[0]);
+  errCode = KSPSetOperators(t_ksp, c_Amat, c_Amat);
+  if (errCode != 0) {
+    flag = (M2C_DEBUG);
+    if (flag != 0) {
+      e_m2c_error(errCode);
+    }
+  }
+
   b0 = !(pctype->size[1] == 0);
   b1 = !(solpack->size[1] == 0);
   emxInit_char_T(&pctype0, 2);
@@ -621,7 +609,6 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  emxInit_uint8_T(&data0, 1);
   b_t = M2C_wtime();
   *time = b_t - t;
   *toplevel = true;
@@ -667,13 +654,15 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   int errCode;
   int flag;
   double t;
+  emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
+  int loop_ub;
+  Mat c_Amat;
   double b_t;
   int sizepe;
   char t2_type[3];
   static const char cv6[3] = { 'K', 'S', 'P' };
 
-  int loop_ub;
   char * ptr;
   int i;
   arg = petscObjectGetComm(Amat->data, Amat->type);
@@ -686,7 +675,41 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   }
 
   t = M2C_wtime();
-  petscKSPSetOperators(t_ksp, Amat->data, Amat->type);
+  if (!isequal(Amat->type)) {
+    emxInit_char_T(&b_Amat, 2);
+    flag = b_Amat->size[0] * b_Amat->size[1];
+    b_Amat->size[0] = 1;
+    b_Amat->size[1] = Amat->type->size[1] + 1;
+    emxEnsureCapacity((emxArray__common *)b_Amat, flag, (int)sizeof(char));
+    loop_ub = Amat->type->size[1];
+    for (flag = 0; flag < loop_ub; flag++) {
+      b_Amat->data[b_Amat->size[0] * flag] = Amat->type->data[Amat->type->size[0]
+        * flag];
+    }
+
+    b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
+    d_m2c_error(b_Amat);
+    emxFree_char_T(&b_Amat);
+  }
+
+  emxInit_uint8_T(&data0, 1);
+  flag = data0->size[0];
+  data0->size[0] = Amat->data->size[0];
+  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
+  loop_ub = Amat->data->size[0];
+  for (flag = 0; flag < loop_ub; flag++) {
+    data0->data[flag] = Amat->data->data[flag];
+  }
+
+  c_Amat = *(Mat*)(&data0->data[0]);
+  errCode = KSPSetOperators(t_ksp, c_Amat, c_Amat);
+  if (errCode != 0) {
+    flag = (M2C_DEBUG);
+    if (flag != 0) {
+      e_m2c_error(errCode);
+    }
+  }
+
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -703,7 +726,6 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
     }
   }
 
-  emxInit_uint8_T(&data0, 1);
   b_t = M2C_wtime();
   sizepe = sizeof(KSP);
   flag = data0->size[0];
@@ -750,9 +772,11 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   int errCode;
   int flag;
   double t;
-  emxArray_char_T *ksptype0;
-  int loop_ub;
+  emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
+  int loop_ub;
+  Mat c_Amat;
+  emxArray_char_T *ksptype0;
   double b_t;
   int sizepe;
   char t1_type[3];
@@ -770,7 +794,41 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   }
 
   t = M2C_wtime();
-  petscKSPSetOperators(t_ksp, Amat->data, Amat->type);
+  if (!isequal(Amat->type)) {
+    emxInit_char_T(&b_Amat, 2);
+    flag = b_Amat->size[0] * b_Amat->size[1];
+    b_Amat->size[0] = 1;
+    b_Amat->size[1] = Amat->type->size[1] + 1;
+    emxEnsureCapacity((emxArray__common *)b_Amat, flag, (int)sizeof(char));
+    loop_ub = Amat->type->size[1];
+    for (flag = 0; flag < loop_ub; flag++) {
+      b_Amat->data[b_Amat->size[0] * flag] = Amat->type->data[Amat->type->size[0]
+        * flag];
+    }
+
+    b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
+    d_m2c_error(b_Amat);
+    emxFree_char_T(&b_Amat);
+  }
+
+  emxInit_uint8_T(&data0, 1);
+  flag = data0->size[0];
+  data0->size[0] = Amat->data->size[0];
+  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
+  loop_ub = Amat->data->size[0];
+  for (flag = 0; flag < loop_ub; flag++) {
+    data0->data[flag] = Amat->data->data[flag];
+  }
+
+  c_Amat = *(Mat*)(&data0->data[0]);
+  errCode = KSPSetOperators(t_ksp, c_Amat, c_Amat);
+  if (errCode != 0) {
+    flag = (M2C_DEBUG);
+    if (flag != 0) {
+      e_m2c_error(errCode);
+    }
+  }
+
   emxInit_char_T(&ksptype0, 2);
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
        [1] - 1] != 0)) {
@@ -823,7 +881,6 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
-  emxInit_uint8_T(&data0, 1);
   b_t = M2C_wtime();
   sizepe = sizeof(KSP);
   flag = data0->size[0];
@@ -871,11 +928,13 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   int errCode;
   int flag;
   double t;
+  emxArray_char_T *b_Amat;
+  emxArray_uint8_T *data0;
+  int loop_ub;
+  Mat c_Amat;
   boolean_T b2;
   emxArray_char_T *pctype0;
   PC t_pc;
-  int loop_ub;
-  emxArray_uint8_T *data0;
   double b_t;
   int sizepe;
   char t0_type[3];
@@ -893,7 +952,41 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   }
 
   t = M2C_wtime();
-  petscKSPSetOperators(t_ksp, Amat->data, Amat->type);
+  if (!isequal(Amat->type)) {
+    emxInit_char_T(&b_Amat, 2);
+    flag = b_Amat->size[0] * b_Amat->size[1];
+    b_Amat->size[0] = 1;
+    b_Amat->size[1] = Amat->type->size[1] + 1;
+    emxEnsureCapacity((emxArray__common *)b_Amat, flag, (int)sizeof(char));
+    loop_ub = Amat->type->size[1];
+    for (flag = 0; flag < loop_ub; flag++) {
+      b_Amat->data[b_Amat->size[0] * flag] = Amat->type->data[Amat->type->size[0]
+        * flag];
+    }
+
+    b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
+    d_m2c_error(b_Amat);
+    emxFree_char_T(&b_Amat);
+  }
+
+  emxInit_uint8_T(&data0, 1);
+  flag = data0->size[0];
+  data0->size[0] = Amat->data->size[0];
+  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
+  loop_ub = Amat->data->size[0];
+  for (flag = 0; flag < loop_ub; flag++) {
+    data0->data[flag] = Amat->data->data[flag];
+  }
+
+  c_Amat = *(Mat*)(&data0->data[0]);
+  errCode = KSPSetOperators(t_ksp, c_Amat, c_Amat);
+  if (errCode != 0) {
+    flag = (M2C_DEBUG);
+    if (flag != 0) {
+      e_m2c_error(errCode);
+    }
+  }
+
   b2 = !(pctype->size[1] == 0);
   emxInit_char_T(&pctype0, 2);
   if (b2) {
@@ -988,7 +1081,6 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
-  emxInit_uint8_T(&data0, 1);
   b_t = M2C_wtime();
   sizepe = sizeof(KSP);
   flag = data0->size[0];

@@ -26,13 +26,14 @@ function [ksp, time, toplevel] = mptKSPSetup(Amat, ksptype, pctype, solpack)
 %#codegen mptKSPSetup_2args -args {PetscMat, PetscKSPType}
 %#codegen mptKSPSetup_3args -args {PetscMat, PetscKSPType, PetscPCType}
 
-t_ksp = petscKSPCreate(petscObjectGetComm(Amat));
+t_Amat = Amat;
+t_ksp = petscKSPCreate(petscObjectGetComm(t_Amat));
 
 time = 0;
 if nargout>1; t=m2c_wtime(); end
 
 % Setup KSP
-petscKSPSetOperators(t_ksp, Amat);
+petscKSPSetOperators(t_ksp, PetscMat(t_Amat));
 
 if nargin>1
     if nargin>2
