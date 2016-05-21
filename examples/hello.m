@@ -7,7 +7,7 @@
 %  >> run examples/hello.m                     % only 1 processor is used.
 %
 %  To run from command line with multiple octave instances.
-%  $ mpirun -np 2 octave --no-gui -silent --eval "startup; run examples/hello.m"
+%  $ mpirun -np 2 octave --no-gui -q --eval "startup; run examples/hello.m"
 %
 %  To run from command line with multiple Matlab instances.
 %  $ mpirun -np 2 matlab -nosplash -nojvm -r "run examples/hello.m; exit"

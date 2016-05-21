@@ -1,5 +1,5 @@
 /*
- * /Users/jiao/projects/NumGeom/ParaCoder/MPETSc/sys/codegen/lib/petscInitialized/petscInitialized_mex.c
+ * sys/codegen/lib/petscInitialized/petscInitialized_mex.c
  *
  * Auxiliary code for mexFunction of petscInitialized
  *

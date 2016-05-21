@@ -1,5 +1,5 @@
 /*
- * /Users/jiao/projects/NumGeom/ParaCoder/MPETSc/sys/codegen/lib/petscGetObject/petscGetObject_mex.c
+ * sys/codegen/lib/petscGetObject/petscGetObject_mex.c
  *
  * Auxiliary code for mexFunction of petscGetObject
  *

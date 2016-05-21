@@ -119,7 +119,7 @@ static void ab_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -154,7 +154,7 @@ static void b_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -187,7 +187,7 @@ static void b_m2c_printf(double varargin_2, int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_error, m2c_warn */
   /* 'm2c_printf:17' coder.inline('never'); */
-  /* 'm2c_printf:19' if coder.target('MATLAB') */
+  /* 'm2c_printf:19' if isempty(coder.target) */
   /* 'm2c_printf:21' else */
   /* 'm2c_printf:22' if isequal(coder.target, 'mex') */
   /* 'm2c_printf:24' else */
@@ -220,7 +220,7 @@ static void bb_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -255,7 +255,7 @@ static void c_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -288,7 +288,7 @@ static void c_m2c_printf(double varargin_2, double varargin_3)
   /*  */
   /*  SEE ALSO: m2c_error, m2c_warn */
   /* 'm2c_printf:17' coder.inline('never'); */
-  /* 'm2c_printf:19' if coder.target('MATLAB') */
+  /* 'm2c_printf:19' if isempty(coder.target) */
   /* 'm2c_printf:21' else */
   /* 'm2c_printf:22' if isequal(coder.target, 'mex') */
   /* 'm2c_printf:24' else */
@@ -321,7 +321,7 @@ static void cb_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -356,7 +356,7 @@ static void d_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -389,7 +389,7 @@ static void d_m2c_printf(int varargin_2, double varargin_3)
   /*  */
   /*  SEE ALSO: m2c_error, m2c_warn */
   /* 'm2c_printf:17' coder.inline('never'); */
-  /* 'm2c_printf:19' if coder.target('MATLAB') */
+  /* 'm2c_printf:19' if isempty(coder.target) */
   /* 'm2c_printf:21' else */
   /* 'm2c_printf:22' if isequal(coder.target, 'mex') */
   /* 'm2c_printf:24' else */
@@ -422,7 +422,7 @@ static void db_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -457,7 +457,7 @@ static void e_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -490,7 +490,7 @@ static void e_m2c_printf(void)
   /*  */
   /*  SEE ALSO: m2c_error, m2c_warn */
   /* 'm2c_printf:17' coder.inline('never'); */
-  /* 'm2c_printf:19' if coder.target('MATLAB') */
+  /* 'm2c_printf:19' if isempty(coder.target) */
   /* 'm2c_printf:21' else */
   /* 'm2c_printf:22' if isequal(coder.target, 'mex') */
   /* 'm2c_printf:24' else */
@@ -522,7 +522,7 @@ static void eb_m2c_error(void)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -572,7 +572,7 @@ static void f_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -607,7 +607,7 @@ static void fb_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -642,7 +642,7 @@ static void g_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -677,7 +677,7 @@ static void gb_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -712,7 +712,7 @@ static void h_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -747,7 +747,7 @@ static void hb_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -782,7 +782,7 @@ static void i_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -817,7 +817,7 @@ static void ib_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -853,7 +853,7 @@ static void j_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -888,7 +888,7 @@ static void jb_m2c_error(void)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -923,7 +923,7 @@ static void k_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -958,7 +958,7 @@ static void kb_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -993,7 +993,7 @@ static void l_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -1028,7 +1028,7 @@ static void m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -1061,7 +1061,7 @@ static void m2c_printf(KSPType varargin_2, PCType varargin_3, int varargin_4)
   /*  */
   /*  SEE ALSO: m2c_error, m2c_warn */
   /* 'm2c_printf:17' coder.inline('never'); */
-  /* 'm2c_printf:19' if coder.target('MATLAB') */
+  /* 'm2c_printf:19' if isempty(coder.target) */
   /* 'm2c_printf:21' else */
   /* 'm2c_printf:22' if isequal(coder.target, 'mex') */
   /* 'm2c_printf:24' else */
@@ -1094,7 +1094,7 @@ static void m_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -1149,7 +1149,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   /*     pctype is PCLU, PCILU, or PCICC. */
   /*  */
   /*  See Also: mptKSPSolve, mptKSPCleanup */
-  /* 'mptKSPSetup:29' t_ksp = petscKSPCreate(petscObjectGetComm(Amat)); */
+  /* 'mptKSPSetup:29' t_Amat = Amat; */
+  /* 'mptKSPSetup:30' t_ksp = petscKSPCreate(petscObjectGetComm(t_Amat)); */
   /* Gets the MPI communicator for any PetscObject, regardless of the type.  */
   /*  */
   /*   [comm, errCode] = petscObjectGetComm(obj) */
@@ -1162,7 +1163,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   /*    PetscErrorCode  PetscObjectGetComm(PetscObject obj,MPI_Comm *comm) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscObjectGetComm.html */
   /* 'petscObjectGetComm:16' errCode = int32(-1); */
-  /* 'petscObjectGetComm:18' if ~coder.target('MATLAB') */
+  /* 'petscObjectGetComm:18' if ~isempty(coder.target) */
   /* 'petscObjectGetComm:19' t_obj = PetscObject(obj); */
   /* Map an opaque object into a PETSc PetscObject object */
   /*  */
@@ -1224,7 +1225,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -1249,7 +1250,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   /*    PetscErrorCode  KSPCreate(MPI_Comm comm,KSP *ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPCreate.html */
   /* 'petscKSPCreate:18' errCode = int32(-1); */
-  /* 'petscKSPCreate:20' if ~coder.target('MATLAB') */
+  /* 'petscKSPCreate:20' if ~isempty(coder.target) */
   /* 'petscKSPCreate:21' t_ksp = coder.opaque('KSP'); */
   /* 'petscKSPCreate:23' if nargin==0 */
   /* 'petscKSPCreate:25' else */
@@ -1308,7 +1309,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -1319,9 +1320,9 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:31' time = 0; */
-  /* 'mptKSPSetup:32' if nargout>1 */
-  /* 'mptKSPSetup:32' t=m2c_wtime(); */
+  /* 'mptKSPSetup:32' time = 0; */
+  /* 'mptKSPSetup:33' if nargout>1 */
+  /* 'mptKSPSetup:33' t=m2c_wtime(); */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -1332,7 +1333,28 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   t = M2C_wtime();
 
   /*  Setup KSP */
-  /* 'mptKSPSetup:35' petscKSPSetOperators(t_ksp, Amat); */
+  /* 'mptKSPSetup:36' petscKSPSetOperators(t_ksp, PetscMat(t_Amat)); */
+  /* Map an opaque object into a PETSc Mat object */
+  /*  */
+  /*   mat = PetscMat() simply returns a definition of the */
+  /*   m2c_opaque_type definition, suitable in the argument */
+  /*   specification for codegen. */
+  /*  */
+  /*   mat = PetscMat(arg) or mat = PetscMat(arg, false) converts arg */
+  /*   into a PETSc Mat object. */
+  /*  */
+  /*   mat = PetscMat(arg, true) wraps the arg into an opaque object.  */
+  /*   This should be used if the object needs to be returned to */
+  /*   MATLAB. Note that the value of opaque must be determined at */
+  /*   compile time. */
+  /*  */
+  /*  See also PetscMat */
+  /* 'PetscMat:18' coder.inline('always'); */
+  /* 'PetscMat:20' if nargin==0 && isempty(coder.target) */
+  /* 'PetscMat:25' if isstruct(arg) && ~isequal(arg.type, 'Mat') */
+  /* 'PetscMat:30' if ~isstruct(arg) || isempty(coder.target) */
+  /* 'PetscMat:31' if nargin==1 || ~opaque */
+  /* 'PetscMat:32' mat = arg; */
   /* Sets the matrix associated with the linear system and a (possibly) */
   /* different one associated with the preconditioner. */
   /*  */
@@ -1353,7 +1375,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   /*    PetscErrorCode  KSPSetOperators(KSP ksp,Mat Amat,Mat Pmat) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetOperators.html */
   /* 'petscKSPSetOperators:25' errCode = int32(-1); */
-  /* 'petscKSPSetOperators:27' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetOperators:27' if ~isempty(coder.target) */
   /* 'petscKSPSetOperators:28' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -1411,7 +1433,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -1422,18 +1444,18 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:37' if nargin>1 */
-  /* 'mptKSPSetup:38' if nargin>2 */
-  /* 'mptKSPSetup:39' hasPC = ~ischar(pctype) || ~isempty(pctype); */
+  /* 'mptKSPSetup:38' if nargin>1 */
+  /* 'mptKSPSetup:39' if nargin>2 */
+  /* 'mptKSPSetup:40' hasPC = ~ischar(pctype) || ~isempty(pctype); */
   b1 = !(pctype->size[1] == 0);
 
-  /* 'mptKSPSetup:40' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
+  /* 'mptKSPSetup:41' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
   b2 = !(solpack->size[1] == 0);
 
-  /* 'mptKSPSetup:42' if hasPC || hasSolver */
+  /* 'mptKSPSetup:43' if hasPC || hasSolver */
   emxInit_char_T(&pctype0, 2);
   if (b1 || b2) {
-    /* 'mptKSPSetup:43' t_pc = petscKSPGetPC(t_ksp); */
+    /* 'mptKSPSetup:44' t_pc = petscKSPGetPC(t_ksp); */
     /* Returns a pointer to the preconditioner context set with petscKSPSetPC. */
     /*  */
     /*   [pc, errCode] = petscKSPGetPC(ksp, pc) gets the PC of the KSP */
@@ -1444,7 +1466,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     /*    PetscErrorCode  KSPGetPC(KSP ksp,PC *pc) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPGetPC.html */
     /* 'petscKSPGetPC:14' errCode = int32(-1); */
-    /* 'petscKSPGetPC:16' if ~coder.target('MATLAB') */
+    /* 'petscKSPGetPC:16' if ~isempty(coder.target) */
     /* 'petscKSPGetPC:17' t_pc = coder.opaque('PC'); */
     /* 'petscKSPGetPC:18' errCode = coder.ceval('KSPGetPC', PetscKSP(ksp), coder.wref(t_pc)); */
     /* Map an opaque object into a PETSc KSP object */
@@ -1500,7 +1522,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -1511,12 +1533,12 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       }
     }
 
-    /* 'mptKSPSetup:45' if hasPC */
+    /* 'mptKSPSetup:46' if hasPC */
     if (b1) {
-      /* 'mptKSPSetup:46' if ischar(pctype) && pctype(end)~=char(0) */
+      /* 'mptKSPSetup:47' if ischar(pctype) && pctype(end)~=char(0) */
       if (pctype->data[pctype->size[1] - 1] != '\x00') {
         /*  null-terminate the string if not terminated properly */
-        /* 'mptKSPSetup:48' pctype0 = [pctype char(0)]; */
+        /* 'mptKSPSetup:49' pctype0 = [pctype char(0)]; */
         flag = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1] + 1;
@@ -1529,8 +1551,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
         pctype0->data[pctype0->size[0] * pctype->size[1]] = '\x00';
       } else {
-        /* 'mptKSPSetup:49' else */
-        /* 'mptKSPSetup:50' pctype0 = pctype; */
+        /* 'mptKSPSetup:50' else */
+        /* 'mptKSPSetup:51' pctype0 = pctype; */
         flag = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1];
@@ -1541,7 +1563,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         }
       }
 
-      /* 'mptKSPSetup:52' petscPCSetType(t_pc, pctype0); */
+      /* 'mptKSPSetup:53' petscPCSetType(t_pc, pctype0); */
       /* Builds PC for a particular solver. */
       /*  */
       /*   errCode = petscPCSetType(pc, type) sets the type of the PC */
@@ -1552,7 +1574,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       /*    PetscErrorCode  PCSetType(PC pc, PCType type) */
       /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/PC/PCSetType.html */
       /* 'petscPCSetType:14' errCode = int32(-1); */
-      /* 'petscPCSetType:16' if ~coder.target('MATLAB') */
+      /* 'petscPCSetType:16' if ~isempty(coder.target) */
       /* 'petscPCSetType:17' if ischar(type) */
       /* 'petscPCSetType:18' errCode = coder.ceval('PCSetType', PetscPC(pc), coder.rref(type)); */
       /* Map an opaque object into a PETSc PC object */
@@ -1586,7 +1608,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
         /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
         /* 'm2c_debug:7' coder.inline('always'); */
-        /* 'm2c_debug:9' if coder.target('MATLAB') */
+        /* 'm2c_debug:9' if isempty(coder.target) */
         /* 'm2c_debug:11' else */
         /* 'm2c_debug:12' flag = int32(1); */
         /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -1598,12 +1620,12 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       }
     }
 
-    /* 'mptKSPSetup:55' if hasSolver */
+    /* 'mptKSPSetup:56' if hasSolver */
     if (b2) {
-      /* 'mptKSPSetup:56' if ischar(solpack) && solpack(end)~=char(0) */
+      /* 'mptKSPSetup:57' if ischar(solpack) && solpack(end)~=char(0) */
       if (solpack->data[solpack->size[1] - 1] != '\x00') {
         /*  null-terminate the string if not terminated properly */
-        /* 'mptKSPSetup:58' solpack0 = [solpack char(0)]; */
+        /* 'mptKSPSetup:59' solpack0 = [solpack char(0)]; */
         flag = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = solpack->size[1] + 1;
@@ -1616,8 +1638,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
         pctype0->data[pctype0->size[0] * solpack->size[1]] = '\x00';
       } else {
-        /* 'mptKSPSetup:59' else */
-        /* 'mptKSPSetup:60' solpack0 = solpack; */
+        /* 'mptKSPSetup:60' else */
+        /* 'mptKSPSetup:61' solpack0 = solpack; */
         flag = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = solpack->size[1];
@@ -1628,7 +1650,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         }
       }
 
-      /* 'mptKSPSetup:62' petscPCFactorSetMatSolverPackage(t_pc,solpack0); */
+      /* 'mptKSPSetup:63' petscPCFactorSetMatSolverPackage(t_pc,solpack0); */
       /* Sets the software that is used to perform the factorization */
       /*  */
       /*   errCode = petscpetscPCFactorSetMatSolverPackage(pc, solver) sets the */
@@ -1640,7 +1662,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       /*    PetscErrorCode  PCFactorSetMatSolverPackage(PC pc,const MatSolverPackage ssolver) */
       /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/PC/petscPCFactorSetMatSolverPackage.html */
       /* 'petscPCFactorSetMatSolverPackage:15' errCode = int32(-1); */
-      /* 'petscPCFactorSetMatSolverPackage:17' if ~coder.target('MATLAB') */
+      /* 'petscPCFactorSetMatSolverPackage:17' if ~isempty(coder.target) */
       /* 'petscPCFactorSetMatSolverPackage:18' if ischar(solver) */
       /* 'petscPCFactorSetMatSolverPackage:19' errCode = coder.ceval('PCFactorSetMatSolverPackage', ... */
       /* 'petscPCFactorSetMatSolverPackage:20'             PetscPC(pc), coder.rref(solver)); */
@@ -1675,7 +1697,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
         /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
         /* 'm2c_debug:7' coder.inline('always'); */
-        /* 'm2c_debug:9' if coder.target('MATLAB') */
+        /* 'm2c_debug:9' if isempty(coder.target) */
         /* 'm2c_debug:11' else */
         /* 'm2c_debug:12' flag = int32(1); */
         /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -1688,11 +1710,11 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:67' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
+  /* 'mptKSPSetup:68' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
        [1] - 1] != 0)) {
     /*  null-terminate the string if not terminated properly */
-    /* 'mptKSPSetup:69' ksptype0 = [ksptype char(0)]; */
+    /* 'mptKSPSetup:70' ksptype0 = [ksptype char(0)]; */
     flag = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1] + 1;
@@ -1705,8 +1727,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
     pctype0->data[pctype0->size[0] * ksptype->size[1]] = '\x00';
   } else {
-    /* 'mptKSPSetup:70' else */
-    /* 'mptKSPSetup:71' ksptype0 = ksptype; */
+    /* 'mptKSPSetup:71' else */
+    /* 'mptKSPSetup:72' ksptype0 = ksptype; */
     flag = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1];
@@ -1717,10 +1739,10 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:73' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
+  /* 'mptKSPSetup:74' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
   if (!(pctype0->size[1] == 0)) {
     /*  Set KSP Types */
-    /* 'mptKSPSetup:75' petscKSPSetType(t_ksp, ksptype0); */
+    /* 'mptKSPSetup:76' petscKSPSetType(t_ksp, ksptype0); */
     /* Builds KSP for a particular solver. */
     /*  */
     /*   errCode = petscKSPSetType(ksp, type) sets the type of the KSP */
@@ -1731,7 +1753,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     /*    PetscErrorCode  KSPSetType(KSP ksp, KSPType type) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetType.html */
     /* 'petscKSPSetType:14' errCode = int32(-1); */
-    /* 'petscKSPSetType:16' if ~coder.target('MATLAB') */
+    /* 'petscKSPSetType:16' if ~isempty(coder.target) */
     /* 'petscKSPSetType:17' if ischar(type) */
     /* 'petscKSPSetType:18' errCode = coder.ceval('KSPSetType', PetscKSP(ksp), coder.rref(type)); */
     /* Map an opaque object into a PETSc KSP object */
@@ -1765,7 +1787,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -1779,7 +1801,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
   emxFree_char_T(&pctype0);
 
-  /* 'mptKSPSetup:79' petscKSPSetFromOptions(t_ksp); */
+  /* 'mptKSPSetup:80' petscKSPSetFromOptions(t_ksp); */
   /* Sets KSP options from the options database. This routine must be called */
   /* before KSPSetUp() if the user is to be allowed to set the Krylov type. */
   /*  */
@@ -1791,7 +1813,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   /*    PetscErrorCode KSPSetFromOptions(KSP ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetFromOptions.html */
   /* 'petscKSPSetFromOptions:15' errCode = int32(-1); */
-  /* 'petscKSPSetFromOptions:17' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetFromOptions:17' if ~isempty(coder.target) */
   /* 'petscKSPSetFromOptions:18' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -1825,7 +1847,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -1836,7 +1858,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:81' petscKSPSetUp(t_ksp); */
+  /* 'mptKSPSetup:82' petscKSPSetUp(t_ksp); */
   /* Sets up the internal data structures for the later use of an iterative solver. */
   /*  */
   /*   errCode = petscKSPSetUp(ksp) */
@@ -1847,7 +1869,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   /*    PetscErrorCode KSPSetUp(KSP ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetUp.html */
   /* 'petscKSPSetUp:14' errCode = int32(-1); */
-  /* 'petscKSPSetUp:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetUp:16' if ~isempty(coder.target) */
   /* 'petscKSPSetUp:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -1881,7 +1903,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -1892,8 +1914,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  /* 'mptKSPSetup:82' if nargout>1 */
-  /* 'mptKSPSetup:82' time=m2c_wtime()-t; */
+  /* 'mptKSPSetup:83' if nargout>1 */
+  /* 'mptKSPSetup:83' time=m2c_wtime()-t; */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -1904,8 +1926,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   b_t = M2C_wtime();
   *time = b_t - t;
 
-  /* 'mptKSPSetup:84' toplevel = nargout>2; */
-  /* 'mptKSPSetup:85' ksp = PetscKSP(t_ksp, toplevel); */
+  /* 'mptKSPSetup:85' toplevel = nargout>2; */
+  /* 'mptKSPSetup:86' ksp = PetscKSP(t_ksp, toplevel); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
   /*   ksp = PetscKSP() simply returns a definition of the */
@@ -1989,14 +2011,36 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
   t = M2C_wtime();
 
+  /* 'mptKSPSolve:40' t_ksp = PetscKSP(ksp); */
+  /* Map an opaque object into a PETSc KSP object */
+  /*  */
+  /*   ksp = PetscKSP() simply returns a definition of the */
+  /*   m2c_opaque_type definition, suitable in the argument */
+  /*   specification for codegen. */
+  /*  */
+  /*   ksp = PetscKSP(arg) or ksp = PetscKSP(arg, false) converts arg */
+  /*   into a PETSc KSP object. */
+  /*  */
+  /*   ksp = PetscKSP(arg, true) wraps the arg into an opaque object.  */
+  /*   This should be used if the object needs to be returned to */
+  /*   MATLAB. Note that the value of opaque must be determined at */
+  /*   compile time. */
+  /*  */
+  /*  See also PetscPC */
+  /* 'PetscKSP:18' coder.inline('always'); */
+  /* 'PetscKSP:20' if nargin==0 && isempty(coder.target) */
+  /* 'PetscKSP:25' if isstruct(arg) && ~isequal(arg.type, 'KSP') */
+  /* 'PetscKSP:30' if ~isstruct(arg) || isempty(coder.target) */
+  /* 'PetscKSP:31' if nargin==1 || ~opaque */
+  /* 'PetscKSP:32' ksp = arg; */
   /*  Solve the linear system */
-  /* 'mptKSPSolve:41' if nargin==2 */
-  /* 'mptKSPSolve:44' else */
+  /* 'mptKSPSolve:43' if nargin==2 */
+  /* 'mptKSPSolve:46' else */
   /*  Set tolerances */
-  /* 'mptKSPSolve:46' if nargin>=4 */
-  /* 'mptKSPSolve:47' if rtol==0 */
+  /* 'mptKSPSolve:48' if nargin>=4 */
+  /* 'mptKSPSolve:49' if rtol==0 */
   if (rtol == 0.0) {
-    /* 'mptKSPSolve:48' rtol = double(PETSC_DEFAULT); */
+    /* 'mptKSPSolve:50' rtol = double(PETSC_DEFAULT); */
     /*  Obtain PETSC constant PETSC_DEFAULT */
     /* 'PETSC_DEFAULT:4' coder.inline('always'); */
     /* 'PETSC_DEFAULT:6' val = petscGetEnum('PETSC_DEFAULT'); */
@@ -2041,7 +2085,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:46' if isempty(coder.target) */
     /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
     /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
@@ -2055,9 +2099,9 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     rtol = val;
   }
 
-  /* 'mptKSPSolve:50' if nargin<5 || maxits==0 */
+  /* 'mptKSPSolve:52' if nargin<5 || maxits==0 */
   if (maxits == 0) {
-    /* 'mptKSPSolve:51' maxits = PETSC_DEFAULT; */
+    /* 'mptKSPSolve:53' maxits = PETSC_DEFAULT; */
     /*  Obtain PETSC constant PETSC_DEFAULT */
     /* 'PETSC_DEFAULT:4' coder.inline('always'); */
     /* 'PETSC_DEFAULT:6' val = petscGetEnum('PETSC_DEFAULT'); */
@@ -2102,7 +2146,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:46' if isempty(coder.target) */
     /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
     /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
@@ -2115,8 +2159,8 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     maxits = (PETSC_DEFAULT);
   }
 
-  /* 'mptKSPSolve:53' petscKSPSetTolerances(ksp, double(rtol), double(PETSC_DEFAULT), ... */
-  /* 'mptKSPSolve:54'             double(PETSC_DEFAULT), int32(maxits)); */
+  /* 'mptKSPSolve:55' petscKSPSetTolerances(t_ksp, double(rtol), double(PETSC_DEFAULT), ... */
+  /* 'mptKSPSolve:56'             double(PETSC_DEFAULT), int32(maxits)); */
   /*  Obtain PETSC constant PETSC_DEFAULT */
   /* 'PETSC_DEFAULT:4' coder.inline('always'); */
   /* 'PETSC_DEFAULT:6' val = petscGetEnum('PETSC_DEFAULT'); */
@@ -2161,7 +2205,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:46' if isempty(coder.target) */
   /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
   /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
@@ -2217,7 +2261,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:46' if isempty(coder.target) */
   /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
   /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
@@ -2252,7 +2296,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*    PetscErrorCode  KSPSetTolerances(KSP ksp,PetscReal rtol,PetscReal abstol,PetscReal dtol,PetscInt maxits) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetTolerances.html */
   /* 'petscKSPSetTolerances:28' errCode = int32(-1); */
-  /* 'petscKSPSetTolerances:30' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetTolerances:30' if ~isempty(coder.target) */
   /* 'petscKSPSetTolerances:31' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -2287,7 +2331,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -2299,7 +2343,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   }
 
   /*  Process initial guess */
-  /* 'mptKSPSolve:58' if nargin>=6 && ~petscIsNULL(x0) */
+  /* 'mptKSPSolve:60' if nargin>=6 && ~petscIsNULL(x0) */
   /*  Determine whether a given object is a null opointer of a particular type. */
   /*  */
   /*     isn = petscIsNULL(obj) */
@@ -2309,7 +2353,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /* 'petscIsNULL:10' isn = coder.ceval('!', obj); */
   val = !(x0);
   if (!(val != 0)) {
-    /* 'mptKSPSolve:59' petscVecCopy(x0, x); */
+    /* 'mptKSPSolve:61' petscVecCopy(x0, x); */
     /* Creates a vector from x to y. */
     /*  */
     /*   errCode = petscVecCopy(x, y) copies the entries from x to y. Both */
@@ -2321,7 +2365,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*    PetscErrorCode  VecCopy(Vec x, Vec y) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecCopy.html */
     /* 'petscVecCopy:15' errCode = int32(-1); */
-    /* 'petscVecCopy:17' if ~coder.target('MATLAB') */
+    /* 'petscVecCopy:17' if ~isempty(coder.target) */
     /* 'petscVecCopy:18' errCode = coder.ceval('VecCopy', PetscVec(x), PetscVec(y)); */
     /* Map an opaque object into a PETSc Vec object */
     /*  */
@@ -2375,7 +2419,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -2386,7 +2430,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       }
     }
 
-    /* 'mptKSPSolve:60' petscKSPSetInitialGuessNonzero(ksp, PETSC_TRUE); */
+    /* 'mptKSPSolve:62' petscKSPSetInitialGuessNonzero(t_ksp, PETSC_TRUE); */
     /*  Obtain PETSC constant PETSC_TRUE */
     /* 'PETSC_TRUE:4' coder.inline('always'); */
     /* 'PETSC_TRUE:6' val = petscGetEnum('PETSC_TRUE'); */
@@ -2431,7 +2475,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:46' if isempty(coder.target) */
     /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
     /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
@@ -2456,7 +2500,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*    PetscErrorCode  KSPSetInitialGuessNonzero(KSP ksp,PetscBool flg) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetInitialGuessNonzero.html */
     /* 'petscKSPSetInitialGuessNonzero:17' errCode = int32(-1); */
-    /* 'petscKSPSetInitialGuessNonzero:19' if ~coder.target('MATLAB') */
+    /* 'petscKSPSetInitialGuessNonzero:19' if ~isempty(coder.target) */
     /* 'petscKSPSetInitialGuessNonzero:20' t_ksp = PetscKSP(ksp); */
     /* Map an opaque object into a PETSc KSP object */
     /*  */
@@ -2490,7 +2534,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -2501,8 +2545,8 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       }
     }
   } else {
-    /* 'mptKSPSolve:61' else */
-    /* 'mptKSPSolve:62' petscKSPSetInitialGuessNonzero(ksp, PETSC_FALSE); */
+    /* 'mptKSPSolve:63' else */
+    /* 'mptKSPSolve:64' petscKSPSetInitialGuessNonzero(t_ksp, PETSC_FALSE); */
     /*  Obtain PETSC constant PETSC_FALSE */
     /* 'PETSC_FALSE:4' coder.inline('always'); */
     /* 'PETSC_FALSE:6' val = petscGetEnum('PETSC_FALSE'); */
@@ -2547,7 +2591,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:46' if isempty(coder.target) */
     /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
     /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
@@ -2572,7 +2616,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*    PetscErrorCode  KSPSetInitialGuessNonzero(KSP ksp,PetscBool flg) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetInitialGuessNonzero.html */
     /* 'petscKSPSetInitialGuessNonzero:17' errCode = int32(-1); */
-    /* 'petscKSPSetInitialGuessNonzero:19' if ~coder.target('MATLAB') */
+    /* 'petscKSPSetInitialGuessNonzero:19' if ~isempty(coder.target) */
     /* 'petscKSPSetInitialGuessNonzero:20' t_ksp = PetscKSP(ksp); */
     /* Map an opaque object into a PETSc KSP object */
     /*  */
@@ -2606,7 +2650,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -2618,7 +2662,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:65' petscKSPSolve(ksp, b, x); */
+  /* 'mptKSPSolve:67' petscKSPSolve(t_ksp, b, x); */
   /* Solves linear system. */
   /*  */
   /*   errCode = petscKSPSolve(ksp, b) */
@@ -2637,7 +2681,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*    PetscErrorCode KSPSolve(KSP ksp,Vec b,Vec x) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSolve.html */
   /* 'petscKSPSolve:23' errCode = int32(-1); */
-  /* 'petscKSPSolve:25' if ~coder.target('MATLAB') */
+  /* 'petscKSPSolve:25' if ~isempty(coder.target) */
   /* 'petscKSPSolve:26' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -2717,7 +2761,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -2728,8 +2772,8 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:68' if nargout>3 */
-  /* 'mptKSPSolve:68' time=m2c_wtime()-t; */
+  /* 'mptKSPSolve:70' if nargout>3 */
+  /* 'mptKSPSolve:70' time=m2c_wtime()-t; */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -2740,7 +2784,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   b_t = M2C_wtime();
   *time = b_t - t;
 
-  /* 'mptKSPSolve:70' flag = petscKSPGetConvergedReason(ksp); */
+  /* 'mptKSPSolve:72' flag = petscKSPGetConvergedReason(t_ksp); */
   /* Gets the reason the KSP iteration was stopped. */
   /*  */
   /*   [flag, errCode] = petscKSPGetConvergedReason(ksp) */
@@ -2751,7 +2795,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*    PetscErrorCode  KSPGetConvergedReason(KSP ksp,KSPConvergedReason *reason) */
   /*  http://www.mcs.anl.gov/petsc/petsc-3.7/docs/manualpages/KSP/KSPGetConvergedReason.html */
   /* 'petscKSPGetConvergedReason:14' errCode = int32(-1); */
-  /* 'petscKSPGetConvergedReason:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPGetConvergedReason:16' if ~isempty(coder.target) */
   /* 'petscKSPGetConvergedReason:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -2786,7 +2830,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -2797,7 +2841,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:71' relres = petscKSPGetResidualNorm(ksp); */
+  /* 'mptKSPSolve:73' relres = petscKSPGetResidualNorm(t_ksp); */
   /* Gets the last (approximate preconditioned) residual norm that has been computed. */
   /*  */
   /*   [rnorm, errCode] = petscKSPGetResidualNorm(ksp) */
@@ -2808,7 +2852,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*    PetscErrorCode  KSPGetResidualNorm(KSP ksp,PetscInt *rnorm) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPGetResidualNorm.html */
   /* 'petscKSPGetResidualNorm:14' errCode = int32(-1); */
-  /* 'petscKSPGetResidualNorm:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPGetResidualNorm:16' if ~isempty(coder.target) */
   /* 'petscKSPGetResidualNorm:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -2843,7 +2887,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -2854,7 +2898,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:72' iter = petscKSPGetIterationNumber(ksp); */
+  /* 'mptKSPSolve:74' iter = petscKSPGetIterationNumber(t_ksp); */
   /* Gets the current iteration number. */
   /*  */
   /*   [its, errCode] = petscKSPGetIterationNumber(ksp) */
@@ -2868,7 +2912,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*    PetscErrorCode  KSPGetIterationNumber(KSP ksp,PetscInt *its) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPGetIterationNumber.html */
   /* 'petscKSPGetIterationNumber:17' errCode = int32(-1); */
-  /* 'petscKSPGetIterationNumber:19' if ~coder.target('MATLAB') */
+  /* 'petscKSPGetIterationNumber:19' if ~isempty(coder.target) */
   /* 'petscKSPGetIterationNumber:20' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -2903,7 +2947,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -2914,7 +2958,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:73' [rtol, abstol, dtol, maxits] = petscKSPGetTolerances(ksp); */
+  /* 'mptKSPSolve:75' [rtol, abstol, dtol, maxits] = petscKSPGetTolerances(t_ksp); */
   /* Gets the relative, absolute, divergence, and maximum iteration tolerances */
   /* used by the default KSP convergence tests. */
   /*  */
@@ -2929,7 +2973,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
   /*    PetscErrorCode  KSPGetTolerances(KSP ksp,PetscReal *rtol,PetscReal *abstol,PetscReal *dtol,PetscInt *maxits) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPGetTolerances.html */
   /* 'petscKSPGetTolerances:18' errCode = int32(-1); */
-  /* 'petscKSPGetTolerances:20' if ~coder.target('MATLAB') */
+  /* 'petscKSPGetTolerances:20' if ~isempty(coder.target) */
   /* 'petscKSPGetTolerances:21' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -2968,7 +3012,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -2979,9 +3023,9 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     }
   }
 
-  /* 'mptKSPSolve:75' if flag < 0 || relres>rtol */
+  /* 'mptKSPSolve:77' if flag < 0 || relres>rtol */
   if ((*flag < 0) || (*relres > b_rtol)) {
-    /* 'mptKSPSolve:76' pc = petscKSPGetPC(ksp); */
+    /* 'mptKSPSolve:78' pc = petscKSPGetPC(t_ksp); */
     /* Returns a pointer to the preconditioner context set with petscKSPSetPC. */
     /*  */
     /*   [pc, errCode] = petscKSPGetPC(ksp, pc) gets the PC of the KSP */
@@ -2992,7 +3036,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*    PetscErrorCode  KSPGetPC(KSP ksp,PC *pc) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPGetPC.html */
     /* 'petscKSPGetPC:14' errCode = int32(-1); */
-    /* 'petscKSPGetPC:16' if ~coder.target('MATLAB') */
+    /* 'petscKSPGetPC:16' if ~isempty(coder.target) */
     /* 'petscKSPGetPC:17' t_pc = coder.opaque('PC'); */
     /* 'petscKSPGetPC:18' errCode = coder.ceval('KSPGetPC', PetscKSP(ksp), coder.wref(t_pc)); */
     /* Map an opaque object into a PETSc KSP object */
@@ -3048,7 +3092,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -3059,7 +3103,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       }
     }
 
-    /* 'mptKSPSolve:78' m2c_printf('### %s with %s preconditioner stopped with flag %d.\n', petscKSPGetType(ksp), petscPCGetType(pc), flag); */
+    /* 'mptKSPSolve:80' m2c_printf('### %s with %s preconditioner stopped with flag %d.\n', petscKSPGetType(t_ksp), petscPCGetType(pc), flag); */
     /* Gets the KSP type as a KSPType object from the KSP object. */
     /*  */
     /*   [type, errCode] = petscKSPGetType(ksp) gets the type of the KSP */
@@ -3070,7 +3114,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*    PetscErrorCode  KSPGetType(KSP ksp, KSPType *type) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPGetType.html */
     /* 'petscKSPGetType:14' errCode = int32(-1); */
-    /* 'petscKSPGetType:16' if ~coder.target('MATLAB') */
+    /* 'petscKSPGetType:16' if ~isempty(coder.target) */
     /* 'petscKSPGetType:17' t_type = coder.opaque('KSPType'); */
     /* 'petscKSPGetType:18' errCode = coder.ceval('KSPGetType', PetscKSP(ksp), coder.wref(t_type)); */
     /* Map an opaque object into a PETSc KSP object */
@@ -3123,7 +3167,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -3144,7 +3188,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
     /*    PetscErrorCode  PCGetType(PC pc, PCType *type) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/PC/PCGetType.html */
     /* 'petscPCGetType:14' errCode = int32(-1); */
-    /* 'petscPCGetType:16' if ~coder.target('MATLAB') */
+    /* 'petscPCGetType:16' if ~isempty(coder.target) */
     /* 'petscPCGetType:17' t_type = coder.opaque('PCType'); */
     /* 'petscPCGetType:18' errCode = coder.ceval('PCGetType', PetscPC(pc), coder.wref(t_type)); */
     /* Map an opaque object into a PETSc PC object */
@@ -3197,7 +3241,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -3210,17 +3254,17 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0,
 
     m2c_printf(t_type, b_t_type, *flag);
 
-    /* 'mptKSPSolve:79' m2c_printf('### The relative residual was %g after %d iterations.\n', relres, iter); */
+    /* 'mptKSPSolve:81' m2c_printf('### The relative residual was %g after %d iterations.\n', relres, iter); */
     b_m2c_printf(*relres, *iter);
 
-    /* 'mptKSPSolve:80' m2c_printf('### The relative and absolute tolerances were %g and %g.\n', rtol, abstol); */
+    /* 'mptKSPSolve:82' m2c_printf('### The relative and absolute tolerances were %g and %g.\n', rtol, abstol); */
     c_m2c_printf(b_rtol, abstol);
 
-    /* 'mptKSPSolve:81' m2c_printf('### The divergence and max-iter tolerances were %d and %g.\n', maxits, dtol); */
+    /* 'mptKSPSolve:83' m2c_printf('### The divergence and max-iter tolerances were %d and %g.\n', maxits, dtol); */
     d_m2c_printf(b_maxits, dtol);
 
-    /* 'mptKSPSolve:82' m2c_printf(['### For explanation of the flag, see http://www.mcs.anl.gov/petsc/' ... */
-    /* 'mptKSPSolve:83'         'petsc-current/docs/manualpages/KSP/KSPConvergedReason.html.\n']); */
+    /* 'mptKSPSolve:84' m2c_printf(['### For explanation of the flag, see http://www.mcs.anl.gov/petsc/' ... */
+    /* 'mptKSPSolve:85'         'petsc-current/docs/manualpages/KSP/KSPConvergedReason.html.\n']); */
     e_m2c_printf();
   }
 }
@@ -3332,7 +3376,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:46' if isempty(coder.target) */
   /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
   /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
@@ -3375,7 +3419,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*          where comm should always be PETSC_COMM_SELF. */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatCreateSeqAIJ.html */
   /* 'petscMatCreateSeqAIJ:36' errCode = int32(-1); */
-  /* 'petscMatCreateSeqAIJ:38' if ~coder.target('MATLAB') */
+  /* 'petscMatCreateSeqAIJ:38' if ~isempty(coder.target) */
   /* 'petscMatCreateSeqAIJ:39' t_mat = coder.opaque('Mat'); */
   /* 'petscMatCreateSeqAIJ:41' comm = MPI_Comm(PETSC_COMM_SELF); */
   /*  Obtain PETSC constant PETSC_COMM_SELF */
@@ -3392,7 +3436,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  Other: */
   /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
   /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-  /* 'petscGetObject:16' if coder.target('MATLAB') */
+  /* 'petscGetObject:16' if isempty(coder.target) */
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:25' case 'PETSC_COMM_SELF' */
   /* 'petscGetObject:26' [obj, toplevel] = get_obj('MPI_Comm', 'PETSC_COMM_SELF', nargout>1); */
@@ -3452,7 +3496,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -3574,7 +3618,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
     /*  */
     /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-    /* 'petscGetEnum:46' if coder.target('MATLAB') */
+    /* 'petscGetEnum:46' if isempty(coder.target) */
     /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
     /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
     /* % InsertMode */
@@ -3586,7 +3630,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     /* 'petscGetEnum:186' val = coder.ceval(' ', coder.opaque(type, name)); */
     iroa = (INSERT_VALUES);
 
-    /* 'petscMatSetValues:35' if ~coder.target('MATLAB') */
+    /* 'petscMatSetValues:35' if ~isempty(coder.target) */
     /* 'petscMatSetValues:36' t_mat = PetscMat(mat); */
     /* Map an opaque object into a PETSc Mat object */
     /*  */
@@ -3622,7 +3666,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -3653,7 +3697,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*    PetscErrorCode MatAssemblyBegin(Mat mat,MatAssemblyType type) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatAssemblyBegin.html */
   /* 'petscMatAssemblyBegin:15' errCode = int32(-1); */
-  /* 'petscMatAssemblyBegin:17' if ~coder.target('MATLAB') */
+  /* 'petscMatAssemblyBegin:17' if ~isempty(coder.target) */
   /* 'petscMatAssemblyBegin:18' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -3722,7 +3766,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:46' if isempty(coder.target) */
   /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
   /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
@@ -3745,7 +3789,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -3768,7 +3812,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*    PetscErrorCode MatAssemblyEnd(Mat mat,MatAssemblyType type) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatAssemblyEnd.html */
   /* 'petscMatAssemblyEnd:15' errCode = int32(-1); */
-  /* 'petscMatAssemblyEnd:17' if ~coder.target('MATLAB') */
+  /* 'petscMatAssemblyEnd:17' if ~isempty(coder.target) */
   /* 'petscMatAssemblyEnd:18' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -3837,7 +3881,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:46' if isempty(coder.target) */
   /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
   /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
@@ -3860,7 +3904,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -3999,7 +4043,8 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   /*     pctype is PCLU, PCILU, or PCICC. */
   /*  */
   /*  See Also: mptKSPSolve, mptKSPCleanup */
-  /* 'mptKSPSetup:29' t_ksp = petscKSPCreate(petscObjectGetComm(Amat)); */
+  /* 'mptKSPSetup:29' t_Amat = Amat; */
+  /* 'mptKSPSetup:30' t_ksp = petscKSPCreate(petscObjectGetComm(t_Amat)); */
   /* Gets the MPI communicator for any PetscObject, regardless of the type.  */
   /*  */
   /*   [comm, errCode] = petscObjectGetComm(obj) */
@@ -4012,7 +4057,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   /*    PetscErrorCode  PetscObjectGetComm(PetscObject obj,MPI_Comm *comm) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscObjectGetComm.html */
   /* 'petscObjectGetComm:16' errCode = int32(-1); */
-  /* 'petscObjectGetComm:18' if ~coder.target('MATLAB') */
+  /* 'petscObjectGetComm:18' if ~isempty(coder.target) */
   /* 'petscObjectGetComm:19' t_obj = PetscObject(obj); */
   /* Map an opaque object into a PETSc PetscObject object */
   /*  */
@@ -4074,7 +4119,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4099,7 +4144,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   /*    PetscErrorCode  KSPCreate(MPI_Comm comm,KSP *ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPCreate.html */
   /* 'petscKSPCreate:18' errCode = int32(-1); */
-  /* 'petscKSPCreate:20' if ~coder.target('MATLAB') */
+  /* 'petscKSPCreate:20' if ~isempty(coder.target) */
   /* 'petscKSPCreate:21' t_ksp = coder.opaque('KSP'); */
   /* 'petscKSPCreate:23' if nargin==0 */
   /* 'petscKSPCreate:25' else */
@@ -4158,7 +4203,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4169,9 +4214,9 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
-  /* 'mptKSPSetup:31' time = 0; */
-  /* 'mptKSPSetup:32' if nargout>1 */
-  /* 'mptKSPSetup:32' t=m2c_wtime(); */
+  /* 'mptKSPSetup:32' time = 0; */
+  /* 'mptKSPSetup:33' if nargout>1 */
+  /* 'mptKSPSetup:33' t=m2c_wtime(); */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -4182,7 +4227,28 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   t = M2C_wtime();
 
   /*  Setup KSP */
-  /* 'mptKSPSetup:35' petscKSPSetOperators(t_ksp, Amat); */
+  /* 'mptKSPSetup:36' petscKSPSetOperators(t_ksp, PetscMat(t_Amat)); */
+  /* Map an opaque object into a PETSc Mat object */
+  /*  */
+  /*   mat = PetscMat() simply returns a definition of the */
+  /*   m2c_opaque_type definition, suitable in the argument */
+  /*   specification for codegen. */
+  /*  */
+  /*   mat = PetscMat(arg) or mat = PetscMat(arg, false) converts arg */
+  /*   into a PETSc Mat object. */
+  /*  */
+  /*   mat = PetscMat(arg, true) wraps the arg into an opaque object.  */
+  /*   This should be used if the object needs to be returned to */
+  /*   MATLAB. Note that the value of opaque must be determined at */
+  /*   compile time. */
+  /*  */
+  /*  See also PetscMat */
+  /* 'PetscMat:18' coder.inline('always'); */
+  /* 'PetscMat:20' if nargin==0 && isempty(coder.target) */
+  /* 'PetscMat:25' if isstruct(arg) && ~isequal(arg.type, 'Mat') */
+  /* 'PetscMat:30' if ~isstruct(arg) || isempty(coder.target) */
+  /* 'PetscMat:31' if nargin==1 || ~opaque */
+  /* 'PetscMat:32' mat = arg; */
   /* Sets the matrix associated with the linear system and a (possibly) */
   /* different one associated with the preconditioner. */
   /*  */
@@ -4203,7 +4269,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   /*    PetscErrorCode  KSPSetOperators(KSP ksp,Mat Amat,Mat Pmat) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetOperators.html */
   /* 'petscKSPSetOperators:25' errCode = int32(-1); */
-  /* 'petscKSPSetOperators:27' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetOperators:27' if ~isempty(coder.target) */
   /* 'petscKSPSetOperators:28' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -4261,7 +4327,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4272,17 +4338,17 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
-  /* 'mptKSPSetup:37' if nargin>1 */
-  /* 'mptKSPSetup:38' if nargin>2 */
-  /* 'mptKSPSetup:39' hasPC = ~ischar(pctype) || ~isempty(pctype); */
-  /* 'mptKSPSetup:40' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
-  /* 'mptKSPSetup:42' if hasPC || hasSolver */
-  /* 'mptKSPSetup:67' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
+  /* 'mptKSPSetup:38' if nargin>1 */
+  /* 'mptKSPSetup:39' if nargin>2 */
+  /* 'mptKSPSetup:40' hasPC = ~ischar(pctype) || ~isempty(pctype); */
+  /* 'mptKSPSetup:41' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
+  /* 'mptKSPSetup:43' if hasPC || hasSolver */
+  /* 'mptKSPSetup:68' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
   emxInit_char_T(&ksptype0, 2);
   if ((!(solver->size[1] == 0)) && ((unsigned char)solver->data[solver->size[1]
        - 1] != 0)) {
     /*  null-terminate the string if not terminated properly */
-    /* 'mptKSPSetup:69' ksptype0 = [ksptype char(0)]; */
+    /* 'mptKSPSetup:70' ksptype0 = [ksptype char(0)]; */
     b_flag = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = solver->size[1] + 1;
@@ -4295,8 +4361,8 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
 
     ksptype0->data[ksptype0->size[0] * solver->size[1]] = '\x00';
   } else {
-    /* 'mptKSPSetup:70' else */
-    /* 'mptKSPSetup:71' ksptype0 = ksptype; */
+    /* 'mptKSPSetup:71' else */
+    /* 'mptKSPSetup:72' ksptype0 = ksptype; */
     b_flag = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = solver->size[1];
@@ -4307,10 +4373,10 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
-  /* 'mptKSPSetup:73' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
+  /* 'mptKSPSetup:74' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
   if (!(ksptype0->size[1] == 0)) {
     /*  Set KSP Types */
-    /* 'mptKSPSetup:75' petscKSPSetType(t_ksp, ksptype0); */
+    /* 'mptKSPSetup:76' petscKSPSetType(t_ksp, ksptype0); */
     /* Builds KSP for a particular solver. */
     /*  */
     /*   errCode = petscKSPSetType(ksp, type) sets the type of the KSP */
@@ -4321,7 +4387,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     /*    PetscErrorCode  KSPSetType(KSP ksp, KSPType type) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetType.html */
     /* 'petscKSPSetType:14' errCode = int32(-1); */
-    /* 'petscKSPSetType:16' if ~coder.target('MATLAB') */
+    /* 'petscKSPSetType:16' if ~isempty(coder.target) */
     /* 'petscKSPSetType:17' if ischar(type) */
     /* 'petscKSPSetType:18' errCode = coder.ceval('KSPSetType', PetscKSP(ksp), coder.rref(type)); */
     /* Map an opaque object into a PETSc KSP object */
@@ -4355,7 +4421,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4369,7 +4435,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
 
   emxFree_char_T(&ksptype0);
 
-  /* 'mptKSPSetup:79' petscKSPSetFromOptions(t_ksp); */
+  /* 'mptKSPSetup:80' petscKSPSetFromOptions(t_ksp); */
   /* Sets KSP options from the options database. This routine must be called */
   /* before KSPSetUp() if the user is to be allowed to set the Krylov type. */
   /*  */
@@ -4381,7 +4447,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   /*    PetscErrorCode KSPSetFromOptions(KSP ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetFromOptions.html */
   /* 'petscKSPSetFromOptions:15' errCode = int32(-1); */
-  /* 'petscKSPSetFromOptions:17' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetFromOptions:17' if ~isempty(coder.target) */
   /* 'petscKSPSetFromOptions:18' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -4415,7 +4481,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4426,7 +4492,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
-  /* 'mptKSPSetup:81' petscKSPSetUp(t_ksp); */
+  /* 'mptKSPSetup:82' petscKSPSetUp(t_ksp); */
   /* Sets up the internal data structures for the later use of an iterative solver. */
   /*  */
   /*   errCode = petscKSPSetUp(ksp) */
@@ -4437,7 +4503,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   /*    PetscErrorCode KSPSetUp(KSP ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetUp.html */
   /* 'petscKSPSetUp:14' errCode = int32(-1); */
-  /* 'petscKSPSetUp:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetUp:16' if ~isempty(coder.target) */
   /* 'petscKSPSetUp:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -4471,7 +4537,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4482,8 +4548,8 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     }
   }
 
-  /* 'mptKSPSetup:82' if nargout>1 */
-  /* 'mptKSPSetup:82' time=m2c_wtime()-t; */
+  /* 'mptKSPSetup:83' if nargout>1 */
+  /* 'mptKSPSetup:83' time=m2c_wtime()-t; */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -4493,8 +4559,8 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
   b_t = M2C_wtime();
 
-  /* 'mptKSPSetup:84' toplevel = nargout>2; */
-  /* 'mptKSPSetup:85' ksp = PetscKSP(t_ksp, toplevel); */
+  /* 'mptKSPSetup:85' toplevel = nargout>2; */
+  /* 'mptKSPSetup:86' ksp = PetscKSP(t_ksp, toplevel); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
   /*   ksp = PetscKSP() simply returns a definition of the */
@@ -4544,7 +4610,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   /*    PetscErrorCode KSPDestroy(KSP *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPDestroy.html */
   /* 'petscKSPDestroy:14' errCode = int32(-1); */
-  /* 'petscKSPDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPDestroy:16' if ~isempty(coder.target) */
   /* 'petscKSPDestroy:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -4600,7 +4666,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4659,7 +4725,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*          where comm should always be PETSC_COMM_SELF. */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecCreateSeq.html */
   /* 'petscVecCreateSeq:16' errCode = int32(-1); */
-  /* 'petscVecCreateSeq:18' if ~coder.target('MATLAB') */
+  /* 'petscVecCreateSeq:18' if ~isempty(coder.target) */
   /* 'petscVecCreateSeq:19' t_vec = coder.opaque('Vec'); */
   /* 'petscVecCreateSeq:21' comm = MPI_Comm(PETSC_COMM_SELF); */
   /*  Obtain PETSC constant PETSC_COMM_SELF */
@@ -4676,7 +4742,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*  Other: */
   /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
   /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-  /* 'petscGetObject:16' if coder.target('MATLAB') */
+  /* 'petscGetObject:16' if isempty(coder.target) */
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:25' case 'PETSC_COMM_SELF' */
   /* 'petscGetObject:26' [obj, toplevel] = get_obj('MPI_Comm', 'PETSC_COMM_SELF', nargout>1); */
@@ -4734,7 +4800,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4799,7 +4865,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*    PetscErrorCode  VecSetValues(Vec x,PetscInt ni,const PetscInt ix[],const PetscScalar y[],InsertMode iora) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecSetValues.html */
   /* 'petscVecSetValues:25' errCode = int32(-1); */
-  /* 'petscVecSetValues:27' if ~coder.target('MATLAB') */
+  /* 'petscVecSetValues:27' if ~isempty(coder.target) */
   /* 'petscVecSetValues:28' if nargin<5 */
   /* 'petscVecSetValues:29' iroa = PETSC_INSERT_VALUES; */
   /*  Obtain PETSC constant INSERT_VALUES */
@@ -4846,7 +4912,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*  NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2 */
   /*  */
   /*  Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT */
-  /* 'petscGetEnum:46' if coder.target('MATLAB') */
+  /* 'petscGetEnum:46' if isempty(coder.target) */
   /* 'petscGetEnum:50' coder.cinclude('petscsys.h'); */
   /* 'petscGetEnum:51' coder.cinclude('petscksp.h'); */
   /* % InsertMode */
@@ -4892,7 +4958,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4915,7 +4981,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*    PetscErrorCode VecAssemblyBegin(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecAssemblyBegin.html */
   /* 'petscVecAssemblyBegin:14' errCode = int32(-1); */
-  /* 'petscVecAssemblyBegin:16' if ~coder.target('MATLAB') */
+  /* 'petscVecAssemblyBegin:16' if ~isempty(coder.target) */
   /* 'petscVecAssemblyBegin:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -4949,7 +5015,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -4971,7 +5037,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   /*    PetscErrorCode VecAssemblyEnd(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecAssemblyEnd.html */
   /* 'petscVecAssemblyEnd:14' errCode = int32(-1); */
-  /* 'petscVecAssemblyEnd:16' if ~coder.target('MATLAB') */
+  /* 'petscVecAssemblyEnd:16' if ~isempty(coder.target) */
   /* 'petscVecAssemblyEnd:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -5005,7 +5071,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -5075,7 +5141,7 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
   /*    PetscErrorCode VecGetLocalSize(Vec vec,PetscInt *n) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecGetLocalSize.html */
   /* 'petscVecGetLocalSize:16' errCode = int32(-1); */
-  /* 'petscVecGetLocalSize:18' if ~coder.target('MATLAB') */
+  /* 'petscVecGetLocalSize:18' if ~isempty(coder.target) */
   /* 'petscVecGetLocalSize:19' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -5110,7 +5176,7 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -5177,7 +5243,7 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
   /*    PetscErrorCode  VecGetValues(Vec x,PetscInt ni,const PetscInt ix[],PetscScalar y[]) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecGetValues.html */
   /* 'petscVecGetValues:22' errCode = int32(-1); */
-  /* 'petscVecGetValues:24' if ~coder.target('MATLAB') */
+  /* 'petscVecGetValues:24' if ~isempty(coder.target) */
   /* 'petscVecGetValues:25' if nargin<4 */
   if (arr->size[0] < n) {
     /* 'petscVecGetValues:27' elseif length(y) < ni */
@@ -5219,7 +5285,7 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -5252,7 +5318,7 @@ static void n_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5287,7 +5353,7 @@ static void o_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5322,7 +5388,7 @@ static void p_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5356,7 +5422,7 @@ static void q_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5391,7 +5457,7 @@ static void r_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5426,7 +5492,7 @@ static void s_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5461,7 +5527,7 @@ static void t_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5496,7 +5562,7 @@ static void u_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5531,7 +5597,7 @@ static void v_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5566,7 +5632,7 @@ static void w_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5601,7 +5667,7 @@ static void x_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5636,7 +5702,7 @@ static void y_m2c_error(int varargin_3)
   /*  */
   /*  SEE ALSO: m2c_print, m2c_warn */
   /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if coder.target('MATLAB') */
+  /* 'm2c_error:20' if isempty(coder.target) */
   /* 'm2c_error:22' else */
   /* 'm2c_error:23' if isequal(coder.target, 'mex') */
   /* 'm2c_error:25' else */
@@ -5875,7 +5941,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /*  Other: */
     /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
     /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-    /* 'petscGetObject:16' if coder.target('MATLAB') */
+    /* 'petscGetObject:16' if isempty(coder.target) */
     /* 'petscGetObject:20' switch name */
     /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
     /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
@@ -5894,7 +5960,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /*    PetscErrorCode  VecDuplicate(Vec vec_in, Vec *vec_out) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDuplicate.html */
     /* 'petscVecDuplicate:16' errCode = int32(-1); */
-    /* 'petscVecDuplicate:18' if ~coder.target('MATLAB') */
+    /* 'petscVecDuplicate:18' if ~isempty(coder.target) */
     /* 'petscVecDuplicate:19' t_vec_out = coder.opaque('Vec'); */
     /* 'petscVecDuplicate:21' errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out)); */
     /* Map an opaque object into a PETSc Vec object */
@@ -5952,7 +6018,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -6066,7 +6132,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode KSPDestroy(KSP *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPDestroy.html */
   /* 'petscKSPDestroy:14' errCode = int32(-1); */
-  /* 'petscKSPDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPDestroy:16' if ~isempty(coder.target) */
   /* 'petscKSPDestroy:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -6124,7 +6190,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -6148,7 +6214,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode MatDestroy(Mat *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatDestroy.html */
   /* 'petscMatDestroy:14' errCode = int32(-1); */
-  /* 'petscMatDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscMatDestroy:16' if ~isempty(coder.target) */
   /* 'petscMatDestroy:17' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -6184,7 +6250,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -6207,7 +6273,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -6244,7 +6310,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -6269,7 +6335,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -6306,7 +6372,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -6456,7 +6522,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /*  Other: */
     /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
     /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-    /* 'petscGetObject:16' if coder.target('MATLAB') */
+    /* 'petscGetObject:16' if isempty(coder.target) */
     /* 'petscGetObject:20' switch name */
     /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
     /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
@@ -6475,7 +6541,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /*    PetscErrorCode  VecDuplicate(Vec vec_in, Vec *vec_out) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDuplicate.html */
     /* 'petscVecDuplicate:16' errCode = int32(-1); */
-    /* 'petscVecDuplicate:18' if ~coder.target('MATLAB') */
+    /* 'petscVecDuplicate:18' if ~isempty(coder.target) */
     /* 'petscVecDuplicate:19' t_vec_out = coder.opaque('Vec'); */
     /* 'petscVecDuplicate:21' errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out)); */
     /* Map an opaque object into a PETSc Vec object */
@@ -6533,7 +6599,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -6675,7 +6741,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /*    PetscErrorCode  PetscOptionsInsertString(PetscOptions options,const char in_str[]) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscOptionsInsertString.html */
     /* 'petscOptionsInsertString:17' errCode = int32(-1); */
-    /* 'petscOptionsInsertString:19' if ~coder.target('MATLAB') */
+    /* 'petscOptionsInsertString:19' if ~isempty(coder.target) */
     /* 'petscOptionsInsertString:20' toplevel = nargout>1; */
     /* 'petscOptionsInsertString:21' if ~isempty(in_str) && in_str(end) && (toplevel || m2c_debug) */
     if (b_opts->data[b_opts->size[1] - 1] != '\x00') {
@@ -6699,7 +6765,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /*  Other: */
     /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
     /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-    /* 'petscGetObject:16' if coder.target('MATLAB') */
+    /* 'petscGetObject:16' if isempty(coder.target) */
     /* 'petscGetObject:20' switch name */
     /* 'petscGetObject:31' case 'PETSC_NULL_OPTIONS' */
     /* 'petscGetObject:32' [obj, toplevel] = get_obj('PetscOptions', 'NULL', nargout>1); */
@@ -6744,7 +6810,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode KSPDestroy(KSP *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPDestroy.html */
   /* 'petscKSPDestroy:14' errCode = int32(-1); */
-  /* 'petscKSPDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPDestroy:16' if ~isempty(coder.target) */
   /* 'petscKSPDestroy:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -6802,7 +6868,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -6826,7 +6892,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode MatDestroy(Mat *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatDestroy.html */
   /* 'petscMatDestroy:14' errCode = int32(-1); */
-  /* 'petscMatDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscMatDestroy:16' if ~isempty(coder.target) */
   /* 'petscMatDestroy:17' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -6862,7 +6928,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -6885,7 +6951,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -6922,7 +6988,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -6947,7 +7013,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -6984,7 +7050,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7124,7 +7190,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  Other: */
   /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
   /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-  /* 'petscGetObject:16' if coder.target('MATLAB') */
+  /* 'petscGetObject:16' if isempty(coder.target) */
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
@@ -7141,7 +7207,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  VecDuplicate(Vec vec_in, Vec *vec_out) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDuplicate.html */
   /* 'petscVecDuplicate:16' errCode = int32(-1); */
-  /* 'petscVecDuplicate:18' if ~coder.target('MATLAB') */
+  /* 'petscVecDuplicate:18' if ~isempty(coder.target) */
   /* 'petscVecDuplicate:19' t_vec_out = coder.opaque('Vec'); */
   /* 'petscVecDuplicate:21' errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out)); */
   /* Map an opaque object into a PETSc Vec object */
@@ -7197,7 +7263,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7295,7 +7361,8 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     pctype is PCLU, PCILU, or PCICC. */
   /*  */
   /*  See Also: mptKSPSolve, mptKSPCleanup */
-  /* 'mptKSPSetup:29' t_ksp = petscKSPCreate(petscObjectGetComm(Amat)); */
+  /* 'mptKSPSetup:29' t_Amat = Amat; */
+  /* 'mptKSPSetup:30' t_ksp = petscKSPCreate(petscObjectGetComm(t_Amat)); */
   /* Gets the MPI communicator for any PetscObject, regardless of the type.  */
   /*  */
   /*   [comm, errCode] = petscObjectGetComm(obj) */
@@ -7308,7 +7375,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  PetscObjectGetComm(PetscObject obj,MPI_Comm *comm) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscObjectGetComm.html */
   /* 'petscObjectGetComm:16' errCode = int32(-1); */
-  /* 'petscObjectGetComm:18' if ~coder.target('MATLAB') */
+  /* 'petscObjectGetComm:18' if ~isempty(coder.target) */
   /* 'petscObjectGetComm:19' t_obj = PetscObject(obj); */
   /* Map an opaque object into a PETSc PetscObject object */
   /*  */
@@ -7370,7 +7437,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7395,7 +7462,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  KSPCreate(MPI_Comm comm,KSP *ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPCreate.html */
   /* 'petscKSPCreate:18' errCode = int32(-1); */
-  /* 'petscKSPCreate:20' if ~coder.target('MATLAB') */
+  /* 'petscKSPCreate:20' if ~isempty(coder.target) */
   /* 'petscKSPCreate:21' t_ksp = coder.opaque('KSP'); */
   /* 'petscKSPCreate:23' if nargin==0 */
   /* 'petscKSPCreate:25' else */
@@ -7454,7 +7521,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7465,9 +7532,9 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:31' time = 0; */
-  /* 'mptKSPSetup:32' if nargout>1 */
-  /* 'mptKSPSetup:32' t=m2c_wtime(); */
+  /* 'mptKSPSetup:32' time = 0; */
+  /* 'mptKSPSetup:33' if nargout>1 */
+  /* 'mptKSPSetup:33' t=m2c_wtime(); */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -7478,7 +7545,28 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   t = M2C_wtime();
 
   /*  Setup KSP */
-  /* 'mptKSPSetup:35' petscKSPSetOperators(t_ksp, Amat); */
+  /* 'mptKSPSetup:36' petscKSPSetOperators(t_ksp, PetscMat(t_Amat)); */
+  /* Map an opaque object into a PETSc Mat object */
+  /*  */
+  /*   mat = PetscMat() simply returns a definition of the */
+  /*   m2c_opaque_type definition, suitable in the argument */
+  /*   specification for codegen. */
+  /*  */
+  /*   mat = PetscMat(arg) or mat = PetscMat(arg, false) converts arg */
+  /*   into a PETSc Mat object. */
+  /*  */
+  /*   mat = PetscMat(arg, true) wraps the arg into an opaque object.  */
+  /*   This should be used if the object needs to be returned to */
+  /*   MATLAB. Note that the value of opaque must be determined at */
+  /*   compile time. */
+  /*  */
+  /*  See also PetscMat */
+  /* 'PetscMat:18' coder.inline('always'); */
+  /* 'PetscMat:20' if nargin==0 && isempty(coder.target) */
+  /* 'PetscMat:25' if isstruct(arg) && ~isequal(arg.type, 'Mat') */
+  /* 'PetscMat:30' if ~isstruct(arg) || isempty(coder.target) */
+  /* 'PetscMat:31' if nargin==1 || ~opaque */
+  /* 'PetscMat:32' mat = arg; */
   /* Sets the matrix associated with the linear system and a (possibly) */
   /* different one associated with the preconditioner. */
   /*  */
@@ -7499,7 +7587,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  KSPSetOperators(KSP ksp,Mat Amat,Mat Pmat) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetOperators.html */
   /* 'petscKSPSetOperators:25' errCode = int32(-1); */
-  /* 'petscKSPSetOperators:27' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetOperators:27' if ~isempty(coder.target) */
   /* 'petscKSPSetOperators:28' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -7557,7 +7645,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7568,16 +7656,16 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:37' if nargin>1 */
-  /* 'mptKSPSetup:38' if nargin>2 */
-  /* 'mptKSPSetup:39' hasPC = ~ischar(pctype) || ~isempty(pctype); */
-  /* 'mptKSPSetup:40' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
-  /* 'mptKSPSetup:42' if hasPC || hasSolver */
-  /* 'mptKSPSetup:67' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
-  /* 'mptKSPSetup:70' else */
-  /* 'mptKSPSetup:71' ksptype0 = ksptype; */
-  /* 'mptKSPSetup:73' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
-  /* 'mptKSPSetup:79' petscKSPSetFromOptions(t_ksp); */
+  /* 'mptKSPSetup:38' if nargin>1 */
+  /* 'mptKSPSetup:39' if nargin>2 */
+  /* 'mptKSPSetup:40' hasPC = ~ischar(pctype) || ~isempty(pctype); */
+  /* 'mptKSPSetup:41' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
+  /* 'mptKSPSetup:43' if hasPC || hasSolver */
+  /* 'mptKSPSetup:68' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
+  /* 'mptKSPSetup:71' else */
+  /* 'mptKSPSetup:72' ksptype0 = ksptype; */
+  /* 'mptKSPSetup:74' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
+  /* 'mptKSPSetup:80' petscKSPSetFromOptions(t_ksp); */
   /* Sets KSP options from the options database. This routine must be called */
   /* before KSPSetUp() if the user is to be allowed to set the Krylov type. */
   /*  */
@@ -7589,7 +7677,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode KSPSetFromOptions(KSP ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetFromOptions.html */
   /* 'petscKSPSetFromOptions:15' errCode = int32(-1); */
-  /* 'petscKSPSetFromOptions:17' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetFromOptions:17' if ~isempty(coder.target) */
   /* 'petscKSPSetFromOptions:18' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -7623,7 +7711,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7634,7 +7722,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:81' petscKSPSetUp(t_ksp); */
+  /* 'mptKSPSetup:82' petscKSPSetUp(t_ksp); */
   /* Sets up the internal data structures for the later use of an iterative solver. */
   /*  */
   /*   errCode = petscKSPSetUp(ksp) */
@@ -7645,7 +7733,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode KSPSetUp(KSP ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetUp.html */
   /* 'petscKSPSetUp:14' errCode = int32(-1); */
-  /* 'petscKSPSetUp:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetUp:16' if ~isempty(coder.target) */
   /* 'petscKSPSetUp:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -7679,7 +7767,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7690,8 +7778,8 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:82' if nargout>1 */
-  /* 'mptKSPSetup:82' time=m2c_wtime()-t; */
+  /* 'mptKSPSetup:83' if nargout>1 */
+  /* 'mptKSPSetup:83' time=m2c_wtime()-t; */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -7701,8 +7789,8 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
   b_t = M2C_wtime();
 
-  /* 'mptKSPSetup:84' toplevel = nargout>2; */
-  /* 'mptKSPSetup:85' ksp = PetscKSP(t_ksp, toplevel); */
+  /* 'mptKSPSetup:85' toplevel = nargout>2; */
+  /* 'mptKSPSetup:86' ksp = PetscKSP(t_ksp, toplevel); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
   /*   ksp = PetscKSP() simply returns a definition of the */
@@ -7750,7 +7838,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode KSPDestroy(KSP *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPDestroy.html */
   /* 'petscKSPDestroy:14' errCode = int32(-1); */
-  /* 'petscKSPDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPDestroy:16' if ~isempty(coder.target) */
   /* 'petscKSPDestroy:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -7806,7 +7894,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7830,7 +7918,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode MatDestroy(Mat *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatDestroy.html */
   /* 'petscMatDestroy:14' errCode = int32(-1); */
-  /* 'petscMatDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscMatDestroy:16' if ~isempty(coder.target) */
   /* 'petscMatDestroy:17' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -7866,7 +7954,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7889,7 +7977,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -7926,7 +8014,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -7951,7 +8039,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -7988,7 +8076,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -8124,7 +8212,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  Other: */
   /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
   /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-  /* 'petscGetObject:16' if coder.target('MATLAB') */
+  /* 'petscGetObject:16' if isempty(coder.target) */
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
@@ -8141,7 +8229,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  VecDuplicate(Vec vec_in, Vec *vec_out) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDuplicate.html */
   /* 'petscVecDuplicate:16' errCode = int32(-1); */
-  /* 'petscVecDuplicate:18' if ~coder.target('MATLAB') */
+  /* 'petscVecDuplicate:18' if ~isempty(coder.target) */
   /* 'petscVecDuplicate:19' t_vec_out = coder.opaque('Vec'); */
   /* 'petscVecDuplicate:21' errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out)); */
   /* Map an opaque object into a PETSc Vec object */
@@ -8197,7 +8285,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -8226,7 +8314,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode MatDestroy(Mat *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatDestroy.html */
   /* 'petscMatDestroy:14' errCode = int32(-1); */
-  /* 'petscMatDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscMatDestroy:16' if ~isempty(coder.target) */
   /* 'petscMatDestroy:17' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -8262,7 +8350,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -8285,7 +8373,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -8322,7 +8410,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -8347,7 +8435,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -8384,7 +8472,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -8519,7 +8607,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  Other: */
   /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
   /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-  /* 'petscGetObject:16' if coder.target('MATLAB') */
+  /* 'petscGetObject:16' if isempty(coder.target) */
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
@@ -8536,7 +8624,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  VecDuplicate(Vec vec_in, Vec *vec_out) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDuplicate.html */
   /* 'petscVecDuplicate:16' errCode = int32(-1); */
-  /* 'petscVecDuplicate:18' if ~coder.target('MATLAB') */
+  /* 'petscVecDuplicate:18' if ~isempty(coder.target) */
   /* 'petscVecDuplicate:19' t_vec_out = coder.opaque('Vec'); */
   /* 'petscVecDuplicate:21' errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out)); */
   /* Map an opaque object into a PETSc Vec object */
@@ -8592,7 +8680,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -8621,7 +8709,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode MatDestroy(Mat *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatDestroy.html */
   /* 'petscMatDestroy:14' errCode = int32(-1); */
-  /* 'petscMatDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscMatDestroy:16' if ~isempty(coder.target) */
   /* 'petscMatDestroy:17' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -8657,7 +8745,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -8680,7 +8768,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -8717,7 +8805,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -8742,7 +8830,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -8779,7 +8867,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -8915,7 +9003,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  Other: */
   /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
   /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-  /* 'petscGetObject:16' if coder.target('MATLAB') */
+  /* 'petscGetObject:16' if isempty(coder.target) */
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
@@ -8932,7 +9020,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  VecDuplicate(Vec vec_in, Vec *vec_out) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDuplicate.html */
   /* 'petscVecDuplicate:16' errCode = int32(-1); */
-  /* 'petscVecDuplicate:18' if ~coder.target('MATLAB') */
+  /* 'petscVecDuplicate:18' if ~isempty(coder.target) */
   /* 'petscVecDuplicate:19' t_vec_out = coder.opaque('Vec'); */
   /* 'petscVecDuplicate:21' errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out)); */
   /* Map an opaque object into a PETSc Vec object */
@@ -8988,7 +9076,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9017,7 +9105,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode MatDestroy(Mat *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatDestroy.html */
   /* 'petscMatDestroy:14' errCode = int32(-1); */
-  /* 'petscMatDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscMatDestroy:16' if ~isempty(coder.target) */
   /* 'petscMatDestroy:17' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -9053,7 +9141,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9076,7 +9164,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -9113,7 +9201,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9138,7 +9226,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -9175,7 +9263,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9322,7 +9410,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  Other: */
   /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
   /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-  /* 'petscGetObject:16' if coder.target('MATLAB') */
+  /* 'petscGetObject:16' if isempty(coder.target) */
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
@@ -9339,7 +9427,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  VecDuplicate(Vec vec_in, Vec *vec_out) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDuplicate.html */
   /* 'petscVecDuplicate:16' errCode = int32(-1); */
-  /* 'petscVecDuplicate:18' if ~coder.target('MATLAB') */
+  /* 'petscVecDuplicate:18' if ~isempty(coder.target) */
   /* 'petscVecDuplicate:19' t_vec_out = coder.opaque('Vec'); */
   /* 'petscVecDuplicate:21' errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out)); */
   /* Map an opaque object into a PETSc Vec object */
@@ -9395,7 +9483,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9493,7 +9581,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*     pctype is PCLU, PCILU, or PCICC. */
   /*  */
   /*  See Also: mptKSPSolve, mptKSPCleanup */
-  /* 'mptKSPSetup:29' t_ksp = petscKSPCreate(petscObjectGetComm(Amat)); */
+  /* 'mptKSPSetup:29' t_Amat = Amat; */
+  /* 'mptKSPSetup:30' t_ksp = petscKSPCreate(petscObjectGetComm(t_Amat)); */
   /* Gets the MPI communicator for any PetscObject, regardless of the type.  */
   /*  */
   /*   [comm, errCode] = petscObjectGetComm(obj) */
@@ -9506,7 +9595,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  PetscObjectGetComm(PetscObject obj,MPI_Comm *comm) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscObjectGetComm.html */
   /* 'petscObjectGetComm:16' errCode = int32(-1); */
-  /* 'petscObjectGetComm:18' if ~coder.target('MATLAB') */
+  /* 'petscObjectGetComm:18' if ~isempty(coder.target) */
   /* 'petscObjectGetComm:19' t_obj = PetscObject(obj); */
   /* Map an opaque object into a PETSc PetscObject object */
   /*  */
@@ -9568,7 +9657,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9593,7 +9682,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  KSPCreate(MPI_Comm comm,KSP *ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPCreate.html */
   /* 'petscKSPCreate:18' errCode = int32(-1); */
-  /* 'petscKSPCreate:20' if ~coder.target('MATLAB') */
+  /* 'petscKSPCreate:20' if ~isempty(coder.target) */
   /* 'petscKSPCreate:21' t_ksp = coder.opaque('KSP'); */
   /* 'petscKSPCreate:23' if nargin==0 */
   /* 'petscKSPCreate:25' else */
@@ -9652,7 +9741,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9663,9 +9752,9 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:31' time = 0; */
-  /* 'mptKSPSetup:32' if nargout>1 */
-  /* 'mptKSPSetup:32' t=m2c_wtime(); */
+  /* 'mptKSPSetup:32' time = 0; */
+  /* 'mptKSPSetup:33' if nargout>1 */
+  /* 'mptKSPSetup:33' t=m2c_wtime(); */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -9676,7 +9765,28 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   t = M2C_wtime();
 
   /*  Setup KSP */
-  /* 'mptKSPSetup:35' petscKSPSetOperators(t_ksp, Amat); */
+  /* 'mptKSPSetup:36' petscKSPSetOperators(t_ksp, PetscMat(t_Amat)); */
+  /* Map an opaque object into a PETSc Mat object */
+  /*  */
+  /*   mat = PetscMat() simply returns a definition of the */
+  /*   m2c_opaque_type definition, suitable in the argument */
+  /*   specification for codegen. */
+  /*  */
+  /*   mat = PetscMat(arg) or mat = PetscMat(arg, false) converts arg */
+  /*   into a PETSc Mat object. */
+  /*  */
+  /*   mat = PetscMat(arg, true) wraps the arg into an opaque object.  */
+  /*   This should be used if the object needs to be returned to */
+  /*   MATLAB. Note that the value of opaque must be determined at */
+  /*   compile time. */
+  /*  */
+  /*  See also PetscMat */
+  /* 'PetscMat:18' coder.inline('always'); */
+  /* 'PetscMat:20' if nargin==0 && isempty(coder.target) */
+  /* 'PetscMat:25' if isstruct(arg) && ~isequal(arg.type, 'Mat') */
+  /* 'PetscMat:30' if ~isstruct(arg) || isempty(coder.target) */
+  /* 'PetscMat:31' if nargin==1 || ~opaque */
+  /* 'PetscMat:32' mat = arg; */
   /* Sets the matrix associated with the linear system and a (possibly) */
   /* different one associated with the preconditioner. */
   /*  */
@@ -9697,7 +9807,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  KSPSetOperators(KSP ksp,Mat Amat,Mat Pmat) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetOperators.html */
   /* 'petscKSPSetOperators:25' errCode = int32(-1); */
-  /* 'petscKSPSetOperators:27' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetOperators:27' if ~isempty(coder.target) */
   /* 'petscKSPSetOperators:28' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -9755,7 +9865,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9766,16 +9876,16 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:37' if nargin>1 */
-  /* 'mptKSPSetup:38' if nargin>2 */
-  /* 'mptKSPSetup:39' hasPC = ~ischar(pctype) || ~isempty(pctype); */
+  /* 'mptKSPSetup:38' if nargin>1 */
+  /* 'mptKSPSetup:39' if nargin>2 */
+  /* 'mptKSPSetup:40' hasPC = ~ischar(pctype) || ~isempty(pctype); */
   b0 = !(pctype->size[1] == 0);
 
-  /* 'mptKSPSetup:40' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
-  /* 'mptKSPSetup:42' if hasPC || hasSolver */
+  /* 'mptKSPSetup:41' hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack)); */
+  /* 'mptKSPSetup:43' if hasPC || hasSolver */
   emxInit_char_T(&pctype0, 2);
   if (b0) {
-    /* 'mptKSPSetup:43' t_pc = petscKSPGetPC(t_ksp); */
+    /* 'mptKSPSetup:44' t_pc = petscKSPGetPC(t_ksp); */
     /* Returns a pointer to the preconditioner context set with petscKSPSetPC. */
     /*  */
     /*   [pc, errCode] = petscKSPGetPC(ksp, pc) gets the PC of the KSP */
@@ -9786,7 +9896,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /*    PetscErrorCode  KSPGetPC(KSP ksp,PC *pc) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPGetPC.html */
     /* 'petscKSPGetPC:14' errCode = int32(-1); */
-    /* 'petscKSPGetPC:16' if ~coder.target('MATLAB') */
+    /* 'petscKSPGetPC:16' if ~isempty(coder.target) */
     /* 'petscKSPGetPC:17' t_pc = coder.opaque('PC'); */
     /* 'petscKSPGetPC:18' errCode = coder.ceval('KSPGetPC', PetscKSP(ksp), coder.wref(t_pc)); */
     /* Map an opaque object into a PETSc KSP object */
@@ -9842,7 +9952,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9853,11 +9963,11 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       }
     }
 
-    /* 'mptKSPSetup:45' if hasPC */
-    /* 'mptKSPSetup:46' if ischar(pctype) && pctype(end)~=char(0) */
+    /* 'mptKSPSetup:46' if hasPC */
+    /* 'mptKSPSetup:47' if ischar(pctype) && pctype(end)~=char(0) */
     if (pctype->data[pctype->size[1] - 1] != '\x00') {
       /*  null-terminate the string if not terminated properly */
-      /* 'mptKSPSetup:48' pctype0 = [pctype char(0)]; */
+      /* 'mptKSPSetup:49' pctype0 = [pctype char(0)]; */
       b_flag = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1] + 1;
@@ -9870,8 +9980,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
       pctype0->data[pctype0->size[0] * pctype->size[1]] = '\x00';
     } else {
-      /* 'mptKSPSetup:49' else */
-      /* 'mptKSPSetup:50' pctype0 = pctype; */
+      /* 'mptKSPSetup:50' else */
+      /* 'mptKSPSetup:51' pctype0 = pctype; */
       b_flag = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1];
@@ -9882,7 +9992,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       }
     }
 
-    /* 'mptKSPSetup:52' petscPCSetType(t_pc, pctype0); */
+    /* 'mptKSPSetup:53' petscPCSetType(t_pc, pctype0); */
     /* Builds PC for a particular solver. */
     /*  */
     /*   errCode = petscPCSetType(pc, type) sets the type of the PC */
@@ -9893,7 +10003,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /*    PetscErrorCode  PCSetType(PC pc, PCType type) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/PC/PCSetType.html */
     /* 'petscPCSetType:14' errCode = int32(-1); */
-    /* 'petscPCSetType:16' if ~coder.target('MATLAB') */
+    /* 'petscPCSetType:16' if ~isempty(coder.target) */
     /* 'petscPCSetType:17' if ischar(type) */
     /* 'petscPCSetType:18' errCode = coder.ceval('PCSetType', PetscPC(pc), coder.rref(type)); */
     /* Map an opaque object into a PETSc PC object */
@@ -9927,7 +10037,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -9938,14 +10048,14 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       }
     }
 
-    /* 'mptKSPSetup:55' if hasSolver */
+    /* 'mptKSPSetup:56' if hasSolver */
   }
 
-  /* 'mptKSPSetup:67' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
+  /* 'mptKSPSetup:68' if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0 */
   if ((!(solver->size[1] == 0)) && ((unsigned char)solver->data[solver->size[1]
        - 1] != 0)) {
     /*  null-terminate the string if not terminated properly */
-    /* 'mptKSPSetup:69' ksptype0 = [ksptype char(0)]; */
+    /* 'mptKSPSetup:70' ksptype0 = [ksptype char(0)]; */
     b_flag = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = solver->size[1] + 1;
@@ -9958,8 +10068,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
     pctype0->data[pctype0->size[0] * solver->size[1]] = '\x00';
   } else {
-    /* 'mptKSPSetup:70' else */
-    /* 'mptKSPSetup:71' ksptype0 = ksptype; */
+    /* 'mptKSPSetup:71' else */
+    /* 'mptKSPSetup:72' ksptype0 = ksptype; */
     b_flag = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = solver->size[1];
@@ -9970,10 +10080,10 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:73' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
+  /* 'mptKSPSetup:74' if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0) */
   if (!(pctype0->size[1] == 0)) {
     /*  Set KSP Types */
-    /* 'mptKSPSetup:75' petscKSPSetType(t_ksp, ksptype0); */
+    /* 'mptKSPSetup:76' petscKSPSetType(t_ksp, ksptype0); */
     /* Builds KSP for a particular solver. */
     /*  */
     /*   errCode = petscKSPSetType(ksp, type) sets the type of the KSP */
@@ -9984,7 +10094,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /*    PetscErrorCode  KSPSetType(KSP ksp, KSPType type) */
     /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetType.html */
     /* 'petscKSPSetType:14' errCode = int32(-1); */
-    /* 'petscKSPSetType:16' if ~coder.target('MATLAB') */
+    /* 'petscKSPSetType:16' if ~isempty(coder.target) */
     /* 'petscKSPSetType:17' if ischar(type) */
     /* 'petscKSPSetType:18' errCode = coder.ceval('KSPSetType', PetscKSP(ksp), coder.rref(type)); */
     /* Map an opaque object into a PETSc KSP object */
@@ -10018,7 +10128,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
       /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
       /* 'm2c_debug:7' coder.inline('always'); */
-      /* 'm2c_debug:9' if coder.target('MATLAB') */
+      /* 'm2c_debug:9' if isempty(coder.target) */
       /* 'm2c_debug:11' else */
       /* 'm2c_debug:12' flag = int32(1); */
       /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10032,7 +10142,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   emxFree_char_T(&pctype0);
 
-  /* 'mptKSPSetup:79' petscKSPSetFromOptions(t_ksp); */
+  /* 'mptKSPSetup:80' petscKSPSetFromOptions(t_ksp); */
   /* Sets KSP options from the options database. This routine must be called */
   /* before KSPSetUp() if the user is to be allowed to set the Krylov type. */
   /*  */
@@ -10044,7 +10154,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode KSPSetFromOptions(KSP ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetFromOptions.html */
   /* 'petscKSPSetFromOptions:15' errCode = int32(-1); */
-  /* 'petscKSPSetFromOptions:17' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetFromOptions:17' if ~isempty(coder.target) */
   /* 'petscKSPSetFromOptions:18' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -10078,7 +10188,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10089,7 +10199,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:81' petscKSPSetUp(t_ksp); */
+  /* 'mptKSPSetup:82' petscKSPSetUp(t_ksp); */
   /* Sets up the internal data structures for the later use of an iterative solver. */
   /*  */
   /*   errCode = petscKSPSetUp(ksp) */
@@ -10100,7 +10210,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode KSPSetUp(KSP ksp) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetUp.html */
   /* 'petscKSPSetUp:14' errCode = int32(-1); */
-  /* 'petscKSPSetUp:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPSetUp:16' if ~isempty(coder.target) */
   /* 'petscKSPSetUp:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -10134,7 +10244,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10145,8 +10255,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
   }
 
-  /* 'mptKSPSetup:82' if nargout>1 */
-  /* 'mptKSPSetup:82' time=m2c_wtime()-t; */
+  /* 'mptKSPSetup:83' if nargout>1 */
+  /* 'mptKSPSetup:83' time=m2c_wtime()-t; */
   /*  Return ellapsed time */
   /*    t = m2c_wtime */
   /* 'm2c_wtime:7' if isempty(coder.target) */
@@ -10156,8 +10266,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /* 'm2c_wtime:13' t = coder.ceval( 'M2C_wtime'); */
   b_t = M2C_wtime();
 
-  /* 'mptKSPSetup:84' toplevel = nargout>2; */
-  /* 'mptKSPSetup:85' ksp = PetscKSP(t_ksp, toplevel); */
+  /* 'mptKSPSetup:85' toplevel = nargout>2; */
+  /* 'mptKSPSetup:86' ksp = PetscKSP(t_ksp, toplevel); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
   /*   ksp = PetscKSP() simply returns a definition of the */
@@ -10205,7 +10315,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode KSPDestroy(KSP *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPDestroy.html */
   /* 'petscKSPDestroy:14' errCode = int32(-1); */
-  /* 'petscKSPDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPDestroy:16' if ~isempty(coder.target) */
   /* 'petscKSPDestroy:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -10261,7 +10371,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10285,7 +10395,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode MatDestroy(Mat *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatDestroy.html */
   /* 'petscMatDestroy:14' errCode = int32(-1); */
-  /* 'petscMatDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscMatDestroy:16' if ~isempty(coder.target) */
   /* 'petscMatDestroy:17' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -10321,7 +10431,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10344,7 +10454,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -10381,7 +10491,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10406,7 +10516,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -10443,7 +10553,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10588,7 +10698,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  Other: */
   /*      PETSC_IGNORE, PETSC_NULL_OPTION, PETSC_NULL_MAT, PETSC_NULL_VEC, */
   /*      PETSC_NULL_INT, PETSC_NULL_REAL */
-  /* 'petscGetObject:16' if coder.target('MATLAB') */
+  /* 'petscGetObject:16' if isempty(coder.target) */
   /* 'petscGetObject:20' switch name */
   /* 'petscGetObject:35' case 'PETSC_NULL_VEC' */
   /* 'petscGetObject:36' [obj, toplevel] = get_obj('Vec', 'NULL', nargout>1); */
@@ -10605,7 +10715,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode  VecDuplicate(Vec vec_in, Vec *vec_out) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDuplicate.html */
   /* 'petscVecDuplicate:16' errCode = int32(-1); */
-  /* 'petscVecDuplicate:18' if ~coder.target('MATLAB') */
+  /* 'petscVecDuplicate:18' if ~isempty(coder.target) */
   /* 'petscVecDuplicate:19' t_vec_out = coder.opaque('Vec'); */
   /* 'petscVecDuplicate:21' errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out)); */
   /* Map an opaque object into a PETSc Vec object */
@@ -10661,7 +10771,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10766,7 +10876,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode KSPDestroy(KSP *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPDestroy.html */
   /* 'petscKSPDestroy:14' errCode = int32(-1); */
-  /* 'petscKSPDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscKSPDestroy:16' if ~isempty(coder.target) */
   /* 'petscKSPDestroy:17' t_ksp = PetscKSP(ksp); */
   /* Map an opaque object into a PETSc KSP object */
   /*  */
@@ -10824,7 +10934,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10848,7 +10958,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode MatDestroy(Mat *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatDestroy.html */
   /* 'petscMatDestroy:14' errCode = int32(-1); */
-  /* 'petscMatDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscMatDestroy:16' if ~isempty(coder.target) */
   /* 'petscMatDestroy:17' t_mat = PetscMat(mat); */
   /* Map an opaque object into a PETSc Mat object */
   /*  */
@@ -10884,7 +10994,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10907,7 +11017,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -10944,7 +11054,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
@@ -10969,7 +11079,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*    PetscErrorCode VecDestroy(Vec *A) */
   /*  http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecDestroy.html */
   /* 'petscVecDestroy:14' errCode = int32(-1); */
-  /* 'petscVecDestroy:16' if ~coder.target('MATLAB') */
+  /* 'petscVecDestroy:16' if ~isempty(coder.target) */
   /* 'petscVecDestroy:17' t_vec = PetscVec(vec); */
   /* Map an opaque object into a PETSc Vec object */
   /*  */
@@ -11006,7 +11116,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
     /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
     /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if coder.target('MATLAB') */
+    /* 'm2c_debug:9' if isempty(coder.target) */
     /* 'm2c_debug:11' else */
     /* 'm2c_debug:12' flag = int32(1); */
     /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
