@@ -18,7 +18,7 @@ if ~exist('m2c', 'file') && exist('../M2C', 'dir')
     % Starting from the current directory with M2C. Load M2C and compile.
     run ../M2C/startup
     
-    if usejava('jvm')
+    if usejava('jvm') && ~exist('octave_config_info', 'builtin')
         % Only build essential functions needed for code development
         % to speedup startup. The other functions will be built when
         % calling load_mpetsc.

@@ -1,7 +1,6 @@
 % Set up a test matrix
-rng(100);
 A = sprand(100,100,0.3);
-A = A + eye(100, 'like', A);
+A = A + speye(100);
 [rowptr, colind, val] = crs_matrix(A); % This requires MSPACK
 b = rand(100,1);
 
