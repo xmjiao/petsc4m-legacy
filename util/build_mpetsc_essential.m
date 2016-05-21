@@ -6,15 +6,15 @@ curpath = pwd;
 cd(mpetscroot);
 
 try
-    opts = [{'-petsc', '-g', '-exe', '-exedir', 'exe', '-mex', ...
+    opts = [{'-petsc', '-g', '-exe', '-exedir', 'exe', ...
         '-time', '{''mptKSPSetup'', ''mptKSPSolve''}'}, varargin{:}];
     
     %Compile top-level functions for CRS and time top-level KSP functions
     files = {'mptSolveCRS'};
     if exist('octave_config_info', 'builtin')
-        mexdir = {};
+        mexdir = {'-mex'};
     else
-        mexdir = {'-mexdir', 'mex'};
+        mexdir = {};
     end
     for i=1:length(files)
         m2c(opts{:}, mexdir{:}, files{i});

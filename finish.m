@@ -1,3 +1,5 @@
 % This script is called automatically when MATLAB and Octave exists.
 
-unload_mpetsc;
+if exist('unload_mpetsc', 'file')
+    unload_mpetsc;
+end
