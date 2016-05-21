@@ -136,7 +136,6 @@ function test %#ok<DEFNU>
 %! A = A + speye(100);
 %! [rowptr, colind, val] = crs_matrix(A); % This requires NumGeom
 %! b = rand(100,1);
-%! x0 = A\b;
 %! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b);
 %! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '');
 %! [x,flag,relres,iter] = mptSolveCRS(rowptr, colind, val, b, '', 1.e-6);
