@@ -44,6 +44,7 @@ try
         m2c(opts{:}, mexdir{:}, files{i}{1});
     end
     
+    fprintf(1, '\nMPETsc was built successfully.\n\n');
     % Load MPETSc if successful
     load_mpetsc;
 catch ME
