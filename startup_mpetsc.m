@@ -18,13 +18,10 @@ if ~exist('m2c', 'file') && exist('../M2C', 'dir')
     % Starting from the current directory with M2C. Load M2C and compile.
     run ../M2C/startup
     
-    if usejava('jvm') && ~exist('octave_config_info', 'builtin')
-        % Only build essential functions needed for code development
-        % to speedup startup. The other functions will be built when
-        % calling load_mpetsc.
-        build_mpetsc_essential;
-    else
-        % Initialize PETSc automatically only when running without JVM
+    if ~exist(['petscFinalized.' mexext], 'file')
+        fprintf(1, ['To build MPETSc, use MATLAB/Octave command build_mpetsc_essential' ...
+            'for basic functionality and build_mpetsc for all functionality.\n']);
+    elseif ~usejava('jvm') || exist('octave_config_info', 'builtin')
         load_mpetsc;
     end
 end
