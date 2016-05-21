@@ -15,7 +15,7 @@ function [errCode, toplevel] = petscVecSetType(vec, type)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = PetscVec(vec);
     
     if ischar(type)

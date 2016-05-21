@@ -15,7 +15,7 @@ function [errCode, toplevel] = petscMatSetFromOptions(mat)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     errCode = coder.ceval('MatSetFromOptions', t_mat);
 

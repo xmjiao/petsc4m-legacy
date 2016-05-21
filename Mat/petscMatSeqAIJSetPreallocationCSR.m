@@ -24,7 +24,7 @@ function [errCode, toplevel] = petscMatSeqAIJSetPreallocationCSR(mat, ix, jx, vs
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     
     if nargin==3

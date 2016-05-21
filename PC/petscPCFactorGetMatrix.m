@@ -18,7 +18,7 @@ function [mat, errCode, toplevel] = petscPCFactorGetMatrix(pc)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = coder.opaque('Mat');
     errCode = coder.ceval('PCFactorGetMatrix', PetscPC(pc), coder.wref(t_mat));
     

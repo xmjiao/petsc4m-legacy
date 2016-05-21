@@ -19,7 +19,7 @@ function [errCode, toplevel] = petscPCFactorSetUpMatSolverPackage(pc)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_pc = PetscPC(pc);
     
     errCode = coder.ceval('PCFactorSetUpMatSolverPackage', t_pc);

@@ -21,7 +21,7 @@ function [errCode, toplevel] = petscMatAYPX(Y, a, X, mstr)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     if nargin==3
         mstr = PETSC_SAME_NONZERO_PATTERN;
     end

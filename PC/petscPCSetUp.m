@@ -13,7 +13,7 @@ function [errCode, toplevel] = petscPCSetUp(pc)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_pc = PetscPC(pc);
     
     errCode = coder.ceval('PCSetUp', t_pc);

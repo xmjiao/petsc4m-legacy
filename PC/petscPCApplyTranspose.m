@@ -22,7 +22,7 @@ function [errCode, toplevel] = petscPCApplyTranspose(pc, b, x)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_pc = PetscPC(pc);
     t_b = PetscVec(b);
     

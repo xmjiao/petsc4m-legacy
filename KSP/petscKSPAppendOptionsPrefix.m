@@ -17,7 +17,7 @@ function [errCode, toplevel] = petscKSPAppendOptionsPrefix(ksp, prefix)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
 
     toplevel = nargout>1;

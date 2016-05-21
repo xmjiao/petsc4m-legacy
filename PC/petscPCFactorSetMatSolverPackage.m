@@ -14,7 +14,7 @@ function [errCode, toplevel] = petscPCFactorSetMatSolverPackage(pc, solver)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     if ischar(solver)
         errCode = coder.ceval('PCFactorSetMatSolverPackage', ...
             PetscPC(pc), coder.rref(solver));

@@ -15,7 +15,7 @@ function [comm, errCode, toplevel] = petscObjectGetComm(obj)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_obj = PetscObject(obj);
     t_comm = coder.opaque('MPI_Comm');
         

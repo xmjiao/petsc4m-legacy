@@ -13,7 +13,7 @@ function [errCode, toplevel] = petscPCSetType(pc, type)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     if ischar(type)
         errCode = coder.ceval('PCSetType', PetscPC(pc), coder.rref(type));
     else % If type is an opaque object of PCType, do not pass by reference.

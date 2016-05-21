@@ -21,7 +21,7 @@ function [info, errCode, toplevel] = petscMatGetInfo(mat, flag)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     if nargin<2
         flag = PETSC_MAT_LOCAL;

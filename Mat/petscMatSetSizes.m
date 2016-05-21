@@ -22,7 +22,7 @@ function [errCode, toplevel] = petscMatSetSizes(mat, m, n, M, N)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     
     if nargin<4;

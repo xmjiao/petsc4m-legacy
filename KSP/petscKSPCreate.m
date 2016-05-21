@@ -17,7 +17,7 @@ function [ksp, errCode, toplevel] = petscKSPCreate(comm)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = coder.opaque('KSP');
     
     if nargin==0

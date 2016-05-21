@@ -15,7 +15,7 @@ function [errCode, toplevel] = petscVecSetFromOptions(vec)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = PetscVec(vec);
     errCode = coder.ceval('VecSetFromOptions', t_vec);
 

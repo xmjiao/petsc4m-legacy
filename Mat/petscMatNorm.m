@@ -15,7 +15,7 @@ function [nrm, errCode, toplevel] = petscMatNorm(A, type)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     nrm = double(0);
     errCode = coder.ceval('MatNorm', PetscMat(A), type, coder.wref(nrm));
     

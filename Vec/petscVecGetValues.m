@@ -21,7 +21,7 @@ function [y, errCode, toplevel] = petscVecGetValues(vec, ni, ix, y)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     if nargin<4
         y = coder.nullcopy(zeros(ni, 1));
     elseif length(y) < ni

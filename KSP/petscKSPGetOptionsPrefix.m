@@ -15,7 +15,7 @@ function [str, errCode, toplevel] = petscKSPGetOptionsPrefix(ksp)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     % null-terminate the string.
     str0 = coder.opaque('const char *');    

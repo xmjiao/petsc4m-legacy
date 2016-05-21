@@ -15,7 +15,7 @@ function [str, errCode, toplevel] = petscPCGetOptionsPrefix(pc)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_pc = PetscPC(pc);
     
     str0 = coder.opaque('const char *');    

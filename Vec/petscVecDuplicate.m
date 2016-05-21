@@ -15,7 +15,7 @@ function [vec_out, errCode, toplevel] = petscVecDuplicate(vec_in)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec_out = coder.opaque('Vec');
     
     errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out));

@@ -14,7 +14,7 @@ function [opts, errCode, toplevel] = petscOptionsCreate
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_opts = coder.opaque('PetscOptions');
     
     errCode = coder.ceval('PetscOptionsCreate', coder.wref(t_opts));

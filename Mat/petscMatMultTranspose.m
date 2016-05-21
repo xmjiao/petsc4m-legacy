@@ -13,7 +13,7 @@ function [errCode, toplevel] = petscMatMultTranspose(A, x, y)
 %#codegen -args {PetscMat, PetscVec, PetscVec}
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     errCode = coder.ceval('MatMultTranspose', PetscMat(A), PetscVec(x), PetscVec(y));
     
     toplevel = nargout>1;

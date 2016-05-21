@@ -13,7 +13,7 @@ function [obj, toplevel] = petscGetObject(name)
 
 %#codegen -args {coder.typeof(char(0),[1,inf])}
 
-if coder.target('MATLAB')
+if isempty(coder.target)
     error('Function petscGetObject must be compiled.');
 end
 

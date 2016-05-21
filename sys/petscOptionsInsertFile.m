@@ -12,7 +12,7 @@ function [errCode, toplevel] = petscOptionsInsertFile(comm, file, req)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     toplevel = nargout>1;
     if ~isempty(file) && file(end) && (toplevel || m2c_debug)
         m2c_error('MPETSc:petscOptionsInsertFile:InputError', ...

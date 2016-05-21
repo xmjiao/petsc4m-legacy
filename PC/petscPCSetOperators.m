@@ -23,7 +23,7 @@ function [errCode, toplevel] = petscPCSetOperators(pc, Amat, Pmat)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_pc = PetscPC(pc);
     t_Amat = PetscMat(Amat);
     

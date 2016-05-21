@@ -13,7 +13,7 @@ function [errCode, toplevel] = petscVecSet(vec, val)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = PetscVec(vec);
     
     errCode = coder.ceval('VecSet', t_vec, val);

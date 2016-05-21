@@ -18,7 +18,7 @@ function [found, errCode, toplevel] = petscOptionsHasName(options, pre, name)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     toplevel = nargout>2;
     if ~isempty(pre) && pre(end) && (toplevel || m2c_debug)
         m2c_error('MPETSc:petscOptionsHasName:InputError', ...

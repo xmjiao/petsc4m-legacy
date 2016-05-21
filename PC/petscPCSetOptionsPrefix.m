@@ -17,7 +17,7 @@ function [errCode, toplevel] = petscPCSetOptionsPrefix(pc, prefix)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_pc = PetscPC(pc);
 
     toplevel = nargout>1;

@@ -14,7 +14,7 @@ function [flag, errCode, toplevel] = petscKSPGetInitialGuessNonzero(ksp)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     
     t_flag = coder.opaque('PetscBool');

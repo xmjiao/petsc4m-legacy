@@ -35,7 +35,7 @@ function [mat, errCode, toplevel] = petscMatCreateSeqAIJ(m, n, nz, nnz, varargin
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = coder.opaque('Mat');
     
     comm = MPI_Comm(PETSC_COMM_SELF);

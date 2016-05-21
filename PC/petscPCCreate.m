@@ -17,7 +17,7 @@ function [pc, errCode, toplevel] = petscPCCreate(comm)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_pc = coder.opaque('PC');
     
     if nargin==0

@@ -15,7 +15,7 @@ function [ncols, cols, vals, errCode, toplevel] = petscMatGetRow(mat, row)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     
     t_ncols = int32(0);

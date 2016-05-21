@@ -16,7 +16,7 @@ function [initialized, errCode, toplevel] = petscInitialized
 initialized = int32(0);
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('PetscInitialized', coder.wref(b));
     initialized = coder.ceval(' ', b);

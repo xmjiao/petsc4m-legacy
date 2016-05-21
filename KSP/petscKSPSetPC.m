@@ -14,7 +14,7 @@ function [errCode, toplevel] = petscKSPSetPC(ksp, pc)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')    
+if ~isempty(coder.target)    
     errCode = coder.ceval('KSPSetPC', PetscKSP(ksp), PetscPC(pc));
     
     toplevel = nargout>1;

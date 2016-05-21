@@ -14,7 +14,7 @@ function [errCode, toplevel] = petscVecAYPX(y, a, x)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     errCode = coder.ceval('VecAYPX', PetscVec(y), a, PetscVec(x));
     
     toplevel = nargout>1;

@@ -17,7 +17,7 @@ function [assembled, errCode, toplevel] = petscMatAssembled(mat)
 assembled = int32(0);
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('MatAssembled', t_mat, coder.wref(b));

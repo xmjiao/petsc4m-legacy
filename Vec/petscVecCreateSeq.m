@@ -15,7 +15,7 @@ function [vec, errCode, toplevel] = petscVecCreateSeq(n)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = coder.opaque('Vec');
     
     comm = MPI_Comm(PETSC_COMM_SELF);

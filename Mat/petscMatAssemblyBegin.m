@@ -14,7 +14,7 @@ function [errCode, toplevel] = petscMatAssemblyBegin(mat,type)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     
     if nargin<2; type = PETSC_MAT_FINAL_ASSEMBLY; end

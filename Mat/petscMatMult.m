@@ -13,7 +13,7 @@ function [errCode, toplevel] = petscMatMult(A, x, y)
 %#codegen -args {PetscMat, PetscVec, PetscVec}
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     errCode = coder.ceval('MatMult', PetscMat(A), PetscVec(x), PetscVec(y));
     
     toplevel = nargout>1;

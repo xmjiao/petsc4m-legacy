@@ -13,7 +13,7 @@ function [errCode, toplevel] = petscVecAssemblyEnd(vec)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = PetscVec(vec);
     
     errCode = coder.ceval('VecAssemblyEnd', t_vec);

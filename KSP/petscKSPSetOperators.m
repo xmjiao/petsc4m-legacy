@@ -24,7 +24,7 @@ function [errCode, toplevel] = petscKSPSetOperators(ksp, Amat, Pmat)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     t_Amat = PetscMat(Amat);
     

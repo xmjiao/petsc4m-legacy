@@ -17,7 +17,7 @@ function [mat_out, errCode, toplevel] = petscMatConvert(mat_in, newtype, reuse)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat_out = coder.opaque('Mat');
     
     errCode = coder.ceval('MatConvert', PetscMat(mat_in), coder.rref(newtype), ...

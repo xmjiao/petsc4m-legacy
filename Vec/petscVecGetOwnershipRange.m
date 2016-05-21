@@ -16,7 +16,7 @@ function [first_row, last_row, errCode, toplevel] = petscVecGetOwnershipRange(ve
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = PetscVec(vec);
     
     first_row = int32(0);

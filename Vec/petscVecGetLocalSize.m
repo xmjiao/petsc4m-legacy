@@ -15,7 +15,7 @@ function [n, errCode, toplevel] = petscVecGetLocalSize(vec)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = PetscVec(vec);
     
     n = int32(0);

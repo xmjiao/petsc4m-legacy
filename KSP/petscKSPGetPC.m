@@ -13,7 +13,7 @@ function [pc, errCode, toplevel] = petscKSPGetPC(ksp)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_pc = coder.opaque('PC');
     errCode = coder.ceval('KSPGetPC', PetscKSP(ksp), coder.wref(t_pc));
     

@@ -25,7 +25,7 @@ function [v, errCode] = petscMatGetValues(mat, ni, ix, nj, jx, v)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     
     if nargin<6

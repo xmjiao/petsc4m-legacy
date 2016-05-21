@@ -7,24 +7,23 @@ cd(mpetscroot);
 
 try
     build_mpetsc_essential(varargin{:});
-    
+        
     %Compile the most most expensive top-level KSP wrapper functions with timing
-    opts = [{'-petsc', '-O3', '-mex', '-mexdir', 'mex'} varargin{:}];
-    files = {'mptKSPSetup', 'mptKSPSolve'};
-    for i=1:length(files)
-        m2c(opts{:}, files{i});
+    opts = [{'-petsc', '-O3', '-mex'} varargin{:}];
+    files = {'mptKSPSetup', 'mptKSPSolve', 'mptKSPCleanup', 'mptMatCreateAIJFromCRS', ...
+        'mptMatAIJToCRS', 'mptVecCreateFromArray', 'mptVecToArray'};
+
+    if exist('octave_config_info', 'builtin')
+        mexdir = {};
+    else
+        mexdir = {'-mexdir', 'mex'};
     end
-    
-    %Compile other top-level wrapper functions without timing
-    opts = [{'-petsc', '-O3', '-mex', '-mexdir', 'mex'} varargin{:}];
-    files = {'mptKSPCleanup', 'mptMatCreateAIJFromCRS', 'mptMatAIJToCRS', ...
-        'mptVecCreateFromArray', 'mptVecToArray'};
     for i=1:length(files)
-        m2c(opts{:}, files{i});
+        m2c(opts{:}, mexdir{:}, files{i});
     end
-    
+       
     %Compile all other system-level and low-level functions with hidden mex files
-    opts = [{'-petsc', '-O', '-mex', '-mexdir', '../mex'} varargin{:}];
+    opts = [{'-petsc', '-O', '-mex'} varargin{:}];
     lines = [grep_pattern('sys/petscInitialize.m', '\n%#codegen\s+-args'), ...
         grep_pattern('sys/petscFinalize.m', '\n%#codegen\s+-args'), ...
         grep_pattern('sys/petscSplitOwnership.m', '\n%#codegen\s+-args'), ...
@@ -35,8 +34,14 @@ try
         grep_pattern('KSP/petsc*.m', '\n%#codegen\s+-args'), ...
         grep_pattern('PC/petsc*.m', '\n%#codegen\s+-args')];
     files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
+
+    if exist('octave_config_info', 'builtin')
+        mexdir = {};
+    else
+        mexdir = {'-mexdir', '../mex'};
+    end
     for i=1:length(files)
-        m2c(opts{:}, files{i}{1});
+        m2c(opts{:}, mexdir{:}, files{i}{1});
     end
 catch ME
     cd(curpath);

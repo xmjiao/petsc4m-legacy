@@ -13,7 +13,7 @@ function [errCode, toplevel] = petscKSPBuildResidual(ksp, v)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     t_v = PetscVec(v);
     

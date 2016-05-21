@@ -14,7 +14,7 @@ function [errCode, toplevel] = petscVecAXPY(y, a, x)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     errCode = coder.ceval('VecAXPY', PetscVec(y), a, PetscVec(x));
     
     toplevel = nargout>1;

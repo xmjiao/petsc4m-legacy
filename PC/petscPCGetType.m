@@ -13,7 +13,7 @@ function [type, errCode, toplevel] = petscPCGetType(pc)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_type = coder.opaque('PCType');
     errCode = coder.ceval('PCGetType', PetscPC(pc), coder.wref(t_type));
     

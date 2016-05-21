@@ -16,7 +16,7 @@ function [errCode, toplevel] = petscOptionsInsertString(in_str)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     toplevel = nargout>1;
     if ~isempty(in_str) && in_str(end) && (toplevel || m2c_debug)
         m2c_error('MPETSc:petscOptionsInsertString:InputError', ...

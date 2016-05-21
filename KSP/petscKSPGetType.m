@@ -13,7 +13,7 @@ function [type, errCode, toplevel] = petscKSPGetType(ksp)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_type = coder.opaque('KSPType');
     errCode = coder.ceval('KSPGetType', PetscKSP(ksp), coder.wref(t_type));
     

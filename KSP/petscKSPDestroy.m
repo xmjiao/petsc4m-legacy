@@ -13,7 +13,7 @@ function [ksp_out, errCode, toplevel] = petscKSPDestroy(ksp)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     
     errCode = coder.ceval('KSPDestroy', coder.ref(t_ksp));

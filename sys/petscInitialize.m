@@ -22,7 +22,7 @@ function [errCode, toplevel] = petscInitialize
 
 errCode = int32(0); %#ok<NASGU>
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     errCode = coder.ceval('PetscInitializeNoArguments');
     
     toplevel = nargout>1;

@@ -16,7 +16,7 @@ function [n, N, errCode, toplevel] = petscSplitOwnership(comm, n, N)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_comm = MPI_Comm(comm);
     
     if nargin<3

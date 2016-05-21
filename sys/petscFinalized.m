@@ -16,7 +16,7 @@ function [finalized, errCode, toplevel] = petscFinalized
 finalized = int32(0);
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     coder.cinclude('petscsys.h');
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('PetscFinalized', coder.wref(b));

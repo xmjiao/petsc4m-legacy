@@ -20,7 +20,7 @@ function [mat, errCode, toplevel] = petscMatCreate(comm)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = coder.opaque('Mat');
     
     if nargin==0

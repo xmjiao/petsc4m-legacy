@@ -17,7 +17,7 @@ function [value, found, errCode, toplevel] = petscOptionsGetBool(pre, name)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     toplevel = nargout>3;
     if ~isempty(pre) && pre(end) && (toplevel || m2c_debug)
         m2c_error('MPETSc:petscOptionsGetBool:InputError', ...

@@ -13,7 +13,7 @@ function [flag, errCode, toplevel] = petscKSPGetConvergedReason(ksp)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     
     flag = int32(0);

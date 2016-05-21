@@ -14,7 +14,7 @@ function [errCode, toplevel] = petscKSPSetFromOptions(ksp)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     
     errCode = coder.ceval('KSPSetFromOptions', t_ksp);

@@ -16,7 +16,7 @@ function [value, found, errCode, toplevel] = petscOptionsGetReal(pre, name)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     toplevel = nargout>3;
     
     if ischar(pre) && ~isempty(pre) && pre(end) && (toplevel || m2c_debug)

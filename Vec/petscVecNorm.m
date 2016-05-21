@@ -20,7 +20,7 @@ function [nrm, errCode, toplevel] = petscVecNorm(x, type, nrm)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     if nargin==2
         nrm = double(0);
     end

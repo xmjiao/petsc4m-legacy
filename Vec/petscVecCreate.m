@@ -18,7 +18,7 @@ function [vec, errCode, toplevel] = petscVecCreate(comm)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = coder.opaque('Vec');
     
     if nargin==0

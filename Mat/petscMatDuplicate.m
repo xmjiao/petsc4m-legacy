@@ -16,7 +16,7 @@ function [mat_out, errCode, toplevel] = petscMatDuplicate(mat_in, op)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat_out = coder.opaque('Mat');
     
     errCode = coder.ceval('MatDuplicate', PetscMat(mat_in), op, ...

@@ -18,7 +18,7 @@ function [errCode, toplevel] = petscVecSetOptionsPrefix(vec, prefix)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = PetscVec(vec);
 
     toplevel = nargout>1;

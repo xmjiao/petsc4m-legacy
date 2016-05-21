@@ -27,7 +27,7 @@ function [errCode, toplevel] = petscKSPSetTolerances(ksp, rtol, abstol, dtol, ma
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     
     if nargin==2

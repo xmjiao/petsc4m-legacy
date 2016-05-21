@@ -19,7 +19,7 @@ function [errCode, toplevel] = petscOptionsSetValue(iname, value)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     toplevel = nargout>1;
     if ~isempty(iname) && iname(end) && (toplevel || m2c_debug)
         m2c_error('MPETSc:petscOptionsSetValue:InputError', ...

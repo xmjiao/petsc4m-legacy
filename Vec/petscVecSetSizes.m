@@ -20,7 +20,7 @@ function [errCode, toplevel] = petscVecSetSizes(vec, n, N)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_vec = PetscVec(vec);
     
     if nargin<3

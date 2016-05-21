@@ -20,7 +20,7 @@ function [errCode, toplevel] = petscMatCopy(A, B, mstr)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     if nargin==2
         mstr = PETSC_SAME_NONZERO_PATTERN;
     end

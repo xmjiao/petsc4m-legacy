@@ -14,7 +14,7 @@ function [errCode, toplevel] = petscVecCopy(x, y)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     errCode = coder.ceval('VecCopy', PetscVec(x), PetscVec(y));
     
     toplevel = nargout>2;

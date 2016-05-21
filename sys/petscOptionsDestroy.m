@@ -14,7 +14,7 @@ function [opts, errCode, toplevel] = petscOptionsDestroy(opts)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_opts = PetscOptions(opts);
     
     errCode = coder.ceval('PetscOptionsDestroy', coder.ref(t_opts));

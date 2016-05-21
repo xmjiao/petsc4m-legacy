@@ -19,7 +19,7 @@ function [errCode, toplevel] = petscFinalize
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     coder.cinclude('petscsys.h');
     errCode = coder.ceval('PetscFinalize');
 

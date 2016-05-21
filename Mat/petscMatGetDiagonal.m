@@ -15,7 +15,7 @@ function [errCode, toplevel] = petscMatGetDiagonal(A, v)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     errCode = coder.ceval('MatGetDiagonal', PetscMat(A), PetscVec(v));
     
     toplevel = nargout>1;

@@ -24,7 +24,7 @@ function [errCode, toplevel] = petscVecSetValues(vec, ni, ix, y, iroa)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     if nargin<5
         iroa = PETSC_INSERT_VALUES;
     end

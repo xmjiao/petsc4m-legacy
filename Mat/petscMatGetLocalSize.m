@@ -17,7 +17,7 @@ function [m, n, errCode, toplevel] = petscMatGetLocalSize(mat)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     
     m = int32(0);

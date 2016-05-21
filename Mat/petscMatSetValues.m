@@ -32,7 +32,7 @@ if nargin<7;
     iroa = PETSC_INSERT_VALUES;
 end
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     
     errCode = coder.ceval('MatSetValues', t_mat, ni, coder.rref(ix), ...

@@ -14,7 +14,7 @@ function [its, errCode, toplevel] = petscKSPGetTotalIterations(ksp)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     
     its = int32(0);

@@ -22,7 +22,7 @@ function [errCode, toplevel] = petscKSPSolve(ksp, b, x)
 
 errCode = int32(-1);
 
-if ~coder.target('MATLAB')
+if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     t_b = PetscVec(b);
     
