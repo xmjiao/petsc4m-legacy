@@ -8,6 +8,8 @@
 #include "petscsys.h"
 #include "petscksp.h"
 
+typedef PetscErrorCode (*MatNullSpaceRemoveFunc)(MatNullSpace,Vec,void*);
+
 /* Define some missing data types and constants for pre 3.7.0 versions */
 #if PETSC_VERSION_LT(3,7,0)
 

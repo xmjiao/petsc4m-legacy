@@ -1,7 +1,7 @@
 function [pc, errCode, toplevel] = petscKSPGetPC(ksp)
 %Returns a pointer to the preconditioner context set with petscKSPSetPC.
 %
-%  [pc, errCode] = petscKSPGetPC(ksp, pc) gets the PC of the KSP
+%  [pc, errCode] = petscKSPGetPC(ksp) gets the PC of the KSP
 %
 %  SEE ALSO:  petscKSPSetPC
 %

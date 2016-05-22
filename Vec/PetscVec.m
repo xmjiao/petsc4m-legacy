@@ -1,9 +1,8 @@
 function vec = PetscVec(arg, opaque) %#codegen
 %Map an opaque object into a PETSc Vec object
 %
-%  vec = PetscVec() simply returns a definition of the
-%  m2c_opaque_type definition, suitable in the argument
-%  specification for codegen.
+%  vec = PetscVec() simply returns a definition of the m2c_opaque_type,
+%  suitable in the argument specification for codegen.
 %
 %  vec = PetscVec(arg) or vec = PetscVec(arg, false) converts arg
 %  into a PETSc Vec object.

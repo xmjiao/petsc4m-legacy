@@ -1,6 +1,4 @@
 #include "petscGetEnum.h"
-#include "petscksp.h"
-#include "petscsys.h"
 #include "mpetsc.h"
 #include "m2c.h"
 
@@ -21,7 +19,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i0] = varargin_3->data[i0];
   }
 
-  M2C_error("petscGetNum:UnknownConstant", "Unknonw constant %s.",
+  M2C_error("petscGetEnum:UnknownConstant", "Unknonw constant %s.",
             &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }

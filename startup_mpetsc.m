@@ -1,31 +1,35 @@
 % Startup MPETSc module and compile some files automatically if needed.
 
-addpath(pwd); %#ok<*MCAP>
-addpath([pwd '/Mat']);
-addpath([pwd '/Vec']);
-addpath([pwd '/KSP']);
-addpath([pwd '/PC'])
+mpetsc_root = fileparts(which('startup_mpetsc.m'));
 
-addpath([pwd '/util'])
-addpath([pwd '/sys'])
-addpath([pwd '/exe'])
+addpath(mpetsc_root); %#ok<*MCAP>
+addpath([mpetsc_root '/Mat']);
+addpath([mpetsc_root '/Vec']);
+addpath([mpetsc_root '/KSP']);
+addpath([mpetsc_root '/PC']);
+
+addpath([mpetsc_root '/util'])
+addpath([mpetsc_root '/sys'])
+addpath([mpetsc_root '/exe'])
 
 if ~exist('mpi_Init', 'file')
-    addpath([pwd '/mpi'])
+    addpath([mpetsc_root '/mpi'])
 end
 
 if ~exist('m2c', 'file') && exist('../M2C', 'dir')
-    % Starting from the current directory with M2C. Load M2C and compile.
+    % Start up M2C from its root directory
     run ../M2C/startup
     
     if ~exist(['petscFinalized.' mexext], 'file')
-        fprintf(1, ['To build MPETSc, use MATLAB/Octave command build_mpetsc_essential' ...
+        % Prompt user how to build MPETSc if not yet built
+        fprintf(1, ['To build MPETSc, use MATLAB/Octave command build_mpetsc_essential\n' ...
             'for basic functionality and build_mpetsc for all functionality.\n']);
-    elseif ~usejava('jvm') || exist('octave_config_info', 'builtin')
+    else
+        % Try to load MPETSc automatically
         load_mpetsc;
     end
 end
 
-if exist('../MSPACK', 'dir')
-    addpath([pwd '/../MSPACK'])
+if ~exist('startup_mspack.m', 'file') && exist('../MSPACK', 'dir')
+    run ../MSPACK/startup_mspack
 end

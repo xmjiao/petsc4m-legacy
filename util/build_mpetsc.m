@@ -44,7 +44,6 @@ try
         m2c(opts{:}, mexdir{:}, files{i}{1});
     end
     
-    fprintf(1, '\nMPETsc was built successfully.\n\n');
     % Load MPETSc if successful
     load_mpetsc;
 catch ME
@@ -55,6 +54,7 @@ end
 cd(curpath);
 
 % TODO:
+%
 % MatDiagonalScale,
 % MatScale, MatTranspose, MatZeroEntries, MatShift, MatZeroEntries
 %
@@ -64,14 +64,16 @@ cd(curpath);
 % VecPointwiseDivide, VecMDot, VecMTDOt, VeccMAXPTY, VecMax, VecMin,
 % VecAbs, VecReciprocal, VecShift, VecSet.
 %
-% MatNullSpace, MatNullSpaceCreate,
-%
 % MatCholeskyFactor, MatLUFactor, MatGetFactor, MatReorderForNonzeroDiagonal
 %
 % , petscMatCreateAIJ, petscVecCreateMPI,
 % MatGetType, MatCreateMPIAIJWithArrays, MatCreateSeqAIJWithArrays
 % MatMPIAIJSetPreallocation, MatSeqAIJSetPreallocation
-% MatSetNullSpace() and MatSetTransposeNullSpace()
+% 
 % PCGetOperators, KSPGetOperators
+%
+% SNES
+%
+%
 
 % Unsupported: KSPRegister, PCRegister

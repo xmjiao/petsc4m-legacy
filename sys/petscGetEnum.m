@@ -47,9 +47,6 @@ if isempty(coder.target)
     error('Function petscGetEnum must be compiled.');
 end
 
-coder.cinclude('petscsys.h');
-coder.cinclude('petscksp.h');
-
 %% InsertMode
 switch name
     case 'PETSC_TRUE'
@@ -174,7 +171,7 @@ switch name
         toplevel = nargout>1;
         val = int32(intmin);
         if toplevel
-            m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
+            m2c_error('petscGetEnum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
         end
 end
 end

@@ -22,10 +22,11 @@ try
     
     %Compile critical system-level functions into their own directory
     opts = [{'-petsc', '-O', '-mex'} varargin{:}];
-    files = {'sys/petscGetEnum.m', 'sys/petscGetObject.m', 'sys/petscGetString.m', ...
-        'sys/petscInitialized.m', 'sys/petscFinalized.m'};
+    lines = [grep_pattern('sys/petscGet*.m', '\n%#codegen\s+-args'), ...
+        grep_pattern('sys/petsc*ed.m', '\n%#codegen\s+-args')];
+    files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
     for i=1:length(files)
-        m2c(opts{:}, files{i});
+        m2c(opts{:}, files{i}{1});
     end
     
     %Compile mpi functions into their own directory
