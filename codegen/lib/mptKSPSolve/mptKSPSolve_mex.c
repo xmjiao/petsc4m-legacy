@@ -21,6 +21,8 @@
 
 void mptKSPSolve_api(const mxArray ** prhs, const mxArray **plhs) {
 
+    emxArray_real_T      reshis;
+
     struct0_T            ksp;
     struct0_T            b;
     struct0_T            x;
@@ -217,13 +219,14 @@ void mptKSPSolve_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[1], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[2], mxINT32_CLASS, 2, l_size); }
+    init_emxArray((emxArray__common*)&reshis, 1);
     {mwSize l_size[] = {1, 1};
-    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[3], mxDOUBLE_CLASS, 2, l_size); }
+    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 2, l_size); }
 
     /* Invoke the target function */
     mptKSPSolve_initialize();
 
-    mptKSPSolve(&ksp, &b, &x, rtol, maxits, &x0, flag, relres, iter, time);
+    mptKSPSolve(&ksp, &b, &x, rtol, maxits, &x0, flag, relres, iter, &reshis, time);
 
     mptKSPSolve_terminate();
 
@@ -231,7 +234,8 @@ void mptKSPSolve_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[0] */
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
-    /* Nothing to do for plhs[3] */
+    plhs[3] = move_emxArray_to_mxArray((emxArray__common*)&reshis, mxDOUBLE_CLASS);
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)ksp.type); mxFree(ksp.type);
@@ -246,8 +250,11 @@ void mptKSPSolve_api(const mxArray ** prhs, const mxArray **plhs) {
     free_emxArray((emxArray__common*)x0.type); mxFree(x0.type);
     free_emxArray((emxArray__common*)x0.data); mxFree(x0.data);
 
+    free_emxArray((emxArray__common*)&reshis);
 }
 void mptKSPSolve_2args_api(const mxArray ** prhs, const mxArray **plhs) {
+
+    emxArray_real_T      reshis;
 
     struct0_T            ksp;
     struct0_T            b;
@@ -347,13 +354,14 @@ void mptKSPSolve_2args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[1], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[2], mxINT32_CLASS, 2, l_size); }
+    init_emxArray((emxArray__common*)&reshis, 1);
     {mwSize l_size[] = {1, 1};
-    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[3], mxDOUBLE_CLASS, 2, l_size); }
+    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 2, l_size); }
 
     /* Invoke the target function */
     mptKSPSolve_initialize();
 
-    mptKSPSolve_2args(&ksp, &b, flag, relres, iter, time);
+    mptKSPSolve_2args(&ksp, &b, flag, relres, iter, &reshis, time);
 
     mptKSPSolve_terminate();
 
@@ -361,7 +369,8 @@ void mptKSPSolve_2args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[0] */
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
-    /* Nothing to do for plhs[3] */
+    plhs[3] = move_emxArray_to_mxArray((emxArray__common*)&reshis, mxDOUBLE_CLASS);
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)ksp.type); mxFree(ksp.type);
@@ -370,8 +379,11 @@ void mptKSPSolve_2args_api(const mxArray ** prhs, const mxArray **plhs) {
     free_emxArray((emxArray__common*)b.type); mxFree(b.type);
     free_emxArray((emxArray__common*)b.data); mxFree(b.data);
 
+    free_emxArray((emxArray__common*)&reshis);
 }
 void mptKSPSolve_3args_api(const mxArray ** prhs, const mxArray **plhs) {
+
+    emxArray_real_T      reshis;
 
     struct0_T            ksp;
     struct0_T            b;
@@ -512,13 +524,14 @@ void mptKSPSolve_3args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[1], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[2], mxINT32_CLASS, 2, l_size); }
+    init_emxArray((emxArray__common*)&reshis, 1);
     {mwSize l_size[] = {1, 1};
-    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[3], mxDOUBLE_CLASS, 2, l_size); }
+    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 2, l_size); }
 
     /* Invoke the target function */
     mptKSPSolve_initialize();
 
-    mptKSPSolve_3args(&ksp, &b, &x, flag, relres, iter, time);
+    mptKSPSolve_3args(&ksp, &b, &x, flag, relres, iter, &reshis, time);
 
     mptKSPSolve_terminate();
 
@@ -526,7 +539,8 @@ void mptKSPSolve_3args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[0] */
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
-    /* Nothing to do for plhs[3] */
+    plhs[3] = move_emxArray_to_mxArray((emxArray__common*)&reshis, mxDOUBLE_CLASS);
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)ksp.type); mxFree(ksp.type);
@@ -538,8 +552,11 @@ void mptKSPSolve_3args_api(const mxArray ** prhs, const mxArray **plhs) {
     free_emxArray((emxArray__common*)x.type); mxFree(x.type);
     free_emxArray((emxArray__common*)x.data); mxFree(x.data);
 
+    free_emxArray((emxArray__common*)&reshis);
 }
 void mptKSPSolve_4args_api(const mxArray ** prhs, const mxArray **plhs) {
+
+    emxArray_real_T      reshis;
 
     struct0_T            ksp;
     struct0_T            b;
@@ -688,13 +705,14 @@ void mptKSPSolve_4args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[1], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[2], mxINT32_CLASS, 2, l_size); }
+    init_emxArray((emxArray__common*)&reshis, 1);
     {mwSize l_size[] = {1, 1};
-    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[3], mxDOUBLE_CLASS, 2, l_size); }
+    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 2, l_size); }
 
     /* Invoke the target function */
     mptKSPSolve_initialize();
 
-    mptKSPSolve_4args(&ksp, &b, &x, rtol, flag, relres, iter, time);
+    mptKSPSolve_4args(&ksp, &b, &x, rtol, flag, relres, iter, &reshis, time);
 
     mptKSPSolve_terminate();
 
@@ -702,7 +720,8 @@ void mptKSPSolve_4args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[0] */
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
-    /* Nothing to do for plhs[3] */
+    plhs[3] = move_emxArray_to_mxArray((emxArray__common*)&reshis, mxDOUBLE_CLASS);
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)ksp.type); mxFree(ksp.type);
@@ -714,8 +733,11 @@ void mptKSPSolve_4args_api(const mxArray ** prhs, const mxArray **plhs) {
     free_emxArray((emxArray__common*)x.type); mxFree(x.type);
     free_emxArray((emxArray__common*)x.data); mxFree(x.data);
 
+    free_emxArray((emxArray__common*)&reshis);
 }
 void mptKSPSolve_5args_api(const mxArray ** prhs, const mxArray **plhs) {
+
+    emxArray_real_T      reshis;
 
     struct0_T            ksp;
     struct0_T            b;
@@ -872,13 +894,14 @@ void mptKSPSolve_5args_api(const mxArray ** prhs, const mxArray **plhs) {
     *(void **)&relres = prealloc_mxArray((mxArray**)&plhs[1], mxDOUBLE_CLASS, 2, l_size); }
     {mwSize l_size[] = {1, 1};
     *(void **)&iter = prealloc_mxArray((mxArray**)&plhs[2], mxINT32_CLASS, 2, l_size); }
+    init_emxArray((emxArray__common*)&reshis, 1);
     {mwSize l_size[] = {1, 1};
-    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[3], mxDOUBLE_CLASS, 2, l_size); }
+    *(void **)&time = prealloc_mxArray((mxArray**)&plhs[4], mxDOUBLE_CLASS, 2, l_size); }
 
     /* Invoke the target function */
     mptKSPSolve_initialize();
 
-    mptKSPSolve_5args(&ksp, &b, &x, rtol, maxiter, flag, relres, iter, time);
+    mptKSPSolve_5args(&ksp, &b, &x, rtol, maxiter, flag, relres, iter, &reshis, time);
 
     mptKSPSolve_terminate();
 
@@ -886,7 +909,8 @@ void mptKSPSolve_5args_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Nothing to do for plhs[0] */
     /* Nothing to do for plhs[1] */
     /* Nothing to do for plhs[2] */
-    /* Nothing to do for plhs[3] */
+    plhs[3] = move_emxArray_to_mxArray((emxArray__common*)&reshis, mxDOUBLE_CLASS);
+    /* Nothing to do for plhs[4] */
 
     /* Free temporary variables */
     free_emxArray((emxArray__common*)ksp.type); mxFree(ksp.type);
@@ -898,40 +922,41 @@ void mptKSPSolve_5args_api(const mxArray ** prhs, const mxArray **plhs) {
     free_emxArray((emxArray__common*)x.type); mxFree(x.type);
     free_emxArray((emxArray__common*)x.data); mxFree(x.data);
 
+    free_emxArray((emxArray__common*)&reshis);
 }
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */
-    mxArray *outputs[4];
+    mxArray *outputs[5];
     int i;
     int nOutputs = (nlhs < 1 ? 1 : nlhs);
 
     if (nrhs == 6) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptKSPSolve:TooManyOutputArguments","Too many output arguments for entry-point mptKSPSolve.");
         /* Call the API function. */
         mptKSPSolve_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 2) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptKSPSolve_2args:TooManyOutputArguments","Too many output arguments for entry-point mptKSPSolve_2args.");
         /* Call the API function. */
         mptKSPSolve_2args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 3) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptKSPSolve_3args:TooManyOutputArguments","Too many output arguments for entry-point mptKSPSolve_3args.");
         /* Call the API function. */
         mptKSPSolve_3args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 4) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptKSPSolve_4args:TooManyOutputArguments","Too many output arguments for entry-point mptKSPSolve_4args.");
         /* Call the API function. */
         mptKSPSolve_4args_api(prhs, (const mxArray**)outputs);
     }
     else if (nrhs == 5) {
-        if (nlhs > 4)
+        if (nlhs > 5)
             mexErrMsgIdAndTxt("mptKSPSolve_5args:TooManyOutputArguments","Too many output arguments for entry-point mptKSPSolve_5args.");
         /* Call the API function. */
         mptKSPSolve_5args_api(prhs, (const mxArray**)outputs);

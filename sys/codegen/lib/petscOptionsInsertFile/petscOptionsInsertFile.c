@@ -22,8 +22,9 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("MPI_Comm:WrongType", "Incorrect data type %s. Expected MPI_Comm.",
-            &b_varargin_3->data[0]);
+  M2C_error("m2c_opaque_obj:WrongInput",
+            "Incorrect data type %s. Expected MPI_Comm.\n", &b_varargin_3->data
+            [0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -69,12 +70,11 @@ void emxInit_struct0_T(struct0_T *pStruct)
 void petscOptionsInsertFile(const struct0_T *comm, const emxArray_char_T *file,
   int req, int *errCode, boolean_T *toplevel)
 {
-  emxArray_char_T *b_file;
-  int i0;
-  int k;
   boolean_T p;
   boolean_T b_p;
+  int k;
   int exitg2;
+  int i0;
   boolean_T exitg1;
   emxArray_char_T *b_comm;
   static const char cv0[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
@@ -84,16 +84,6 @@ void petscOptionsInsertFile(const struct0_T *comm, const emxArray_char_T *file,
   *toplevel = true;
   if ((!(file->size[1] == 0)) && (file->data[file->size[1] - 1] != '\x00')) {
     m2c_error();
-  }
-
-  emxInit_char_T(&b_file, 2);
-  i0 = b_file->size[0] * b_file->size[1];
-  b_file->size[0] = 1;
-  b_file->size[1] = file->size[1];
-  emxEnsureCapacity((emxArray__common *)b_file, i0, (int)sizeof(char));
-  k = file->size[0] * file->size[1];
-  for (i0 = 0; i0 < k; i0++) {
-    b_file->data[i0] = file->data[i0];
   }
 
   p = false;
@@ -159,9 +149,8 @@ void petscOptionsInsertFile(const struct0_T *comm, const emxArray_char_T *file,
   }
 
   c_comm = *(MPI_Comm*)(&data->data[0]);
-  *errCode = PetscOptionsInsertFile(c_comm, NULL, &b_file->data[0], req);
+  *errCode = PetscOptionsInsertFile(c_comm, NULL, &file->data[0], req);
   emxFree_uint8_T(&data);
-  emxFree_char_T(&b_file);
   if (*errCode != 0) {
     c_m2c_error(*errCode);
   }

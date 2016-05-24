@@ -1,6 +1,4 @@
 #include "mptMatCreateAIJFromCRS.h"
-#include "petscksp.h"
-#include "petscsys.h"
 #include "mpetsc.h"
 #include "m2c.h"
 

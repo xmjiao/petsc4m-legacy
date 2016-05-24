@@ -34,10 +34,15 @@ function [val, toplevel] = petscGetEnum(name)
 %
 % MatInfoType: MAT_LOCAL,MAT_GLOBAL_MAX,MAT_GLOBAL_SUM
 %
-% MatFactorType: MAT_FACTOR_NONE, MAT_FACTOR_LU, MAT_FACTOR_CHOLESKY, 
+% MatFactorType: MAT_FACTOR_NONE, MAT_FACTOR_LU, MAT_FACTOR_CHOLESKY,
 %      MAT_FACTOR_ILU, MAT_FACTOR_ICC,MAT_FACTOR_ILUDT
 %
 % NormType: NORM_1, NORM_2, NORM_FROBENIUS, NORM_INFINITY, NORM_1_AND_2
+%
+% KSPNormType: KSP_NORM_DEFAULT, KSP_NORM_NONE, KSP_NORM_PRECONDITIONED,
+%              KSP_NORM_UNPRECONDITIONED,KSP_NORM_NATURAL
+%
+% PCSide: PC_LEFT, PC_RIGHT, PC_SYMMETRIC
 %
 % Others:  PETSC_DETERMINE, PETSC_DECIDE, PETSC_DEFAULT
 
@@ -161,6 +166,22 @@ switch name
         [val, toplevel] = get_val('NormType', 'NORM_INFINITY', nargin>1);
     case 'NORM_1_AND_2'
         [val, toplevel] = get_val('NormType', 'NORM_1_AND_2', nargin>1);
+    case 'KSP_NORM_DEFAULT'
+        [val, toplevel] = get_val('KSPNormType', 'KSP_NORM_DEFAULT', nargin>1);
+    case 'KSP_NORM_NONE'
+        [val, toplevel] = get_val('KSPNormType', 'KSP_NORM_NONE', nargin>1);
+    case 'KSP_NORM_PRECONDITIONED'
+        [val, toplevel] = get_val('KSPNormType', 'KSP_NORM_PRECONDITIONED', nargin>1);
+    case 'KSP_NORM_UNPRECONDITIONED'
+        [val, toplevel] = get_val('KSPNormType', 'KSP_NORM_UNPRECONDITIONED', nargin>1);
+    case 'KSP_NORM_NATURAL'
+        [val, toplevel] = get_val('KSPNormType', 'KSP_NORM_NATURAL', nargin>1);
+    case 'PC_LEFT'
+        [val, toplevel] = get_val('PetscInt', 'PC_LEFT', nargin>1);
+    case 'PC_RIGHT'
+        [val, toplevel] = get_val('PetscInt', 'PC_RIGHT', nargin>1);
+    case 'PC_SYMMETRIC'
+        [val, toplevel] = get_val('PetscInt', 'PC_SYMMETRIC', nargin>1);
     case 'PETSC_DETERMINE'
         [val, toplevel] = get_val('PetscInt', 'PETSC_DETERMINE', nargin>1);
     case 'PETSC_DECIDE'

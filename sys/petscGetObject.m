@@ -41,7 +41,7 @@ switch name
     otherwise
         m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
         if nargout>1
-            obj = m2c_opaque_obj('void *', coder.opaque('void *',  'NULL'));
+            obj = m2c_opaque_obj('void *', coder.opaque('void *',  'NULL'), 'wrap');
             toplevel = true;
         end
 end
@@ -50,7 +50,7 @@ end
 function [obj, toplevel] = get_obj(type, name, toplevel)
 coder.inline('always')
 if toplevel
-    obj = m2c_opaque_obj(type, coder.opaque(type,  name));
+    obj = m2c_opaque_obj(type, coder.opaque(type,  name), 'wrap');
 else
     obj = coder.opaque(type,  name);
 end

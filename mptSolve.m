@@ -1,5 +1,5 @@
-function [flag,relres,iter, times] = mptSolve(A, b, x, solver, rtol, maxit, ...
-    pctype, solpack, x0, opts)
+function [flag, relres, iter, reshis, times] = mptSolve(A, b, x, solver, ...
+    rtol, maxit, pctype, pcopt, x0, opts)
 % Solves a linear system using a given solver in PETSc.
 %
 % Syntax:
@@ -9,11 +9,14 @@ function [flag,relres,iter, times] = mptSolve(A, b, x, solver, rtol, maxit, ...
 %    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol)
 %    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit)
 %    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype)
-%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack)
-%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack, x0_hdl)
-%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack, x0_hdl, opts)
+%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, pcopt)
+%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, pcopt, x0_hdl)
+%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, pcopt, x0_hdl, opts)
 %
-%    [flag, reslres, iter] = mptSolve(A_hdl, b_hdl, x_hdl, ...)
+%    [flag, relres, iter, reshis, times] = mptSolve(A_hdl, b_hdl, x_hdl, ...)
+%    returns the flag (KSPConvergedReason), relative residual, number of 
+%    iterations, history of residual used in convergence test (typically 
+%    preconditioned residual), and the execution times spent in its core steps.
 %
 %    The handles are PetscMat or PetscVec objects.
 %
@@ -39,14 +42,18 @@ function [flag,relres,iter, times] = mptSolve(A, b, x, solver, rtol, maxit, ...
 %    specified preconditioner (PETSC_PC*). The preconditioner can be
 %    controlled by the PETSc option database.
 %
-%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack)
-%    specifies the solver packages for factorization (PETSC_MATSOLVER*).
+%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, pcopt)
+%    aspecifies additional control options for the preconditioner.
+%    If solver is PETSC_KSPPREONLY, and pctype is a direct method (such as
+%    PETSC_PCLU or PETSC_PCCHOLESKY), then pcopt may be used to specify
+%    the solver packages for factorization (PETSC_MATSOLVER*). Otherwise,
+%    pcopt may be 'left', 'right', or 'symmetric'.
 %
-%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack,
+%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, pcopt,
 %    x0_handle) usee x0 for the initial guess. x0 can be the same as x or
 %    be PETSC_NULL_VEC.
 %
-%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, solpack,
+%    mptSolve(A_hdl, b_hdl, x_hdl, solver, rtol, maxit, pctype, pcopt,
 %    x0_handle, opts) can pass command-line options in a string to PETSc.
 %
 % SEE ALSO: mptSolveCRS, mptMatCreateAIJFromCRS, mptVecCreateFromArray,
@@ -61,18 +68,19 @@ if nargin<4; solver = ''; end
 if nargin<5; rtol = 0; end
 if nargin<6; maxit = int32(0); end
 if nargin<7; pctype = ''; end
-if nargin<8; solpack = ''; end
+if nargin<8; pcopt = ''; end
 if nargin<9; x0 = PETSC_NULL_VEC; end
 
 if nargin==10 && ~isempty(opts)
     mptOptionsInsert(opts);
 end
 
-[ksp, time_setup] = mptKSPSetup(A, solver, pctype, solpack);
+[ksp, time_setup] = mptKSPSetup(A, solver, pctype, pcopt);
 
-[flag,relres,iter, time_solve] = mptKSPSolve(ksp, b, x, double(rtol), int32(maxit), x0);
+[flag, relres, iter, reshis, time_solve] = mptKSPSolve(ksp, b, x, ...
+    double(rtol), int32(maxit), x0);
 
-if nargout>3
+if nargout>4
     times = [time_setup; time_solve];
 end
 

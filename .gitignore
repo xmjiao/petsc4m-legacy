@@ -9,7 +9,6 @@
 *.cgns
 *.exe
 *.exe.dSYM
-*.o
 *.d
 *.so
 *.7z
@@ -40,6 +39,7 @@ octave-core
 **/codegen/lib/*/*_exe.c
 **/codegen/lib/*/README
 **/codegen/lib/*/mex_*.m
+**/codegen/lib/*/oct_*.m
 **/codegen/lib/*/build_*_exe.m
 **/codegen/lib/*/html
 *.html

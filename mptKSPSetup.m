@@ -1,11 +1,11 @@
-function [ksp, time, toplevel] = mptKSPSetup(Amat, ksptype, pctype, solpack)
+function [ksp, time, toplevel] = mptKSPSetup(Amat, ksptype, pctype, pcopt)
 % Sets up KSP using the given matrix (matrices).
 %
 % Syntax:
 %  ksp = mptKSPSetup(A)
 %  ksp = mptKSPSetup(A, ksptype)
 %  ksp = mptKSPSetup(A, ksptype, pctype)
-%  ksp = mptKSPSetup(A, ksptype, pctype, solpack)
+%  ksp = mptKSPSetup(A, ksptype, pctype, pcopt)
 %
 % Description:
 %  ksp = mptKSPSetup(A) sets up a KSP using matrix A.
@@ -15,9 +15,13 @@ function [ksp, time, toplevel] = mptKSPSetup(Amat, ksptype, pctype, solpack)
 %  ksp = mptKSPSetup(A, ksptype, pctype) also sets the type of the KSP
 %    and the preconditioner. Note that pctype can be NULL.
 %
-%  ksp = mptKSPSetup(A, ksptype, pctype, solpack) configures the KSP
-%    solver using the specified solver package. It is useful only when
-%    pctype is PCLU, PCILU, or PCICC.
+%  ksp = mptKSPSetup(A, ksptype, pctype, pcopt) aspecifies additional
+%    control options for the preconditioner. It can be PETSC_MATSOLVER*,
+%    which is useful when the ksptype is PETSC_KSPPREONLY, and the pctype
+%    is a direct method (such as PETSC_PCLU or PETSC_PCCHOLESKY). Otherwise,
+%    it may be 'left', 'right', or 'symmetric' (without null-terminator)
+%    to choose to use left, right, or symmetric preconditioners. By
+%    default, PETSc uses left preconditioners.
 %
 % See Also: mptKSPSolve, mptKSPCleanup
 
@@ -29,8 +33,13 @@ function [ksp, time, toplevel] = mptKSPSetup(Amat, ksptype, pctype, solpack)
 t_Amat = Amat;
 t_ksp = petscKSPCreate(petscObjectGetComm(t_Amat));
 
-time = 0;
-if nargout>1; t=m2c_wtime(); end
+if nargout>1;
+    time = 0;
+    comm = petscObjectGetComm(t_ksp);
+    % When timing the run, use mpi_Barrier for more accurate results.
+    mpi_Barrier(comm);
+    t = mpi_Wtime();
+end
 
 % Setup KSP
 petscKSPSetOperators(t_ksp, PetscMat(t_Amat));
@@ -38,9 +47,9 @@ petscKSPSetOperators(t_ksp, PetscMat(t_Amat));
 if nargin>1
     if nargin>2
         hasPC = ~ischar(pctype) || ~isempty(pctype);
-        hasSolver = nargin>3 && (~ischar(solpack) || ~isempty(solpack));
+        hasOpt = nargin>3 && (~ischar(pcopt) || ~isempty(pcopt));
         
-        if hasPC || hasSolver
+        if hasPC || hasOpt
             t_pc = petscKSPGetPC(t_ksp);
             
             if hasPC
@@ -53,14 +62,22 @@ if nargin>1
                 petscPCSetType(t_pc, pctype0);
             end
             
-            if hasSolver
-                if ischar(solpack) && solpack(end)~=char(0)
-                    % null-terminate the string if not terminated properly
-                    solpack0 = [solpack char(0)];
+            if hasOpt
+                if isequal(pcopt, 'left')
+                    petscKSPSetPCSide(t_ksp, PETSC_PC_LEFT);
+                elseif isequal(pcopt, 'right')
+                    petscKSPSetPCSide(t_ksp, PETSC_PC_RIGHT);
+                elseif isequal(pcopt, 'symmetric')
+                    petscKSPSetPCSide(t_ksp, PETSC_PC_SYMMETRIC);
                 else
-                    solpack0 = solpack;
+                    if ischar(pcopt) && pcopt(end)~=char(0)
+                        % null-terminate the string if not terminated properly
+                        pcopt0 = [pcopt char(0)];
+                    else
+                        pcopt0 = pcopt;
+                    end
+                    petscPCFactorSetMatSolverPackage(t_pc,pcopt0);
                 end
-                petscPCFactorSetMatSolverPackage(t_pc,solpack0);
             end
         end
     end
@@ -80,7 +97,12 @@ end
 petscKSPSetFromOptions(t_ksp);
 
 petscKSPSetUp(t_ksp);
-if nargout>1; time=m2c_wtime()-t; end
+
+if nargout>1
+    % When timing the run, use mpi_Barrier for more accurate results.
+    mpi_Barrier(comm);
+    time = mpi_Wtime()-t;
+end
 
 toplevel = nargout>2;
 ksp = PetscKSP(t_ksp, toplevel);

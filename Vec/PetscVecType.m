@@ -1,15 +1,16 @@
-function type = PetscVecType(arg, opaque) %#codegen
+function type = PetscVecType(arg, wrap) %#codegen
 %Map a null-terminated C string into a PETSc VecType handle
 %
-%  type = PetscVecType() simply returns a definition of a string,
+%  PetscVecType() simply returns a definition of a string,
 %  suitable in the argument specification for codegen.
 %
-%  type = PetscVecType(arg) or type = PetscVecType(arg, false) converts arg
-%  into a PETSc VecType object.
+%  PetscVecType(arg) or PetscVecType(arg, false) converts arg into a
+%  PETSc VecType object.
 %
-%  type = PetscVecType(arg, true) copies the arg into a VecLAB string.
-%  This should be used if the object needs to be returned to VecLAB.
-%  Note that the value of opaque must be determined at compile time.
+%  PetscVecType(arg, 'wrap') or PetscVecType(arg, true) copies the
+%  arg into a VecLAB string. This should be used if the object
+%  needs to be returned to VecLAB. Note that the value of the
+%  second argument must be determined at compile time.
 %
 % See also PetscMatType
 
@@ -25,8 +26,8 @@ if isempty(coder.target) && ~ischar(arg)
         'Incorrect data type of argument. Expected a string.');
 end
 
-if nargin==1 || ~opaque
+if nargin==1 || ~ischar(wrap) && ~wrap
     type = arg;
 else
-    type = m2c_strcopy(arg, opaque);
+    type = m2c_strcopy(arg, 'wrap');
 end

@@ -27,8 +27,8 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i2] = varargin_3->data[i2];
   }
 
-  M2C_error("PetscMatNullSpaceRemoveFunc:WrongType",
-            "Incorrect data type %s. Expected MatNullSpaceRemoveFunc.",
+  M2C_error("m2c_opaque_obj:WrongInput",
+            "Incorrect data type %s. Expected MatNullSpaceRemoveFunc.\n",
             &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
@@ -96,8 +96,8 @@ static void m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("PetscMatNullSpace:WrongType",
-            "Incorrect data type %s. Expected MatNullSpace.",
+  M2C_error("m2c_opaque_obj:WrongInput",
+            "Incorrect data type %s. Expected MatNullSpace.\n",
             &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
@@ -134,17 +134,17 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   boolean_T p;
   boolean_T b_p;
   int k;
-  int exitg6;
+  int exitg5;
   int i0;
-  boolean_T exitg5;
+  boolean_T exitg4;
   emxArray_char_T *b_nullSp;
   static const char cv0[12] = { 'M', 'a', 't', 'N', 'u', 'l', 'l', 'S', 'p', 'a',
     'c', 'e' };
 
   emxArray_uint8_T *data;
   MatNullSpace t_nullSp;
-  int exitg4;
-  boolean_T exitg3;
+  int exitg3;
+  boolean_T exitg2;
   emxArray_char_T *b_rmvFunc;
   static const char cv1[22] = { 'M', 'a', 't', 'N', 'u', 'l', 'l', 'S', 'p', 'a',
     'c', 'e', 'R', 'e', 'm', 'o', 'v', 'e', 'F', 'u', 'n', 'c' };
@@ -152,7 +152,6 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   emxArray_uint8_T *b_data;
   MatNullSpaceRemoveFunc t_rmvFunc;
   void * t_ctx;
-  boolean_T exitg2;
   mxArray * parent;
   boolean_T exitg1;
   static const signed char iv0[6] = { 1, 2, 3, 4, 5, 6 };
@@ -163,27 +162,27 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   b_p = false;
   k = 0;
   do {
-    exitg6 = 0;
+    exitg5 = 0;
     if (k < 2) {
       i0 = nullSp->type->size[k];
       if (i0 != 11 * k + 1) {
-        exitg6 = 1;
+        exitg5 = 1;
       } else {
         k++;
       }
     } else {
       b_p = true;
-      exitg6 = 1;
+      exitg5 = 1;
     }
-  } while (exitg6 == 0);
+  } while (exitg5 == 0);
 
   if (b_p && (!(nullSp->type->size[1] == 0))) {
     k = 0;
-    exitg5 = false;
-    while ((!exitg5) && (k < 12)) {
+    exitg4 = false;
+    while ((!exitg4) && (k < 12)) {
       if (!(nullSp->type->data[k] == cv0[k])) {
         b_p = false;
-        exitg5 = true;
+        exitg4 = true;
       } else {
         k++;
       }
@@ -226,27 +225,27 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   b_p = false;
   k = 0;
   do {
-    exitg4 = 0;
+    exitg3 = 0;
     if (k < 2) {
       i0 = rmvFunc->type->size[k];
       if (i0 != 21 * k + 1) {
-        exitg4 = 1;
+        exitg3 = 1;
       } else {
         k++;
       }
     } else {
       b_p = true;
-      exitg4 = 1;
+      exitg3 = 1;
     }
-  } while (exitg4 == 0);
+  } while (exitg3 == 0);
 
   if (b_p && (!(rmvFunc->type->size[1] == 0))) {
     k = 0;
-    exitg3 = false;
-    while ((!exitg3) && (k < 22)) {
+    exitg2 = false;
+    while ((!exitg2) && (k < 22)) {
       if (!(rmvFunc->type->data[k] == cv1[k])) {
         b_p = false;
-        exitg3 = true;
+        exitg2 = true;
       } else {
         k++;
       }
@@ -295,59 +294,42 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   }
 
   t_ctx = *(void **)(&b_data->data[0]);
+  i0 = data->size[0];
+  data->size[0] = ctx->parent->size[0];
+  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
+  k = ctx->parent->size[0];
   emxFree_uint8_T(&b_data);
-  if (!(ctx->parent->size[0] == 0)) {
+  for (i0 = 0; i0 < k; i0++) {
+    data->data[i0] = ctx->parent->data[i0];
+  }
+
+  parent = *(mxArray **)(&data->data[0]);
+  M2C_CHK_OPAQUE_PTR(t_ctx, parent, ctx->offset);
+  emxFree_uint8_T(&data);
+  if (ctx->type->size[1] > 6) {
     p = false;
-    k = 1;
-    exitg2 = false;
-    while ((!exitg2) && (k <= ctx->parent->size[0])) {
-      b_p = (ctx->parent->data[k - 1] == 0);
-      if (!b_p) {
-        p = true;
-        exitg2 = true;
+    b_p = true;
+    k = 0;
+    exitg1 = false;
+    while ((!exitg1) && (k < 6)) {
+      if (!(ctx->type->data[iv0[k] - 1] == cv2[k])) {
+        b_p = false;
+        exitg1 = true;
       } else {
         k++;
       }
     }
 
-    if (!p) {
-      i0 = data->size[0];
-      data->size[0] = ctx->parent->size[0];
-      emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-      k = ctx->parent->size[0];
-      for (i0 = 0; i0 < k; i0++) {
-        data->data[i0] = ctx->parent->data[i0];
-      }
+    if (!b_p) {
+    } else {
+      p = true;
+    }
 
-      parent = *(mxArray **)(&data->data[0]);
-      M2C_CHK_OPAQUE_PTR(t_ctx, parent, ctx->offset);
-      if (ctx->type->size[1] > 6) {
-        p = false;
-        b_p = true;
-        k = 0;
-        exitg1 = false;
-        while ((!exitg1) && (k < 6)) {
-          if (!(ctx->type->data[iv0[k] - 1] == cv2[k])) {
-            b_p = false;
-            exitg1 = true;
-          } else {
-            k++;
-          }
-        }
-
-        if (!b_p) {
-        } else {
-          p = true;
-        }
-
-        if (p) {
-          m2c_warn();
-        }
-      }
+    if (p) {
+      m2c_warn();
     }
   }
 
-  emxFree_uint8_T(&data);
   *errCode = MatNullSpaceSetFunction(t_nullSp, t_rmvFunc, t_ctx);
   *toplevel = true;
   if (*errCode != 0) {

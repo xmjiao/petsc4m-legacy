@@ -55,8 +55,17 @@ cd(curpath);
 
 % TODO:
 %
-% MatDiagonalScale,
-% MatScale, MatTranspose, MatZeroEntries, MatShift, MatZeroEntries
+% 4.4.9 Multigrid Preconditioners
+% PCMGSetLevels, PCMGSetType, PCMGSetCycleType, PCMGSetNumberSmoothUp,
+% PCMGSetNumberSmoothDown, PCMGGetCoarseSolve, PCMGGetSmoother,
+% PCMGGetSmootherUp, PCMGGetSmootherDown, PCMGSetInterpolation, 
+% PCMGSetRestriction, 
+% Optional work vectors for PC: PCMGSetRhs, PCMGSetX, PCMGSetR
+%
+% MatDiagonalScale, MatScale,
+% MatTranspose, MatZeroEntries, MatShift, MatZeroEntries,
+% MatCreateTranspose, MatCreateNormal, MatIsTranspose, 
+% MatIsSymmetric, MatIsHermitian
 %
 % VecWAXPY, VecAXPBY, VecScale,
 % VecDot, VecTDot,  VecDotBegin, VecDotEnd, VecNormBegin,
@@ -66,7 +75,7 @@ cd(curpath);
 %
 % MatCholeskyFactor, MatLUFactor, MatGetFactor, MatReorderForNonzeroDiagonal
 %
-% , petscMatCreateAIJ, petscVecCreateMPI,
+% petscMatCreateAIJ, petscVecCreateMPI,
 % MatGetType, MatCreateMPIAIJWithArrays, MatCreateSeqAIJWithArrays
 % MatMPIAIJSetPreallocation, MatSeqAIJSetPreallocation
 % 

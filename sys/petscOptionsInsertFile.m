@@ -20,7 +20,7 @@ if ~isempty(coder.target)
     end
     
     errCode = coder.ceval('PetscOptionsInsertFile', MPI_Comm(comm), ...
-        PETSC_NULL_OPTIONS, file, req);
+        PETSC_NULL_OPTIONS, coder.rref(file), req);
     
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'PetscOptionsInsertFile returned error code %d\n', errCode)

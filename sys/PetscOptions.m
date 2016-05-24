@@ -1,38 +1,18 @@
-function opts = PetscOptions(arg, opaque) %#codegen
-%Map an opaque object into a PETSc PetscOptions object
+function opts = PetscOptions(varargin) %#codegen
+%Map an opaque object into a PETSc Options object
 %
-%  opts = PetscOptions() simply returns a definition of the
-%  m2c_opaque_type definition, suitable in the argument
-%  specification for codegen.
+%  PetscOptions() simply returns a definition of the m2c_opaque_type,
+%  suitable in the argument specification for codegen.
 %
-%  opts = PetscOptions(arg) or opts = PetscOptions(arg, false) converts arg
-%  into a PETSc Options object.
+%  PetscOptions(obj) or PetscOptions(obj, false) converts obj into 
+%  a PETSc Options object.
 %
-%  opts = PetscOptions(arg, true) wraps the arg into an opaque object. 
-%  This should be used if the object needs to be returned to
-%  MATLAB. Note that the value of opaque must be determined at
-%  compile time.
+%  PetscOptions(obj, 'wrap') or PetscOptions(obj, true) wraps the
+%  obj into an opaque object. This should be used if the opaque
+%  object needs to be returned to MATLAB.
 %
 % See also PetscMat
 
 coder.inline('always');
 
-if nargin==0 && isempty(coder.target)
-    opts = m2c_opaque_type; 
-    return;
-end
-
-if isstruct(arg) && ~isequal(arg.type, 'PetscOptions')
-    m2c_error('PetscOptions:WrongType', ...
-        'Incorrect data type %s. Expected PetscOptions.', [arg.type char(0)]);
-end
-
-if ~isstruct(arg) || isempty(coder.target)
-    if nargin==1 || ~opaque
-        opts = arg;
-    else
-        opts = m2c_opaque_obj('PetscOptions', arg);
-    end
-else
-    opts = castdata('PetscOptions', arg.data);
-end
+opts = m2c_opaque_obj('PetscOptions', varargin{:});

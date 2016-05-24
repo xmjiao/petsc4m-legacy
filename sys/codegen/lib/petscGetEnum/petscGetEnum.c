@@ -33,247 +33,278 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 {
   boolean_T b_bool;
   int kstr;
-  int exitg59;
+  int exitg67;
   static const char cv0[10] = { 'P', 'E', 'T', 'S', 'C', '_', 'T', 'R', 'U', 'E'
   };
 
   emxArray_char_T *b_name;
-  int exitg58;
+  int exitg66;
   static const char cv1[11] = { 'P', 'E', 'T', 'S', 'C', '_', 'F', 'A', 'L', 'S',
     'E' };
 
-  int exitg57;
+  int exitg65;
   static const char cv2[25] = { 'D', 'I', 'F', 'F', 'E', 'R', 'E', 'N', 'T', '_',
     'N', 'O', 'N', 'Z', 'E', 'R', 'O', '_', 'P', 'A', 'T', 'T', 'E', 'R', 'N' };
 
   int loop_ub;
-  int exitg56;
+  int exitg64;
   static const char cv3[22] = { 'S', 'U', 'B', 'S', 'E', 'T', '_', 'N', 'O', 'N',
     'Z', 'E', 'R', 'O', '_', 'P', 'A', 'T', 'T', 'E', 'R', 'N' };
 
-  int exitg55;
+  int exitg63;
   static const char cv4[20] = { 'S', 'A', 'M', 'E', '_', 'N', 'O', 'N', 'Z', 'E',
     'R', 'O', '_', 'P', 'A', 'T', 'T', 'E', 'R', 'N' };
 
-  int exitg54;
+  int exitg62;
   static const char cv5[22] = { 'M', 'A', 'T', '_', 'D', 'O', '_', 'N', 'O', 'T',
     '_', 'C', 'O', 'P', 'Y', '_', 'V', 'A', 'L', 'U', 'E', 'S' };
 
-  int exitg53;
+  int exitg61;
   static const char cv6[15] = { 'M', 'A', 'T', '_', 'C', 'O', 'P', 'Y', '_', 'V',
     'A', 'L', 'U', 'E', 'S' };
 
-  int exitg52;
+  int exitg60;
   static const char cv7[25] = { 'M', 'A', 'T', '_', 'S', 'H', 'A', 'R', 'E', '_',
     'N', 'O', 'N', 'Z', 'E', 'R', 'O', '_', 'P', 'A', 'T', 'T', 'E', 'R', 'N' };
 
-  int exitg51;
+  int exitg59;
   static const char cv8[18] = { 'M', 'A', 'T', '_', 'I', 'N', 'I', 'T', 'I', 'A',
     'L', '_', 'M', 'A', 'T', 'R', 'I', 'X' };
 
-  int exitg50;
+  int exitg58;
   static const char cv9[16] = { 'M', 'A', 'T', '_', 'R', 'E', 'U', 'S', 'E', '_',
     'M', 'A', 'T', 'R', 'I', 'X' };
 
-  int exitg49;
+  int exitg57;
   static const char cv10[17] = { 'M', 'A', 'T', '_', 'I', 'G', 'N', 'O', 'R',
     'E', '_', 'M', 'A', 'T', 'R', 'I', 'X' };
 
-  int exitg48;
+  int exitg56;
   static const char cv11[18] = { 'M', 'A', 'T', '_', 'I', 'N', 'P', 'L', 'A',
     'C', 'E', '_', 'M', 'A', 'T', 'R', 'I', 'X' };
 
-  int exitg47;
+  int exitg55;
   static const char cv12[14] = { 'N', 'O', 'T', '_', 'S', 'E', 'T', '_', 'V',
     'A', 'L', 'U', 'E', 'S' };
 
-  int exitg46;
+  int exitg54;
   static const char cv13[13] = { 'I', 'N', 'S', 'E', 'R', 'T', '_', 'V', 'A',
     'L', 'U', 'E', 'S' };
 
-  int exitg45;
+  int exitg53;
   static const char cv14[10] = { 'A', 'D', 'D', '_', 'V', 'A', 'L', 'U', 'E',
     'S' };
 
-  int exitg44;
+  int exitg52;
   static const char cv15[10] = { 'M', 'A', 'X', '_', 'V', 'A', 'L', 'U', 'E',
     'S' };
 
-  int exitg43;
+  int exitg51;
   static const char cv16[17] = { 'I', 'N', 'S', 'E', 'R', 'T', '_', 'A', 'L',
     'L', '_', 'V', 'A', 'L', 'U', 'E', 'S' };
 
-  int exitg42;
+  int exitg50;
   static const char cv17[14] = { 'A', 'D', 'D', '_', 'A', 'L', 'L', '_', 'V',
     'A', 'L', 'U', 'E', 'S' };
 
-  int exitg41;
+  int exitg49;
   static const char cv18[16] = { 'I', 'N', 'S', 'E', 'R', 'T', '_', 'B', 'C',
     '_', 'V', 'A', 'L', 'U', 'E', 'S' };
 
-  int exitg40;
+  int exitg48;
   static const char cv19[13] = { 'A', 'D', 'D', '_', 'B', 'C', '_', 'V', 'A',
     'L', 'U', 'E', 'S' };
 
-  int exitg39;
+  int exitg47;
   static const char cv20[18] = { 'M', 'A', 'T', '_', 'F', 'I', 'N', 'A', 'L',
     '_', 'A', 'S', 'S', 'E', 'M', 'B', 'L', 'Y' };
 
-  int exitg38;
+  int exitg46;
   static const char cv21[18] = { 'M', 'A', 'T', '_', 'F', 'L', 'U', 'S', 'H',
     '_', 'A', 'S', 'S', 'E', 'M', 'B', 'L', 'Y' };
 
-  int exitg37;
+  int exitg45;
   static const char cv22[9] = { 'M', 'A', 'T', '_', 'L', 'O', 'C', 'A', 'L' };
 
-  int exitg36;
+  int exitg44;
   static const char cv23[14] = { 'M', 'A', 'T', '_', 'G', 'L', 'O', 'B', 'A',
     'L', '_', 'M', 'A', 'X' };
 
-  int exitg35;
+  int exitg43;
   static const char cv24[14] = { 'M', 'A', 'T', '_', 'G', 'L', 'O', 'B', 'A',
     'L', '_', 'S', 'U', 'M' };
 
-  int exitg34;
+  int exitg42;
   static const char cv25[16] = { 'M', 'A', 'T', '_', 'R', 'O', 'W', '_', 'O',
     'R', 'I', 'E', 'N', 'T', 'E', 'D' };
 
-  int exitg33;
+  int exitg41;
   static const char cv26[13] = { 'M', 'A', 'T', '_', 'S', 'Y', 'M', 'M', 'E',
     'T', 'R', 'I', 'C' };
 
-  int exitg32;
+  int exitg40;
   static const char cv27[26] = { 'M', 'A', 'T', '_', 'S', 'T', 'R', 'U', 'C',
     'T', 'U', 'R', 'A', 'L', 'L', 'Y', '_', 'S', 'Y', 'M', 'M', 'E', 'T', 'R',
     'I', 'C' };
 
-  int exitg31;
+  int exitg39;
   static const char cv28[17] = { 'M', 'A', 'T', '_', 'N', 'E', 'W', '_', 'D',
     'I', 'A', 'G', 'O', 'N', 'A', 'L', 'S' };
 
-  int exitg30;
+  int exitg38;
   static const char cv29[27] = { 'M', 'A', 'T', '_', 'I', 'G', 'N', 'O', 'R',
     'E', '_', 'O', 'F', 'F', '_', 'P', 'R', 'O', 'C', '_', 'E', 'N', 'T', 'R',
     'I', 'E', 'S' };
 
-  int exitg29;
+  int exitg37;
   static const char cv30[18] = { 'M', 'A', 'T', '_', 'U', 'S', 'E', '_', 'H',
     'A', 'S', 'H', '_', 'T', 'A', 'B', 'L', 'E' };
 
-  int exitg28;
+  int exitg36;
   static const char cv31[24] = { 'M', 'A', 'T', '_', 'K', 'E', 'E', 'P', '_',
     'N', 'O', 'N', 'Z', 'E', 'R', 'O', '_', 'P', 'A', 'T', 'T', 'E', 'R', 'N' };
 
-  int exitg27;
+  int exitg35;
   static const char cv32[23] = { 'M', 'A', 'T', '_', 'I', 'G', 'N', 'O', 'R',
     'E', '_', 'Z', 'E', 'R', 'O', '_', 'E', 'N', 'T', 'R', 'I', 'E', 'S' };
 
-  int exitg26;
+  int exitg34;
   static const char cv33[14] = { 'M', 'A', 'T', '_', 'U', 'S', 'E', '_', 'I',
     'N', 'O', 'D', 'E', 'S' };
 
-  int exitg25;
+  int exitg33;
   static const char cv34[13] = { 'M', 'A', 'T', '_', 'H', 'E', 'R', 'M', 'I',
     'T', 'I', 'A', 'N' };
 
-  int exitg24;
+  int exitg32;
   static const char cv35[20] = { 'M', 'A', 'T', '_', 'S', 'Y', 'M', 'M', 'E',
     'T', 'R', 'Y', '_', 'E', 'T', 'E', 'R', 'N', 'A', 'L' };
 
-  int exitg23;
+  int exitg31;
   static const char cv36[28] = { 'M', 'A', 'T', '_', 'N', 'E', 'W', '_', 'N',
     'O', 'N', 'Z', 'E', 'R', 'O', '_', 'L', 'O', 'C', 'A', 'T', 'I', 'O', 'N',
     '_', 'E', 'R', 'R' };
 
-  int exitg22;
+  int exitg30;
   static const char cv37[27] = { 'M', 'A', 'T', '_', 'I', 'G', 'N', 'O', 'R',
     'E', '_', 'L', 'O', 'W', 'E', 'R', '_', 'T', 'R', 'I', 'A', 'N', 'G', 'U',
     'L', 'A', 'R' };
 
-  int exitg21;
+  int exitg29;
   static const char cv38[26] = { 'M', 'A', 'T', '_', 'E', 'R', 'R', 'O', 'R',
     '_', 'L', 'O', 'W', 'E', 'R', '_', 'T', 'R', 'I', 'A', 'N', 'G', 'U', 'L',
     'A', 'R' };
 
-  int exitg20;
+  int exitg28;
   static const char cv39[26] = { 'M', 'A', 'T', '_', 'G', 'E', 'T', 'R', 'O',
     'W', '_', 'U', 'P', 'P', 'E', 'R', 'T', 'R', 'I', 'A', 'N', 'G', 'U', 'L',
     'A', 'R' };
 
-  int exitg19;
+  int exitg27;
   static const char cv40[7] = { 'M', 'A', 'T', '_', 'S', 'P', 'D' };
 
-  int exitg18;
+  int exitg26;
   static const char cv41[25] = { 'M', 'A', 'T', '_', 'N', 'O', '_', 'O', 'F',
     'F', '_', 'P', 'R', 'O', 'C', '_', 'Z', 'E', 'R', 'O', '_', 'R', 'O', 'W',
     'S' };
 
-  int exitg17;
+  int exitg25;
   static const char cv42[23] = { 'M', 'A', 'T', '_', 'N', 'O', '_', 'O', 'F',
     'F', '_', 'P', 'R', 'O', 'C', '_', 'E', 'N', 'T', 'R', 'I', 'E', 'S' };
 
-  int exitg16;
+  int exitg24;
   static const char cv43[30] = { 'M', 'A', 'T', '_', 'N', 'E', 'W', '_', 'N',
     'O', 'N', 'Z', 'E', 'R', 'O', '_', 'A', 'L', 'L', 'O', 'C', 'A', 'T', 'I',
     'O', 'N', '_', 'E', 'R', 'R' };
 
-  int exitg15;
+  int exitg23;
   static const char cv44[27] = { 'M', 'A', 'T', '_', 'S', 'U', 'B', 'S', 'E',
     'T', '_', 'O', 'F', 'F', '_', 'P', 'R', 'O', 'C', '_', 'E', 'N', 'T', 'R',
     'I', 'E', 'S' };
 
-  int exitg14;
+  int exitg22;
   static const char cv45[15] = { 'M', 'A', 'T', '_', 'F', 'A', 'C', 'T', 'O',
     'R', '_', 'N', 'O', 'N', 'E' };
 
-  int exitg13;
+  int exitg21;
   static const char cv46[13] = { 'M', 'A', 'T', '_', 'F', 'A', 'C', 'T', 'O',
     'R', '_', 'L', 'U' };
 
-  int exitg12;
+  int exitg20;
   static const char cv47[19] = { 'M', 'A', 'T', '_', 'F', 'A', 'C', 'T', 'O',
     'R', '_', 'C', 'H', 'O', 'L', 'E', 'S', 'K', 'Y' };
 
-  int exitg11;
+  int exitg19;
   static const char cv48[14] = { 'M', 'A', 'T', '_', 'F', 'A', 'C', 'T', 'O',
     'R', '_', 'I', 'L', 'U' };
 
-  int exitg10;
+  int exitg18;
   static const char cv49[14] = { 'M', 'A', 'T', '_', 'F', 'A', 'C', 'T', 'O',
     'R', '_', 'I', 'C', 'C' };
 
-  int exitg9;
+  int exitg17;
   static const char cv50[16] = { 'M', 'A', 'T', '_', 'F', 'A', 'C', 'T', 'O',
     'R', '_', 'I', 'L', 'U', 'D', 'T' };
 
-  int exitg8;
+  int exitg16;
   static const char cv51[6] = { 'N', 'O', 'R', 'M', '_', '1' };
 
-  int exitg7;
+  int exitg15;
   static const char cv52[6] = { 'N', 'O', 'R', 'M', '_', '2' };
 
-  int exitg6;
+  int exitg14;
   static const char cv53[14] = { 'N', 'O', 'R', 'M', '_', 'F', 'R', 'O', 'B',
     'E', 'N', 'I', 'U', 'S' };
 
-  int exitg5;
+  int exitg13;
   static const char cv54[13] = { 'N', 'O', 'R', 'M', '_', 'I', 'N', 'F', 'I',
     'N', 'I', 'T', 'Y' };
 
-  int exitg4;
+  int exitg12;
   static const char cv55[12] = { 'N', 'O', 'R', 'M', '_', '1', '_', 'A', 'N',
     'D', '_', '2' };
 
+  int exitg11;
+  static const char cv56[16] = { 'K', 'S', 'P', '_', 'N', 'O', 'R', 'M', '_',
+    'D', 'E', 'F', 'A', 'U', 'L', 'T' };
+
+  int exitg10;
+  static const char cv57[13] = { 'K', 'S', 'P', '_', 'N', 'O', 'R', 'M', '_',
+    'N', 'O', 'N', 'E' };
+
+  int exitg9;
+  static const char cv58[23] = { 'K', 'S', 'P', '_', 'N', 'O', 'R', 'M', '_',
+    'P', 'R', 'E', 'C', 'O', 'N', 'D', 'I', 'T', 'I', 'O', 'N', 'E', 'D' };
+
+  int exitg8;
+  static const char cv59[25] = { 'K', 'S', 'P', '_', 'N', 'O', 'R', 'M', '_',
+    'U', 'N', 'P', 'R', 'E', 'C', 'O', 'N', 'D', 'I', 'T', 'I', 'O', 'N', 'E',
+    'D' };
+
+  int exitg7;
+  static const char cv60[16] = { 'K', 'S', 'P', '_', 'N', 'O', 'R', 'M', '_',
+    'N', 'A', 'T', 'U', 'R', 'A', 'L' };
+
+  int exitg6;
+  static const char cv61[7] = { 'P', 'C', '_', 'L', 'E', 'F', 'T' };
+
+  int exitg5;
+  static const char cv62[8] = { 'P', 'C', '_', 'R', 'I', 'G', 'H', 'T' };
+
+  int exitg4;
+  static const char cv63[12] = { 'P', 'C', '_', 'S', 'Y', 'M', 'M', 'E', 'T',
+    'R', 'I', 'C' };
+
   int exitg3;
-  static const char cv56[15] = { 'P', 'E', 'T', 'S', 'C', '_', 'D', 'E', 'T',
+  static const char cv64[15] = { 'P', 'E', 'T', 'S', 'C', '_', 'D', 'E', 'T',
     'E', 'R', 'M', 'I', 'N', 'E' };
 
   int exitg2;
-  static const char cv57[12] = { 'P', 'E', 'T', 'S', 'C', '_', 'D', 'E', 'C',
+  static const char cv65[12] = { 'P', 'E', 'T', 'S', 'C', '_', 'D', 'E', 'C',
     'I', 'D', 'E' };
 
   int exitg1;
-  static const char cv58[13] = { 'P', 'E', 'T', 'S', 'C', '_', 'D', 'E', 'F',
+  static const char cv66[13] = { 'P', 'E', 'T', 'S', 'C', '_', 'D', 'E', 'F',
     'A', 'U', 'L', 'T' };
 
   b_bool = false;
@@ -281,18 +312,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
   } else {
     kstr = 0;
     do {
-      exitg59 = 0;
+      exitg67 = 0;
       if (kstr + 1 < 11) {
         if (name->data[kstr] != cv0[kstr]) {
-          exitg59 = 1;
+          exitg67 = 1;
         } else {
           kstr++;
         }
       } else {
         b_bool = true;
-        exitg59 = 1;
+        exitg67 = 1;
       }
-    } while (exitg59 == 0);
+    } while (exitg67 == 0);
   }
 
   if (b_bool) {
@@ -303,18 +334,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
     } else {
       kstr = 0;
       do {
-        exitg58 = 0;
+        exitg66 = 0;
         if (kstr + 1 < 12) {
           if (name->data[kstr] != cv1[kstr]) {
-            exitg58 = 1;
+            exitg66 = 1;
           } else {
             kstr++;
           }
         } else {
           b_bool = true;
-          exitg58 = 1;
+          exitg66 = 1;
         }
-      } while (exitg58 == 0);
+      } while (exitg66 == 0);
     }
 
     if (b_bool) {
@@ -325,18 +356,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
       } else {
         kstr = 0;
         do {
-          exitg57 = 0;
+          exitg65 = 0;
           if (kstr + 1 < 26) {
             if (name->data[kstr] != cv2[kstr]) {
-              exitg57 = 1;
+              exitg65 = 1;
             } else {
               kstr++;
             }
           } else {
             b_bool = true;
-            exitg57 = 1;
+            exitg65 = 1;
           }
-        } while (exitg57 == 0);
+        } while (exitg65 == 0);
       }
 
       if (b_bool) {
@@ -347,18 +378,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
         } else {
           kstr = 0;
           do {
-            exitg56 = 0;
+            exitg64 = 0;
             if (kstr + 1 < 23) {
               if (name->data[kstr] != cv3[kstr]) {
-                exitg56 = 1;
+                exitg64 = 1;
               } else {
                 kstr++;
               }
             } else {
               b_bool = true;
-              exitg56 = 1;
+              exitg64 = 1;
             }
-          } while (exitg56 == 0);
+          } while (exitg64 == 0);
         }
 
         if (b_bool) {
@@ -369,18 +400,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
           } else {
             kstr = 0;
             do {
-              exitg55 = 0;
+              exitg63 = 0;
               if (kstr + 1 < 21) {
                 if (name->data[kstr] != cv4[kstr]) {
-                  exitg55 = 1;
+                  exitg63 = 1;
                 } else {
                   kstr++;
                 }
               } else {
                 b_bool = true;
-                exitg55 = 1;
+                exitg63 = 1;
               }
-            } while (exitg55 == 0);
+            } while (exitg63 == 0);
           }
 
           if (b_bool) {
@@ -391,18 +422,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
             } else {
               kstr = 0;
               do {
-                exitg54 = 0;
+                exitg62 = 0;
                 if (kstr + 1 < 23) {
                   if (name->data[kstr] != cv5[kstr]) {
-                    exitg54 = 1;
+                    exitg62 = 1;
                   } else {
                     kstr++;
                   }
                 } else {
                   b_bool = true;
-                  exitg54 = 1;
+                  exitg62 = 1;
                 }
-              } while (exitg54 == 0);
+              } while (exitg62 == 0);
             }
 
             if (b_bool) {
@@ -413,18 +444,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
               } else {
                 kstr = 0;
                 do {
-                  exitg53 = 0;
+                  exitg61 = 0;
                   if (kstr + 1 < 16) {
                     if (name->data[kstr] != cv6[kstr]) {
-                      exitg53 = 1;
+                      exitg61 = 1;
                     } else {
                       kstr++;
                     }
                   } else {
                     b_bool = true;
-                    exitg53 = 1;
+                    exitg61 = 1;
                   }
-                } while (exitg53 == 0);
+                } while (exitg61 == 0);
               }
 
               if (b_bool) {
@@ -435,18 +466,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                 } else {
                   kstr = 0;
                   do {
-                    exitg52 = 0;
+                    exitg60 = 0;
                     if (kstr + 1 < 26) {
                       if (name->data[kstr] != cv7[kstr]) {
-                        exitg52 = 1;
+                        exitg60 = 1;
                       } else {
                         kstr++;
                       }
                     } else {
                       b_bool = true;
-                      exitg52 = 1;
+                      exitg60 = 1;
                     }
-                  } while (exitg52 == 0);
+                  } while (exitg60 == 0);
                 }
 
                 if (b_bool) {
@@ -457,18 +488,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                   } else {
                     kstr = 0;
                     do {
-                      exitg51 = 0;
+                      exitg59 = 0;
                       if (kstr + 1 < 19) {
                         if (name->data[kstr] != cv8[kstr]) {
-                          exitg51 = 1;
+                          exitg59 = 1;
                         } else {
                           kstr++;
                         }
                       } else {
                         b_bool = true;
-                        exitg51 = 1;
+                        exitg59 = 1;
                       }
-                    } while (exitg51 == 0);
+                    } while (exitg59 == 0);
                   }
 
                   if (b_bool) {
@@ -479,18 +510,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                     } else {
                       kstr = 0;
                       do {
-                        exitg50 = 0;
+                        exitg58 = 0;
                         if (kstr + 1 < 17) {
                           if (name->data[kstr] != cv9[kstr]) {
-                            exitg50 = 1;
+                            exitg58 = 1;
                           } else {
                             kstr++;
                           }
                         } else {
                           b_bool = true;
-                          exitg50 = 1;
+                          exitg58 = 1;
                         }
-                      } while (exitg50 == 0);
+                      } while (exitg58 == 0);
                     }
 
                     if (b_bool) {
@@ -501,18 +532,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                       } else {
                         kstr = 0;
                         do {
-                          exitg49 = 0;
+                          exitg57 = 0;
                           if (kstr + 1 < 18) {
                             if (name->data[kstr] != cv10[kstr]) {
-                              exitg49 = 1;
+                              exitg57 = 1;
                             } else {
                               kstr++;
                             }
                           } else {
                             b_bool = true;
-                            exitg49 = 1;
+                            exitg57 = 1;
                           }
-                        } while (exitg49 == 0);
+                        } while (exitg57 == 0);
                       }
 
                       if (b_bool) {
@@ -523,18 +554,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                         } else {
                           kstr = 0;
                           do {
-                            exitg48 = 0;
+                            exitg56 = 0;
                             if (kstr + 1 < 19) {
                               if (name->data[kstr] != cv11[kstr]) {
-                                exitg48 = 1;
+                                exitg56 = 1;
                               } else {
                                 kstr++;
                               }
                             } else {
                               b_bool = true;
-                              exitg48 = 1;
+                              exitg56 = 1;
                             }
-                          } while (exitg48 == 0);
+                          } while (exitg56 == 0);
                         }
 
                         if (b_bool) {
@@ -545,18 +576,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                           } else {
                             kstr = 0;
                             do {
-                              exitg47 = 0;
+                              exitg55 = 0;
                               if (kstr + 1 < 15) {
                                 if (name->data[kstr] != cv12[kstr]) {
-                                  exitg47 = 1;
+                                  exitg55 = 1;
                                 } else {
                                   kstr++;
                                 }
                               } else {
                                 b_bool = true;
-                                exitg47 = 1;
+                                exitg55 = 1;
                               }
-                            } while (exitg47 == 0);
+                            } while (exitg55 == 0);
                           }
 
                           if (b_bool) {
@@ -567,18 +598,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                             } else {
                               kstr = 0;
                               do {
-                                exitg46 = 0;
+                                exitg54 = 0;
                                 if (kstr + 1 < 14) {
                                   if (name->data[kstr] != cv13[kstr]) {
-                                    exitg46 = 1;
+                                    exitg54 = 1;
                                   } else {
                                     kstr++;
                                   }
                                 } else {
                                   b_bool = true;
-                                  exitg46 = 1;
+                                  exitg54 = 1;
                                 }
-                              } while (exitg46 == 0);
+                              } while (exitg54 == 0);
                             }
 
                             if (b_bool) {
@@ -589,18 +620,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                               } else {
                                 kstr = 0;
                                 do {
-                                  exitg45 = 0;
+                                  exitg53 = 0;
                                   if (kstr + 1 < 11) {
                                     if (name->data[kstr] != cv14[kstr]) {
-                                      exitg45 = 1;
+                                      exitg53 = 1;
                                     } else {
                                       kstr++;
                                     }
                                   } else {
                                     b_bool = true;
-                                    exitg45 = 1;
+                                    exitg53 = 1;
                                   }
-                                } while (exitg45 == 0);
+                                } while (exitg53 == 0);
                               }
 
                               if (b_bool) {
@@ -611,18 +642,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                 } else {
                                   kstr = 0;
                                   do {
-                                    exitg44 = 0;
+                                    exitg52 = 0;
                                     if (kstr + 1 < 11) {
                                       if (name->data[kstr] != cv15[kstr]) {
-                                        exitg44 = 1;
+                                        exitg52 = 1;
                                       } else {
                                         kstr++;
                                       }
                                     } else {
                                       b_bool = true;
-                                      exitg44 = 1;
+                                      exitg52 = 1;
                                     }
-                                  } while (exitg44 == 0);
+                                  } while (exitg52 == 0);
                                 }
 
                                 if (b_bool) {
@@ -633,18 +664,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                   } else {
                                     kstr = 0;
                                     do {
-                                      exitg43 = 0;
+                                      exitg51 = 0;
                                       if (kstr + 1 < 18) {
                                         if (name->data[kstr] != cv16[kstr]) {
-                                          exitg43 = 1;
+                                          exitg51 = 1;
                                         } else {
                                           kstr++;
                                         }
                                       } else {
                                         b_bool = true;
-                                        exitg43 = 1;
+                                        exitg51 = 1;
                                       }
-                                    } while (exitg43 == 0);
+                                    } while (exitg51 == 0);
                                   }
 
                                   if (b_bool) {
@@ -655,18 +686,18 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                     } else {
                                       kstr = 0;
                                       do {
-                                        exitg42 = 0;
+                                        exitg50 = 0;
                                         if (kstr + 1 < 15) {
                                           if (name->data[kstr] != cv17[kstr]) {
-                                            exitg42 = 1;
+                                            exitg50 = 1;
                                           } else {
                                             kstr++;
                                           }
                                         } else {
                                           b_bool = true;
-                                          exitg42 = 1;
+                                          exitg50 = 1;
                                         }
-                                      } while (exitg42 == 0);
+                                      } while (exitg50 == 0);
                                     }
 
                                     if (b_bool) {
@@ -677,19 +708,19 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                       } else {
                                         kstr = 0;
                                         do {
-                                          exitg41 = 0;
+                                          exitg49 = 0;
                                           if (kstr + 1 < 17) {
                                             if (name->data[kstr] != cv18[kstr])
                                             {
-                                              exitg41 = 1;
+                                              exitg49 = 1;
                                             } else {
                                               kstr++;
                                             }
                                           } else {
                                             b_bool = true;
-                                            exitg41 = 1;
+                                            exitg49 = 1;
                                           }
-                                        } while (exitg41 == 0);
+                                        } while (exitg49 == 0);
                                       }
 
                                       if (b_bool) {
@@ -700,19 +731,19 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                         } else {
                                           kstr = 0;
                                           do {
-                                            exitg40 = 0;
+                                            exitg48 = 0;
                                             if (kstr + 1 < 14) {
                                               if (name->data[kstr] != cv19[kstr])
                                               {
-                                                exitg40 = 1;
+                                                exitg48 = 1;
                                               } else {
                                                 kstr++;
                                               }
                                             } else {
                                               b_bool = true;
-                                              exitg40 = 1;
+                                              exitg48 = 1;
                                             }
-                                          } while (exitg40 == 0);
+                                          } while (exitg48 == 0);
                                         }
 
                                         if (b_bool) {
@@ -723,19 +754,19 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                           } else {
                                             kstr = 0;
                                             do {
-                                              exitg39 = 0;
+                                              exitg47 = 0;
                                               if (kstr + 1 < 19) {
                                                 if (name->data[kstr] !=
                                                     cv20[kstr]) {
-                                                  exitg39 = 1;
+                                                  exitg47 = 1;
                                                 } else {
                                                   kstr++;
                                                 }
                                               } else {
                                                 b_bool = true;
-                                                exitg39 = 1;
+                                                exitg47 = 1;
                                               }
-                                            } while (exitg39 == 0);
+                                            } while (exitg47 == 0);
                                           }
 
                                           if (b_bool) {
@@ -746,19 +777,19 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                             } else {
                                               kstr = 0;
                                               do {
-                                                exitg38 = 0;
+                                                exitg46 = 0;
                                                 if (kstr + 1 < 19) {
                                                   if (name->data[kstr] !=
                                                       cv21[kstr]) {
-                                                    exitg38 = 1;
+                                                    exitg46 = 1;
                                                   } else {
                                                     kstr++;
                                                   }
                                                 } else {
                                                   b_bool = true;
-                                                  exitg38 = 1;
+                                                  exitg46 = 1;
                                                 }
-                                              } while (exitg38 == 0);
+                                              } while (exitg46 == 0);
                                             }
 
                                             if (b_bool) {
@@ -769,19 +800,19 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                               } else {
                                                 kstr = 0;
                                                 do {
-                                                  exitg37 = 0;
+                                                  exitg45 = 0;
                                                   if (kstr + 1 < 10) {
                                                     if (name->data[kstr] !=
                                                         cv22[kstr]) {
-                                                      exitg37 = 1;
+                                                      exitg45 = 1;
                                                     } else {
                                                       kstr++;
                                                     }
                                                   } else {
                                                     b_bool = true;
-                                                    exitg37 = 1;
+                                                    exitg45 = 1;
                                                   }
-                                                } while (exitg37 == 0);
+                                                } while (exitg45 == 0);
                                               }
 
                                               if (b_bool) {
@@ -792,19 +823,19 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                 } else {
                                                   kstr = 0;
                                                   do {
-                                                    exitg36 = 0;
+                                                    exitg44 = 0;
                                                     if (kstr + 1 < 15) {
                                                       if (name->data[kstr] !=
                                                           cv23[kstr]) {
-                                                        exitg36 = 1;
+                                                        exitg44 = 1;
                                                       } else {
                                                         kstr++;
                                                       }
                                                     } else {
                                                       b_bool = true;
-                                                      exitg36 = 1;
+                                                      exitg44 = 1;
                                                     }
-                                                  } while (exitg36 == 0);
+                                                  } while (exitg44 == 0);
                                                 }
 
                                                 if (b_bool) {
@@ -815,19 +846,19 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                   } else {
                                                     kstr = 0;
                                                     do {
-                                                      exitg35 = 0;
+                                                      exitg43 = 0;
                                                       if (kstr + 1 < 15) {
                                                         if (name->data[kstr] !=
                                                             cv24[kstr]) {
-                                                          exitg35 = 1;
+                                                          exitg43 = 1;
                                                         } else {
                                                           kstr++;
                                                         }
                                                       } else {
                                                         b_bool = true;
-                                                        exitg35 = 1;
+                                                        exitg43 = 1;
                                                       }
-                                                    } while (exitg35 == 0);
+                                                    } while (exitg43 == 0);
                                                   }
 
                                                   if (b_bool) {
@@ -838,19 +869,19 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                     } else {
                                                       kstr = 0;
                                                       do {
-                                                        exitg34 = 0;
+                                                        exitg42 = 0;
                                                         if (kstr + 1 < 17) {
                                                           if (name->data[kstr]
                                                               != cv25[kstr]) {
-                                                            exitg34 = 1;
+                                                            exitg42 = 1;
                                                           } else {
                                                             kstr++;
                                                           }
                                                         } else {
                                                           b_bool = true;
-                                                          exitg34 = 1;
+                                                          exitg42 = 1;
                                                         }
-                                                      } while (exitg34 == 0);
+                                                      } while (exitg42 == 0);
                                                     }
 
                                                     if (b_bool) {
@@ -861,19 +892,19 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                       } else {
                                                         kstr = 0;
                                                         do {
-                                                          exitg33 = 0;
+                                                          exitg41 = 0;
                                                           if (kstr + 1 < 14) {
                                                             if (name->data[kstr]
                                                                 != cv26[kstr]) {
-                                                              exitg33 = 1;
+                                                              exitg41 = 1;
                                                             } else {
                                                               kstr++;
                                                             }
                                                           } else {
                                                             b_bool = true;
-                                                            exitg33 = 1;
+                                                            exitg41 = 1;
                                                           }
-                                                        } while (exitg33 == 0);
+                                                        } while (exitg41 == 0);
                                                       }
 
                                                       if (b_bool) {
@@ -885,20 +916,20 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                         } else {
                                                           kstr = 0;
                                                           do {
-                                                            exitg32 = 0;
+                                                            exitg40 = 0;
                                                             if (kstr + 1 < 27) {
                                                               if (name->
                                                                   data[kstr] !=
                                                                   cv27[kstr]) {
-                                                                exitg32 = 1;
+                                                                exitg40 = 1;
                                                               } else {
                                                                 kstr++;
                                                               }
                                                             } else {
                                                               b_bool = true;
-                                                              exitg32 = 1;
+                                                              exitg40 = 1;
                                                             }
-                                                          } while (exitg32 == 0);
+                                                          } while (exitg40 == 0);
                                                         }
 
                                                         if (b_bool) {
@@ -910,22 +941,22 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                           } else {
                                                             kstr = 0;
                                                             do {
-                                                              exitg31 = 0;
+                                                              exitg39 = 0;
                                                               if (kstr + 1 < 18)
                                                               {
                                                                 if (name->
                                                                     data[kstr]
                                                                     != cv28[kstr])
                                                                 {
-                                                                  exitg31 = 1;
+                                                                  exitg39 = 1;
                                                                 } else {
                                                                   kstr++;
                                                                 }
                                                               } else {
                                                                 b_bool = true;
-                                                                exitg31 = 1;
+                                                                exitg39 = 1;
                                                               }
-                                                            } while (exitg31 ==
+                                                            } while (exitg39 ==
                                                                      0);
                                                           }
 
@@ -938,7 +969,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                             } else {
                                                               kstr = 0;
                                                               do {
-                                                                exitg30 = 0;
+                                                                exitg38 = 0;
                                                                 if (kstr + 1 <
                                                                     28) {
                                                                   if (name->
@@ -946,15 +977,15 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       !=
                                                                       cv29[kstr])
                                                                   {
-                                                                    exitg30 = 1;
+                                                                    exitg38 = 1;
                                                                   } else {
                                                                     kstr++;
                                                                   }
                                                                 } else {
                                                                   b_bool = true;
-                                                                  exitg30 = 1;
+                                                                  exitg38 = 1;
                                                                 }
-                                                              } while (exitg30 ==
+                                                              } while (exitg38 ==
                                                                       0);
                                                             }
 
@@ -967,7 +998,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                               } else {
                                                                 kstr = 0;
                                                                 do {
-                                                                  exitg29 = 0;
+                                                                  exitg37 = 0;
                                                                   if (kstr + 1 <
                                                                       19) {
                                                                     if
@@ -975,7 +1006,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       [kstr] !=
                                                                       cv30[kstr])
                                                                     {
-                                                                      exitg29 =
+                                                                      exitg37 =
                                                                       1;
                                                                     } else {
                                                                       kstr++;
@@ -983,9 +1014,9 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                   } else {
                                                                     b_bool =
                                                                       true;
-                                                                    exitg29 = 1;
+                                                                    exitg37 = 1;
                                                                   }
-                                                                } while (exitg29
+                                                                } while (exitg37
                                                                       == 0);
                                                               }
 
@@ -998,7 +1029,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                 } else {
                                                                   kstr = 0;
                                                                   do {
-                                                                    exitg28 = 0;
+                                                                    exitg36 = 0;
                                                                     if (kstr + 1
                                                                       < 25) {
                                                                       if
@@ -1006,7 +1037,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       [kstr] !=
                                                                       cv31[kstr])
                                                                       {
-                                                                      exitg28 =
+                                                                      exitg36 =
                                                                       1;
                                                                       } else {
                                                                       kstr++;
@@ -1014,11 +1045,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                     } else {
                                                                       b_bool =
                                                                       true;
-                                                                      exitg28 =
+                                                                      exitg36 =
                                                                       1;
                                                                     }
                                                                   } while
-                                                                      (exitg28 ==
+                                                                      (exitg36 ==
                                                                       0);
                                                                 }
 
@@ -1032,7 +1063,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                   } else {
                                                                     kstr = 0;
                                                                     do {
-                                                                      exitg27 =
+                                                                      exitg35 =
                                                                       0;
                                                                       if (kstr +
                                                                       1 < 24) {
@@ -1041,7 +1072,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       [kstr] !=
                                                                       cv32[kstr])
                                                                       {
-                                                                      exitg27 =
+                                                                      exitg35 =
                                                                       1;
                                                                       } else {
                                                                       kstr++;
@@ -1049,11 +1080,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       } else {
                                                                       b_bool =
                                                                       true;
-                                                                      exitg27 =
+                                                                      exitg35 =
                                                                       1;
                                                                       }
                                                                     } while
-                                                                      (exitg27 ==
+                                                                      (exitg35 ==
                                                                       0);
                                                                   }
 
@@ -1069,7 +1100,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                     } else {
                                                                       kstr = 0;
                                                                       do {
-                                                                      exitg26 =
+                                                                      exitg34 =
                                                                       0;
                                                                       if (kstr +
                                                                       1 < 15) {
@@ -1078,7 +1109,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       [kstr] !=
                                                                       cv33[kstr])
                                                                       {
-                                                                      exitg26 =
+                                                                      exitg34 =
                                                                       1;
                                                                       } else {
                                                                       kstr++;
@@ -1086,11 +1117,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       } else {
                                                                       b_bool =
                                                                       true;
-                                                                      exitg26 =
+                                                                      exitg34 =
                                                                       1;
                                                                       }
                                                                       } while
-                                                                      (exitg26 ==
+                                                                      (exitg34 ==
                                                                       0);
                                                                     }
 
@@ -1107,7 +1138,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       } else {
                                                                       kstr = 0;
                                                                       do {
-                                                                      exitg25 =
+                                                                      exitg33 =
                                                                       0;
                                                                       if (kstr +
                                                                       1 < 14) {
@@ -1115,6 +1146,310 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       (name->data
                                                                       [kstr] !=
                                                                       cv34[kstr])
+                                                                      {
+                                                                      exitg33 =
+                                                                      1;
+                                                                      } else {
+                                                                      kstr++;
+                                                                      }
+                                                                      } else {
+                                                                      b_bool =
+                                                                      true;
+                                                                      exitg33 =
+                                                                      1;
+                                                                      }
+                                                                      } while
+                                                                      (exitg33 ==
+                                                                      0);
+                                                                      }
+
+                                                                      if (b_bool)
+                                                                      {
+                                                                      kstr = 34;
+                                                                      } else {
+                                                                      b_bool =
+                                                                      false;
+                                                                      if
+                                                                      (name->size
+                                                                      [1] != 20)
+                                                                      {
+                                                                      } else {
+                                                                      kstr = 0;
+                                                                      do {
+                                                                      exitg32 =
+                                                                      0;
+                                                                      if (kstr +
+                                                                      1 < 21) {
+                                                                      if
+                                                                      (name->data
+                                                                      [kstr] !=
+                                                                      cv35[kstr])
+                                                                      {
+                                                                      exitg32 =
+                                                                      1;
+                                                                      } else {
+                                                                      kstr++;
+                                                                      }
+                                                                      } else {
+                                                                      b_bool =
+                                                                      true;
+                                                                      exitg32 =
+                                                                      1;
+                                                                      }
+                                                                      } while
+                                                                      (exitg32 ==
+                                                                      0);
+                                                                      }
+
+                                                                      if (b_bool)
+                                                                      {
+                                                                      kstr = 35;
+                                                                      } else {
+                                                                      b_bool =
+                                                                      false;
+                                                                      if
+                                                                      (name->size
+                                                                      [1] != 28)
+                                                                      {
+                                                                      } else {
+                                                                      kstr = 0;
+                                                                      do {
+                                                                      exitg31 =
+                                                                      0;
+                                                                      if (kstr +
+                                                                      1 < 29) {
+                                                                      if
+                                                                      (name->data
+                                                                      [kstr] !=
+                                                                      cv36[kstr])
+                                                                      {
+                                                                      exitg31 =
+                                                                      1;
+                                                                      } else {
+                                                                      kstr++;
+                                                                      }
+                                                                      } else {
+                                                                      b_bool =
+                                                                      true;
+                                                                      exitg31 =
+                                                                      1;
+                                                                      }
+                                                                      } while
+                                                                      (exitg31 ==
+                                                                      0);
+                                                                      }
+
+                                                                      if (b_bool)
+                                                                      {
+                                                                      kstr = 36;
+                                                                      } else {
+                                                                      b_bool =
+                                                                      false;
+                                                                      if
+                                                                      (name->size
+                                                                      [1] != 27)
+                                                                      {
+                                                                      } else {
+                                                                      kstr = 0;
+                                                                      do {
+                                                                      exitg30 =
+                                                                      0;
+                                                                      if (kstr +
+                                                                      1 < 28) {
+                                                                      if
+                                                                      (name->data
+                                                                      [kstr] !=
+                                                                      cv37[kstr])
+                                                                      {
+                                                                      exitg30 =
+                                                                      1;
+                                                                      } else {
+                                                                      kstr++;
+                                                                      }
+                                                                      } else {
+                                                                      b_bool =
+                                                                      true;
+                                                                      exitg30 =
+                                                                      1;
+                                                                      }
+                                                                      } while
+                                                                      (exitg30 ==
+                                                                      0);
+                                                                      }
+
+                                                                      if (b_bool)
+                                                                      {
+                                                                      kstr = 37;
+                                                                      } else {
+                                                                      b_bool =
+                                                                      false;
+                                                                      if
+                                                                      (name->size
+                                                                      [1] != 26)
+                                                                      {
+                                                                      } else {
+                                                                      kstr = 0;
+                                                                      do {
+                                                                      exitg29 =
+                                                                      0;
+                                                                      if (kstr +
+                                                                      1 < 27) {
+                                                                      if
+                                                                      (name->data
+                                                                      [kstr] !=
+                                                                      cv38[kstr])
+                                                                      {
+                                                                      exitg29 =
+                                                                      1;
+                                                                      } else {
+                                                                      kstr++;
+                                                                      }
+                                                                      } else {
+                                                                      b_bool =
+                                                                      true;
+                                                                      exitg29 =
+                                                                      1;
+                                                                      }
+                                                                      } while
+                                                                      (exitg29 ==
+                                                                      0);
+                                                                      }
+
+                                                                      if (b_bool)
+                                                                      {
+                                                                      kstr = 38;
+                                                                      } else {
+                                                                      b_bool =
+                                                                      false;
+                                                                      if
+                                                                      (name->size
+                                                                      [1] != 26)
+                                                                      {
+                                                                      } else {
+                                                                      kstr = 0;
+                                                                      do {
+                                                                      exitg28 =
+                                                                      0;
+                                                                      if (kstr +
+                                                                      1 < 27) {
+                                                                      if
+                                                                      (name->data
+                                                                      [kstr] !=
+                                                                      cv39[kstr])
+                                                                      {
+                                                                      exitg28 =
+                                                                      1;
+                                                                      } else {
+                                                                      kstr++;
+                                                                      }
+                                                                      } else {
+                                                                      b_bool =
+                                                                      true;
+                                                                      exitg28 =
+                                                                      1;
+                                                                      }
+                                                                      } while
+                                                                      (exitg28 ==
+                                                                      0);
+                                                                      }
+
+                                                                      if (b_bool)
+                                                                      {
+                                                                      kstr = 39;
+                                                                      } else {
+                                                                      b_bool =
+                                                                      false;
+                                                                      if
+                                                                      (name->size
+                                                                      [1] != 7)
+                                                                      {
+                                                                      } else {
+                                                                      kstr = 0;
+                                                                      do {
+                                                                      exitg27 =
+                                                                      0;
+                                                                      if (kstr +
+                                                                      1 < 8) {
+                                                                      if
+                                                                      (name->data
+                                                                      [kstr] !=
+                                                                      cv40[kstr])
+                                                                      {
+                                                                      exitg27 =
+                                                                      1;
+                                                                      } else {
+                                                                      kstr++;
+                                                                      }
+                                                                      } else {
+                                                                      b_bool =
+                                                                      true;
+                                                                      exitg27 =
+                                                                      1;
+                                                                      }
+                                                                      } while
+                                                                      (exitg27 ==
+                                                                      0);
+                                                                      }
+
+                                                                      if (b_bool)
+                                                                      {
+                                                                      kstr = 40;
+                                                                      } else {
+                                                                      b_bool =
+                                                                      false;
+                                                                      if
+                                                                      (name->size
+                                                                      [1] != 25)
+                                                                      {
+                                                                      } else {
+                                                                      kstr = 0;
+                                                                      do {
+                                                                      exitg26 =
+                                                                      0;
+                                                                      if (kstr +
+                                                                      1 < 26) {
+                                                                      if
+                                                                      (name->data
+                                                                      [kstr] !=
+                                                                      cv41[kstr])
+                                                                      {
+                                                                      exitg26 =
+                                                                      1;
+                                                                      } else {
+                                                                      kstr++;
+                                                                      }
+                                                                      } else {
+                                                                      b_bool =
+                                                                      true;
+                                                                      exitg26 =
+                                                                      1;
+                                                                      }
+                                                                      } while
+                                                                      (exitg26 ==
+                                                                      0);
+                                                                      }
+
+                                                                      if (b_bool)
+                                                                      {
+                                                                      kstr = 41;
+                                                                      } else {
+                                                                      b_bool =
+                                                                      false;
+                                                                      if
+                                                                      (name->size
+                                                                      [1] != 23)
+                                                                      {
+                                                                      } else {
+                                                                      kstr = 0;
+                                                                      do {
+                                                                      exitg25 =
+                                                                      0;
+                                                                      if (kstr +
+                                                                      1 < 24) {
+                                                                      if
+                                                                      (name->data
+                                                                      [kstr] !=
+                                                                      cv42[kstr])
                                                                       {
                                                                       exitg25 =
                                                                       1;
@@ -1134,13 +1469,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 34;
+                                                                      kstr = 42;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 20)
+                                                                      [1] != 30)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1148,11 +1483,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg24 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 21) {
+                                                                      1 < 31) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv35[kstr])
+                                                                      cv43[kstr])
                                                                       {
                                                                       exitg24 =
                                                                       1;
@@ -1172,13 +1507,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 35;
+                                                                      kstr = 43;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 28)
+                                                                      [1] != 27)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1186,11 +1521,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg23 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 29) {
+                                                                      1 < 28) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv36[kstr])
+                                                                      cv44[kstr])
                                                                       {
                                                                       exitg23 =
                                                                       1;
@@ -1210,13 +1545,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 36;
+                                                                      kstr = 44;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 27)
+                                                                      [1] != 15)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1224,11 +1559,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg22 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 28) {
+                                                                      1 < 16) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv37[kstr])
+                                                                      cv45[kstr])
                                                                       {
                                                                       exitg22 =
                                                                       1;
@@ -1248,13 +1583,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 37;
+                                                                      kstr = 45;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 26)
+                                                                      [1] != 13)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1262,11 +1597,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg21 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 27) {
+                                                                      1 < 14) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv38[kstr])
+                                                                      cv46[kstr])
                                                                       {
                                                                       exitg21 =
                                                                       1;
@@ -1286,13 +1621,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 38;
+                                                                      kstr = 46;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 26)
+                                                                      [1] != 19)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1300,11 +1635,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg20 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 27) {
+                                                                      1 < 20) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv39[kstr])
+                                                                      cv47[kstr])
                                                                       {
                                                                       exitg20 =
                                                                       1;
@@ -1324,13 +1659,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 39;
+                                                                      kstr = 47;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 7)
+                                                                      [1] != 14)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1338,11 +1673,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg19 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 8) {
+                                                                      1 < 15) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv40[kstr])
+                                                                      cv48[kstr])
                                                                       {
                                                                       exitg19 =
                                                                       1;
@@ -1362,13 +1697,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 40;
+                                                                      kstr = 48;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 25)
+                                                                      [1] != 14)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1376,11 +1711,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg18 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 26) {
+                                                                      1 < 15) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv41[kstr])
+                                                                      cv49[kstr])
                                                                       {
                                                                       exitg18 =
                                                                       1;
@@ -1400,13 +1735,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 41;
+                                                                      kstr = 49;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 23)
+                                                                      [1] != 16)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1414,11 +1749,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg17 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 24) {
+                                                                      1 < 17) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv42[kstr])
+                                                                      cv50[kstr])
                                                                       {
                                                                       exitg17 =
                                                                       1;
@@ -1438,13 +1773,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 42;
+                                                                      kstr = 50;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 30)
+                                                                      [1] != 6)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1452,11 +1787,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg16 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 31) {
+                                                                      1 < 7) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv43[kstr])
+                                                                      cv51[kstr])
                                                                       {
                                                                       exitg16 =
                                                                       1;
@@ -1476,13 +1811,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 43;
+                                                                      kstr = 51;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 27)
+                                                                      [1] != 6)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1490,11 +1825,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg15 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 28) {
+                                                                      1 < 7) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv44[kstr])
+                                                                      cv52[kstr])
                                                                       {
                                                                       exitg15 =
                                                                       1;
@@ -1514,13 +1849,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 44;
+                                                                      kstr = 52;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 15)
+                                                                      [1] != 14)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1528,11 +1863,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg14 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 16) {
+                                                                      1 < 15) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv45[kstr])
+                                                                      cv53[kstr])
                                                                       {
                                                                       exitg14 =
                                                                       1;
@@ -1552,7 +1887,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 45;
+                                                                      kstr = 53;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1570,7 +1905,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv46[kstr])
+                                                                      cv54[kstr])
                                                                       {
                                                                       exitg13 =
                                                                       1;
@@ -1590,13 +1925,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 46;
+                                                                      kstr = 54;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 19)
+                                                                      [1] != 12)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1604,11 +1939,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg12 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 20) {
+                                                                      1 < 13) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv47[kstr])
+                                                                      cv55[kstr])
                                                                       {
                                                                       exitg12 =
                                                                       1;
@@ -1628,13 +1963,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 47;
+                                                                      kstr = 55;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 14)
+                                                                      [1] != 16)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1642,11 +1977,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg11 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 15) {
+                                                                      1 < 17) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv48[kstr])
+                                                                      cv56[kstr])
                                                                       {
                                                                       exitg11 =
                                                                       1;
@@ -1666,13 +2001,13 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 48;
+                                                                      kstr = 56;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 14)
+                                                                      [1] != 13)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
@@ -1680,11 +2015,11 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       exitg10 =
                                                                       0;
                                                                       if (kstr +
-                                                                      1 < 15) {
+                                                                      1 < 14) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv49[kstr])
+                                                                      cv57[kstr])
                                                                       {
                                                                       exitg10 =
                                                                       1;
@@ -1704,24 +2039,24 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 49;
+                                                                      kstr = 57;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 16)
+                                                                      [1] != 23)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
                                                                       do {
                                                                       exitg9 = 0;
                                                                       if (kstr +
-                                                                      1 < 17) {
+                                                                      1 < 24) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv50[kstr])
+                                                                      cv58[kstr])
                                                                       {
                                                                       exitg9 = 1;
                                                                       } else {
@@ -1739,24 +2074,24 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 50;
+                                                                      kstr = 58;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 6)
+                                                                      [1] != 25)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
                                                                       do {
                                                                       exitg8 = 0;
                                                                       if (kstr +
-                                                                      1 < 7) {
+                                                                      1 < 26) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv51[kstr])
+                                                                      cv59[kstr])
                                                                       {
                                                                       exitg8 = 1;
                                                                       } else {
@@ -1774,24 +2109,24 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 51;
+                                                                      kstr = 59;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 6)
+                                                                      [1] != 16)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
                                                                       do {
                                                                       exitg7 = 0;
                                                                       if (kstr +
-                                                                      1 < 7) {
+                                                                      1 < 17) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv52[kstr])
+                                                                      cv60[kstr])
                                                                       {
                                                                       exitg7 = 1;
                                                                       } else {
@@ -1809,24 +2144,24 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 52;
+                                                                      kstr = 60;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 14)
+                                                                      [1] != 7)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
                                                                       do {
                                                                       exitg6 = 0;
                                                                       if (kstr +
-                                                                      1 < 15) {
+                                                                      1 < 8) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv53[kstr])
+                                                                      cv61[kstr])
                                                                       {
                                                                       exitg6 = 1;
                                                                       } else {
@@ -1844,24 +2179,24 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 53;
+                                                                      kstr = 61;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
                                                                       if
                                                                       (name->size
-                                                                      [1] != 13)
+                                                                      [1] != 8)
                                                                       {
                                                                       } else {
                                                                       kstr = 0;
                                                                       do {
                                                                       exitg5 = 0;
                                                                       if (kstr +
-                                                                      1 < 14) {
+                                                                      1 < 9) {
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv54[kstr])
+                                                                      cv62[kstr])
                                                                       {
                                                                       exitg5 = 1;
                                                                       } else {
@@ -1879,7 +2214,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 54;
+                                                                      kstr = 62;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1896,7 +2231,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv55[kstr])
+                                                                      cv63[kstr])
                                                                       {
                                                                       exitg4 = 1;
                                                                       } else {
@@ -1914,7 +2249,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 55;
+                                                                      kstr = 63;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1931,7 +2266,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv56[kstr])
+                                                                      cv64[kstr])
                                                                       {
                                                                       exitg3 = 1;
                                                                       } else {
@@ -1949,7 +2284,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 56;
+                                                                      kstr = 64;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1966,7 +2301,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv57[kstr])
+                                                                      cv65[kstr])
                                                                       {
                                                                       exitg2 = 1;
                                                                       } else {
@@ -1984,7 +2319,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 57;
+                                                                      kstr = 65;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2001,7 +2336,7 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
                                                                       if
                                                                       (name->data
                                                                       [kstr] !=
-                                                                      cv58[kstr])
+                                                                      cv66[kstr])
                                                                       {
                                                                       exitg1 = 1;
                                                                       } else {
@@ -2019,9 +2354,17 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 58;
+                                                                      kstr = 66;
                                                                       } else {
                                                                       kstr = -1;
+                                                                      }
+                                                                      }
+                                                                      }
+                                                                      }
+                                                                      }
+                                                                      }
+                                                                      }
+                                                                      }
                                                                       }
                                                                       }
                                                                       }
@@ -2364,16 +2707,56 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
     break;
 
    case 56:
-    *val = (PETSC_DETERMINE);
+    *val = (KSP_NORM_DEFAULT);
     *toplevel = false;
     break;
 
    case 57:
-    *val = (PETSC_DECIDE);
+    *val = (KSP_NORM_NONE);
     *toplevel = false;
     break;
 
    case 58:
+    *val = (KSP_NORM_PRECONDITIONED);
+    *toplevel = false;
+    break;
+
+   case 59:
+    *val = (KSP_NORM_UNPRECONDITIONED);
+    *toplevel = false;
+    break;
+
+   case 60:
+    *val = (KSP_NORM_NATURAL);
+    *toplevel = false;
+    break;
+
+   case 61:
+    *val = (PC_LEFT);
+    *toplevel = false;
+    break;
+
+   case 62:
+    *val = (PC_RIGHT);
+    *toplevel = false;
+    break;
+
+   case 63:
+    *val = (PC_SYMMETRIC);
+    *toplevel = false;
+    break;
+
+   case 64:
+    *val = (PETSC_DETERMINE);
+    *toplevel = false;
+    break;
+
+   case 65:
+    *val = (PETSC_DECIDE);
+    *toplevel = false;
+    break;
+
+   case 66:
     *val = (PETSC_DEFAULT);
     *toplevel = false;
     break;

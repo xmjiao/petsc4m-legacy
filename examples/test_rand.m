@@ -5,10 +5,23 @@ A = A + speye(100);
 b = rand(100,1);
 
 % Solve using default KSP solver and preconditioner
-[x,flag,relres,iter,times] = mptSolveCRS(rowptr, colind, val, b);
+[x,flag,relres,iter,reshist,times] = mptSolveCRS(rowptr, colind, val, b);
 
 % Solve using GMRES with Jacobi preconditioner with default options
-[x,flag,relres,iter,times] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPGMRES, 0, int32(0), PETSC_PCJACOBI);
+[x,flag,relres,iter,reshist,times] = mptSolveCRS(rowptr, colind, val, b, ...
+    PETSC_KSPGMRES, 0, int32(0), PETSC_PCJACOBI);
+
+% Solve using BiCGSTAB with Jacobi preconditioner as right preconditioner 
+% with relative tolerance 1.e-10 and a maximum of 100 iterations
+[x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b, ...
+    PETSC_KSPBCGS, 1.e-10, int32(100), PETSC_PCJACOBI, 'right');
 
 % Solve using SuperLU (assuming SuperLU was installed)
-[x,flag,relres,iter,times] = mptSolveCRS(rowptr, colind, val, b, PETSC_KSPPREONLY, 0, int32(0), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
+[x,flag,relres,iter,reshist,times] = mptSolveCRS(rowptr, colind, val, b, ...
+    PETSC_KSPPREONLY, 0, int32(0), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
+
+% Solve using BiCGSTAB with Jacobi preconditioner as right preconditioner 
+% and monitor the true residual
+[x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b, ...
+    PETSC_KSPBCGS, 1.e-10, int32(100), PETSC_PCJACOBI, 'right', ...
+    zeros(0,1), '-ksp-monitor-true-residual');

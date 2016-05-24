@@ -22,8 +22,8 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i2] = varargin_3->data[i2];
   }
 
-  M2C_error("PetscVec:WrongType", "Incorrect data type %s. Expected Vec.",
-            &b_varargin_3->data[0]);
+  M2C_error("m2c_opaque_obj:WrongInput",
+            "Incorrect data type %s. Expected Vec.\n", &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -60,8 +60,8 @@ static void m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("PetscKSP:WrongType", "Incorrect data type %s. Expected KSP.",
-            &b_varargin_3->data[0]);
+  M2C_error("m2c_opaque_obj:WrongInput",
+            "Incorrect data type %s. Expected KSP.\n", &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 

@@ -46,38 +46,41 @@ extern void mptSolveCRS_10args(const emxArray_int32_T *Arows, const
   emxArray_int32_T *Acols, const emxArray_real_T *Avals, const emxArray_real_T
   *b, const emxArray_char_T *solver, double rtol, int maxiter, const
   emxArray_char_T *pctype, const emxArray_char_T *solpack, const emxArray_real_T
-  *x0, emxArray_real_T *x, int *flag, double *relres, int *iter, double times[2]);
+  *x0, emxArray_real_T *x, int *flag, double *relres, int *iter, emxArray_real_T
+  *reshis, double times[2]);
 extern void mptSolveCRS_11args(const emxArray_int32_T *Arows, const
   emxArray_int32_T *Acols, const emxArray_real_T *Avals, const emxArray_real_T
   *b, const emxArray_char_T *solver, double rtol, int maxiter, const
   emxArray_char_T *pctype, const emxArray_char_T *solpack, const emxArray_real_T
   *x0, const emxArray_char_T *opts, emxArray_real_T *x, int *flag, double
-  *relres, int *iter, double times[2]);
+  *relres, int *iter, emxArray_real_T *reshis, double times[2]);
 extern void mptSolveCRS_4args(const emxArray_int32_T *Arows, const
   emxArray_int32_T *Acols, const emxArray_real_T *Avals, const emxArray_real_T
-  *b, emxArray_real_T *x, int *flag, double *relres, int *iter, double times[2]);
+  *b, emxArray_real_T *x, int *flag, double *relres, int *iter, emxArray_real_T *
+  reshis, double times[2]);
 extern void mptSolveCRS_5args(const emxArray_int32_T *Arows, const
   emxArray_int32_T *Acols, const emxArray_real_T *Avals, const emxArray_real_T
   *b, const emxArray_char_T *solver, emxArray_real_T *x, int *flag, double
-  *relres, int *iter, double times[2]);
+  *relres, int *iter, emxArray_real_T *reshis, double times[2]);
 extern void mptSolveCRS_6args(const emxArray_int32_T *Arows, const
   emxArray_int32_T *Acols, const emxArray_real_T *Avals, const emxArray_real_T
   *b, const emxArray_char_T *solver, double rtol, emxArray_real_T *x, int *flag,
-  double *relres, int *iter, double times[2]);
+  double *relres, int *iter, emxArray_real_T *reshis, double times[2]);
 extern void mptSolveCRS_7args(const emxArray_int32_T *Arows, const
   emxArray_int32_T *Acols, const emxArray_real_T *Avals, const emxArray_real_T
   *b, const emxArray_char_T *solver, double rtol, int maxiter, emxArray_real_T
-  *x, int *flag, double *relres, int *iter, double times[2]);
+  *x, int *flag, double *relres, int *iter, emxArray_real_T *reshis, double
+  times[2]);
 extern void mptSolveCRS_8args(const emxArray_int32_T *Arows, const
   emxArray_int32_T *Acols, const emxArray_real_T *Avals, const emxArray_real_T
   *b, const emxArray_char_T *solver, double rtol, int maxiter, const
   emxArray_char_T *pctype, emxArray_real_T *x, int *flag, double *relres, int
-  *iter, double times[2]);
+  *iter, emxArray_real_T *reshis, double times[2]);
 extern void mptSolveCRS_9args(const emxArray_int32_T *Arows, const
   emxArray_int32_T *Acols, const emxArray_real_T *Avals, const emxArray_real_T
   *b, const emxArray_char_T *solver, double rtol, int maxiter, const
   emxArray_char_T *pctype, const emxArray_char_T *solpack, emxArray_real_T *x,
-  int *flag, double *relres, int *iter, double times[2]);
+  int *flag, double *relres, int *iter, emxArray_real_T *reshis, double times[2]);
 extern void mptSolveCRS_initialize(void);
 extern void mptSolveCRS_terminate(void);
 

@@ -432,5 +432,9 @@ coder.inline('always')
 
 str0 = coder.opaque(type, name);
 
-str = m2c_strcopy(str0, toplevel);
+if ~toplevel
+    str = str0;
+else
+    str = m2c_strcopy(str0, 'wrap');
+end
 end

@@ -22,8 +22,8 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i2] = varargin_3->data[i2];
   }
 
-  M2C_error("PetscVec:WrongType", "Incorrect data type %s. Expected Vec.",
-            &b_varargin_3->data[0]);
+  M2C_error("m2c_opaque_obj:WrongInput",
+            "Incorrect data type %s. Expected Vec.\n", &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -60,8 +60,8 @@ static void m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("PetscMatNullSpace:WrongType",
-            "Incorrect data type %s. Expected MatNullSpace.",
+  M2C_error("m2c_opaque_obj:WrongInput",
+            "Incorrect data type %s. Expected MatNullSpace.\n",
             &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
@@ -90,7 +90,7 @@ void petscMatNullSpaceRemove(const struct0_T *mat, const struct0_T *vec, int
     'c', 'e' };
 
   emxArray_uint8_T *data;
-  MatNullSpace matNull;
+  MatNullSpace nullsp;
   int exitg2;
   boolean_T exitg1;
   emxArray_char_T *b_vec;
@@ -158,7 +158,7 @@ void petscMatNullSpaceRemove(const struct0_T *mat, const struct0_T *vec, int
     data->data[i0] = mat->data->data[i0];
   }
 
-  matNull = *(MatNullSpace*)(&data->data[0]);
+  nullsp = *(MatNullSpace*)(&data->data[0]);
   p = false;
   b_p = false;
   k = 0;
@@ -220,7 +220,7 @@ void petscMatNullSpaceRemove(const struct0_T *mat, const struct0_T *vec, int
   }
 
   c_vec = *(Vec*)(&data->data[0]);
-  *errCode = MatNullSpaceRemove(matNull, c_vec);
+  *errCode = MatNullSpaceRemove(nullsp, c_vec);
   *toplevel = true;
   emxFree_uint8_T(&data);
   if (*errCode != 0) {

@@ -65,13 +65,13 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
   emxArray_uint8_T *data0;
   int exitg9;
   emxArray_char_T *b_name;
-  MPI_Comm data;
-  void * b_data;
-  PetscOptions c_data;
-  Mat d_data;
-  Vec e_data;
-  int * f_data;
-  double * g_data;
+  MPI_Comm arg;
+  void * b_arg;
+  PetscOptions c_arg;
+  Mat d_arg;
+  Vec e_arg;
+  int * f_arg;
+  double * g_arg;
   int sizepe;
   static const char cv1[14] = { 'M', 'P', 'I', '_', 'C', 'O', 'M', 'M', '_', 'W',
     'O', 'R', 'L', 'D' };
@@ -366,7 +366,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
   emxInit_uint8_T(&data0, 1);
   switch (kstr) {
    case 0:
-    data = MPI_COMM_SELF;
+    arg = MPI_COMM_SELF;
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -393,7 +393,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&data);
+    ptr = (char *)(&arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -403,7 +403,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 1:
-    data = MPI_COMM_WORLD;
+    arg = MPI_COMM_WORLD;
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -430,7 +430,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&data);
+    ptr = (char *)(&arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -440,7 +440,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 2:
-    data = PETSC_COMM_SELF;
+    arg = PETSC_COMM_SELF;
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -467,7 +467,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&data);
+    ptr = (char *)(&arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -477,7 +477,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 3:
-    data = PETSC_COMM_WORLD;
+    arg = PETSC_COMM_WORLD;
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -504,7 +504,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&data);
+    ptr = (char *)(&arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -514,7 +514,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 4:
-    b_data = PETSC_IGNORE;
+    b_arg = PETSC_IGNORE;
     sizepe = sizeof(void *);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -541,7 +541,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&b_data);
+    ptr = (char *)(&b_arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -551,7 +551,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 5:
-    c_data = NULL;
+    c_arg = NULL;
     sizepe = sizeof(PetscOptions);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -578,7 +578,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&c_data);
+    ptr = (char *)(&c_arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -588,7 +588,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 6:
-    d_data = NULL;
+    d_arg = NULL;
     sizepe = sizeof(Mat);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -615,7 +615,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&d_data);
+    ptr = (char *)(&d_arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -625,7 +625,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 7:
-    e_data = NULL;
+    e_arg = NULL;
     sizepe = sizeof(Vec);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -652,7 +652,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&e_data);
+    ptr = (char *)(&e_arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -662,7 +662,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 8:
-    f_data = NULL;
+    f_arg = NULL;
     sizepe = sizeof(int *);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -689,7 +689,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&f_data);
+    ptr = (char *)(&f_arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -699,7 +699,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     break;
 
    case 9:
-    g_data = NULL;
+    g_arg = NULL;
     sizepe = sizeof(double *);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -726,7 +726,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&g_data);
+    ptr = (char *)(&g_arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
@@ -748,7 +748,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     b_name->data[b_name->size[0] * name->size[1]] = '\x00';
     m2c_error(b_name);
-    b_data = NULL;
+    b_arg = NULL;
     sizepe = sizeof(void *);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
@@ -776,7 +776,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     }
 
     obj->nitems = 1;
-    ptr = (char *)(&b_data);
+    ptr = (char *)(&b_arg);
     for (i = 1; i <= sizepe; i++) {
       obj->data->data[i - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);

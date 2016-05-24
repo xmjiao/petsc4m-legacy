@@ -23,7 +23,7 @@ void mptKSPSetup_api(const mxArray ** prhs, const mxArray **plhs) {
 
     emxArray_char_T      ksptype;
     emxArray_char_T      pctype;
-    emxArray_char_T      solpack;
+    emxArray_char_T      pcopt;
 
     struct0_T            Amat;
     struct0_T            ksp;
@@ -83,8 +83,8 @@ void mptKSPSetup_api(const mxArray ** prhs, const mxArray **plhs) {
     alias_mxArray_to_emxArray(prhs[2], (emxArray__common *)&pctype, "pctype", 2);
     if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxCHAR_CLASS)
         mexErrMsgIdAndTxt("mptKSPSetup:WrongInputType",
-            "Input argument solpack has incorrect data type. char is expected.");
-    alias_mxArray_to_emxArray(prhs[3], (emxArray__common *)&solpack, "solpack", 2);
+            "Input argument pcopt has incorrect data type. char is expected.");
+    alias_mxArray_to_emxArray(prhs[3], (emxArray__common *)&pcopt, "pcopt", 2);
 
     /* Preallocate output variables */
     *(void **)&ksp.data = mxCalloc(1, sizeof(emxArray__common));    init_emxArray((emxArray__common*)ksp.data, 1);
@@ -97,7 +97,7 @@ void mptKSPSetup_api(const mxArray ** prhs, const mxArray **plhs) {
     /* Invoke the target function */
     mptKSPSetup_initialize();
 
-    mptKSPSetup(&Amat, &ksptype, &pctype, &solpack, &ksp, time, toplevel);
+    mptKSPSetup(&Amat, &ksptype, &pctype, &pcopt, &ksp, time, toplevel);
 
     mptKSPSetup_terminate();
 
@@ -117,7 +117,7 @@ void mptKSPSetup_api(const mxArray ** prhs, const mxArray **plhs) {
 
     free_emxArray((emxArray__common*)&ksptype);
     free_emxArray((emxArray__common*)&pctype);
-    free_emxArray((emxArray__common*)&solpack);
+    free_emxArray((emxArray__common*)&pcopt);
     free_emxArray((emxArray__common*)ksp.type); mxFree(ksp.type);
     free_emxArray((emxArray__common*)ksp.data); mxFree(ksp.data);
 

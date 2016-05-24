@@ -1,15 +1,16 @@
-function type = PetscMatType(arg, opaque) %#codegen
+function type = PetscMatType(arg, wrap) %#codegen
 %Map a null-terminated C string into a PETSc MatType handle
 %
-%  type = PetscMatType() simply returns a definition of a string,
+%  PetscMatType() simply returns a definition of a string,
 %  suitable in the argument specification for codegen.
 %
-%  type = PetscMatType(arg) or type = PetscMatType(arg, false) converts arg
-%  into a PETSc MatType object.
+%  PetscMatType(arg) or PetscMatType(arg, false) converts arg into a 
+%  PETSc MatType object.
 %
-%  type = PetscMatType(arg, true) copies the arg into a MATLAB string.
-%  This should be used if the object needs to be returned to MATLAB.
-%  Note that the value of opaque must be determined at compile time.
+%  PetscMatType(arg, 'wrap') or PetscMatType(arg, true) copies the arg
+%  into a MATLAB string. This should be used if the object needs to
+%  be returned to MATLAB. Note that the value of the second
+%  argumentmust be determined at compile time.
 %
 % See also PetscVecType
 
@@ -25,8 +26,9 @@ if isempty(coder.target) && ~ischar(arg)
         'Incorrect data type of argument. Expected a string.');
 end
 
-if nargin==1 || ~opaque
+
+if nargin==1 || ~ischar(wrap) && ~wrap
     type = arg;
 else
-    type = m2c_strcopy(arg, opaque);
+    type = m2c_strcopy(arg, 'wrap');
 end

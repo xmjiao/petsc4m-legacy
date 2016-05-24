@@ -21,8 +21,9 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("MPI_Comm:WrongType", "Incorrect data type %s. Expected MPI_Comm.",
-            &b_varargin_3->data[0]);
+  M2C_error("m2c_opaque_obj:WrongInput",
+            "Incorrect data type %s. Expected MPI_Comm.\n", &b_varargin_3->data
+            [0]);
   emxFree_char_T(&b_varargin_3);
 }
 
