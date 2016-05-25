@@ -446,21 +446,21 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   PC t_pc;
   int exitg6;
   boolean_T exitg5;
-  double secs;
   static const char cv0[4] = { 'l', 'e', 'f', 't' };
 
-  int sizepe;
+  double secs;
   int exitg4;
+  int sizepe;
   char t3_type[3];
+  boolean_T exitg3;
   static const char cv1[3] = { 'K', 'S', 'P' };
 
-  boolean_T exitg3;
   static const char cv2[5] = { 'r', 'i', 'g', 'h', 't' };
 
   int exitg2;
   char * ptr;
-  int i;
   boolean_T exitg1;
+  int i;
   static const char cv3[9] = { 's', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c' };
 
   varargin_1 = petscObjectGetComm(Amat->data, Amat->type);
@@ -781,6 +781,17 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   }
 
   emxFree_char_T(&pctype0);
+  if (pcopt->size[1] == 0) {
+    k = (PC_RIGHT);
+    errCode = KSPSetPCSide(t_ksp, k);
+    if (errCode != 0) {
+      k = (M2C_DEBUG);
+      if (k != 0) {
+        i_m2c_error(errCode);
+      }
+    }
+  }
+
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     k = (M2C_DEBUG);
@@ -922,6 +933,15 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
     flag = (M2C_DEBUG);
     if (flag != 0) {
       f_m2c_error(errCode);
+    }
+  }
+
+  flag = (PC_RIGHT);
+  errCode = KSPSetPCSide(t_ksp, flag);
+  if (errCode != 0) {
+    flag = (M2C_DEBUG);
+    if (flag != 0) {
+      i_m2c_error(errCode);
     }
   }
 
@@ -1108,6 +1128,15 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   }
 
   emxFree_char_T(&ksptype0);
+  flag = (PC_RIGHT);
+  errCode = KSPSetPCSide(t_ksp, flag);
+  if (errCode != 0) {
+    flag = (M2C_DEBUG);
+    if (flag != 0) {
+      i_m2c_error(errCode);
+    }
+  }
+
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -1336,6 +1365,15 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   }
 
   emxFree_char_T(&pctype0);
+  flag = (PC_RIGHT);
+  errCode = KSPSetPCSide(t_ksp, flag);
+  if (errCode != 0) {
+    flag = (M2C_DEBUG);
+    if (flag != 0) {
+      i_m2c_error(errCode);
+    }
+  }
+
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);

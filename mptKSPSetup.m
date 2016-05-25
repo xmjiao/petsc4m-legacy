@@ -94,6 +94,11 @@ if nargin>1
     end
 end
 
+if nargin<=3 || isempty(pcopt)
+    % Use right-preconditioner by default
+    petscKSPSetPCSide(t_ksp, PETSC_PC_RIGHT);
+end
+
 petscKSPSetFromOptions(t_ksp);
 
 petscKSPSetUp(t_ksp);
