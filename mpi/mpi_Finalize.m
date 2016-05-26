@@ -17,8 +17,6 @@ function [info, toplevel] = mpi_Finalize
 
 %#codegen -args {}
 
-coder.cinclude('mpi.h');
-
 info = int32(0);
 
 if ~mpi_Finalized
@@ -27,5 +25,5 @@ end
 
 toplevel = nargout>1;
 if info && (toplevel || m2c_debug)
-    m2c_error('MPI:RuntimeError', 'MPI_Finalize returned error code %d\n', info)
+    m2c_error('MPI:RuntimeError', 'MPI_Finalize failed with error message %s\n', mpi_Error_string(info))
 end

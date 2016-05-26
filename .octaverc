@@ -1,0 +1,5 @@
+warning('off', 'Octave:precedence-change');
+warning('off', 'Octave:resize-on-range-error');
+more off;
+
+startup_mpetsc

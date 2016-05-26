@@ -21,13 +21,11 @@ function [size, info, toplevel] = mpi_Comm_size(comm)
 
 size = int32(1); info = int32(0); %#ok<NASGU>
 
-coder.cinclude('mpi.h');
-
 info = coder.ceval('MPI_Comm_size', MPI_Comm(comm), coder.wref(size));
 
 toplevel = nargout>2;
 if info && (toplevel || m2c_debug)
-    m2c_error('MPI:RuntimeError', 'MPI_Comm_size returned error code %d\n', info)
+    m2c_error('MPI:RuntimeError', 'MPI_Comm_size failed with error message %s\n', mpi_Error_string(info))
 end
 
 function test  %#ok<DEFNU>

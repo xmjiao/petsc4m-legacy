@@ -38,6 +38,27 @@ typedef struct emxArray__common emxArray__common;
 
 #endif                                 /*typedef_emxArray__common*/
 
+#ifndef struct_emxArray_uint8_T
+#define struct_emxArray_uint8_T
+
+struct emxArray_uint8_T
+{
+  unsigned char *data;
+  int *size;
+  int allocatedSize;
+  int numDimensions;
+  boolean_T canFreeData;
+};
+
+#endif                                 /*struct_emxArray_uint8_T*/
+
+#ifndef typedef_emxArray_uint8_T
+#define typedef_emxArray_uint8_T
+
+typedef struct emxArray_uint8_T emxArray_uint8_T;
+
+#endif                                 /*typedef_emxArray_uint8_T*/
+
 /* Function Declarations */
 static void ab_m2c_error(int varargin_3);
 static void b_m2c_error(int varargin_3);
@@ -56,7 +77,9 @@ static void db_m2c_error(int varargin_3);
 static void e_m2c_error(int varargin_3);
 static void e_m2c_printf(void);
 static void eb_m2c_error(int varargin_3);
+static void emxFree_uint8_T(emxArray_uint8_T **pEmxArray);
 static void emxInit_int32_T1(emxArray_int32_T **pEmxArray, int numDimensions);
+static void emxInit_uint8_T(emxArray_uint8_T **pEmxArray, int numDimensions);
 static void f_m2c_error(int varargin_3);
 static void fb_m2c_error(int varargin_3);
 static void g_m2c_error(int varargin_3);
@@ -68,14 +91,15 @@ static void ib_m2c_error(int varargin_3);
 static void j_m2c_error(int varargin_3);
 static void jb_m2c_error(int varargin_3);
 static void k_m2c_error(int varargin_3);
-static void kb_m2c_error(void);
+static void kb_m2c_error(int varargin_3);
 static void l_m2c_error(int varargin_3);
-static void lb_m2c_error(int varargin_3);
+static void lb_m2c_error(void);
 static void m2c_error(int varargin_3);
 static void m2c_printf(KSPType varargin_2, PCType varargin_3, const
   emxArray_char_T *varargin_4, int varargin_5);
-static void m_m2c_error(int varargin_3);
+static void m_m2c_error(const emxArray_char_T *varargin_3);
 static void mb_m2c_error(int varargin_3);
+static void mpi_Barrier(MPI_Comm comm);
 static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   double *time);
 static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres,
@@ -93,10 +117,11 @@ static void nb_m2c_error(int varargin_3);
 static void o_m2c_error(int varargin_3);
 static void ob_m2c_error(int varargin_3);
 static void p_m2c_error(int varargin_3);
-static void pb_m2c_error(void);
+static void pb_m2c_error(int varargin_3);
 static void q_m2c_error(int varargin_3);
-static void qb_m2c_error(int varargin_3);
+static void qb_m2c_error(void);
 static void r_m2c_error(int varargin_3);
+static void rb_m2c_error(int varargin_3);
 static void s_m2c_error(int varargin_3);
 static void t_m2c_error(int varargin_3);
 static void u_m2c_error(int varargin_3);
@@ -138,8 +163,8 @@ static void ab_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "KSPGetTolerances returned error code %d\n",
-            varargin_3);
+  M2C_error("petsc:RuntimeError",
+            "KSPGetIterationNumber returned error code %d\n", varargin_3);
 }
 
 /*
@@ -219,12 +244,11 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   int errCode;
   int k;
   KSP t_ksp;
-  int info;
   double t;
   boolean_T p;
   boolean_T b_p;
   emxArray_char_T *pctype0;
-  int i3;
+  int i4;
   PC t_pc;
   int exitg6;
   boolean_T exitg5;
@@ -592,80 +616,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSetup:40' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    k = (M2C_DEBUG);
-    if (k != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSetup:41' t = mpi_Wtime(); */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -679,8 +630,8 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   t = MPI_Wtime();
 
   /*  Setup KSP */
@@ -845,7 +796,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     k = (M2C_DEBUG);
     if (k != 0) {
       /* 'petscKSPSetOperators:41' m2c_error('petsc:RuntimeError', 'KSPSetOperators returned error code %d\n', errCode) */
-      m_m2c_error(errCode);
+      n_m2c_error(errCode);
     }
   }
 
@@ -970,7 +921,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       k = (M2C_DEBUG);
       if (k != 0) {
         /* 'petscKSPGetPC:24' m2c_error('petsc:RuntimeError', 'KSPGetPC returned error code %d\n', errCode) */
-        bb_m2c_error(errCode);
+        cb_m2c_error(errCode);
       }
     }
 
@@ -980,27 +931,27 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       if (pctype->data[pctype->size[1] - 1] != '\x00') {
         /*  null-terminate the string if not terminated properly */
         /* 'mptKSPSetup:58' pctype0 = [pctype char(0)]; */
-        i3 = pctype0->size[0] * pctype0->size[1];
+        i4 = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1] + 1;
-        emxEnsureCapacity((emxArray__common *)pctype0, i3, (int)sizeof(char));
+        emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof(char));
         k = pctype->size[1];
-        for (i3 = 0; i3 < k; i3++) {
-          pctype0->data[pctype0->size[0] * i3] = pctype->data[pctype->size[0] *
-            i3];
+        for (i4 = 0; i4 < k; i4++) {
+          pctype0->data[pctype0->size[0] * i4] = pctype->data[pctype->size[0] *
+            i4];
         }
 
         pctype0->data[pctype0->size[0] * pctype->size[1]] = '\x00';
       } else {
         /* 'mptKSPSetup:59' else */
         /* 'mptKSPSetup:60' pctype0 = pctype; */
-        i3 = pctype0->size[0] * pctype0->size[1];
+        i4 = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1];
-        emxEnsureCapacity((emxArray__common *)pctype0, i3, (int)sizeof(char));
+        emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof(char));
         k = pctype->size[0] * pctype->size[1];
-        for (i3 = 0; i3 < k; i3++) {
-          pctype0->data[i3] = pctype->data[i3];
+        for (i4 = 0; i4 < k; i4++) {
+          pctype0->data[i4] = pctype->data[i4];
         }
       }
 
@@ -1074,7 +1025,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         k = (M2C_DEBUG);
         if (k != 0) {
           /* 'petscPCSetType:25' m2c_error('petsc:RuntimeError', 'PCSetType returned error code %d\n', errCode) */
-          nb_m2c_error(errCode);
+          ob_m2c_error(errCode);
         }
       }
     }
@@ -1088,8 +1039,8 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       do {
         exitg6 = 0;
         if (k < 2) {
-          i3 = pcopt->size[k];
-          if (i3 != 3 * k + 1) {
+          i4 = pcopt->size[k];
+          if (i4 != 3 * k + 1) {
             exitg6 = 1;
           } else {
             k++;
@@ -1247,7 +1198,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
           k = (M2C_DEBUG);
           if (k != 0) {
             /* 'petscKSPSetPCSide:21' m2c_error('petsc:RuntimeError', 'KSPSetPCSide returned error code %d\n', errCode) */
-            n_m2c_error(errCode);
+            o_m2c_error(errCode);
           }
         }
       } else {
@@ -1257,8 +1208,8 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         do {
           exitg4 = 0;
           if (k < 2) {
-            i3 = pcopt->size[k];
-            if (i3 != (k << 2) + 1) {
+            i4 = pcopt->size[k];
+            if (i4 != (k << 2) + 1) {
               exitg4 = 1;
             } else {
               k++;
@@ -1417,7 +1368,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
             k = (M2C_DEBUG);
             if (k != 0) {
               /* 'petscKSPSetPCSide:21' m2c_error('petsc:RuntimeError', 'KSPSetPCSide returned error code %d\n', errCode) */
-              n_m2c_error(errCode);
+              o_m2c_error(errCode);
             }
           }
         } else {
@@ -1427,8 +1378,8 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
           do {
             exitg2 = 0;
             if (k < 2) {
-              i3 = pcopt->size[k];
-              if (i3 != (k << 3) + 1) {
+              i4 = pcopt->size[k];
+              if (i4 != (k << 3) + 1) {
                 exitg2 = 1;
               } else {
                 k++;
@@ -1587,7 +1538,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
               k = (M2C_DEBUG);
               if (k != 0) {
                 /* 'petscKSPSetPCSide:21' m2c_error('petsc:RuntimeError', 'KSPSetPCSide returned error code %d\n', errCode) */
-                n_m2c_error(errCode);
+                o_m2c_error(errCode);
               }
             }
           } else {
@@ -1596,29 +1547,29 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
             if (pcopt->data[pcopt->size[1] - 1] != '\x00') {
               /*  null-terminate the string if not terminated properly */
               /* 'mptKSPSetup:75' pcopt0 = [pcopt char(0)]; */
-              i3 = pctype0->size[0] * pctype0->size[1];
+              i4 = pctype0->size[0] * pctype0->size[1];
               pctype0->size[0] = 1;
               pctype0->size[1] = pcopt->size[1] + 1;
-              emxEnsureCapacity((emxArray__common *)pctype0, i3, (int)sizeof
+              emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof
                                 (char));
               k = pcopt->size[1];
-              for (i3 = 0; i3 < k; i3++) {
-                pctype0->data[pctype0->size[0] * i3] = pcopt->data[pcopt->size[0]
-                  * i3];
+              for (i4 = 0; i4 < k; i4++) {
+                pctype0->data[pctype0->size[0] * i4] = pcopt->data[pcopt->size[0]
+                  * i4];
               }
 
               pctype0->data[pctype0->size[0] * pcopt->size[1]] = '\x00';
             } else {
               /* 'mptKSPSetup:76' else */
               /* 'mptKSPSetup:77' pcopt0 = pcopt; */
-              i3 = pctype0->size[0] * pctype0->size[1];
+              i4 = pctype0->size[0] * pctype0->size[1];
               pctype0->size[0] = 1;
               pctype0->size[1] = pcopt->size[1];
-              emxEnsureCapacity((emxArray__common *)pctype0, i3, (int)sizeof
+              emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof
                                 (char));
               k = pcopt->size[0] * pcopt->size[1];
-              for (i3 = 0; i3 < k; i3++) {
-                pctype0->data[i3] = pcopt->data[i3];
+              for (i4 = 0; i4 < k; i4++) {
+                pctype0->data[i4] = pcopt->data[i4];
               }
             }
 
@@ -1694,7 +1645,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
               k = (M2C_DEBUG);
               if (k != 0) {
                 /* 'petscPCFactorSetMatSolverPackage:29' m2c_error('petsc:RuntimeError', 'petscPCFactorSetMatSolverPackage returned error code %d\n', errCode) */
-                ob_m2c_error(errCode);
+                pb_m2c_error(errCode);
               }
             }
           }
@@ -1708,26 +1659,26 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
        [1] - 1] != 0)) {
     /*  null-terminate the string if not terminated properly */
     /* 'mptKSPSetup:87' ksptype0 = [ksptype char(0)]; */
-    i3 = pctype0->size[0] * pctype0->size[1];
+    i4 = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)pctype0, i3, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof(char));
     k = ksptype->size[1];
-    for (i3 = 0; i3 < k; i3++) {
-      pctype0->data[pctype0->size[0] * i3] = ksptype->data[ksptype->size[0] * i3];
+    for (i4 = 0; i4 < k; i4++) {
+      pctype0->data[pctype0->size[0] * i4] = ksptype->data[ksptype->size[0] * i4];
     }
 
     pctype0->data[pctype0->size[0] * ksptype->size[1]] = '\x00';
   } else {
     /* 'mptKSPSetup:88' else */
     /* 'mptKSPSetup:89' ksptype0 = ksptype; */
-    i3 = pctype0->size[0] * pctype0->size[1];
+    i4 = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1];
-    emxEnsureCapacity((emxArray__common *)pctype0, i3, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof(char));
     k = ksptype->size[0] * ksptype->size[1];
-    for (i3 = 0; i3 < k; i3++) {
-      pctype0->data[i3] = ksptype->data[i3];
+    for (i4 = 0; i4 < k; i4++) {
+      pctype0->data[i4] = ksptype->data[i4];
     }
   }
 
@@ -1804,7 +1755,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       k = (M2C_DEBUG);
       if (k != 0) {
         /* 'petscKSPSetType:25' m2c_error('petsc:RuntimeError', 'KSPSetType returned error code %d\n', errCode) */
-        mb_m2c_error(errCode);
+        nb_m2c_error(errCode);
       }
     }
   }
@@ -1942,7 +1893,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       k = (M2C_DEBUG);
       if (k != 0) {
         /* 'petscKSPSetPCSide:21' m2c_error('petsc:RuntimeError', 'KSPSetPCSide returned error code %d\n', errCode) */
-        n_m2c_error(errCode);
+        o_m2c_error(errCode);
       }
     }
   }
@@ -2018,7 +1969,7 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     k = (M2C_DEBUG);
     if (k != 0) {
       /* 'petscKSPSetFromOptions:24' m2c_error('petsc:RuntimeError', 'KSPSetFromOptions returned error code %d\n', errCode) */
-      o_m2c_error(errCode);
+      p_m2c_error(errCode);
     }
   }
 
@@ -2092,87 +2043,14 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     k = (M2C_DEBUG);
     if (k != 0) {
       /* 'petscKSPSetUp:23' m2c_error('petsc:RuntimeError', 'KSPSetUp returned error code %d\n', errCode) */
-      p_m2c_error(errCode);
+      q_m2c_error(errCode);
     }
   }
 
   /* 'mptKSPSetup:106' if nargout>1 */
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSetup:108' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    k = (M2C_DEBUG);
-    if (k != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSetup:109' time = mpi_Wtime()-t; */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -2186,8 +2064,8 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   secs = MPI_Wtime();
   *time = secs - t;
 
@@ -2246,7 +2124,6 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   int errCode;
   PetscObject t_obj;
   MPI_Comm t_comm;
-  int info;
   double t;
   int b_val;
   boolean_T b2;
@@ -2436,7 +2313,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscVecNorm:31' m2c_error('petsc:RuntimeError', 'VecNorm returned error code %d\n', errCode) */
-      q_m2c_error(errCode);
+      r_m2c_error(errCode);
     }
   }
 
@@ -2586,80 +2463,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
 
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSolve:46' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    val = (M2C_DEBUG);
-    if (val != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSolve:47' t = mpi_Wtime(); */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -2673,8 +2477,8 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   t = MPI_Wtime();
 
   /* 'mptKSPSolve:50' if nargin<5 || maxits==0 */
@@ -3012,7 +2816,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPSetTolerances:43' m2c_error('petsc:RuntimeError', 'KSPSetTolerances returned error code %d\n', errCode) */
-      r_m2c_error(errCode);
+      s_m2c_error(errCode);
     }
   }
 
@@ -3139,7 +2943,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
       val = (M2C_DEBUG);
       if (val != 0) {
         /* 'petscVecCopy:22' m2c_error('petsc:RuntimeError', 'VecCopy returned error code %d\n', errCode) */
-        s_m2c_error(errCode);
+        t_m2c_error(errCode);
       }
     }
   }
@@ -3288,7 +3092,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     if (val != 0) {
       /* 'petscKSPSetResidualHistory:36' m2c_error('petsc:RuntimeError', ... */
       /* 'petscKSPSetResidualHistory:37'             'petscKSPSetResidualHistory returned error code %d\n', errCode) */
-      t_m2c_error(errCode);
+      u_m2c_error(errCode);
     }
   }
 
@@ -3365,7 +3169,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPSetInitialGuessNonzero:26' m2c_error('petsc:RuntimeError', 'KSPSetInitialGuessNonzero returned error code %d\n', errCode) */
-      u_m2c_error(errCode);
+      v_m2c_error(errCode);
     }
   }
 
@@ -3529,87 +3333,14 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPSolve:39' m2c_error('petsc:RuntimeError', 'KSPSolve returned error code %d\n', errCode) */
-      v_m2c_error(errCode);
+      w_m2c_error(errCode);
     }
   }
 
   /* 'mptKSPSolve:82' if nargout>4 */
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSolve:84' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    val = (M2C_DEBUG);
-    if (val != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSolve:85' time = mpi_Wtime()-t; */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -3623,8 +3354,8 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   secs = MPI_Wtime();
   *time = secs - t;
 
@@ -3699,7 +3430,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetConvergedReason:24' m2c_error('petsc:RuntimeError', 'KSPGetConvergedReason returned error code %d\n', errCode) */
-      w_m2c_error(errCode);
+      x_m2c_error(errCode);
     }
   }
 
@@ -3774,7 +3505,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetResidualNorm:24' m2c_error('petsc:RuntimeError', 'KSPGetResidualNorm returned error code %d\n', errCode) */
-      x_m2c_error(errCode);
+      y_m2c_error(errCode);
     }
   }
 
@@ -3852,7 +3583,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetIterationNumber:27' m2c_error('petsc:RuntimeError', 'KSPGetIterationNumber returned error code %d\n', errCode) */
-      y_m2c_error(errCode);
+      ab_m2c_error(errCode);
     }
   }
 
@@ -3938,7 +3669,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetTolerances:33' m2c_error('petsc:RuntimeError', 'KSPGetTolerances returned error code %d\n', errCode) */
-      ab_m2c_error(errCode);
+      bb_m2c_error(errCode);
     }
   }
 
@@ -4055,7 +3786,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
       val = (M2C_DEBUG);
       if (val != 0) {
         /* 'petscKSPGetPC:24' m2c_error('petsc:RuntimeError', 'KSPGetPC returned error code %d\n', errCode) */
-        bb_m2c_error(errCode);
+        cb_m2c_error(errCode);
       }
     }
 
@@ -4129,7 +3860,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
       val = (M2C_DEBUG);
       if (val != 0) {
         /* 'petscKSPGetPCSide:22' m2c_error('petsc:RuntimeError', 'KSPGetPCSide returned error code %d\n', errCode) */
-        cb_m2c_error(errCode);
+        db_m2c_error(errCode);
       }
     }
 
@@ -4387,7 +4118,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
       val = (M2C_DEBUG);
       if (val != 0) {
         /* 'petscKSPGetType:24' m2c_error('petsc:RuntimeError', 'KSPGetType returned error code %d\n', errCode) */
-        db_m2c_error(errCode);
+        eb_m2c_error(errCode);
       }
     }
 
@@ -4480,7 +4211,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
       val = (M2C_DEBUG);
       if (val != 0) {
         /* 'petscPCGetType:24' m2c_error('petsc:RuntimeError', 'PCGetType returned error code %d\n', errCode) */
-        eb_m2c_error(errCode);
+        fb_m2c_error(errCode);
       }
     }
 
@@ -4590,7 +4321,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetResidualHistory:31' m2c_error('petsc:RuntimeError', 'KSPGetResidualHistory returned error code %d\n', errCode) */
-      fb_m2c_error(errCode);
+      gb_m2c_error(errCode);
     }
   }
 }
@@ -4626,7 +4357,7 @@ static void bb_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "KSPGetPC returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPGetTolerances returned error code %d\n",
             varargin_3);
 }
 
@@ -4727,7 +4458,7 @@ static void cb_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "KSPGetPCSide returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPGetPC returned error code %d\n",
             varargin_3);
 }
 
@@ -4828,7 +4559,7 @@ static void db_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "KSPGetType returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPGetPCSide returned error code %d\n",
             varargin_3);
 }
 
@@ -4928,8 +4659,22 @@ static void eb_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "PCGetType returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPGetType returned error code %d\n",
             varargin_3);
+}
+
+static void emxFree_uint8_T(emxArray_uint8_T **pEmxArray)
+{
+  if (*pEmxArray != (emxArray_uint8_T *)NULL) {
+    if (((*pEmxArray)->data != (unsigned char *)NULL) && (*pEmxArray)
+        ->canFreeData) {
+      free((void *)(*pEmxArray)->data);
+    }
+
+    free((void *)(*pEmxArray)->size);
+    free((void *)*pEmxArray);
+    *pEmxArray = (emxArray_uint8_T *)NULL;
+  }
 }
 
 static void emxInit_int32_T1(emxArray_int32_T **pEmxArray, int numDimensions)
@@ -4939,6 +4684,22 @@ static void emxInit_int32_T1(emxArray_int32_T **pEmxArray, int numDimensions)
   *pEmxArray = (emxArray_int32_T *)malloc(sizeof(emxArray_int32_T));
   emxArray = *pEmxArray;
   emxArray->data = (int *)NULL;
+  emxArray->numDimensions = numDimensions;
+  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < numDimensions; i++) {
+    emxArray->size[i] = 0;
+  }
+}
+
+static void emxInit_uint8_T(emxArray_uint8_T **pEmxArray, int numDimensions)
+{
+  emxArray_uint8_T *emxArray;
+  int i;
+  *pEmxArray = (emxArray_uint8_T *)malloc(sizeof(emxArray_uint8_T));
+  emxArray = *pEmxArray;
+  emxArray->data = (unsigned char *)NULL;
   emxArray->numDimensions = numDimensions;
   emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
   emxArray->allocatedSize = 0;
@@ -5014,8 +4775,8 @@ static void fb_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError",
-            "KSPGetResidualHistory returned error code %d\n", varargin_3);
+  M2C_error("petsc:RuntimeError", "PCGetType returned error code %d\n",
+            varargin_3);
 }
 
 /*
@@ -5084,8 +4845,8 @@ static void gb_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "KSPDestroy returned error code %d\n",
-            varargin_3);
+  M2C_error("petsc:RuntimeError",
+            "KSPGetResidualHistory returned error code %d\n", varargin_3);
 }
 
 /*
@@ -5154,7 +4915,7 @@ static void hb_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "MatDestroy returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPDestroy returned error code %d\n",
             varargin_3);
 }
 
@@ -5224,7 +4985,7 @@ static void ib_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "VecDestroy returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "MatDestroy returned error code %d\n",
             varargin_3);
 }
 
@@ -5294,7 +5055,7 @@ static void jb_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "VecGetLocalSize returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "VecDestroy returned error code %d\n",
             varargin_3);
 }
 
@@ -5336,7 +5097,7 @@ static void k_m2c_error(int varargin_3)
 /*
  * function m2c_error(varargin)
  */
-static void kb_m2c_error(void)
+static void kb_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -5360,11 +5121,12 @@ static void kb_m2c_error(void)
   /* 'm2c_error:25' else */
   /* 'm2c_error:26' cmd = 'M2C_error'; */
   /* 'm2c_error:29' if nargin==1 || ischar(varargin{1}) && ~ischar(varargin{2}) */
-  /* 'm2c_error:30' fmt = coder.opaque('const char *', ['"' varargin{1} '"']); */
-  /* 'm2c_error:32' coder.ceval(cmd, ... */
-  /* 'm2c_error:33'                     coder.opaque('const char *', '"runtime:Error"'), ... */
-  /* 'm2c_error:34'                     fmt, varargin{2:end}); */
-  M2C_error("runtime:Error", "Output array y is too small.");
+  /* 'm2c_error:35' else */
+  /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
+  /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
+  /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
+  M2C_error("petsc:RuntimeError", "VecGetLocalSize returned error code %d\n",
+            varargin_3);
 }
 
 /*
@@ -5398,14 +5160,14 @@ static void l_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("MPI:RuntimeError", "MPI_Barrier returned error code %d\n",
+  M2C_error("MPI:RuntimeError", "MPI_Error_string with error code %d\n",
             varargin_3);
 }
 
 /*
  * function m2c_error(varargin)
  */
-static void lb_m2c_error(int varargin_3)
+static void lb_m2c_error(void)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -5429,12 +5191,11 @@ static void lb_m2c_error(int varargin_3)
   /* 'm2c_error:25' else */
   /* 'm2c_error:26' cmd = 'M2C_error'; */
   /* 'm2c_error:29' if nargin==1 || ischar(varargin{1}) && ~ischar(varargin{2}) */
-  /* 'm2c_error:35' else */
-  /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
-  /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
-  /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "VecGetValues returned error code %d\n",
-            varargin_3);
+  /* 'm2c_error:30' fmt = coder.opaque('const char *', ['"' varargin{1} '"']); */
+  /* 'm2c_error:32' coder.ceval(cmd, ... */
+  /* 'm2c_error:33'                     coder.opaque('const char *', '"runtime:Error"'), ... */
+  /* 'm2c_error:34'                     fmt, varargin{2:end}); */
+  M2C_error("runtime:Error", "Output array y is too small.");
 }
 
 /*
@@ -5479,7 +5240,7 @@ static void m2c_printf(KSPType varargin_2, PCType varargin_3, const
   emxArray_char_T *varargin_4, int varargin_5)
 {
   emxArray_char_T *b_varargin_4;
-  int i2;
+  int i3;
   int loop_ub;
   emxInit_char_T(&b_varargin_4, 2);
 
@@ -5505,13 +5266,13 @@ static void m2c_printf(KSPType varargin_2, PCType varargin_3, const
   /* 'm2c_printf:27' assert(nargin>=1); */
   /* 'm2c_printf:28' fmt = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_printf:29' coder.ceval(cmd, fmt, varargin{2:end}); */
-  i2 = b_varargin_4->size[0] * b_varargin_4->size[1];
+  i3 = b_varargin_4->size[0] * b_varargin_4->size[1];
   b_varargin_4->size[0] = 1;
   b_varargin_4->size[1] = varargin_4->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_4, i2, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_4, i3, (int)sizeof(char));
   loop_ub = varargin_4->size[0] * varargin_4->size[1];
-  for (i2 = 0; i2 < loop_ub; i2++) {
-    b_varargin_4->data[i2] = varargin_4->data[i2];
+  for (i3 = 0; i3 < loop_ub; i3++) {
+    b_varargin_4->data[i3] = varargin_4->data[i3];
   }
 
   M2C_printf("### %s with %s as %s preconditioner stopped with flag %d.\n",
@@ -5522,8 +5283,13 @@ static void m2c_printf(KSPType varargin_2, PCType varargin_3, const
 /*
  * function m2c_error(varargin)
  */
-static void m_m2c_error(int varargin_3)
+static void m_m2c_error(const emxArray_char_T *varargin_3)
 {
+  emxArray_char_T *b_varargin_3;
+  int i2;
+  int loop_ub;
+  emxInit_char_T(&b_varargin_3, 2);
+
   /* m2c_error Issue a fatal error message. */
   /*   */
   /*  m2c_error(msg); */
@@ -5550,8 +5316,18 @@ static void m_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "KSPSetOperators returned error code %d\n",
-            varargin_3);
+  i2 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  b_varargin_3->size[0] = 1;
+  b_varargin_3->size[1] = varargin_3->size[1];
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i2, (int)sizeof(char));
+  loop_ub = varargin_3->size[0] * varargin_3->size[1];
+  for (i2 = 0; i2 < loop_ub; i2++) {
+    b_varargin_3->data[i2] = varargin_3->data[i2];
+  }
+
+  M2C_error("MPI:RuntimeError", "MPI_Barrier failed with error message %s\n",
+            &b_varargin_3->data[0]);
+  emxFree_char_T(&b_varargin_3);
 }
 
 /*
@@ -5585,8 +5361,169 @@ static void mb_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "KSPSetType returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "VecGetValues returned error code %d\n",
             varargin_3);
+}
+
+/*
+ * function [info, toplevel] = mpi_Barrier(comm)
+ */
+static void mpi_Barrier(MPI_Comm comm)
+{
+  int info;
+  emxArray_uint8_T *varargin_1;
+  emxArray_char_T *b_varargin_1;
+  int flag;
+  unsigned char msg0[1024];
+  char * ptr;
+  int resultlen;
+  int loop_ub;
+
+  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
+  /*  */
+  /*   info = mpi_Barrier (comm) */
+  /*  */
+  /*   comm         Opaque MPI_Comm object. */
+  /*  */
+  /*   info (int)	return code */
+  /*  */
+  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
+  /*  */
+  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
+  /*  */
+  /*  C interface: */
+  /*     int MPI_Barrier(MPI_Comm comm) */
+  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
+  /* 'mpi_Barrier:20' info = int32(0); */
+  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
+  /* Map an opaque object into an MPI_Comm object */
+  /*  */
+  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
+  /*   suitable in the argument specification for codegen. */
+  /*  */
+  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
+  /*  */
+  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
+  /*   used if the opaque object needs to be returned to MATLAB. */
+  /* 'MPI_Comm:12' coder.inline('always'); */
+  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
+  /* Maps between C opaque object and a MATLAB structure. */
+  /*  */
+  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
+  /*   definition of the m2c_opaque_type, suitable in the argument type */
+  /*   specification for codegen. */
+  /*  */
+  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
+  /*   arg into an object of give data type. */
+  /*  */
+  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
+  /*   wraps the arg into an opaque object. This should be used if the opaque */
+  /*   object needs to be returned to MATLAB. Note that the third argument */
+  /*   must be determined at compile time. */
+  /*  */
+  /*  See also m2c_opaque_array, m2c_opaque_ptr */
+  /*  Undocumented use: */
+  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
+  /*   into an opaque object. This is for internal use by */
+  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
+  /* 'm2c_opaque_obj:23' coder.inline('always'); */
+  /* 'm2c_opaque_obj:26' if nargin<=1 */
+  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
+  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
+  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
+  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
+  /* 'm2c_opaque_obj:43' obj = arg; */
+  info = MPI_Barrier(comm);
+
+  /* 'mpi_Barrier:23' toplevel = nargout>1; */
+  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
+  emxInit_uint8_T(&varargin_1, 2);
+  emxInit_char_T(&b_varargin_1, 2);
+  if (info != 0) {
+    /* Flag indicating whether m2c_debug is on. */
+    /* It is always true within MATLAB. In the generated C code, it is */
+    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
+    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
+    /* 'm2c_debug:7' coder.inline('always'); */
+    /* 'm2c_debug:9' if isempty(coder.target) */
+    /* 'm2c_debug:11' else */
+    /* 'm2c_debug:12' flag = int32(1); */
+    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
+    flag = (M2C_DEBUG);
+    if (flag != 0) {
+      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier failed with error message %s\n', mpi_Error_string(info)) */
+      /* Returns a string for a given error code. */
+      /*  */
+      /*  [msg, info] = mpi_Error_string(errcode) */
+      /*  */
+      /*  C interface: */
+      /*      int MPI_Error_string(int errorcode, char *string, int *resultlen) */
+      /*  http://mpi.deino.net/mpi_functions/MPI_Error_string.html */
+      /* 'mpi_Error_string:12' coder.inline('always'); */
+      /* 'mpi_Error_string:14' msg0 = zeros(1, 1024, 'uint8'); */
+      memset(&msg0[0], 0, sizeof(unsigned char) << 10);
+
+      /* 'mpi_Error_string:16' ptr = coder.opaque('char *'); */
+      /* 'mpi_Error_string:17' ptr = coder.ceval('(char *)', coder.ref(msg0)); */
+      ptr = (char *)(msg0);
+
+      /* 'mpi_Error_string:19' info = int32(0); */
+      /* 'mpi_Error_string:20' resultlen = int32(0); */
+      resultlen = 0;
+
+      /* 'mpi_Error_string:21' info = coder.ceval('MPI_Error_string', errcode, ptr, coder.ref(resultlen)); */
+      info = MPI_Error_string(info, ptr, &resultlen);
+
+      /* 'mpi_Error_string:22' msg = char(msg0(1:resultlen)); */
+      if (1 > resultlen) {
+        loop_ub = 0;
+      } else {
+        loop_ub = resultlen;
+      }
+
+      flag = varargin_1->size[0] * varargin_1->size[1];
+      varargin_1->size[0] = 1;
+      varargin_1->size[1] = loop_ub;
+      emxEnsureCapacity((emxArray__common *)varargin_1, flag, (int)sizeof
+                        (unsigned char));
+      for (flag = 0; flag < loop_ub; flag++) {
+        varargin_1->data[varargin_1->size[0] * flag] = msg0[flag];
+      }
+
+      /* 'mpi_Error_string:24' toplevel = nargout>2; */
+      /* 'mpi_Error_string:25' if info && (toplevel || m2c_debug) */
+      if (info != 0) {
+        /* Flag indicating whether m2c_debug is on. */
+        /* It is always true within MATLAB. In the generated C code, it is */
+        /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
+        /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
+        /* 'm2c_debug:7' coder.inline('always'); */
+        /* 'm2c_debug:9' if isempty(coder.target) */
+        /* 'm2c_debug:11' else */
+        /* 'm2c_debug:12' flag = int32(1); */
+        /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
+        flag = (M2C_DEBUG);
+        if (flag != 0) {
+          /* 'mpi_Error_string:26' m2c_error('MPI:RuntimeError', 'MPI_Error_string with error code %d\n', info); */
+          l_m2c_error(info);
+        }
+      }
+
+      flag = b_varargin_1->size[0] * b_varargin_1->size[1];
+      b_varargin_1->size[0] = 1;
+      b_varargin_1->size[1] = (short)loop_ub;
+      emxEnsureCapacity((emxArray__common *)b_varargin_1, flag, (int)sizeof(char));
+      loop_ub = (short)loop_ub;
+      for (flag = 0; flag < loop_ub; flag++) {
+        b_varargin_1->data[flag] = (signed char)varargin_1->data[flag];
+      }
+
+      m_m2c_error(b_varargin_1);
+    }
+  }
+
+  emxFree_char_T(&b_varargin_1);
+  emxFree_uint8_T(&varargin_1);
 }
 
 /*
@@ -5600,7 +5537,6 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   int errCode;
   int flag;
   KSP t_ksp;
-  int info;
   double t;
   emxArray_char_T *ksptype0;
   int loop_ub;
@@ -5958,80 +5894,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
 
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSetup:40' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSetup:41' t = mpi_Wtime(); */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -6045,8 +5908,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   t = MPI_Wtime();
 
   /*  Setup KSP */
@@ -6211,7 +6074,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
     flag = (M2C_DEBUG);
     if (flag != 0) {
       /* 'petscKSPSetOperators:41' m2c_error('petsc:RuntimeError', 'KSPSetOperators returned error code %d\n', errCode) */
-      m_m2c_error(errCode);
+      n_m2c_error(errCode);
     }
   }
 
@@ -6323,7 +6186,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
       flag = (M2C_DEBUG);
       if (flag != 0) {
         /* 'petscKSPSetType:25' m2c_error('petsc:RuntimeError', 'KSPSetType returned error code %d\n', errCode) */
-        mb_m2c_error(errCode);
+        nb_m2c_error(errCode);
       }
     }
   }
@@ -6460,7 +6323,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
     flag = (M2C_DEBUG);
     if (flag != 0) {
       /* 'petscKSPSetPCSide:21' m2c_error('petsc:RuntimeError', 'KSPSetPCSide returned error code %d\n', errCode) */
-      n_m2c_error(errCode);
+      o_m2c_error(errCode);
     }
   }
 
@@ -6535,7 +6398,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
     flag = (M2C_DEBUG);
     if (flag != 0) {
       /* 'petscKSPSetFromOptions:24' m2c_error('petsc:RuntimeError', 'KSPSetFromOptions returned error code %d\n', errCode) */
-      o_m2c_error(errCode);
+      p_m2c_error(errCode);
     }
   }
 
@@ -6609,87 +6472,14 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
     flag = (M2C_DEBUG);
     if (flag != 0) {
       /* 'petscKSPSetUp:23' m2c_error('petsc:RuntimeError', 'KSPSetUp returned error code %d\n', errCode) */
-      p_m2c_error(errCode);
+      q_m2c_error(errCode);
     }
   }
 
   /* 'mptKSPSetup:106' if nargout>1 */
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSetup:108' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSetup:109' time = mpi_Wtime()-t; */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -6703,8 +6493,8 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   secs = MPI_Wtime();
   *time = secs - t;
 
@@ -6764,7 +6554,6 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   int b_flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
-  int info;
   double t;
   int maxits;
   int b_val;
@@ -6954,7 +6743,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecNorm:31' m2c_error('petsc:RuntimeError', 'VecNorm returned error code %d\n', errCode) */
-      q_m2c_error(errCode);
+      r_m2c_error(errCode);
     }
   }
 
@@ -7104,80 +6893,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
 
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSolve:46' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSolve:47' t = mpi_Wtime(); */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -7191,8 +6907,8 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   t = MPI_Wtime();
 
   /* 'mptKSPSolve:50' if nargin<5 || maxits==0 */
@@ -7526,7 +7242,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetTolerances:43' m2c_error('petsc:RuntimeError', 'KSPSetTolerances returned error code %d\n', errCode) */
-      r_m2c_error(errCode);
+      s_m2c_error(errCode);
     }
   }
 
@@ -7653,7 +7369,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
       b_flag = (M2C_DEBUG);
       if (b_flag != 0) {
         /* 'petscVecCopy:22' m2c_error('petsc:RuntimeError', 'VecCopy returned error code %d\n', errCode) */
-        s_m2c_error(errCode);
+        t_m2c_error(errCode);
       }
     }
   }
@@ -7802,7 +7518,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     if (b_flag != 0) {
       /* 'petscKSPSetResidualHistory:36' m2c_error('petsc:RuntimeError', ... */
       /* 'petscKSPSetResidualHistory:37'             'petscKSPSetResidualHistory returned error code %d\n', errCode) */
-      t_m2c_error(errCode);
+      u_m2c_error(errCode);
     }
   }
 
@@ -7879,7 +7595,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetInitialGuessNonzero:26' m2c_error('petsc:RuntimeError', 'KSPSetInitialGuessNonzero returned error code %d\n', errCode) */
-      u_m2c_error(errCode);
+      v_m2c_error(errCode);
     }
   }
 
@@ -8043,87 +7759,14 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSolve:39' m2c_error('petsc:RuntimeError', 'KSPSolve returned error code %d\n', errCode) */
-      v_m2c_error(errCode);
+      w_m2c_error(errCode);
     }
   }
 
   /* 'mptKSPSolve:82' if nargout>4 */
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSolve:84' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSolve:85' time = mpi_Wtime()-t; */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -8137,8 +7780,8 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   secs = MPI_Wtime();
   *time = secs - t;
 
@@ -8213,7 +7856,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPGetConvergedReason:24' m2c_error('petsc:RuntimeError', 'KSPGetConvergedReason returned error code %d\n', errCode) */
-      w_m2c_error(errCode);
+      x_m2c_error(errCode);
     }
   }
 
@@ -8288,7 +7931,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPGetResidualNorm:24' m2c_error('petsc:RuntimeError', 'KSPGetResidualNorm returned error code %d\n', errCode) */
-      x_m2c_error(errCode);
+      y_m2c_error(errCode);
     }
   }
 
@@ -8366,7 +8009,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPGetIterationNumber:27' m2c_error('petsc:RuntimeError', 'KSPGetIterationNumber returned error code %d\n', errCode) */
-      y_m2c_error(errCode);
+      ab_m2c_error(errCode);
     }
   }
 
@@ -8452,7 +8095,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPGetTolerances:33' m2c_error('petsc:RuntimeError', 'KSPGetTolerances returned error code %d\n', errCode) */
-      ab_m2c_error(errCode);
+      bb_m2c_error(errCode);
     }
   }
 
@@ -8569,7 +8212,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
       b_flag = (M2C_DEBUG);
       if (b_flag != 0) {
         /* 'petscKSPGetPC:24' m2c_error('petsc:RuntimeError', 'KSPGetPC returned error code %d\n', errCode) */
-        bb_m2c_error(errCode);
+        cb_m2c_error(errCode);
       }
     }
 
@@ -8643,7 +8286,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
       b_flag = (M2C_DEBUG);
       if (b_flag != 0) {
         /* 'petscKSPGetPCSide:22' m2c_error('petsc:RuntimeError', 'KSPGetPCSide returned error code %d\n', errCode) */
-        cb_m2c_error(errCode);
+        db_m2c_error(errCode);
       }
     }
 
@@ -8901,7 +8544,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
       b_flag = (M2C_DEBUG);
       if (b_flag != 0) {
         /* 'petscKSPGetType:24' m2c_error('petsc:RuntimeError', 'KSPGetType returned error code %d\n', errCode) */
-        db_m2c_error(errCode);
+        eb_m2c_error(errCode);
       }
     }
 
@@ -8994,7 +8637,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
       b_flag = (M2C_DEBUG);
       if (b_flag != 0) {
         /* 'petscPCGetType:24' m2c_error('petsc:RuntimeError', 'PCGetType returned error code %d\n', errCode) */
-        eb_m2c_error(errCode);
+        fb_m2c_error(errCode);
       }
     }
 
@@ -9104,7 +8747,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPGetResidualHistory:31' m2c_error('petsc:RuntimeError', 'KSPGetResidualHistory returned error code %d\n', errCode) */
-      fb_m2c_error(errCode);
+      gb_m2c_error(errCode);
     }
   }
 }
@@ -10117,7 +9760,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPDestroy:25' m2c_error('petsc:RuntimeError', 'KSPDestroy returned error code %d\n', errCode) */
-      gb_m2c_error(errCode);
+      hb_m2c_error(errCode);
     }
   }
 
@@ -10754,7 +10397,7 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
     yk = (M2C_DEBUG);
     if (yk != 0) {
       /* 'petscVecGetLocalSize:26' m2c_error('petsc:RuntimeError', 'VecGetLocalSize returned error code %d\n', errCode) */
-      jb_m2c_error(errCode);
+      kb_m2c_error(errCode);
     }
   }
 
@@ -10819,7 +10462,7 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
   if (arr->size[0] < n) {
     /* 'petscVecGetValues:27' elseif length(y) < ni */
     /* 'petscVecGetValues:28' m2c_error('Output array y is too small.'); */
-    kb_m2c_error();
+    lb_m2c_error();
   }
 
   /* 'petscVecGetValues:31' t_vec = PetscVec(vec); */
@@ -10881,7 +10524,7 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
     yk = (M2C_DEBUG);
     if (yk != 0) {
       /* 'petscVecGetValues:36' m2c_error('petsc:RuntimeError', 'VecGetValues returned error code %d\n', errCode) */
-      lb_m2c_error(errCode);
+      mb_m2c_error(errCode);
     }
   }
 }
@@ -10917,7 +10560,7 @@ static void n_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "KSPSetPCSide returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPSetOperators returned error code %d\n",
             varargin_3);
 }
 
@@ -10952,7 +10595,7 @@ static void nb_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "PCSetType returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPSetType returned error code %d\n",
             varargin_3);
 }
 
@@ -10987,7 +10630,7 @@ static void o_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "KSPSetFromOptions returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPSetPCSide returned error code %d\n",
             varargin_3);
 }
 
@@ -10995,6 +10638,76 @@ static void o_m2c_error(int varargin_3)
  * function m2c_error(varargin)
  */
 static void ob_m2c_error(int varargin_3)
+{
+  /* m2c_error Issue a fatal error message. */
+  /*   */
+  /*  m2c_error(msg); */
+  /*  m2c_error(fmt, null_terminated_char, number, ...); */
+  /*  m2c_error(msg_id, fmt, null_terminated_char, number, ...); */
+  /*  */
+  /*  Note that the character strings associated with %s in the format must */
+  /*  be null-terminated character strings. */
+  /*  */
+  /*  Example usage: */
+  /*     m2c_error('Error message in a constant string does not need to be null-terminated.'); */
+  /*     m2c_error('Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
+  /*     m2c_error('error:ID', 'Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
+  /*  */
+  /*  SEE ALSO: m2c_print, m2c_warn */
+  /* 'm2c_error:18' coder.inline('never'); */
+  /* 'm2c_error:20' if isempty(coder.target) */
+  /* 'm2c_error:22' else */
+  /* 'm2c_error:23' if isequal(coder.target, 'mex') */
+  /* 'm2c_error:25' else */
+  /* 'm2c_error:26' cmd = 'M2C_error'; */
+  /* 'm2c_error:29' if nargin==1 || ischar(varargin{1}) && ~ischar(varargin{2}) */
+  /* 'm2c_error:35' else */
+  /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
+  /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
+  /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
+  M2C_error("petsc:RuntimeError", "PCSetType returned error code %d\n",
+            varargin_3);
+}
+
+/*
+ * function m2c_error(varargin)
+ */
+static void p_m2c_error(int varargin_3)
+{
+  /* m2c_error Issue a fatal error message. */
+  /*   */
+  /*  m2c_error(msg); */
+  /*  m2c_error(fmt, null_terminated_char, number, ...); */
+  /*  m2c_error(msg_id, fmt, null_terminated_char, number, ...); */
+  /*  */
+  /*  Note that the character strings associated with %s in the format must */
+  /*  be null-terminated character strings. */
+  /*  */
+  /*  Example usage: */
+  /*     m2c_error('Error message in a constant string does not need to be null-terminated.'); */
+  /*     m2c_error('Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
+  /*     m2c_error('error:ID', 'Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
+  /*  */
+  /*  SEE ALSO: m2c_print, m2c_warn */
+  /* 'm2c_error:18' coder.inline('never'); */
+  /* 'm2c_error:20' if isempty(coder.target) */
+  /* 'm2c_error:22' else */
+  /* 'm2c_error:23' if isequal(coder.target, 'mex') */
+  /* 'm2c_error:25' else */
+  /* 'm2c_error:26' cmd = 'M2C_error'; */
+  /* 'm2c_error:29' if nargin==1 || ischar(varargin{1}) && ~ischar(varargin{2}) */
+  /* 'm2c_error:35' else */
+  /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
+  /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
+  /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
+  M2C_error("petsc:RuntimeError", "KSPSetFromOptions returned error code %d\n",
+            varargin_3);
+}
+
+/*
+ * function m2c_error(varargin)
+ */
+static void pb_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -11030,7 +10743,7 @@ static void ob_m2c_error(int varargin_3)
 /*
  * function m2c_error(varargin)
  */
-static void p_m2c_error(int varargin_3)
+static void q_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -11065,7 +10778,7 @@ static void p_m2c_error(int varargin_3)
 /*
  * function m2c_error(varargin)
  */
-static void pb_m2c_error(void)
+static void qb_m2c_error(void)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -11100,7 +10813,7 @@ static void pb_m2c_error(void)
 /*
  * function m2c_error(varargin)
  */
-static void q_m2c_error(int varargin_3)
+static void r_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -11134,7 +10847,7 @@ static void q_m2c_error(int varargin_3)
 /*
  * function m2c_error(varargin)
  */
-static void qb_m2c_error(int varargin_3)
+static void rb_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -11169,7 +10882,7 @@ static void qb_m2c_error(int varargin_3)
 /*
  * function m2c_error(varargin)
  */
-static void r_m2c_error(int varargin_3)
+static void s_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -11204,40 +10917,6 @@ static void r_m2c_error(int varargin_3)
 /*
  * function m2c_error(varargin)
  */
-static void s_m2c_error(int varargin_3)
-{
-  /* m2c_error Issue a fatal error message. */
-  /*   */
-  /*  m2c_error(msg); */
-  /*  m2c_error(fmt, null_terminated_char, number, ...); */
-  /*  m2c_error(msg_id, fmt, null_terminated_char, number, ...); */
-  /*  */
-  /*  Note that the character strings associated with %s in the format must */
-  /*  be null-terminated character strings. */
-  /*  */
-  /*  Example usage: */
-  /*     m2c_error('Error message in a constant string does not need to be null-terminated.'); */
-  /*     m2c_error('Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
-  /*     m2c_error('error:ID', 'Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
-  /*  */
-  /*  SEE ALSO: m2c_print, m2c_warn */
-  /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if isempty(coder.target) */
-  /* 'm2c_error:22' else */
-  /* 'm2c_error:23' if isequal(coder.target, 'mex') */
-  /* 'm2c_error:25' else */
-  /* 'm2c_error:26' cmd = 'M2C_error'; */
-  /* 'm2c_error:29' if nargin==1 || ischar(varargin{1}) && ~ischar(varargin{2}) */
-  /* 'm2c_error:35' else */
-  /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
-  /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
-  /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError", "VecCopy returned error code %d\n", varargin_3);
-}
-
-/*
- * function m2c_error(varargin)
- */
 static void t_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
@@ -11266,8 +10945,7 @@ static void t_m2c_error(int varargin_3)
   /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError",
-            "petscKSPSetResidualHistory returned error code %d\n", varargin_3);
+  M2C_error("petsc:RuntimeError", "VecCopy returned error code %d\n", varargin_3);
 }
 
 /*
@@ -11302,13 +10980,48 @@ static void u_m2c_error(int varargin_3)
   /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
   M2C_error("petsc:RuntimeError",
-            "KSPSetInitialGuessNonzero returned error code %d\n", varargin_3);
+            "petscKSPSetResidualHistory returned error code %d\n", varargin_3);
 }
 
 /*
  * function m2c_error(varargin)
  */
 static void v_m2c_error(int varargin_3)
+{
+  /* m2c_error Issue a fatal error message. */
+  /*   */
+  /*  m2c_error(msg); */
+  /*  m2c_error(fmt, null_terminated_char, number, ...); */
+  /*  m2c_error(msg_id, fmt, null_terminated_char, number, ...); */
+  /*  */
+  /*  Note that the character strings associated with %s in the format must */
+  /*  be null-terminated character strings. */
+  /*  */
+  /*  Example usage: */
+  /*     m2c_error('Error message in a constant string does not need to be null-terminated.'); */
+  /*     m2c_error('Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
+  /*     m2c_error('error:ID', 'Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
+  /*  */
+  /*  SEE ALSO: m2c_print, m2c_warn */
+  /* 'm2c_error:18' coder.inline('never'); */
+  /* 'm2c_error:20' if isempty(coder.target) */
+  /* 'm2c_error:22' else */
+  /* 'm2c_error:23' if isequal(coder.target, 'mex') */
+  /* 'm2c_error:25' else */
+  /* 'm2c_error:26' cmd = 'M2C_error'; */
+  /* 'm2c_error:29' if nargin==1 || ischar(varargin{1}) && ~ischar(varargin{2}) */
+  /* 'm2c_error:35' else */
+  /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
+  /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
+  /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
+  M2C_error("petsc:RuntimeError",
+            "KSPSetInitialGuessNonzero returned error code %d\n", varargin_3);
+}
+
+/*
+ * function m2c_error(varargin)
+ */
+static void w_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -11343,7 +11056,7 @@ static void v_m2c_error(int varargin_3)
 /*
  * function m2c_error(varargin)
  */
-static void w_m2c_error(int varargin_3)
+static void x_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -11378,7 +11091,7 @@ static void w_m2c_error(int varargin_3)
 /*
  * function m2c_error(varargin)
  */
-static void x_m2c_error(int varargin_3)
+static void y_m2c_error(int varargin_3)
 {
   /* m2c_error Issue a fatal error message. */
   /*   */
@@ -11408,41 +11121,6 @@ static void x_m2c_error(int varargin_3)
   /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
   M2C_error("petsc:RuntimeError", "KSPGetResidualNorm returned error code %d\n",
             varargin_3);
-}
-
-/*
- * function m2c_error(varargin)
- */
-static void y_m2c_error(int varargin_3)
-{
-  /* m2c_error Issue a fatal error message. */
-  /*   */
-  /*  m2c_error(msg); */
-  /*  m2c_error(fmt, null_terminated_char, number, ...); */
-  /*  m2c_error(msg_id, fmt, null_terminated_char, number, ...); */
-  /*  */
-  /*  Note that the character strings associated with %s in the format must */
-  /*  be null-terminated character strings. */
-  /*  */
-  /*  Example usage: */
-  /*     m2c_error('Error message in a constant string does not need to be null-terminated.'); */
-  /*     m2c_error('Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
-  /*     m2c_error('error:ID', 'Error ID %d - message %s.', int32(10), ['Need to be null-terminated' char(0)]); */
-  /*  */
-  /*  SEE ALSO: m2c_print, m2c_warn */
-  /* 'm2c_error:18' coder.inline('never'); */
-  /* 'm2c_error:20' if isempty(coder.target) */
-  /* 'm2c_error:22' else */
-  /* 'm2c_error:23' if isequal(coder.target, 'mex') */
-  /* 'm2c_error:25' else */
-  /* 'm2c_error:26' cmd = 'M2C_error'; */
-  /* 'm2c_error:29' if nargin==1 || ischar(varargin{1}) && ~ischar(varargin{2}) */
-  /* 'm2c_error:35' else */
-  /* 'm2c_error:36' msgid = coder.opaque('const char *', ['"' varargin{1} '"']); */
-  /* 'm2c_error:38' fmt = coder.opaque('const char *', ['"' varargin{2} '"']); */
-  /* 'm2c_error:39' coder.ceval(cmd, msgid, fmt, varargin{3:end}); */
-  M2C_error("petsc:RuntimeError",
-            "KSPGetIterationNumber returned error code %d\n", varargin_3);
 }
 
 void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
@@ -11894,7 +11572,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     c_flag = (M2C_DEBUG);
     if (c_flag != 0) {
       /* 'petscMatDestroy:23' m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode) */
-      hb_m2c_error(errCode);
+      ib_m2c_error(errCode);
     }
   }
 
@@ -11972,7 +11650,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     c_flag = (M2C_DEBUG);
     if (c_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -12052,7 +11730,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     c_flag = (M2C_DEBUG);
     if (c_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -12469,7 +12147,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     if (b_opts->data[b_opts->size[1] - 1] != '\x00') {
       /* 'petscOptionsInsertString:22' m2c_error('MPETSc:petscOptionsInsertString:InputError', ... */
       /* 'petscOptionsInsertString:23'             'The argument must be a null-terminated string.') */
-      pb_m2c_error();
+      qb_m2c_error();
     }
 
     /* 'petscOptionsInsertString:26' errCode = coder.ceval('PetscOptionsInsertString', PETSC_NULL_OPTIONS, coder.rref(in_str)); */
@@ -12497,7 +12175,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     emxFree_char_T(&b_opts);
     if (errCode != 0) {
       /* 'petscOptionsInsertString:29' m2c_error('petsc:RuntimeError', 'PetscOptionsInsertString returned error code %d\n', errCode) */
-      qb_m2c_error(errCode);
+      rb_m2c_error(errCode);
     }
 
     /* 'mptOptionsInsert:22' ~ */
@@ -12634,7 +12312,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPDestroy:25' m2c_error('petsc:RuntimeError', 'KSPDestroy returned error code %d\n', errCode) */
-      gb_m2c_error(errCode);
+      hb_m2c_error(errCode);
     }
   }
 
@@ -12712,7 +12390,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscMatDestroy:23' m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode) */
-      hb_m2c_error(errCode);
+      ib_m2c_error(errCode);
     }
   }
 
@@ -12790,7 +12468,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -12870,7 +12548,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -12897,7 +12575,6 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   PetscObject t_obj;
   MPI_Comm t_comm;
   KSP t_ksp;
-  int info;
   double t;
   double secs;
   int c_flag;
@@ -13557,80 +13234,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSetup:40' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSetup:41' t = mpi_Wtime(); */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -13644,8 +13248,8 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   t = MPI_Wtime();
 
   /*  Setup KSP */
@@ -13810,7 +13414,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetOperators:41' m2c_error('petsc:RuntimeError', 'KSPSetOperators returned error code %d\n', errCode) */
-      m_m2c_error(errCode);
+      n_m2c_error(errCode);
     }
   }
 
@@ -13953,7 +13557,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetPCSide:21' m2c_error('petsc:RuntimeError', 'KSPSetPCSide returned error code %d\n', errCode) */
-      n_m2c_error(errCode);
+      o_m2c_error(errCode);
     }
   }
 
@@ -14028,7 +13632,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetFromOptions:24' m2c_error('petsc:RuntimeError', 'KSPSetFromOptions returned error code %d\n', errCode) */
-      o_m2c_error(errCode);
+      p_m2c_error(errCode);
     }
   }
 
@@ -14102,87 +13706,14 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetUp:23' m2c_error('petsc:RuntimeError', 'KSPSetUp returned error code %d\n', errCode) */
-      p_m2c_error(errCode);
+      q_m2c_error(errCode);
     }
   }
 
   /* 'mptKSPSetup:106' if nargout>1 */
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSetup:108' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSetup:109' time = mpi_Wtime()-t; */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -14196,8 +13727,8 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   secs = MPI_Wtime();
 
   /* 'mptKSPSetup:112' toplevel = nargout>2; */
@@ -14367,7 +13898,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPDestroy:25' m2c_error('petsc:RuntimeError', 'KSPDestroy returned error code %d\n', errCode) */
-      gb_m2c_error(errCode);
+      hb_m2c_error(errCode);
     }
   }
 
@@ -14445,7 +13976,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscMatDestroy:23' m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode) */
-      hb_m2c_error(errCode);
+      ib_m2c_error(errCode);
     }
   }
 
@@ -14523,7 +14054,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -14603,7 +14134,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -15066,7 +14597,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPDestroy:25' m2c_error('petsc:RuntimeError', 'KSPDestroy returned error code %d\n', errCode) */
-      gb_m2c_error(errCode);
+      hb_m2c_error(errCode);
     }
   }
 
@@ -15144,7 +14675,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscMatDestroy:23' m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode) */
-      hb_m2c_error(errCode);
+      ib_m2c_error(errCode);
     }
   }
 
@@ -15222,7 +14753,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -15302,7 +14833,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -15334,7 +14865,6 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   double bnrm;
   PetscObject t_obj;
   MPI_Comm t_comm;
-  int info;
   double t;
   int maxits;
   int b_val;
@@ -15836,7 +15366,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecNorm:31' m2c_error('petsc:RuntimeError', 'VecNorm returned error code %d\n', errCode) */
-      q_m2c_error(errCode);
+      r_m2c_error(errCode);
     }
   }
 
@@ -15986,80 +15516,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSolve:46' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSolve:47' t = mpi_Wtime(); */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -16073,8 +15530,8 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   t = MPI_Wtime();
 
   /* 'mptKSPSolve:50' if nargin<5 || maxits==0 */
@@ -16410,7 +15867,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetTolerances:43' m2c_error('petsc:RuntimeError', 'KSPSetTolerances returned error code %d\n', errCode) */
-      r_m2c_error(errCode);
+      s_m2c_error(errCode);
     }
   }
 
@@ -16537,7 +15994,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
       b_flag = (M2C_DEBUG);
       if (b_flag != 0) {
         /* 'petscVecCopy:22' m2c_error('petsc:RuntimeError', 'VecCopy returned error code %d\n', errCode) */
-        s_m2c_error(errCode);
+        t_m2c_error(errCode);
       }
     }
   }
@@ -16686,7 +16143,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     if (b_flag != 0) {
       /* 'petscKSPSetResidualHistory:36' m2c_error('petsc:RuntimeError', ... */
       /* 'petscKSPSetResidualHistory:37'             'petscKSPSetResidualHistory returned error code %d\n', errCode) */
-      t_m2c_error(errCode);
+      u_m2c_error(errCode);
     }
   }
 
@@ -16763,7 +16220,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetInitialGuessNonzero:26' m2c_error('petsc:RuntimeError', 'KSPSetInitialGuessNonzero returned error code %d\n', errCode) */
-      u_m2c_error(errCode);
+      v_m2c_error(errCode);
     }
   }
 
@@ -16927,87 +16384,14 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSolve:39' m2c_error('petsc:RuntimeError', 'KSPSolve returned error code %d\n', errCode) */
-      v_m2c_error(errCode);
+      w_m2c_error(errCode);
     }
   }
 
   /* 'mptKSPSolve:82' if nargout>4 */
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSolve:84' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSolve:85' time = mpi_Wtime()-t; */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -17021,8 +16405,8 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   secs = MPI_Wtime();
 
   /* 'mptKSPSolve:88' flag = petscKSPGetConvergedReason(t_ksp); */
@@ -17096,7 +16480,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetConvergedReason:24' m2c_error('petsc:RuntimeError', 'KSPGetConvergedReason returned error code %d\n', errCode) */
-      w_m2c_error(errCode);
+      x_m2c_error(errCode);
     }
   }
 
@@ -17171,7 +16555,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetResidualNorm:24' m2c_error('petsc:RuntimeError', 'KSPGetResidualNorm returned error code %d\n', errCode) */
-      x_m2c_error(errCode);
+      y_m2c_error(errCode);
     }
   }
 
@@ -17249,7 +16633,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetIterationNumber:27' m2c_error('petsc:RuntimeError', 'KSPGetIterationNumber returned error code %d\n', errCode) */
-      y_m2c_error(errCode);
+      ab_m2c_error(errCode);
     }
   }
 
@@ -17335,7 +16719,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetTolerances:33' m2c_error('petsc:RuntimeError', 'KSPGetTolerances returned error code %d\n', errCode) */
-      ab_m2c_error(errCode);
+      bb_m2c_error(errCode);
     }
   }
 
@@ -17452,7 +16836,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
       val = (M2C_DEBUG);
       if (val != 0) {
         /* 'petscKSPGetPC:24' m2c_error('petsc:RuntimeError', 'KSPGetPC returned error code %d\n', errCode) */
-        bb_m2c_error(errCode);
+        cb_m2c_error(errCode);
       }
     }
 
@@ -17526,7 +16910,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
       val = (M2C_DEBUG);
       if (val != 0) {
         /* 'petscKSPGetPCSide:22' m2c_error('petsc:RuntimeError', 'KSPGetPCSide returned error code %d\n', errCode) */
-        cb_m2c_error(errCode);
+        db_m2c_error(errCode);
       }
     }
 
@@ -17784,7 +17168,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
       val = (M2C_DEBUG);
       if (val != 0) {
         /* 'petscKSPGetType:24' m2c_error('petsc:RuntimeError', 'KSPGetType returned error code %d\n', errCode) */
-        db_m2c_error(errCode);
+        eb_m2c_error(errCode);
       }
     }
 
@@ -17877,7 +17261,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
       val = (M2C_DEBUG);
       if (val != 0) {
         /* 'petscPCGetType:24' m2c_error('petsc:RuntimeError', 'PCGetType returned error code %d\n', errCode) */
-        eb_m2c_error(errCode);
+        fb_m2c_error(errCode);
       }
     }
 
@@ -17987,7 +17371,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPGetResidualHistory:31' m2c_error('petsc:RuntimeError', 'KSPGetResidualHistory returned error code %d\n', errCode) */
-      fb_m2c_error(errCode);
+      gb_m2c_error(errCode);
     }
   }
 
@@ -18114,7 +17498,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscKSPDestroy:25' m2c_error('petsc:RuntimeError', 'KSPDestroy returned error code %d\n', errCode) */
-      gb_m2c_error(errCode);
+      hb_m2c_error(errCode);
     }
   }
 
@@ -18192,7 +17576,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscMatDestroy:23' m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode) */
-      hb_m2c_error(errCode);
+      ib_m2c_error(errCode);
     }
   }
 
@@ -18270,7 +17654,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -18350,7 +17734,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = (M2C_DEBUG);
     if (val != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -18815,7 +18199,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPDestroy:25' m2c_error('petsc:RuntimeError', 'KSPDestroy returned error code %d\n', errCode) */
-      gb_m2c_error(errCode);
+      hb_m2c_error(errCode);
     }
   }
 
@@ -18893,7 +18277,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscMatDestroy:23' m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode) */
-      hb_m2c_error(errCode);
+      ib_m2c_error(errCode);
     }
   }
 
@@ -18971,7 +18355,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -19051,7 +18435,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -19079,7 +18463,6 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   PetscObject t_obj;
   MPI_Comm t_comm;
   KSP t_ksp;
-  int info;
   double t;
   boolean_T b3;
   emxArray_char_T *pctype0;
@@ -19747,80 +19130,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSetup:40' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSetup:41' t = mpi_Wtime(); */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -19834,8 +19144,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   t = MPI_Wtime();
 
   /*  Setup KSP */
@@ -20000,7 +19310,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetOperators:41' m2c_error('petsc:RuntimeError', 'KSPSetOperators returned error code %d\n', errCode) */
-      m_m2c_error(errCode);
+      n_m2c_error(errCode);
     }
   }
 
@@ -20123,7 +19433,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       b_flag = (M2C_DEBUG);
       if (b_flag != 0) {
         /* 'petscKSPGetPC:24' m2c_error('petsc:RuntimeError', 'KSPGetPC returned error code %d\n', errCode) */
-        bb_m2c_error(errCode);
+        cb_m2c_error(errCode);
       }
     }
 
@@ -20226,7 +19536,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       b_flag = (M2C_DEBUG);
       if (b_flag != 0) {
         /* 'petscPCSetType:25' m2c_error('petsc:RuntimeError', 'PCSetType returned error code %d\n', errCode) */
-        nb_m2c_error(errCode);
+        ob_m2c_error(errCode);
       }
     }
 
@@ -20335,7 +19645,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       b_flag = (M2C_DEBUG);
       if (b_flag != 0) {
         /* 'petscKSPSetType:25' m2c_error('petsc:RuntimeError', 'KSPSetType returned error code %d\n', errCode) */
-        mb_m2c_error(errCode);
+        nb_m2c_error(errCode);
       }
     }
   }
@@ -20472,7 +19782,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetPCSide:21' m2c_error('petsc:RuntimeError', 'KSPSetPCSide returned error code %d\n', errCode) */
-      n_m2c_error(errCode);
+      o_m2c_error(errCode);
     }
   }
 
@@ -20547,7 +19857,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetFromOptions:24' m2c_error('petsc:RuntimeError', 'KSPSetFromOptions returned error code %d\n', errCode) */
-      o_m2c_error(errCode);
+      p_m2c_error(errCode);
     }
   }
 
@@ -20621,87 +19931,14 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPSetUp:23' m2c_error('petsc:RuntimeError', 'KSPSetUp returned error code %d\n', errCode) */
-      p_m2c_error(errCode);
+      q_m2c_error(errCode);
     }
   }
 
   /* 'mptKSPSetup:106' if nargout>1 */
   /*  When timing the run, use mpi_Barrier for more accurate results. */
   /* 'mptKSPSetup:108' mpi_Barrier(comm); */
-  /* mpi_Barrier   Blocks until all processes in the communicator have reached this routine. */
-  /*  */
-  /*   info = mpi_Barrier (comm) */
-  /*  */
-  /*   comm         Opaque MPI_Comm object. */
-  /*  */
-  /*   info (int)	return code */
-  /*  */
-  /*   SEE ALSO: mpi_Bcast, mpi_Scatter, mpi_Gather, mpi_Reduce */
-  /*  */
-  /*   mpi_Barrier is a collective operation on comm (all ranks must call it) */
-  /*  */
-  /*  C interface: */
-  /*     int MPI_Barrier(MPI_Comm comm) */
-  /*  http://mpi.deino.net/mpi_functions/MPI_Barrier.html */
-  /* 'mpi_Barrier:20' info = int32(0); */
-  /* 'mpi_Barrier:21' info = coder.ceval('MPI_Barrier', MPI_Comm(comm)); */
-  /* Map an opaque object into an MPI_Comm object */
-  /*  */
-  /*   MPI_Comm() simply returns a definition of the m2c_opaque_type, */
-  /*   suitable in the argument specification for codegen. */
-  /*  */
-  /*   MPI_Comm(obj) or MPI_Comm(obj, false) converts obj into an MPI_Comm object. */
-  /*  */
-  /*   MPI_Comm(obj, true) wraps the obj into an opaque object. This should be */
-  /*   used if the opaque object needs to be returned to MATLAB. */
-  /* 'MPI_Comm:12' coder.inline('always'); */
-  /* 'MPI_Comm:14' comm = m2c_opaque_obj('MPI_Comm', varargin{:}); */
-  /* Maps between C opaque object and a MATLAB structure. */
-  /*  */
-  /*   m2c_opaque_obj() or m2c_opaque_obj(type) simply returns a */
-  /*   definition of the m2c_opaque_type, suitable in the argument type */
-  /*   specification for codegen. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg) or m2c_opaque_obj(type, arg, false) converts */
-  /*   arg into an object of give data type. */
-  /*  */
-  /*   m2c_opaque_obj(type, arg, 'wrap') or m2c_opaque_obj(type, arg, true) */
-  /*   wraps the arg into an opaque object. This should be used if the opaque */
-  /*   object needs to be returned to MATLAB. Note that the third argument */
-  /*   must be determined at compile time. */
-  /*  */
-  /*  See also m2c_opaque_array, m2c_opaque_ptr */
-  /*  Undocumented use: */
-  /*   obj = m2c_opaque_obj(type, arg, n, [sizepe]) wraps n objects */
-  /*   into an opaque object. This is for internal use by */
-  /*   m2c_opaque_array. Users should use m2c_opaque_array instead. */
-  /* 'm2c_opaque_obj:23' coder.inline('always'); */
-  /* 'm2c_opaque_obj:26' if nargin<=1 */
-  /* 'm2c_opaque_obj:31' if isstruct(arg) && ~isequal(arg.type, type) */
-  /* 'm2c_opaque_obj:36' if nargin==3 && ischar(wrap) && ~isequal(wrap, 'wrap') */
-  /* 'm2c_opaque_obj:41' if nargin<3 || islogical(wrap) && ~wrap */
-  /* 'm2c_opaque_obj:42' if ~isstruct(arg) || isempty(coder.target) */
-  /* 'm2c_opaque_obj:43' obj = arg; */
-  info = MPI_Barrier(t_comm);
-
-  /* 'mpi_Barrier:23' toplevel = nargout>1; */
-  /* 'mpi_Barrier:24' if info && (toplevel || m2c_debug) */
-  if (info != 0) {
-    /* Flag indicating whether m2c_debug is on. */
-    /* It is always true within MATLAB. In the generated C code, it is */
-    /* turned off by the -DNDEBUG compiler option. It can also be turned on  */
-    /* or off by the compiler options -DM2C_DEBUG=1  DM2C_DEBUG=0, respectively. */
-    /* 'm2c_debug:7' coder.inline('always'); */
-    /* 'm2c_debug:9' if isempty(coder.target) */
-    /* 'm2c_debug:11' else */
-    /* 'm2c_debug:12' flag = int32(1); */
-    /* 'm2c_debug:13' flag = coder.ceval(' ', coder.opaque('int', 'M2C_DEBUG')); */
-    b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
-      /* 'mpi_Barrier:25' m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info) */
-      l_m2c_error(info);
-    }
-  }
+  mpi_Barrier(t_comm);
 
   /* 'mptKSPSetup:109' time = mpi_Wtime()-t; */
   /* mpi_Wtime    Returns an elapsed time on the calling processor */
@@ -20715,8 +19952,8 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   /*  C interface: */
   /*  double MPI_Wtime(void) */
   /*  http://mpi.deino.net/mpi_functions/MPI_Wtime.html */
-  /* 'mpi_Wtime:16' secs = 0; */
-  /* 'mpi_Wtime:17' secs = coder.ceval('MPI_Wtime'); */
+  /* 'mpi_Wtime:17' secs = 0; */
+  /* 'mpi_Wtime:18' secs = coder.ceval('MPI_Wtime'); */
   secs = MPI_Wtime();
 
   /* 'mptKSPSetup:112' toplevel = nargout>2; */
@@ -20886,7 +20123,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscKSPDestroy:25' m2c_error('petsc:RuntimeError', 'KSPDestroy returned error code %d\n', errCode) */
-      gb_m2c_error(errCode);
+      hb_m2c_error(errCode);
     }
   }
 
@@ -20964,7 +20201,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscMatDestroy:23' m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode) */
-      hb_m2c_error(errCode);
+      ib_m2c_error(errCode);
     }
   }
 
@@ -21042,7 +20279,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -21122,7 +20359,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     b_flag = (M2C_DEBUG);
     if (b_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -21462,7 +20699,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     c_flag = (M2C_DEBUG);
     if (c_flag != 0) {
       /* 'petscMatDestroy:23' m2c_error('petsc:RuntimeError', 'MatDestroy returned error code %d\n', errCode) */
-      hb_m2c_error(errCode);
+      ib_m2c_error(errCode);
     }
   }
 
@@ -21540,7 +20777,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     c_flag = (M2C_DEBUG);
     if (c_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 
@@ -21620,7 +20857,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
     c_flag = (M2C_DEBUG);
     if (c_flag != 0) {
       /* 'petscVecDestroy:25' m2c_error('petsc:RuntimeError', 'VecDestroy returned error code %d\n', errCode) */
-      ib_m2c_error(errCode);
+      jb_m2c_error(errCode);
     }
   }
 

@@ -1,5 +1,4 @@
 #include "petscMatNullSpaceSetFunction.h"
-#include "mex.h"
 #include "mpetsc.h"
 #include "m2c.h"
 
@@ -49,7 +48,6 @@ static void emxFreeStruct_struct1_T(struct1_T *pStruct)
 {
   emxFree_uint8_T(&pStruct->data);
   emxFree_char_T(&pStruct->type);
-  emxFree_uint8_T(&pStruct->parent);
 }
 
 static void emxInitStruct_struct0_T(struct0_T *pStruct)
@@ -62,7 +60,6 @@ static void emxInitStruct_struct1_T(struct1_T *pStruct)
 {
   emxInit_uint8_T1(&pStruct->data, 2);
   emxInit_char_T(&pStruct->type, 2);
-  emxInit_uint8_T(&pStruct->parent, 1);
 }
 
 static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions)
@@ -152,7 +149,6 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   emxArray_uint8_T *b_data;
   MatNullSpaceRemoveFunc t_rmvFunc;
   void * t_ctx;
-  mxArray * parent;
   boolean_T exitg1;
   static const signed char iv0[6] = { 1, 2, 3, 4, 5, 6 };
 
@@ -289,23 +285,13 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   b_data->size[1] = ctx->data->size[1];
   emxEnsureCapacity((emxArray__common *)b_data, i0, (int)sizeof(unsigned char));
   k = ctx->data->size[0] * ctx->data->size[1];
+  emxFree_uint8_T(&data);
   for (i0 = 0; i0 < k; i0++) {
     b_data->data[i0] = ctx->data->data[i0];
   }
 
   t_ctx = *(void **)(&b_data->data[0]);
-  i0 = data->size[0];
-  data->size[0] = ctx->parent->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = ctx->parent->size[0];
   emxFree_uint8_T(&b_data);
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = ctx->parent->data[i0];
-  }
-
-  parent = *(mxArray **)(&data->data[0]);
-  M2C_CHK_OPAQUE_PTR(t_ctx, parent, ctx->offset);
-  emxFree_uint8_T(&data);
   if (ctx->type->size[1] > 6) {
     p = false;
     b_p = true;

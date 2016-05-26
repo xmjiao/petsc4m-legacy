@@ -13,5 +13,6 @@ function secs = mpi_Wtime
 
 %#codegen -args {}
 
-secs = 0;
+
+secs = 0; %#ok<NASGU>
 secs = coder.ceval('MPI_Wtime');

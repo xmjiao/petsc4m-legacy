@@ -8,7 +8,8 @@ static void d_m2c_error(int varargin_3);
 static void e_m2c_error(const emxArray_char_T *varargin_3);
 static void emxFreeStruct_struct0_T(struct0_T *pStruct);
 static void emxInitStruct_struct0_T(struct0_T *pStruct);
-static void f_m2c_error(int varargin_3);
+static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions);
+static void f_m2c_error(const emxArray_char_T *varargin_3);
 static void g_m2c_error(int varargin_3);
 static void h_m2c_error(int varargin_3);
 static void i_m2c_error(int varargin_3);
@@ -18,6 +19,8 @@ static void k_m2c_error(int varargin_3);
 static void l_m2c_error(int varargin_3);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void m_m2c_error(int varargin_3);
+static void mpi_Barrier(MPI_Comm comm);
+static void n_m2c_error(int varargin_3);
 static MPI_Comm petscObjectGetComm(const emxArray_uint8_T *obj_data, const
   emxArray_char_T *obj_type);
 static void b_m2c_error(int varargin_3)
@@ -34,7 +37,7 @@ static void c_m2c_error(int varargin_3)
 
 static void d_m2c_error(int varargin_3)
 {
-  M2C_error("MPI:RuntimeError", "MPI_Barrier returned error code %d\n",
+  M2C_error("MPI:RuntimeError", "MPI_Error_string with error code %d\n",
             varargin_3);
 }
 
@@ -53,8 +56,8 @@ static void e_m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i4] = varargin_3->data[i4];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected Mat.\n", &b_varargin_3->data[0]);
+  M2C_error("MPI:RuntimeError", "MPI_Barrier failed with error message %s\n",
+            &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -70,27 +73,57 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
   emxInit_char_T(&pStruct->type, 2);
 }
 
-static void f_m2c_error(int varargin_3)
+static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions)
+{
+  emxArray_uint8_T *emxArray;
+  int i;
+  *pEmxArray = (emxArray_uint8_T *)malloc(sizeof(emxArray_uint8_T));
+  emxArray = *pEmxArray;
+  emxArray->data = (unsigned char *)NULL;
+  emxArray->numDimensions = numDimensions;
+  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
+  emxArray->allocatedSize = 0;
+  emxArray->canFreeData = true;
+  for (i = 0; i < numDimensions; i++) {
+    emxArray->size[i] = 0;
+  }
+}
+
+static void f_m2c_error(const emxArray_char_T *varargin_3)
+{
+  emxArray_char_T *b_varargin_3;
+  int i5;
+  int loop_ub;
+  emxInit_char_T(&b_varargin_3, 2);
+  i5 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  b_varargin_3->size[0] = 1;
+  b_varargin_3->size[1] = varargin_3->size[1];
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i5, (int)sizeof(char));
+  loop_ub = varargin_3->size[0] * varargin_3->size[1];
+  for (i5 = 0; i5 < loop_ub; i5++) {
+    b_varargin_3->data[i5] = varargin_3->data[i5];
+  }
+
+  M2C_error("m2c_opaque_obj:WrongInput",
+            "Incorrect data type %s. Expected Mat.\n", &b_varargin_3->data[0]);
+  emxFree_char_T(&b_varargin_3);
+}
+
+static void g_m2c_error(int varargin_3)
 {
   M2C_error("petsc:RuntimeError", "KSPSetOperators returned error code %d\n",
             varargin_3);
 }
 
-static void g_m2c_error(int varargin_3)
+static void h_m2c_error(int varargin_3)
 {
   M2C_error("petsc:RuntimeError", "KSPGetPC returned error code %d\n",
             varargin_3);
 }
 
-static void h_m2c_error(int varargin_3)
-{
-  M2C_error("petsc:RuntimeError", "PCSetType returned error code %d\n",
-            varargin_3);
-}
-
 static void i_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "KSPSetPCSide returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "PCSetType returned error code %d\n",
             varargin_3);
 }
 
@@ -145,20 +178,20 @@ static boolean_T isequal(const emxArray_char_T *varargin_1)
 
 static void j_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError",
-            "petscPCFactorSetMatSolverPackage returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPSetPCSide returned error code %d\n",
             varargin_3);
 }
 
 static void k_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "KSPSetType returned error code %d\n",
+  M2C_error("petsc:RuntimeError",
+            "petscPCFactorSetMatSolverPackage returned error code %d\n",
             varargin_3);
 }
 
 static void l_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "KSPSetFromOptions returned error code %d\n",
+  M2C_error("petsc:RuntimeError", "KSPSetType returned error code %d\n",
             varargin_3);
 }
 
@@ -184,6 +217,71 @@ static void m2c_error(const emxArray_char_T *varargin_3)
 }
 
 static void m_m2c_error(int varargin_3)
+{
+  M2C_error("petsc:RuntimeError", "KSPSetFromOptions returned error code %d\n",
+            varargin_3);
+}
+
+static void mpi_Barrier(MPI_Comm comm)
+{
+  int info;
+  emxArray_uint8_T *varargin_1;
+  emxArray_char_T *b_varargin_1;
+  int flag;
+  unsigned char msg0[1024];
+  char * ptr;
+  int resultlen;
+  int loop_ub;
+  info = MPI_Barrier(comm);
+  emxInit_uint8_T1(&varargin_1, 2);
+  emxInit_char_T(&b_varargin_1, 2);
+  if (info != 0) {
+    flag = (M2C_DEBUG);
+    if (flag != 0) {
+      memset(&msg0[0], 0, sizeof(unsigned char) << 10);
+      ptr = (char *)(msg0);
+      resultlen = 0;
+      info = MPI_Error_string(info, ptr, &resultlen);
+      if (1 > resultlen) {
+        loop_ub = 0;
+      } else {
+        loop_ub = resultlen;
+      }
+
+      flag = varargin_1->size[0] * varargin_1->size[1];
+      varargin_1->size[0] = 1;
+      varargin_1->size[1] = loop_ub;
+      emxEnsureCapacity((emxArray__common *)varargin_1, flag, (int)sizeof
+                        (unsigned char));
+      for (flag = 0; flag < loop_ub; flag++) {
+        varargin_1->data[varargin_1->size[0] * flag] = msg0[flag];
+      }
+
+      if (info != 0) {
+        flag = (M2C_DEBUG);
+        if (flag != 0) {
+          d_m2c_error(info);
+        }
+      }
+
+      flag = b_varargin_1->size[0] * b_varargin_1->size[1];
+      b_varargin_1->size[0] = 1;
+      b_varargin_1->size[1] = (short)loop_ub;
+      emxEnsureCapacity((emxArray__common *)b_varargin_1, flag, (int)sizeof(char));
+      loop_ub = (short)loop_ub;
+      for (flag = 0; flag < loop_ub; flag++) {
+        b_varargin_1->data[flag] = (signed char)varargin_1->data[flag];
+      }
+
+      e_m2c_error(b_varargin_1);
+    }
+  }
+
+  emxFree_char_T(&b_varargin_1);
+  emxFree_uint8_T(&varargin_1);
+}
+
+static void n_m2c_error(int varargin_3)
 {
   M2C_error("petsc:RuntimeError", "KSPSetUp returned error code %d\n",
             varargin_3);
@@ -434,7 +532,6 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   int k;
   PetscObject t_obj;
   MPI_Comm t_comm;
-  int info;
   double t;
   emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
@@ -446,21 +543,21 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   PC t_pc;
   int exitg6;
   boolean_T exitg5;
+  double secs;
   static const char cv0[4] = { 'l', 'e', 'f', 't' };
 
-  double secs;
-  int exitg4;
   int sizepe;
+  int exitg4;
   char t3_type[3];
-  boolean_T exitg3;
   static const char cv1[3] = { 'K', 'S', 'P' };
 
+  boolean_T exitg3;
   static const char cv2[5] = { 'r', 'i', 'g', 'h', 't' };
 
   int exitg2;
   char * ptr;
-  boolean_T exitg1;
   int i;
+  boolean_T exitg1;
   static const char cv3[9] = { 's', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c' };
 
   varargin_1 = petscObjectGetComm(Amat->data, Amat->type);
@@ -481,14 +578,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     }
   }
 
-  info = MPI_Barrier(t_comm);
-  if (info != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
-      d_m2c_error(info);
-    }
-  }
-
+  mpi_Barrier(t_comm);
   t = MPI_Wtime();
   if (!isequal(Amat->type)) {
     emxInit_char_T(&b_Amat, 2);
@@ -503,7 +593,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     }
 
     b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
-    e_m2c_error(b_Amat);
+    f_m2c_error(b_Amat);
     emxFree_char_T(&b_Amat);
   }
 
@@ -521,7 +611,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   if (errCode != 0) {
     k = (M2C_DEBUG);
     if (k != 0) {
-      f_m2c_error(errCode);
+      g_m2c_error(errCode);
     }
   }
 
@@ -533,7 +623,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     if (errCode != 0) {
       k = (M2C_DEBUG);
       if (k != 0) {
-        g_m2c_error(errCode);
+        h_m2c_error(errCode);
       }
     }
 
@@ -565,7 +655,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
       if (errCode != 0) {
         k = (M2C_DEBUG);
         if (k != 0) {
-          h_m2c_error(errCode);
+          i_m2c_error(errCode);
         }
       }
     }
@@ -613,7 +703,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
         if (errCode != 0) {
           k = (M2C_DEBUG);
           if (k != 0) {
-            i_m2c_error(errCode);
+            j_m2c_error(errCode);
           }
         }
       } else {
@@ -659,7 +749,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
           if (errCode != 0) {
             k = (M2C_DEBUG);
             if (k != 0) {
-              i_m2c_error(errCode);
+              j_m2c_error(errCode);
             }
           }
         } else {
@@ -705,7 +795,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
             if (errCode != 0) {
               k = (M2C_DEBUG);
               if (k != 0) {
-                i_m2c_error(errCode);
+                j_m2c_error(errCode);
               }
             }
           } else {
@@ -738,7 +828,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
             if (errCode != 0) {
               k = (M2C_DEBUG);
               if (k != 0) {
-                j_m2c_error(errCode);
+                k_m2c_error(errCode);
               }
             }
           }
@@ -775,7 +865,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     if (errCode != 0) {
       k = (M2C_DEBUG);
       if (k != 0) {
-        k_m2c_error(errCode);
+        l_m2c_error(errCode);
       }
     }
   }
@@ -787,7 +877,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     if (errCode != 0) {
       k = (M2C_DEBUG);
       if (k != 0) {
-        i_m2c_error(errCode);
+        j_m2c_error(errCode);
       }
     }
   }
@@ -796,7 +886,7 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   if (errCode != 0) {
     k = (M2C_DEBUG);
     if (k != 0) {
-      l_m2c_error(errCode);
+      m_m2c_error(errCode);
     }
   }
 
@@ -804,18 +894,11 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   if (errCode != 0) {
     k = (M2C_DEBUG);
     if (k != 0) {
-      m_m2c_error(errCode);
+      n_m2c_error(errCode);
     }
   }
 
-  info = MPI_Barrier(t_comm);
-  if (info != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
-      d_m2c_error(info);
-    }
-  }
-
+  mpi_Barrier(t_comm);
   secs = MPI_Wtime();
   *time = secs - t;
   *toplevel = true;
@@ -861,7 +944,6 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   int flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
-  int info;
   double t;
   emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
@@ -892,14 +974,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
     }
   }
 
-  info = MPI_Barrier(t_comm);
-  if (info != 0) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
-      d_m2c_error(info);
-    }
-  }
-
+  mpi_Barrier(t_comm);
   t = MPI_Wtime();
   if (!isequal(Amat->type)) {
     emxInit_char_T(&b_Amat, 2);
@@ -914,7 +989,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
     }
 
     b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
-    e_m2c_error(b_Amat);
+    f_m2c_error(b_Amat);
     emxFree_char_T(&b_Amat);
   }
 
@@ -932,7 +1007,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      f_m2c_error(errCode);
+      g_m2c_error(errCode);
     }
   }
 
@@ -941,7 +1016,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      i_m2c_error(errCode);
+      j_m2c_error(errCode);
     }
   }
 
@@ -949,7 +1024,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      l_m2c_error(errCode);
+      m_m2c_error(errCode);
     }
   }
 
@@ -957,18 +1032,11 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      m_m2c_error(errCode);
+      n_m2c_error(errCode);
     }
   }
 
-  info = MPI_Barrier(t_comm);
-  if (info != 0) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
-      d_m2c_error(info);
-    }
-  }
-
+  mpi_Barrier(t_comm);
   secs = MPI_Wtime();
   sizepe = sizeof(KSP);
   flag = data0->size[0];
@@ -1016,7 +1084,6 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   int flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
-  int info;
   double t;
   emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
@@ -1048,14 +1115,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
-  info = MPI_Barrier(t_comm);
-  if (info != 0) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
-      d_m2c_error(info);
-    }
-  }
-
+  mpi_Barrier(t_comm);
   t = MPI_Wtime();
   if (!isequal(Amat->type)) {
     emxInit_char_T(&b_Amat, 2);
@@ -1070,7 +1130,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
 
     b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
-    e_m2c_error(b_Amat);
+    f_m2c_error(b_Amat);
     emxFree_char_T(&b_Amat);
   }
 
@@ -1088,7 +1148,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      f_m2c_error(errCode);
+      g_m2c_error(errCode);
     }
   }
 
@@ -1122,7 +1182,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     if (errCode != 0) {
       flag = (M2C_DEBUG);
       if (flag != 0) {
-        k_m2c_error(errCode);
+        l_m2c_error(errCode);
       }
     }
   }
@@ -1133,7 +1193,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      i_m2c_error(errCode);
+      j_m2c_error(errCode);
     }
   }
 
@@ -1141,7 +1201,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      l_m2c_error(errCode);
+      m_m2c_error(errCode);
     }
   }
 
@@ -1149,18 +1209,11 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      m_m2c_error(errCode);
+      n_m2c_error(errCode);
     }
   }
 
-  info = MPI_Barrier(t_comm);
-  if (info != 0) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
-      d_m2c_error(info);
-    }
-  }
-
+  mpi_Barrier(t_comm);
   secs = MPI_Wtime();
   sizepe = sizeof(KSP);
   flag = data0->size[0];
@@ -1209,7 +1262,6 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   int flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
-  int info;
   double t;
   emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
@@ -1243,14 +1295,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
   }
 
-  info = MPI_Barrier(t_comm);
-  if (info != 0) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
-      d_m2c_error(info);
-    }
-  }
-
+  mpi_Barrier(t_comm);
   t = MPI_Wtime();
   if (!isequal(Amat->type)) {
     emxInit_char_T(&b_Amat, 2);
@@ -1265,7 +1310,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     }
 
     b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
-    e_m2c_error(b_Amat);
+    f_m2c_error(b_Amat);
     emxFree_char_T(&b_Amat);
   }
 
@@ -1283,7 +1328,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      f_m2c_error(errCode);
+      g_m2c_error(errCode);
     }
   }
 
@@ -1294,7 +1339,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     if (errCode != 0) {
       flag = (M2C_DEBUG);
       if (flag != 0) {
-        g_m2c_error(errCode);
+        h_m2c_error(errCode);
       }
     }
 
@@ -1325,7 +1370,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     if (errCode != 0) {
       flag = (M2C_DEBUG);
       if (flag != 0) {
-        h_m2c_error(errCode);
+        i_m2c_error(errCode);
       }
     }
   }
@@ -1359,7 +1404,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     if (errCode != 0) {
       flag = (M2C_DEBUG);
       if (flag != 0) {
-        k_m2c_error(errCode);
+        l_m2c_error(errCode);
       }
     }
   }
@@ -1370,7 +1415,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      i_m2c_error(errCode);
+      j_m2c_error(errCode);
     }
   }
 
@@ -1378,7 +1423,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      l_m2c_error(errCode);
+      m_m2c_error(errCode);
     }
   }
 
@@ -1386,18 +1431,11 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag != 0) {
-      m_m2c_error(errCode);
+      n_m2c_error(errCode);
     }
   }
 
-  info = MPI_Barrier(t_comm);
-  if (info != 0) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
-      d_m2c_error(info);
-    }
-  }
-
+  mpi_Barrier(t_comm);
   secs = MPI_Wtime();
   sizepe = sizeof(KSP);
   flag = data0->size[0];

@@ -20,8 +20,6 @@ function [info, toplevel] = mpi_Init(varargin)
 
 %#codegen -args {}
 
-coder.cinclude('mpi.h');
-
 info = int32(0); %#ok<NASGU>
 
 if nargin==2
@@ -38,5 +36,5 @@ info = coder.ceval('MPI_Init', argc, argv);
 
 toplevel = nargout>1;
 if info && (toplevel || m2c_debug)
-    m2c_error('MPI:RuntimeError', 'MPI_Init returned error code %d\n', info)
+    m2c_error('MPI:RuntimeError', 'MPI_Init failed with error message %s\n', mpi_Error_string(info))
 end

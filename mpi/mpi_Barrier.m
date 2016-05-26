@@ -17,12 +17,12 @@ function [info, toplevel] = mpi_Barrier(comm)
 
 %#codegen -args {MPI_Comm}
 
-info = int32(0);
+info = int32(0); %#ok<NASGU>
 info = coder.ceval('MPI_Barrier', MPI_Comm(comm));
 
 toplevel = nargout>1;
 if info && (toplevel || m2c_debug)
-    m2c_error('MPI:RuntimeError', 'MPI_Barrier returned error code %d\n', info)
+    m2c_error('MPI:RuntimeError', 'MPI_Barrier failed with error message %s\n', mpi_Error_string(info))
 end
 
 function test  %#ok<DEFNU>

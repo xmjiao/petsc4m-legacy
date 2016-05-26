@@ -114,7 +114,7 @@ void petscMatNullSpaceSetFunction_api(const mxArray ** prhs, const mxArray **plh
     if (!mxIsStruct(prhs[2]))
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
             "Input argument ctx has incorrect data type. struct is expected.");
-    if (mxGetNumberOfFields(prhs[2])!=5)
+    if (mxGetNumberOfFields(prhs[2])!=4)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:InputStructWrongFields",
             "Input argument ctx has incorrect number of fields.");
     if (mxGetNumberOfElements(prhs[2]) != 1)
@@ -150,15 +150,6 @@ void petscMatNullSpaceSetFunction_api(const mxArray ** prhs, const mxArray **plh
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
             "Argument ctx.nbytes should be a scalar.");
     ctx.nbytes = *(int32_T*)mxGetData(_sub_mx1);
-    _sub_mx1 = mxGetField(prhs[2], 0, "parent");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument ctx does not have the field parent.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxUINT8_CLASS)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument ctx.parent has incorrect data type. uint8 is expected.");
-    *(void**)&ctx.parent = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)ctx.parent, "ctx.parent", 1);
     _sub_mx1 = mxGetField(prhs[2], 0, "offset");
     if (_sub_mx1==NULL)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
@@ -195,7 +186,6 @@ void petscMatNullSpaceSetFunction_api(const mxArray ** prhs, const mxArray **plh
     free_emxArray((emxArray__common*)rmvFunc.type); mxFree(rmvFunc.type);
     free_emxArray((emxArray__common*)rmvFunc.data); mxFree(rmvFunc.data);
 
-    free_emxArray((emxArray__common*)ctx.parent); mxFree(ctx.parent);
     free_emxArray((emxArray__common*)ctx.type); mxFree(ctx.type);
     free_emxArray((emxArray__common*)ctx.data); mxFree(ctx.data);
 

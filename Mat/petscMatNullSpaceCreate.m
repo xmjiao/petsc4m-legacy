@@ -36,7 +36,7 @@ if ~isempty(coder.target)
     end
     
     errCode = coder.ceval('MatNullSpaceCreate', t_comm, has_cnst, n, ...
-        t_vecs, coder.wref(t_nullsp));
+        m2c_opaque_ptr_const(t_vecs, 'Vec *'), coder.wref(t_nullsp));
     
     toplevel = nargout>2;
     nullsp = PetscMatNullSpace(t_nullsp, toplevel);

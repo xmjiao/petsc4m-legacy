@@ -61,7 +61,6 @@ typedef struct {
   emxArray_uint8_T *data;
   emxArray_char_T *type;
   int nbytes;
-  emxArray_uint8_T *parent;
   int offset;
 } struct1_T;
 

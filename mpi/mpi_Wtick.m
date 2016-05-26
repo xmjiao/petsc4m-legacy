@@ -13,5 +13,5 @@ function res = mpi_Wtick
 
 %#codegen -args {}
 
-res = 0;
+res = 0; %#ok<NASGU>
 res = coder.ceval('MPI_Wtick');

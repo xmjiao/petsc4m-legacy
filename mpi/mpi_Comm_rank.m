@@ -16,8 +16,6 @@ function [rank, info, toplevel] = mpi_Comm_rank(comm)
 
 %#codegen -args {MPI_Comm}
 
-coder.cinclude('mpi.h');
- 
 info = int32(0); %#ok<NASGU>
 rank = int32(0);
 
@@ -25,7 +23,7 @@ info = coder.ceval('MPI_Comm_rank', MPI_Comm(comm), coder.wref(rank));
 
 toplevel = nargout>2;
 if info && (toplevel || m2c_debug)
-    m2c_error('MPI:RuntimeError', 'MPI_Comm_rank returned error code %d\n', info)
+    m2c_error('MPI:RuntimeError', 'MPI_Comm_rank failed with error message %s\n', mpi_Error_string(info))
 end
 
 function test  %#ok<DEFNU>

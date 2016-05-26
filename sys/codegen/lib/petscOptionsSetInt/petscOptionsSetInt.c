@@ -24,10 +24,10 @@ void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
 void petscOptionsSetInt(const emxArray_char_T *iname, int value, int *errCode,
   boolean_T *toplevel)
 {
-  unsigned char t_str[20];
+  signed char t_str[20];
   char * ptr;
   char str[20];
-  int i;
+  int i0;
   *toplevel = true;
   if ((!(iname->size[1] == 0)) && (iname->data[iname->size[1] - 1] != '\x00')) {
     m2c_error();
@@ -35,8 +35,8 @@ void petscOptionsSetInt(const emxArray_char_T *iname, int value, int *errCode,
 
   ptr = (char *)(t_str);
   sprintf(ptr, "%d", value);
-  for (i = 0; i < 20; i++) {
-    str[i] = (signed char)t_str[i];
+  for (i0 = 0; i0 < 20; i0++) {
+    str[i0] = t_str[i0];
   }
 
   *errCode = PetscOptionsSetValue(NULL, &iname->data[0], str);
