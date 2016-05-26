@@ -95,7 +95,7 @@ if isempty(coder.target) && ~exist(['mptSolveCRS.' mexext], 'file') && ...
         exist('run_mptSolveCRS_exe', 'file')
     % Is running in MATLAB and mex files are not available
     [x, flag, relres, iter, reshis, times] = run_mptSolveCRS_exe(varargin{:});
-    fprintf('Solver setup took %g seconds and solving time took %g seconds\n', times(1), times(2));
+    fprintf('KSP setup took %g seconds and solver took %g seconds\n', times(1), times(2));
     return;
 elseif isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file')
     error('You must have built either the executible built when running in MATLAB.');
