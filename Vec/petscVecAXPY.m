@@ -1,8 +1,8 @@
 function [errCode, toplevel] = petscVecAXPY(y, a, x)
 %Computes y = a*x + y.
 %
-%  errCode = [errCode, toplevel] = petscVecAXPY(y, a, x) computes
-%     y = a*x + y. Notes: x and y MUST be different vectors
+%  errCode = petscVecAXPY(y, a, x) computes
+%     y = a*x + y, where x and y MUST be different vectors
 %
 %  SEE ALSO: petscVecAYPX
 %

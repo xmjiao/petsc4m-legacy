@@ -3,12 +3,4 @@ function isn = petscIsNULL(obj)
 %
 %    isn = petscIsNULL(obj)
 
-if ischar(obj)
-    isn = isempty(obj);
-elseif ~isstruct(obj)
-    isn = int32(0); %#ok<NASGU>
-    isn = coder.ceval('!', obj);
-else
-    isn = ~any(obj.data);
-end
-end
+isn = m2c_isnull(obj);

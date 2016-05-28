@@ -70,7 +70,7 @@ cd(curpath);
 % VecWAXPY, VecAXPBY, VecScale,
 % VecDot, VecTDot,  VecDotBegin, VecDotEnd, VecNormBegin,
 % VecNormEnd, VecSum, VecCopy, VecSwap, VecPointwiseMult,
-% VecPointwiseDivide, VecMDot, VecMTDOt, VeccMAXPTY, VecMax, VecMin,
+% VecPointwiseDivide, VecMDot, VecMTDOt, VecMAXPTY, VecMax, VecMin,
 % VecAbs, VecReciprocal, VecShift, VecSet.
 %
 % MatCholeskyFactor, MatLUFactor, MatGetFactor, MatReorderForNonzeroDiagonal
