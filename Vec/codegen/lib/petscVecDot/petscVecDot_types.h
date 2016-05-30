@@ -1,5 +1,5 @@
-#ifndef PETSCMATNULLSPACESETFUNCTION_TYPES_H
-#define PETSCMATNULLSPACESETFUNCTION_TYPES_H
+#ifndef PETSCVECDOT_TYPES_H
+#define PETSCVECDOT_TYPES_H
 #include "rtwtypes.h"
 #ifndef struct_emxArray_char_T
 #define struct_emxArray_char_T
@@ -51,18 +51,6 @@ typedef struct {
   emxArray_char_T *type;
   int nitems;
 } struct0_T;
-
-#endif
-
-#ifndef typedef_struct1_T
-#define typedef_struct1_T
-
-typedef struct {
-  unsigned long data;
-  emxArray_char_T *type;
-  int nbytes;
-  int offset;
-} struct1_T;
 
 #endif
 #endif

@@ -1,25 +1,11 @@
-/*
- * Academic License - for use in teaching, academic research, and meeting
- * course requirements at degree granting institutions only.  Not for
- * government, commercial, or other organizational use.
- *
- * mptSolveCRS.h
- *
- * Code generation for function 'mptSolveCRS'
- *
- */
-
 #ifndef MPTSOLVECRS_H
 #define MPTSOLVECRS_H
-
-/* Include files */
 #include <stddef.h>
 #include <stdlib.h>
 #include <string.h>
 #include "rtwtypes.h"
 #include "mptSolveCRS_types.h"
 
-/* Function Declarations */
 extern emxArray_char_T *emxCreateND_char_T(int numDimensions, int *size);
 extern emxArray_int32_T *emxCreateND_int32_T(int numDimensions, int *size);
 extern emxArray_real_T *emxCreateND_real_T(int numDimensions, int *size);
@@ -85,5 +71,3 @@ extern void mptSolveCRS_initialize(void);
 extern void mptSolveCRS_terminate(void);
 
 #endif
-
-/* End of code generation (mptSolveCRS.h) */

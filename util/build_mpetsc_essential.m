@@ -6,7 +6,7 @@ curpath = pwd;
 cd(mpetscroot);
 
 try
-    opts = [{'-petsc', '-g', '-exe', '-exedir', 'exe', '-mex', ...
+    opts = [{'-petsc', '-exe', '-exedir', 'exe', '-mex', ...
         '-time', '{''mptKSPSetup'', ''mptKSPSolve''}'}, varargin{:}];
     
     %Compile top-level functions for CRS and time top-level KSP functions

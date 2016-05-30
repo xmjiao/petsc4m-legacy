@@ -8,7 +8,6 @@ static void emxFreeStruct_struct0_T(struct0_T *pStruct);
 static void emxFreeStruct_struct1_T(struct1_T *pStruct);
 static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void emxInitStruct_struct1_T(struct1_T *pStruct);
-static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void m2c_warn(void);
 static void b_m2c_error(const emxArray_char_T *varargin_3)
@@ -46,7 +45,6 @@ static void emxFreeStruct_struct0_T(struct0_T *pStruct)
 
 static void emxFreeStruct_struct1_T(struct1_T *pStruct)
 {
-  emxFree_uint8_T(&pStruct->data);
   emxFree_char_T(&pStruct->type);
 }
 
@@ -58,24 +56,7 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
 
 static void emxInitStruct_struct1_T(struct1_T *pStruct)
 {
-  emxInit_uint8_T1(&pStruct->data, 2);
   emxInit_char_T(&pStruct->type, 2);
-}
-
-static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions)
-{
-  emxArray_uint8_T *emxArray;
-  int i;
-  *pEmxArray = (emxArray_uint8_T *)malloc(sizeof(emxArray_uint8_T));
-  emxArray = *pEmxArray;
-  emxArray->data = (unsigned char *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
@@ -146,9 +127,9 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   static const char cv1[22] = { 'M', 'a', 't', 'N', 'u', 'l', 'l', 'S', 'p', 'a',
     'c', 'e', 'R', 'e', 'm', 'o', 'v', 'e', 'F', 'u', 'n', 'c' };
 
-  emxArray_uint8_T *b_data;
   MatNullSpaceRemoveFunc t_rmvFunc;
-  void * t_ctx;
+  unsigned long b_data;
+  char * t_ctx;
   boolean_T exitg1;
   static const signed char iv0[6] = { 1, 2, 3, 4, 5, 6 };
 
@@ -278,20 +259,10 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
     data->data[i0] = rmvFunc->data->data[i0];
   }
 
-  emxInit_uint8_T1(&b_data, 2);
   t_rmvFunc = *(MatNullSpaceRemoveFunc*)(&data->data[0]);
-  i0 = b_data->size[0] * b_data->size[1];
-  b_data->size[0] = ctx->data->size[0];
-  b_data->size[1] = ctx->data->size[1];
-  emxEnsureCapacity((emxArray__common *)b_data, i0, (int)sizeof(unsigned char));
-  k = ctx->data->size[0] * ctx->data->size[1];
+  b_data = ctx->data;
+  t_ctx = *(char **)(&b_data);
   emxFree_uint8_T(&data);
-  for (i0 = 0; i0 < k; i0++) {
-    b_data->data[i0] = ctx->data->data[i0];
-  }
-
-  t_ctx = *(void **)(&b_data->data[0]);
-  emxFree_uint8_T(&b_data);
   if (ctx->type->size[1] > 6) {
     p = false;
     b_p = true;
@@ -314,6 +285,11 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
     if (p) {
       m2c_warn();
     }
+  }
+
+  if (ctx->offset != 0) {
+    (M2C_DEBUG);
+    t_ctx = M2C_OFFSET_PTR(t_ctx, ctx->offset);
   }
 
   *errCode = MatNullSpaceSetFunction(t_nullSp, t_rmvFunc, t_ctx);

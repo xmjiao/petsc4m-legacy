@@ -125,11 +125,13 @@ void petscMatNullSpaceSetFunction_api(const mxArray ** prhs, const mxArray **plh
     if (_sub_mx1==NULL)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
             "Input argument ctx does not have the field data.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxUINT8_CLASS)
+    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxUINT64_CLASS)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument ctx.data has incorrect data type. uint8 is expected.");
-    *(void**)&ctx.data = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)ctx.data, "ctx.data", 2);
+            "Input argument ctx.data has incorrect data type. uint64 is expected.");
+    if (mxGetNumberOfElements(_sub_mx1) != 1)
+        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
+            "Argument ctx.data should be a scalar.");
+    ctx.data = *(uint64_T*)mxGetData(_sub_mx1);
     _sub_mx1 = mxGetField(prhs[2], 0, "type");
     if (_sub_mx1==NULL)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
@@ -187,7 +189,6 @@ void petscMatNullSpaceSetFunction_api(const mxArray ** prhs, const mxArray **plh
     free_emxArray((emxArray__common*)rmvFunc.data); mxFree(rmvFunc.data);
 
     free_emxArray((emxArray__common*)ctx.type); mxFree(ctx.type);
-    free_emxArray((emxArray__common*)ctx.data); mxFree(ctx.data);
 
 }
 
