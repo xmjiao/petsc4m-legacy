@@ -9,21 +9,20 @@ try
     build_mpetsc_essential(varargin{:});
     
     %Compile the most most expensive top-level KSP wrapper functions with timing
-    opts = [{'-petsc', '-O3', '-mex'} varargin{:}];
     files = {'mptKSPSetup', 'mptKSPSolve', 'mptKSPCleanup', 'mptMatCreateAIJFromCRS', ...
         'mptMatAIJToCRS', 'mptVecCreateFromArray', 'mptVecToArray'};
     
     if exist('octave_config_info', 'builtin')
         mexdir = {};
     else
-        mexdir = {'-mexdir', 'mex'};
+        mexdir = {'mex'};
     end
+    opts = [{'-petsc', '-O3', '-mex'} mexdir{:} varargin{:}];
     for i=1:length(files)
-        m2c(opts{:}, mexdir{:}, files{i});
+        m2c(opts{:}, files{i});
     end
     
     %Compile all other system-level and low-level functions with hidden mex files
-    opts = [{'-petsc', '-O', '-mex'} varargin{:}];
     lines = [grep_pattern('sys/petscInitialize.m', '\n%#codegen\s+-args'), ...
         grep_pattern('sys/petscFinalize.m', '\n%#codegen\s+-args'), ...
         grep_pattern('sys/petscSplitOwnership.m', '\n%#codegen\s+-args'), ...
@@ -38,10 +37,11 @@ try
     if exist('octave_config_info', 'builtin')
         mexdir = {};
     else
-        mexdir = {'-mexdir', '../mex'};
+        mexdir = {'../mex'};
     end
+    opts = [{'-petsc', '-O3', '-mex'} mexdir{:}, varargin{:}];
     for i=1:length(files)
-        m2c(opts{:}, mexdir{:}, files{i}{1});
+        m2c(opts{:}, files{i}{1});
     end
     
     % Load MPETSc if successful
@@ -58,13 +58,13 @@ cd(curpath);
 % 4.4.9 Multigrid Preconditioners
 % PCMGSetLevels, PCMGSetType, PCMGSetCycleType, PCMGSetNumberSmoothUp,
 % PCMGSetNumberSmoothDown, PCMGGetCoarseSolve, PCMGGetSmoother,
-% PCMGGetSmootherUp, PCMGGetSmootherDown, PCMGSetInterpolation, 
-% PCMGSetRestriction, 
+% PCMGGetSmootherUp, PCMGGetSmootherDown, PCMGSetInterpolation,
+% PCMGSetRestriction,
 % Optional work vectors for PC: PCMGSetRhs, PCMGSetX, PCMGSetR
 %
 % MatDiagonalScale, MatScale,
 % MatTranspose, MatZeroEntries, MatShift, MatZeroEntries,
-% MatCreateTranspose, MatCreateNormal, MatIsTranspose, 
+% MatCreateTranspose, MatCreateNormal, MatIsTranspose,
 % MatIsSymmetric, MatIsHermitian
 %
 % VecWAXPY, VecAXPBY, VecScale,
@@ -78,7 +78,7 @@ cd(curpath);
 % petscMatCreateAIJ, petscVecCreateMPI,
 % MatGetType, MatCreateMPIAIJWithArrays, MatCreateSeqAIJWithArrays
 % MatMPIAIJSetPreallocation, MatSeqAIJSetPreallocation
-% 
+%
 % PCGetOperators, KSPGetOperators
 %
 % SNES

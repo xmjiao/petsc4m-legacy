@@ -15,5 +15,6 @@ function rmv = PetscMatNullSpaceRemoveFunc(varargin) %#codegen
 % See also petscMatNullSpaceRemoveFuncCreate
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 rmv = m2c_opaque_obj('MatNullSpaceRemoveFunc', varargin{:});

@@ -1,6 +1,6 @@
 #include "petscGetSizeof.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void m2c_error(const emxArray_char_T *varargin_3);
 

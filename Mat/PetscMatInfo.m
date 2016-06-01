@@ -2,6 +2,7 @@ function [info, nfields] = PetscMatInfo %codegen
 % MATLAB structure corresponding to MatInfo in Petsc
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 info = struct('block_size', 0, ...        % block size
     'nz_allocated',0, 'nz_used', 0, 'nz_unneeded', 0, ...   % number of nonzeros

@@ -1,6 +1,5 @@
 #include "mpi_Wtick.h"
 #include "mpetsc.h"
-#include "m2c.h"
 
 double mpi_Wtick(void)
 {

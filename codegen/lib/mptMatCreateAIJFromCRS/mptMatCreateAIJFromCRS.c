@@ -1,6 +1,6 @@
 #include "mptMatCreateAIJFromCRS.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
 static void c_m2c_error(int varargin_3);
@@ -122,6 +122,7 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   int b_val;
   Mat t_mat;
   int errCode;
+  boolean_T flag;
   emxArray_int32_T *jidx;
   emxArray_real_T *rowval;
   int i1;
@@ -145,8 +146,8 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   b_val = (PETSC_DEFAULT);
   errCode = MatCreateSeqAIJ(PETSC_COMM_SELF, n, n, b_val, &nnz->data[0], &t_mat);
   if (errCode != 0) {
-    b_val = (M2C_DEBUG);
-    if (b_val != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       m2c_error(errCode);
     }
   }
@@ -191,8 +192,8 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     errCode = MatSetValues(t_mat, 1, &i, nnz->data[i], &jidx->data[0],
       &rowval->data[0], iroa);
     if (errCode != 0) {
-      b_val = (M2C_DEBUG);
-      if (b_val != 0) {
+      flag = (M2C_DEBUG);
+      if (flag) {
         b_m2c_error(errCode);
       }
     }
@@ -206,8 +207,8 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   type = (MAT_FINAL_ASSEMBLY);
   errCode = MatAssemblyBegin(t_mat, type);
   if (errCode != 0) {
-    b_val = (M2C_DEBUG);
-    if (b_val != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
@@ -215,8 +216,8 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   type = (MAT_FINAL_ASSEMBLY);
   errCode = MatAssemblyEnd(t_mat, type);
   if (errCode != 0) {
-    b_val = (M2C_DEBUG);
-    if (b_val != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       d_m2c_error(errCode);
     }
   }
@@ -268,6 +269,7 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
   int b_val;
   Mat t_mat;
   int errCode;
+  boolean_T flag;
   emxArray_int32_T *jidx;
   emxArray_real_T *rowval;
   int i3;
@@ -292,8 +294,8 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
   errCode = MatCreateSeqAIJ(PETSC_COMM_SELF, n, ncols, b_val, &nnz->data[0],
     &t_mat);
   if (errCode != 0) {
-    b_val = (M2C_DEBUG);
-    if (b_val != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       m2c_error(errCode);
     }
   }
@@ -338,8 +340,8 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
     errCode = MatSetValues(t_mat, 1, &i, nnz->data[i], &jidx->data[0],
       &rowval->data[0], iroa);
     if (errCode != 0) {
-      b_val = (M2C_DEBUG);
-      if (b_val != 0) {
+      flag = (M2C_DEBUG);
+      if (flag) {
         b_m2c_error(errCode);
       }
     }
@@ -353,8 +355,8 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
   type = (MAT_FINAL_ASSEMBLY);
   errCode = MatAssemblyBegin(t_mat, type);
   if (errCode != 0) {
-    b_val = (M2C_DEBUG);
-    if (b_val != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
@@ -362,8 +364,8 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
   type = (MAT_FINAL_ASSEMBLY);
   errCode = MatAssemblyEnd(t_mat, type);
   if (errCode != 0) {
-    b_val = (M2C_DEBUG);
-    if (b_val != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       d_m2c_error(errCode);
     }
   }
@@ -415,9 +417,10 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   int i;
   Mat t_mat;
   int errCode;
-  int flag;
+  boolean_T flag;
   emxArray_char_T *b_prefix;
   int loop_ub;
+  int b_val;
   int first_row;
   int last_row;
   emxArray_int32_T *jidx;
@@ -442,7 +445,7 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   errCode = MatCreate(PETSC_COMM_WORLD, &t_mat);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       e_m2c_error(errCode);
     }
   }
@@ -474,7 +477,7 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   if ((!(b_prefix->size[1] == 0)) && (b_prefix->data[b_prefix->size[1] - 1] !=
        '\x00')) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       f_m2c_error();
     }
   }
@@ -483,7 +486,7 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   emxFree_char_T(&b_prefix);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       g_m2c_error(errCode);
     }
   }
@@ -491,17 +494,17 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   errCode = MatSetFromOptions(t_mat);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       h_m2c_error(errCode);
     }
   }
 
-  flag = (PETSC_DECIDE);
-  loop_ub = (PETSC_DETERMINE);
-  errCode = MatSetSizes(t_mat, n, flag, loop_ub, ncols);
+  loop_ub = (PETSC_DECIDE);
+  b_val = (PETSC_DETERMINE);
+  errCode = MatSetSizes(t_mat, n, loop_ub, b_val, ncols);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       i_m2c_error(errCode);
     }
   }
@@ -509,7 +512,7 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   errCode = MatGetOwnershipRange(t_mat, &first_row, &last_row);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       j_m2c_error(errCode);
     }
   }
@@ -520,34 +523,34 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   while (i + 1 <= n) {
     i4 = row_ptr->data[i + 1] - 1;
     if (row_ptr->data[i] > i4) {
-      flag = 0;
+      b_val = 0;
       i4 = 0;
     } else {
-      flag = row_ptr->data[i] - 1;
+      b_val = row_ptr->data[i] - 1;
     }
 
     loop_ub = jidx->size[0];
-    jidx->size[0] = i4 - flag;
+    jidx->size[0] = i4 - b_val;
     emxEnsureCapacity((emxArray__common *)jidx, loop_ub, (int)sizeof(int));
-    loop_ub = i4 - flag;
+    loop_ub = i4 - b_val;
     for (i4 = 0; i4 < loop_ub; i4++) {
-      jidx->data[i4] = col_ind->data[flag + i4] - 1;
+      jidx->data[i4] = col_ind->data[b_val + i4] - 1;
     }
 
     i4 = row_ptr->data[i + 1] - 1;
     if (row_ptr->data[i] > i4) {
-      flag = 0;
+      b_val = 0;
       i4 = 0;
     } else {
-      flag = row_ptr->data[i] - 1;
+      b_val = row_ptr->data[i] - 1;
     }
 
     loop_ub = rowval->size[0];
-    rowval->size[0] = i4 - flag;
+    rowval->size[0] = i4 - b_val;
     emxEnsureCapacity((emxArray__common *)rowval, loop_ub, (int)sizeof(double));
-    loop_ub = i4 - flag;
+    loop_ub = i4 - b_val;
     for (i4 = 0; i4 < loop_ub; i4++) {
-      rowval->data[i4] = val->data[flag + i4];
+      rowval->data[i4] = val->data[b_val + i4];
     }
 
     loop_ub = i + first_row;
@@ -556,7 +559,7 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
       &rowval->data[0], iroa);
     if (errCode != 0) {
       flag = (M2C_DEBUG);
-      if (flag != 0) {
+      if (flag) {
         b_m2c_error(errCode);
       }
     }
@@ -571,7 +574,7 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   errCode = MatAssemblyBegin(t_mat, type);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
@@ -580,7 +583,7 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   errCode = MatAssemblyEnd(t_mat, type);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       d_m2c_error(errCode);
     }
   }

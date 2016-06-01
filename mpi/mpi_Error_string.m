@@ -8,6 +8,7 @@ function [msg, info, toplevel] = mpi_Error_string(errcode)
 % http://mpi.deino.net/mpi_functions/MPI_Error_string.html
 
 %#codegen -args {int32(0)}
+coder.cinclude('mpetsc.h');
 
 coder.inline('always');
 

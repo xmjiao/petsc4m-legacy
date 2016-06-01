@@ -1,6 +1,6 @@
 #include "petscVecGetValues.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(const emxArray_char_T *varargin_3);
 static void c_m2c_error(int varargin_3);
@@ -77,7 +77,7 @@ void petscVecGetValues(const struct0_T *vec, int ni, const emxArray_int32_T *ix,
   boolean_T b_p;
   int k;
   int exitg2;
-  int i1;
+  int i2;
   boolean_T exitg1;
   emxArray_char_T *b_vec;
   static const char cv1[3] = { 'V', 'e', 'c' };
@@ -88,6 +88,93 @@ void petscVecGetValues(const struct0_T *vec, int ni, const emxArray_int32_T *ix,
     m2c_error();
   }
 
+  p = false;
+  b_p = false;
+  k = 0;
+  do {
+    exitg2 = 0;
+    if (k < 2) {
+      i2 = vec->type->size[k];
+      if (i2 != (k << 1) + 1) {
+        exitg2 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
+
+  if (b_p && (!(vec->type->size[1] == 0))) {
+    k = 0;
+    exitg1 = false;
+    while ((!exitg1) && (k < 3)) {
+      if (!(vec->type->data[k] == cv1[k])) {
+        b_p = false;
+        exitg1 = true;
+      } else {
+        k++;
+      }
+    }
+  }
+
+  if (!b_p) {
+  } else {
+    p = true;
+  }
+
+  if (!p) {
+    emxInit_char_T(&b_vec, 2);
+    i2 = b_vec->size[0] * b_vec->size[1];
+    b_vec->size[0] = 1;
+    b_vec->size[1] = vec->type->size[1] + 1;
+    emxEnsureCapacity((emxArray__common *)b_vec, i2, (int)sizeof(char));
+    k = vec->type->size[1];
+    for (i2 = 0; i2 < k; i2++) {
+      b_vec->data[b_vec->size[0] * i2] = vec->type->data[vec->type->size[0] * i2];
+    }
+
+    b_vec->data[b_vec->size[0] * vec->type->size[1]] = '\x00';
+    b_m2c_error(b_vec);
+    emxFree_char_T(&b_vec);
+  }
+
+  emxInit_uint8_T(&data, 1);
+  i2 = data->size[0];
+  data->size[0] = vec->data->size[0];
+  emxEnsureCapacity((emxArray__common *)data, i2, (int)sizeof(unsigned char));
+  k = vec->data->size[0];
+  for (i2 = 0; i2 < k; i2++) {
+    data->data[i2] = vec->data->data[i2];
+  }
+
+  t_vec = *(Vec*)(&data->data[0]);
+  *errCode = VecGetValues(t_vec, ni, &ix->data[0], &y->data[0]);
+  *toplevel = true;
+  emxFree_uint8_T(&data);
+  if (*errCode != 0) {
+    c_m2c_error(*errCode);
+  }
+}
+
+void petscVecGetValues_Alloc(const struct0_T *vec, int ni, const
+  emxArray_int32_T *ix, emxArray_real_T *y, int *errCode)
+{
+  int i1;
+  boolean_T p;
+  boolean_T b_p;
+  int k;
+  int exitg2;
+  boolean_T exitg1;
+  emxArray_char_T *b_vec;
+  static const char cv0[3] = { 'V', 'e', 'c' };
+
+  emxArray_uint8_T *data;
+  Vec t_vec;
+  i1 = y->size[0];
+  y->size[0] = ni;
+  emxEnsureCapacity((emxArray__common *)y, i1, (int)sizeof(double));
   p = false;
   b_p = false;
   k = 0;
@@ -110,7 +197,7 @@ void petscVecGetValues(const struct0_T *vec, int ni, const emxArray_int32_T *ix,
     k = 0;
     exitg1 = false;
     while ((!exitg1) && (k < 3)) {
-      if (!(vec->type->data[k] == cv1[k])) {
+      if (!(vec->type->data[k] == cv0[k])) {
         b_p = false;
         exitg1 = true;
       } else {
@@ -150,99 +237,11 @@ void petscVecGetValues(const struct0_T *vec, int ni, const emxArray_int32_T *ix,
   }
 
   t_vec = *(Vec*)(&data->data[0]);
-  *errCode = VecGetValues(t_vec, ni, &ix->data[0], &y->data[0]);
-  *toplevel = true;
-  emxFree_uint8_T(&data);
-  if (*errCode != 0) {
-    c_m2c_error(*errCode);
-  }
-}
-
-void petscVecGetValues_Alloc(const struct0_T *vec, int ni, const
-  emxArray_int32_T *ix, emxArray_real_T *y, int *errCode)
-{
-  int flag;
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  int exitg2;
-  boolean_T exitg1;
-  emxArray_char_T *b_vec;
-  static const char cv0[3] = { 'V', 'e', 'c' };
-
-  emxArray_uint8_T *data;
-  Vec t_vec;
-  flag = y->size[0];
-  y->size[0] = ni;
-  emxEnsureCapacity((emxArray__common *)y, flag, (int)sizeof(double));
-  p = false;
-  b_p = false;
-  k = 0;
-  do {
-    exitg2 = 0;
-    if (k < 2) {
-      flag = vec->type->size[k];
-      if (flag != (k << 1) + 1) {
-        exitg2 = 1;
-      } else {
-        k++;
-      }
-    } else {
-      b_p = true;
-      exitg2 = 1;
-    }
-  } while (exitg2 == 0);
-
-  if (b_p && (!(vec->type->size[1] == 0))) {
-    k = 0;
-    exitg1 = false;
-    while ((!exitg1) && (k < 3)) {
-      if (!(vec->type->data[k] == cv0[k])) {
-        b_p = false;
-        exitg1 = true;
-      } else {
-        k++;
-      }
-    }
-  }
-
-  if (!b_p) {
-  } else {
-    p = true;
-  }
-
-  if (!p) {
-    emxInit_char_T(&b_vec, 2);
-    flag = b_vec->size[0] * b_vec->size[1];
-    b_vec->size[0] = 1;
-    b_vec->size[1] = vec->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_vec, flag, (int)sizeof(char));
-    k = vec->type->size[1];
-    for (flag = 0; flag < k; flag++) {
-      b_vec->data[b_vec->size[0] * flag] = vec->type->data[vec->type->size[0] *
-        flag];
-    }
-
-    b_vec->data[b_vec->size[0] * vec->type->size[1]] = '\x00';
-    b_m2c_error(b_vec);
-    emxFree_char_T(&b_vec);
-  }
-
-  emxInit_uint8_T(&data, 1);
-  flag = data->size[0];
-  data->size[0] = vec->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, flag, (int)sizeof(unsigned char));
-  k = vec->data->size[0];
-  for (flag = 0; flag < k; flag++) {
-    data->data[flag] = vec->data->data[flag];
-  }
-
-  t_vec = *(Vec*)(&data->data[0]);
   k = VecGetValues(t_vec, ni, &ix->data[0], &y->data[0]);
   emxFree_uint8_T(&data);
   if (k != 0) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       c_m2c_error(k);
     }
   }

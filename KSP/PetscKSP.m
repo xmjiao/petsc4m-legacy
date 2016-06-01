@@ -12,5 +12,6 @@ function ksp = PetscKSP(varargin) %#codegen
 % See also PetscPC
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 ksp = m2c_opaque_obj('KSP', varargin{:});

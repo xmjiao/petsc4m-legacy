@@ -12,11 +12,11 @@ function [initialized, errCode, toplevel] = petscInitialized
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscInitialized.html
 
 %#codegen -args {}
-
 initialized = int32(0);
 errCode = int32(-1);
 
 if ~isempty(coder.target)
+    coder.cinclude('mpetsc.h');
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('PetscInitialized', coder.wref(b));
     initialized = coder.ceval(' ', b);

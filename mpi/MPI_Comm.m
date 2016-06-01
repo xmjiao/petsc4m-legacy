@@ -10,5 +10,6 @@ function comm = MPI_Comm(varargin) %#codegen
 %  used if the opaque object needs to be returned to MATLAB.
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 comm = m2c_opaque_obj('MPI_Comm', varargin{:});

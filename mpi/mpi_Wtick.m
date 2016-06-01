@@ -12,6 +12,7 @@ function res = mpi_Wtick
 % http://www.mcs.anl.gov/research/projects/mpi/www/www3/mpi_Wtick.html
 
 %#codegen -args {}
+coder.cinclude('mpetsc.h');
 
 res = 0; %#ok<NASGU>
 res = coder.ceval('MPI_Wtick');

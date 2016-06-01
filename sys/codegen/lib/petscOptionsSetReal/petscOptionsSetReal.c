@@ -1,6 +1,6 @@
 #include "petscOptionsSetReal.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
 static void m2c_error(void);

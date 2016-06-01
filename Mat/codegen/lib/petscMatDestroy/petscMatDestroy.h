@@ -19,8 +19,6 @@ extern emxArray_char_T *emxCreate_char_T(int rows, int cols);
 extern emxArray_uint8_T *emxCreate_uint8_T(int rows, int cols);
 extern void emxDestroyArray_char_T(emxArray_char_T *emxArray);
 extern void emxDestroyArray_uint8_T(emxArray_uint8_T *emxArray);
-extern void emxDestroy_struct0_T(struct0_T emxArray);
-extern void emxInit_struct0_T(struct0_T *pStruct);
 extern void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel);
 extern void petscMatDestroy_initialize(void);
 extern void petscMatDestroy_terminate(void);

@@ -1,6 +1,6 @@
 #include "mpi_Barrier.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
 static void c_m2c_error(const emxArray_char_T *varargin_3);
@@ -105,7 +105,6 @@ void mpi_Barrier(const struct0_T *comm, int *info, boolean_T *toplevel)
   static const char cv0[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
 
   emxArray_uint8_T *data;
-  int loop_ub;
   MPI_Comm c_comm;
   unsigned char msg0[1024];
   char * ptr;
@@ -155,8 +154,8 @@ void mpi_Barrier(const struct0_T *comm, int *info, boolean_T *toplevel)
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
     emxEnsureCapacity((emxArray__common *)b_comm, i0, (int)sizeof(char));
-    loop_ub = comm->type->size[1];
-    for (i0 = 0; i0 < loop_ub; i0++) {
+    k = comm->type->size[1];
+    for (i0 = 0; i0 < k; i0++) {
       b_comm->data[b_comm->size[0] * i0] = comm->type->data[comm->type->size[0] *
         i0];
     }
@@ -170,8 +169,8 @@ void mpi_Barrier(const struct0_T *comm, int *info, boolean_T *toplevel)
   i0 = data->size[0];
   data->size[0] = comm->data->size[0];
   emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  loop_ub = comm->data->size[0];
-  for (i0 = 0; i0 < loop_ub; i0++) {
+  k = comm->data->size[0];
+  for (i0 = 0; i0 < k; i0++) {
     data->data[i0] = comm->data->data[i0];
   }
 
@@ -185,24 +184,24 @@ void mpi_Barrier(const struct0_T *comm, int *info, boolean_T *toplevel)
     resultlen = 0;
     b_info = MPI_Error_string(*info, ptr, &resultlen);
     if (1 > resultlen) {
-      loop_ub = 0;
+      k = 0;
     } else {
-      loop_ub = resultlen;
+      k = resultlen;
     }
 
     emxInit_uint8_T1(&varargin_1, 2);
     i0 = varargin_1->size[0] * varargin_1->size[1];
     varargin_1->size[0] = 1;
-    varargin_1->size[1] = loop_ub;
+    varargin_1->size[1] = k;
     emxEnsureCapacity((emxArray__common *)varargin_1, i0, (int)sizeof(unsigned
       char));
-    for (i0 = 0; i0 < loop_ub; i0++) {
+    for (i0 = 0; i0 < k; i0++) {
       varargin_1->data[varargin_1->size[0] * i0] = msg0[i0];
     }
 
     if (b_info != 0) {
-      k = (M2C_DEBUG);
-      if (k != 0) {
+      p = (M2C_DEBUG);
+      if (p) {
         b_m2c_error(b_info);
       }
     }
@@ -210,10 +209,10 @@ void mpi_Barrier(const struct0_T *comm, int *info, boolean_T *toplevel)
     emxInit_char_T(&b_varargin_1, 2);
     i0 = b_varargin_1->size[0] * b_varargin_1->size[1];
     b_varargin_1->size[0] = 1;
-    b_varargin_1->size[1] = (short)loop_ub;
+    b_varargin_1->size[1] = (short)k;
     emxEnsureCapacity((emxArray__common *)b_varargin_1, i0, (int)sizeof(char));
-    loop_ub = (short)loop_ub;
-    for (i0 = 0; i0 < loop_ub; i0++) {
+    k = (short)k;
+    for (i0 = 0; i0 < k; i0++) {
       b_varargin_1->data[i0] = (signed char)varargin_1->data[i0];
     }
 

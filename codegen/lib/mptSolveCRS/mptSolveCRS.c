@@ -1,6 +1,6 @@
 #include "mptSolveCRS.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 #ifndef struct_emxArray_uint8_T
 #define struct_emxArray_uint8_T
@@ -116,14 +116,15 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   PetscObject t_obj;
   MPI_Comm t_comm;
   int errCode;
-  int k;
+  boolean_T flag;
   KSP t_ksp;
   double t;
   boolean_T p;
-  boolean_T b_p;
+  boolean_T b3;
   emxArray_char_T *pctype0;
   PC t_pc;
-  int i4;
+  int i5;
+  int k;
   int exitg6;
   boolean_T exitg5;
   double secs;
@@ -140,16 +141,16 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   t_obj = (PetscObject)(Amat);
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       j_m2c_error(errCode);
     }
   }
 
   errCode = KSPCreate(t_comm, &t_ksp);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       k_m2c_error(errCode);
     }
   }
@@ -157,8 +158,8 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   t_obj = (PetscObject)(t_ksp);
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       j_m2c_error(errCode);
     }
   }
@@ -167,82 +168,82 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   t = MPI_Wtime();
   errCode = KSPSetOperators(t_ksp, Amat, Amat);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       n_m2c_error(errCode);
     }
   }
 
   p = !(pctype->size[1] == 0);
-  b_p = !(pcopt->size[1] == 0);
+  b3 = !(pcopt->size[1] == 0);
   emxInit_char_T(&pctype0, 2);
-  if (p || b_p) {
+  if (p || b3) {
     errCode = KSPGetPC(t_ksp, &t_pc);
     if (errCode != 0) {
-      k = (M2C_DEBUG);
-      if (k != 0) {
+      flag = (M2C_DEBUG);
+      if (flag) {
         cb_m2c_error(errCode);
       }
     }
 
     if (p) {
       if (pctype->data[pctype->size[1] - 1] != '\x00') {
-        i4 = pctype0->size[0] * pctype0->size[1];
+        i5 = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1] + 1;
-        emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof(char));
+        emxEnsureCapacity((emxArray__common *)pctype0, i5, (int)sizeof(char));
         k = pctype->size[1];
-        for (i4 = 0; i4 < k; i4++) {
-          pctype0->data[pctype0->size[0] * i4] = pctype->data[pctype->size[0] *
-            i4];
+        for (i5 = 0; i5 < k; i5++) {
+          pctype0->data[pctype0->size[0] * i5] = pctype->data[pctype->size[0] *
+            i5];
         }
 
         pctype0->data[pctype0->size[0] * pctype->size[1]] = '\x00';
       } else {
-        i4 = pctype0->size[0] * pctype0->size[1];
+        i5 = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1];
-        emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof(char));
+        emxEnsureCapacity((emxArray__common *)pctype0, i5, (int)sizeof(char));
         k = pctype->size[0] * pctype->size[1];
-        for (i4 = 0; i4 < k; i4++) {
-          pctype0->data[i4] = pctype->data[i4];
+        for (i5 = 0; i5 < k; i5++) {
+          pctype0->data[i5] = pctype->data[i5];
         }
       }
 
       errCode = PCSetType(t_pc, &pctype0->data[0]);
       if (errCode != 0) {
-        k = (M2C_DEBUG);
-        if (k != 0) {
+        flag = (M2C_DEBUG);
+        if (flag) {
           ob_m2c_error(errCode);
         }
       }
     }
 
-    if (b_p) {
+    if (b3) {
+      flag = false;
       p = false;
-      b_p = false;
       k = 0;
       do {
         exitg6 = 0;
         if (k < 2) {
-          i4 = pcopt->size[k];
-          if (i4 != 3 * k + 1) {
+          i5 = pcopt->size[k];
+          if (i5 != 3 * k + 1) {
             exitg6 = 1;
           } else {
             k++;
           }
         } else {
-          b_p = true;
+          p = true;
           exitg6 = 1;
         }
       } while (exitg6 == 0);
 
-      if (b_p && (!(pcopt->size[1] == 0))) {
+      if (p && (!(pcopt->size[1] == 0))) {
         k = 0;
         exitg5 = false;
         while ((!exitg5) && (k < 4)) {
           if (!(pcopt->data[k] == cv9[k])) {
-            b_p = false;
+            p = false;
             exitg5 = true;
           } else {
             k++;
@@ -250,45 +251,45 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         }
       }
 
-      if (!b_p) {
+      if (!p) {
       } else {
-        p = true;
+        flag = true;
       }
 
-      if (p) {
+      if (flag) {
         k = (PC_LEFT);
         errCode = KSPSetPCSide(t_ksp, k);
         if (errCode != 0) {
-          k = (M2C_DEBUG);
-          if (k != 0) {
+          flag = (M2C_DEBUG);
+          if (flag) {
             o_m2c_error(errCode);
           }
         }
       } else {
+        flag = false;
         p = false;
-        b_p = false;
         k = 0;
         do {
           exitg4 = 0;
           if (k < 2) {
-            i4 = pcopt->size[k];
-            if (i4 != (k << 2) + 1) {
+            i5 = pcopt->size[k];
+            if (i5 != (k << 2) + 1) {
               exitg4 = 1;
             } else {
               k++;
             }
           } else {
-            b_p = true;
+            p = true;
             exitg4 = 1;
           }
         } while (exitg4 == 0);
 
-        if (b_p && (!(pcopt->size[1] == 0))) {
+        if (p && (!(pcopt->size[1] == 0))) {
           k = 0;
           exitg3 = false;
           while ((!exitg3) && (k < 5)) {
             if (!(pcopt->data[k] == cv10[k])) {
-              b_p = false;
+              p = false;
               exitg3 = true;
             } else {
               k++;
@@ -296,45 +297,45 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
           }
         }
 
-        if (!b_p) {
+        if (!p) {
         } else {
-          p = true;
+          flag = true;
         }
 
-        if (p) {
+        if (flag) {
           k = (PC_RIGHT);
           errCode = KSPSetPCSide(t_ksp, k);
           if (errCode != 0) {
-            k = (M2C_DEBUG);
-            if (k != 0) {
+            flag = (M2C_DEBUG);
+            if (flag) {
               o_m2c_error(errCode);
             }
           }
         } else {
+          flag = false;
           p = false;
-          b_p = false;
           k = 0;
           do {
             exitg2 = 0;
             if (k < 2) {
-              i4 = pcopt->size[k];
-              if (i4 != (k << 3) + 1) {
+              i5 = pcopt->size[k];
+              if (i5 != (k << 3) + 1) {
                 exitg2 = 1;
               } else {
                 k++;
               }
             } else {
-              b_p = true;
+              p = true;
               exitg2 = 1;
             }
           } while (exitg2 == 0);
 
-          if (b_p && (!(pcopt->size[1] == 0))) {
+          if (p && (!(pcopt->size[1] == 0))) {
             k = 0;
             exitg1 = false;
             while ((!exitg1) && (k < 9)) {
               if (!(pcopt->data[k] == cv11[k])) {
-                b_p = false;
+                p = false;
                 exitg1 = true;
               } else {
                 k++;
@@ -342,50 +343,50 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
             }
           }
 
-          if (!b_p) {
+          if (!p) {
           } else {
-            p = true;
+            flag = true;
           }
 
-          if (p) {
+          if (flag) {
             k = (PC_SYMMETRIC);
             errCode = KSPSetPCSide(t_ksp, k);
             if (errCode != 0) {
-              k = (M2C_DEBUG);
-              if (k != 0) {
+              flag = (M2C_DEBUG);
+              if (flag) {
                 o_m2c_error(errCode);
               }
             }
           } else {
             if (pcopt->data[pcopt->size[1] - 1] != '\x00') {
-              i4 = pctype0->size[0] * pctype0->size[1];
+              i5 = pctype0->size[0] * pctype0->size[1];
               pctype0->size[0] = 1;
               pctype0->size[1] = pcopt->size[1] + 1;
-              emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof
+              emxEnsureCapacity((emxArray__common *)pctype0, i5, (int)sizeof
                                 (char));
               k = pcopt->size[1];
-              for (i4 = 0; i4 < k; i4++) {
-                pctype0->data[pctype0->size[0] * i4] = pcopt->data[pcopt->size[0]
-                  * i4];
+              for (i5 = 0; i5 < k; i5++) {
+                pctype0->data[pctype0->size[0] * i5] = pcopt->data[pcopt->size[0]
+                  * i5];
               }
 
               pctype0->data[pctype0->size[0] * pcopt->size[1]] = '\x00';
             } else {
-              i4 = pctype0->size[0] * pctype0->size[1];
+              i5 = pctype0->size[0] * pctype0->size[1];
               pctype0->size[0] = 1;
               pctype0->size[1] = pcopt->size[1];
-              emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof
+              emxEnsureCapacity((emxArray__common *)pctype0, i5, (int)sizeof
                                 (char));
               k = pcopt->size[0] * pcopt->size[1];
-              for (i4 = 0; i4 < k; i4++) {
-                pctype0->data[i4] = pcopt->data[i4];
+              for (i5 = 0; i5 < k; i5++) {
+                pctype0->data[i5] = pcopt->data[i5];
               }
             }
 
             errCode = PCFactorSetMatSolverPackage(t_pc, &pctype0->data[0]);
             if (errCode != 0) {
-              k = (M2C_DEBUG);
-              if (k != 0) {
+              flag = (M2C_DEBUG);
+              if (flag) {
                 pb_m2c_error(errCode);
               }
             }
@@ -397,32 +398,32 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
        [1] - 1] != 0)) {
-    i4 = pctype0->size[0] * pctype0->size[1];
+    i5 = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)pctype0, i5, (int)sizeof(char));
     k = ksptype->size[1];
-    for (i4 = 0; i4 < k; i4++) {
-      pctype0->data[pctype0->size[0] * i4] = ksptype->data[ksptype->size[0] * i4];
+    for (i5 = 0; i5 < k; i5++) {
+      pctype0->data[pctype0->size[0] * i5] = ksptype->data[ksptype->size[0] * i5];
     }
 
     pctype0->data[pctype0->size[0] * ksptype->size[1]] = '\x00';
   } else {
-    i4 = pctype0->size[0] * pctype0->size[1];
+    i5 = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1];
-    emxEnsureCapacity((emxArray__common *)pctype0, i4, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)pctype0, i5, (int)sizeof(char));
     k = ksptype->size[0] * ksptype->size[1];
-    for (i4 = 0; i4 < k; i4++) {
-      pctype0->data[i4] = ksptype->data[i4];
+    for (i5 = 0; i5 < k; i5++) {
+      pctype0->data[i5] = ksptype->data[i5];
     }
   }
 
   if (!(pctype0->size[1] == 0)) {
     errCode = KSPSetType(t_ksp, &pctype0->data[0]);
     if (errCode != 0) {
-      k = (M2C_DEBUG);
-      if (k != 0) {
+      flag = (M2C_DEBUG);
+      if (flag) {
         nb_m2c_error(errCode);
       }
     }
@@ -433,8 +434,8 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     k = (PC_RIGHT);
     errCode = KSPSetPCSide(t_ksp, k);
     if (errCode != 0) {
-      k = (M2C_DEBUG);
-      if (k != 0) {
+      flag = (M2C_DEBUG);
+      if (flag) {
         o_m2c_error(errCode);
       }
     }
@@ -442,16 +443,16 @@ static void b_mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
 
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       p_m2c_error(errCode);
     }
   }
 
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       q_m2c_error(errCode);
     }
   }
@@ -468,6 +469,7 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   int val;
   double bnrm;
   int errCode;
+  boolean_T b_flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
   double t;
@@ -495,8 +497,8 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   val = (NORM_2);
   errCode = VecNorm(b, val, &bnrm);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       r_m2c_error(errCode);
     }
   }
@@ -504,8 +506,8 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   t_obj = (PetscObject)(ksp);
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       j_m2c_error(errCode);
     }
   }
@@ -525,8 +527,8 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   b_val = (PETSC_DEFAULT);
   errCode = KSPSetTolerances(ksp, rtol, (double)val, (double)b_val, maxits);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       s_m2c_error(errCode);
     }
   }
@@ -536,8 +538,8 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   if (b2) {
     errCode = VecCopy(x0, x);
     if (errCode != 0) {
-      val = (M2C_DEBUG);
-      if (val != 0) {
+      b_flag = (M2C_DEBUG);
+      if (b_flag) {
         t_m2c_error(errCode);
       }
     }
@@ -546,24 +548,24 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   val = (PETSC_TRUE);
   errCode = KSPSetResidualHistory(ksp, NULL, maxits, val);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       u_m2c_error(errCode);
     }
   }
 
   errCode = KSPSetInitialGuessNonzero(ksp, (int)b2);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       v_m2c_error(errCode);
     }
   }
 
   errCode = KSPSolve(ksp, b, x);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       w_m2c_error(errCode);
     }
   }
@@ -573,24 +575,24 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   *time = secs - t;
   errCode = KSPGetConvergedReason(ksp, flag);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       x_m2c_error(errCode);
     }
   }
 
   errCode = KSPGetResidualNorm(ksp, &res);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       y_m2c_error(errCode);
     }
   }
 
   errCode = KSPGetIterationNumber(ksp, iter);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       ab_m2c_error(errCode);
     }
   }
@@ -598,8 +600,8 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   *relres = res / bnrm;
   errCode = KSPGetTolerances(ksp, &b_rtol, &abstol, &dtol, &b_maxits);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       bb_m2c_error(errCode);
     }
   }
@@ -608,16 +610,16 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
   if ((*flag < 0) || (*relres > b_rtol)) {
     errCode = KSPGetPC(ksp, &t_pc);
     if (errCode != 0) {
-      val = (M2C_DEBUG);
-      if (val != 0) {
+      b_flag = (M2C_DEBUG);
+      if (b_flag) {
         cb_m2c_error(errCode);
       }
     }
 
     errCode = KSPGetPCSide(ksp, &b_side);
     if (errCode != 0) {
-      val = (M2C_DEBUG);
-      if (val != 0) {
+      b_flag = (M2C_DEBUG);
+      if (b_flag) {
         db_m2c_error(errCode);
       }
     }
@@ -666,16 +668,16 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
 
     errCode = KSPGetType(ksp, &t_type);
     if (errCode != 0) {
-      val = (M2C_DEBUG);
-      if (val != 0) {
+      b_flag = (M2C_DEBUG);
+      if (b_flag) {
         eb_m2c_error(errCode);
       }
     }
 
     errCode = PCGetType(t_pc, &b_t_type);
     if (errCode != 0) {
-      val = (M2C_DEBUG);
-      if (val != 0) {
+      b_flag = (M2C_DEBUG);
+      if (b_flag) {
         fb_m2c_error(errCode);
       }
     }
@@ -698,8 +700,8 @@ static void b_mptKSPSolve(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec x0
 
   memcpy(&reshis->data[0], a, na << 3);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       gb_m2c_error(errCode);
     }
   }
@@ -903,16 +905,16 @@ static void m2c_printf(KSPType varargin_2, PCType varargin_3, const
   emxArray_char_T *varargin_4, int varargin_5)
 {
   emxArray_char_T *b_varargin_4;
-  int i3;
+  int i4;
   int loop_ub;
   emxInit_char_T(&b_varargin_4, 2);
-  i3 = b_varargin_4->size[0] * b_varargin_4->size[1];
+  i4 = b_varargin_4->size[0] * b_varargin_4->size[1];
   b_varargin_4->size[0] = 1;
   b_varargin_4->size[1] = varargin_4->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_4, i3, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_4, i4, (int)sizeof(char));
   loop_ub = varargin_4->size[0] * varargin_4->size[1];
-  for (i3 = 0; i3 < loop_ub; i3++) {
-    b_varargin_4->data[i3] = varargin_4->data[i3];
+  for (i4 = 0; i4 < loop_ub; i4++) {
+    b_varargin_4->data[i4] = varargin_4->data[i4];
   }
 
   M2C_printf("### %s with %s as %s preconditioner stopped with flag %d.\n",
@@ -923,16 +925,16 @@ static void m2c_printf(KSPType varargin_2, PCType varargin_3, const
 static void m_m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i2;
+  int i3;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i2 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i3 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i2, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i3, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i2 = 0; i2 < loop_ub; i2++) {
-    b_varargin_3->data[i2] = varargin_3->data[i2];
+  for (i3 = 0; i3 < loop_ub; i3++) {
+    b_varargin_3->data[i3] = varargin_3->data[i3];
   }
 
   M2C_error("MPI:RuntimeError", "MPI_Barrier failed with error message %s\n",
@@ -951,17 +953,18 @@ static void mpi_Barrier(MPI_Comm comm)
   int info;
   emxArray_uint8_T *varargin_1;
   emxArray_char_T *b_varargin_1;
-  int flag;
+  boolean_T flag;
   unsigned char msg0[1024];
   char * ptr;
   int resultlen;
   int loop_ub;
+  int i2;
   info = MPI_Barrier(comm);
   emxInit_uint8_T(&varargin_1, 2);
   emxInit_char_T(&b_varargin_1, 2);
   if (info != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       memset(&msg0[0], 0, sizeof(unsigned char) << 10);
       ptr = (char *)(msg0);
       resultlen = 0;
@@ -972,29 +975,29 @@ static void mpi_Barrier(MPI_Comm comm)
         loop_ub = resultlen;
       }
 
-      flag = varargin_1->size[0] * varargin_1->size[1];
+      i2 = varargin_1->size[0] * varargin_1->size[1];
       varargin_1->size[0] = 1;
       varargin_1->size[1] = loop_ub;
-      emxEnsureCapacity((emxArray__common *)varargin_1, flag, (int)sizeof
-                        (unsigned char));
-      for (flag = 0; flag < loop_ub; flag++) {
-        varargin_1->data[varargin_1->size[0] * flag] = msg0[flag];
+      emxEnsureCapacity((emxArray__common *)varargin_1, i2, (int)sizeof(unsigned
+        char));
+      for (i2 = 0; i2 < loop_ub; i2++) {
+        varargin_1->data[varargin_1->size[0] * i2] = msg0[i2];
       }
 
       if (info != 0) {
         flag = (M2C_DEBUG);
-        if (flag != 0) {
+        if (flag) {
           l_m2c_error(info);
         }
       }
 
-      flag = b_varargin_1->size[0] * b_varargin_1->size[1];
+      i2 = b_varargin_1->size[0] * b_varargin_1->size[1];
       b_varargin_1->size[0] = 1;
       b_varargin_1->size[1] = (short)loop_ub;
-      emxEnsureCapacity((emxArray__common *)b_varargin_1, flag, (int)sizeof(char));
+      emxEnsureCapacity((emxArray__common *)b_varargin_1, i2, (int)sizeof(char));
       loop_ub = (short)loop_ub;
-      for (flag = 0; flag < loop_ub; flag++) {
-        b_varargin_1->data[flag] = (signed char)varargin_1->data[flag];
+      for (i2 = 0; i2 < loop_ub; i2++) {
+        b_varargin_1->data[i2] = (signed char)varargin_1->data[i2];
       }
 
       m_m2c_error(b_varargin_1);
@@ -1011,17 +1014,18 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   PetscObject t_obj;
   MPI_Comm t_comm;
   int errCode;
-  int flag;
+  boolean_T flag;
   KSP t_ksp;
   double t;
   emxArray_char_T *ksptype0;
+  int val;
   int loop_ub;
   double secs;
   t_obj = (PetscObject)(Amat);
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       j_m2c_error(errCode);
     }
   }
@@ -1029,7 +1033,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   errCode = KSPCreate(t_comm, &t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       k_m2c_error(errCode);
     }
   }
@@ -1038,7 +1042,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       j_m2c_error(errCode);
     }
   }
@@ -1048,7 +1052,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   errCode = KSPSetOperators(t_ksp, Amat, Amat);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       n_m2c_error(errCode);
     }
   }
@@ -1056,25 +1060,25 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   emxInit_char_T(&ksptype0, 2);
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
        [1] - 1] != 0)) {
-    flag = ksptype0->size[0] * ksptype0->size[1];
+    val = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = ksptype->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)ksptype0, flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)ksptype0, val, (int)sizeof(char));
     loop_ub = ksptype->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      ksptype0->data[ksptype0->size[0] * flag] = ksptype->data[ksptype->size[0] *
-        flag];
+    for (val = 0; val < loop_ub; val++) {
+      ksptype0->data[ksptype0->size[0] * val] = ksptype->data[ksptype->size[0] *
+        val];
     }
 
     ksptype0->data[ksptype0->size[0] * ksptype->size[1]] = '\x00';
   } else {
-    flag = ksptype0->size[0] * ksptype0->size[1];
+    val = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = ksptype->size[1];
-    emxEnsureCapacity((emxArray__common *)ksptype0, flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)ksptype0, val, (int)sizeof(char));
     loop_ub = ksptype->size[0] * ksptype->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      ksptype0->data[flag] = ksptype->data[flag];
+    for (val = 0; val < loop_ub; val++) {
+      ksptype0->data[val] = ksptype->data[val];
     }
   }
 
@@ -1082,18 +1086,18 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
     errCode = KSPSetType(t_ksp, &ksptype0->data[0]);
     if (errCode != 0) {
       flag = (M2C_DEBUG);
-      if (flag != 0) {
+      if (flag) {
         nb_m2c_error(errCode);
       }
     }
   }
 
   emxFree_char_T(&ksptype0);
-  flag = (PC_RIGHT);
-  errCode = KSPSetPCSide(t_ksp, flag);
+  val = (PC_RIGHT);
+  errCode = KSPSetPCSide(t_ksp, val);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       o_m2c_error(errCode);
     }
   }
@@ -1101,7 +1105,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       p_m2c_error(errCode);
     }
   }
@@ -1109,7 +1113,7 @@ static void mptKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       q_m2c_error(errCode);
     }
   }
@@ -1126,12 +1130,13 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   int val;
   double bnrm;
   int errCode;
-  int b_flag;
+  boolean_T b_flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
   double t;
   int maxits;
   int b_val;
+  int c_val;
   boolean_T b0;
   double secs;
   double res;
@@ -1142,7 +1147,6 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   PC t_pc;
   PetscReal * a;
   int na;
-  int b_side;
   static const char cv0[9] = { 's', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c' };
 
   static const char cv1[4] = { 'l', 'e', 'f', 't' };
@@ -1155,7 +1159,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   errCode = VecNorm(b, val, &bnrm);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       r_m2c_error(errCode);
     }
   }
@@ -1164,7 +1168,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       j_m2c_error(errCode);
     }
   }
@@ -1174,23 +1178,23 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   maxits = (PETSC_DEFAULT);
   val = (PETSC_DEFAULT);
   b_val = (PETSC_DEFAULT);
-  b_flag = (PETSC_DEFAULT);
-  errCode = KSPSetTolerances(ksp, (double)val, (double)b_val, (double)b_flag,
+  c_val = (PETSC_DEFAULT);
+  errCode = KSPSetTolerances(ksp, (double)val, (double)b_val, (double)c_val,
     maxits);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       s_m2c_error(errCode);
     }
   }
 
-  b_flag = !(x0);
-  b0 = !(b_flag != 0);
+  c_val = !(x0);
+  b0 = !(c_val != 0);
   if (b0) {
     errCode = VecCopy(x0, x);
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         t_m2c_error(errCode);
       }
     }
@@ -1200,7 +1204,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   errCode = KSPSetResidualHistory(ksp, NULL, maxits, val);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       u_m2c_error(errCode);
     }
   }
@@ -1208,7 +1212,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   errCode = KSPSetInitialGuessNonzero(ksp, (int)b0);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       v_m2c_error(errCode);
     }
   }
@@ -1216,7 +1220,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   errCode = KSPSolve(ksp, b, x);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       w_m2c_error(errCode);
     }
   }
@@ -1227,7 +1231,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   errCode = KSPGetConvergedReason(ksp, flag);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       x_m2c_error(errCode);
     }
   }
@@ -1235,7 +1239,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   errCode = KSPGetResidualNorm(ksp, &res);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       y_m2c_error(errCode);
     }
   }
@@ -1243,7 +1247,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   errCode = KSPGetIterationNumber(ksp, iter);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       ab_m2c_error(errCode);
     }
   }
@@ -1252,7 +1256,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
   errCode = KSPGetTolerances(ksp, &rtol, &abstol, &dtol, &maxits);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       bb_m2c_error(errCode);
     }
   }
@@ -1262,57 +1266,57 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     errCode = KSPGetPC(ksp, &t_pc);
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         cb_m2c_error(errCode);
       }
     }
 
-    errCode = KSPGetPCSide(ksp, &b_side);
+    errCode = KSPGetPCSide(ksp, &c_val);
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         db_m2c_error(errCode);
       }
     }
 
     val = (PC_LEFT);
     b_val = (PC_RIGHT);
-    if (val == b_side) {
-      b_flag = 0;
-    } else if (b_val == b_side) {
-      b_flag = 1;
+    if (val == c_val) {
+      c_val = 0;
+    } else if (b_val == c_val) {
+      c_val = 1;
     } else {
-      b_flag = -1;
+      c_val = -1;
     }
 
-    switch (b_flag) {
+    switch (c_val) {
      case 0:
-      b_flag = side->size[0] * side->size[1];
+      c_val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 4;
-      emxEnsureCapacity((emxArray__common *)side, b_flag, (int)sizeof(char));
-      for (b_flag = 0; b_flag < 4; b_flag++) {
-        side->data[b_flag] = cv1[b_flag];
+      emxEnsureCapacity((emxArray__common *)side, c_val, (int)sizeof(char));
+      for (c_val = 0; c_val < 4; c_val++) {
+        side->data[c_val] = cv1[c_val];
       }
       break;
 
      case 1:
-      b_flag = side->size[0] * side->size[1];
+      c_val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 5;
-      emxEnsureCapacity((emxArray__common *)side, b_flag, (int)sizeof(char));
-      for (b_flag = 0; b_flag < 5; b_flag++) {
-        side->data[b_flag] = cv2[b_flag];
+      emxEnsureCapacity((emxArray__common *)side, c_val, (int)sizeof(char));
+      for (c_val = 0; c_val < 5; c_val++) {
+        side->data[c_val] = cv2[c_val];
       }
       break;
 
      default:
-      b_flag = side->size[0] * side->size[1];
+      c_val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 9;
-      emxEnsureCapacity((emxArray__common *)side, b_flag, (int)sizeof(char));
-      for (b_flag = 0; b_flag < 9; b_flag++) {
-        side->data[b_flag] = cv0[b_flag];
+      emxEnsureCapacity((emxArray__common *)side, c_val, (int)sizeof(char));
+      for (c_val = 0; c_val < 9; c_val++) {
+        side->data[c_val] = cv0[c_val];
       }
       break;
     }
@@ -1320,7 +1324,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     errCode = KSPGetType(ksp, &t_type);
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         eb_m2c_error(errCode);
       }
     }
@@ -1328,7 +1332,7 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
     errCode = PCGetType(t_pc, &b_t_type);
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         fb_m2c_error(errCode);
       }
     }
@@ -1342,17 +1346,17 @@ static void mptKSPSolve(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double *relres
 
   emxFree_char_T(&side);
   errCode = KSPGetResidualHistory(ksp, &a, &na);
-  b_flag = reshis->size[0];
+  c_val = reshis->size[0];
   reshis->size[0] = na;
-  emxEnsureCapacity((emxArray__common *)reshis, b_flag, (int)sizeof(double));
-  for (b_flag = 0; b_flag < na; b_flag++) {
-    reshis->data[b_flag] = 0.0;
+  emxEnsureCapacity((emxArray__common *)reshis, c_val, (int)sizeof(double));
+  for (c_val = 0; c_val < na; c_val++) {
+    reshis->data[c_val] = 0.0;
   }
 
   memcpy(&reshis->data[0], a, na << 3);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       gb_m2c_error(errCode);
     }
   }
@@ -1368,6 +1372,7 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   int b_val;
   Mat t_mat;
   int errCode;
+  boolean_T flag;
   emxArray_int32_T *jidx;
   emxArray_real_T *rowval;
   int i1;
@@ -1385,8 +1390,8 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   b_val = (PETSC_DEFAULT);
   errCode = MatCreateSeqAIJ(PETSC_COMM_SELF, n, n, b_val, &nnz->data[0], &t_mat);
   if (errCode != 0) {
-    b_val = (M2C_DEBUG);
-    if (b_val != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       m2c_error(errCode);
     }
   }
@@ -1431,8 +1436,8 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     errCode = MatSetValues(t_mat, 1, &i, nnz->data[i], &jidx->data[0],
       &rowval->data[0], iroa);
     if (errCode != 0) {
-      b_val = (M2C_DEBUG);
-      if (b_val != 0) {
+      flag = (M2C_DEBUG);
+      if (flag) {
         b_m2c_error(errCode);
       }
     }
@@ -1446,8 +1451,8 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   type = (MAT_FINAL_ASSEMBLY);
   errCode = MatAssemblyBegin(t_mat, type);
   if (errCode != 0) {
-    b_val = (M2C_DEBUG);
-    if (b_val != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
@@ -1455,8 +1460,8 @@ static Mat mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   type = (MAT_FINAL_ASSEMBLY);
   errCode = MatAssemblyEnd(t_mat, type);
   if (errCode != 0) {
-    b_val = (M2C_DEBUG);
-    if (b_val != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       d_m2c_error(errCode);
     }
   }
@@ -1474,7 +1479,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   double time_solve;
   KSP t_ksp;
   int errCode;
-  int b_flag;
+  boolean_T b_flag;
   b_mptKSPSetup(A, solver, pctype, pcopt, &ksp, &time_setup);
   b_mptKSPSolve(ksp, b, x, rtol, maxit, x0, flag, relres, iter, reshis,
                 &time_solve);
@@ -1484,7 +1489,7 @@ static void mptSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver, double
   errCode = KSPDestroy(&t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       hb_m2c_error(errCode);
     }
   }
@@ -1495,17 +1500,18 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   int n;
   Vec t_vec;
   int errCode;
-  int yk;
+  boolean_T flag;
   int b_n;
   emxArray_int32_T *y;
   int k;
   emxArray_int32_T *idx;
+  int yk;
   int iroa;
   n = arr->size[0];
   errCode = VecCreateSeq(PETSC_COMM_SELF, n, &t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       e_m2c_error(errCode);
     }
   }
@@ -1544,24 +1550,24 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
   errCode = VecSetValues(t_vec, n, &idx->data[0], &arr->data[0], iroa);
   emxFree_int32_T(&idx);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       f_m2c_error(errCode);
     }
   }
 
   errCode = VecAssemblyBegin(t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       g_m2c_error(errCode);
     }
   }
 
   errCode = VecAssemblyEnd(t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       h_m2c_error(errCode);
     }
   }
@@ -1573,15 +1579,16 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
 {
   int n;
   int errCode;
-  int yk;
+  boolean_T flag;
   int k;
   int b_n;
   emxArray_int32_T *y;
   emxArray_int32_T *idx;
+  int yk;
   errCode = VecGetLocalSize(vec, &n);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       kb_m2c_error(errCode);
     }
   }
@@ -1626,8 +1633,8 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
   errCode = VecGetValues(vec, n, &idx->data[0], &arr->data[0]);
   emxFree_int32_T(&idx);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       mb_m2c_error(errCode);
     }
   }
@@ -1777,7 +1784,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   double b_relres;
   int b_iter;
   Mat t_mat;
-  int c_flag;
+  boolean_T c_flag;
   Vec t_vec;
   AMat = mptMatCreateAIJFromCRS(Arows, Acols, Avals);
   bVec = mptVecCreateFromArray(b);
@@ -1787,7 +1794,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
     xVec = t_vec_out;
     if (errCode != 0) {
       c_flag = (M2C_DEBUG);
-      if (c_flag != 0) {
+      if (c_flag) {
         i_m2c_error(errCode);
       }
     }
@@ -1802,7 +1809,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = MatDestroy(&t_mat);
   if (errCode != 0) {
     c_flag = (M2C_DEBUG);
-    if (c_flag != 0) {
+    if (c_flag) {
       ib_m2c_error(errCode);
     }
   }
@@ -1811,7 +1818,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     c_flag = (M2C_DEBUG);
-    if (c_flag != 0) {
+    if (c_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -1821,7 +1828,7 @@ void mptSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     c_flag = (M2C_DEBUG);
-    if (c_flag != 0) {
+    if (c_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -1847,7 +1854,8 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   emxArray_char_T *b_opts;
   KSP ksp;
   double time_setup;
-  int b_flag;
+  int i6;
+  boolean_T b_flag;
   int c_flag;
   double b_relres;
   int b_iter;
@@ -1864,7 +1872,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
     xVec = t_vec_out;
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         i_m2c_error(errCode);
       }
     }
@@ -1875,24 +1883,23 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   if (!(opts->size[1] == 0)) {
     emxInit_char_T(&b_opts, 2);
-    b_flag = b_opts->size[0] * b_opts->size[1];
+    i6 = b_opts->size[0] * b_opts->size[1];
     b_opts->size[0] = 1;
     b_opts->size[1] = opts->size[1];
-    emxEnsureCapacity((emxArray__common *)b_opts, b_flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_opts, i6, (int)sizeof(char));
     loop_ub = opts->size[0] * opts->size[1];
-    for (b_flag = 0; b_flag < loop_ub; b_flag++) {
-      b_opts->data[b_flag] = opts->data[b_flag];
+    for (i6 = 0; i6 < loop_ub; i6++) {
+      b_opts->data[i6] = opts->data[i6];
     }
 
     if (opts->data[opts->size[1] - 1] != '\x00') {
-      b_flag = b_opts->size[0] * b_opts->size[1];
+      i6 = b_opts->size[0] * b_opts->size[1];
       b_opts->size[0] = 1;
       b_opts->size[1] = opts->size[1] + 1;
-      emxEnsureCapacity((emxArray__common *)b_opts, b_flag, (int)sizeof(char));
+      emxEnsureCapacity((emxArray__common *)b_opts, i6, (int)sizeof(char));
       loop_ub = opts->size[1];
-      for (b_flag = 0; b_flag < loop_ub; b_flag++) {
-        b_opts->data[b_opts->size[0] * b_flag] = opts->data[opts->size[0] *
-          b_flag];
+      for (i6 = 0; i6 < loop_ub; i6++) {
+        b_opts->data[b_opts->size[0] * i6] = opts->data[opts->size[0] * i6];
       }
 
       b_opts->data[b_opts->size[0] * opts->size[1]] = '\x00';
@@ -1916,7 +1923,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPDestroy(&t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       hb_m2c_error(errCode);
     }
   }
@@ -1925,7 +1932,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = MatDestroy(&t_mat);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       ib_m2c_error(errCode);
     }
   }
@@ -1934,7 +1941,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -1944,7 +1951,7 @@ void mptSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -1965,11 +1972,12 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   Vec bVec;
   Vec t_vec_out;
   int errCode;
-  int b_flag;
+  boolean_T b_flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
   KSP t_ksp;
   double t;
+  int val;
   double secs;
   int c_flag;
   double b_relres;
@@ -1982,7 +1990,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDuplicate(bVec, &t_vec_out);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       i_m2c_error(errCode);
     }
   }
@@ -1991,7 +1999,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       j_m2c_error(errCode);
     }
   }
@@ -1999,7 +2007,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPCreate(t_comm, &t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       k_m2c_error(errCode);
     }
   }
@@ -2008,7 +2016,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       j_m2c_error(errCode);
     }
   }
@@ -2018,16 +2026,16 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSetOperators(t_ksp, AMat, AMat);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       n_m2c_error(errCode);
     }
   }
 
-  b_flag = (PC_RIGHT);
-  errCode = KSPSetPCSide(t_ksp, b_flag);
+  val = (PC_RIGHT);
+  errCode = KSPSetPCSide(t_ksp, val);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       o_m2c_error(errCode);
     }
   }
@@ -2035,7 +2043,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       p_m2c_error(errCode);
     }
   }
@@ -2043,7 +2051,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       q_m2c_error(errCode);
     }
   }
@@ -2055,7 +2063,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPDestroy(&t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       hb_m2c_error(errCode);
     }
   }
@@ -2064,7 +2072,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = MatDestroy(&t_mat);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       ib_m2c_error(errCode);
     }
   }
@@ -2073,7 +2081,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2083,7 +2091,7 @@ void mptSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2104,7 +2112,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   Vec bVec;
   Vec t_vec_out;
   int errCode;
-  int b_flag;
+  boolean_T b_flag;
   KSP ksp;
   double time_setup;
   int c_flag;
@@ -2119,7 +2127,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDuplicate(bVec, &t_vec_out);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       i_m2c_error(errCode);
     }
   }
@@ -2131,7 +2139,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPDestroy(&t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       hb_m2c_error(errCode);
     }
   }
@@ -2140,7 +2148,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = MatDestroy(&t_mat);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       ib_m2c_error(errCode);
     }
   }
@@ -2149,7 +2157,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2159,7 +2167,7 @@ void mptSolveCRS_5args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2181,7 +2189,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   Vec obj;
   Vec t_vec_out;
   int errCode;
-  int b_flag;
+  boolean_T b_flag;
   KSP ksp;
   double time_setup;
   double b_rtol;
@@ -2194,6 +2202,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   int b_val;
   boolean_T b1;
   double secs;
+  int c_flag;
   double res;
   int b_iter;
   double b_relres;
@@ -2221,7 +2230,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDuplicate(bVec, &t_vec_out);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       i_m2c_error(errCode);
     }
   }
@@ -2232,7 +2241,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecNorm(bVec, val, &bnrm);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       r_m2c_error(errCode);
     }
   }
@@ -2241,7 +2250,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       j_m2c_error(errCode);
     }
   }
@@ -2259,7 +2268,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSetTolerances(ksp, b_rtol, (double)val, (double)b_val, maxits);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       s_m2c_error(errCode);
     }
   }
@@ -2270,7 +2279,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
     errCode = VecCopy(obj, t_vec_out);
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         t_m2c_error(errCode);
       }
     }
@@ -2280,7 +2289,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSetResidualHistory(ksp, NULL, maxits, val);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       u_m2c_error(errCode);
     }
   }
@@ -2288,7 +2297,7 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSetInitialGuessNonzero(ksp, (int)b1);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       v_m2c_error(errCode);
     }
   }
@@ -2296,33 +2305,33 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSolve(ksp, bVec, t_vec_out);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       w_m2c_error(errCode);
     }
   }
 
   mpi_Barrier(t_comm);
   secs = MPI_Wtime();
-  errCode = KSPGetConvergedReason(ksp, &b_flag);
+  errCode = KSPGetConvergedReason(ksp, &c_flag);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       x_m2c_error(errCode);
     }
   }
 
   errCode = KSPGetResidualNorm(ksp, &res);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       y_m2c_error(errCode);
     }
   }
 
   errCode = KSPGetIterationNumber(ksp, &b_iter);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       ab_m2c_error(errCode);
     }
   }
@@ -2330,26 +2339,26 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   b_relres = res / bnrm;
   errCode = KSPGetTolerances(ksp, &b_rtol, &abstol, &dtol, &maxits);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       bb_m2c_error(errCode);
     }
   }
 
   emxInit_char_T(&side, 2);
-  if ((b_flag < 0) || (b_relres > b_rtol)) {
+  if ((c_flag < 0) || (b_relres > b_rtol)) {
     errCode = KSPGetPC(ksp, &t_pc);
     if (errCode != 0) {
-      val = (M2C_DEBUG);
-      if (val != 0) {
+      b_flag = (M2C_DEBUG);
+      if (b_flag) {
         cb_m2c_error(errCode);
       }
     }
 
     errCode = KSPGetPCSide(ksp, &b_side);
     if (errCode != 0) {
-      val = (M2C_DEBUG);
-      if (val != 0) {
+      b_flag = (M2C_DEBUG);
+      if (b_flag) {
         db_m2c_error(errCode);
       }
     }
@@ -2398,21 +2407,21 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
     errCode = KSPGetType(ksp, &t_type);
     if (errCode != 0) {
-      val = (M2C_DEBUG);
-      if (val != 0) {
+      b_flag = (M2C_DEBUG);
+      if (b_flag) {
         eb_m2c_error(errCode);
       }
     }
 
     errCode = PCGetType(t_pc, &b_t_type);
     if (errCode != 0) {
-      val = (M2C_DEBUG);
-      if (val != 0) {
+      b_flag = (M2C_DEBUG);
+      if (b_flag) {
         fb_m2c_error(errCode);
       }
     }
 
-    m2c_printf(t_type, b_t_type, side, b_flag);
+    m2c_printf(t_type, b_t_type, side, c_flag);
     b_m2c_printf(b_relres, b_iter);
     c_m2c_printf(b_rtol, abstol);
     d_m2c_printf(maxits, dtol);
@@ -2430,8 +2439,8 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   memcpy(&reshis->data[0], a, na << 3);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       gb_m2c_error(errCode);
     }
   }
@@ -2439,8 +2448,8 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   t_ksp = ksp;
   errCode = KSPDestroy(&t_ksp);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       hb_m2c_error(errCode);
     }
   }
@@ -2448,8 +2457,8 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   t_mat = AMat;
   errCode = MatDestroy(&t_mat);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       ib_m2c_error(errCode);
     }
   }
@@ -2457,8 +2466,8 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   t_vec = bVec;
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2467,13 +2476,13 @@ void mptSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   t_vec = t_vec_out;
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
-    val = (M2C_DEBUG);
-    if (val != 0) {
+    b_flag = (M2C_DEBUG);
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
 
-  *flag = b_flag;
+  *flag = c_flag;
   *relres = b_relres;
   *iter = b_iter;
   times[0] = time_setup;
@@ -2489,7 +2498,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   Vec bVec;
   Vec t_vec_out;
   int errCode;
-  int b_flag;
+  boolean_T b_flag;
   KSP ksp;
   double time_setup;
   int c_flag;
@@ -2504,7 +2513,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDuplicate(bVec, &t_vec_out);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       i_m2c_error(errCode);
     }
   }
@@ -2516,7 +2525,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPDestroy(&t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       hb_m2c_error(errCode);
     }
   }
@@ -2525,7 +2534,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = MatDestroy(&t_mat);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       ib_m2c_error(errCode);
     }
   }
@@ -2534,7 +2543,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2544,7 +2553,7 @@ void mptSolveCRS_7args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2566,14 +2575,14 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   Vec bVec;
   Vec t_vec_out;
   int errCode;
-  int b_flag;
+  boolean_T b_flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
   KSP t_ksp;
   double t;
-  boolean_T b3;
   emxArray_char_T *pctype0;
   PC t_pc;
+  int val;
   int loop_ub;
   double secs;
   int c_flag;
@@ -2587,7 +2596,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDuplicate(bVec, &t_vec_out);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       i_m2c_error(errCode);
     }
   }
@@ -2596,7 +2605,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       j_m2c_error(errCode);
     }
   }
@@ -2604,7 +2613,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPCreate(t_comm, &t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       k_m2c_error(errCode);
     }
   }
@@ -2613,7 +2622,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       j_m2c_error(errCode);
     }
   }
@@ -2623,49 +2632,49 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSetOperators(t_ksp, AMat, AMat);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       n_m2c_error(errCode);
     }
   }
 
-  b3 = !(pctype->size[1] == 0);
+  b_flag = !(pctype->size[1] == 0);
   emxInit_char_T(&pctype0, 2);
-  if (b3) {
+  if (b_flag) {
     errCode = KSPGetPC(t_ksp, &t_pc);
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         cb_m2c_error(errCode);
       }
     }
 
     if (pctype->data[pctype->size[1] - 1] != '\x00') {
-      b_flag = pctype0->size[0] * pctype0->size[1];
+      val = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1] + 1;
-      emxEnsureCapacity((emxArray__common *)pctype0, b_flag, (int)sizeof(char));
+      emxEnsureCapacity((emxArray__common *)pctype0, val, (int)sizeof(char));
       loop_ub = pctype->size[1];
-      for (b_flag = 0; b_flag < loop_ub; b_flag++) {
-        pctype0->data[pctype0->size[0] * b_flag] = pctype->data[pctype->size[0] *
-          b_flag];
+      for (val = 0; val < loop_ub; val++) {
+        pctype0->data[pctype0->size[0] * val] = pctype->data[pctype->size[0] *
+          val];
       }
 
       pctype0->data[pctype0->size[0] * pctype->size[1]] = '\x00';
     } else {
-      b_flag = pctype0->size[0] * pctype0->size[1];
+      val = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1];
-      emxEnsureCapacity((emxArray__common *)pctype0, b_flag, (int)sizeof(char));
+      emxEnsureCapacity((emxArray__common *)pctype0, val, (int)sizeof(char));
       loop_ub = pctype->size[0] * pctype->size[1];
-      for (b_flag = 0; b_flag < loop_ub; b_flag++) {
-        pctype0->data[b_flag] = pctype->data[b_flag];
+      for (val = 0; val < loop_ub; val++) {
+        pctype0->data[val] = pctype->data[val];
       }
     }
 
     errCode = PCSetType(t_pc, &pctype0->data[0]);
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         ob_m2c_error(errCode);
       }
     }
@@ -2673,25 +2682,24 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
 
   if ((!(solver->size[1] == 0)) && ((unsigned char)solver->data[solver->size[1]
        - 1] != 0)) {
-    b_flag = pctype0->size[0] * pctype0->size[1];
+    val = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = solver->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)pctype0, b_flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)pctype0, val, (int)sizeof(char));
     loop_ub = solver->size[1];
-    for (b_flag = 0; b_flag < loop_ub; b_flag++) {
-      pctype0->data[pctype0->size[0] * b_flag] = solver->data[solver->size[0] *
-        b_flag];
+    for (val = 0; val < loop_ub; val++) {
+      pctype0->data[pctype0->size[0] * val] = solver->data[solver->size[0] * val];
     }
 
     pctype0->data[pctype0->size[0] * solver->size[1]] = '\x00';
   } else {
-    b_flag = pctype0->size[0] * pctype0->size[1];
+    val = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = solver->size[1];
-    emxEnsureCapacity((emxArray__common *)pctype0, b_flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)pctype0, val, (int)sizeof(char));
     loop_ub = solver->size[0] * solver->size[1];
-    for (b_flag = 0; b_flag < loop_ub; b_flag++) {
-      pctype0->data[b_flag] = solver->data[b_flag];
+    for (val = 0; val < loop_ub; val++) {
+      pctype0->data[val] = solver->data[val];
     }
   }
 
@@ -2699,18 +2707,18 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     errCode = KSPSetType(t_ksp, &pctype0->data[0]);
     if (errCode != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         nb_m2c_error(errCode);
       }
     }
   }
 
   emxFree_char_T(&pctype0);
-  b_flag = (PC_RIGHT);
-  errCode = KSPSetPCSide(t_ksp, b_flag);
+  val = (PC_RIGHT);
+  errCode = KSPSetPCSide(t_ksp, val);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       o_m2c_error(errCode);
     }
   }
@@ -2718,7 +2726,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       p_m2c_error(errCode);
     }
   }
@@ -2726,7 +2734,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       q_m2c_error(errCode);
     }
   }
@@ -2738,7 +2746,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = KSPDestroy(&t_ksp);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       hb_m2c_error(errCode);
     }
   }
@@ -2747,7 +2755,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = MatDestroy(&t_mat);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       ib_m2c_error(errCode);
     }
   }
@@ -2756,7 +2764,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2766,7 +2774,7 @@ void mptSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2788,7 +2796,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   Vec bVec;
   Vec t_vec_out;
   int errCode;
-  int b_flag;
+  boolean_T b_flag;
   int c_flag;
   double b_relres;
   int b_iter;
@@ -2799,7 +2807,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDuplicate(bVec, &t_vec_out);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       i_m2c_error(errCode);
     }
   }
@@ -2810,7 +2818,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = MatDestroy(&t_mat);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       ib_m2c_error(errCode);
     }
   }
@@ -2819,7 +2827,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }
@@ -2829,7 +2837,7 @@ void mptSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   errCode = VecDestroy(&t_vec);
   if (errCode != 0) {
     b_flag = (M2C_DEBUG);
-    if (b_flag != 0) {
+    if (b_flag) {
       jb_m2c_error(errCode);
     }
   }

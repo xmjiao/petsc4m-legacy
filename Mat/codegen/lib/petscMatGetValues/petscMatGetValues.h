@@ -32,8 +32,6 @@ extern void emxDestroyArray_int32_T(emxArray_int32_T *emxArray);
 extern void emxDestroyArray_real_T(emxArray_real_T *emxArray);
 extern void emxDestroyArray_uint8_T(emxArray_uint8_T *emxArray);
 extern void emxDestroy_struct0_T(struct0_T emxArray);
-extern void emxEnsureCapacity(emxArray__common *emxArray, int oldNumel, int
-  elementSize);
 extern void emxInitArray_int32_T(emxArray_int32_T **pEmxArray, int numDimensions);
 extern void emxInitArray_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 extern void emxInit_struct0_T(struct0_T *pStruct);

@@ -9,6 +9,8 @@ function [sz, toplevel] = petscGetSizeof(name)
 
 %#codegen -args {coder.typeof(char(0),[1,inf])}
 
+coder.cinclude('mpetsc.h');
+
 if isempty(coder.target)
     error('Function petscGetEnum must be compiled.');
 end

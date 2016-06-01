@@ -15,6 +15,7 @@ function type = PetscKSPType(arg, wrap) %#codegen
 % See also PetscPCType, PETSC_KSP*
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 if nargin==0 && isempty(coder.target)
     type = coder.typeof(char(0), [1, inf]);

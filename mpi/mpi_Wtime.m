@@ -12,7 +12,7 @@ function secs = mpi_Wtime
 % http://mpi.deino.net/mpi_functions/MPI_Wtime.html
 
 %#codegen -args {}
-
+coder.cinclude('mpetsc.h');
 
 secs = 0; %#ok<NASGU>
 secs = coder.ceval('MPI_Wtime');

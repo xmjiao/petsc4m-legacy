@@ -21,6 +21,7 @@ function [errCode, toplevel] = petscInitialize
 %#codegen -args {}
 
 errCode = int32(0); %#ok<NASGU>
+coder.cinclude('mpetsc.h');
 
 if ~isempty(coder.target)
     errCode = coder.ceval('PetscInitializeNoArguments');

@@ -14,5 +14,6 @@ function nullsp = PetscMatNullSpace(varargin) %#codegen
 % See also petscMatNullSpaceCreate
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 nullsp = m2c_opaque_obj('MatNullSpace', varargin{:});

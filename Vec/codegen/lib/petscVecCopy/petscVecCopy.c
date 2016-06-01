@@ -1,6 +1,6 @@
 #include "petscVecCopy.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
 static void emxFreeStruct_struct0_T(struct0_T *pStruct);
@@ -198,8 +198,8 @@ void petscVecCopy(const struct0_T *x, const struct0_T *y, int *errCode,
   *toplevel = false;
   emxFree_uint8_T(&data);
   if (*errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       b_m2c_error(*errCode);
     }
   }

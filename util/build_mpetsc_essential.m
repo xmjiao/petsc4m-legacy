@@ -5,20 +5,16 @@ mpetscroot = fileparts(which('startup_mpetsc'));
 curpath = pwd;
 cd(mpetscroot);
 
-try
-    opts = [{'-petsc', '-exe', '-exedir', 'exe', '-mex', ...
-        '-time', '{''mptKSPSetup'', ''mptKSPSolve''}'}, varargin{:}];
-    
+try    
     %Compile top-level functions for CRS and time top-level KSP functions
-    files = {'mptSolveCRS'};
     if exist('octave_config_info', 'builtin')
         mexdir = {};
     else
-        mexdir = {'-mexdir', 'mex'};
+        mexdir = {'mex'};
     end
-    for i=1:length(files)
-        m2c(opts{:}, mexdir{:}, files{i});
-    end
+    opts = [{'-petsc', '-exe', 'exe', '-mex'}, mexdir{:}, ...
+        '-time', '{''mptKSPSetup'', ''mptKSPSolve''}', varargin{:}];
+    m2c(opts{:}, 'mptSolveCRS');
     
     %Compile critical system-level functions into their own directory
     opts = [{'-petsc', '-O', '-mex'} varargin{:}];

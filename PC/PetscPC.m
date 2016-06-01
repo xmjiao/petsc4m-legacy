@@ -12,5 +12,6 @@ function pc = PetscPC(varargin) %#codegen
 % See also PetscPC
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 pc = m2c_opaque_obj('PC', varargin{:});

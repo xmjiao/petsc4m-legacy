@@ -12,12 +12,11 @@ function [finalized, errCode, toplevel] = petscFinalized
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscFinalized.html
 
 %#codegen -args {}
-
 finalized = int32(0);
 errCode = int32(-1);
 
 if ~isempty(coder.target)
-    coder.cinclude('petscsys.h');
+    coder.cinclude('mpetsc.h');
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('PetscFinalized', coder.wref(b));
     

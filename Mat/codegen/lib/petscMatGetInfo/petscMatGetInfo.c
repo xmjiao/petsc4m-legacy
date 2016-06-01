@@ -1,6 +1,6 @@
 #include "petscMatGetInfo.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
 static void c_m2c_error(int varargin_3, unsigned int varargin_4);
@@ -149,8 +149,8 @@ void petscMatGetInfo(const struct0_T *mat, int flag, MPetscMatInfo *info, int
 
   nbytes = sizeof(t_info);
   if (80U < nbytes) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       c_m2c_error(10, nbytes >> 3U);
     }
   }
@@ -241,16 +241,16 @@ void petscMatGetInfo_Local(const struct0_T *mat, MPetscMatInfo *info, int
   *errCode = MatGetInfo(t_mat, flag, &t_info);
   emxFree_uint8_T(&data);
   if (*errCode != 0) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       b_m2c_error(*errCode);
     }
   }
 
   nbytes = sizeof(t_info);
   if (80U < nbytes) {
-    flag = (M2C_DEBUG);
-    if (flag != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       c_m2c_error(10, nbytes >> 3U);
     }
   }

@@ -1,6 +1,6 @@
 #include "petscMatGetValues.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
 static void emxFreeStruct_struct0_T(struct0_T *pStruct);
@@ -72,7 +72,7 @@ int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
   boolean_T b_p;
   int k;
   int exitg2;
-  int i3;
+  int i2;
   boolean_T exitg1;
   emxArray_char_T *b_mat;
   static const char cv1[3] = { 'M', 'a', 't' };
@@ -85,8 +85,8 @@ int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
   do {
     exitg2 = 0;
     if (k < 2) {
-      i3 = mat->type->size[k];
-      if (i3 != (k << 1) + 1) {
+      i2 = mat->type->size[k];
+      if (i2 != (k << 1) + 1) {
         exitg2 = 1;
       } else {
         k++;
@@ -117,13 +117,13 @@ int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
 
   if (!p) {
     emxInit_char_T(&b_mat, 2);
-    i3 = b_mat->size[0] * b_mat->size[1];
+    i2 = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat, i3, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_mat, i2, (int)sizeof(char));
     k = mat->type->size[1];
-    for (i3 = 0; i3 < k; i3++) {
-      b_mat->data[b_mat->size[0] * i3] = mat->type->data[mat->type->size[0] * i3];
+    for (i2 = 0; i2 < k; i2++) {
+      b_mat->data[b_mat->size[0] * i2] = mat->type->data[mat->type->size[0] * i2];
     }
 
     b_mat->data[b_mat->size[0] * mat->type->size[1]] = '\x00';
@@ -132,12 +132,12 @@ int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
   }
 
   emxInit_uint8_T(&data, 1);
-  i3 = data->size[0];
+  i2 = data->size[0];
   data->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i3, (int)sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data, i2, (int)sizeof(unsigned char));
   k = mat->data->size[0];
-  for (i3 = 0; i3 < k; i3++) {
-    data->data[i3] = mat->data->data[i3];
+  for (i2 = 0; i2 < k; i2++) {
+    data->data[i2] = mat->data->data[i2];
   }
 
   t_mat = *(Mat*)(&data->data[0]);

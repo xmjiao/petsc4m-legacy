@@ -23,6 +23,7 @@ function output = PetscVecArray(varargin) %#codegen
 % See also PetscVec, m2c_opaque_array
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 if nargin==1 && isnumeric(varargin{1})
     output = m2c_opaque_array('Vec', varargin{1}, petscGetSizeof('PetscVec'));

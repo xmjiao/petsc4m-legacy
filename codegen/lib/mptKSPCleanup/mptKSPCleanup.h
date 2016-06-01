@@ -19,8 +19,6 @@ extern emxArray_char_T *emxCreate_char_T(int rows, int cols);
 extern emxArray_uint8_T *emxCreate_uint8_T(int rows, int cols);
 extern void emxDestroyArray_char_T(emxArray_char_T *emxArray);
 extern void emxDestroyArray_uint8_T(emxArray_uint8_T *emxArray);
-extern void emxDestroy_struct0_T(struct0_T emxArray);
-extern void emxInit_struct0_T(struct0_T *pStruct);
 extern boolean_T mptKSPCleanup(struct0_T *ksp);
 extern void mptKSPCleanup_initialize(void);
 extern void mptKSPCleanup_terminate(void);

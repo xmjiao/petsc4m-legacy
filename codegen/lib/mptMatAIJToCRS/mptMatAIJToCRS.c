@@ -1,6 +1,6 @@
 #include "mptMatAIJToCRS.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
 static void c_m2c_error(int varargin_3);
@@ -133,6 +133,7 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
   int exitg4;
   boolean_T exitg3;
   emxArray_char_T *c_mat;
+  int flag;
   MatInfo t_info;
   unsigned int nbytes;
   MPetscMatInfo info;
@@ -214,8 +215,8 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
   t_mat = *(Mat*)(&data->data[0]);
   errCode = MatGetOwnershipRange(t_mat, &first_row, &last_row);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       b_m2c_error(errCode);
     }
   }
@@ -282,19 +283,19 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
   }
 
   t_mat = *(Mat*)(&data->data[0]);
-  k = (MAT_LOCAL);
-  errCode = MatGetInfo(t_mat, k, &t_info);
+  flag = (MAT_LOCAL);
+  errCode = MatGetInfo(t_mat, flag, &t_info);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       c_m2c_error(errCode);
     }
   }
 
   nbytes = sizeof(t_info);
   if (80U < nbytes) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       d_m2c_error(10, nbytes >> 3U);
     }
   }
@@ -380,8 +381,8 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
     t_ncols = 0;
     errCode = MatGetRow(t_mat, b_row, &t_ncols, &t_cols, &t_vals);
     if (errCode != 0) {
-      k = (M2C_DEBUG);
-      if (k != 0) {
+      p = (M2C_DEBUG);
+      if (p) {
         e_m2c_error(errCode);
       }
     }
@@ -397,8 +398,8 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
     memcpy(&row_vals->data[0], t_vals, t_ncols << 3);
     errCode = MatRestoreRow(t_mat, b_row, &t_ncols, &t_cols, &t_vals);
     if (errCode != 0) {
-      k = (M2C_DEBUG);
-      if (k != 0) {
+      p = (M2C_DEBUG);
+      if (p) {
         f_m2c_error(errCode);
       }
     }

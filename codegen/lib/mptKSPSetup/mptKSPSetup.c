@@ -1,6 +1,6 @@
 #include "mptKSPSetup.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
 static void c_m2c_error(int varargin_3);
@@ -44,16 +44,16 @@ static void d_m2c_error(int varargin_3)
 static void e_m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i4;
+  int i5;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i4 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i5 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i4, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i5, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i4 = 0; i4 < loop_ub; i4++) {
-    b_varargin_3->data[i4] = varargin_3->data[i4];
+  for (i5 = 0; i5 < loop_ub; i5++) {
+    b_varargin_3->data[i5] = varargin_3->data[i5];
   }
 
   M2C_error("MPI:RuntimeError", "MPI_Barrier failed with error message %s\n",
@@ -92,16 +92,16 @@ static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions)
 static void f_m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i5;
+  int i6;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i5 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i6 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i5, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i6, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i5 = 0; i5 < loop_ub; i5++) {
-    b_varargin_3->data[i5] = varargin_3->data[i5];
+  for (i6 = 0; i6 < loop_ub; i6++) {
+    b_varargin_3->data[i6] = varargin_3->data[i6];
   }
 
   M2C_error("m2c_opaque_obj:WrongInput",
@@ -227,17 +227,18 @@ static void mpi_Barrier(MPI_Comm comm)
   int info;
   emxArray_uint8_T *varargin_1;
   emxArray_char_T *b_varargin_1;
-  int flag;
+  boolean_T flag;
   unsigned char msg0[1024];
   char * ptr;
   int resultlen;
   int loop_ub;
+  int i4;
   info = MPI_Barrier(comm);
   emxInit_uint8_T1(&varargin_1, 2);
   emxInit_char_T(&b_varargin_1, 2);
   if (info != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       memset(&msg0[0], 0, sizeof(unsigned char) << 10);
       ptr = (char *)(msg0);
       resultlen = 0;
@@ -248,29 +249,29 @@ static void mpi_Barrier(MPI_Comm comm)
         loop_ub = resultlen;
       }
 
-      flag = varargin_1->size[0] * varargin_1->size[1];
+      i4 = varargin_1->size[0] * varargin_1->size[1];
       varargin_1->size[0] = 1;
       varargin_1->size[1] = loop_ub;
-      emxEnsureCapacity((emxArray__common *)varargin_1, flag, (int)sizeof
-                        (unsigned char));
-      for (flag = 0; flag < loop_ub; flag++) {
-        varargin_1->data[varargin_1->size[0] * flag] = msg0[flag];
+      emxEnsureCapacity((emxArray__common *)varargin_1, i4, (int)sizeof(unsigned
+        char));
+      for (i4 = 0; i4 < loop_ub; i4++) {
+        varargin_1->data[varargin_1->size[0] * i4] = msg0[i4];
       }
 
       if (info != 0) {
         flag = (M2C_DEBUG);
-        if (flag != 0) {
+        if (flag) {
           d_m2c_error(info);
         }
       }
 
-      flag = b_varargin_1->size[0] * b_varargin_1->size[1];
+      i4 = b_varargin_1->size[0] * b_varargin_1->size[1];
       b_varargin_1->size[0] = 1;
       b_varargin_1->size[1] = (short)loop_ub;
-      emxEnsureCapacity((emxArray__common *)b_varargin_1, flag, (int)sizeof(char));
+      emxEnsureCapacity((emxArray__common *)b_varargin_1, i4, (int)sizeof(char));
       loop_ub = (short)loop_ub;
-      for (flag = 0; flag < loop_ub; flag++) {
-        b_varargin_1->data[flag] = (signed char)varargin_1->data[flag];
+      for (i4 = 0; i4 < loop_ub; i4++) {
+        b_varargin_1->data[i4] = (signed char)varargin_1->data[i4];
       }
 
       e_m2c_error(b_varargin_1);
@@ -498,8 +499,8 @@ static MPI_Comm petscObjectGetComm(const emxArray_uint8_T *obj_data, const
   comm = t_comm;
   emxFree_uint8_T(&data);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       b_m2c_error(errCode);
     }
   }
@@ -529,16 +530,17 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   MPI_Comm varargin_1;
   KSP t_ksp;
   int errCode;
-  int k;
+  boolean_T flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
   double t;
   emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
   int i0;
+  int k;
   Mat c_Amat;
   boolean_T p;
-  boolean_T b_p;
+  boolean_T b0;
   emxArray_char_T *pctype0;
   PC t_pc;
   int exitg6;
@@ -563,8 +565,8 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   varargin_1 = petscObjectGetComm(Amat->data, Amat->type);
   errCode = KSPCreate(varargin_1, &t_ksp);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
@@ -572,8 +574,8 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   t_obj = (PetscObject)(t_ksp);
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       b_m2c_error(errCode);
     }
   }
@@ -609,20 +611,20 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   c_Amat = *(Mat*)(&data0->data[0]);
   errCode = KSPSetOperators(t_ksp, c_Amat, c_Amat);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       g_m2c_error(errCode);
     }
   }
 
   p = !(pctype->size[1] == 0);
-  b_p = !(pcopt->size[1] == 0);
+  b0 = !(pcopt->size[1] == 0);
   emxInit_char_T(&pctype0, 2);
-  if (p || b_p) {
+  if (p || b0) {
     errCode = KSPGetPC(t_ksp, &t_pc);
     if (errCode != 0) {
-      k = (M2C_DEBUG);
-      if (k != 0) {
+      flag = (M2C_DEBUG);
+      if (flag) {
         h_m2c_error(errCode);
       }
     }
@@ -653,16 +655,16 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
 
       errCode = PCSetType(t_pc, &pctype0->data[0]);
       if (errCode != 0) {
-        k = (M2C_DEBUG);
-        if (k != 0) {
+        flag = (M2C_DEBUG);
+        if (flag) {
           i_m2c_error(errCode);
         }
       }
     }
 
-    if (b_p) {
+    if (b0) {
+      flag = false;
       p = false;
-      b_p = false;
       k = 0;
       do {
         exitg6 = 0;
@@ -674,17 +676,17 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
             k++;
           }
         } else {
-          b_p = true;
+          p = true;
           exitg6 = 1;
         }
       } while (exitg6 == 0);
 
-      if (b_p && (!(pcopt->size[1] == 0))) {
+      if (p && (!(pcopt->size[1] == 0))) {
         k = 0;
         exitg5 = false;
         while ((!exitg5) && (k < 4)) {
           if (!(pcopt->data[k] == cv0[k])) {
-            b_p = false;
+            p = false;
             exitg5 = true;
           } else {
             k++;
@@ -692,23 +694,23 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
         }
       }
 
-      if (!b_p) {
+      if (!p) {
       } else {
-        p = true;
+        flag = true;
       }
 
-      if (p) {
+      if (flag) {
         k = (PC_LEFT);
         errCode = KSPSetPCSide(t_ksp, k);
         if (errCode != 0) {
-          k = (M2C_DEBUG);
-          if (k != 0) {
+          flag = (M2C_DEBUG);
+          if (flag) {
             j_m2c_error(errCode);
           }
         }
       } else {
+        flag = false;
         p = false;
-        b_p = false;
         k = 0;
         do {
           exitg4 = 0;
@@ -720,17 +722,17 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
               k++;
             }
           } else {
-            b_p = true;
+            p = true;
             exitg4 = 1;
           }
         } while (exitg4 == 0);
 
-        if (b_p && (!(pcopt->size[1] == 0))) {
+        if (p && (!(pcopt->size[1] == 0))) {
           k = 0;
           exitg3 = false;
           while ((!exitg3) && (k < 5)) {
             if (!(pcopt->data[k] == cv2[k])) {
-              b_p = false;
+              p = false;
               exitg3 = true;
             } else {
               k++;
@@ -738,23 +740,23 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
           }
         }
 
-        if (!b_p) {
+        if (!p) {
         } else {
-          p = true;
+          flag = true;
         }
 
-        if (p) {
+        if (flag) {
           k = (PC_RIGHT);
           errCode = KSPSetPCSide(t_ksp, k);
           if (errCode != 0) {
-            k = (M2C_DEBUG);
-            if (k != 0) {
+            flag = (M2C_DEBUG);
+            if (flag) {
               j_m2c_error(errCode);
             }
           }
         } else {
+          flag = false;
           p = false;
-          b_p = false;
           k = 0;
           do {
             exitg2 = 0;
@@ -766,17 +768,17 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
                 k++;
               }
             } else {
-              b_p = true;
+              p = true;
               exitg2 = 1;
             }
           } while (exitg2 == 0);
 
-          if (b_p && (!(pcopt->size[1] == 0))) {
+          if (p && (!(pcopt->size[1] == 0))) {
             k = 0;
             exitg1 = false;
             while ((!exitg1) && (k < 9)) {
               if (!(pcopt->data[k] == cv3[k])) {
-                b_p = false;
+                p = false;
                 exitg1 = true;
               } else {
                 k++;
@@ -784,17 +786,17 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
             }
           }
 
-          if (!b_p) {
+          if (!p) {
           } else {
-            p = true;
+            flag = true;
           }
 
-          if (p) {
+          if (flag) {
             k = (PC_SYMMETRIC);
             errCode = KSPSetPCSide(t_ksp, k);
             if (errCode != 0) {
-              k = (M2C_DEBUG);
-              if (k != 0) {
+              flag = (M2C_DEBUG);
+              if (flag) {
                 j_m2c_error(errCode);
               }
             }
@@ -826,8 +828,8 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
 
             errCode = PCFactorSetMatSolverPackage(t_pc, &pctype0->data[0]);
             if (errCode != 0) {
-              k = (M2C_DEBUG);
-              if (k != 0) {
+              flag = (M2C_DEBUG);
+              if (flag) {
                 k_m2c_error(errCode);
               }
             }
@@ -863,8 +865,8 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
   if (!(pctype0->size[1] == 0)) {
     errCode = KSPSetType(t_ksp, &pctype0->data[0]);
     if (errCode != 0) {
-      k = (M2C_DEBUG);
-      if (k != 0) {
+      flag = (M2C_DEBUG);
+      if (flag) {
         l_m2c_error(errCode);
       }
     }
@@ -875,8 +877,8 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
     k = (PC_RIGHT);
     errCode = KSPSetPCSide(t_ksp, k);
     if (errCode != 0) {
-      k = (M2C_DEBUG);
-      if (k != 0) {
+      flag = (M2C_DEBUG);
+      if (flag) {
         j_m2c_error(errCode);
       }
     }
@@ -884,16 +886,16 @@ void mptKSPSetup(const struct0_T *Amat, const emxArray_char_T *ksptype, const
 
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       m_m2c_error(errCode);
     }
   }
 
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       n_m2c_error(errCode);
     }
   }
@@ -941,12 +943,13 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   MPI_Comm varargin_1;
   KSP t_ksp;
   int errCode;
-  int flag;
+  boolean_T flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
   double t;
   emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
+  int val;
   int loop_ub;
   Mat c_Amat;
   double secs;
@@ -960,7 +963,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   errCode = KSPCreate(varargin_1, &t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
@@ -969,7 +972,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       b_m2c_error(errCode);
     }
   }
@@ -978,14 +981,14 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   t = MPI_Wtime();
   if (!isequal(Amat->type)) {
     emxInit_char_T(&b_Amat, 2);
-    flag = b_Amat->size[0] * b_Amat->size[1];
+    val = b_Amat->size[0] * b_Amat->size[1];
     b_Amat->size[0] = 1;
     b_Amat->size[1] = Amat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_Amat, flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_Amat, val, (int)sizeof(char));
     loop_ub = Amat->type->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      b_Amat->data[b_Amat->size[0] * flag] = Amat->type->data[Amat->type->size[0]
-        * flag];
+    for (val = 0; val < loop_ub; val++) {
+      b_Amat->data[b_Amat->size[0] * val] = Amat->type->data[Amat->type->size[0]
+        * val];
     }
 
     b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
@@ -994,28 +997,28 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   }
 
   emxInit_uint8_T(&data0, 1);
-  flag = data0->size[0];
+  val = data0->size[0];
   data0->size[0] = Amat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, val, (int)sizeof(unsigned char));
   loop_ub = Amat->data->size[0];
-  for (flag = 0; flag < loop_ub; flag++) {
-    data0->data[flag] = Amat->data->data[flag];
+  for (val = 0; val < loop_ub; val++) {
+    data0->data[val] = Amat->data->data[val];
   }
 
   c_Amat = *(Mat*)(&data0->data[0]);
   errCode = KSPSetOperators(t_ksp, c_Amat, c_Amat);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       g_m2c_error(errCode);
     }
   }
 
-  flag = (PC_RIGHT);
-  errCode = KSPSetPCSide(t_ksp, flag);
+  val = (PC_RIGHT);
+  errCode = KSPSetPCSide(t_ksp, val);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       j_m2c_error(errCode);
     }
   }
@@ -1023,7 +1026,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       m_m2c_error(errCode);
     }
   }
@@ -1031,7 +1034,7 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       n_m2c_error(errCode);
     }
   }
@@ -1039,29 +1042,29 @@ void mptKSPSetup_1arg(const struct0_T *Amat, struct0_T *ksp, double *time,
   mpi_Barrier(t_comm);
   secs = MPI_Wtime();
   sizepe = sizeof(KSP);
-  flag = data0->size[0];
+  val = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
-  for (flag = 0; flag < 3; flag++) {
-    t2_type[flag] = cv9[flag];
+  emxEnsureCapacity((emxArray__common *)data0, val, (int)sizeof(unsigned char));
+  for (val = 0; val < 3; val++) {
+    t2_type[val] = cv9[val];
   }
 
-  flag = ksp->data->size[0];
+  val = ksp->data->size[0];
   ksp->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)ksp->data, flag, (int)sizeof(unsigned
+  emxEnsureCapacity((emxArray__common *)ksp->data, val, (int)sizeof(unsigned
     char));
   loop_ub = data0->size[0];
-  for (flag = 0; flag < loop_ub; flag++) {
-    ksp->data->data[flag] = data0->data[flag];
+  for (val = 0; val < loop_ub; val++) {
+    ksp->data->data[val] = data0->data[val];
   }
 
   emxFree_uint8_T(&data0);
-  flag = ksp->type->size[0] * ksp->type->size[1];
+  val = ksp->type->size[0] * ksp->type->size[1];
   ksp->type->size[0] = 1;
   ksp->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)ksp->type, flag, (int)sizeof(char));
-  for (flag = 0; flag < 3; flag++) {
-    ksp->type->data[flag] = t2_type[flag];
+  emxEnsureCapacity((emxArray__common *)ksp->type, val, (int)sizeof(char));
+  for (val = 0; val < 3; val++) {
+    ksp->type->data[val] = t2_type[val];
   }
 
   ksp->nitems = 1;
@@ -1081,12 +1084,13 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   MPI_Comm varargin_1;
   KSP t_ksp;
   int errCode;
-  int flag;
+  boolean_T flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
   double t;
   emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
+  int val;
   int loop_ub;
   Mat c_Amat;
   emxArray_char_T *ksptype0;
@@ -1101,7 +1105,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   errCode = KSPCreate(varargin_1, &t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
@@ -1110,7 +1114,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       b_m2c_error(errCode);
     }
   }
@@ -1119,14 +1123,14 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   t = MPI_Wtime();
   if (!isequal(Amat->type)) {
     emxInit_char_T(&b_Amat, 2);
-    flag = b_Amat->size[0] * b_Amat->size[1];
+    val = b_Amat->size[0] * b_Amat->size[1];
     b_Amat->size[0] = 1;
     b_Amat->size[1] = Amat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_Amat, flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_Amat, val, (int)sizeof(char));
     loop_ub = Amat->type->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      b_Amat->data[b_Amat->size[0] * flag] = Amat->type->data[Amat->type->size[0]
-        * flag];
+    for (val = 0; val < loop_ub; val++) {
+      b_Amat->data[b_Amat->size[0] * val] = Amat->type->data[Amat->type->size[0]
+        * val];
     }
 
     b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
@@ -1135,19 +1139,19 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   }
 
   emxInit_uint8_T(&data0, 1);
-  flag = data0->size[0];
+  val = data0->size[0];
   data0->size[0] = Amat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, val, (int)sizeof(unsigned char));
   loop_ub = Amat->data->size[0];
-  for (flag = 0; flag < loop_ub; flag++) {
-    data0->data[flag] = Amat->data->data[flag];
+  for (val = 0; val < loop_ub; val++) {
+    data0->data[val] = Amat->data->data[val];
   }
 
   c_Amat = *(Mat*)(&data0->data[0]);
   errCode = KSPSetOperators(t_ksp, c_Amat, c_Amat);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       g_m2c_error(errCode);
     }
   }
@@ -1155,25 +1159,25 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   emxInit_char_T(&ksptype0, 2);
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
        [1] - 1] != 0)) {
-    flag = ksptype0->size[0] * ksptype0->size[1];
+    val = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = ksptype->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)ksptype0, flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)ksptype0, val, (int)sizeof(char));
     loop_ub = ksptype->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      ksptype0->data[ksptype0->size[0] * flag] = ksptype->data[ksptype->size[0] *
-        flag];
+    for (val = 0; val < loop_ub; val++) {
+      ksptype0->data[ksptype0->size[0] * val] = ksptype->data[ksptype->size[0] *
+        val];
     }
 
     ksptype0->data[ksptype0->size[0] * ksptype->size[1]] = '\x00';
   } else {
-    flag = ksptype0->size[0] * ksptype0->size[1];
+    val = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = ksptype->size[1];
-    emxEnsureCapacity((emxArray__common *)ksptype0, flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)ksptype0, val, (int)sizeof(char));
     loop_ub = ksptype->size[0] * ksptype->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      ksptype0->data[flag] = ksptype->data[flag];
+    for (val = 0; val < loop_ub; val++) {
+      ksptype0->data[val] = ksptype->data[val];
     }
   }
 
@@ -1181,18 +1185,18 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     errCode = KSPSetType(t_ksp, &ksptype0->data[0]);
     if (errCode != 0) {
       flag = (M2C_DEBUG);
-      if (flag != 0) {
+      if (flag) {
         l_m2c_error(errCode);
       }
     }
   }
 
   emxFree_char_T(&ksptype0);
-  flag = (PC_RIGHT);
-  errCode = KSPSetPCSide(t_ksp, flag);
+  val = (PC_RIGHT);
+  errCode = KSPSetPCSide(t_ksp, val);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       j_m2c_error(errCode);
     }
   }
@@ -1200,7 +1204,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       m_m2c_error(errCode);
     }
   }
@@ -1208,7 +1212,7 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       n_m2c_error(errCode);
     }
   }
@@ -1216,29 +1220,29 @@ void mptKSPSetup_2args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   mpi_Barrier(t_comm);
   secs = MPI_Wtime();
   sizepe = sizeof(KSP);
-  flag = data0->size[0];
+  val = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
-  for (flag = 0; flag < 3; flag++) {
-    t1_type[flag] = cv10[flag];
+  emxEnsureCapacity((emxArray__common *)data0, val, (int)sizeof(unsigned char));
+  for (val = 0; val < 3; val++) {
+    t1_type[val] = cv10[val];
   }
 
-  flag = ksp->data->size[0];
+  val = ksp->data->size[0];
   ksp->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)ksp->data, flag, (int)sizeof(unsigned
+  emxEnsureCapacity((emxArray__common *)ksp->data, val, (int)sizeof(unsigned
     char));
   loop_ub = data0->size[0];
-  for (flag = 0; flag < loop_ub; flag++) {
-    ksp->data->data[flag] = data0->data[flag];
+  for (val = 0; val < loop_ub; val++) {
+    ksp->data->data[val] = data0->data[val];
   }
 
   emxFree_uint8_T(&data0);
-  flag = ksp->type->size[0] * ksp->type->size[1];
+  val = ksp->type->size[0] * ksp->type->size[1];
   ksp->type->size[0] = 1;
   ksp->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)ksp->type, flag, (int)sizeof(char));
-  for (flag = 0; flag < 3; flag++) {
-    ksp->type->data[flag] = t1_type[flag];
+  emxEnsureCapacity((emxArray__common *)ksp->type, val, (int)sizeof(char));
+  for (val = 0; val < 3; val++) {
+    ksp->type->data[val] = t1_type[val];
   }
 
   ksp->nitems = 1;
@@ -1259,15 +1263,15 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   MPI_Comm varargin_1;
   KSP t_ksp;
   int errCode;
-  int flag;
+  boolean_T flag;
   PetscObject t_obj;
   MPI_Comm t_comm;
   double t;
   emxArray_char_T *b_Amat;
   emxArray_uint8_T *data0;
+  int val;
   int loop_ub;
   Mat c_Amat;
-  boolean_T b0;
   emxArray_char_T *pctype0;
   PC t_pc;
   double secs;
@@ -1281,7 +1285,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   errCode = KSPCreate(varargin_1, &t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
@@ -1290,7 +1294,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   errCode = PetscObjectGetComm(t_obj, &t_comm);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       b_m2c_error(errCode);
     }
   }
@@ -1299,14 +1303,14 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   t = MPI_Wtime();
   if (!isequal(Amat->type)) {
     emxInit_char_T(&b_Amat, 2);
-    flag = b_Amat->size[0] * b_Amat->size[1];
+    val = b_Amat->size[0] * b_Amat->size[1];
     b_Amat->size[0] = 1;
     b_Amat->size[1] = Amat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_Amat, flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_Amat, val, (int)sizeof(char));
     loop_ub = Amat->type->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      b_Amat->data[b_Amat->size[0] * flag] = Amat->type->data[Amat->type->size[0]
-        * flag];
+    for (val = 0; val < loop_ub; val++) {
+      b_Amat->data[b_Amat->size[0] * val] = Amat->type->data[Amat->type->size[0]
+        * val];
     }
 
     b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
@@ -1315,61 +1319,61 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   }
 
   emxInit_uint8_T(&data0, 1);
-  flag = data0->size[0];
+  val = data0->size[0];
   data0->size[0] = Amat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, val, (int)sizeof(unsigned char));
   loop_ub = Amat->data->size[0];
-  for (flag = 0; flag < loop_ub; flag++) {
-    data0->data[flag] = Amat->data->data[flag];
+  for (val = 0; val < loop_ub; val++) {
+    data0->data[val] = Amat->data->data[val];
   }
 
   c_Amat = *(Mat*)(&data0->data[0]);
   errCode = KSPSetOperators(t_ksp, c_Amat, c_Amat);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       g_m2c_error(errCode);
     }
   }
 
-  b0 = !(pctype->size[1] == 0);
+  flag = !(pctype->size[1] == 0);
   emxInit_char_T(&pctype0, 2);
-  if (b0) {
+  if (flag) {
     errCode = KSPGetPC(t_ksp, &t_pc);
     if (errCode != 0) {
       flag = (M2C_DEBUG);
-      if (flag != 0) {
+      if (flag) {
         h_m2c_error(errCode);
       }
     }
 
     if (pctype->data[pctype->size[1] - 1] != '\x00') {
-      flag = pctype0->size[0] * pctype0->size[1];
+      val = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1] + 1;
-      emxEnsureCapacity((emxArray__common *)pctype0, flag, (int)sizeof(char));
+      emxEnsureCapacity((emxArray__common *)pctype0, val, (int)sizeof(char));
       loop_ub = pctype->size[1];
-      for (flag = 0; flag < loop_ub; flag++) {
-        pctype0->data[pctype0->size[0] * flag] = pctype->data[pctype->size[0] *
-          flag];
+      for (val = 0; val < loop_ub; val++) {
+        pctype0->data[pctype0->size[0] * val] = pctype->data[pctype->size[0] *
+          val];
       }
 
       pctype0->data[pctype0->size[0] * pctype->size[1]] = '\x00';
     } else {
-      flag = pctype0->size[0] * pctype0->size[1];
+      val = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1];
-      emxEnsureCapacity((emxArray__common *)pctype0, flag, (int)sizeof(char));
+      emxEnsureCapacity((emxArray__common *)pctype0, val, (int)sizeof(char));
       loop_ub = pctype->size[0] * pctype->size[1];
-      for (flag = 0; flag < loop_ub; flag++) {
-        pctype0->data[flag] = pctype->data[flag];
+      for (val = 0; val < loop_ub; val++) {
+        pctype0->data[val] = pctype->data[val];
       }
     }
 
     errCode = PCSetType(t_pc, &pctype0->data[0]);
     if (errCode != 0) {
       flag = (M2C_DEBUG);
-      if (flag != 0) {
+      if (flag) {
         i_m2c_error(errCode);
       }
     }
@@ -1377,25 +1381,25 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
 
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
        [1] - 1] != 0)) {
-    flag = pctype0->size[0] * pctype0->size[1];
+    val = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)pctype0, flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)pctype0, val, (int)sizeof(char));
     loop_ub = ksptype->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      pctype0->data[pctype0->size[0] * flag] = ksptype->data[ksptype->size[0] *
-        flag];
+    for (val = 0; val < loop_ub; val++) {
+      pctype0->data[pctype0->size[0] * val] = ksptype->data[ksptype->size[0] *
+        val];
     }
 
     pctype0->data[pctype0->size[0] * ksptype->size[1]] = '\x00';
   } else {
-    flag = pctype0->size[0] * pctype0->size[1];
+    val = pctype0->size[0] * pctype0->size[1];
     pctype0->size[0] = 1;
     pctype0->size[1] = ksptype->size[1];
-    emxEnsureCapacity((emxArray__common *)pctype0, flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)pctype0, val, (int)sizeof(char));
     loop_ub = ksptype->size[0] * ksptype->size[1];
-    for (flag = 0; flag < loop_ub; flag++) {
-      pctype0->data[flag] = ksptype->data[flag];
+    for (val = 0; val < loop_ub; val++) {
+      pctype0->data[val] = ksptype->data[val];
     }
   }
 
@@ -1403,18 +1407,18 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
     errCode = KSPSetType(t_ksp, &pctype0->data[0]);
     if (errCode != 0) {
       flag = (M2C_DEBUG);
-      if (flag != 0) {
+      if (flag) {
         l_m2c_error(errCode);
       }
     }
   }
 
   emxFree_char_T(&pctype0);
-  flag = (PC_RIGHT);
-  errCode = KSPSetPCSide(t_ksp, flag);
+  val = (PC_RIGHT);
+  errCode = KSPSetPCSide(t_ksp, val);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       j_m2c_error(errCode);
     }
   }
@@ -1422,7 +1426,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   errCode = KSPSetFromOptions(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       m_m2c_error(errCode);
     }
   }
@@ -1430,7 +1434,7 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   errCode = KSPSetUp(t_ksp);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
-    if (flag != 0) {
+    if (flag) {
       n_m2c_error(errCode);
     }
   }
@@ -1438,29 +1442,29 @@ void mptKSPSetup_3args(const struct0_T *Amat, const emxArray_char_T *ksptype,
   mpi_Barrier(t_comm);
   secs = MPI_Wtime();
   sizepe = sizeof(KSP);
-  flag = data0->size[0];
+  val = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, flag, (int)sizeof(unsigned char));
-  for (flag = 0; flag < 3; flag++) {
-    t0_type[flag] = cv11[flag];
+  emxEnsureCapacity((emxArray__common *)data0, val, (int)sizeof(unsigned char));
+  for (val = 0; val < 3; val++) {
+    t0_type[val] = cv11[val];
   }
 
-  flag = ksp->data->size[0];
+  val = ksp->data->size[0];
   ksp->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)ksp->data, flag, (int)sizeof(unsigned
+  emxEnsureCapacity((emxArray__common *)ksp->data, val, (int)sizeof(unsigned
     char));
   loop_ub = data0->size[0];
-  for (flag = 0; flag < loop_ub; flag++) {
-    ksp->data->data[flag] = data0->data[flag];
+  for (val = 0; val < loop_ub; val++) {
+    ksp->data->data[val] = data0->data[val];
   }
 
   emxFree_uint8_T(&data0);
-  flag = ksp->type->size[0] * ksp->type->size[1];
+  val = ksp->type->size[0] * ksp->type->size[1];
   ksp->type->size[0] = 1;
   ksp->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)ksp->type, flag, (int)sizeof(char));
-  for (flag = 0; flag < 3; flag++) {
-    ksp->type->data[flag] = t0_type[flag];
+  emxEnsureCapacity((emxArray__common *)ksp->type, val, (int)sizeof(char));
+  for (val = 0; val < 3; val++) {
+    ksp->type->data[val] = t0_type[val];
   }
 
   ksp->nitems = 1;

@@ -1,4 +1,3 @@
-*.o
 *~
 *.dll
 *.bak
@@ -9,6 +8,7 @@
 *.cgns
 *.exe
 *.exe.dSYM
+*.o
 *.d
 *.so
 *.7z
@@ -42,6 +42,8 @@ octave-core
 **/codegen/lib/*/oct_*.m
 **/codegen/lib/*/build_*_exe.m
 **/codegen/lib/*/html
+**/codegen/lib/*/examples
+**/codegen/lib/*/interface
 *.html
 run_*_exe.m
 octave-core

@@ -1,27 +1,13 @@
 #include "mptKSPCleanup.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
-static void emxFreeStruct_struct0_T(struct0_T *pStruct);
-static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
   M2C_error("petsc:RuntimeError", "KSPDestroy returned error code %d\n",
             varargin_3);
-}
-
-static void emxFreeStruct_struct0_T(struct0_T *pStruct)
-{
-  emxFree_uint8_T(&pStruct->data);
-  emxFree_char_T(&pStruct->type);
-}
-
-static void emxInitStruct_struct0_T(struct0_T *pStruct)
-{
-  emxInit_uint8_T(&pStruct->data, 1);
-  emxInit_char_T(&pStruct->type, 2);
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
@@ -42,16 +28,6 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   M2C_error("m2c_opaque_obj:WrongInput",
             "Incorrect data type %s. Expected KSP.\n", &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
-}
-
-void emxDestroy_struct0_T(struct0_T emxArray)
-{
-  emxFreeStruct_struct0_T(&emxArray);
-}
-
-void emxInit_struct0_T(struct0_T *pStruct)
-{
-  emxInitStruct_struct0_T(pStruct);
 }
 
 boolean_T mptKSPCleanup(struct0_T *ksp)
@@ -139,8 +115,8 @@ boolean_T mptKSPCleanup(struct0_T *ksp)
   t_ksp = *(KSP*)(&data0->data[0]);
   errCode = KSPDestroy(&t_ksp);
   if (errCode != 0) {
-    k = (M2C_DEBUG);
-    if (k != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       b_m2c_error(errCode);
     }
   }

@@ -15,6 +15,7 @@ function type = PetscVecType(arg, wrap) %#codegen
 % See also PetscMatType
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 if nargin==0 && isempty(coder.target)
     type = coder.typeof(char(0), [1, inf]);

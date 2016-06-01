@@ -20,7 +20,7 @@ function [errCode, toplevel] = petscFinalize
 errCode = int32(-1);
 
 if ~isempty(coder.target)
-    coder.cinclude('petscsys.h');
+    coder.cinclude('mpetsc.h');
     errCode = coder.ceval('PetscFinalize');
 
     toplevel = nargout>1;

@@ -1,6 +1,6 @@
 #include "mptVecToArray.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 #ifndef struct_emxArray_int32_T
 #define struct_emxArray_int32_T
@@ -227,8 +227,8 @@ void mptVecToArray(const struct0_T *vec, emxArray_real_T *arr)
   t_vec = *(Vec*)(&data->data[0]);
   errCode = VecGetLocalSize(t_vec, &n);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       b_m2c_error(errCode);
     }
   }
@@ -335,8 +335,8 @@ void mptVecToArray(const struct0_T *vec, emxArray_real_T *arr)
   emxFree_uint8_T(&data);
   emxFree_int32_T(&idx);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    p = (M2C_DEBUG);
+    if (p) {
       d_m2c_error(errCode);
     }
   }

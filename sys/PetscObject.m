@@ -16,6 +16,7 @@ function obj = PetscObject(arg, wrap) %#codegen
 % See also PetscMat
 
 coder.inline('always');
+coder.cinclude('mpetsc.h');
 
 if nargin==0 && isempty(coder.target)
     obj = m2c_opaque_type;
@@ -37,5 +38,5 @@ if ~isstruct(arg) || isempty(coder.target)
         obj = m2c_opaque_obj('PetscObject', arg, 'wrap');
     end
 else
-    obj = castdata('PetscObject', arg.data);
+    obj = m2c_castdata('PetscObject', arg.data);
 end

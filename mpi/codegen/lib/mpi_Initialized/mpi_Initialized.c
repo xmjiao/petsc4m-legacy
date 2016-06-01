@@ -1,6 +1,6 @@
 #include "mpi_Initialized.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 #ifndef struct_emxArray_char_T
 #define struct_emxArray_char_T
@@ -53,16 +53,16 @@ static void m2c_error(int varargin_3);
 static void b_m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i0;
+  int i1;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i0 = 0; i0 < loop_ub; i0++) {
-    b_varargin_3->data[i0] = varargin_3->data[i0];
+  for (i1 = 0; i1 < loop_ub; i1++) {
+    b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
   M2C_error("MPI:RuntimeError", "MPI_Initialized failed with error message %s\n",
@@ -143,7 +143,8 @@ void mpi_Initialized(int *flag, int *info, boolean_T *toplevel)
   int b_info;
   int loop_ub;
   emxArray_uint8_T *varargin_1;
-  int b_flag;
+  int i0;
+  boolean_T b_flag;
   emxArray_char_T *b_varargin_1;
   *info = MPI_Initialized(flag);
   *toplevel = true;
@@ -159,30 +160,30 @@ void mpi_Initialized(int *flag, int *info, boolean_T *toplevel)
     }
 
     emxInit_uint8_T(&varargin_1, 2);
-    b_flag = varargin_1->size[0] * varargin_1->size[1];
+    i0 = varargin_1->size[0] * varargin_1->size[1];
     varargin_1->size[0] = 1;
     varargin_1->size[1] = loop_ub;
-    emxEnsureCapacity((emxArray__common *)varargin_1, b_flag, (int)sizeof
-                      (unsigned char));
-    for (b_flag = 0; b_flag < loop_ub; b_flag++) {
-      varargin_1->data[varargin_1->size[0] * b_flag] = msg0[b_flag];
+    emxEnsureCapacity((emxArray__common *)varargin_1, i0, (int)sizeof(unsigned
+      char));
+    for (i0 = 0; i0 < loop_ub; i0++) {
+      varargin_1->data[varargin_1->size[0] * i0] = msg0[i0];
     }
 
     if (b_info != 0) {
       b_flag = (M2C_DEBUG);
-      if (b_flag != 0) {
+      if (b_flag) {
         m2c_error(b_info);
       }
     }
 
     emxInit_char_T(&b_varargin_1, 2);
-    b_flag = b_varargin_1->size[0] * b_varargin_1->size[1];
+    i0 = b_varargin_1->size[0] * b_varargin_1->size[1];
     b_varargin_1->size[0] = 1;
     b_varargin_1->size[1] = (short)loop_ub;
-    emxEnsureCapacity((emxArray__common *)b_varargin_1, b_flag, (int)sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_varargin_1, i0, (int)sizeof(char));
     loop_ub = (short)loop_ub;
-    for (b_flag = 0; b_flag < loop_ub; b_flag++) {
-      b_varargin_1->data[b_flag] = (signed char)varargin_1->data[b_flag];
+    for (i0 = 0; i0 < loop_ub; i0++) {
+      b_varargin_1->data[i0] = (signed char)varargin_1->data[i0];
     }
 
     emxFree_uint8_T(&varargin_1);

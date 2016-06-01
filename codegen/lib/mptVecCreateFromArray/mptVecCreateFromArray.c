@@ -1,6 +1,6 @@
 #include "mptVecCreateFromArray.h"
-#include "mpetsc.h"
 #include "m2c.h"
+#include "mpetsc.h"
 
 #ifndef struct_emxArray_int32_T
 #define struct_emxArray_int32_T
@@ -174,11 +174,12 @@ void mptVecCreateFromArray(const emxArray_real_T *arr, struct0_T *vec_out,
   int n;
   Vec t_vec;
   int errCode;
-  int yk;
+  boolean_T flag;
   int b_n;
   emxArray_int32_T *y;
   int k;
   emxArray_int32_T *idx;
+  int yk;
   int iroa;
   emxArray_uint8_T *data0;
   int sizepe;
@@ -190,8 +191,8 @@ void mptVecCreateFromArray(const emxArray_real_T *arr, struct0_T *vec_out,
   n = arr->size[0];
   errCode = VecCreateSeq(PETSC_COMM_SELF, n, &t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       m2c_error(errCode);
     }
   }
@@ -230,24 +231,24 @@ void mptVecCreateFromArray(const emxArray_real_T *arr, struct0_T *vec_out,
   errCode = VecSetValues(t_vec, n, &idx->data[0], &arr->data[0], iroa);
   emxFree_int32_T(&idx);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       b_m2c_error(errCode);
     }
   }
 
   errCode = VecAssemblyBegin(t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
 
   errCode = VecAssemblyEnd(t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       d_m2c_error(errCode);
     }
   }
@@ -294,9 +295,10 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
   int n;
   Vec t_vec;
   int errCode;
-  int yk;
+  boolean_T flag;
   emxArray_char_T *b_prefix;
   int k;
+  int yk;
   int N;
   int b_n;
   emxArray_int32_T *y;
@@ -312,8 +314,8 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
   n = arr->size[0];
   errCode = VecCreate(PETSC_COMM_WORLD, &t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       e_m2c_error(errCode);
     }
   }
@@ -344,8 +346,8 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
 
   if ((!(b_prefix->size[1] == 0)) && (b_prefix->data[b_prefix->size[1] - 1] !=
        '\x00')) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       f_m2c_error();
     }
   }
@@ -353,16 +355,16 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
   errCode = VecSetOptionsPrefix(t_vec, &b_prefix->data[0]);
   emxFree_char_T(&b_prefix);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       g_m2c_error(errCode);
     }
   }
 
   errCode = VecSetFromOptions(t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       h_m2c_error(errCode);
     }
   }
@@ -370,8 +372,8 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
   N = (PETSC_DECIDE);
   errCode = VecSetSizes(t_vec, n, N);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       i_m2c_error(errCode);
     }
   }
@@ -410,24 +412,24 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
   errCode = VecSetValues(t_vec, n, &idx->data[0], &arr->data[0], iroa);
   emxFree_int32_T(&idx);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       b_m2c_error(errCode);
     }
   }
 
   errCode = VecAssemblyBegin(t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       c_m2c_error(errCode);
     }
   }
 
   errCode = VecAssemblyEnd(t_vec);
   if (errCode != 0) {
-    yk = (M2C_DEBUG);
-    if (yk != 0) {
+    flag = (M2C_DEBUG);
+    if (flag) {
       d_m2c_error(errCode);
     }
   }
