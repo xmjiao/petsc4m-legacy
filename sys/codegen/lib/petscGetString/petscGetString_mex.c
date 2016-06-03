@@ -1,5 +1,5 @@
 /*
- * sys/codegen/lib/petscGetString/petscGetString_mex.c
+ * petscGetString_mex.c
  *
  * Auxiliary code for mexFunction of petscGetString
  *
