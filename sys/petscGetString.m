@@ -382,43 +382,43 @@ switch name
     case 'PCTELESCOPE'
         [str, toplevel] = get_string('PCType', 'PCTELESCOPE', nargout>1);
     case 'MATSOLVERSUPERLU'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERSUPERLU', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERSUPERLU', nargout>1);
     case 'MATSOLVERSUPERLU_DIST'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERSUPERLU_DIST', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERSUPERLU_DIST', nargout>1);
     case 'MATSOLVERUMFPACK'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERUMFPACK', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERUMFPACK', nargout>1);
     case 'MATSOLVERCHOLMOD'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERCHOLMOD', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERCHOLMOD', nargout>1);
     case 'MATSOLVERCLIQUE'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERCLIQUE', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERCLIQUE', nargout>1);
     case 'MATSOLVERKLU'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERKLU', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERKLU', nargout>1);
     case 'MATSOLVERELEMENTAL'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERELEMENTAL', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERELEMENTAL', nargout>1);
     case 'MATSOLVERESSL'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERESSL', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERESSL', nargout>1);
     case 'MATSOLVERLUSOL'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERLUSOL', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERLUSOL', nargout>1);
     case 'MATSOLVERMUMPS'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERMUMPS', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERMUMPS', nargout>1);
     case 'MATSOLVERMKL_PARDISO'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERMKL_PARDISO', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERMKL_PARDISO', nargout>1);
     case 'MATSOLVERMKL_CPARDISO'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERMKL_CPARDISO', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERMKL_CPARDISO', nargout>1);
     case 'MATSOLVERPASTIX'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERPASTIX', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERPASTIX', nargout>1);
     case 'MATSOLVERMATLAB'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERMATLAB', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERMATLAB', nargout>1);
     case 'MATSOLVERPETSC'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERPETSC', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERPETSC', nargout>1);
     case 'MATSOLVERBAS'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERBAS', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERBAS', nargout>1);
     case 'MATSOLVERCUSPARSE'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERCUSPARSE', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERCUSPARSE', nargout>1);
     case 'MATSOLVERBSTRM'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERBSTRM', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERBSTRM', nargout>1);
     case 'MATSOLVERSBSTRM'
-        [str, toplevel] = get_string('MatSolverPackage', 'MATSOLVERSBSTRM', nargout>1);
+        [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERSBSTRM', nargout>1);
     otherwise
         m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
         if nargout>1

@@ -35,7 +35,7 @@ boolean_T mptKSPCleanup(struct0_T *ksp)
   boolean_T toplevel;
   boolean_T p;
   boolean_T b_p;
-  int k;
+  int errCode;
   int exitg2;
   int i1;
   boolean_T exitg1;
@@ -44,24 +44,22 @@ boolean_T mptKSPCleanup(struct0_T *ksp)
 
   emxArray_uint8_T *data0;
   KSP t_ksp;
-  int errCode;
   int sizepe;
   char t0_type[3];
   static const char x2[3] = { 'K', 'S', 'P' };
 
   char * ptr;
-  int i;
   p = false;
   b_p = false;
-  k = 0;
+  errCode = 0;
   do {
     exitg2 = 0;
-    if (k < 2) {
-      i1 = ksp->type->size[k];
-      if (i1 != (k << 1) + 1) {
+    if (errCode < 2) {
+      i1 = ksp->type->size[errCode];
+      if (i1 != (errCode << 1) + 1) {
         exitg2 = 1;
       } else {
-        k++;
+        errCode++;
       }
     } else {
       b_p = true;
@@ -70,14 +68,14 @@ boolean_T mptKSPCleanup(struct0_T *ksp)
   } while (exitg2 == 0);
 
   if (b_p && (!(ksp->type->size[1] == 0))) {
-    k = 0;
+    errCode = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 3)) {
-      if (!(ksp->type->data[k] == cv0[k])) {
+    while ((!exitg1) && (errCode < 3)) {
+      if (!(ksp->type->data[errCode] == cv0[errCode])) {
         b_p = false;
         exitg1 = true;
       } else {
-        k++;
+        errCode++;
       }
     }
   }
@@ -93,8 +91,8 @@ boolean_T mptKSPCleanup(struct0_T *ksp)
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
     emxEnsureCapacity((emxArray__common *)b_ksp, i1, (int)sizeof(char));
-    k = ksp->type->size[1];
-    for (i1 = 0; i1 < k; i1++) {
+    errCode = ksp->type->size[1];
+    for (i1 = 0; i1 < errCode; i1++) {
       b_ksp->data[b_ksp->size[0] * i1] = ksp->type->data[ksp->type->size[0] * i1];
     }
 
@@ -107,8 +105,8 @@ boolean_T mptKSPCleanup(struct0_T *ksp)
   i1 = data0->size[0];
   data0->size[0] = ksp->data->size[0];
   emxEnsureCapacity((emxArray__common *)data0, i1, (int)sizeof(unsigned char));
-  k = ksp->data->size[0];
-  for (i1 = 0; i1 < k; i1++) {
+  errCode = ksp->data->size[0];
+  for (i1 = 0; i1 < errCode; i1++) {
     data0->data[i1] = ksp->data->data[i1];
   }
 
@@ -133,8 +131,8 @@ boolean_T mptKSPCleanup(struct0_T *ksp)
   i1 = ksp->data->size[0];
   ksp->data->size[0] = data0->size[0];
   emxEnsureCapacity((emxArray__common *)ksp->data, i1, (int)sizeof(unsigned char));
-  k = data0->size[0];
-  for (i1 = 0; i1 < k; i1++) {
+  errCode = data0->size[0];
+  for (i1 = 0; i1 < errCode; i1++) {
     ksp->data->data[i1] = data0->data[i1];
   }
 
@@ -149,8 +147,8 @@ boolean_T mptKSPCleanup(struct0_T *ksp)
 
   ksp->nitems = 1;
   ptr = (char *)(&t_ksp);
-  for (i = 1; i <= sizepe; i++) {
-    ksp->data->data[i - 1] = *(ptr);
+  for (errCode = 1; errCode <= sizepe; errCode++) {
+    ksp->data->data[errCode - 1] = *(ptr);
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }
 

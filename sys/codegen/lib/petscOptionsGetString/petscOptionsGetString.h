@@ -14,8 +14,8 @@ extern emxArray_char_T *emxCreate_char_T(int rows, int cols);
 extern void emxDestroyArray_char_T(emxArray_char_T *emxArray);
 extern void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions);
 extern void petscOptionsGetString(const emxArray_char_T *pre, const
-  emxArray_char_T *name, emxArray_char_T *str, int *found, int *errCode,
-  boolean_T *toplevel);
+  emxArray_char_T *name, char str_data[], int str_size[2], int *found, int
+  *errCode, boolean_T *toplevel);
 extern void petscOptionsGetString_initialize(void);
 extern void petscOptionsGetString_terminate(void);
 

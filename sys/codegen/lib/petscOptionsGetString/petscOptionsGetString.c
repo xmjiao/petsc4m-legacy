@@ -7,20 +7,29 @@ static void c_m2c_error(int varargin_3);
 static void m2c_error(void);
 static void b_m2c_error(void)
 {
-  M2C_error("MPETSc:petscOptionsGetString:InputError",
-            "Argument name must be a null-terminated character string.");
+  const char * msgid;
+  const char * fmt;
+  msgid = "MPETSc:petscOptionsGetString:InputError";
+  fmt = "Argument name must be a null-terminated character string.";
+  M2C_error(msgid, fmt);
 }
 
 static void c_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError",
-            "PetscOptionsGetString returned error code %d\n", varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "PetscOptionsGetString returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void m2c_error(void)
 {
-  M2C_error("MPETSc:petscOptionsGetString:InputError",
-            "Argument pre must be a null-terminated string.");
+  const char * msgid;
+  const char * fmt;
+  msgid = "MPETSc:petscOptionsGetString:InputError";
+  fmt = "Argument pre must be a null-terminated string.";
+  M2C_error(msgid, fmt);
 }
 
 void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
@@ -29,14 +38,15 @@ void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
 }
 
 void petscOptionsGetString(const emxArray_char_T *pre, const emxArray_char_T
-  *name, emxArray_char_T *str, int *found, int *errCode, boolean_T *toplevel)
+  *name, char str_data[], int str_size[2], int *found, int *errCode, boolean_T
+  *toplevel)
 {
   char str0[21];
   PetscBool b_flag;
-  int i0;
+  PetscOptions obj;
   int i;
   boolean_T exitg1;
-  int loop_ub;
+  int i0;
   *toplevel = true;
   if ((!(pre->size[1] == 0)) && (pre->data[pre->size[1] - 1] != '\x00')) {
     m2c_error();
@@ -46,24 +56,20 @@ void petscOptionsGetString(const emxArray_char_T *pre, const emxArray_char_T
     b_m2c_error();
   }
 
-  *errCode = PetscOptionsGetString(NULL, &pre->data[0], &name->data[0], str0, 20,
+  obj = NULL;
+  *errCode = PetscOptionsGetString(obj, &pre->data[0], &name->data[0], str0, 20,
     &b_flag);
   *found = (int)(b_flag);
-  i0 = str->size[0] * str->size[1];
-  str->size[0] = 1;
-  str->size[1] = 0;
-  emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
+  str_size[0] = 1;
+  str_size[1] = 0;
   i = 0;
   exitg1 = false;
   while ((!exitg1) && (i < 21)) {
     if ((unsigned char)str0[i] == 0) {
-      loop_ub = i + 1;
-      i0 = str->size[0] * str->size[1];
-      str->size[0] = 1;
-      str->size[1] = i + 1;
-      emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-      for (i0 = 0; i0 < loop_ub; i0++) {
-        str->data[str->size[0] * i0] = str0[i0];
+      str_size[0] = 1;
+      str_size[1] = i + 1;
+      for (i0 = 0; i0 <= i; i0++) {
+        str_data[i0] = str0[i0];
       }
 
       exitg1 = true;

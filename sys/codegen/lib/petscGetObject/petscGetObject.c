@@ -118,7 +118,6 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     'L', '_', 'M', 'A', 'T' };
 
   char * ptr;
-  int i;
   int exitg3;
   static const char cv14[14] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L',
     'L', '_', 'V', 'E', 'C' };
@@ -394,8 +393,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -431,8 +430,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -468,8 +467,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -505,8 +504,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -542,8 +541,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&b_arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -579,8 +578,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&c_arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -616,8 +615,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&d_arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -653,8 +652,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&e_arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -690,8 +689,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&f_arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -727,8 +726,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&g_arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 
@@ -777,8 +776,8 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     obj->nitems = 1;
     ptr = (char *)(&b_arg);
-    for (i = 1; i <= sizepe; i++) {
-      obj->data->data[i - 1] = *(ptr);
+    for (kstr = 1; kstr <= sizepe; kstr++) {
+      obj->data->data[kstr - 1] = *(ptr);
       ptr = M2C_OFFSET_PTR(ptr, 1);
     }
 

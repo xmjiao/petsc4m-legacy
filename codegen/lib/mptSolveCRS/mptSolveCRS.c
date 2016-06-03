@@ -2,27 +2,6 @@
 #include "m2c.h"
 #include "mpetsc.h"
 
-#ifndef struct_emxArray_uint8_T
-#define struct_emxArray_uint8_T
-
-struct emxArray_uint8_T
-{
-  unsigned char *data;
-  int *size;
-  int allocatedSize;
-  int numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif
-
-#ifndef typedef_emxArray_uint8_T
-#define typedef_emxArray_uint8_T
-
-typedef struct emxArray_uint8_T emxArray_uint8_T;
-
-#endif
-
 static void ab_m2c_error(int varargin_3);
 static void b_m2c_error(int varargin_3);
 static void b_m2c_printf(double varargin_2, int varargin_3);
@@ -40,9 +19,6 @@ static void db_m2c_error(int varargin_3);
 static void e_m2c_error(int varargin_3);
 static void e_m2c_printf(void);
 static void eb_m2c_error(int varargin_3);
-static void emxFree_uint8_T(emxArray_uint8_T **pEmxArray);
-static void emxInit_int32_T1(emxArray_int32_T **pEmxArray, int numDimensions);
-static void emxInit_uint8_T(emxArray_uint8_T **pEmxArray, int numDimensions);
 static void f_m2c_error(int varargin_3);
 static void fb_m2c_error(int varargin_3);
 static void g_m2c_error(int varargin_3);
@@ -766,52 +742,6 @@ static void eb_m2c_error(int varargin_3)
             varargin_3);
 }
 
-static void emxFree_uint8_T(emxArray_uint8_T **pEmxArray)
-{
-  if (*pEmxArray != (emxArray_uint8_T *)NULL) {
-    if (((*pEmxArray)->data != (unsigned char *)NULL) && (*pEmxArray)
-        ->canFreeData) {
-      free((void *)(*pEmxArray)->data);
-    }
-
-    free((void *)(*pEmxArray)->size);
-    free((void *)*pEmxArray);
-    *pEmxArray = (emxArray_uint8_T *)NULL;
-  }
-}
-
-static void emxInit_int32_T1(emxArray_int32_T **pEmxArray, int numDimensions)
-{
-  emxArray_int32_T *emxArray;
-  int i;
-  *pEmxArray = (emxArray_int32_T *)malloc(sizeof(emxArray_int32_T));
-  emxArray = *pEmxArray;
-  emxArray->data = (int *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
-static void emxInit_uint8_T(emxArray_uint8_T **pEmxArray, int numDimensions)
-{
-  emxArray_uint8_T *emxArray;
-  int i;
-  *pEmxArray = (emxArray_uint8_T *)malloc(sizeof(emxArray_uint8_T));
-  emxArray = *pEmxArray;
-  emxArray->data = (unsigned char *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
 static void f_m2c_error(int varargin_3)
 {
   M2C_error("petsc:RuntimeError", "VecSetValues returned error code %d\n",
@@ -1522,7 +1452,7 @@ static Vec mptVecCreateFromArray(const emxArray_real_T *arr)
     b_n = n;
   }
 
-  emxInit_int32_T1(&y, 2);
+  emxInit_int32_T(&y, 2);
   k = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = b_n;
@@ -1602,7 +1532,7 @@ static void mptVecToArray(Vec vec, emxArray_real_T *arr)
     b_n = n;
   }
 
-  emxInit_int32_T1(&y, 2);
+  emxInit_int32_T(&y, 2);
   k = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = b_n;

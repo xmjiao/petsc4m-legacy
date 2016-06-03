@@ -8,8 +8,11 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "PetscSplitOwnership returned error code %d\n",
-            varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "PetscSplitOwnership returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct)
@@ -27,9 +30,13 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
+  const char * msgid;
+  const char * fmt;
   int i0;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected MPI_Comm.\n";
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
@@ -39,9 +46,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i0] = varargin_3->data[i0];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected MPI_Comm.\n", &b_varargin_3->data
-            [0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -62,12 +67,12 @@ void petscSplitOwnership(const struct0_T *comm, int *n, int *N, int *errCode,
   boolean_T b_p;
   int k;
   int exitg2;
-  int i1;
   boolean_T exitg1;
   emxArray_char_T *b_comm;
   static const char cv0[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
 
   emxArray_uint8_T *data;
+  int loop_ub;
   MPI_Comm t_comm;
   p = false;
   b_p = false;
@@ -75,8 +80,7 @@ void petscSplitOwnership(const struct0_T *comm, int *n, int *N, int *errCode,
   do {
     exitg2 = 0;
     if (k < 2) {
-      i1 = comm->type->size[k];
-      if (i1 != 7 * k + 1) {
+      if (comm->type->size[k] != 1 + 7 * k) {
         exitg2 = 1;
       } else {
         k++;
@@ -107,14 +111,14 @@ void petscSplitOwnership(const struct0_T *comm, int *n, int *N, int *errCode,
 
   if (!p) {
     emxInit_char_T(&b_comm, 2);
-    i1 = b_comm->size[0] * b_comm->size[1];
+    k = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_comm, i1, (int)sizeof(char));
-    k = comm->type->size[1];
-    for (i1 = 0; i1 < k; i1++) {
-      b_comm->data[b_comm->size[0] * i1] = comm->type->data[comm->type->size[0] *
-        i1];
+    emxEnsureCapacity((emxArray__common *)b_comm, k, (int)sizeof(char));
+    loop_ub = comm->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_comm->data[b_comm->size[0] * k] = comm->type->data[comm->type->size[0] *
+        k];
     }
 
     b_comm->data[b_comm->size[0] * comm->type->size[1]] = '\x00';
@@ -123,12 +127,12 @@ void petscSplitOwnership(const struct0_T *comm, int *n, int *N, int *errCode,
   }
 
   emxInit_uint8_T(&data, 1);
-  i1 = data->size[0];
+  k = data->size[0];
   data->size[0] = comm->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i1, (int)sizeof(unsigned char));
-  k = comm->data->size[0];
-  for (i1 = 0; i1 < k; i1++) {
-    data->data[i1] = comm->data->data[i1];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = comm->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = comm->data->data[k];
   }
 
   t_comm = *(MPI_Comm*)(&data->data[0]);

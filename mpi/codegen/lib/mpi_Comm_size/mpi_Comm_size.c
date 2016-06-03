@@ -6,7 +6,6 @@ static void b_m2c_error(int varargin_3);
 static void c_m2c_error(const emxArray_char_T *varargin_3);
 static void emxFreeStruct_struct0_T(struct0_T *pStruct);
 static void emxInitStruct_struct0_T(struct0_T *pStruct);
-static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -46,22 +45,6 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
   emxInit_char_T(&pStruct->type, 2);
 }
 
-static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions)
-{
-  emxArray_uint8_T *emxArray;
-  int i;
-  *pEmxArray = (emxArray_uint8_T *)malloc(sizeof(emxArray_uint8_T));
-  emxArray = *pEmxArray;
-  emxArray->data = (unsigned char *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
@@ -98,7 +81,7 @@ void mpi_Comm_size(const struct0_T *comm, int *size, int *info, boolean_T
 {
   boolean_T p;
   boolean_T b_p;
-  int k;
+  int resultlen;
   int exitg2;
   int i0;
   boolean_T exitg1;
@@ -109,21 +92,20 @@ void mpi_Comm_size(const struct0_T *comm, int *size, int *info, boolean_T
   MPI_Comm c_comm;
   unsigned char msg0[1024];
   char * ptr;
-  int resultlen;
   int b_info;
   emxArray_uint8_T *varargin_1;
   emxArray_char_T *b_varargin_1;
   p = false;
   b_p = false;
-  k = 0;
+  resultlen = 0;
   do {
     exitg2 = 0;
-    if (k < 2) {
-      i0 = comm->type->size[k];
-      if (i0 != 7 * k + 1) {
+    if (resultlen < 2) {
+      i0 = comm->type->size[resultlen];
+      if (i0 != 7 * resultlen + 1) {
         exitg2 = 1;
       } else {
-        k++;
+        resultlen++;
       }
     } else {
       b_p = true;
@@ -132,14 +114,14 @@ void mpi_Comm_size(const struct0_T *comm, int *size, int *info, boolean_T
   } while (exitg2 == 0);
 
   if (b_p && (!(comm->type->size[1] == 0))) {
-    k = 0;
+    resultlen = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 8)) {
-      if (!(comm->type->data[k] == cv0[k])) {
+    while ((!exitg1) && (resultlen < 8)) {
+      if (!(comm->type->data[resultlen] == cv0[resultlen])) {
         b_p = false;
         exitg1 = true;
       } else {
-        k++;
+        resultlen++;
       }
     }
   }
@@ -155,8 +137,8 @@ void mpi_Comm_size(const struct0_T *comm, int *size, int *info, boolean_T
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
     emxEnsureCapacity((emxArray__common *)b_comm, i0, (int)sizeof(char));
-    k = comm->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
+    resultlen = comm->type->size[1];
+    for (i0 = 0; i0 < resultlen; i0++) {
       b_comm->data[b_comm->size[0] * i0] = comm->type->data[comm->type->size[0] *
         i0];
     }
@@ -170,8 +152,8 @@ void mpi_Comm_size(const struct0_T *comm, int *size, int *info, boolean_T
   i0 = data->size[0];
   data->size[0] = comm->data->size[0];
   emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = comm->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
+  resultlen = comm->data->size[0];
+  for (i0 = 0; i0 < resultlen; i0++) {
     data->data[i0] = comm->data->data[i0];
   }
 
@@ -185,18 +167,16 @@ void mpi_Comm_size(const struct0_T *comm, int *size, int *info, boolean_T
     resultlen = 0;
     b_info = MPI_Error_string(*info, ptr, &resultlen);
     if (1 > resultlen) {
-      k = 0;
-    } else {
-      k = resultlen;
+      resultlen = 0;
     }
 
-    emxInit_uint8_T1(&varargin_1, 2);
+    emxInit_uint8_T(&varargin_1, 2);
     i0 = varargin_1->size[0] * varargin_1->size[1];
     varargin_1->size[0] = 1;
-    varargin_1->size[1] = k;
+    varargin_1->size[1] = resultlen;
     emxEnsureCapacity((emxArray__common *)varargin_1, i0, (int)sizeof(unsigned
       char));
-    for (i0 = 0; i0 < k; i0++) {
+    for (i0 = 0; i0 < resultlen; i0++) {
       varargin_1->data[varargin_1->size[0] * i0] = msg0[i0];
     }
 
@@ -210,10 +190,10 @@ void mpi_Comm_size(const struct0_T *comm, int *size, int *info, boolean_T
     emxInit_char_T(&b_varargin_1, 2);
     i0 = b_varargin_1->size[0] * b_varargin_1->size[1];
     b_varargin_1->size[0] = 1;
-    b_varargin_1->size[1] = (short)k;
+    b_varargin_1->size[1] = (short)resultlen;
     emxEnsureCapacity((emxArray__common *)b_varargin_1, i0, (int)sizeof(char));
-    k = (short)k;
-    for (i0 = 0; i0 < k; i0++) {
+    resultlen = (short)resultlen;
+    for (i0 = 0; i0 < resultlen; i0++) {
       b_varargin_1->data[i0] = (signed char)varargin_1->data[i0];
     }
 

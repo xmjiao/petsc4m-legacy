@@ -119,18 +119,15 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   int n;
   int i0;
   int i;
-  int b_val;
-  Mat t_mat;
   int errCode;
+  Mat t_mat;
   boolean_T flag;
   emxArray_int32_T *jidx;
   emxArray_real_T *rowval;
   int i1;
-  int type;
+  int loop_ub;
   emxArray_uint8_T *data0;
-  int sizepe;
   char t2_type[3];
-  int iroa;
   static const char cv0[3] = { 'M', 'a', 't' };
 
   char * ptr;
@@ -143,8 +140,9 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     nnz->data[i - 1] = row_ptr->data[i] - row_ptr->data[i - 1];
   }
 
-  b_val = (PETSC_DEFAULT);
-  errCode = MatCreateSeqAIJ(PETSC_COMM_SELF, n, n, b_val, &nnz->data[0], &t_mat);
+  errCode = (PETSC_DEFAULT);
+  errCode = MatCreateSeqAIJ(PETSC_COMM_SELF, n, n, errCode, &nnz->data[0],
+    &t_mat);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag) {
@@ -164,11 +162,11 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
       i1 = row_ptr->data[i] - 1;
     }
 
-    b_val = jidx->size[0];
+    errCode = jidx->size[0];
     jidx->size[0] = i0 - i1;
-    emxEnsureCapacity((emxArray__common *)jidx, b_val, (int)sizeof(int));
-    b_val = i0 - i1;
-    for (i0 = 0; i0 < b_val; i0++) {
+    emxEnsureCapacity((emxArray__common *)jidx, errCode, (int)sizeof(int));
+    loop_ub = i0 - i1;
+    for (i0 = 0; i0 < loop_ub; i0++) {
       jidx->data[i0] = col_ind->data[i1 + i0] - 1;
     }
 
@@ -180,17 +178,17 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
       i1 = row_ptr->data[i] - 1;
     }
 
-    b_val = rowval->size[0];
+    errCode = rowval->size[0];
     rowval->size[0] = i0 - i1;
-    emxEnsureCapacity((emxArray__common *)rowval, b_val, (int)sizeof(double));
-    b_val = i0 - i1;
-    for (i0 = 0; i0 < b_val; i0++) {
+    emxEnsureCapacity((emxArray__common *)rowval, errCode, (int)sizeof(double));
+    loop_ub = i0 - i1;
+    for (i0 = 0; i0 < loop_ub; i0++) {
       rowval->data[i0] = val->data[i1 + i0];
     }
 
-    iroa = (INSERT_VALUES);
+    errCode = (INSERT_VALUES);
     errCode = MatSetValues(t_mat, 1, &i, nnz->data[i], &jidx->data[0],
-      &rowval->data[0], iroa);
+      &rowval->data[0], errCode);
     if (errCode != 0) {
       flag = (M2C_DEBUG);
       if (flag) {
@@ -204,8 +202,8 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   emxFree_real_T(&rowval);
   emxFree_int32_T(&jidx);
   emxFree_int32_T(&nnz);
-  type = (MAT_FINAL_ASSEMBLY);
-  errCode = MatAssemblyBegin(t_mat, type);
+  errCode = (MAT_FINAL_ASSEMBLY);
+  errCode = MatAssemblyBegin(t_mat, errCode);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag) {
@@ -213,8 +211,8 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
     }
   }
 
-  type = (MAT_FINAL_ASSEMBLY);
-  errCode = MatAssemblyEnd(t_mat, type);
+  errCode = (MAT_FINAL_ASSEMBLY);
+  errCode = MatAssemblyEnd(t_mat, errCode);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag) {
@@ -224,9 +222,9 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
 
   emxInit_uint8_T(&data0, 1);
   *toplevel = true;
-  sizepe = sizeof(Mat);
+  errCode = sizeof(Mat);
   i0 = data0->size[0];
-  data0->size[0] = sizepe;
+  data0->size[0] = errCode;
   emxEnsureCapacity((emxArray__common *)data0, i0, (int)sizeof(unsigned char));
   for (i0 = 0; i0 < 3; i0++) {
     t2_type[i0] = cv0[i0];
@@ -236,8 +234,8 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   mat_out->data->size[0] = data0->size[0];
   emxEnsureCapacity((emxArray__common *)mat_out->data, i0, (int)sizeof(unsigned
     char));
-  b_val = data0->size[0];
-  for (i0 = 0; i0 < b_val; i0++) {
+  loop_ub = data0->size[0];
+  for (i0 = 0; i0 < loop_ub; i0++) {
     mat_out->data->data[i0] = data0->data[i0];
   }
 
@@ -252,7 +250,7 @@ void mptMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
 
   mat_out->nitems = 1;
   ptr = (char *)(&t_mat);
-  for (i = 1; i <= sizepe; i++) {
+  for (i = 1; i <= errCode; i++) {
     mat_out->data->data[i - 1] = *(ptr);
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }
@@ -266,20 +264,17 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
   int n;
   int i2;
   int i;
-  int b_val;
-  Mat t_mat;
   int errCode;
+  Mat t_mat;
   boolean_T flag;
   emxArray_int32_T *jidx;
   emxArray_real_T *rowval;
   int i3;
-  int type;
+  int loop_ub;
   emxArray_uint8_T *data0;
-  int sizepe;
   char t1_type[3];
   static const char cv1[3] = { 'M', 'a', 't' };
 
-  int iroa;
   char * ptr;
   emxInit_int32_T(&nnz, 1);
   n = row_ptr->size[0] - 1;
@@ -290,8 +285,8 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
     nnz->data[i - 1] = row_ptr->data[i] - row_ptr->data[i - 1];
   }
 
-  b_val = (PETSC_DEFAULT);
-  errCode = MatCreateSeqAIJ(PETSC_COMM_SELF, n, ncols, b_val, &nnz->data[0],
+  errCode = (PETSC_DEFAULT);
+  errCode = MatCreateSeqAIJ(PETSC_COMM_SELF, n, ncols, errCode, &nnz->data[0],
     &t_mat);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -312,11 +307,11 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
       i3 = row_ptr->data[i] - 1;
     }
 
-    b_val = jidx->size[0];
+    errCode = jidx->size[0];
     jidx->size[0] = i2 - i3;
-    emxEnsureCapacity((emxArray__common *)jidx, b_val, (int)sizeof(int));
-    b_val = i2 - i3;
-    for (i2 = 0; i2 < b_val; i2++) {
+    emxEnsureCapacity((emxArray__common *)jidx, errCode, (int)sizeof(int));
+    loop_ub = i2 - i3;
+    for (i2 = 0; i2 < loop_ub; i2++) {
       jidx->data[i2] = col_ind->data[i3 + i2] - 1;
     }
 
@@ -328,17 +323,17 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
       i3 = row_ptr->data[i] - 1;
     }
 
-    b_val = rowval->size[0];
+    errCode = rowval->size[0];
     rowval->size[0] = i2 - i3;
-    emxEnsureCapacity((emxArray__common *)rowval, b_val, (int)sizeof(double));
-    b_val = i2 - i3;
-    for (i2 = 0; i2 < b_val; i2++) {
+    emxEnsureCapacity((emxArray__common *)rowval, errCode, (int)sizeof(double));
+    loop_ub = i2 - i3;
+    for (i2 = 0; i2 < loop_ub; i2++) {
       rowval->data[i2] = val->data[i3 + i2];
     }
 
-    iroa = (INSERT_VALUES);
+    errCode = (INSERT_VALUES);
     errCode = MatSetValues(t_mat, 1, &i, nnz->data[i], &jidx->data[0],
-      &rowval->data[0], iroa);
+      &rowval->data[0], errCode);
     if (errCode != 0) {
       flag = (M2C_DEBUG);
       if (flag) {
@@ -352,8 +347,8 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
   emxFree_real_T(&rowval);
   emxFree_int32_T(&jidx);
   emxFree_int32_T(&nnz);
-  type = (MAT_FINAL_ASSEMBLY);
-  errCode = MatAssemblyBegin(t_mat, type);
+  errCode = (MAT_FINAL_ASSEMBLY);
+  errCode = MatAssemblyBegin(t_mat, errCode);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag) {
@@ -361,8 +356,8 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
     }
   }
 
-  type = (MAT_FINAL_ASSEMBLY);
-  errCode = MatAssemblyEnd(t_mat, type);
+  errCode = (MAT_FINAL_ASSEMBLY);
+  errCode = MatAssemblyEnd(t_mat, errCode);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag) {
@@ -371,9 +366,9 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
   }
 
   emxInit_uint8_T(&data0, 1);
-  sizepe = sizeof(Mat);
+  errCode = sizeof(Mat);
   i2 = data0->size[0];
-  data0->size[0] = sizepe;
+  data0->size[0] = errCode;
   emxEnsureCapacity((emxArray__common *)data0, i2, (int)sizeof(unsigned char));
   for (i2 = 0; i2 < 3; i2++) {
     t1_type[i2] = cv1[i2];
@@ -383,8 +378,8 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
   mat_out->data->size[0] = data0->size[0];
   emxEnsureCapacity((emxArray__common *)mat_out->data, i2, (int)sizeof(unsigned
     char));
-  b_val = data0->size[0];
-  for (i2 = 0; i2 < b_val; i2++) {
+  loop_ub = data0->size[0];
+  for (i2 = 0; i2 < loop_ub; i2++) {
     mat_out->data->data[i2] = data0->data[i2];
   }
 
@@ -399,7 +394,7 @@ void mptMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr, const
 
   mat_out->nitems = 1;
   ptr = (char *)(&t_mat);
-  for (i = 1; i <= sizepe; i++) {
+  for (i = 1; i <= errCode; i++) {
     mat_out->data->data[i - 1] = *(ptr);
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }
@@ -419,19 +414,14 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   int errCode;
   boolean_T flag;
   emxArray_char_T *b_prefix;
-  int loop_ub;
-  int b_val;
-  int first_row;
   int last_row;
+  int first_row;
   emxArray_int32_T *jidx;
   emxArray_real_T *rowval;
-  int type;
   emxArray_uint8_T *data0;
-  int sizepe;
   char t0_type[3];
   static const char cv2[3] = { 'M', 'a', 't' };
 
-  int iroa;
   char * ptr;
   emxInit_int32_T(&nnz, 1);
   n = row_ptr->size[0] - 1;
@@ -457,8 +447,8 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
     b_prefix->size[0] = 1;
     b_prefix->size[1] = prefix->size[1];
     emxEnsureCapacity((emxArray__common *)b_prefix, i4, (int)sizeof(char));
-    loop_ub = prefix->size[0] * prefix->size[1];
-    for (i4 = 0; i4 < loop_ub; i4++) {
+    last_row = prefix->size[0] * prefix->size[1];
+    for (i4 = 0; i4 < last_row; i4++) {
       b_prefix->data[i4] = prefix->data[i4];
     }
   } else {
@@ -466,8 +456,8 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
     b_prefix->size[0] = 1;
     b_prefix->size[1] = prefix->size[1] + 1;
     emxEnsureCapacity((emxArray__common *)b_prefix, i4, (int)sizeof(char));
-    loop_ub = prefix->size[1];
-    for (i4 = 0; i4 < loop_ub; i4++) {
+    last_row = prefix->size[1];
+    for (i4 = 0; i4 < last_row; i4++) {
       b_prefix->data[b_prefix->size[0] * i4] = prefix->data[prefix->size[0] * i4];
     }
 
@@ -499,9 +489,9 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
     }
   }
 
-  loop_ub = (PETSC_DECIDE);
-  b_val = (PETSC_DETERMINE);
-  errCode = MatSetSizes(t_mat, n, loop_ub, b_val, ncols);
+  last_row = (PETSC_DECIDE);
+  errCode = (PETSC_DETERMINE);
+  errCode = MatSetSizes(t_mat, n, last_row, errCode, ncols);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag) {
@@ -523,40 +513,40 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   while (i + 1 <= n) {
     i4 = row_ptr->data[i + 1] - 1;
     if (row_ptr->data[i] > i4) {
-      b_val = 0;
+      errCode = 0;
       i4 = 0;
     } else {
-      b_val = row_ptr->data[i] - 1;
+      errCode = row_ptr->data[i] - 1;
     }
 
-    loop_ub = jidx->size[0];
-    jidx->size[0] = i4 - b_val;
-    emxEnsureCapacity((emxArray__common *)jidx, loop_ub, (int)sizeof(int));
-    loop_ub = i4 - b_val;
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      jidx->data[i4] = col_ind->data[b_val + i4] - 1;
+    last_row = jidx->size[0];
+    jidx->size[0] = i4 - errCode;
+    emxEnsureCapacity((emxArray__common *)jidx, last_row, (int)sizeof(int));
+    last_row = i4 - errCode;
+    for (i4 = 0; i4 < last_row; i4++) {
+      jidx->data[i4] = col_ind->data[errCode + i4] - 1;
     }
 
     i4 = row_ptr->data[i + 1] - 1;
     if (row_ptr->data[i] > i4) {
-      b_val = 0;
+      errCode = 0;
       i4 = 0;
     } else {
-      b_val = row_ptr->data[i] - 1;
+      errCode = row_ptr->data[i] - 1;
     }
 
-    loop_ub = rowval->size[0];
-    rowval->size[0] = i4 - b_val;
-    emxEnsureCapacity((emxArray__common *)rowval, loop_ub, (int)sizeof(double));
-    loop_ub = i4 - b_val;
-    for (i4 = 0; i4 < loop_ub; i4++) {
-      rowval->data[i4] = val->data[b_val + i4];
+    last_row = rowval->size[0];
+    rowval->size[0] = i4 - errCode;
+    emxEnsureCapacity((emxArray__common *)rowval, last_row, (int)sizeof(double));
+    last_row = i4 - errCode;
+    for (i4 = 0; i4 < last_row; i4++) {
+      rowval->data[i4] = val->data[errCode + i4];
     }
 
-    loop_ub = i + first_row;
-    iroa = (INSERT_VALUES);
-    errCode = MatSetValues(t_mat, 1, &loop_ub, nnz->data[i], &jidx->data[0],
-      &rowval->data[0], iroa);
+    last_row = i + first_row;
+    errCode = (INSERT_VALUES);
+    errCode = MatSetValues(t_mat, 1, &last_row, nnz->data[i], &jidx->data[0],
+      &rowval->data[0], errCode);
     if (errCode != 0) {
       flag = (M2C_DEBUG);
       if (flag) {
@@ -570,8 +560,8 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   emxFree_real_T(&rowval);
   emxFree_int32_T(&jidx);
   emxFree_int32_T(&nnz);
-  type = (MAT_FINAL_ASSEMBLY);
-  errCode = MatAssemblyBegin(t_mat, type);
+  last_row = (MAT_FINAL_ASSEMBLY);
+  errCode = MatAssemblyBegin(t_mat, last_row);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag) {
@@ -579,8 +569,8 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
     }
   }
 
-  type = (MAT_FINAL_ASSEMBLY);
-  errCode = MatAssemblyEnd(t_mat, type);
+  last_row = (MAT_FINAL_ASSEMBLY);
+  errCode = MatAssemblyEnd(t_mat, last_row);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag) {
@@ -589,9 +579,9 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   }
 
   emxInit_uint8_T(&data0, 1);
-  sizepe = sizeof(Mat);
+  errCode = sizeof(Mat);
   i4 = data0->size[0];
-  data0->size[0] = sizepe;
+  data0->size[0] = errCode;
   emxEnsureCapacity((emxArray__common *)data0, i4, (int)sizeof(unsigned char));
   for (i4 = 0; i4 < 3; i4++) {
     t0_type[i4] = cv2[i4];
@@ -601,8 +591,8 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
   mat_out->data->size[0] = data0->size[0];
   emxEnsureCapacity((emxArray__common *)mat_out->data, i4, (int)sizeof(unsigned
     char));
-  loop_ub = data0->size[0];
-  for (i4 = 0; i4 < loop_ub; i4++) {
+  last_row = data0->size[0];
+  for (i4 = 0; i4 < last_row; i4++) {
     mat_out->data->data[i4] = data0->data[i4];
   }
 
@@ -617,7 +607,7 @@ void mptMatCreateAIJFromCRS_5args(const emxArray_int32_T *row_ptr, const
 
   mat_out->nitems = 1;
   ptr = (char *)(&t_mat);
-  for (i = 1; i <= sizepe; i++) {
+  for (i = 1; i <= errCode; i++) {
     mat_out->data->data[i - 1] = *(ptr);
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }

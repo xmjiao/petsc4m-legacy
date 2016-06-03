@@ -11,7 +11,9 @@ addpath([mpetsc_root '/PC']);
 addpath([mpetsc_root '/util'])
 addpath([mpetsc_root '/sys'])
 addpath([mpetsc_root '/exe'])
-addpath([mpetsc_root '/mpi'])
+if ~exist('mpi_Init', 'file')
+    addpath([mpetsc_root '/mpi'])
+end
 
 if ~exist('m2c', 'file') && exist('../M2C', 'dir')
     % Start up M2C from its root directory

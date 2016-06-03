@@ -10,27 +10,33 @@ static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i2;
+  const char * msgid;
+  const char * fmt;
+  int i1;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i2 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected Vec.\n";
+  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i2, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i2 = 0; i2 < loop_ub; i2++) {
-    b_varargin_3->data[i2] = varargin_3->data[i2];
+  for (i1 = 0; i1 < loop_ub; i1++) {
+    b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected Vec.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
 static void c_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError",
-            "MatMultHermitianTransposeAdd returned error code %d\n", varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "MatMultHermitianTransposeAdd returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct)
@@ -48,20 +54,23 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i1;
+  const char * msgid;
+  const char * fmt;
+  int i0;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected Mat.\n";
+  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i1 = 0; i1 < loop_ub; i1++) {
-    b_varargin_3->data[i1] = varargin_3->data[i1];
+  for (i0 = 0; i0 < loop_ub; i0++) {
+    b_varargin_3->data[i0] = varargin_3->data[i0];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected Mat.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -82,12 +91,12 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
   boolean_T b_p;
   int k;
   int exitg8;
-  int i0;
   boolean_T exitg7;
   emxArray_char_T *b_A;
   static const char cv0[3] = { 'M', 'a', 't' };
 
   emxArray_uint8_T *data;
+  int loop_ub;
   Mat mat;
   int exitg6;
   boolean_T exitg5;
@@ -109,8 +118,7 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
   do {
     exitg8 = 0;
     if (k < 2) {
-      i0 = A->type->size[k];
-      if (i0 != (k << 1) + 1) {
+      if (A->type->size[k] != 1 + (k << 1)) {
         exitg8 = 1;
       } else {
         k++;
@@ -141,13 +149,13 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
 
   if (!p) {
     emxInit_char_T(&b_A, 2);
-    i0 = b_A->size[0] * b_A->size[1];
+    k = b_A->size[0] * b_A->size[1];
     b_A->size[0] = 1;
     b_A->size[1] = A->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_A, i0, (int)sizeof(char));
-    k = A->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_A->data[b_A->size[0] * i0] = A->type->data[A->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_A, k, (int)sizeof(char));
+    loop_ub = A->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_A->data[b_A->size[0] * k] = A->type->data[A->type->size[0] * k];
     }
 
     b_A->data[b_A->size[0] * A->type->size[1]] = '\x00';
@@ -156,12 +164,12 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
   }
 
   emxInit_uint8_T(&data, 1);
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = A->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = A->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = A->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = A->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = A->data->data[k];
   }
 
   mat = *(Mat*)(&data->data[0]);
@@ -171,8 +179,7 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
   do {
     exitg6 = 0;
     if (k < 2) {
-      i0 = v1->type->size[k];
-      if (i0 != (k << 1) + 1) {
+      if (v1->type->size[k] != 1 + (k << 1)) {
         exitg6 = 1;
       } else {
         k++;
@@ -203,13 +210,13 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
 
   if (!p) {
     emxInit_char_T(&b_v1, 2);
-    i0 = b_v1->size[0] * b_v1->size[1];
+    k = b_v1->size[0] * b_v1->size[1];
     b_v1->size[0] = 1;
     b_v1->size[1] = v1->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_v1, i0, (int)sizeof(char));
-    k = v1->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_v1->data[b_v1->size[0] * i0] = v1->type->data[v1->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_v1, k, (int)sizeof(char));
+    loop_ub = v1->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_v1->data[b_v1->size[0] * k] = v1->type->data[v1->type->size[0] * k];
     }
 
     b_v1->data[b_v1->size[0] * v1->type->size[1]] = '\x00';
@@ -217,12 +224,12 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
     emxFree_char_T(&b_v1);
   }
 
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = v1->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = v1->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = v1->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = v1->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = v1->data->data[k];
   }
 
   vec = *(Vec*)(&data->data[0]);
@@ -232,8 +239,7 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
   do {
     exitg4 = 0;
     if (k < 2) {
-      i0 = v2->type->size[k];
-      if (i0 != (k << 1) + 1) {
+      if (v2->type->size[k] != 1 + (k << 1)) {
         exitg4 = 1;
       } else {
         k++;
@@ -264,13 +270,13 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
 
   if (!p) {
     emxInit_char_T(&b_v2, 2);
-    i0 = b_v2->size[0] * b_v2->size[1];
+    k = b_v2->size[0] * b_v2->size[1];
     b_v2->size[0] = 1;
     b_v2->size[1] = v2->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_v2, i0, (int)sizeof(char));
-    k = v2->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_v2->data[b_v2->size[0] * i0] = v2->type->data[v2->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_v2, k, (int)sizeof(char));
+    loop_ub = v2->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_v2->data[b_v2->size[0] * k] = v2->type->data[v2->type->size[0] * k];
     }
 
     b_v2->data[b_v2->size[0] * v2->type->size[1]] = '\x00';
@@ -278,12 +284,12 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
     emxFree_char_T(&b_v2);
   }
 
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = v2->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = v2->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = v2->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = v2->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = v2->data->data[k];
   }
 
   b_vec = *(Vec*)(&data->data[0]);
@@ -293,8 +299,7 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
   do {
     exitg2 = 0;
     if (k < 2) {
-      i0 = v3->type->size[k];
-      if (i0 != (k << 1) + 1) {
+      if (v3->type->size[k] != 1 + (k << 1)) {
         exitg2 = 1;
       } else {
         k++;
@@ -325,13 +330,13 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
 
   if (!p) {
     emxInit_char_T(&b_v3, 2);
-    i0 = b_v3->size[0] * b_v3->size[1];
+    k = b_v3->size[0] * b_v3->size[1];
     b_v3->size[0] = 1;
     b_v3->size[1] = v3->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_v3, i0, (int)sizeof(char));
-    k = v3->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_v3->data[b_v3->size[0] * i0] = v3->type->data[v3->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_v3, k, (int)sizeof(char));
+    loop_ub = v3->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_v3->data[b_v3->size[0] * k] = v3->type->data[v3->type->size[0] * k];
     }
 
     b_v3->data[b_v3->size[0] * v3->type->size[1]] = '\x00';
@@ -339,12 +344,12 @@ void petscMatMultHermitianTransposeAdd(const struct0_T *A, const struct0_T *v1,
     emxFree_char_T(&b_v3);
   }
 
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = v3->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = v3->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = v3->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = v3->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = v3->data->data[k];
   }
 
   c_vec = *(Vec*)(&data->data[0]);

@@ -10,27 +10,33 @@ static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i2;
+  const char * msgid;
+  const char * fmt;
+  int i1;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i2 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected PC.\n";
+  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i2, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i2 = 0; i2 < loop_ub; i2++) {
-    b_varargin_3->data[i2] = varargin_3->data[i2];
+  for (i1 = 0; i1 < loop_ub; i1++) {
+    b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected PC.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
 static void c_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "KSPSetPC returned error code %d\n",
-            varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "KSPSetPC returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct)
@@ -48,20 +54,23 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i1;
+  const char * msgid;
+  const char * fmt;
+  int i0;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected KSP.\n";
+  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i1 = 0; i1 < loop_ub; i1++) {
-    b_varargin_3->data[i1] = varargin_3->data[i1];
+  for (i0 = 0; i0 < loop_ub; i0++) {
+    b_varargin_3->data[i0] = varargin_3->data[i0];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected KSP.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -82,12 +91,12 @@ void petscKSPSetPC(const struct0_T *ksp, const struct0_T *pc, int *errCode,
   boolean_T b_p;
   int k;
   int exitg4;
-  int i0;
   boolean_T exitg3;
   emxArray_char_T *b_ksp;
   static const char cv0[3] = { 'K', 'S', 'P' };
 
   emxArray_uint8_T *data;
+  int loop_ub;
   KSP c_ksp;
   int exitg2;
   boolean_T exitg1;
@@ -101,8 +110,7 @@ void petscKSPSetPC(const struct0_T *ksp, const struct0_T *pc, int *errCode,
   do {
     exitg4 = 0;
     if (k < 2) {
-      i0 = ksp->type->size[k];
-      if (i0 != (k << 1) + 1) {
+      if (ksp->type->size[k] != 1 + (k << 1)) {
         exitg4 = 1;
       } else {
         k++;
@@ -133,13 +141,13 @@ void petscKSPSetPC(const struct0_T *ksp, const struct0_T *pc, int *errCode,
 
   if (!p) {
     emxInit_char_T(&b_ksp, 2);
-    i0 = b_ksp->size[0] * b_ksp->size[1];
+    k = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_ksp, i0, (int)sizeof(char));
-    k = ksp->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_ksp->data[b_ksp->size[0] * i0] = ksp->type->data[ksp->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_ksp, k, (int)sizeof(char));
+    loop_ub = ksp->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_ksp->data[b_ksp->size[0] * k] = ksp->type->data[ksp->type->size[0] * k];
     }
 
     b_ksp->data[b_ksp->size[0] * ksp->type->size[1]] = '\x00';
@@ -148,12 +156,12 @@ void petscKSPSetPC(const struct0_T *ksp, const struct0_T *pc, int *errCode,
   }
 
   emxInit_uint8_T(&data, 1);
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = ksp->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = ksp->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = ksp->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = ksp->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = ksp->data->data[k];
   }
 
   c_ksp = *(KSP*)(&data->data[0]);
@@ -163,8 +171,7 @@ void petscKSPSetPC(const struct0_T *ksp, const struct0_T *pc, int *errCode,
   do {
     exitg2 = 0;
     if (k < 2) {
-      i0 = pc->type->size[k];
-      if (i0 != k + 1) {
+      if (pc->type->size[k] != 1 + k) {
         exitg2 = 1;
       } else {
         k++;
@@ -195,13 +202,13 @@ void petscKSPSetPC(const struct0_T *ksp, const struct0_T *pc, int *errCode,
 
   if (!p) {
     emxInit_char_T(&b_pc, 2);
-    i0 = b_pc->size[0] * b_pc->size[1];
+    k = b_pc->size[0] * b_pc->size[1];
     b_pc->size[0] = 1;
     b_pc->size[1] = pc->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_pc, i0, (int)sizeof(char));
-    k = pc->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_pc->data[b_pc->size[0] * i0] = pc->type->data[pc->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_pc, k, (int)sizeof(char));
+    loop_ub = pc->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_pc->data[b_pc->size[0] * k] = pc->type->data[pc->type->size[0] * k];
     }
 
     b_pc->data[b_pc->size[0] * pc->type->size[1]] = '\x00';
@@ -209,12 +216,12 @@ void petscKSPSetPC(const struct0_T *ksp, const struct0_T *pc, int *errCode,
     emxFree_char_T(&b_pc);
   }
 
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = pc->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = pc->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = pc->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = pc->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = pc->data->data[k];
   }
 
   c_pc = *(PC*)(&data->data[0]);

@@ -140,34 +140,35 @@ end
 
 function test %#ok<DEFNU>
 %!test
-%!shared A, b, rowptr, colind, val
+%!shared A, b, rowptr, colind, vals
 %! A = sprand(100,100,0.3);
 %! A = A + speye(100);
-%! [rowptr, colind, val] = crs_matrix(A); % This requires NumGeom
+%! B = bsrCreateFromSparse(A);
+%! rowptr = B.rowptr; colind=B.colind; vals=B.vals;
 %! b = rand(100,1);
 
 %!test
-%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b);
+%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, vals, b);
 %!test
-%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b, '');
+%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, vals, b, '');
 %!test
-%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b, ...
+%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, vals, b, ...
 %!     '', 1.e-6);
 %!test
-%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b, ...
+%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, vals, b, ...
 %!     PETSC_KSPBCGS, 1.e-6, int32(100));
 %!test
-%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b, ...
+%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, vals, b, ...
 %!     PETSC_KSPTFQMR, 1.e-6, int32(100));
 %!test
-%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b, ...
+%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, vals, b, ...
 %!     PETSC_KSPBCGS, 1.e-10, int32(10), PETSC_PCJACOBI, 'right', ...
 %!     zeros(0,1), '-ksp_monitor_true_residual');
 %!test
-%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b, ...
+%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, vals, b, ...
 %!     PETSC_KSPBCGS, 1.e-6, int32(100), PETSC_PCILU, '');
 %!test
-%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, val, b, ...
+%! [x,flag,relres,iter,reshis,times] = mptSolveCRS(rowptr, colind, vals, b, ...
 %!     PETSC_KSPPREONLY, 1.e-6, int32(100), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
 
 end

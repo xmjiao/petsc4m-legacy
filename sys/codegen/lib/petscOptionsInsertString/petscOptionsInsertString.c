@@ -6,14 +6,20 @@ static void b_m2c_error(int varargin_3);
 static void m2c_error(void);
 static void b_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError",
-            "PetscOptionsInsertString returned error code %d\n", varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "PetscOptionsInsertString returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void m2c_error(void)
 {
-  M2C_error("MPETSc:petscOptionsInsertString:InputError",
-            "The argument must be a null-terminated string.");
+  const char * msgid;
+  const char * fmt;
+  msgid = "MPETSc:petscOptionsInsertString:InputError";
+  fmt = "The argument must be a null-terminated string.";
+  M2C_error(msgid, fmt);
 }
 
 void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
@@ -24,13 +30,15 @@ void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
 void petscOptionsInsertString(const emxArray_char_T *in_str, int *errCode,
   boolean_T *toplevel)
 {
+  PetscOptions obj;
   *toplevel = true;
   if ((!(in_str->size[1] == 0)) && (in_str->data[in_str->size[1] - 1] != '\x00'))
   {
     m2c_error();
   }
 
-  *errCode = PetscOptionsInsertString(NULL, &in_str->data[0]);
+  obj = NULL;
+  *errCode = PetscOptionsInsertString(obj, &in_str->data[0]);
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }

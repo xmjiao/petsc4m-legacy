@@ -2,36 +2,12 @@
 #include "m2c.h"
 #include "mpetsc.h"
 
-#ifndef struct_emxArray_int32_T
-#define struct_emxArray_int32_T
-
-struct emxArray_int32_T
-{
-  int *data;
-  int *size;
-  int allocatedSize;
-  int numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif
-
-#ifndef typedef_emxArray_int32_T
-#define typedef_emxArray_int32_T
-
-typedef struct emxArray_int32_T emxArray_int32_T;
-
-#endif
-
 static void b_m2c_error(int varargin_3);
 static void c_m2c_error(int varargin_3);
 static void d_m2c_error(int varargin_3);
 static void e_m2c_error(int varargin_3);
 static void emxFreeStruct_struct0_T(struct0_T *pStruct);
-static void emxFree_int32_T(emxArray_int32_T **pEmxArray);
 static void emxInitStruct_struct0_T(struct0_T *pStruct);
-static void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions);
-static void emxInit_int32_T1(emxArray_int32_T **pEmxArray, int numDimensions);
 static void f_m2c_error(void);
 static void g_m2c_error(int varargin_3);
 static void h_m2c_error(int varargin_3);
@@ -67,55 +43,10 @@ static void emxFreeStruct_struct0_T(struct0_T *pStruct)
   emxFree_char_T(&pStruct->type);
 }
 
-static void emxFree_int32_T(emxArray_int32_T **pEmxArray)
-{
-  if (*pEmxArray != (emxArray_int32_T *)NULL) {
-    if (((*pEmxArray)->data != (int *)NULL) && (*pEmxArray)->canFreeData) {
-      free((void *)(*pEmxArray)->data);
-    }
-
-    free((void *)(*pEmxArray)->size);
-    free((void *)*pEmxArray);
-    *pEmxArray = (emxArray_int32_T *)NULL;
-  }
-}
-
 static void emxInitStruct_struct0_T(struct0_T *pStruct)
 {
   emxInit_uint8_T(&pStruct->data, 1);
   emxInit_char_T(&pStruct->type, 2);
-}
-
-static void emxInit_int32_T(emxArray_int32_T **pEmxArray, int numDimensions)
-{
-  emxArray_int32_T *emxArray;
-  int i;
-  *pEmxArray = (emxArray_int32_T *)malloc(sizeof(emxArray_int32_T));
-  emxArray = *pEmxArray;
-  emxArray->data = (int *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
-}
-
-static void emxInit_int32_T1(emxArray_int32_T **pEmxArray, int numDimensions)
-{
-  emxArray_int32_T *emxArray;
-  int i;
-  *pEmxArray = (emxArray_int32_T *)malloc(sizeof(emxArray_int32_T));
-  emxArray = *pEmxArray;
-  emxArray->data = (int *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
 }
 
 static void f_m2c_error(void)
@@ -177,17 +108,14 @@ void mptVecCreateFromArray(const emxArray_real_T *arr, struct0_T *vec_out,
   boolean_T flag;
   int b_n;
   emxArray_int32_T *y;
-  int k;
+  int i0;
   emxArray_int32_T *idx;
-  int yk;
-  int iroa;
-  emxArray_uint8_T *data0;
   int sizepe;
+  emxArray_uint8_T *data0;
   char t1_type[3];
   static const char cv0[3] = { 'V', 'e', 'c' };
 
   char * ptr;
-  int i;
   n = arr->size[0];
   errCode = VecCreateSeq(PETSC_COMM_SELF, n, &t_vec);
   if (errCode != 0) {
@@ -203,32 +131,32 @@ void mptVecCreateFromArray(const emxArray_real_T *arr, struct0_T *vec_out,
     b_n = n;
   }
 
-  emxInit_int32_T1(&y, 2);
-  k = y->size[0] * y->size[1];
+  emxInit_int32_T(&y, 2);
+  i0 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = b_n;
-  emxEnsureCapacity((emxArray__common *)y, k, (int)sizeof(int));
+  emxEnsureCapacity((emxArray__common *)y, i0, (int)sizeof(int));
   if (b_n > 0) {
     y->data[0] = 0;
-    yk = 0;
-    for (k = 2; k <= b_n; k++) {
-      yk++;
-      y->data[k - 1] = yk;
+    errCode = 0;
+    for (sizepe = 2; sizepe <= b_n; sizepe++) {
+      errCode++;
+      y->data[sizepe - 1] = errCode;
     }
   }
 
   emxInit_int32_T(&idx, 1);
-  k = idx->size[0];
+  i0 = idx->size[0];
   idx->size[0] = y->size[1];
-  emxEnsureCapacity((emxArray__common *)idx, k, (int)sizeof(int));
-  yk = y->size[1];
-  for (k = 0; k < yk; k++) {
-    idx->data[k] = y->data[y->size[0] * k];
+  emxEnsureCapacity((emxArray__common *)idx, i0, (int)sizeof(int));
+  errCode = y->size[1];
+  for (i0 = 0; i0 < errCode; i0++) {
+    idx->data[i0] = y->data[y->size[0] * i0];
   }
 
   emxFree_int32_T(&y);
-  iroa = (INSERT_VALUES);
-  errCode = VecSetValues(t_vec, n, &idx->data[0], &arr->data[0], iroa);
+  errCode = (INSERT_VALUES);
+  errCode = VecSetValues(t_vec, n, &idx->data[0], &arr->data[0], errCode);
   emxFree_int32_T(&idx);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -256,35 +184,35 @@ void mptVecCreateFromArray(const emxArray_real_T *arr, struct0_T *vec_out,
   emxInit_uint8_T(&data0, 1);
   *toplevel = true;
   sizepe = sizeof(Vec);
-  k = data0->size[0];
+  i0 = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
-  for (k = 0; k < 3; k++) {
-    t1_type[k] = cv0[k];
+  emxEnsureCapacity((emxArray__common *)data0, i0, (int)sizeof(unsigned char));
+  for (i0 = 0; i0 < 3; i0++) {
+    t1_type[i0] = cv0[i0];
   }
 
-  k = vec_out->data->size[0];
+  i0 = vec_out->data->size[0];
   vec_out->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)vec_out->data, k, (int)sizeof(unsigned
+  emxEnsureCapacity((emxArray__common *)vec_out->data, i0, (int)sizeof(unsigned
     char));
-  yk = data0->size[0];
-  for (k = 0; k < yk; k++) {
-    vec_out->data->data[k] = data0->data[k];
+  errCode = data0->size[0];
+  for (i0 = 0; i0 < errCode; i0++) {
+    vec_out->data->data[i0] = data0->data[i0];
   }
 
   emxFree_uint8_T(&data0);
-  k = vec_out->type->size[0] * vec_out->type->size[1];
+  i0 = vec_out->type->size[0] * vec_out->type->size[1];
   vec_out->type->size[0] = 1;
   vec_out->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)vec_out->type, k, (int)sizeof(char));
-  for (k = 0; k < 3; k++) {
-    vec_out->type->data[k] = t1_type[k];
+  emxEnsureCapacity((emxArray__common *)vec_out->type, i0, (int)sizeof(char));
+  for (i0 = 0; i0 < 3; i0++) {
+    vec_out->type->data[i0] = t1_type[i0];
   }
 
   vec_out->nitems = 1;
   ptr = (char *)(&t_vec);
-  for (i = 1; i <= sizepe; i++) {
-    vec_out->data->data[i - 1] = *(ptr);
+  for (errCode = 1; errCode <= sizepe; errCode++) {
+    vec_out->data->data[errCode - 1] = *(ptr);
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }
 }
@@ -297,20 +225,16 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
   int errCode;
   boolean_T flag;
   emxArray_char_T *b_prefix;
-  int k;
-  int yk;
-  int N;
+  int i1;
   int b_n;
   emxArray_int32_T *y;
   emxArray_int32_T *idx;
-  int iroa;
-  emxArray_uint8_T *data0;
   int sizepe;
+  emxArray_uint8_T *data0;
   char t0_type[3];
   static const char cv1[3] = { 'V', 'e', 'c' };
 
   char * ptr;
-  int i;
   n = arr->size[0];
   errCode = VecCreate(PETSC_COMM_WORLD, &t_vec);
   if (errCode != 0) {
@@ -323,22 +247,22 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
   emxInit_char_T(&b_prefix, 2);
   if ((prefix->size[1] == 0) || (!(prefix->data[prefix->size[1] - 1] != '\x00')))
   {
-    k = b_prefix->size[0] * b_prefix->size[1];
+    i1 = b_prefix->size[0] * b_prefix->size[1];
     b_prefix->size[0] = 1;
     b_prefix->size[1] = prefix->size[1];
-    emxEnsureCapacity((emxArray__common *)b_prefix, k, (int)sizeof(char));
-    yk = prefix->size[0] * prefix->size[1];
-    for (k = 0; k < yk; k++) {
-      b_prefix->data[k] = prefix->data[k];
+    emxEnsureCapacity((emxArray__common *)b_prefix, i1, (int)sizeof(char));
+    errCode = prefix->size[0] * prefix->size[1];
+    for (i1 = 0; i1 < errCode; i1++) {
+      b_prefix->data[i1] = prefix->data[i1];
     }
   } else {
-    k = b_prefix->size[0] * b_prefix->size[1];
+    i1 = b_prefix->size[0] * b_prefix->size[1];
     b_prefix->size[0] = 1;
     b_prefix->size[1] = prefix->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_prefix, k, (int)sizeof(char));
-    yk = prefix->size[1];
-    for (k = 0; k < yk; k++) {
-      b_prefix->data[b_prefix->size[0] * k] = prefix->data[prefix->size[0] * k];
+    emxEnsureCapacity((emxArray__common *)b_prefix, i1, (int)sizeof(char));
+    errCode = prefix->size[1];
+    for (i1 = 0; i1 < errCode; i1++) {
+      b_prefix->data[b_prefix->size[0] * i1] = prefix->data[prefix->size[0] * i1];
     }
 
     b_prefix->data[b_prefix->size[0] * prefix->size[1]] = '\x00';
@@ -369,8 +293,8 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
     }
   }
 
-  N = (PETSC_DECIDE);
-  errCode = VecSetSizes(t_vec, n, N);
+  errCode = (PETSC_DECIDE);
+  errCode = VecSetSizes(t_vec, n, errCode);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
     if (flag) {
@@ -384,32 +308,32 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
     b_n = n;
   }
 
-  emxInit_int32_T1(&y, 2);
-  k = y->size[0] * y->size[1];
+  emxInit_int32_T(&y, 2);
+  i1 = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = b_n;
-  emxEnsureCapacity((emxArray__common *)y, k, (int)sizeof(int));
+  emxEnsureCapacity((emxArray__common *)y, i1, (int)sizeof(int));
   if (b_n > 0) {
     y->data[0] = 0;
-    yk = 0;
-    for (k = 2; k <= b_n; k++) {
-      yk++;
-      y->data[k - 1] = yk;
+    errCode = 0;
+    for (sizepe = 2; sizepe <= b_n; sizepe++) {
+      errCode++;
+      y->data[sizepe - 1] = errCode;
     }
   }
 
   emxInit_int32_T(&idx, 1);
-  k = idx->size[0];
+  i1 = idx->size[0];
   idx->size[0] = y->size[1];
-  emxEnsureCapacity((emxArray__common *)idx, k, (int)sizeof(int));
-  yk = y->size[1];
-  for (k = 0; k < yk; k++) {
-    idx->data[k] = y->data[y->size[0] * k];
+  emxEnsureCapacity((emxArray__common *)idx, i1, (int)sizeof(int));
+  errCode = y->size[1];
+  for (i1 = 0; i1 < errCode; i1++) {
+    idx->data[i1] = y->data[y->size[0] * i1];
   }
 
   emxFree_int32_T(&y);
-  iroa = (INSERT_VALUES);
-  errCode = VecSetValues(t_vec, n, &idx->data[0], &arr->data[0], iroa);
+  errCode = (INSERT_VALUES);
+  errCode = VecSetValues(t_vec, n, &idx->data[0], &arr->data[0], errCode);
   emxFree_int32_T(&idx);
   if (errCode != 0) {
     flag = (M2C_DEBUG);
@@ -436,35 +360,35 @@ void mptVecCreateFromArray_2args(const emxArray_real_T *arr, const
 
   emxInit_uint8_T(&data0, 1);
   sizepe = sizeof(Vec);
-  k = data0->size[0];
+  i1 = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
-  for (k = 0; k < 3; k++) {
-    t0_type[k] = cv1[k];
+  emxEnsureCapacity((emxArray__common *)data0, i1, (int)sizeof(unsigned char));
+  for (i1 = 0; i1 < 3; i1++) {
+    t0_type[i1] = cv1[i1];
   }
 
-  k = vec_out->data->size[0];
+  i1 = vec_out->data->size[0];
   vec_out->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)vec_out->data, k, (int)sizeof(unsigned
+  emxEnsureCapacity((emxArray__common *)vec_out->data, i1, (int)sizeof(unsigned
     char));
-  yk = data0->size[0];
-  for (k = 0; k < yk; k++) {
-    vec_out->data->data[k] = data0->data[k];
+  errCode = data0->size[0];
+  for (i1 = 0; i1 < errCode; i1++) {
+    vec_out->data->data[i1] = data0->data[i1];
   }
 
   emxFree_uint8_T(&data0);
-  k = vec_out->type->size[0] * vec_out->type->size[1];
+  i1 = vec_out->type->size[0] * vec_out->type->size[1];
   vec_out->type->size[0] = 1;
   vec_out->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)vec_out->type, k, (int)sizeof(char));
-  for (k = 0; k < 3; k++) {
-    vec_out->type->data[k] = t0_type[k];
+  emxEnsureCapacity((emxArray__common *)vec_out->type, i1, (int)sizeof(char));
+  for (i1 = 0; i1 < 3; i1++) {
+    vec_out->type->data[i1] = t0_type[i1];
   }
 
   vec_out->nitems = 1;
   ptr = (char *)(&t_vec);
-  for (i = 1; i <= sizepe; i++) {
-    vec_out->data->data[i - 1] = *(ptr);
+  for (errCode = 1; errCode <= sizepe; errCode++) {
+    vec_out->data->data[errCode - 1] = *(ptr);
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }
 

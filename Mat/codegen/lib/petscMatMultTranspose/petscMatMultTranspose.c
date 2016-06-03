@@ -10,27 +10,33 @@ static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i2;
+  const char * msgid;
+  const char * fmt;
+  int i1;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i2 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected Vec.\n";
+  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i2, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i2 = 0; i2 < loop_ub; i2++) {
-    b_varargin_3->data[i2] = varargin_3->data[i2];
+  for (i1 = 0; i1 < loop_ub; i1++) {
+    b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected Vec.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
 static void c_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "MatMultTranspose returned error code %d\n",
-            varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "MatMultTranspose returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct)
@@ -48,20 +54,23 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i1;
+  const char * msgid;
+  const char * fmt;
+  int i0;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected Mat.\n";
+  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i1 = 0; i1 < loop_ub; i1++) {
-    b_varargin_3->data[i1] = varargin_3->data[i1];
+  for (i0 = 0; i0 < loop_ub; i0++) {
+    b_varargin_3->data[i0] = varargin_3->data[i0];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected Mat.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -82,12 +91,12 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
   boolean_T b_p;
   int k;
   int exitg6;
-  int i0;
   boolean_T exitg5;
   emxArray_char_T *b_A;
   static const char cv0[3] = { 'M', 'a', 't' };
 
   emxArray_uint8_T *data;
+  int loop_ub;
   Mat mat;
   int exitg4;
   boolean_T exitg3;
@@ -105,8 +114,7 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
   do {
     exitg6 = 0;
     if (k < 2) {
-      i0 = A->type->size[k];
-      if (i0 != (k << 1) + 1) {
+      if (A->type->size[k] != 1 + (k << 1)) {
         exitg6 = 1;
       } else {
         k++;
@@ -137,13 +145,13 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
 
   if (!p) {
     emxInit_char_T(&b_A, 2);
-    i0 = b_A->size[0] * b_A->size[1];
+    k = b_A->size[0] * b_A->size[1];
     b_A->size[0] = 1;
     b_A->size[1] = A->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_A, i0, (int)sizeof(char));
-    k = A->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_A->data[b_A->size[0] * i0] = A->type->data[A->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_A, k, (int)sizeof(char));
+    loop_ub = A->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_A->data[b_A->size[0] * k] = A->type->data[A->type->size[0] * k];
     }
 
     b_A->data[b_A->size[0] * A->type->size[1]] = '\x00';
@@ -152,12 +160,12 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
   }
 
   emxInit_uint8_T(&data, 1);
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = A->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = A->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = A->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = A->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = A->data->data[k];
   }
 
   mat = *(Mat*)(&data->data[0]);
@@ -167,8 +175,7 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
   do {
     exitg4 = 0;
     if (k < 2) {
-      i0 = x->type->size[k];
-      if (i0 != (k << 1) + 1) {
+      if (x->type->size[k] != 1 + (k << 1)) {
         exitg4 = 1;
       } else {
         k++;
@@ -199,13 +206,13 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
 
   if (!p) {
     emxInit_char_T(&b_x, 2);
-    i0 = b_x->size[0] * b_x->size[1];
+    k = b_x->size[0] * b_x->size[1];
     b_x->size[0] = 1;
     b_x->size[1] = x->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_x, i0, (int)sizeof(char));
-    k = x->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_x->data[b_x->size[0] * i0] = x->type->data[x->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_x, k, (int)sizeof(char));
+    loop_ub = x->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_x->data[b_x->size[0] * k] = x->type->data[x->type->size[0] * k];
     }
 
     b_x->data[b_x->size[0] * x->type->size[1]] = '\x00';
@@ -213,12 +220,12 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
     emxFree_char_T(&b_x);
   }
 
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = x->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = x->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = x->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = x->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = x->data->data[k];
   }
 
   vec = *(Vec*)(&data->data[0]);
@@ -228,8 +235,7 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
   do {
     exitg2 = 0;
     if (k < 2) {
-      i0 = y->type->size[k];
-      if (i0 != (k << 1) + 1) {
+      if (y->type->size[k] != 1 + (k << 1)) {
         exitg2 = 1;
       } else {
         k++;
@@ -260,13 +266,13 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
 
   if (!p) {
     emxInit_char_T(&b_y, 2);
-    i0 = b_y->size[0] * b_y->size[1];
+    k = b_y->size[0] * b_y->size[1];
     b_y->size[0] = 1;
     b_y->size[1] = y->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_y, i0, (int)sizeof(char));
-    k = y->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_y->data[b_y->size[0] * i0] = y->type->data[y->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_y, k, (int)sizeof(char));
+    loop_ub = y->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_y->data[b_y->size[0] * k] = y->type->data[y->type->size[0] * k];
     }
 
     b_y->data[b_y->size[0] * y->type->size[1]] = '\x00';
@@ -274,12 +280,12 @@ void petscMatMultTranspose(const struct0_T *A, const struct0_T *x, const
     emxFree_char_T(&b_y);
   }
 
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = y->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = y->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = y->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = y->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = y->data->data[k];
   }
 
   b_vec = *(Vec*)(&data->data[0]);

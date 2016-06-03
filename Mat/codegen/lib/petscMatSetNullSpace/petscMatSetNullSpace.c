@@ -10,28 +10,33 @@ static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i2;
+  const char * msgid;
+  const char * fmt;
+  int i1;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i2 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected MatNullSpace.\n";
+  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i2, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i2 = 0; i2 < loop_ub; i2++) {
-    b_varargin_3->data[i2] = varargin_3->data[i2];
+  for (i1 = 0; i1 < loop_ub; i1++) {
+    b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected MatNullSpace.\n",
-            &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
 static void c_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "MatSetNullSpace returned error code %d\n",
-            varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "MatSetNullSpace returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct)
@@ -49,20 +54,23 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i1;
+  const char * msgid;
+  const char * fmt;
+  int i0;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected Mat.\n";
+  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i1 = 0; i1 < loop_ub; i1++) {
-    b_varargin_3->data[i1] = varargin_3->data[i1];
+  for (i0 = 0; i0 < loop_ub; i0++) {
+    b_varargin_3->data[i0] = varargin_3->data[i0];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected Mat.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -83,12 +91,12 @@ void petscMatSetNullSpace(const struct0_T *mat, const struct0_T *nullSp, int
   boolean_T b_p;
   int k;
   int exitg4;
-  int i0;
   boolean_T exitg3;
   emxArray_char_T *b_mat;
   static const char cv0[3] = { 'M', 'a', 't' };
 
   emxArray_uint8_T *data;
+  int loop_ub;
   Mat t_mat;
   int exitg2;
   boolean_T exitg1;
@@ -103,8 +111,7 @@ void petscMatSetNullSpace(const struct0_T *mat, const struct0_T *nullSp, int
   do {
     exitg4 = 0;
     if (k < 2) {
-      i0 = mat->type->size[k];
-      if (i0 != (k << 1) + 1) {
+      if (mat->type->size[k] != 1 + (k << 1)) {
         exitg4 = 1;
       } else {
         k++;
@@ -135,13 +142,13 @@ void petscMatSetNullSpace(const struct0_T *mat, const struct0_T *nullSp, int
 
   if (!p) {
     emxInit_char_T(&b_mat, 2);
-    i0 = b_mat->size[0] * b_mat->size[1];
+    k = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat, i0, (int)sizeof(char));
-    k = mat->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_mat->data[b_mat->size[0] * i0] = mat->type->data[mat->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_mat, k, (int)sizeof(char));
+    loop_ub = mat->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_mat->data[b_mat->size[0] * k] = mat->type->data[mat->type->size[0] * k];
     }
 
     b_mat->data[b_mat->size[0] * mat->type->size[1]] = '\x00';
@@ -150,12 +157,12 @@ void petscMatSetNullSpace(const struct0_T *mat, const struct0_T *nullSp, int
   }
 
   emxInit_uint8_T(&data, 1);
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = mat->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = mat->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = mat->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = mat->data->data[k];
   }
 
   t_mat = *(Mat*)(&data->data[0]);
@@ -165,8 +172,7 @@ void petscMatSetNullSpace(const struct0_T *mat, const struct0_T *nullSp, int
   do {
     exitg2 = 0;
     if (k < 2) {
-      i0 = nullSp->type->size[k];
-      if (i0 != 11 * k + 1) {
+      if (nullSp->type->size[k] != 1 + 11 * k) {
         exitg2 = 1;
       } else {
         k++;
@@ -197,14 +203,14 @@ void petscMatSetNullSpace(const struct0_T *mat, const struct0_T *nullSp, int
 
   if (!p) {
     emxInit_char_T(&b_nullSp, 2);
-    i0 = b_nullSp->size[0] * b_nullSp->size[1];
+    k = b_nullSp->size[0] * b_nullSp->size[1];
     b_nullSp->size[0] = 1;
     b_nullSp->size[1] = nullSp->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_nullSp, i0, (int)sizeof(char));
-    k = nullSp->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_nullSp->data[b_nullSp->size[0] * i0] = nullSp->type->data[nullSp->
-        type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_nullSp, k, (int)sizeof(char));
+    loop_ub = nullSp->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_nullSp->data[b_nullSp->size[0] * k] = nullSp->type->data[nullSp->
+        type->size[0] * k];
     }
 
     b_nullSp->data[b_nullSp->size[0] * nullSp->type->size[1]] = '\x00';
@@ -212,12 +218,12 @@ void petscMatSetNullSpace(const struct0_T *mat, const struct0_T *nullSp, int
     emxFree_char_T(&b_nullSp);
   }
 
-  i0 = data->size[0];
+  k = data->size[0];
   data->size[0] = nullSp->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = nullSp->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = nullSp->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = nullSp->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = nullSp->data->data[k];
   }
 
   t_nullSp = *(MatNullSpace*)(&data->data[0]);

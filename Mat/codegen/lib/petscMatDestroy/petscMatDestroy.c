@@ -6,16 +6,23 @@ static void b_m2c_error(int varargin_3);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "MatDestroy returned error code %d\n",
-            varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "MatDestroy returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
+  const char * msgid;
+  const char * fmt;
   int i0;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected Mat.\n";
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
@@ -25,8 +32,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i0] = varargin_3->data[i0];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected Mat.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -36,27 +42,25 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
   boolean_T b_p;
   int k;
   int exitg2;
-  int i1;
   boolean_T exitg1;
   emxArray_char_T *b_mat;
   static const char cv0[3] = { 'M', 'a', 't' };
 
   emxArray_uint8_T *data0;
+  int loop_ub;
   Mat t_mat;
   int sizepe;
   char t0_type[3];
   static const char x2[3] = { 'M', 'a', 't' };
 
   char * ptr;
-  int i;
   p = false;
   b_p = false;
   k = 0;
   do {
     exitg2 = 0;
     if (k < 2) {
-      i1 = mat->type->size[k];
-      if (i1 != (k << 1) + 1) {
+      if (mat->type->size[k] != 1 + (k << 1)) {
         exitg2 = 1;
       } else {
         k++;
@@ -87,13 +91,13 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
 
   if (!p) {
     emxInit_char_T(&b_mat, 2);
-    i1 = b_mat->size[0] * b_mat->size[1];
+    k = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat, i1, (int)sizeof(char));
-    k = mat->type->size[1];
-    for (i1 = 0; i1 < k; i1++) {
-      b_mat->data[b_mat->size[0] * i1] = mat->type->data[mat->type->size[0] * i1];
+    emxEnsureCapacity((emxArray__common *)b_mat, k, (int)sizeof(char));
+    loop_ub = mat->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_mat->data[b_mat->size[0] * k] = mat->type->data[mat->type->size[0] * k];
     }
 
     b_mat->data[b_mat->size[0] * mat->type->size[1]] = '\x00';
@@ -102,12 +106,12 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
   }
 
   emxInit_uint8_T(&data0, 1);
-  i1 = data0->size[0];
+  k = data0->size[0];
   data0->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, i1, (int)sizeof(unsigned char));
-  k = mat->data->size[0];
-  for (i1 = 0; i1 < k; i1++) {
-    data0->data[i1] = mat->data->data[i1];
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
+  loop_ub = mat->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data0->data[k] = mat->data->data[k];
   }
 
   t_mat = *(Mat*)(&data0->data[0]);
@@ -118,34 +122,34 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
   }
 
   sizepe = sizeof(Mat);
-  i1 = data0->size[0];
+  k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, i1, (int)sizeof(unsigned char));
-  for (i1 = 0; i1 < 3; i1++) {
-    t0_type[i1] = x2[i1];
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
+  for (k = 0; k < 3; k++) {
+    t0_type[k] = x2[k];
   }
 
-  i1 = mat->data->size[0];
+  k = mat->data->size[0];
   mat->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat->data, i1, (int)sizeof(unsigned char));
-  k = data0->size[0];
-  for (i1 = 0; i1 < k; i1++) {
-    mat->data->data[i1] = data0->data[i1];
+  emxEnsureCapacity((emxArray__common *)mat->data, k, (int)sizeof(unsigned char));
+  loop_ub = data0->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    mat->data->data[k] = data0->data[k];
   }
 
   emxFree_uint8_T(&data0);
-  i1 = mat->type->size[0] * mat->type->size[1];
+  k = mat->type->size[0] * mat->type->size[1];
   mat->type->size[0] = 1;
   mat->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)mat->type, i1, (int)sizeof(char));
-  for (i1 = 0; i1 < 3; i1++) {
-    mat->type->data[i1] = t0_type[i1];
+  emxEnsureCapacity((emxArray__common *)mat->type, k, (int)sizeof(char));
+  for (k = 0; k < 3; k++) {
+    mat->type->data[k] = t0_type[k];
   }
 
   mat->nitems = 1;
   ptr = (char *)(&t_mat);
-  for (i = 1; i <= sizepe; i++) {
-    mat->data->data[i - 1] = *(ptr);
+  for (k = 1; k <= sizepe; k++) {
+    mat->data->data[k - 1] = *(ptr);
     ptr = M2C_OFFSET_PTR(ptr, 1);
   }
 }

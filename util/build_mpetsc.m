@@ -15,9 +15,9 @@ try
     if exist('octave_config_info', 'builtin')
         mexdir = {};
     else
-        mexdir = {'mex'};
+        mexdir = {'{''mex''}'};
     end
-    opts = [{'-petsc', '-O3', '-mex'} mexdir{:} varargin{:}];
+    opts = [{'-petsc', '-O', '-mex'} mexdir{:} varargin{:}];
     for i=1:length(files)
         m2c(opts{:}, files{i});
     end
@@ -37,7 +37,7 @@ try
     if exist('octave_config_info', 'builtin')
         mexdir = {};
     else
-        mexdir = {'../mex'};
+        mexdir = {'{''../mex''}'};
     end
     opts = [{'-petsc', '-O3', '-mex'} mexdir{:}, varargin{:}];
     for i=1:length(files)

@@ -10,9 +10,9 @@ try
     if exist('octave_config_info', 'builtin')
         mexdir = {};
     else
-        mexdir = {'mex'};
+        mexdir = {'{''mex''}'};
     end
-    opts = [{'-petsc', '-exe', 'exe', '-mex'}, mexdir{:}, ...
+    opts = [{'-petsc', '-exe', '{''exe''}', '-mex'}, mexdir{:}, ...
         '-time', '{''mptKSPSetup'', ''mptKSPSolve''}', varargin{:}];
     m2c(opts{:}, 'mptSolveCRS');
     

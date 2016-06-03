@@ -57,16 +57,16 @@ static void f_m2c_error(int varargin_3)
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
-  int i1;
+  int i0;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
-  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i1 = 0; i1 < loop_ub; i1++) {
-    b_varargin_3->data[i1] = varargin_3->data[i1];
+  for (i0 = 0; i0 < loop_ub; i0++) {
+    b_varargin_3->data[i0] = varargin_3->data[i0];
   }
 
   M2C_error("m2c_opaque_obj:WrongInput",
@@ -117,9 +117,9 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
 {
   boolean_T p;
   boolean_T b_p;
-  int k;
+  int flag;
   int exitg6;
-  int i0;
+  int errCode;
   boolean_T exitg5;
   emxArray_char_T *b_mat;
   static const char cv0[3] = { 'M', 'a', 't' };
@@ -127,17 +127,13 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
   emxArray_uint8_T *data;
   Mat t_mat;
   int first_row;
-  int last_row;
-  int errCode;
   int nrows;
   int exitg4;
   boolean_T exitg3;
   emxArray_char_T *c_mat;
-  int flag;
   MatInfo t_info;
   unsigned int nbytes;
   MPetscMatInfo info;
-  int nnz;
   int ind;
   int row;
   emxArray_int32_T *row_cols;
@@ -146,22 +142,20 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
   int b_row;
   int exitg2;
   boolean_T exitg1;
-  int t_ncols;
   const int * t_cols;
   const double * t_vals;
   int ncols;
-  int j;
   p = false;
   b_p = false;
-  k = 0;
+  flag = 0;
   do {
     exitg6 = 0;
-    if (k < 2) {
-      i0 = mat->type->size[k];
-      if (i0 != (k << 1) + 1) {
+    if (flag < 2) {
+      errCode = mat->type->size[flag];
+      if (errCode != (flag << 1) + 1) {
         exitg6 = 1;
       } else {
-        k++;
+        flag++;
       }
     } else {
       b_p = true;
@@ -170,14 +164,14 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
   } while (exitg6 == 0);
 
   if (b_p && (!(mat->type->size[1] == 0))) {
-    k = 0;
+    flag = 0;
     exitg5 = false;
-    while ((!exitg5) && (k < 3)) {
-      if (!(mat->type->data[k] == cv0[k])) {
+    while ((!exitg5) && (flag < 3)) {
+      if (!(mat->type->data[flag] == cv0[flag])) {
         b_p = false;
         exitg5 = true;
       } else {
-        k++;
+        flag++;
       }
     }
   }
@@ -189,13 +183,14 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
 
   if (!p) {
     emxInit_char_T(&b_mat, 2);
-    i0 = b_mat->size[0] * b_mat->size[1];
+    errCode = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat, i0, (int)sizeof(char));
-    k = mat->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      b_mat->data[b_mat->size[0] * i0] = mat->type->data[mat->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)b_mat, errCode, (int)sizeof(char));
+    flag = mat->type->size[1];
+    for (errCode = 0; errCode < flag; errCode++) {
+      b_mat->data[b_mat->size[0] * errCode] = mat->type->data[mat->type->size[0]
+        * errCode];
     }
 
     b_mat->data[b_mat->size[0] * mat->type->size[1]] = '\x00';
@@ -204,16 +199,16 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
   }
 
   emxInit_uint8_T(&data, 1);
-  i0 = data->size[0];
+  errCode = data->size[0];
   data->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = mat->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = mat->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, errCode, (int)sizeof(unsigned char));
+  flag = mat->data->size[0];
+  for (errCode = 0; errCode < flag; errCode++) {
+    data->data[errCode] = mat->data->data[errCode];
   }
 
   t_mat = *(Mat*)(&data->data[0]);
-  errCode = MatGetOwnershipRange(t_mat, &first_row, &last_row);
+  errCode = MatGetOwnershipRange(t_mat, &first_row, &flag);
   if (errCode != 0) {
     p = (M2C_DEBUG);
     if (p) {
@@ -221,18 +216,18 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
     }
   }
 
-  nrows = last_row - first_row;
+  nrows = flag - first_row;
   p = false;
   b_p = false;
-  k = 0;
+  flag = 0;
   do {
     exitg4 = 0;
-    if (k < 2) {
-      i0 = mat->type->size[k];
-      if (i0 != (k << 1) + 1) {
+    if (flag < 2) {
+      errCode = mat->type->size[flag];
+      if (errCode != (flag << 1) + 1) {
         exitg4 = 1;
       } else {
-        k++;
+        flag++;
       }
     } else {
       b_p = true;
@@ -241,14 +236,14 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
   } while (exitg4 == 0);
 
   if (b_p && (!(mat->type->size[1] == 0))) {
-    k = 0;
+    flag = 0;
     exitg3 = false;
-    while ((!exitg3) && (k < 3)) {
-      if (!(mat->type->data[k] == cv0[k])) {
+    while ((!exitg3) && (flag < 3)) {
+      if (!(mat->type->data[flag] == cv0[flag])) {
         b_p = false;
         exitg3 = true;
       } else {
-        k++;
+        flag++;
       }
     }
   }
@@ -260,13 +255,14 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
 
   if (!p) {
     emxInit_char_T(&c_mat, 2);
-    i0 = c_mat->size[0] * c_mat->size[1];
+    errCode = c_mat->size[0] * c_mat->size[1];
     c_mat->size[0] = 1;
     c_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)c_mat, i0, (int)sizeof(char));
-    k = mat->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
-      c_mat->data[c_mat->size[0] * i0] = mat->type->data[mat->type->size[0] * i0];
+    emxEnsureCapacity((emxArray__common *)c_mat, errCode, (int)sizeof(char));
+    flag = mat->type->size[1];
+    for (errCode = 0; errCode < flag; errCode++) {
+      c_mat->data[c_mat->size[0] * errCode] = mat->type->data[mat->type->size[0]
+        * errCode];
     }
 
     c_mat->data[c_mat->size[0] * mat->type->size[1]] = '\x00';
@@ -274,12 +270,12 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
     emxFree_char_T(&c_mat);
   }
 
-  i0 = data->size[0];
+  errCode = data->size[0];
   data->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = mat->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
-    data->data[i0] = mat->data->data[i0];
+  emxEnsureCapacity((emxArray__common *)data, errCode, (int)sizeof(unsigned char));
+  flag = mat->data->size[0];
+  for (errCode = 0; errCode < flag; errCode++) {
+    data->data[errCode] = mat->data->data[errCode];
   }
 
   t_mat = *(Mat*)(&data->data[0]);
@@ -301,16 +297,16 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
   }
 
   memcpy(&info, &t_info, nbytes);
-  nnz = (int)rt_roundd(info.nz_used);
-  i0 = row_ptr->size[0];
+  flag = (int)rt_roundd(info.nz_used);
+  errCode = row_ptr->size[0];
   row_ptr->size[0] = nrows + 1;
-  emxEnsureCapacity((emxArray__common *)row_ptr, i0, (int)sizeof(int));
-  i0 = col_ind->size[0];
-  col_ind->size[0] = nnz;
-  emxEnsureCapacity((emxArray__common *)col_ind, i0, (int)sizeof(int));
-  i0 = val->size[0];
-  val->size[0] = nnz;
-  emxEnsureCapacity((emxArray__common *)val, i0, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)row_ptr, errCode, (int)sizeof(int));
+  errCode = col_ind->size[0];
+  col_ind->size[0] = flag;
+  emxEnsureCapacity((emxArray__common *)col_ind, errCode, (int)sizeof(int));
+  errCode = val->size[0];
+  val->size[0] = flag;
+  emxEnsureCapacity((emxArray__common *)val, errCode, (int)sizeof(double));
   ind = 1;
   row = 0;
   emxInit_int32_T(&row_cols, 1);
@@ -320,15 +316,15 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
     b_row = row + first_row;
     p = false;
     b_p = false;
-    k = 0;
+    flag = 0;
     do {
       exitg2 = 0;
-      if (k < 2) {
-        i0 = mat->type->size[k];
-        if (i0 != (k << 1) + 1) {
+      if (flag < 2) {
+        errCode = mat->type->size[flag];
+        if (errCode != (flag << 1) + 1) {
           exitg2 = 1;
         } else {
-          k++;
+          flag++;
         }
       } else {
         b_p = true;
@@ -337,14 +333,14 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
     } while (exitg2 == 0);
 
     if (b_p && (!(mat->type->size[1] == 0))) {
-      k = 0;
+      flag = 0;
       exitg1 = false;
-      while ((!exitg1) && (k < 3)) {
-        if (!(mat->type->data[k] == cv0[k])) {
+      while ((!exitg1) && (flag < 3)) {
+        if (!(mat->type->data[flag] == cv0[flag])) {
           b_p = false;
           exitg1 = true;
         } else {
-          k++;
+          flag++;
         }
       }
     }
@@ -355,31 +351,32 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
     }
 
     if (!p) {
-      i0 = d_mat->size[0] * d_mat->size[1];
+      errCode = d_mat->size[0] * d_mat->size[1];
       d_mat->size[0] = 1;
       d_mat->size[1] = mat->type->size[1] + 1;
-      emxEnsureCapacity((emxArray__common *)d_mat, i0, (int)sizeof(char));
-      k = mat->type->size[1];
-      for (i0 = 0; i0 < k; i0++) {
-        d_mat->data[d_mat->size[0] * i0] = mat->type->data[mat->type->size[0] *
-          i0];
+      emxEnsureCapacity((emxArray__common *)d_mat, errCode, (int)sizeof(char));
+      flag = mat->type->size[1];
+      for (errCode = 0; errCode < flag; errCode++) {
+        d_mat->data[d_mat->size[0] * errCode] = mat->type->data[mat->type->size
+          [0] * errCode];
       }
 
       d_mat->data[d_mat->size[0] * mat->type->size[1]] = '\x00';
       m2c_error(d_mat);
     }
 
-    i0 = data->size[0];
+    errCode = data->size[0];
     data->size[0] = mat->data->size[0];
-    emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-    k = mat->data->size[0];
-    for (i0 = 0; i0 < k; i0++) {
-      data->data[i0] = mat->data->data[i0];
+    emxEnsureCapacity((emxArray__common *)data, errCode, (int)sizeof(unsigned
+      char));
+    flag = mat->data->size[0];
+    for (errCode = 0; errCode < flag; errCode++) {
+      data->data[errCode] = mat->data->data[errCode];
     }
 
     t_mat = *(Mat*)(&data->data[0]);
-    t_ncols = 0;
-    errCode = MatGetRow(t_mat, b_row, &t_ncols, &t_cols, &t_vals);
+    flag = 0;
+    errCode = MatGetRow(t_mat, b_row, &flag, &t_cols, &t_vals);
     if (errCode != 0) {
       p = (M2C_DEBUG);
       if (p) {
@@ -387,16 +384,16 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
       }
     }
 
-    ncols = t_ncols;
-    i0 = row_cols->size[0];
-    row_cols->size[0] = t_ncols;
-    emxEnsureCapacity((emxArray__common *)row_cols, i0, (int)sizeof(int));
-    i0 = row_vals->size[0];
-    row_vals->size[0] = t_ncols;
-    emxEnsureCapacity((emxArray__common *)row_vals, i0, (int)sizeof(double));
-    memcpy(&row_cols->data[0], t_cols, t_ncols << 2);
-    memcpy(&row_vals->data[0], t_vals, t_ncols << 3);
-    errCode = MatRestoreRow(t_mat, b_row, &t_ncols, &t_cols, &t_vals);
+    ncols = flag;
+    errCode = row_cols->size[0];
+    row_cols->size[0] = flag;
+    emxEnsureCapacity((emxArray__common *)row_cols, errCode, (int)sizeof(int));
+    errCode = row_vals->size[0];
+    row_vals->size[0] = flag;
+    emxEnsureCapacity((emxArray__common *)row_vals, errCode, (int)sizeof(double));
+    memcpy(&row_cols->data[0], t_cols, flag << 2);
+    memcpy(&row_vals->data[0], t_vals, flag << 3);
+    errCode = MatRestoreRow(t_mat, b_row, &flag, &t_cols, &t_vals);
     if (errCode != 0) {
       p = (M2C_DEBUG);
       if (p) {
@@ -404,9 +401,9 @@ void mptMatAIJToCRS(const struct0_T *mat, emxArray_int32_T *row_ptr,
       }
     }
 
-    for (j = 1; j <= ncols; j++) {
-      col_ind->data[(j + ind) - 2] = row_cols->data[j - 1] + 1;
-      val->data[(j + ind) - 2] = row_vals->data[j - 1];
+    for (flag = 1; flag <= ncols; flag++) {
+      col_ind->data[(flag + ind) - 2] = row_cols->data[flag - 1] + 1;
+      val->data[(flag + ind) - 2] = row_vals->data[flag - 1];
     }
 
     row_ptr->data[row] = ind;

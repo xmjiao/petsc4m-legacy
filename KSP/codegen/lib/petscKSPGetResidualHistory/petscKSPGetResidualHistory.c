@@ -8,8 +8,11 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError",
-            "KSPGetResidualHistory returned error code %d\n", varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "KSPGetResidualHistory returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct)
@@ -27,9 +30,13 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
+  const char * msgid;
+  const char * fmt;
   int i1;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected KSP.\n";
   i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
@@ -39,8 +46,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected KSP.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -64,28 +70,26 @@ void petscKSPGetResidualHistory(const struct0_T *ksp, emxArray_real_T *reshis,
 {
   boolean_T p;
   boolean_T b_p;
-  int k;
+  int na;
   int exitg2;
-  int i0;
   boolean_T exitg1;
   emxArray_char_T *b_ksp;
   static const char cv0[3] = { 'K', 'S', 'P' };
 
   emxArray_uint8_T *data;
+  int i0;
   KSP t_ksp;
   PetscReal * a;
-  int na;
   p = false;
   b_p = false;
-  k = 0;
+  na = 0;
   do {
     exitg2 = 0;
-    if (k < 2) {
-      i0 = ksp->type->size[k];
-      if (i0 != (k << 1) + 1) {
+    if (na < 2) {
+      if (ksp->type->size[na] != 1 + (na << 1)) {
         exitg2 = 1;
       } else {
-        k++;
+        na++;
       }
     } else {
       b_p = true;
@@ -94,14 +98,14 @@ void petscKSPGetResidualHistory(const struct0_T *ksp, emxArray_real_T *reshis,
   } while (exitg2 == 0);
 
   if (b_p && (!(ksp->type->size[1] == 0))) {
-    k = 0;
+    na = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 3)) {
-      if (!(ksp->type->data[k] == cv0[k])) {
+    while ((!exitg1) && (na < 3)) {
+      if (!(ksp->type->data[na] == cv0[na])) {
         b_p = false;
         exitg1 = true;
       } else {
-        k++;
+        na++;
       }
     }
   }
@@ -117,8 +121,8 @@ void petscKSPGetResidualHistory(const struct0_T *ksp, emxArray_real_T *reshis,
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
     emxEnsureCapacity((emxArray__common *)b_ksp, i0, (int)sizeof(char));
-    k = ksp->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
+    na = ksp->type->size[1];
+    for (i0 = 0; i0 < na; i0++) {
       b_ksp->data[b_ksp->size[0] * i0] = ksp->type->data[ksp->type->size[0] * i0];
     }
 
@@ -131,8 +135,8 @@ void petscKSPGetResidualHistory(const struct0_T *ksp, emxArray_real_T *reshis,
   i0 = data->size[0];
   data->size[0] = ksp->data->size[0];
   emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = ksp->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
+  na = ksp->data->size[0];
+  for (i0 = 0; i0 < na; i0++) {
     data->data[i0] = ksp->data->data[i0];
   }
 

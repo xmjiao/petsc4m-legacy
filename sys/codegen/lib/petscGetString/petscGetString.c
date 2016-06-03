@@ -2,30 +2,7 @@
 #include "m2c.h"
 #include "mpetsc.h"
 
-#ifndef struct_emxArray_uint8_T
-#define struct_emxArray_uint8_T
-
-struct emxArray_uint8_T
-{
-  unsigned char *data;
-  int *size;
-  int allocatedSize;
-  int numDimensions;
-  boolean_T canFreeData;
-};
-
-#endif
-
-#ifndef typedef_emxArray_uint8_T
-#define typedef_emxArray_uint8_T
-
-typedef struct emxArray_uint8_T emxArray_uint8_T;
-
-#endif
-
 static void b_char(const emxArray_uint8_T *varargin_1, emxArray_char_T *y);
-static void emxFree_uint8_T(emxArray_uint8_T **pEmxArray);
-static void emxInit_uint8_T(emxArray_uint8_T **pEmxArray, int numDimensions);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_char(const emxArray_uint8_T *varargin_1, emxArray_char_T *y)
 {
@@ -43,36 +20,6 @@ static void b_char(const emxArray_uint8_T *varargin_1, emxArray_char_T *y)
   loop_ub = (int)uv0[1];
   for (i1 = 0; i1 < loop_ub; i1++) {
     y->data[i1] = (signed char)varargin_1->data[i1];
-  }
-}
-
-static void emxFree_uint8_T(emxArray_uint8_T **pEmxArray)
-{
-  if (*pEmxArray != (emxArray_uint8_T *)NULL) {
-    if (((*pEmxArray)->data != (unsigned char *)NULL) && (*pEmxArray)
-        ->canFreeData) {
-      free((void *)(*pEmxArray)->data);
-    }
-
-    free((void *)(*pEmxArray)->size);
-    free((void *)*pEmxArray);
-    *pEmxArray = (emxArray_uint8_T *)NULL;
-  }
-}
-
-static void emxInit_uint8_T(emxArray_uint8_T **pEmxArray, int numDimensions)
-{
-  emxArray_uint8_T *emxArray;
-  int i;
-  *pEmxArray = (emxArray_uint8_T *)malloc(sizeof(emxArray_uint8_T));
-  emxArray = *pEmxArray;
-  emxArray->data = (unsigned char *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
   }
 }
 
@@ -105,7 +52,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                     *toplevel)
 {
   boolean_T b_bool;
-  int kstr;
+  int empty;
   int exitg178;
   static const char cv0[17] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L', 'L',
     '_', 'S', 'T', 'R', 'I', 'N', 'G' };
@@ -117,7 +64,6 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
   const char * c_str;
   static const char cv1[7] = { 'M', 'A', 'T', 'S', 'A', 'M', 'E' };
 
-  int empty;
   int i0;
   int exitg176;
   int n;
@@ -130,7 +76,6 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
   char * ptr;
   int exitg174;
   char y[2];
-  int i;
   static const char cv4[10] = { 'M', 'A', 'T', 'M', 'P', 'I', 'M', 'A', 'I', 'J'
   };
 
@@ -741,14 +686,14 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
   b_bool = false;
   if (name->size[1] != 17) {
   } else {
-    kstr = 0;
+    empty = 0;
     do {
       exitg178 = 0;
-      if (kstr + 1 < 18) {
-        if (name->data[kstr] != cv0[kstr]) {
+      if (empty + 1 < 18) {
+        if (name->data[empty] != cv0[empty]) {
           exitg178 = 1;
         } else {
-          kstr++;
+          empty++;
         }
       } else {
         b_bool = true;
@@ -758,19 +703,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
   }
 
   if (b_bool) {
-    kstr = 0;
+    empty = 0;
   } else {
     b_bool = false;
     if (name->size[1] != 7) {
     } else {
-      kstr = 0;
+      empty = 0;
       do {
         exitg177 = 0;
-        if (kstr + 1 < 8) {
-          if (name->data[kstr] != cv1[kstr]) {
+        if (empty + 1 < 8) {
+          if (name->data[empty] != cv1[empty]) {
             exitg177 = 1;
           } else {
-            kstr++;
+            empty++;
           }
         } else {
           b_bool = true;
@@ -780,19 +725,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     }
 
     if (b_bool) {
-      kstr = 1;
+      empty = 1;
     } else {
       b_bool = false;
       if (name->size[1] != 7) {
       } else {
-        kstr = 0;
+        empty = 0;
         do {
           exitg176 = 0;
-          if (kstr + 1 < 8) {
-            if (name->data[kstr] != cv2[kstr]) {
+          if (empty + 1 < 8) {
+            if (name->data[empty] != cv2[empty]) {
               exitg176 = 1;
             } else {
-              kstr++;
+              empty++;
             }
           } else {
             b_bool = true;
@@ -802,19 +747,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       if (b_bool) {
-        kstr = 2;
+        empty = 2;
       } else {
         b_bool = false;
         if (name->size[1] != 10) {
         } else {
-          kstr = 0;
+          empty = 0;
           do {
             exitg175 = 0;
-            if (kstr + 1 < 11) {
-              if (name->data[kstr] != cv3[kstr]) {
+            if (empty + 1 < 11) {
+              if (name->data[empty] != cv3[empty]) {
                 exitg175 = 1;
               } else {
-                kstr++;
+                empty++;
               }
             } else {
               b_bool = true;
@@ -824,19 +769,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
         }
 
         if (b_bool) {
-          kstr = 3;
+          empty = 3;
         } else {
           b_bool = false;
           if (name->size[1] != 10) {
           } else {
-            kstr = 0;
+            empty = 0;
             do {
               exitg174 = 0;
-              if (kstr + 1 < 11) {
-                if (name->data[kstr] != cv4[kstr]) {
+              if (empty + 1 < 11) {
+                if (name->data[empty] != cv4[empty]) {
                   exitg174 = 1;
                 } else {
-                  kstr++;
+                  empty++;
                 }
               } else {
                 b_bool = true;
@@ -846,19 +791,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
           }
 
           if (b_bool) {
-            kstr = 4;
+            empty = 4;
           } else {
             b_bool = false;
             if (name->size[1] != 5) {
             } else {
-              kstr = 0;
+              empty = 0;
               do {
                 exitg173 = 0;
-                if (kstr + 1 < 6) {
-                  if (name->data[kstr] != cv5[kstr]) {
+                if (empty + 1 < 6) {
+                  if (name->data[empty] != cv5[empty]) {
                     exitg173 = 1;
                   } else {
-                    kstr++;
+                    empty++;
                   }
                 } else {
                   b_bool = true;
@@ -868,19 +813,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
             }
 
             if (b_bool) {
-              kstr = 5;
+              empty = 5;
             } else {
               b_bool = false;
               if (name->size[1] != 6) {
               } else {
-                kstr = 0;
+                empty = 0;
                 do {
                   exitg172 = 0;
-                  if (kstr + 1 < 7) {
-                    if (name->data[kstr] != cv6[kstr]) {
+                  if (empty + 1 < 7) {
+                    if (name->data[empty] != cv6[empty]) {
                       exitg172 = 1;
                     } else {
-                      kstr++;
+                      empty++;
                     }
                   } else {
                     b_bool = true;
@@ -890,19 +835,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
               }
 
               if (b_bool) {
-                kstr = 6;
+                empty = 6;
               } else {
                 b_bool = false;
                 if (name->size[1] != 9) {
                 } else {
-                  kstr = 0;
+                  empty = 0;
                   do {
                     exitg171 = 0;
-                    if (kstr + 1 < 10) {
-                      if (name->data[kstr] != cv7[kstr]) {
+                    if (empty + 1 < 10) {
+                      if (name->data[empty] != cv7[empty]) {
                         exitg171 = 1;
                       } else {
-                        kstr++;
+                        empty++;
                       }
                     } else {
                       b_bool = true;
@@ -912,19 +857,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                 }
 
                 if (b_bool) {
-                  kstr = 7;
+                  empty = 7;
                 } else {
                   b_bool = false;
                   if (name->size[1] != 9) {
                   } else {
-                    kstr = 0;
+                    empty = 0;
                     do {
                       exitg170 = 0;
-                      if (kstr + 1 < 10) {
-                        if (name->data[kstr] != cv8[kstr]) {
+                      if (empty + 1 < 10) {
+                        if (name->data[empty] != cv8[empty]) {
                           exitg170 = 1;
                         } else {
-                          kstr++;
+                          empty++;
                         }
                       } else {
                         b_bool = true;
@@ -934,19 +879,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                   }
 
                   if (b_bool) {
-                    kstr = 8;
+                    empty = 8;
                   } else {
                     b_bool = false;
                     if (name->size[1] != 9) {
                     } else {
-                      kstr = 0;
+                      empty = 0;
                       do {
                         exitg169 = 0;
-                        if (kstr + 1 < 10) {
-                          if (name->data[kstr] != cv9[kstr]) {
+                        if (empty + 1 < 10) {
+                          if (name->data[empty] != cv9[empty]) {
                             exitg169 = 1;
                           } else {
-                            kstr++;
+                            empty++;
                           }
                         } else {
                           b_bool = true;
@@ -956,19 +901,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                     }
 
                     if (b_bool) {
-                      kstr = 9;
+                      empty = 9;
                     } else {
                       b_bool = false;
                       if (name->size[1] != 12) {
                       } else {
-                        kstr = 0;
+                        empty = 0;
                         do {
                           exitg168 = 0;
-                          if (kstr + 1 < 13) {
-                            if (name->data[kstr] != cv10[kstr]) {
+                          if (empty + 1 < 13) {
+                            if (name->data[empty] != cv10[empty]) {
                               exitg168 = 1;
                             } else {
-                              kstr++;
+                              empty++;
                             }
                           } else {
                             b_bool = true;
@@ -978,19 +923,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                       }
 
                       if (b_bool) {
-                        kstr = 10;
+                        empty = 10;
                       } else {
                         b_bool = false;
                         if (name->size[1] != 12) {
                         } else {
-                          kstr = 0;
+                          empty = 0;
                           do {
                             exitg167 = 0;
-                            if (kstr + 1 < 13) {
-                              if (name->data[kstr] != cv11[kstr]) {
+                            if (empty + 1 < 13) {
+                              if (name->data[empty] != cv11[empty]) {
                                 exitg167 = 1;
                               } else {
-                                kstr++;
+                                empty++;
                               }
                             } else {
                               b_bool = true;
@@ -1000,19 +945,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                         }
 
                         if (b_bool) {
-                          kstr = 11;
+                          empty = 11;
                         } else {
                           b_bool = false;
                           if (name->size[1] != 10) {
                           } else {
-                            kstr = 0;
+                            empty = 0;
                             do {
                               exitg166 = 0;
-                              if (kstr + 1 < 11) {
-                                if (name->data[kstr] != cv12[kstr]) {
+                              if (empty + 1 < 11) {
+                                if (name->data[empty] != cv12[empty]) {
                                   exitg166 = 1;
                                 } else {
-                                  kstr++;
+                                  empty++;
                                 }
                               } else {
                                 b_bool = true;
@@ -1022,19 +967,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                           }
 
                           if (b_bool) {
-                            kstr = 12;
+                            empty = 12;
                           } else {
                             b_bool = false;
                             if (name->size[1] != 13) {
                             } else {
-                              kstr = 0;
+                              empty = 0;
                               do {
                                 exitg165 = 0;
-                                if (kstr + 1 < 14) {
-                                  if (name->data[kstr] != cv13[kstr]) {
+                                if (empty + 1 < 14) {
+                                  if (name->data[empty] != cv13[empty]) {
                                     exitg165 = 1;
                                   } else {
-                                    kstr++;
+                                    empty++;
                                   }
                                 } else {
                                   b_bool = true;
@@ -1044,19 +989,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                             }
 
                             if (b_bool) {
-                              kstr = 13;
+                              empty = 13;
                             } else {
                               b_bool = false;
                               if (name->size[1] != 13) {
                               } else {
-                                kstr = 0;
+                                empty = 0;
                                 do {
                                   exitg164 = 0;
-                                  if (kstr + 1 < 14) {
-                                    if (name->data[kstr] != cv14[kstr]) {
+                                  if (empty + 1 < 14) {
+                                    if (name->data[empty] != cv14[empty]) {
                                       exitg164 = 1;
                                     } else {
-                                      kstr++;
+                                      empty++;
                                     }
                                   } else {
                                     b_bool = true;
@@ -1066,19 +1011,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                               }
 
                               if (b_bool) {
-                                kstr = 14;
+                                empty = 14;
                               } else {
                                 b_bool = false;
                                 if (name->size[1] != 14) {
                                 } else {
-                                  kstr = 0;
+                                  empty = 0;
                                   do {
                                     exitg163 = 0;
-                                    if (kstr + 1 < 15) {
-                                      if (name->data[kstr] != cv15[kstr]) {
+                                    if (empty + 1 < 15) {
+                                      if (name->data[empty] != cv15[empty]) {
                                         exitg163 = 1;
                                       } else {
-                                        kstr++;
+                                        empty++;
                                       }
                                     } else {
                                       b_bool = true;
@@ -1088,19 +1033,19 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                 }
 
                                 if (b_bool) {
-                                  kstr = 15;
+                                  empty = 15;
                                 } else {
                                   b_bool = false;
                                   if (name->size[1] != 17) {
                                   } else {
-                                    kstr = 0;
+                                    empty = 0;
                                     do {
                                       exitg162 = 0;
-                                      if (kstr + 1 < 18) {
-                                        if (name->data[kstr] != cv16[kstr]) {
+                                      if (empty + 1 < 18) {
+                                        if (name->data[empty] != cv16[empty]) {
                                           exitg162 = 1;
                                         } else {
-                                          kstr++;
+                                          empty++;
                                         }
                                       } else {
                                         b_bool = true;
@@ -1110,19 +1055,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                   }
 
                                   if (b_bool) {
-                                    kstr = 16;
+                                    empty = 16;
                                   } else {
                                     b_bool = false;
                                     if (name->size[1] != 17) {
                                     } else {
-                                      kstr = 0;
+                                      empty = 0;
                                       do {
                                         exitg161 = 0;
-                                        if (kstr + 1 < 18) {
-                                          if (name->data[kstr] != cv17[kstr]) {
+                                        if (empty + 1 < 18) {
+                                          if (name->data[empty] != cv17[empty])
+                                          {
                                             exitg161 = 1;
                                           } else {
-                                            kstr++;
+                                            empty++;
                                           }
                                         } else {
                                           b_bool = true;
@@ -1132,20 +1078,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                     }
 
                                     if (b_bool) {
-                                      kstr = 17;
+                                      empty = 17;
                                     } else {
                                       b_bool = false;
                                       if (name->size[1] != 14) {
                                       } else {
-                                        kstr = 0;
+                                        empty = 0;
                                         do {
                                           exitg160 = 0;
-                                          if (kstr + 1 < 15) {
-                                            if (name->data[kstr] != cv18[kstr])
+                                          if (empty + 1 < 15) {
+                                            if (name->data[empty] != cv18[empty])
                                             {
                                               exitg160 = 1;
                                             } else {
-                                              kstr++;
+                                              empty++;
                                             }
                                           } else {
                                             b_bool = true;
@@ -1155,20 +1101,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                       }
 
                                       if (b_bool) {
-                                        kstr = 18;
+                                        empty = 18;
                                       } else {
                                         b_bool = false;
                                         if (name->size[1] != 17) {
                                         } else {
-                                          kstr = 0;
+                                          empty = 0;
                                           do {
                                             exitg159 = 0;
-                                            if (kstr + 1 < 18) {
-                                              if (name->data[kstr] != cv19[kstr])
-                                              {
+                                            if (empty + 1 < 18) {
+                                              if (name->data[empty] !=
+                                                  cv19[empty]) {
                                                 exitg159 = 1;
                                               } else {
-                                                kstr++;
+                                                empty++;
                                               }
                                             } else {
                                               b_bool = true;
@@ -1178,20 +1124,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                         }
 
                                         if (b_bool) {
-                                          kstr = 19;
+                                          empty = 19;
                                         } else {
                                           b_bool = false;
                                           if (name->size[1] != 17) {
                                           } else {
-                                            kstr = 0;
+                                            empty = 0;
                                             do {
                                               exitg158 = 0;
-                                              if (kstr + 1 < 18) {
-                                                if (name->data[kstr] !=
-                                                    cv20[kstr]) {
+                                              if (empty + 1 < 18) {
+                                                if (name->data[empty] !=
+                                                    cv20[empty]) {
                                                   exitg158 = 1;
                                                 } else {
-                                                  kstr++;
+                                                  empty++;
                                                 }
                                               } else {
                                                 b_bool = true;
@@ -1201,20 +1147,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                           }
 
                                           if (b_bool) {
-                                            kstr = 20;
+                                            empty = 20;
                                           } else {
                                             b_bool = false;
                                             if (name->size[1] != 10) {
                                             } else {
-                                              kstr = 0;
+                                              empty = 0;
                                               do {
                                                 exitg157 = 0;
-                                                if (kstr + 1 < 11) {
-                                                  if (name->data[kstr] !=
-                                                      cv21[kstr]) {
+                                                if (empty + 1 < 11) {
+                                                  if (name->data[empty] !=
+                                                      cv21[empty]) {
                                                     exitg157 = 1;
                                                   } else {
-                                                    kstr++;
+                                                    empty++;
                                                   }
                                                 } else {
                                                   b_bool = true;
@@ -1224,20 +1170,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                             }
 
                                             if (b_bool) {
-                                              kstr = 21;
+                                              empty = 21;
                                             } else {
                                               b_bool = false;
                                               if (name->size[1] != 13) {
                                               } else {
-                                                kstr = 0;
+                                                empty = 0;
                                                 do {
                                                   exitg156 = 0;
-                                                  if (kstr + 1 < 14) {
-                                                    if (name->data[kstr] !=
-                                                        cv22[kstr]) {
+                                                  if (empty + 1 < 14) {
+                                                    if (name->data[empty] !=
+                                                        cv22[empty]) {
                                                       exitg156 = 1;
                                                     } else {
-                                                      kstr++;
+                                                      empty++;
                                                     }
                                                   } else {
                                                     b_bool = true;
@@ -1247,20 +1193,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                               }
 
                                               if (b_bool) {
-                                                kstr = 22;
+                                                empty = 22;
                                               } else {
                                                 b_bool = false;
                                                 if (name->size[1] != 13) {
                                                 } else {
-                                                  kstr = 0;
+                                                  empty = 0;
                                                   do {
                                                     exitg155 = 0;
-                                                    if (kstr + 1 < 14) {
-                                                      if (name->data[kstr] !=
-                                                          cv23[kstr]) {
+                                                    if (empty + 1 < 14) {
+                                                      if (name->data[empty] !=
+                                                          cv23[empty]) {
                                                         exitg155 = 1;
                                                       } else {
-                                                        kstr++;
+                                                        empty++;
                                                       }
                                                     } else {
                                                       b_bool = true;
@@ -1270,20 +1216,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                 }
 
                                                 if (b_bool) {
-                                                  kstr = 23;
+                                                  empty = 23;
                                                 } else {
                                                   b_bool = false;
                                                   if (name->size[1] != 8) {
                                                   } else {
-                                                    kstr = 0;
+                                                    empty = 0;
                                                     do {
                                                       exitg154 = 0;
-                                                      if (kstr + 1 < 9) {
-                                                        if (name->data[kstr] !=
-                                                            cv24[kstr]) {
+                                                      if (empty + 1 < 9) {
+                                                        if (name->data[empty] !=
+                                                            cv24[empty]) {
                                                           exitg154 = 1;
                                                         } else {
-                                                          kstr++;
+                                                          empty++;
                                                         }
                                                       } else {
                                                         b_bool = true;
@@ -1293,20 +1239,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                   }
 
                                                   if (b_bool) {
-                                                    kstr = 24;
+                                                    empty = 24;
                                                   } else {
                                                     b_bool = false;
                                                     if (name->size[1] != 8) {
                                                     } else {
-                                                      kstr = 0;
+                                                      empty = 0;
                                                       do {
                                                         exitg153 = 0;
-                                                        if (kstr + 1 < 9) {
-                                                          if (name->data[kstr]
-                                                              != cv25[kstr]) {
+                                                        if (empty + 1 < 9) {
+                                                          if (name->data[empty]
+                                                              != cv25[empty]) {
                                                             exitg153 = 1;
                                                           } else {
-                                                            kstr++;
+                                                            empty++;
                                                           }
                                                         } else {
                                                           b_bool = true;
@@ -1316,20 +1262,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                     }
 
                                                     if (b_bool) {
-                                                      kstr = 25;
+                                                      empty = 25;
                                                     } else {
                                                       b_bool = false;
                                                       if (name->size[1] != 11) {
                                                       } else {
-                                                        kstr = 0;
+                                                        empty = 0;
                                                         do {
                                                           exitg152 = 0;
-                                                          if (kstr + 1 < 12) {
-                                                            if (name->data[kstr]
-                                                                != cv26[kstr]) {
+                                                          if (empty + 1 < 12) {
+                                                            if (name->data[empty]
+                                                                != cv26[empty])
+                                                            {
                                                               exitg152 = 1;
                                                             } else {
-                                                              kstr++;
+                                                              empty++;
                                                             }
                                                           } else {
                                                             b_bool = true;
@@ -1339,22 +1286,23 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                       }
 
                                                       if (b_bool) {
-                                                        kstr = 26;
+                                                        empty = 26;
                                                       } else {
                                                         b_bool = false;
                                                         if (name->size[1] != 11)
                                                         {
                                                         } else {
-                                                          kstr = 0;
+                                                          empty = 0;
                                                           do {
                                                             exitg151 = 0;
-                                                            if (kstr + 1 < 12) {
+                                                            if (empty + 1 < 12)
+                                                            {
                                                               if (name->
-                                                                  data[kstr] !=
-                                                                  cv27[kstr]) {
+                                                                  data[empty] !=
+                                                                  cv27[empty]) {
                                                                 exitg151 = 1;
                                                               } else {
-                                                                kstr++;
+                                                                empty++;
                                                               }
                                                             } else {
                                                               b_bool = true;
@@ -1364,24 +1312,25 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                         }
 
                                                         if (b_bool) {
-                                                          kstr = 27;
+                                                          empty = 27;
                                                         } else {
                                                           b_bool = false;
                                                           if (name->size[1] !=
                                                               12) {
                                                           } else {
-                                                            kstr = 0;
+                                                            empty = 0;
                                                             do {
                                                               exitg150 = 0;
-                                                              if (kstr + 1 < 13)
+                                                              if (empty + 1 < 13)
                                                               {
                                                                 if (name->
-                                                                    data[kstr]
-                                                                    != cv28[kstr])
+                                                                    data[empty]
+                                                                    !=
+                                                                    cv28[empty])
                                                                 {
                                                                   exitg150 = 1;
                                                                 } else {
-                                                                  kstr++;
+                                                                  empty++;
                                                                 }
                                                               } else {
                                                                 b_bool = true;
@@ -1392,25 +1341,25 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                           }
 
                                                           if (b_bool) {
-                                                            kstr = 28;
+                                                            empty = 28;
                                                           } else {
                                                             b_bool = false;
                                                             if (name->size[1] !=
                                                                 7) {
                                                             } else {
-                                                              kstr = 0;
+                                                              empty = 0;
                                                               do {
                                                                 exitg149 = 0;
-                                                                if (kstr + 1 < 8)
-                                                                {
+                                                                if (empty + 1 <
+                                                                    8) {
                                                                   if (name->
-                                                                      data[kstr]
+                                                                      data[empty]
                                                                       !=
-                                                                      cv29[kstr])
+                                                                      cv29[empty])
                                                                   {
                                                                     exitg149 = 1;
                                                                   } else {
-                                                                    kstr++;
+                                                                    empty++;
                                                                   }
                                                                 } else {
                                                                   b_bool = true;
@@ -1421,26 +1370,26 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                             }
 
                                                             if (b_bool) {
-                                                              kstr = 29;
+                                                              empty = 29;
                                                             } else {
                                                               b_bool = false;
                                                               if (name->size[1]
                                                                   != 10) {
                                                               } else {
-                                                                kstr = 0;
+                                                                empty = 0;
                                                                 do {
                                                                   exitg148 = 0;
-                                                                  if (kstr + 1 <
+                                                                  if (empty + 1 <
                                                                       11) {
                                                                     if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv30[kstr])
+                                                                      [empty] !=
+                                                                      cv30[empty])
                                                                     {
                                                                       exitg148 =
                                                                       1;
                                                                     } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                     }
                                                                   } else {
                                                                     b_bool =
@@ -1453,26 +1402,26 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                               }
 
                                                               if (b_bool) {
-                                                                kstr = 30;
+                                                                empty = 30;
                                                               } else {
                                                                 b_bool = false;
                                                                 if (name->size[1]
                                                                     != 10) {
                                                                 } else {
-                                                                  kstr = 0;
+                                                                  empty = 0;
                                                                   do {
                                                                     exitg147 = 0;
-                                                                    if (kstr + 1
-                                                                      < 11) {
+                                                                    if (empty +
+                                                                      1 < 11) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv31[kstr])
+                                                                      [empty] !=
+                                                                      cv31[empty])
                                                                       {
                                                                       exitg147 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                     } else {
                                                                       b_bool =
@@ -1486,28 +1435,29 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                 }
 
                                                                 if (b_bool) {
-                                                                  kstr = 31;
+                                                                  empty = 31;
                                                                 } else {
                                                                   b_bool = false;
                                                                   if (name->
                                                                       size[1] !=
                                                                       9) {
                                                                   } else {
-                                                                    kstr = 0;
+                                                                    empty = 0;
                                                                     do {
                                                                       exitg146 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv32[kstr])
+                                                                      [empty] !=
+                                                                      cv32[empty])
                                                                       {
                                                                       exitg146 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1521,7 +1471,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                   }
 
                                                                   if (b_bool) {
-                                                                    kstr = 32;
+                                                                    empty = 32;
                                                                   } else {
                                                                     b_bool =
                                                                       false;
@@ -1530,21 +1480,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                     {
                                                                     } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg145 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv33[kstr])
+                                                                      [empty] !=
+                                                                      cv33[empty])
                                                                       {
                                                                       exitg145 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1559,7 +1509,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                     if (b_bool)
                                                                     {
-                                                                      kstr = 33;
+                                                                      empty = 33;
                                                                     } else {
                                                                       b_bool =
                                                                       false;
@@ -1568,21 +1518,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg144 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv34[kstr])
+                                                                      [empty] !=
+                                                                      cv34[empty])
                                                                       {
                                                                       exitg144 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1597,7 +1548,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 34;
+                                                                      empty = 34;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1606,21 +1557,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg143 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv35[kstr])
+                                                                      [empty] !=
+                                                                      cv35[empty])
                                                                       {
                                                                       exitg143 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1635,7 +1587,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 35;
+                                                                      empty = 35;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1644,21 +1596,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg142 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv36[kstr])
+                                                                      [empty] !=
+                                                                      cv36[empty])
                                                                       {
                                                                       exitg142 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1673,7 +1626,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 36;
+                                                                      empty = 36;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1682,21 +1635,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg141 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv37[kstr])
+                                                                      [empty] !=
+                                                                      cv37[empty])
                                                                       {
                                                                       exitg141 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1711,7 +1665,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 37;
+                                                                      empty = 37;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1720,21 +1674,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg140 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv38[kstr])
+                                                                      [empty] !=
+                                                                      cv38[empty])
                                                                       {
                                                                       exitg140 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1749,7 +1703,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 38;
+                                                                      empty = 38;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1758,21 +1712,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 12)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg139 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 13) {
+                                                                      if (empty
+                                                                      + 1 < 13)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv39[kstr])
+                                                                      [empty] !=
+                                                                      cv39[empty])
                                                                       {
                                                                       exitg139 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1787,7 +1742,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 39;
+                                                                      empty = 39;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1796,21 +1751,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 12)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg138 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 13) {
+                                                                      if (empty
+                                                                      + 1 < 13)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv40[kstr])
+                                                                      [empty] !=
+                                                                      cv40[empty])
                                                                       {
                                                                       exitg138 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1825,7 +1781,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 40;
+                                                                      empty = 40;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1834,21 +1790,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg137 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv41[kstr])
+                                                                      [empty] !=
+                                                                      cv41[empty])
                                                                       {
                                                                       exitg137 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1863,7 +1820,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 41;
+                                                                      empty = 41;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1872,21 +1829,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg136 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv42[kstr])
+                                                                      [empty] !=
+                                                                      cv42[empty])
                                                                       {
                                                                       exitg136 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1901,7 +1858,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 42;
+                                                                      empty = 42;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1910,21 +1867,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg135 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv43[kstr])
+                                                                      [empty] !=
+                                                                      cv43[empty])
                                                                       {
                                                                       exitg135 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1939,7 +1896,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 43;
+                                                                      empty = 43;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1948,21 +1905,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg134 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv44[kstr])
+                                                                      [empty] !=
+                                                                      cv44[empty])
                                                                       {
                                                                       exitg134 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -1977,7 +1935,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 44;
+                                                                      empty = 44;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -1986,21 +1944,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 18)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg133 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 19) {
+                                                                      if (empty
+                                                                      + 1 < 19)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv45[kstr])
+                                                                      [empty] !=
+                                                                      cv45[empty])
                                                                       {
                                                                       exitg133 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2015,7 +1974,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 45;
+                                                                      empty = 45;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2024,21 +1983,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg132 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv46[kstr])
+                                                                      [empty] !=
+                                                                      cv46[empty])
                                                                       {
                                                                       exitg132 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2053,7 +2012,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 46;
+                                                                      empty = 46;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2062,21 +2021,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg131 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv47[kstr])
+                                                                      [empty] !=
+                                                                      cv47[empty])
                                                                       {
                                                                       exitg131 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2091,7 +2051,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 47;
+                                                                      empty = 47;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2100,21 +2060,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg130 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv48[kstr])
+                                                                      [empty] !=
+                                                                      cv48[empty])
                                                                       {
                                                                       exitg130 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2129,7 +2090,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 48;
+                                                                      empty = 48;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2138,21 +2099,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 12)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg129 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 13) {
+                                                                      if (empty
+                                                                      + 1 < 13)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv49[kstr])
+                                                                      [empty] !=
+                                                                      cv49[empty])
                                                                       {
                                                                       exitg129 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2167,7 +2129,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 49;
+                                                                      empty = 49;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2176,21 +2138,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg128 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv50[kstr])
+                                                                      [empty] !=
+                                                                      cv50[empty])
                                                                       {
                                                                       exitg128 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2205,7 +2167,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 50;
+                                                                      empty = 50;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2214,21 +2176,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg127 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv51[kstr])
+                                                                      [empty] !=
+                                                                      cv51[empty])
                                                                       {
                                                                       exitg127 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2243,7 +2205,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 51;
+                                                                      empty = 51;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2252,21 +2214,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg126 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv52[kstr])
+                                                                      [empty] !=
+                                                                      cv52[empty])
                                                                       {
                                                                       exitg126 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2281,7 +2244,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 52;
+                                                                      empty = 52;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2290,21 +2253,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 15)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg125 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 16) {
+                                                                      if (empty
+                                                                      + 1 < 16)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv53[kstr])
+                                                                      [empty] !=
+                                                                      cv53[empty])
                                                                       {
                                                                       exitg125 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2319,7 +2283,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 53;
+                                                                      empty = 53;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2328,21 +2292,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 18)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg124 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 19) {
+                                                                      if (empty
+                                                                      + 1 < 19)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv54[kstr])
+                                                                      [empty] !=
+                                                                      cv54[empty])
                                                                       {
                                                                       exitg124 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2357,7 +2322,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 54;
+                                                                      empty = 54;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2366,21 +2331,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg123 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv55[kstr])
+                                                                      [empty] !=
+                                                                      cv55[empty])
                                                                       {
                                                                       exitg123 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2395,7 +2361,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 55;
+                                                                      empty = 55;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2404,21 +2370,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 14)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg122 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 15) {
+                                                                      if (empty
+                                                                      + 1 < 15)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv56[kstr])
+                                                                      [empty] !=
+                                                                      cv56[empty])
                                                                       {
                                                                       exitg122 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2433,7 +2400,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 56;
+                                                                      empty = 56;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2442,21 +2409,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 15)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg121 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 16) {
+                                                                      if (empty
+                                                                      + 1 < 16)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv57[kstr])
+                                                                      [empty] !=
+                                                                      cv57[empty])
                                                                       {
                                                                       exitg121 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2471,7 +2439,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 57;
+                                                                      empty = 57;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2480,21 +2448,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 12)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg120 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 13) {
+                                                                      if (empty
+                                                                      + 1 < 13)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv58[kstr])
+                                                                      [empty] !=
+                                                                      cv58[empty])
                                                                       {
                                                                       exitg120 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2509,7 +2478,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 58;
+                                                                      empty = 58;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2518,21 +2487,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg119 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv59[kstr])
+                                                                      [empty] !=
+                                                                      cv59[empty])
                                                                       {
                                                                       exitg119 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2547,7 +2517,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 59;
+                                                                      empty = 59;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2556,21 +2526,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg118 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv60[kstr])
+                                                                      [empty] !=
+                                                                      cv60[empty])
                                                                       {
                                                                       exitg118 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2585,7 +2555,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 60;
+                                                                      empty = 60;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2594,21 +2564,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 15)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg117 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 16) {
+                                                                      if (empty
+                                                                      + 1 < 16)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv61[kstr])
+                                                                      [empty] !=
+                                                                      cv61[empty])
                                                                       {
                                                                       exitg117 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2623,7 +2594,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 61;
+                                                                      empty = 61;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2632,21 +2603,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg116 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv62[kstr])
+                                                                      [empty] !=
+                                                                      cv62[empty])
                                                                       {
                                                                       exitg116 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2661,7 +2632,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 62;
+                                                                      empty = 62;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2670,21 +2641,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg115 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv63[kstr])
+                                                                      [empty] !=
+                                                                      cv63[empty])
                                                                       {
                                                                       exitg115 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2699,7 +2670,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 63;
+                                                                      empty = 63;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2708,21 +2679,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg114 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv64[kstr])
+                                                                      [empty] !=
+                                                                      cv64[empty])
                                                                       {
                                                                       exitg114 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2737,7 +2709,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 64;
+                                                                      empty = 64;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2746,21 +2718,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg113 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv65[kstr])
+                                                                      [empty] !=
+                                                                      cv65[empty])
                                                                       {
                                                                       exitg113 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2775,7 +2748,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 65;
+                                                                      empty = 65;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2784,21 +2757,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg112 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv66[kstr])
+                                                                      [empty] !=
+                                                                      cv66[empty])
                                                                       {
                                                                       exitg112 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2813,7 +2787,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 66;
+                                                                      empty = 66;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2822,21 +2796,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg111 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv67[kstr])
+                                                                      [empty] !=
+                                                                      cv67[empty])
                                                                       {
                                                                       exitg111 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2851,7 +2826,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 67;
+                                                                      empty = 67;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2860,21 +2835,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg110 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv68[kstr])
+                                                                      [empty] !=
+                                                                      cv68[empty])
                                                                       {
                                                                       exitg110 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2889,7 +2864,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 68;
+                                                                      empty = 68;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2898,21 +2873,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 14)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg109 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 15) {
+                                                                      if (empty
+                                                                      + 1 < 15)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv69[kstr])
+                                                                      [empty] !=
+                                                                      cv69[empty])
                                                                       {
                                                                       exitg109 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2927,7 +2903,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 69;
+                                                                      empty = 69;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2936,21 +2912,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 14)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg108 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 15) {
+                                                                      if (empty
+                                                                      + 1 < 15)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv70[kstr])
+                                                                      [empty] !=
+                                                                      cv70[empty])
                                                                       {
                                                                       exitg108 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -2965,7 +2942,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 70;
+                                                                      empty = 70;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -2974,21 +2951,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg107 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv71[kstr])
+                                                                      [empty] !=
+                                                                      cv71[empty])
                                                                       {
                                                                       exitg107 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3003,7 +2981,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 71;
+                                                                      empty = 71;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3012,21 +2990,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg106 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv72[kstr])
+                                                                      [empty] !=
+                                                                      cv72[empty])
                                                                       {
                                                                       exitg106 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3041,7 +3020,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 72;
+                                                                      empty = 72;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3050,21 +3029,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg105 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv73[kstr])
+                                                                      [empty] !=
+                                                                      cv73[empty])
                                                                       {
                                                                       exitg105 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3079,7 +3059,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 73;
+                                                                      empty = 73;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3088,21 +3068,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg104 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv74[kstr])
+                                                                      [empty] !=
+                                                                      cv74[empty])
                                                                       {
                                                                       exitg104 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3117,7 +3097,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 74;
+                                                                      empty = 74;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3126,21 +3106,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg103 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv75[kstr])
+                                                                      [empty] !=
+                                                                      cv75[empty])
                                                                       {
                                                                       exitg103 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3155,7 +3135,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 75;
+                                                                      empty = 75;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3164,21 +3144,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 13)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg102 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 14) {
+                                                                      if (empty
+                                                                      + 1 < 14)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv76[kstr])
+                                                                      [empty] !=
+                                                                      cv76[empty])
                                                                       {
                                                                       exitg102 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3193,7 +3174,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 76;
+                                                                      empty = 76;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3202,21 +3183,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 12)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg101 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 13) {
+                                                                      if (empty
+                                                                      + 1 < 13)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv77[kstr])
+                                                                      [empty] !=
+                                                                      cv77[empty])
                                                                       {
                                                                       exitg101 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3231,7 +3213,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 77;
+                                                                      empty = 77;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3240,21 +3222,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg100 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv78[kstr])
+                                                                      [empty] !=
+                                                                      cv78[empty])
                                                                       {
                                                                       exitg100 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3269,7 +3251,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 78;
+                                                                      empty = 78;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3278,21 +3260,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg99 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv79[kstr])
+                                                                      [empty] !=
+                                                                      cv79[empty])
                                                                       {
                                                                       exitg99 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3307,7 +3290,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 79;
+                                                                      empty = 79;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3316,21 +3299,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg98 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv80[kstr])
+                                                                      [empty] !=
+                                                                      cv80[empty])
                                                                       {
                                                                       exitg98 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3345,7 +3329,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 80;
+                                                                      empty = 80;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3354,21 +3338,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg97 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv81[kstr])
+                                                                      [empty] !=
+                                                                      cv81[empty])
                                                                       {
                                                                       exitg97 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3383,7 +3368,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 81;
+                                                                      empty = 81;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3392,21 +3377,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg96 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv82[kstr])
+                                                                      [empty] !=
+                                                                      cv82[empty])
                                                                       {
                                                                       exitg96 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3421,7 +3406,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 82;
+                                                                      empty = 82;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3430,21 +3415,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg95 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv83[kstr])
+                                                                      [empty] !=
+                                                                      cv83[empty])
                                                                       {
                                                                       exitg95 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3459,7 +3444,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 83;
+                                                                      empty = 83;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3468,21 +3453,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg94 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv84[kstr])
+                                                                      [empty] !=
+                                                                      cv84[empty])
                                                                       {
                                                                       exitg94 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3497,7 +3482,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 84;
+                                                                      empty = 84;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3506,21 +3491,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg93 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv85[kstr])
+                                                                      [empty] !=
+                                                                      cv85[empty])
                                                                       {
                                                                       exitg93 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3535,7 +3520,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 85;
+                                                                      empty = 85;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3544,21 +3529,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg92 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv86[kstr])
+                                                                      [empty] !=
+                                                                      cv86[empty])
                                                                       {
                                                                       exitg92 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3573,7 +3558,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 86;
+                                                                      empty = 86;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3582,21 +3567,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg91 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv87[kstr])
+                                                                      [empty] !=
+                                                                      cv87[empty])
                                                                       {
                                                                       exitg91 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3611,7 +3597,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 87;
+                                                                      empty = 87;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3620,21 +3606,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg90 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv88[kstr])
+                                                                      [empty] !=
+                                                                      cv88[empty])
                                                                       {
                                                                       exitg90 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3649,7 +3635,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 88;
+                                                                      empty = 88;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3658,21 +3644,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 13)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg89 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 14) {
+                                                                      if (empty
+                                                                      + 1 < 14)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv89[kstr])
+                                                                      [empty] !=
+                                                                      cv89[empty])
                                                                       {
                                                                       exitg89 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3687,7 +3674,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 89;
+                                                                      empty = 89;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3696,21 +3683,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg88 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv90[kstr])
+                                                                      [empty] !=
+                                                                      cv90[empty])
                                                                       {
                                                                       exitg88 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3725,7 +3713,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 90;
+                                                                      empty = 90;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3734,21 +3722,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg87 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv91[kstr])
+                                                                      [empty] !=
+                                                                      cv91[empty])
                                                                       {
                                                                       exitg87 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3763,7 +3752,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 91;
+                                                                      empty = 91;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3772,21 +3761,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg86 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv92[kstr])
+                                                                      [empty] !=
+                                                                      cv92[empty])
                                                                       {
                                                                       exitg86 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3801,7 +3791,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 92;
+                                                                      empty = 92;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3810,21 +3800,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg85 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv93[kstr])
+                                                                      [empty] !=
+                                                                      cv93[empty])
                                                                       {
                                                                       exitg85 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3839,7 +3830,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 93;
+                                                                      empty = 93;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3848,21 +3839,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg84 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv94[kstr])
+                                                                      [empty] !=
+                                                                      cv94[empty])
                                                                       {
                                                                       exitg84 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3877,7 +3868,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 94;
+                                                                      empty = 94;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3886,21 +3877,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg83 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv95[kstr])
+                                                                      [empty] !=
+                                                                      cv95[empty])
                                                                       {
                                                                       exitg83 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3915,7 +3906,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 95;
+                                                                      empty = 95;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3924,21 +3915,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg82 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv96[kstr])
+                                                                      [empty] !=
+                                                                      cv96[empty])
                                                                       {
                                                                       exitg82 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3953,7 +3944,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 96;
+                                                                      empty = 96;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -3962,21 +3953,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg81 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv97[kstr])
+                                                                      [empty] !=
+                                                                      cv97[empty])
                                                                       {
                                                                       exitg81 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -3991,7 +3982,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 97;
+                                                                      empty = 97;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4000,21 +3991,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg80 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv98[kstr])
+                                                                      [empty] !=
+                                                                      cv98[empty])
                                                                       {
                                                                       exitg80 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4029,7 +4021,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 98;
+                                                                      empty = 98;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4038,21 +4030,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg79 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv99[kstr])
+                                                                      [empty] !=
+                                                                      cv99[empty])
                                                                       {
                                                                       exitg79 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4067,7 +4059,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 99;
+                                                                      empty = 99;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4076,21 +4068,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg78 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv100[kstr])
+                                                                      [empty] !=
+                                                                      cv100[empty])
                                                                       {
                                                                       exitg78 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4105,7 +4097,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 100;
+                                                                      empty =
+                                                                      100;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4114,21 +4107,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg77 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv101[kstr])
+                                                                      [empty] !=
+                                                                      cv101[empty])
                                                                       {
                                                                       exitg77 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4143,7 +4136,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 101;
+                                                                      empty =
+                                                                      101;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4152,21 +4146,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg76 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv102[kstr])
+                                                                      [empty] !=
+                                                                      cv102[empty])
                                                                       {
                                                                       exitg76 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4181,7 +4175,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 102;
+                                                                      empty =
+                                                                      102;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4190,21 +4185,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg75 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv103[kstr])
+                                                                      [empty] !=
+                                                                      cv103[empty])
                                                                       {
                                                                       exitg75 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4219,7 +4215,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 103;
+                                                                      empty =
+                                                                      103;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4228,21 +4225,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg74 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv104[kstr])
+                                                                      [empty] !=
+                                                                      cv104[empty])
                                                                       {
                                                                       exitg74 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4257,7 +4254,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 104;
+                                                                      empty =
+                                                                      104;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4266,21 +4264,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg73 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv105[kstr])
+                                                                      [empty] !=
+                                                                      cv105[empty])
                                                                       {
                                                                       exitg73 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4295,7 +4294,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 105;
+                                                                      empty =
+                                                                      105;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4304,21 +4304,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg72 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv106[kstr])
+                                                                      [empty] !=
+                                                                      cv106[empty])
                                                                       {
                                                                       exitg72 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4333,7 +4333,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 106;
+                                                                      empty =
+                                                                      106;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4342,21 +4343,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg71 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv107[kstr])
+                                                                      [empty] !=
+                                                                      cv107[empty])
                                                                       {
                                                                       exitg71 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4371,7 +4372,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 107;
+                                                                      empty =
+                                                                      107;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4380,21 +4382,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg70 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv108[kstr])
+                                                                      [empty] !=
+                                                                      cv108[empty])
                                                                       {
                                                                       exitg70 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4409,7 +4412,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 108;
+                                                                      empty =
+                                                                      108;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4418,21 +4422,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg69 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv109[kstr])
+                                                                      [empty] !=
+                                                                      cv109[empty])
                                                                       {
                                                                       exitg69 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4447,7 +4452,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 109;
+                                                                      empty =
+                                                                      109;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4456,21 +4462,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg68 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv110[kstr])
+                                                                      [empty] !=
+                                                                      cv110[empty])
                                                                       {
                                                                       exitg68 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4485,7 +4491,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 110;
+                                                                      empty =
+                                                                      110;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4494,21 +4501,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg67 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv111[kstr])
+                                                                      [empty] !=
+                                                                      cv111[empty])
                                                                       {
                                                                       exitg67 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4523,7 +4531,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 111;
+                                                                      empty =
+                                                                      111;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4532,21 +4541,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg66 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv112[kstr])
+                                                                      [empty] !=
+                                                                      cv112[empty])
                                                                       {
                                                                       exitg66 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4561,7 +4570,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 112;
+                                                                      empty =
+                                                                      112;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4570,21 +4580,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg65 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv113[kstr])
+                                                                      [empty] !=
+                                                                      cv113[empty])
                                                                       {
                                                                       exitg65 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4599,7 +4610,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 113;
+                                                                      empty =
+                                                                      113;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4608,21 +4620,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg64 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv114[kstr])
+                                                                      [empty] !=
+                                                                      cv114[empty])
                                                                       {
                                                                       exitg64 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4637,7 +4649,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 114;
+                                                                      empty =
+                                                                      114;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4646,21 +4659,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg63 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv115[kstr])
+                                                                      [empty] !=
+                                                                      cv115[empty])
                                                                       {
                                                                       exitg63 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4675,7 +4688,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 115;
+                                                                      empty =
+                                                                      115;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4684,21 +4698,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg62 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv116[kstr])
+                                                                      [empty] !=
+                                                                      cv116[empty])
                                                                       {
                                                                       exitg62 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4713,7 +4727,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 116;
+                                                                      empty =
+                                                                      116;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4722,21 +4737,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg61 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv117[kstr])
+                                                                      [empty] !=
+                                                                      cv117[empty])
                                                                       {
                                                                       exitg61 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4751,7 +4766,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 117;
+                                                                      empty =
+                                                                      117;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4760,21 +4776,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg60 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv118[kstr])
+                                                                      [empty] !=
+                                                                      cv118[empty])
                                                                       {
                                                                       exitg60 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4789,7 +4805,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 118;
+                                                                      empty =
+                                                                      118;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4798,21 +4815,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 4)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg59 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 5) {
+                                                                      if (empty
+                                                                      + 1 < 5) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv119[kstr])
+                                                                      [empty] !=
+                                                                      cv119[empty])
                                                                       {
                                                                       exitg59 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4827,7 +4844,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 119;
+                                                                      empty =
+                                                                      119;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4836,21 +4854,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg58 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv120[kstr])
+                                                                      [empty] !=
+                                                                      cv120[empty])
                                                                       {
                                                                       exitg58 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4865,7 +4883,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 120;
+                                                                      empty =
+                                                                      120;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4874,21 +4893,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg57 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv121[kstr])
+                                                                      [empty] !=
+                                                                      cv121[empty])
                                                                       {
                                                                       exitg57 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4903,7 +4923,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 121;
+                                                                      empty =
+                                                                      121;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4912,21 +4933,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 4)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg56 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 5) {
+                                                                      if (empty
+                                                                      + 1 < 5) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv122[kstr])
+                                                                      [empty] !=
+                                                                      cv122[empty])
                                                                       {
                                                                       exitg56 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4941,7 +4962,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 122;
+                                                                      empty =
+                                                                      122;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4950,21 +4972,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg55 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv123[kstr])
+                                                                      [empty] !=
+                                                                      cv123[empty])
                                                                       {
                                                                       exitg55 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -4979,7 +5002,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 123;
+                                                                      empty =
+                                                                      123;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -4988,21 +5012,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg54 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv124[kstr])
+                                                                      [empty] !=
+                                                                      cv124[empty])
                                                                       {
                                                                       exitg54 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5017,7 +5041,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 124;
+                                                                      empty =
+                                                                      124;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5026,21 +5051,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg53 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv125[kstr])
+                                                                      [empty] !=
+                                                                      cv125[empty])
                                                                       {
                                                                       exitg53 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5055,7 +5080,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 125;
+                                                                      empty =
+                                                                      125;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5064,21 +5090,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg52 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv126[kstr])
+                                                                      [empty] !=
+                                                                      cv126[empty])
                                                                       {
                                                                       exitg52 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5093,7 +5119,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 126;
+                                                                      empty =
+                                                                      126;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5102,21 +5129,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg51 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv127[kstr])
+                                                                      [empty] !=
+                                                                      cv127[empty])
                                                                       {
                                                                       exitg51 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5131,7 +5158,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 127;
+                                                                      empty =
+                                                                      127;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5140,21 +5168,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg50 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv128[kstr])
+                                                                      [empty] !=
+                                                                      cv128[empty])
                                                                       {
                                                                       exitg50 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5169,7 +5197,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 128;
+                                                                      empty =
+                                                                      128;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5178,21 +5207,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg49 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv129[kstr])
+                                                                      [empty] !=
+                                                                      cv129[empty])
                                                                       {
                                                                       exitg49 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5207,7 +5237,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 129;
+                                                                      empty =
+                                                                      129;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5216,21 +5247,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg48 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv130[kstr])
+                                                                      [empty] !=
+                                                                      cv130[empty])
                                                                       {
                                                                       exitg48 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5245,7 +5277,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 130;
+                                                                      empty =
+                                                                      130;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5254,21 +5287,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg47 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv131[kstr])
+                                                                      [empty] !=
+                                                                      cv131[empty])
                                                                       {
                                                                       exitg47 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5283,7 +5316,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 131;
+                                                                      empty =
+                                                                      131;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5292,21 +5326,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 4)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg46 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 5) {
+                                                                      if (empty
+                                                                      + 1 < 5) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv132[kstr])
+                                                                      [empty] !=
+                                                                      cv132[empty])
                                                                       {
                                                                       exitg46 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5321,7 +5355,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 132;
+                                                                      empty =
+                                                                      132;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5330,21 +5365,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg45 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv133[kstr])
+                                                                      [empty] !=
+                                                                      cv133[empty])
                                                                       {
                                                                       exitg45 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5359,7 +5395,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 133;
+                                                                      empty =
+                                                                      133;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5368,21 +5405,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg44 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv134[kstr])
+                                                                      [empty] !=
+                                                                      cv134[empty])
                                                                       {
                                                                       exitg44 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5397,7 +5435,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 134;
+                                                                      empty =
+                                                                      134;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5406,21 +5445,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg43 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv135[kstr])
+                                                                      [empty] !=
+                                                                      cv135[empty])
                                                                       {
                                                                       exitg43 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5435,7 +5474,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 135;
+                                                                      empty =
+                                                                      135;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5444,21 +5484,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg42 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv136[kstr])
+                                                                      [empty] !=
+                                                                      cv136[empty])
                                                                       {
                                                                       exitg42 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5473,7 +5513,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 136;
+                                                                      empty =
+                                                                      136;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5482,21 +5523,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 7)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg41 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 8) {
+                                                                      if (empty
+                                                                      + 1 < 8) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv137[kstr])
+                                                                      [empty] !=
+                                                                      cv137[empty])
                                                                       {
                                                                       exitg41 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5511,7 +5552,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 137;
+                                                                      empty =
+                                                                      137;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5520,21 +5562,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 12)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg40 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 13) {
+                                                                      if (empty
+                                                                      + 1 < 13)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv138[kstr])
+                                                                      [empty] !=
+                                                                      cv138[empty])
                                                                       {
                                                                       exitg40 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5549,7 +5592,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 138;
+                                                                      empty =
+                                                                      138;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5558,21 +5602,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg39 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv139[kstr])
+                                                                      [empty] !=
+                                                                      cv139[empty])
                                                                       {
                                                                       exitg39 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5587,7 +5631,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 139;
+                                                                      empty =
+                                                                      139;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5596,21 +5641,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 4)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg38 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 5) {
+                                                                      if (empty
+                                                                      + 1 < 5) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv140[kstr])
+                                                                      [empty] !=
+                                                                      cv140[empty])
                                                                       {
                                                                       exitg38 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5625,7 +5670,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 140;
+                                                                      empty =
+                                                                      140;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5634,21 +5680,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg37 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv141[kstr])
+                                                                      [empty] !=
+                                                                      cv141[empty])
                                                                       {
                                                                       exitg37 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5663,7 +5710,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 141;
+                                                                      empty =
+                                                                      141;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5672,21 +5720,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg36 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv142[kstr])
+                                                                      [empty] !=
+                                                                      cv142[empty])
                                                                       {
                                                                       exitg36 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5701,7 +5749,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 142;
+                                                                      empty =
+                                                                      142;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5710,21 +5759,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 4)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg35 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 5) {
+                                                                      if (empty
+                                                                      + 1 < 5) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv143[kstr])
+                                                                      [empty] !=
+                                                                      cv143[empty])
                                                                       {
                                                                       exitg35 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5739,7 +5788,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 143;
+                                                                      empty =
+                                                                      143;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5748,21 +5798,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg34 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv144[kstr])
+                                                                      [empty] !=
+                                                                      cv144[empty])
                                                                       {
                                                                       exitg34 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5777,7 +5827,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 144;
+                                                                      empty =
+                                                                      144;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5786,21 +5837,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg33 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv145[kstr])
+                                                                      [empty] !=
+                                                                      cv145[empty])
                                                                       {
                                                                       exitg33 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5815,7 +5866,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 145;
+                                                                      empty =
+                                                                      145;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5824,21 +5876,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg32 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv146[kstr])
+                                                                      [empty] !=
+                                                                      cv146[empty])
                                                                       {
                                                                       exitg32 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5853,7 +5905,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 146;
+                                                                      empty =
+                                                                      146;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5862,21 +5915,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg31 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv147[kstr])
+                                                                      [empty] !=
+                                                                      cv147[empty])
                                                                       {
                                                                       exitg31 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5891,7 +5944,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 147;
+                                                                      empty =
+                                                                      147;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5900,21 +5954,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 9)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg30 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 10) {
+                                                                      if (empty
+                                                                      + 1 < 10)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv148[kstr])
+                                                                      [empty] !=
+                                                                      cv148[empty])
                                                                       {
                                                                       exitg30 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5929,7 +5984,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 148;
+                                                                      empty =
+                                                                      148;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5938,21 +5994,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 14)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg29 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 15) {
+                                                                      if (empty
+                                                                      + 1 < 15)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv149[kstr])
+                                                                      [empty] !=
+                                                                      cv149[empty])
                                                                       {
                                                                       exitg29 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -5967,7 +6024,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 149;
+                                                                      empty =
+                                                                      149;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -5976,21 +6034,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 5)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg28 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 6) {
+                                                                      if (empty
+                                                                      + 1 < 6) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv150[kstr])
+                                                                      [empty] !=
+                                                                      cv150[empty])
                                                                       {
                                                                       exitg28 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6005,7 +6063,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 150;
+                                                                      empty =
+                                                                      150;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6014,21 +6073,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg27 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv151[kstr])
+                                                                      [empty] !=
+                                                                      cv151[empty])
                                                                       {
                                                                       exitg27 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6043,7 +6102,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 151;
+                                                                      empty =
+                                                                      151;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6052,21 +6112,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 8)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg26 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 9) {
+                                                                      if (empty
+                                                                      + 1 < 9) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv152[kstr])
+                                                                      [empty] !=
+                                                                      cv152[empty])
                                                                       {
                                                                       exitg26 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6081,7 +6141,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 152;
+                                                                      empty =
+                                                                      152;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6090,21 +6151,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 12)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg25 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 13) {
+                                                                      if (empty
+                                                                      + 1 < 13)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv153[kstr])
+                                                                      [empty] !=
+                                                                      cv153[empty])
                                                                       {
                                                                       exitg25 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6119,7 +6181,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 153;
+                                                                      empty =
+                                                                      153;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6128,21 +6191,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 14)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg24 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 15) {
+                                                                      if (empty
+                                                                      + 1 < 15)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv154[kstr])
+                                                                      [empty] !=
+                                                                      cv154[empty])
                                                                       {
                                                                       exitg24 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6157,7 +6221,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 154;
+                                                                      empty =
+                                                                      154;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6166,21 +6231,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg23 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv155[kstr])
+                                                                      [empty] !=
+                                                                      cv155[empty])
                                                                       {
                                                                       exitg23 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6195,7 +6261,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 155;
+                                                                      empty =
+                                                                      155;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6204,21 +6271,21 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 6)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg22 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 7) {
+                                                                      if (empty
+                                                                      + 1 < 7) {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv156[kstr])
+                                                                      [empty] !=
+                                                                      cv156[empty])
                                                                       {
                                                                       exitg22 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6233,7 +6300,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 156;
+                                                                      empty =
+                                                                      156;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6242,21 +6310,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 10)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg21 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 11) {
+                                                                      if (empty
+                                                                      + 1 < 11)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv157[kstr])
+                                                                      [empty] !=
+                                                                      cv157[empty])
                                                                       {
                                                                       exitg21 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6271,7 +6340,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 157;
+                                                                      empty =
+                                                                      157;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6280,21 +6350,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 11)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg20 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 12) {
+                                                                      if (empty
+                                                                      + 1 < 12)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv158[kstr])
+                                                                      [empty] !=
+                                                                      cv158[empty])
                                                                       {
                                                                       exitg20 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6309,7 +6380,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 158;
+                                                                      empty =
+                                                                      158;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6318,21 +6390,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 16)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg19 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 17) {
+                                                                      if (empty
+                                                                      + 1 < 17)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv159[kstr])
+                                                                      [empty] !=
+                                                                      cv159[empty])
                                                                       {
                                                                       exitg19 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6347,7 +6420,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 159;
+                                                                      empty =
+                                                                      159;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6356,21 +6430,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 21)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg18 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 22) {
+                                                                      if (empty
+                                                                      + 1 < 22)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv160[kstr])
+                                                                      [empty] !=
+                                                                      cv160[empty])
                                                                       {
                                                                       exitg18 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6385,7 +6460,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 160;
+                                                                      empty =
+                                                                      160;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6394,21 +6470,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 16)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg17 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 17) {
+                                                                      if (empty
+                                                                      + 1 < 17)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv161[kstr])
+                                                                      [empty] !=
+                                                                      cv161[empty])
                                                                       {
                                                                       exitg17 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6423,7 +6500,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 161;
+                                                                      empty =
+                                                                      161;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6432,21 +6510,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 16)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg16 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 17) {
+                                                                      if (empty
+                                                                      + 1 < 17)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv162[kstr])
+                                                                      [empty] !=
+                                                                      cv162[empty])
                                                                       {
                                                                       exitg16 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6461,7 +6540,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 162;
+                                                                      empty =
+                                                                      162;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6470,21 +6550,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 15)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg15 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 16) {
+                                                                      if (empty
+                                                                      + 1 < 16)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv163[kstr])
+                                                                      [empty] !=
+                                                                      cv163[empty])
                                                                       {
                                                                       exitg15 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6499,7 +6580,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 163;
+                                                                      empty =
+                                                                      163;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6508,21 +6590,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 12)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg14 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 13) {
+                                                                      if (empty
+                                                                      + 1 < 13)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv164[kstr])
+                                                                      [empty] !=
+                                                                      cv164[empty])
                                                                       {
                                                                       exitg14 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6537,7 +6620,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 164;
+                                                                      empty =
+                                                                      164;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6546,21 +6630,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 18)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg13 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 19) {
+                                                                      if (empty
+                                                                      + 1 < 19)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv165[kstr])
+                                                                      [empty] !=
+                                                                      cv165[empty])
                                                                       {
                                                                       exitg13 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6575,7 +6660,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 165;
+                                                                      empty =
+                                                                      165;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6584,21 +6670,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 13)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg12 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 14) {
+                                                                      if (empty
+                                                                      + 1 < 14)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv166[kstr])
+                                                                      [empty] !=
+                                                                      cv166[empty])
                                                                       {
                                                                       exitg12 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6613,7 +6700,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 166;
+                                                                      empty =
+                                                                      166;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6622,21 +6710,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 14)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg11 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 15) {
+                                                                      if (empty
+                                                                      + 1 < 15)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv167[kstr])
+                                                                      [empty] !=
+                                                                      cv167[empty])
                                                                       {
                                                                       exitg11 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6651,7 +6740,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 167;
+                                                                      empty =
+                                                                      167;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6660,21 +6750,22 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 14)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg10 =
                                                                       0;
-                                                                      if (kstr +
-                                                                      1 < 15) {
+                                                                      if (empty
+                                                                      + 1 < 15)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv168[kstr])
+                                                                      [empty] !=
+                                                                      cv168[empty])
                                                                       {
                                                                       exitg10 =
                                                                       1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6689,7 +6780,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 168;
+                                                                      empty =
+                                                                      168;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6698,19 +6790,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 20)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg9 = 0;
-                                                                      if (kstr +
-                                                                      1 < 21) {
+                                                                      if (empty
+                                                                      + 1 < 21)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv169[kstr])
+                                                                      [empty] !=
+                                                                      cv169[empty])
                                                                       {
                                                                       exitg9 = 1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6724,7 +6817,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 169;
+                                                                      empty =
+                                                                      169;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6733,19 +6827,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 21)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg8 = 0;
-                                                                      if (kstr +
-                                                                      1 < 22) {
+                                                                      if (empty
+                                                                      + 1 < 22)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv170[kstr])
+                                                                      [empty] !=
+                                                                      cv170[empty])
                                                                       {
                                                                       exitg8 = 1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6759,7 +6854,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 170;
+                                                                      empty =
+                                                                      170;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6768,19 +6864,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 15)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg7 = 0;
-                                                                      if (kstr +
-                                                                      1 < 16) {
+                                                                      if (empty
+                                                                      + 1 < 16)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv171[kstr])
+                                                                      [empty] !=
+                                                                      cv171[empty])
                                                                       {
                                                                       exitg7 = 1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6794,7 +6891,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 171;
+                                                                      empty =
+                                                                      171;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6803,19 +6901,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 15)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg6 = 0;
-                                                                      if (kstr +
-                                                                      1 < 16) {
+                                                                      if (empty
+                                                                      + 1 < 16)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv172[kstr])
+                                                                      [empty] !=
+                                                                      cv172[empty])
                                                                       {
                                                                       exitg6 = 1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6829,7 +6928,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 172;
+                                                                      empty =
+                                                                      172;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6838,19 +6938,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 14)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg5 = 0;
-                                                                      if (kstr +
-                                                                      1 < 15) {
+                                                                      if (empty
+                                                                      + 1 < 15)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv173[kstr])
+                                                                      [empty] !=
+                                                                      cv173[empty])
                                                                       {
                                                                       exitg5 = 1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6864,7 +6965,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 173;
+                                                                      empty =
+                                                                      173;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6873,19 +6975,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 12)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg4 = 0;
-                                                                      if (kstr +
-                                                                      1 < 13) {
+                                                                      if (empty
+                                                                      + 1 < 13)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv174[kstr])
+                                                                      [empty] !=
+                                                                      cv174[empty])
                                                                       {
                                                                       exitg4 = 1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6899,7 +7002,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 174;
+                                                                      empty =
+                                                                      174;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6908,19 +7012,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 17)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg3 = 0;
-                                                                      if (kstr +
-                                                                      1 < 18) {
+                                                                      if (empty
+                                                                      + 1 < 18)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv175[kstr])
+                                                                      [empty] !=
+                                                                      cv175[empty])
                                                                       {
                                                                       exitg3 = 1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6934,7 +7039,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 175;
+                                                                      empty =
+                                                                      175;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6943,19 +7049,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 14)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg2 = 0;
-                                                                      if (kstr +
-                                                                      1 < 15) {
+                                                                      if (empty
+                                                                      + 1 < 15)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv176[kstr])
+                                                                      [empty] !=
+                                                                      cv176[empty])
                                                                       {
                                                                       exitg2 = 1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -6969,7 +7076,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 176;
+                                                                      empty =
+                                                                      176;
                                                                       } else {
                                                                       b_bool =
                                                                       false;
@@ -6978,19 +7086,20 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                                                                       [1] != 15)
                                                                       {
                                                                       } else {
-                                                                      kstr = 0;
+                                                                      empty = 0;
                                                                       do {
                                                                       exitg1 = 0;
-                                                                      if (kstr +
-                                                                      1 < 16) {
+                                                                      if (empty
+                                                                      + 1 < 16)
+                                                                      {
                                                                       if
                                                                       (name->data
-                                                                      [kstr] !=
-                                                                      cv177[kstr])
+                                                                      [empty] !=
+                                                                      cv177[empty])
                                                                       {
                                                                       exitg1 = 1;
                                                                       } else {
-                                                                      kstr++;
+                                                                      empty++;
                                                                       }
                                                                       } else {
                                                                       b_bool =
@@ -7004,9 +7113,10 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
                                                                       if (b_bool)
                                                                       {
-                                                                      kstr = 177;
+                                                                      empty =
+                                                                      177;
                                                                       } else {
-                                                                      kstr = -1;
+                                                                      empty = -1;
                                                                       }
                                                                       }
                                                                       }
@@ -7188,7 +7298,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
 
   emxInit_char_T(&b_str, 2);
   emxInit_uint8_T(&str1, 2);
-  switch (kstr) {
+  switch (empty) {
    case 0:
     c_str = (NULL);
     empty = !(c_str);
@@ -7203,8 +7313,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7219,8 +7329,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7241,8 +7351,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7257,8 +7367,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7279,8 +7389,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7295,8 +7405,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7317,8 +7427,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7333,8 +7443,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7355,8 +7465,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7371,8 +7481,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7393,8 +7503,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7409,8 +7519,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7431,8 +7541,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7447,8 +7557,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7469,8 +7579,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7485,8 +7595,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7507,8 +7617,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7523,8 +7633,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7545,8 +7655,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7561,8 +7671,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7583,8 +7693,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7599,8 +7709,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7621,8 +7731,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7637,8 +7747,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7659,8 +7769,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7675,8 +7785,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7697,8 +7807,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7713,8 +7823,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7735,8 +7845,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7751,8 +7861,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7773,8 +7883,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7789,8 +7899,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7811,8 +7921,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7827,8 +7937,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7849,8 +7959,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7865,8 +7975,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7887,8 +7997,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7903,8 +8013,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7925,8 +8035,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7941,8 +8051,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -7963,8 +8073,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -7979,8 +8089,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8001,8 +8111,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8017,8 +8127,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8039,8 +8149,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8055,8 +8165,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8077,8 +8187,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8093,8 +8203,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8115,8 +8225,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8131,8 +8241,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8153,8 +8263,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8169,8 +8279,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8191,8 +8301,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8207,8 +8317,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8229,8 +8339,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8245,8 +8355,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8267,8 +8377,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8283,8 +8393,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8305,8 +8415,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8321,8 +8431,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8343,8 +8453,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8359,8 +8469,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8381,8 +8491,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8397,8 +8507,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8419,8 +8529,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8435,8 +8545,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8457,8 +8567,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8473,8 +8583,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8495,8 +8605,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8511,8 +8621,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8533,8 +8643,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8549,8 +8659,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8571,8 +8681,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8587,8 +8697,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8609,8 +8719,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8625,8 +8735,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8647,8 +8757,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8663,8 +8773,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8685,8 +8795,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8701,8 +8811,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8723,8 +8833,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8739,8 +8849,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8761,8 +8871,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8777,8 +8887,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8799,8 +8909,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8815,8 +8925,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8837,8 +8947,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8853,8 +8963,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8875,8 +8985,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8891,8 +9001,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8913,8 +9023,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8929,8 +9039,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8951,8 +9061,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -8967,8 +9077,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -8989,8 +9099,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9005,8 +9115,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9027,8 +9137,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9043,8 +9153,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9065,8 +9175,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9081,8 +9191,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9103,8 +9213,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9119,8 +9229,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9141,8 +9251,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9157,8 +9267,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9179,8 +9289,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9195,8 +9305,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9217,8 +9327,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9233,8 +9343,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9255,8 +9365,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9271,8 +9381,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9293,8 +9403,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9309,8 +9419,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9331,8 +9441,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9347,8 +9457,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9369,8 +9479,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9385,8 +9495,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9407,8 +9517,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9423,8 +9533,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9445,8 +9555,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9461,8 +9571,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9483,8 +9593,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9499,8 +9609,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9521,8 +9631,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9537,8 +9647,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9559,8 +9669,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9575,8 +9685,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9597,8 +9707,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9613,8 +9723,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9635,8 +9745,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9651,8 +9761,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9673,8 +9783,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9689,8 +9799,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9711,8 +9821,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9727,8 +9837,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9749,8 +9859,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9765,8 +9875,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9787,8 +9897,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9803,8 +9913,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9825,8 +9935,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9841,8 +9951,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9863,8 +9973,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9879,8 +9989,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9901,8 +10011,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9917,8 +10027,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9939,8 +10049,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9955,8 +10065,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -9977,8 +10087,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -9993,8 +10103,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10015,8 +10125,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10031,8 +10141,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10053,8 +10163,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10069,8 +10179,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10091,8 +10201,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10107,8 +10217,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10129,8 +10239,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10145,8 +10255,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10167,8 +10277,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10183,8 +10293,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10205,8 +10315,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10221,8 +10331,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10243,8 +10353,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10259,8 +10369,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10281,8 +10391,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10297,8 +10407,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10319,8 +10429,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10335,8 +10445,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10357,8 +10467,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10373,8 +10483,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10395,8 +10505,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10411,8 +10521,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10433,8 +10543,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10449,8 +10559,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10471,8 +10581,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10487,8 +10597,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10509,8 +10619,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10525,8 +10635,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10547,8 +10657,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10563,8 +10673,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10585,8 +10695,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10601,8 +10711,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10623,8 +10733,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10639,8 +10749,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10661,8 +10771,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10677,8 +10787,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10699,8 +10809,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10715,8 +10825,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10737,8 +10847,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10753,8 +10863,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10775,8 +10885,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10791,8 +10901,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10813,8 +10923,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10829,8 +10939,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10851,8 +10961,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10867,8 +10977,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10889,8 +10999,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10905,8 +11015,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10927,8 +11037,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10943,8 +11053,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -10965,8 +11075,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -10981,8 +11091,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11003,8 +11113,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11019,8 +11129,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11041,8 +11151,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11057,8 +11167,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11079,8 +11189,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11095,8 +11205,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11117,8 +11227,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11133,8 +11243,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11155,8 +11265,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11171,8 +11281,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11193,8 +11303,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11209,8 +11319,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11231,8 +11341,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11247,8 +11357,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11269,8 +11379,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11285,8 +11395,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11307,8 +11417,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11323,8 +11433,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11345,8 +11455,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11361,8 +11471,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11383,8 +11493,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11399,8 +11509,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11421,8 +11531,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11437,8 +11547,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11459,8 +11569,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11475,8 +11585,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11497,8 +11607,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11513,8 +11623,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11535,8 +11645,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11551,8 +11661,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11573,8 +11683,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11589,8 +11699,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11611,8 +11721,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11627,8 +11737,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11649,8 +11759,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11665,8 +11775,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11687,8 +11797,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11703,8 +11813,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11725,8 +11835,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11741,8 +11851,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11763,8 +11873,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11779,8 +11889,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11801,8 +11911,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11817,8 +11927,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11839,8 +11949,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11855,8 +11965,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11877,8 +11987,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11893,8 +12003,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11915,8 +12025,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11931,8 +12041,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11953,8 +12063,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -11969,8 +12079,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -11991,8 +12101,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12007,8 +12117,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12029,8 +12139,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12045,8 +12155,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12067,8 +12177,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12083,8 +12193,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12105,8 +12215,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12121,8 +12231,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12143,8 +12253,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12159,8 +12269,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12181,8 +12291,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12197,8 +12307,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12219,8 +12329,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12235,8 +12345,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12257,8 +12367,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12273,8 +12383,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12295,8 +12405,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12311,8 +12421,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12333,8 +12443,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12349,8 +12459,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12371,8 +12481,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12387,8 +12497,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12409,8 +12519,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12425,8 +12535,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12447,8 +12557,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12463,8 +12573,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12485,8 +12595,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12501,8 +12611,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12523,8 +12633,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12539,8 +12649,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12561,8 +12671,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12577,8 +12687,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12599,8 +12709,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12615,8 +12725,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12637,8 +12747,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12653,8 +12763,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12675,8 +12785,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12691,8 +12801,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12713,8 +12823,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12729,8 +12839,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12751,8 +12861,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12767,8 +12877,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12789,8 +12899,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12805,8 +12915,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12827,8 +12937,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12843,8 +12953,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12865,8 +12975,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12881,8 +12991,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12903,8 +13013,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12919,8 +13029,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12941,8 +13051,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12957,8 +13067,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -12979,8 +13089,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -12995,8 +13105,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13017,8 +13127,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13033,8 +13143,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13055,8 +13165,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13071,8 +13181,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13093,8 +13203,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13109,8 +13219,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13131,8 +13241,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13147,8 +13257,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13169,8 +13279,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13185,8 +13295,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13207,8 +13317,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13223,8 +13333,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13245,8 +13355,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13261,8 +13371,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13283,8 +13393,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13299,8 +13409,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13321,8 +13431,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13337,8 +13447,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13359,8 +13469,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13375,8 +13485,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13397,8 +13507,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13413,8 +13523,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13435,8 +13545,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13451,8 +13561,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13473,8 +13583,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13489,8 +13599,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13511,8 +13621,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13527,8 +13637,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13549,8 +13659,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13565,8 +13675,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13587,8 +13697,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13603,8 +13713,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13625,8 +13735,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13641,8 +13751,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13663,8 +13773,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13679,8 +13789,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13701,8 +13811,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13717,8 +13827,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13739,8 +13849,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13755,8 +13865,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13777,8 +13887,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13793,8 +13903,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13815,8 +13925,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13831,8 +13941,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13853,8 +13963,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13869,8 +13979,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13891,8 +14001,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13907,8 +14017,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13929,8 +14039,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       }
 
       ptr = (char *)(c_str);
-      for (i = 1; i <= n; i++) {
-        str1->data[i - 1] = *(ptr);
+      for (empty = 1; empty <= n; empty++) {
+        str1->data[empty - 1] = *(ptr);
         ptr = M2C_OFFSET_PTR(ptr, 1);
       }
     } else {
@@ -13945,8 +14055,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     str->size[0] = 1;
     str->size[1] = b_str->size[1];
     emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-    kstr = b_str->size[0] * b_str->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = b_str->size[0] * b_str->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       str->data[i0] = b_str->data[i0];
     }
 
@@ -13959,8 +14069,8 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
     b_name->size[0] = 1;
     b_name->size[1] = name->size[1] + 1;
     emxEnsureCapacity((emxArray__common *)b_name, i0, (int)sizeof(char));
-    kstr = name->size[1];
-    for (i0 = 0; i0 < kstr; i0++) {
+    empty = name->size[1];
+    for (i0 = 0; i0 < empty; i0++) {
       b_name->data[b_name->size[0] * i0] = name->data[name->size[0] * i0];
     }
 

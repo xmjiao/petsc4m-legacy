@@ -5,12 +5,14 @@
 static void b_m2c_error(int varargin_3);
 static void emxFreeStruct_struct0_T(struct0_T *pStruct);
 static void emxInitStruct_struct0_T(struct0_T *pStruct);
-static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "PCGetOptionsPrefix returned error code %d\n",
-            varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "PCGetOptionsPrefix returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct)
@@ -21,32 +23,20 @@ static void emxFreeStruct_struct0_T(struct0_T *pStruct)
 
 static void emxInitStruct_struct0_T(struct0_T *pStruct)
 {
-  emxInit_uint8_T1(&pStruct->data, 1);
+  emxInit_uint8_T(&pStruct->data, 1);
   emxInit_char_T(&pStruct->type, 2);
-}
-
-static void emxInit_uint8_T1(emxArray_uint8_T **pEmxArray, int numDimensions)
-{
-  emxArray_uint8_T *emxArray;
-  int i;
-  *pEmxArray = (emxArray_uint8_T *)malloc(sizeof(emxArray_uint8_T));
-  emxArray = *pEmxArray;
-  emxArray->data = (unsigned char *)NULL;
-  emxArray->numDimensions = numDimensions;
-  emxArray->size = (int *)malloc((unsigned int)(sizeof(int) * numDimensions));
-  emxArray->allocatedSize = 0;
-  emxArray->canFreeData = true;
-  for (i = 0; i < numDimensions; i++) {
-    emxArray->size[i] = 0;
-  }
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
+  const char * msgid;
+  const char * fmt;
   int i1;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected PC.\n";
   i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
@@ -56,8 +46,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i1] = varargin_3->data[i1];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected PC.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -81,31 +70,27 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
 {
   boolean_T p;
   boolean_T b_p;
-  int k;
+  int noprefx;
   int exitg2;
-  int i0;
   boolean_T exitg1;
   emxArray_char_T *b_pc;
   static const char cv0[2] = { 'P', 'C' };
 
   emxArray_uint8_T *data;
+  int i0;
   PC t_pc;
   const char * str0;
-  int noprefx;
   emxArray_uint8_T *str1;
-  int n;
-  unsigned int uv0[2];
   p = false;
   b_p = false;
-  k = 0;
+  noprefx = 0;
   do {
     exitg2 = 0;
-    if (k < 2) {
-      i0 = pc->type->size[k];
-      if (i0 != k + 1) {
+    if (noprefx < 2) {
+      if (pc->type->size[noprefx] != 1 + noprefx) {
         exitg2 = 1;
       } else {
-        k++;
+        noprefx++;
       }
     } else {
       b_p = true;
@@ -114,14 +99,14 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
   } while (exitg2 == 0);
 
   if (b_p && (!(pc->type->size[1] == 0))) {
-    k = 0;
+    noprefx = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 2)) {
-      if (!(pc->type->data[k] == cv0[k])) {
+    while ((!exitg1) && (noprefx < 2)) {
+      if (!(pc->type->data[noprefx] == cv0[noprefx])) {
         b_p = false;
         exitg1 = true;
       } else {
-        k++;
+        noprefx++;
       }
     }
   }
@@ -137,8 +122,8 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
     b_pc->size[0] = 1;
     b_pc->size[1] = pc->type->size[1] + 1;
     emxEnsureCapacity((emxArray__common *)b_pc, i0, (int)sizeof(char));
-    k = pc->type->size[1];
-    for (i0 = 0; i0 < k; i0++) {
+    noprefx = pc->type->size[1];
+    for (i0 = 0; i0 < noprefx; i0++) {
       b_pc->data[b_pc->size[0] * i0] = pc->type->data[pc->type->size[0] * i0];
     }
 
@@ -147,12 +132,12 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
     emxFree_char_T(&b_pc);
   }
 
-  emxInit_uint8_T1(&data, 1);
+  emxInit_uint8_T(&data, 1);
   i0 = data->size[0];
   data->size[0] = pc->data->size[0];
   emxEnsureCapacity((emxArray__common *)data, i0, (int)sizeof(unsigned char));
-  k = pc->data->size[0];
-  for (i0 = 0; i0 < k; i0++) {
+  noprefx = pc->data->size[0];
+  for (i0 = 0; i0 < noprefx; i0++) {
     data->data[i0] = pc->data->data[i0];
   }
 
@@ -167,16 +152,16 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
   noprefx = !(str0);
   emxInit_uint8_T(&str1, 2);
   if (!(noprefx != 0)) {
-    n = strlen(str0) + 1;
+    noprefx = strlen(str0) + 1;
     i0 = str1->size[0] * str1->size[1];
     str1->size[0] = 1;
-    str1->size[1] = n;
+    str1->size[1] = noprefx;
     emxEnsureCapacity((emxArray__common *)str1, i0, (int)sizeof(unsigned char));
-    for (i0 = 0; i0 < n; i0++) {
+    for (i0 = 0; i0 < noprefx; i0++) {
       str1->data[i0] = 0;
     }
 
-    memcpy(&str1->data[0], str0, n);
+    memcpy(&str1->data[0], str0, noprefx);
   } else {
     i0 = str1->size[0] * str1->size[1];
     str1->size[0] = 1;
@@ -184,16 +169,12 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
     emxEnsureCapacity((emxArray__common *)str1, i0, (int)sizeof(unsigned char));
   }
 
-  for (i0 = 0; i0 < 2; i0++) {
-    uv0[i0] = (unsigned int)str1->size[i0];
-  }
-
   i0 = str->size[0] * str->size[1];
   str->size[0] = 1;
-  str->size[1] = (int)uv0[1];
+  str->size[1] = str1->size[1];
   emxEnsureCapacity((emxArray__common *)str, i0, (int)sizeof(char));
-  k = (int)uv0[1];
-  for (i0 = 0; i0 < k; i0++) {
+  noprefx = str1->size[1];
+  for (i0 = 0; i0 < noprefx; i0++) {
     str->data[i0] = (signed char)str1->data[i0];
   }
 

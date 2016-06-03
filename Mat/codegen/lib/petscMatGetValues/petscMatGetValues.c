@@ -8,8 +8,11 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
-  M2C_error("petsc:RuntimeError", "MatGetValues returned error code %d\n",
-            varargin_3);
+  const char * msgid;
+  const char * fmt;
+  msgid = "petsc:RuntimeError";
+  fmt = "MatGetValues returned error code %d\n";
+  M2C_error(msgid, fmt, varargin_3);
 }
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct)
@@ -27,9 +30,13 @@ static void emxInitStruct_struct0_T(struct0_T *pStruct)
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
+  const char * msgid;
+  const char * fmt;
   int i0;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
+  msgid = "m2c_opaque_obj:WrongInput";
+  fmt = "Incorrect data type %s. Expected Mat.\n";
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
@@ -39,8 +46,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
     b_varargin_3->data[i0] = varargin_3->data[i0];
   }
 
-  M2C_error("m2c_opaque_obj:WrongInput",
-            "Incorrect data type %s. Expected Mat.\n", &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -72,12 +78,12 @@ int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
   boolean_T b_p;
   int k;
   int exitg2;
-  int i2;
   boolean_T exitg1;
   emxArray_char_T *b_mat;
   static const char cv1[3] = { 'M', 'a', 't' };
 
   emxArray_uint8_T *data;
+  int loop_ub;
   Mat t_mat;
   p = false;
   b_p = false;
@@ -85,8 +91,7 @@ int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
   do {
     exitg2 = 0;
     if (k < 2) {
-      i2 = mat->type->size[k];
-      if (i2 != (k << 1) + 1) {
+      if (mat->type->size[k] != 1 + (k << 1)) {
         exitg2 = 1;
       } else {
         k++;
@@ -117,13 +122,13 @@ int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
 
   if (!p) {
     emxInit_char_T(&b_mat, 2);
-    i2 = b_mat->size[0] * b_mat->size[1];
+    k = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat, i2, (int)sizeof(char));
-    k = mat->type->size[1];
-    for (i2 = 0; i2 < k; i2++) {
-      b_mat->data[b_mat->size[0] * i2] = mat->type->data[mat->type->size[0] * i2];
+    emxEnsureCapacity((emxArray__common *)b_mat, k, (int)sizeof(char));
+    loop_ub = mat->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_mat->data[b_mat->size[0] * k] = mat->type->data[mat->type->size[0] * k];
     }
 
     b_mat->data[b_mat->size[0] * mat->type->size[1]] = '\x00';
@@ -132,12 +137,12 @@ int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
   }
 
   emxInit_uint8_T(&data, 1);
-  i2 = data->size[0];
+  k = data->size[0];
   data->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i2, (int)sizeof(unsigned char));
-  k = mat->data->size[0];
-  for (i2 = 0; i2 < k; i2++) {
-    data->data[i2] = mat->data->data[i2];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = mat->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = mat->data->data[k];
   }
 
   t_mat = *(Mat*)(&data->data[0]);
@@ -158,12 +163,12 @@ void petscMatGetValues_Alloc(const struct0_T *mat, int ni, const
   boolean_T b_p;
   int k;
   int exitg2;
-  int i1;
   boolean_T exitg1;
   emxArray_char_T *b_mat;
   static const char cv0[3] = { 'M', 'a', 't' };
 
   emxArray_uint8_T *data;
+  int loop_ub;
   Mat t_mat;
   p = false;
   b_p = false;
@@ -171,8 +176,7 @@ void petscMatGetValues_Alloc(const struct0_T *mat, int ni, const
   do {
     exitg2 = 0;
     if (k < 2) {
-      i1 = mat->type->size[k];
-      if (i1 != (k << 1) + 1) {
+      if (mat->type->size[k] != 1 + (k << 1)) {
         exitg2 = 1;
       } else {
         k++;
@@ -203,13 +207,13 @@ void petscMatGetValues_Alloc(const struct0_T *mat, int ni, const
 
   if (!p) {
     emxInit_char_T(&b_mat, 2);
-    i1 = b_mat->size[0] * b_mat->size[1];
+    k = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat, i1, (int)sizeof(char));
-    k = mat->type->size[1];
-    for (i1 = 0; i1 < k; i1++) {
-      b_mat->data[b_mat->size[0] * i1] = mat->type->data[mat->type->size[0] * i1];
+    emxEnsureCapacity((emxArray__common *)b_mat, k, (int)sizeof(char));
+    loop_ub = mat->type->size[1];
+    for (k = 0; k < loop_ub; k++) {
+      b_mat->data[b_mat->size[0] * k] = mat->type->data[mat->type->size[0] * k];
     }
 
     b_mat->data[b_mat->size[0] * mat->type->size[1]] = '\x00';
@@ -218,18 +222,18 @@ void petscMatGetValues_Alloc(const struct0_T *mat, int ni, const
   }
 
   emxInit_uint8_T(&data, 1);
-  i1 = data->size[0];
+  k = data->size[0];
   data->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i1, (int)sizeof(unsigned char));
-  k = mat->data->size[0];
-  for (i1 = 0; i1 < k; i1++) {
-    data->data[i1] = mat->data->data[i1];
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
+  loop_ub = mat->data->size[0];
+  for (k = 0; k < loop_ub; k++) {
+    data->data[k] = mat->data->data[k];
   }
 
   t_mat = *(Mat*)(&data->data[0]);
-  i1 = v->size[0];
+  k = v->size[0];
   v->size[0] = ni * nj;
-  emxEnsureCapacity((emxArray__common *)v, i1, (int)sizeof(double));
+  emxEnsureCapacity((emxArray__common *)v, k, (int)sizeof(double));
   k = MatGetValues(t_mat, ni, &ix->data[0], nj, &jx->data[0], &v->data[0]);
   emxFree_uint8_T(&data);
   if (k != 0) {
