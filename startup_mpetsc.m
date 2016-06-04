@@ -14,11 +14,9 @@ addpath([mpetsc_root '/exe'])
 if ~exist('m2c', 'file') && exist('../M2C', 'dir')
     % Start up M2C from its root directory
     run ../M2C/startup
+    run ../MMPI/startup_mmpi
+    run ../MSPACK/startup_mspack
 
-    if ~exist('mpi_Init', 'file')
-        run ../MMPI/startup_mmpi
-    end
-    
     if ~exist(['petscFinalized.' mexext], 'file')
         % Prompt user how to build MPETSc if not yet built
         fprintf(1, ['To build MPETSc, use MATLAB/Octave command build_mpetsc_essential\n' ...
@@ -27,8 +25,4 @@ if ~exist('m2c', 'file') && exist('../M2C', 'dir')
         % Try to load MPETSc automatically
         load_mpetsc;
     end
-end
-
-if ~exist('startup_mspack.m', 'file') && exist('../MSPACK', 'dir')
-    run ../MSPACK/startup_mspack
 end
