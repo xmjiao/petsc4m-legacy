@@ -1,5 +1,4 @@
 % Startup MPETSc module and compile some files automatically if needed.
-
 mpetsc_root = fileparts(which('startup_mpetsc.m'));
 
 addpath(mpetsc_root); %#ok<*MCAP>
@@ -11,13 +10,14 @@ addpath([mpetsc_root '/PC']);
 addpath([mpetsc_root '/util'])
 addpath([mpetsc_root '/sys'])
 addpath([mpetsc_root '/exe'])
-if ~exist('mpi_Init', 'file')
-    addpath([mpetsc_root '/mpi'])
-end
 
 if ~exist('m2c', 'file') && exist('../M2C', 'dir')
     % Start up M2C from its root directory
     run ../M2C/startup
+
+    if ~exist('mpi_Init', 'file')
+        run ../MMPI/startup_mmpi
+    end
     
     if ~exist(['petscFinalized.' mexext], 'file')
         % Prompt user how to build MPETSc if not yet built

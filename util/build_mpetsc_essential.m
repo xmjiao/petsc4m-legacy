@@ -26,13 +26,7 @@ try
     end
     
     %Compile mpi functions into their own directory
-    opts = [{'-petsc', '-O', '-mex'} varargin{:}];
-    lines = grep_pattern('mpi/*.m', '\n%#codegen\s+-args');
-    files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
-    
-    for i=1:length(files)
-        m2c(opts{:}, files{i}{1});
-    end
+    build_mmpi_essential('-petsc');
 catch ME
     cd(curpath);
     rethrow(ME);
