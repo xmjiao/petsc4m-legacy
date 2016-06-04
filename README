@@ -12,8 +12,7 @@ accessing iterative solvers in PETSc directly from MATLAB without much
 coding and the flexibility to control PETSc using options.  MPETSc
 also offers about 150 low-level PETSc API functions, so that you can
 also directly program in MATLAB using the PETSc API for prototyping
-new algorithms. In addition, MPETSc includes a few basic MPI calls for
-you to program in parallel.
+new algorithms. It depends on MMPI for some basic MPI calls.
 
 The high-level MPETSc functions support two matrix formats: Sequential
 AIJ and MPI AIJ. These formats tend to deliver good performance and
@@ -62,12 +61,12 @@ The following is an example code:
         PETSC_KSPPREONLY, 0, int32(0), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
 
 When you start MATLAB with JVM enabled, mptSolveCRS will be compiled
-into a standalone executible, and data exchange with MATLAB is done
-through files. This helps preventing your MATLAB session being crashed
-by errors in PETSc. When JVM is disabled in MATLAB (i.e., when you
+into a standalone executable, and data exchange with MATLAB is done
+through files. This helps to prevent your MATLAB session from crashing
+due to  errors in PETSc. When JVM is disabled in MATLAB (i.e., when you
 start MATLAB with the -nojvm option), then mptSolveCRS will call the
 compiled mex files of the other high-level functions, and all the data
-will be passed in memory. This is more useful for "product runs." In
+are passed in memory. This is useful for "product runs." In
 both cases, petscInit and petscFinalize are called automatically, so
 you do not need to call them manually.
 
@@ -91,45 +90,41 @@ There are three types of low-level functions in MPETSc.
 The first two types are useful for all users. These functions aid code
 generation, so end-users typically do not need to access them in programming.
 In particular, when specifying KSPType, PCType, MatType, VecType, etc.,
-it is the best to use the constants defined by MPETSc instead of typing 
-character strings directly. Thse constants have the prefix PETSC_KSP, 
+it is the best to use the constants defined by MPETSc instead of using 
+character strings directly. These constants have the prefix PETSC_KSP, 
 PETSC_PC, PETSC_MAT, and PETSC_VEC respectively. These names are all 
 null-terminated strings, so you do not need to worry about null-terminating
 them manually.
 
-The functions for Mat, Vec, KSP, and PC are all located in the the sub-directory
+The functions for Mat, Vec, KSP, and PC are all located in the sub-directory
 Mat/, Vec/, KSP/, and PC/, respectively. Most of these functions do not need to be 
 used directly, except for the APIs for creating and destroying them. The other
-functions are helpful for prototying new algorithms or experimenting with
+functions are helpful for prototyping new algorithms or experimenting with
 different matrix formats in PETSc.
 
-The functions related initialization, finalization, options are in the sys/
-subdirectory. 
+The functions related to initialization, finalization, and options are in 
+the sys/ subdirectory. 
 
 Basic MPI Functions
 -------------------
 
-MPETSc also includes aA few basic MPI functions in the mpi/ subdirectory, including
+MPETSc uses a few basic MPI functions in the MMPI module, including
 
    mpi_Init mpi_Initialized 
    mpi_Comm_size mpi_Comm_rank 
    mpi_Finalize mpi_Finalized
 
-These functions all start with lowercase mpi_ to avoid conflict with the C MPI 
-interface and the MATLAB's built-in MPI calls. Additional MPI features are 
-available in MMPI. If MMPI is loaded, then the mpi subdirectory will not be
-used.
+Additional MPI features are available in MMPI.
 
 LIMITATIONS
 ===========
 
 Currently, when running MPETSc-based codes within MATLAB, you must disable
 JVM by starting MATLAB using the command "matlab -nojvm". This is because 
-PETSc's memory management seems to conflict with those of JVM and causes 
+PETSc's memory management seems to conflict with those of JVM and cause 
 errors. (This may be fixed in the future by setting PETSc's error handler.)
 For best practice, start one MATLAB session with JVM and Desktop enabled for
 code development, and start another MATLAB session for running the code.
 
 MPETSc does not support KSPRegister and PCRegister. You need to implement
 these functions directly in C.
-
