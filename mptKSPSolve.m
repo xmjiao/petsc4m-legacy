@@ -29,12 +29,6 @@ function [flag,relres,iter,reshis,time] = mptKSPSolve(ksp, b, x, rtol, maxits, x
 %
 % See also mptKSPSetup, mptKSPCleanup
 
-%#codegen -args {PetscKSP, PetscVec, PetscVec, 0, int32(0), PetscVec}
-%#codegen mptKSPSolve_2args -args {PetscKSP, PetscVec}
-%#codegen mptKSPSolve_3args -args {PetscKSP, PetscVec, PetscVec}
-%#codegen mptKSPSolve_4args -args {PetscKSP, PetscVec, PetscVec, 0}
-%#codegen mptKSPSolve_5args -args {PetscKSP, PetscVec, PetscVec, 0, int32(0)}
-
 % Compute norm of b before it is overwritten
 bnrm = petscVecNorm(b, PETSC_NORM_2);
 t_ksp = PetscKSP(ksp);

@@ -155,11 +155,10 @@ void petscMatSetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
   }
 }
 
-int petscMatSetValues_Insert(const struct0_T *mat, int ni, const
+void petscMatSetValues_Insert(const struct0_T *mat, int ni, const
   emxArray_int32_T *ix, int nj, const emxArray_int32_T *jx, const
-  emxArray_real_T *v)
+  emxArray_real_T *v, int *errCode, boolean_T *toplevel)
 {
-  int errCode;
   int iroa;
   boolean_T p;
   boolean_T b_p;
@@ -234,17 +233,14 @@ int petscMatSetValues_Insert(const struct0_T *mat, int ni, const
   }
 
   t_mat = *(Mat*)(&data->data[0]);
-  errCode = MatSetValues(t_mat, ni, &ix->data[0], nj, &jx->data[0], &v->data[0],
+  *errCode = MatSetValues(t_mat, ni, &ix->data[0], nj, &jx->data[0], &v->data[0],
     iroa);
   emxFree_uint8_T(&data);
-  if (errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(errCode);
-    }
+  if (*errCode != 0) {
+    b_m2c_error(*errCode);
   }
 
-  return errCode;
+  *toplevel = true;
 }
 
 void petscMatSetValues_initialize(void)

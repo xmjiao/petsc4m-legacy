@@ -27,7 +27,7 @@ if ~isempty(coder.target)
     
     errCode = coder.ceval('MatCopy', PetscMat(A), PetscMat(B), mstr);
     
-    toplevel = nargout>2;
+    toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatCopy returned error code %d\n', errCode)
     end

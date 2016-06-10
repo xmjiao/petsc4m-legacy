@@ -166,7 +166,7 @@ void petscVecGetValues(const struct0_T *vec, int ni, const emxArray_int32_T *ix,
 }
 
 void petscVecGetValues_Alloc(const struct0_T *vec, int ni, const
-  emxArray_int32_T *ix, emxArray_real_T *y, int *errCode)
+  emxArray_int32_T *ix, emxArray_real_T *y, int *errCode, boolean_T *toplevel)
 {
   int k;
   boolean_T p;
@@ -246,13 +246,11 @@ void petscVecGetValues_Alloc(const struct0_T *vec, int ni, const
   k = VecGetValues(t_vec, ni, &ix->data[0], &y->data[0]);
   emxFree_uint8_T(&data);
   if (k != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      c_m2c_error(k);
-    }
+    c_m2c_error(k);
   }
 
   *errCode = k;
+  *toplevel = true;
 }
 
 void petscVecGetValues_initialize(void)

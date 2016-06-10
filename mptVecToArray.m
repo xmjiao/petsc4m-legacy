@@ -6,8 +6,6 @@ function arr = mptVecToArray(vec)
 %
 %  SEE ALSO: mptVecCreateFromArray
 
-%#codegen -args {PetscVec}
-
 if nargin<1
     error('At least one argument is required.');
 end

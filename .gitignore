@@ -9,6 +9,7 @@
 *.exe
 *.exe.dSYM
 *.o
+*.ptx
 *.d
 *.so
 *.7z
@@ -46,4 +47,5 @@ octave-core
 **/codegen/lib/*/interface
 *.html
 run_*_exe.m
+eval_*_ptx.m
 octave-core

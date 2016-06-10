@@ -200,13 +200,10 @@ void petscVecCopy(const struct0_T *x, const struct0_T *y, int *errCode,
 
   b_vec = *(Vec*)(&data->data[0]);
   *errCode = VecCopy(vec, b_vec);
-  *toplevel = false;
+  *toplevel = true;
   emxFree_uint8_T(&data);
   if (*errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(*errCode);
-    }
+    b_m2c_error(*errCode);
   }
 }
 

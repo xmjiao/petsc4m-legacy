@@ -35,11 +35,12 @@ extern void emxDestroy_struct0_T(struct0_T emxArray);
 extern void emxInitArray_int32_T(emxArray_int32_T **pEmxArray, int numDimensions);
 extern void emxInitArray_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 extern void emxInit_struct0_T(struct0_T *pStruct);
-extern int petscMatGetValues(const struct0_T *mat, int ni, const
-  emxArray_int32_T *ix, int nj, const emxArray_int32_T *jx, emxArray_real_T *v);
+extern void petscMatGetValues(const struct0_T *mat, int ni, const
+  emxArray_int32_T *ix, int nj, const emxArray_int32_T *jx, emxArray_real_T *v,
+  int *errCode, boolean_T *toplevel);
 extern void petscMatGetValues_Alloc(const struct0_T *mat, int ni, const
   emxArray_int32_T *ix, int nj, const emxArray_int32_T *jx, emxArray_real_T *v,
-  int *errCode);
+  int *errCode, boolean_T *toplevel);
 extern void petscMatGetValues_initialize(void);
 extern void petscMatGetValues_terminate(void);
 

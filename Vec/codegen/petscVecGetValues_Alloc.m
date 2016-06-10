@@ -1,2 +1,2 @@
-function [y, errCode] = petscVecGetValues_Alloc(vec, ni, ix) %#codegen
-[y, errCode] = petscVecGetValues(vec, ni, ix);
+function [y, errCode, toplevel] = petscVecGetValues_Alloc(vec, ni, ix) %#codegen
+[y, errCode, toplevel] = petscVecGetValues(vec, ni, ix);

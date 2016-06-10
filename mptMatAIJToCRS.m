@@ -8,8 +8,6 @@ function [row_ptr, col_ind, val] = mptMatAIJToCRS(mat)
 %
 % SEE ALSO: mptMatAIJCreateFromCRS
 
-%#codegen -args {PetscMat}
-
 [first_row, last_row] = petscMatGetOwnershipRange(mat);
 
 nrows = last_row-first_row;

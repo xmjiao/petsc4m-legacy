@@ -1,4 +1,4 @@
-function [v, errCode] = petscMatGetValues(mat, ni, ix, nj, jx, v)
+function [v, errCode, toplevel] = petscMatGetValues(mat, ni, ix, nj, jx, v)
 %Gets a block of values from a matrix.
 %
 %  [v, errCode] = petscMatGetValues(mat, ni, ix, nj, jx)
@@ -35,7 +35,7 @@ if ~isempty(coder.target)
     errCode = coder.ceval('MatGetValues', t_mat, ni, coder.rref(ix), ...
         nj, coder.rref(jx), coder.ref(v));
 
-    toplevel = nargout>1;
+    toplevel = nargout>2;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatGetValues returned error code %d\n', errCode)
     end

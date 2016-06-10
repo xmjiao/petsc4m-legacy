@@ -35,7 +35,7 @@ if ~isempty(coder.target)
             coder.rref(ix), coder.rref(jx), coder.rref(vs));
     end
     
-    toplevel = nargout>2;
+    toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'MatMPIAIJSetPreallocationCSR returned error code %d\n', errCode)
     end

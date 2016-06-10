@@ -1,2 +1,2 @@
-function errCode = petscMatSetSizes_Local(mat, m, n) %#codegen
-errCode = petscMatSetSizes(mat, m, n);
+function [errCode, toplevel] = petscMatSetSizes_Local(mat, m, n) %#codegen
+[errCode, toplevel] = petscMatSetSizes(mat, m, n);

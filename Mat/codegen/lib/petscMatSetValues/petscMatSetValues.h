@@ -38,9 +38,9 @@ extern void emxInit_struct0_T(struct0_T *pStruct);
 extern void petscMatSetValues(const struct0_T *mat, int ni, const
   emxArray_int32_T *ix, int nj, const emxArray_int32_T *jx, const
   emxArray_real_T *v, int iroa, int *errCode, boolean_T *toplevel);
-extern int petscMatSetValues_Insert(const struct0_T *mat, int ni, const
+extern void petscMatSetValues_Insert(const struct0_T *mat, int ni, const
   emxArray_int32_T *ix, int nj, const emxArray_int32_T *jx, const
-  emxArray_real_T *v);
+  emxArray_real_T *v, int *errCode, boolean_T *toplevel);
 extern void petscMatSetValues_initialize(void);
 extern void petscMatSetValues_terminate(void);
 

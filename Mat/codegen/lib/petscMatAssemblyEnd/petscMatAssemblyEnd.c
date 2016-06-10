@@ -143,9 +143,9 @@ void petscMatAssemblyEnd(const struct0_T *mat, int type, int *errCode, boolean_T
   }
 }
 
-int petscMatAssemblyEnd_Final(const struct0_T *mat)
+void petscMatAssemblyEnd_Final(const struct0_T *mat, int *errCode, boolean_T
+  *toplevel)
 {
-  int errCode;
   boolean_T p;
   boolean_T b_p;
   int type;
@@ -220,16 +220,13 @@ int petscMatAssemblyEnd_Final(const struct0_T *mat)
 
   t_mat = *(Mat*)(&data->data[0]);
   type = (MAT_FINAL_ASSEMBLY);
-  errCode = MatAssemblyEnd(t_mat, type);
+  *errCode = MatAssemblyEnd(t_mat, type);
   emxFree_uint8_T(&data);
-  if (errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(errCode);
-    }
+  if (*errCode != 0) {
+    b_m2c_error(*errCode);
   }
 
-  return errCode;
+  *toplevel = true;
 }
 
 void petscMatAssemblyEnd_initialize(void)

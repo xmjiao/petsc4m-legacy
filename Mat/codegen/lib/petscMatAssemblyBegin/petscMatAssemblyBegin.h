@@ -23,7 +23,8 @@ extern void emxDestroy_struct0_T(struct0_T emxArray);
 extern void emxInit_struct0_T(struct0_T *pStruct);
 extern void petscMatAssemblyBegin(const struct0_T *mat, int type, int *errCode,
   boolean_T *toplevel);
-extern int petscMatAssemblyBegin_Final(const struct0_T *mat);
+extern void petscMatAssemblyBegin_Final(const struct0_T *mat, int *errCode,
+  boolean_T *toplevel);
 extern void petscMatAssemblyBegin_initialize(void);
 extern void petscMatAssemblyBegin_terminate(void);
 

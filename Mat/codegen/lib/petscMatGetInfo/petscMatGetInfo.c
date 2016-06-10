@@ -3,7 +3,6 @@
 #include "mpetsc.h"
 
 static void b_m2c_error(int varargin_3);
-static void c_m2c_error(unsigned int varargin_4);
 static void emxFreeStruct_struct0_T(struct0_T *pStruct);
 static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
@@ -14,15 +13,6 @@ static void b_m2c_error(int varargin_3)
   msgid = "petsc:RuntimeError";
   fmt = "petscMatGetInfo returned error code %d\n";
   M2C_error(msgid, fmt, varargin_3);
-}
-
-static void c_m2c_error(unsigned int varargin_4)
-{
-  const char * msgid;
-  const char * fmt;
-  msgid = "petscMatGetInfo:WrongSize";
-  fmt = "There are %d fields in PetscMatInfo but %d fields in MatInfo.";
-  M2C_error(msgid, fmt, 10, varargin_4);
 }
 
 static void emxFreeStruct_struct0_T(struct0_T *pStruct)
@@ -155,18 +145,11 @@ void petscMatGetInfo(const struct0_T *mat, int flag, MPetscMatInfo *info, int
   }
 
   nbytes = sizeof(t_info);
-  if (80U < nbytes) {
-    p = (M2C_DEBUG);
-    if (p) {
-      c_m2c_error(nbytes >> 3U);
-    }
-  }
-
   memcpy(info, &t_info, nbytes);
 }
 
 void petscMatGetInfo_Local(const struct0_T *mat, MPetscMatInfo *info, int
-  *errCode)
+  *errCode, boolean_T *toplevel)
 {
   boolean_T p;
   boolean_T b_p;
@@ -247,21 +230,12 @@ void petscMatGetInfo_Local(const struct0_T *mat, MPetscMatInfo *info, int
   *errCode = MatGetInfo(t_mat, flag, &t_info);
   emxFree_uint8_T(&data);
   if (*errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(*errCode);
-    }
+    b_m2c_error(*errCode);
   }
 
   nbytes = sizeof(t_info);
-  if (80U < nbytes) {
-    p = (M2C_DEBUG);
-    if (p) {
-      c_m2c_error(nbytes >> 3U);
-    }
-  }
-
   memcpy(info, &t_info, nbytes);
+  *toplevel = true;
 }
 
 void petscMatGetInfo_initialize(void)

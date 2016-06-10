@@ -296,7 +296,6 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   }
 
   if (ctx->offset != 0) {
-    (M2C_DEBUG);
     t_ctx = M2C_OFFSET_PTR(t_ctx, ctx->offset);
   }
 

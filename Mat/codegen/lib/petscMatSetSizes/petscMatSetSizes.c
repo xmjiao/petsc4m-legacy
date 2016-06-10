@@ -143,9 +143,9 @@ void petscMatSetSizes(const struct0_T *mat, int m, int n, int M, int N, int
   }
 }
 
-int petscMatSetSizes_Local(const struct0_T *mat, int m, int n)
+void petscMatSetSizes_Local(const struct0_T *mat, int m, int n, int *errCode,
+  boolean_T *toplevel)
 {
-  int errCode;
   boolean_T p;
   boolean_T b_p;
   int M;
@@ -220,16 +220,13 @@ int petscMatSetSizes_Local(const struct0_T *mat, int m, int n)
   t_mat = *(Mat*)(&data->data[0]);
   M = (PETSC_DETERMINE);
   N = (PETSC_DETERMINE);
-  errCode = MatSetSizes(t_mat, m, n, M, N);
+  *errCode = MatSetSizes(t_mat, m, n, M, N);
   emxFree_uint8_T(&data);
-  if (errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(errCode);
-    }
+  if (*errCode != 0) {
+    b_m2c_error(*errCode);
   }
 
-  return errCode;
+  *toplevel = true;
 }
 
 void petscMatSetSizes_initialize(void)

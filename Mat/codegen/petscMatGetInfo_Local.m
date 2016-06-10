@@ -1,3 +1,3 @@
-function [info, errCode] = petscMatGetInfo_Local(mat) %#codegen
-[info, errCode] = petscMatGetInfo(mat);
+function [info, errCode, toplevel] = petscMatGetInfo_Local(mat) %#codegen
+[info, errCode, toplevel] = petscMatGetInfo(mat);
 

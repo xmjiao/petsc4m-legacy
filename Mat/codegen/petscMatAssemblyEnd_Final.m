@@ -1,2 +1,2 @@
-function errCode = petscMatAssemblyEnd_Final(mat) %#codegen
-errCode = petscMatAssemblyEnd(mat);
+function [errCode, toplevel] = petscMatAssemblyEnd_Final(mat) %#codegen
+[errCode, toplevel] = petscMatAssemblyEnd(mat);

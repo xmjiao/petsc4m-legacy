@@ -1,4 +1,4 @@
-function [mat_out, toplevel] = mptMatCreateAIJFromCRS(row_ptr, col_ind, val, varargin)
+function mat = mptMatCreateAIJFromCRS(row_ptr, col_ind, val, varargin)
 % Creates a sparse matrix in PETSc using AIJ format from the CRS arrays format.
 %
 %    mat = mptMatCreateAIJFromCRS(row_ptr, col_ind, val)
@@ -21,13 +21,6 @@ function [mat_out, toplevel] = mptMatCreateAIJFromCRS(row_ptr, col_ind, val, var
 %  The matrix must be deallocated by calling petscMatDestroy after use.
 %
 % SEE ALSO: petscMatDestroy, mptMatAIJToCRS, mptOptionsInsert
-
-%#codegen -args {coder.typeof(int32(0), [inf, 1]), coder.typeof(int32(0), [inf, 1]),
-%#codegen coder.typeof(0, [inf, 1])} mptMatCreateAIJFromCRS_4args -args
-%#codegen {coder.typeof(int32(0), [inf, 1]), coder.typeof(int32(0), [inf, 1]),
-%#codegen coder.typeof(0, [inf, 1]), int32(0)} mptMatCreateAIJFromCRS_5args -args
-%#codegen {coder.typeof(int32(0), [inf, 1]), coder.typeof(int32(0), [inf, 1]),
-%#codegen coder.typeof(0, [inf, 1]), int32(0), coder.typeof(char(0), [1, inf])}
 
 if nargin<3
     error('At least three arguments are required.');
@@ -78,9 +71,6 @@ end
 % Call assembly
 petscMatAssemblyBegin(mat);
 petscMatAssemblyEnd(mat);
-
-toplevel = nargout>1;
-mat_out = PetscMat(mat, toplevel);
 
 end
 

@@ -1,4 +1,4 @@
-function [vec_out, toplevel] = mptVecCreateFromArray(arr, varargin)
+function vec = mptVecCreateFromArray(arr, varargin)
 %Creates a vector in PETSc from a MATLAB column vector.
 %
 %  vec = mptVecCreateFromArray(arr)
@@ -10,9 +10,6 @@ function [vec_out, toplevel] = mptVecCreateFromArray(arr, varargin)
 %  The vector must be deallocated by calling petscVecDestroy after use.
 %
 %  SEE ALSO: petscVecDestroy, mptVecToArray, mptOptionsInsert
-
-%#codegen -args {coder.typeof(0, [inf, 1])} mptVecCreateFromArray_2args -args
-%#codegen {coder.typeof(0, [inf, 1]), coder.typeof(char(0), [1,inf])}
 
 if nargin<1
     error('At least one argument is required.');
@@ -43,9 +40,6 @@ petscVecSetValues(vec, n, idx, arr);
 % Call assembly
 petscVecAssemblyBegin(vec);
 petscVecAssemblyEnd(vec);
-
-toplevel = nargout>1;
-vec_out = PetscVec(vec, toplevel);
 
 end
 

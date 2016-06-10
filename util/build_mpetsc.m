@@ -8,20 +8,6 @@ cd(mpetscroot);
 try
     build_mpetsc_essential(varargin{:});
     
-    %Compile the most most expensive top-level KSP wrapper functions with timing
-    files = {'mptKSPSetup', 'mptKSPSolve', 'mptKSPCleanup', 'mptMatCreateAIJFromCRS', ...
-        'mptMatAIJToCRS', 'mptVecCreateFromArray', 'mptVecToArray'};
-    
-    if exist('octave_config_info', 'builtin')
-        mexdir = {};
-    else
-        mexdir = {'{''mex''}'};
-    end
-    opts = [{'-petsc', '-O', '-mex'} mexdir{:} varargin{:}];
-    for i=1:length(files)
-        m2c(opts{:}, files{i});
-    end
-    
     %Compile all other system-level and low-level functions with hidden mex files
     lines = [grep_pattern('sys/petscInitialize.m', '\n%#codegen\s+-args'), ...
         grep_pattern('sys/petscFinalize.m', '\n%#codegen\s+-args'), ...

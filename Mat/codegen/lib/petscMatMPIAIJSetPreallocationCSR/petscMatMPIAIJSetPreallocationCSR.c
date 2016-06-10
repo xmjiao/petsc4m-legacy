@@ -148,13 +148,10 @@ void petscMatMPIAIJSetPreallocationCSR(const struct0_T *mat, const
   t_mat = *(Mat*)(&data->data[0]);
   *errCode = MatMPIAIJSetPreallocationCSR(t_mat, &ix->data[0], &jx->data[0],
     &vs->data[0]);
-  *toplevel = false;
+  *toplevel = true;
   emxFree_uint8_T(&data);
   if (*errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(*errCode);
-    }
+    b_m2c_error(*errCode);
   }
 }
 
@@ -238,13 +235,10 @@ void petscMatMPIAIJSetPreallocationCSR_Indexonly(const struct0_T *mat, const
     NULL);
   emxFree_uint8_T(&data);
   if (*errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(*errCode);
-    }
+    b_m2c_error(*errCode);
   }
 
-  *toplevel = false;
+  *toplevel = true;
 }
 
 void petscMatMPIAIJSetPreallocationCSR_initialize(void)

@@ -1,4 +1,4 @@
-function [ksp, toplevel] = mptKSPCleanup(ksp) 
+function ksp = mptKSPCleanup(ksp) 
 % Cleans up the KSP.
 %
 %   ksp = mptKSPCleanup(ksp) destropys the given KSP object.
@@ -7,12 +7,7 @@ function [ksp, toplevel] = mptKSPCleanup(ksp)
 %
 % See Also: mptKSPSetup, mptKSPSolve
 
-%#codegen -args {PetscKSP}
-
 % Destroy the KSP and solution vector
-t_ksp = petscKSPDestroy(ksp);
-
-toplevel = nargout>1;
-ksp = PetscKSP(t_ksp, toplevel);
+ksp = petscKSPDestroy(ksp);
 
 end

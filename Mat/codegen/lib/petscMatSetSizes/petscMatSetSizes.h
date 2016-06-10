@@ -23,7 +23,8 @@ extern void emxDestroy_struct0_T(struct0_T emxArray);
 extern void emxInit_struct0_T(struct0_T *pStruct);
 extern void petscMatSetSizes(const struct0_T *mat, int m, int n, int M, int N,
   int *errCode, boolean_T *toplevel);
-extern int petscMatSetSizes_Local(const struct0_T *mat, int m, int n);
+extern void petscMatSetSizes_Local(const struct0_T *mat, int m, int n, int
+  *errCode, boolean_T *toplevel);
 extern void petscMatSetSizes_initialize(void);
 extern void petscMatSetSizes_terminate(void);
 

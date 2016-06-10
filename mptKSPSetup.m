@@ -1,4 +1,4 @@
-function [ksp, time, toplevel] = mptKSPSetup(Amat, ksptype, pctype, pcopt)
+function [ksp, time] = mptKSPSetup(Amat, ksptype, pctype, pcopt)
 % Sets up KSP using the given matrix (matrices).
 %
 % Syntax:
@@ -25,24 +25,19 @@ function [ksp, time, toplevel] = mptKSPSetup(Amat, ksptype, pctype, pcopt)
 %
 % See Also: mptKSPSolve, mptKSPCleanup
 
-%#codegen -args {PetscMat, PetscKSPType, PetscPCType, PetscMatSolverPackage}
-%#codegen mptKSPSetup_1arg -args {PetscMat}
-%#codegen mptKSPSetup_2args -args {PetscMat, PetscKSPType}
-%#codegen mptKSPSetup_3args -args {PetscMat, PetscKSPType, PetscPCType}
-
 t_Amat = Amat;
-t_ksp = petscKSPCreate(petscObjectGetComm(t_Amat));
+ksp = petscKSPCreate(petscObjectGetComm(t_Amat));
 
 if nargout>1;
     time = 0;
-    comm = petscObjectGetComm(t_ksp);
+    comm = petscObjectGetComm(ksp);
     % When timing the run, use mpi_Barrier for more accurate results.
     mpi_Barrier(comm);
     t = mpi_Wtime();
 end
 
 % Setup KSP
-petscKSPSetOperators(t_ksp, PetscMat(t_Amat));
+petscKSPSetOperators(ksp, PetscMat(t_Amat));
 
 if nargin>1
     if nargin>2
@@ -50,7 +45,7 @@ if nargin>1
         hasOpt = nargin>3 && (~ischar(pcopt) || ~isempty(pcopt));
         
         if hasPC || hasOpt
-            t_pc = petscKSPGetPC(t_ksp);
+            t_pc = petscKSPGetPC(ksp);
             
             if hasPC
                 if ischar(pctype) && pctype(end)~=char(0)
@@ -64,11 +59,11 @@ if nargin>1
             
             if hasOpt
                 if isequal(pcopt, 'left')
-                    petscKSPSetPCSide(t_ksp, PETSC_PC_LEFT);
+                    petscKSPSetPCSide(ksp, PETSC_PC_LEFT);
                 elseif isequal(pcopt, 'right')
-                    petscKSPSetPCSide(t_ksp, PETSC_PC_RIGHT);
+                    petscKSPSetPCSide(ksp, PETSC_PC_RIGHT);
                 elseif isequal(pcopt, 'symmetric')
-                    petscKSPSetPCSide(t_ksp, PETSC_PC_SYMMETRIC);
+                    petscKSPSetPCSide(ksp, PETSC_PC_SYMMETRIC);
                 else
                     if ischar(pcopt) && pcopt(end)~=char(0)
                         % null-terminate the string if not terminated properly
@@ -90,26 +85,23 @@ if nargin>1
     end
     if ischar(ksptype0) && ~isempty(ksptype0) || ~ischar(ksptype0)
         % Set KSP Types
-        petscKSPSetType(t_ksp, ksptype0);
+        petscKSPSetType(ksp, ksptype0);
     end
 end
 
 if nargin<=3 || isempty(pcopt)
     % Use right-preconditioner by default
-    petscKSPSetPCSide(t_ksp, PETSC_PC_RIGHT);
+    petscKSPSetPCSide(ksp, PETSC_PC_RIGHT);
 end
 
-petscKSPSetFromOptions(t_ksp);
+petscKSPSetFromOptions(ksp);
 
-petscKSPSetUp(t_ksp);
+petscKSPSetUp(ksp);
 
 if nargout>1
     % When timing the run, use mpi_Barrier for more accurate results.
     mpi_Barrier(comm);
     time = mpi_Wtime()-t;
 end
-
-toplevel = nargout>2;
-ksp = PetscKSP(t_ksp, toplevel);
 
 end

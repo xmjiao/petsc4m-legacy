@@ -1,2 +1,2 @@
-function errCode = petscMatSetValues_Insert(mat, ni, ix, nj, jx, v) %#codegen
-errCode = petscMatSetValues(mat, ni, ix, nj, jx, v);
+function [errCode, toplevel] = petscMatSetValues_Insert(mat, ni, ix, nj, jx, v)
+[errCode, toplevel] = petscMatSetValues(mat, ni, ix, nj, jx, v);

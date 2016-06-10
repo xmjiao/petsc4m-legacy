@@ -23,7 +23,8 @@ extern void emxDestroy_struct0_T(struct0_T emxArray);
 extern void emxInit_struct0_T(struct0_T *pStruct);
 extern void petscVecSetSizes(const struct0_T *vec, int n, int N, int *errCode,
   boolean_T *toplevel);
-extern int petscVecSetSizes_Local(const struct0_T *vec, int n);
+extern void petscVecSetSizes_Local(const struct0_T *vec, int n, int *errCode,
+  boolean_T *toplevel);
 extern void petscVecSetSizes_initialize(void);
 extern void petscVecSetSizes_terminate(void);
 

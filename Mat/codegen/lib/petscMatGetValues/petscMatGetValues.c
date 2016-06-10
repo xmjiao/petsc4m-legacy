@@ -70,10 +70,10 @@ void emxInit_struct0_T(struct0_T *pStruct)
   emxInitStruct_struct0_T(pStruct);
 }
 
-int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
-                      int nj, const emxArray_int32_T *jx, emxArray_real_T *v)
+void petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
+  int nj, const emxArray_int32_T *jx, emxArray_real_T *v, int *errCode,
+  boolean_T *toplevel)
 {
-  int errCode;
   boolean_T p;
   boolean_T b_p;
   int k;
@@ -146,18 +146,17 @@ int petscMatGetValues(const struct0_T *mat, int ni, const emxArray_int32_T *ix,
   }
 
   t_mat = *(Mat*)(&data->data[0]);
-  errCode = MatGetValues(t_mat, ni, &ix->data[0], nj, &jx->data[0], &v->data[0]);
+  *errCode = MatGetValues(t_mat, ni, &ix->data[0], nj, &jx->data[0], &v->data[0]);
+  *toplevel = true;
   emxFree_uint8_T(&data);
-  if (errCode != 0) {
-    b_m2c_error(errCode);
+  if (*errCode != 0) {
+    b_m2c_error(*errCode);
   }
-
-  return errCode;
 }
 
 void petscMatGetValues_Alloc(const struct0_T *mat, int ni, const
   emxArray_int32_T *ix, int nj, const emxArray_int32_T *jx, emxArray_real_T *v,
-  int *errCode)
+  int *errCode, boolean_T *toplevel)
 {
   boolean_T p;
   boolean_T b_p;
@@ -241,6 +240,7 @@ void petscMatGetValues_Alloc(const struct0_T *mat, int ni, const
   }
 
   *errCode = k;
+  *toplevel = true;
 }
 
 void petscMatGetValues_initialize(void)

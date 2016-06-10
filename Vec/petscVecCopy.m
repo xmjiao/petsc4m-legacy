@@ -17,7 +17,7 @@ errCode = int32(-1);
 if ~isempty(coder.target)
     errCode = coder.ceval('VecCopy', PetscVec(x), PetscVec(y));
     
-    toplevel = nargout>2;
+    toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecCopy returned error code %d\n', errCode)
     end

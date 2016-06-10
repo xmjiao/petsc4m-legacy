@@ -153,10 +153,10 @@ void petscVecSetValues(const struct0_T *vec, int ni, const emxArray_int32_T *ix,
   }
 }
 
-int petscVecSetValues_Insert(const struct0_T *vec, int ni, const
-  emxArray_int32_T *ix, const emxArray_real_T *y)
+void petscVecSetValues_Insert(const struct0_T *vec, int ni, const
+  emxArray_int32_T *ix, const emxArray_real_T *y, int *errCode, boolean_T
+  *toplevel)
 {
-  int errCode;
   int iroa;
   boolean_T p;
   boolean_T b_p;
@@ -231,16 +231,13 @@ int petscVecSetValues_Insert(const struct0_T *vec, int ni, const
   }
 
   t_vec = *(Vec*)(&data->data[0]);
-  errCode = VecSetValues(t_vec, ni, &ix->data[0], &y->data[0], iroa);
+  *errCode = VecSetValues(t_vec, ni, &ix->data[0], &y->data[0], iroa);
   emxFree_uint8_T(&data);
-  if (errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(errCode);
-    }
+  if (*errCode != 0) {
+    b_m2c_error(*errCode);
   }
 
-  return errCode;
+  *toplevel = true;
 }
 
 void petscVecSetValues_initialize(void)

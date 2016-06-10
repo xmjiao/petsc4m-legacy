@@ -200,13 +200,10 @@ void petscMatCopy(const struct0_T *A, const struct0_T *B, int mstr, int *errCode
 
   b_mat = *(Mat*)(&data->data[0]);
   *errCode = MatCopy(mat, b_mat, mstr);
-  *toplevel = false;
+  *toplevel = true;
   emxFree_uint8_T(&data);
   if (*errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(*errCode);
-    }
+    b_m2c_error(*errCode);
   }
 }
 
@@ -354,13 +351,10 @@ void petscMatCopy_2args(const struct0_T *A, const struct0_T *B, int *errCode,
   *errCode = MatCopy(mat, b_mat, mstr);
   emxFree_uint8_T(&data);
   if (*errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(*errCode);
-    }
+    b_m2c_error(*errCode);
   }
 
-  *toplevel = false;
+  *toplevel = true;
 }
 
 void petscMatCopy_initialize(void)

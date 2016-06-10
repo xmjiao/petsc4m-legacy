@@ -24,7 +24,7 @@ extern void emxInit_struct0_T(struct0_T *pStruct);
 extern void petscMatGetInfo(const struct0_T *mat, int flag, MPetscMatInfo *info,
   int *errCode, boolean_T *toplevel);
 extern void petscMatGetInfo_Local(const struct0_T *mat, MPetscMatInfo *info, int
-  *errCode);
+  *errCode, boolean_T *toplevel);
 extern void petscMatGetInfo_initialize(void);
 extern void petscMatGetInfo_terminate(void);
 

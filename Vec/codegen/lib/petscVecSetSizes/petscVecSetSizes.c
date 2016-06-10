@@ -143,9 +143,9 @@ void petscVecSetSizes(const struct0_T *vec, int n, int N, int *errCode,
   }
 }
 
-int petscVecSetSizes_Local(const struct0_T *vec, int n)
+void petscVecSetSizes_Local(const struct0_T *vec, int n, int *errCode, boolean_T
+  *toplevel)
 {
-  int errCode;
   boolean_T p;
   boolean_T b_p;
   int N;
@@ -219,16 +219,13 @@ int petscVecSetSizes_Local(const struct0_T *vec, int n)
 
   t_vec = *(Vec*)(&data->data[0]);
   N = (PETSC_DECIDE);
-  errCode = VecSetSizes(t_vec, n, N);
+  *errCode = VecSetSizes(t_vec, n, N);
   emxFree_uint8_T(&data);
-  if (errCode != 0) {
-    p = (M2C_DEBUG);
-    if (p) {
-      b_m2c_error(errCode);
-    }
+  if (*errCode != 0) {
+    b_m2c_error(*errCode);
   }
 
-  return errCode;
+  *toplevel = true;
 }
 
 void petscVecSetSizes_initialize(void)

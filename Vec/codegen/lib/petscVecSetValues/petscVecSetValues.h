@@ -38,8 +38,9 @@ extern void emxInit_struct0_T(struct0_T *pStruct);
 extern void petscVecSetValues(const struct0_T *vec, int ni, const
   emxArray_int32_T *ix, const emxArray_real_T *y, int iroa, int *errCode,
   boolean_T *toplevel);
-extern int petscVecSetValues_Insert(const struct0_T *vec, int ni, const
-  emxArray_int32_T *ix, const emxArray_real_T *y);
+extern void petscVecSetValues_Insert(const struct0_T *vec, int ni, const
+  emxArray_int32_T *ix, const emxArray_real_T *y, int *errCode, boolean_T
+  *toplevel);
 extern void petscVecSetValues_initialize(void);
 extern void petscVecSetValues_terminate(void);
 
