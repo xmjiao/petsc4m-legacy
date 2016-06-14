@@ -174,7 +174,7 @@ void petscMatGetNearNullSpace(const struct0_T *mat, struct0_T *nullsp, int
   ptr = (char *)(&t_nullsp);
   for (k = 1; k <= sizepe; k++) {
     nullsp->data->data[k - 1] = *(ptr);
-    ptr = M2C_OFFSET_PTR(ptr, 1);
+    ptr = ptr+1;
   }
 
   if (*errCode != 0) {

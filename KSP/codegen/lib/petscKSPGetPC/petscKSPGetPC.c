@@ -172,7 +172,7 @@ void petscKSPGetPC(const struct0_T *ksp, struct0_T *pc, int *errCode, boolean_T 
   ptr = (char *)(&t_pc);
   for (k = 1; k <= sizepe; k++) {
     pc->data->data[k - 1] = *(ptr);
-    ptr = M2C_OFFSET_PTR(ptr, 1);
+    ptr = ptr+1;
   }
 
   if (*errCode != 0) {

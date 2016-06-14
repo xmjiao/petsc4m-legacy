@@ -87,7 +87,7 @@ void petscMatCreateSeqAIJ(int m, int n, int nz, const emxArray_int32_T *nnz,
   ptr = (char *)(&t_mat);
   for (i = 1; i <= sizepe; i++) {
     mat->data->data[i - 1] = *(ptr);
-    ptr = M2C_OFFSET_PTR(ptr, 1);
+    ptr = ptr+1;
   }
 
   if (*errCode != 0) {
@@ -141,7 +141,7 @@ void petscMatCreateSeqAIJ_FixedRows(int m, int n, int nz, struct0_T *mat, int
   ptr = (char *)(&t_mat);
   for (i = 1; i <= sizepe; i++) {
     mat->data->data[i - 1] = *(ptr);
-    ptr = M2C_OFFSET_PTR(ptr, 1);
+    ptr = ptr+1;
   }
 
   if (b_errCode != 0) {

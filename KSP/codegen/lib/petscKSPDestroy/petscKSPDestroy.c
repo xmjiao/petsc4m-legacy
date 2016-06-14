@@ -172,7 +172,7 @@ void petscKSPDestroy(const struct0_T *ksp, struct0_T *ksp_out, int *errCode,
   ptr = (char *)(&t_ksp);
   for (k = 1; k <= sizepe; k++) {
     ksp_out->data->data[k - 1] = *(ptr);
-    ptr = M2C_OFFSET_PTR(ptr, 1);
+    ptr = ptr+1;
   }
 
   if (*errCode != 0) {

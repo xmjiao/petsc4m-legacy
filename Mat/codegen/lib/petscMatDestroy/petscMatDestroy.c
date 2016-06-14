@@ -150,7 +150,7 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
   ptr = (char *)(&t_mat);
   for (k = 1; k <= sizepe; k++) {
     mat->data->data[k - 1] = *(ptr);
-    ptr = M2C_OFFSET_PTR(ptr, 1);
+    ptr = ptr+1;
   }
 }
 

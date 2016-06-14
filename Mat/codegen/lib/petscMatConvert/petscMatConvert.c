@@ -180,7 +180,7 @@ void petscMatConvert(const struct0_T *mat_in, const emxArray_char_T *newtype,
   ptr = (char *)(&t_mat_out);
   for (k = 1; k <= sizepe; k++) {
     mat_out->data->data[k - 1] = *(ptr);
-    ptr = M2C_OFFSET_PTR(ptr, 1);
+    ptr = ptr+1;
   }
 
   if (*errCode != 0) {

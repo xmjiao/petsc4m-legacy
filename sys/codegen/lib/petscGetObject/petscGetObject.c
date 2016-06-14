@@ -395,7 +395,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -432,7 +432,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -469,7 +469,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -506,7 +506,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -543,7 +543,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&b_arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -580,7 +580,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&c_arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -617,7 +617,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&d_arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -654,7 +654,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&e_arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -691,7 +691,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&f_arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -728,7 +728,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&g_arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;
@@ -778,7 +778,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     ptr = (char *)(&b_arg);
     for (kstr = 1; kstr <= sizepe; kstr++) {
       obj->data->data[kstr - 1] = *(ptr);
-      ptr = M2C_OFFSET_PTR(ptr, 1);
+      ptr = ptr+1;
     }
 
     *toplevel = true;

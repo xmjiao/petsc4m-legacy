@@ -174,7 +174,7 @@ void petscVecDuplicate(const struct0_T *vec_in, struct0_T *vec_out, int *errCode
   ptr = (char *)(&t_vec_out);
   for (k = 1; k <= sizepe; k++) {
     vec_out->data->data[k - 1] = *(ptr);
-    ptr = M2C_OFFSET_PTR(ptr, 1);
+    ptr = ptr+1;
   }
 
   if (*errCode != 0) {

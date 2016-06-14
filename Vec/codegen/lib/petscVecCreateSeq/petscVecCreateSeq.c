@@ -81,7 +81,7 @@ void petscVecCreateSeq(int n, struct0_T *vec, int *errCode, boolean_T *toplevel)
   ptr = (char *)(&t_vec);
   for (i = 1; i <= sizepe; i++) {
     vec->data->data[i - 1] = *(ptr);
-    ptr = M2C_OFFSET_PTR(ptr, 1);
+    ptr = ptr+1;
   }
 
   if (*errCode != 0) {

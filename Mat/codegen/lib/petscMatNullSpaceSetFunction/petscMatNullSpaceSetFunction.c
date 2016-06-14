@@ -296,7 +296,7 @@ void petscMatNullSpaceSetFunction(const struct0_T *nullSp, const struct0_T
   }
 
   if (ctx->offset != 0) {
-    t_ctx = M2C_OFFSET_PTR(t_ctx, ctx->offset);
+    t_ctx = (t_ctx)+(ctx->offset);
   }
 
   *errCode = MatNullSpaceSetFunction(t_nullSp, t_rmvFunc, t_ctx);
