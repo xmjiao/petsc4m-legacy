@@ -60,8 +60,6 @@ function [flag, relres, iter, reshis, times] = mptSolve(A, b, x, solver, ...
 %           mptOptionsInsert, mptKSPSetup, mptKSPSolve, mptKSPCleanup
 
 %This function is codegen compatbile, but no need to a top-level function
-%#codegen
-
 % Setup KSP
 if nargin<3; x = b; end
 if nargin<4; solver = ''; end

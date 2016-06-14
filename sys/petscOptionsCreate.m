@@ -10,8 +10,6 @@ function [opts, errCode, toplevel] = petscOptionsCreate
 % http://www.mcs.anl.gov/petsc/petsc-dev/docs/manualpages/Sys/PetscOptionsCreate.html
 
 %Not supported. Skip compilation.
-%#codegen
-
 errCode = int32(-1);
 
 if ~isempty(coder.target)

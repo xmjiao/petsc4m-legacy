@@ -10,8 +10,6 @@ function [opts, errCode, toplevel] = petscOptionsDestroy(opts)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscOptionsDestroy.html
 
 %Not supported. Skip compilation.
-%#codegen 
-
 errCode = int32(-1);
 
 if ~isempty(coder.target)

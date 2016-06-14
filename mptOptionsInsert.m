@@ -12,8 +12,6 @@ function errCode = mptOptionsInsert(opts)
 %   sys/petscOptionsGetString
 
 %This function is codegen compatbile, but no need to a top-level function
-%#codegen
-
 if ~isempty(opts) && opts(end)~=char(0)
     opts = [opts char(0)];
 end
