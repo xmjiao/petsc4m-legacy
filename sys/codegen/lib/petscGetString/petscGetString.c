@@ -9073,7 +9073,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9109,7 +9109,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9145,7 +9145,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9181,7 +9181,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9217,7 +9217,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9253,7 +9253,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9289,7 +9289,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9325,7 +9325,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9361,7 +9361,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9397,7 +9397,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9433,7 +9433,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9469,7 +9469,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9505,7 +9505,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9541,7 +9541,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9577,7 +9577,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9613,7 +9613,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9649,7 +9649,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9685,7 +9685,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9721,7 +9721,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9757,7 +9757,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9793,7 +9793,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9829,7 +9829,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9865,7 +9865,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9901,7 +9901,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9937,7 +9937,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -9973,7 +9973,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10009,7 +10009,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10045,7 +10045,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10081,7 +10081,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10117,7 +10117,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10153,7 +10153,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10189,7 +10189,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10225,7 +10225,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10261,7 +10261,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10297,7 +10297,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10333,7 +10333,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10369,7 +10369,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10405,7 +10405,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10441,7 +10441,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10477,7 +10477,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10513,7 +10513,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10549,7 +10549,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10585,7 +10585,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10621,7 +10621,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10657,7 +10657,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10693,7 +10693,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10729,7 +10729,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10765,7 +10765,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10801,7 +10801,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10837,7 +10837,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10873,7 +10873,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10909,7 +10909,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10945,7 +10945,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -10981,7 +10981,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11017,7 +11017,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11053,7 +11053,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11089,7 +11089,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11125,7 +11125,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11161,7 +11161,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11197,7 +11197,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11233,7 +11233,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11269,7 +11269,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11305,7 +11305,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11341,7 +11341,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11377,7 +11377,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11413,7 +11413,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11449,7 +11449,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11485,7 +11485,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11521,7 +11521,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11557,7 +11557,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11593,7 +11593,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11629,7 +11629,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11665,7 +11665,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11701,7 +11701,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11737,7 +11737,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11773,7 +11773,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11809,7 +11809,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11845,7 +11845,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11881,7 +11881,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11917,7 +11917,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11953,7 +11953,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -11989,7 +11989,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12025,7 +12025,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12061,7 +12061,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12097,7 +12097,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12133,7 +12133,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12169,7 +12169,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12205,7 +12205,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12241,7 +12241,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12277,7 +12277,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12313,7 +12313,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12349,7 +12349,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12385,7 +12385,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12421,7 +12421,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12457,7 +12457,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12493,7 +12493,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12529,7 +12529,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12565,7 +12565,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12601,7 +12601,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12637,7 +12637,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12673,7 +12673,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12709,7 +12709,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12745,7 +12745,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12781,7 +12781,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12817,7 +12817,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12853,7 +12853,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12889,7 +12889,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12925,7 +12925,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12961,7 +12961,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -12997,7 +12997,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13033,7 +13033,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13069,7 +13069,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13105,7 +13105,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13141,7 +13141,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13177,7 +13177,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13213,7 +13213,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13249,7 +13249,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13285,7 +13285,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13321,7 +13321,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13357,7 +13357,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13393,7 +13393,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13429,7 +13429,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13465,7 +13465,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13501,7 +13501,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13537,7 +13537,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13573,7 +13573,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13609,7 +13609,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13645,7 +13645,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13681,7 +13681,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13717,7 +13717,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13753,7 +13753,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13789,7 +13789,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13825,7 +13825,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13861,7 +13861,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13897,7 +13897,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13933,7 +13933,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -13969,7 +13969,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14005,7 +14005,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14041,7 +14041,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14077,7 +14077,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14113,7 +14113,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14149,7 +14149,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14185,7 +14185,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14221,7 +14221,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14257,7 +14257,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14293,7 +14293,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14329,7 +14329,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14365,7 +14365,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14401,7 +14401,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14437,7 +14437,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14473,7 +14473,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14509,7 +14509,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14545,7 +14545,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14581,7 +14581,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14617,7 +14617,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14653,7 +14653,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14689,7 +14689,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14725,7 +14725,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14761,7 +14761,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14797,7 +14797,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14833,7 +14833,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14869,7 +14869,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14905,7 +14905,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14941,7 +14941,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -14977,7 +14977,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15013,7 +15013,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15049,7 +15049,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15085,7 +15085,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15121,7 +15121,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15157,7 +15157,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15193,7 +15193,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15229,7 +15229,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15265,7 +15265,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15301,7 +15301,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15337,7 +15337,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15373,7 +15373,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15409,7 +15409,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];
@@ -15445,7 +15445,7 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       ptr = (char *)(c_str);
       for (empty = 1; empty <= n; empty++) {
         str1->data[empty - 1] = *(ptr);
-        ptr = ptr+1;
+        ptr = ptr + 1;
       }
     } else {
       i0 = str1->size[0] * str1->size[1];

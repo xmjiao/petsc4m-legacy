@@ -172,7 +172,7 @@ void petscPCFactorGetMatrix(const struct0_T *pc, struct0_T *mat, int *errCode,
   ptr = (char *)(&t_mat);
   for (k = 1; k <= sizepe; k++) {
     mat->data->data[k - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (*errCode != 0) {

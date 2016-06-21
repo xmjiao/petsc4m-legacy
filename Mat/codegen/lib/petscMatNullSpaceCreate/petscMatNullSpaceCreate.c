@@ -274,7 +274,7 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
   b_ptr = (char *)(&t_nullsp);
   for (k = 1; k <= sizepe; k++) {
     nullsp->data->data[k - 1] = *(b_ptr);
-    b_ptr = b_ptr+1;
+    b_ptr = b_ptr + 1;
   }
 
   if (*errCode != 0) {
@@ -399,7 +399,7 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
   ptr = (char *)(&t_nullsp);
   for (k = 1; k <= sizepe; k++) {
     nullsp->data->data[k - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (b_errCode != 0) {

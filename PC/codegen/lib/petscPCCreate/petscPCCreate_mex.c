@@ -20,123 +20,148 @@
 /* Include declaration of some helper functions. */
 #include "lib2mex_helper.c"
 
-static void __petscPCCreate_api(mxArray **plhs, const mxArray ** prhs) {
 
+static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, const char *mname) {
+    mxArray             *sub_mx;
+
+    if (!mxIsStruct(mx))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s has incorrect data type; struct is expected.", mname);
+    if (!mxGetField(mx, 0, "data"))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s is missing the field data.", mname);
+    if (!mxGetField(mx, 0, "type"))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s is missing the field type.", mname);
+    if (!mxGetField(mx, 0, "nitems"))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s is missing the field nitems.", mname);
+    if (mxGetNumberOfFields(mx) > 3)
+        M2C_warn("marshallin_const_struct0_T:ExtraFields",
+            "Extra fields in %s and are ignored.", mname);
+
+    sub_mx = mxGetField(mx, 0, "data");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxUINT8_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongInputType",
+            "Input argument data has incorrect data type; uint8 is expected.");
+    if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[1] != 1) 
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
+            "Dimension 2 of data should equal 1.");
+    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    init_emxArray((emxArray__common*)(pStruct->data), 1);
+    alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->data), "data", 1);
+
+    sub_mx = mxGetField(mx, 0, "type");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxCHAR_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongInputType",
+            "Input argument type has incorrect data type; char is expected.");
+    if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
+            "Dimension 1 of type should equal 1.");
+    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    init_emxArray((emxArray__common*)(pStruct->type), 2);
+    alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
+
+    sub_mx = mxGetField(mx, 0, "nitems");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxINT32_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongInputType",
+            "Input argument nitems has incorrect data type; int32 is expected.");
+    if (mxGetNumberOfElements(sub_mx) != 1)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
+            "Argument nitems should be a scalar.");
+    pStruct->nitems = *(int32_T*)mxGetData(sub_mx);
+}
+static void prealloc_struct0_T(struct0_T *pStruct) {
+
+
+    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    init_emxArray((emxArray__common*)(pStruct->data), 1);
+
+    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    init_emxArray((emxArray__common*)(pStruct->type), 2);
+
+}
+static mxArray *marshallout_struct0_T(struct0_T *pStruct) {
+    const char           *fields[] = {"data", "type", "nitems"};
+    int                  one=1;
+    mxArray              *mx = create_struct_mxArray(1, &one, 3, fields);
+
+    mxSetField(mx, 0, "data", move_emxArray_to_mxArray((emxArray__common*)(pStruct->data), mxUINT8_CLASS));
+    mxFree(pStruct->data->size);
+    mxFree(pStruct->data);
+
+    mxSetField(mx, 0, "type", move_emxArray_to_mxArray((emxArray__common*)(pStruct->type), mxCHAR_CLASS));
+    mxFree(pStruct->type->size);
+    mxFree(pStruct->type);
+
+    mxSetField(mx, 0, "nitems", copy_scalar_to_mxArray(&pStruct->nitems, mxINT32_CLASS));
+    return mx;
+}
+static void destroy_struct0_T(struct0_T *pStruct) {
+
+    free_emxArray((emxArray__common*)(pStruct->data));
+    mxFree(pStruct->data);
+
+    free_emxArray((emxArray__common*)(pStruct->type));
+    mxFree(pStruct->type);
+
+
+}
+
+
+static void __petscPCCreate_api(mxArray **plhs, const mxArray ** prhs) {
     struct0_T            comm;
     struct0_T            pc;
-    mxArray              *_sub_mx1;
+    int32_T             *errCode;
+    boolean_T           *toplevel;
 
-    int32_T              *errCode;
-    boolean_T            *toplevel;
-
-    /* Marshall in function inputs */
-
-    if (!mxIsStruct(prhs[0]))
+    /* Marshall in inputs and preallocate outputs */
+    if (mxGetNumberOfElements(prhs[0]) && mxGetClassID(prhs[0]) != mxSTRUCT_CLASS)
         mexErrMsgIdAndTxt("petscPCCreate:WrongInputType",
-            "Input argument comm has incorrect data type. struct is expected.");
-    if (mxGetNumberOfFields(prhs[0])!=3)
-        mexErrMsgIdAndTxt("petscPCCreate:InputStructWrongFields",
-            "Input argument comm has incorrect number of fields.");
+            "Input argument comm has incorrect data type; struct is expected.");
     if (mxGetNumberOfElements(prhs[0]) != 1)
         mexErrMsgIdAndTxt("petscPCCreate:WrongSizeOfInputArg",
-            "Argument comm must contain 1 items.");
+            "Argument comm should be a scalar.");
+    marshallin_const_struct0_T(&comm, prhs[0], "comm");
+    prealloc_struct0_T(&pc);
 
-    _sub_mx1 = mxGetField(prhs[0], 0, "data");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscPCCreate:WrongInputStruct",
-            "Input argument comm does not have the field data.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxUINT8_CLASS)
-        mexErrMsgIdAndTxt("petscPCCreate:WrongInputType",
-            "Input argument comm.data has incorrect data type. uint8 is expected.");
-    *(void**)&comm.data = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)comm.data, "comm.data", 1);
-    _sub_mx1 = mxGetField(prhs[0], 0, "type");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscPCCreate:WrongInputStruct",
-            "Input argument comm does not have the field type.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxCHAR_CLASS)
-        mexErrMsgIdAndTxt("petscPCCreate:WrongInputType",
-            "Input argument comm.type has incorrect data type. char is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetDimensions(_sub_mx1)[0] != 1)
-        mexErrMsgIdAndTxt("petscPCCreate:WrongSizeOfInputArg",
-            "Dimension 1 of comm.type should be equal to 1.");
-    *(void**)&comm.type = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)comm.type, "comm.type", 2);
-    _sub_mx1 = mxGetField(prhs[0], 0, "nitems");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscPCCreate:WrongInputStruct",
-            "Input argument comm does not have the field nitems.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxINT32_CLASS)
-        mexErrMsgIdAndTxt("petscPCCreate:WrongInputType",
-            "Input argument comm.nitems has incorrect data type. int32 is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) != 1)
-        mexErrMsgIdAndTxt("petscPCCreate:WrongSizeOfInputArg",
-            "Argument comm.nitems should be a scalar.");
-    comm.nitems = *(int32_T*)mxGetData(_sub_mx1);
+    errCode = mxMalloc(sizeof(int32_T));
 
-    /* Preallocate output variables */
-    *(void **)&pc.data = mxCalloc(1, sizeof(emxArray__common));    init_emxArray((emxArray__common*)pc.data, 1);
-    *(void **)&pc.type = mxCalloc(1, sizeof(emxArray__common));    init_emxArray((emxArray__common*)pc.type, 2);
-    {mwSize l_size[] = {1, 1};
-    *(void **)&errCode = prealloc_mxArray((mxArray**)&plhs[1], mxINT32_CLASS, 2, l_size); }
-    {mwSize l_size[] = {1, 1};
-    *(void **)&toplevel = prealloc_mxArray((mxArray**)&plhs[2], mxLOGICAL_CLASS, 2, l_size); }
+    toplevel = mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscPCCreate(&comm, &pc, errCode, toplevel);
 
-    /* Marshall out function outputs */
-    {const char *_fields[] = { "data", "type", "nitems",  ""};
-    int32_T _one=1;
-    plhs[0] = create_struct_mxArray(1, &_one, 3, _fields);}
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 0, move_emxArray_to_mxArray((emxArray__common*)pc.data, mxUINT8_CLASS));
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 1, move_emxArray_to_mxArray((emxArray__common*)pc.type, mxCHAR_CLASS));
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 2, copy_scalar_to_mxArray(&pc.nitems, mxINT32_CLASS));
-    /* Nothing to do for plhs[1] */
-    /* Nothing to do for plhs[2] */
-
-    /* Free temporary variables */
-    free_emxArray((emxArray__common*)comm.type); mxFree(comm.type);
-    free_emxArray((emxArray__common*)comm.data); mxFree(comm.data);
-
-    free_emxArray((emxArray__common*)pc.type); mxFree(pc.type);
-    free_emxArray((emxArray__common*)pc.data); mxFree(pc.data);
+    /* Deallocate input and marshall out function outputs */
+    destroy_struct0_T(&comm);
+    plhs[0] = marshallout_struct0_T(&pc);
+    plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
+    plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 
 }
+
 static void __petscPCCreate_World_api(mxArray **plhs, const mxArray ** prhs) {
-
     struct0_T            ksp;
-    mxArray              *_sub_mx1;
+    int32_T             *errCode;
+    boolean_T           *toplevel;
 
-    int32_T              *errCode;
-    boolean_T            *toplevel;
+    /* Marshall in inputs and preallocate outputs */
+    prealloc_struct0_T(&ksp);
 
-    /* Preallocate output variables */
-    *(void **)&ksp.data = mxCalloc(1, sizeof(emxArray__common));    init_emxArray((emxArray__common*)ksp.data, 1);
-    *(void **)&ksp.type = mxCalloc(1, sizeof(emxArray__common));    init_emxArray((emxArray__common*)ksp.type, 2);
-    {mwSize l_size[] = {1, 1};
-    *(void **)&errCode = prealloc_mxArray((mxArray**)&plhs[1], mxINT32_CLASS, 2, l_size); }
-    {mwSize l_size[] = {1, 1};
-    *(void **)&toplevel = prealloc_mxArray((mxArray**)&plhs[2], mxLOGICAL_CLASS, 2, l_size); }
+    errCode = mxMalloc(sizeof(int32_T));
+
+    toplevel = mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscPCCreate_World(&ksp, errCode, toplevel);
 
-    /* Marshall out function outputs */
-    {const char *_fields[] = { "data", "type", "nitems",  ""};
-    int32_T _one=1;
-    plhs[0] = create_struct_mxArray(1, &_one, 3, _fields);}
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 0, move_emxArray_to_mxArray((emxArray__common*)ksp.data, mxUINT8_CLASS));
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 1, move_emxArray_to_mxArray((emxArray__common*)ksp.type, mxCHAR_CLASS));
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 2, copy_scalar_to_mxArray(&ksp.nitems, mxINT32_CLASS));
-    /* Nothing to do for plhs[1] */
-    /* Nothing to do for plhs[2] */
-
-    /* Free temporary variables */
-    free_emxArray((emxArray__common*)ksp.type); mxFree(ksp.type);
-    free_emxArray((emxArray__common*)ksp.data); mxFree(ksp.data);
+    /* Deallocate input and marshall out function outputs */
+    plhs[0] = marshallout_struct0_T(&ksp);
+    plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
+    plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 
 }
+
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */

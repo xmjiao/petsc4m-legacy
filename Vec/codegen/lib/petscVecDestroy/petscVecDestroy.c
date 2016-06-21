@@ -146,7 +146,7 @@ void petscVecDestroy(struct0_T *vec, int *errCode, boolean_T *toplevel)
   ptr = (char *)(&t_vec);
   for (k = 1; k <= sizepe; k++) {
     vec->data->data[k - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (*errCode != 0) {

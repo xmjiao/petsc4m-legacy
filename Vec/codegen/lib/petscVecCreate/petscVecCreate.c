@@ -178,7 +178,7 @@ void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
   ptr = (char *)(&t_vec);
   for (k = 1; k <= sizepe; k++) {
     vec->data->data[k - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 }
 
@@ -231,7 +231,7 @@ void petscVecCreate_World(struct0_T *vec, int *errCode, boolean_T *topleve)
   ptr = (char *)(&t_vec);
   for (i = 1; i <= sizepe; i++) {
     vec->data->data[i - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   *errCode = b_errCode;

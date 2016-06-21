@@ -20,183 +20,186 @@
 /* Include declaration of some helper functions. */
 #include "lib2mex_helper.c"
 
-static void __petscMatNullSpaceSetFunction_api(mxArray **plhs, const mxArray ** prhs) {
 
+static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, const char *mname) {
+    mxArray             *sub_mx;
+
+    if (!mxIsStruct(mx))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s has incorrect data type; struct is expected.", mname);
+    if (!mxGetField(mx, 0, "data"))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s is missing the field data.", mname);
+    if (!mxGetField(mx, 0, "type"))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s is missing the field type.", mname);
+    if (!mxGetField(mx, 0, "nitems"))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s is missing the field nitems.", mname);
+    if (mxGetNumberOfFields(mx) > 3)
+        M2C_warn("marshallin_const_struct0_T:ExtraFields",
+            "Extra fields in %s and are ignored.", mname);
+
+    sub_mx = mxGetField(mx, 0, "data");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxUINT8_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongInputType",
+            "Input argument data has incorrect data type; uint8 is expected.");
+    if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[1] != 1) 
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
+            "Dimension 2 of data should equal 1.");
+    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    init_emxArray((emxArray__common*)(pStruct->data), 1);
+    alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->data), "data", 1);
+
+    sub_mx = mxGetField(mx, 0, "type");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxCHAR_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongInputType",
+            "Input argument type has incorrect data type; char is expected.");
+    if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
+            "Dimension 1 of type should equal 1.");
+    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    init_emxArray((emxArray__common*)(pStruct->type), 2);
+    alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
+
+    sub_mx = mxGetField(mx, 0, "nitems");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxINT32_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongInputType",
+            "Input argument nitems has incorrect data type; int32 is expected.");
+    if (mxGetNumberOfElements(sub_mx) != 1)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
+            "Argument nitems should be a scalar.");
+    pStruct->nitems = *(int32_T*)mxGetData(sub_mx);
+}
+static void destroy_struct0_T(struct0_T *pStruct) {
+
+    free_emxArray((emxArray__common*)(pStruct->data));
+    mxFree(pStruct->data);
+
+    free_emxArray((emxArray__common*)(pStruct->type));
+    mxFree(pStruct->type);
+
+
+}
+
+
+static void marshallin_const_struct1_T(struct1_T *pStruct, const mxArray *mx, const char *mname) {
+    mxArray             *sub_mx;
+
+    if (!mxIsStruct(mx))
+        M2C_error("marshallin_const_struct1_T:WrongType",
+            "Input argument %s has incorrect data type; struct is expected.", mname);
+    if (!mxGetField(mx, 0, "data"))
+        M2C_error("marshallin_const_struct1_T:WrongType",
+            "Input argument %s is missing the field data.", mname);
+    if (!mxGetField(mx, 0, "type"))
+        M2C_error("marshallin_const_struct1_T:WrongType",
+            "Input argument %s is missing the field type.", mname);
+    if (!mxGetField(mx, 0, "nbytes"))
+        M2C_error("marshallin_const_struct1_T:WrongType",
+            "Input argument %s is missing the field nbytes.", mname);
+    if (!mxGetField(mx, 0, "offset"))
+        M2C_error("marshallin_const_struct1_T:WrongType",
+            "Input argument %s is missing the field offset.", mname);
+    if (mxGetNumberOfFields(mx) > 4)
+        M2C_warn("marshallin_const_struct1_T:ExtraFields",
+            "Extra fields in %s and are ignored.", mname);
+
+    sub_mx = mxGetField(mx, 0, "data");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxUINT64_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct1_T:WrongInputType",
+            "Input argument data has incorrect data type; uint64 is expected.");
+    if (mxGetNumberOfElements(sub_mx) != 1)
+        mexErrMsgIdAndTxt("marshallin_const_struct1_T:WrongSizeOfInputArg",
+            "Argument data should be a scalar.");
+    pStruct->data = *(uint64_T*)mxGetData(sub_mx);
+
+    sub_mx = mxGetField(mx, 0, "type");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxCHAR_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct1_T:WrongInputType",
+            "Input argument type has incorrect data type; char is expected.");
+    if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
+        mexErrMsgIdAndTxt("marshallin_const_struct1_T:WrongSizeOfInputArg",
+            "Dimension 1 of type should equal 1.");
+    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    init_emxArray((emxArray__common*)(pStruct->type), 2);
+    alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
+
+    sub_mx = mxGetField(mx, 0, "nbytes");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxINT32_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct1_T:WrongInputType",
+            "Input argument nbytes has incorrect data type; int32 is expected.");
+    if (mxGetNumberOfElements(sub_mx) != 1)
+        mexErrMsgIdAndTxt("marshallin_const_struct1_T:WrongSizeOfInputArg",
+            "Argument nbytes should be a scalar.");
+    pStruct->nbytes = *(int32_T*)mxGetData(sub_mx);
+
+    sub_mx = mxGetField(mx, 0, "offset");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxINT32_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct1_T:WrongInputType",
+            "Input argument offset has incorrect data type; int32 is expected.");
+    if (mxGetNumberOfElements(sub_mx) != 1)
+        mexErrMsgIdAndTxt("marshallin_const_struct1_T:WrongSizeOfInputArg",
+            "Argument offset should be a scalar.");
+    pStruct->offset = *(int32_T*)mxGetData(sub_mx);
+}
+static void destroy_struct1_T(struct1_T *pStruct) {
+
+    free_emxArray((emxArray__common*)(pStruct->type));
+    mxFree(pStruct->type);
+
+
+}
+
+
+static void __petscMatNullSpaceSetFunction_api(mxArray **plhs, const mxArray ** prhs) {
     struct0_T            nullSp;
     struct0_T            rmvFunc;
     struct1_T            ctx;
-    mxArray              *_sub_mx1;
+    int32_T             *errCode;
+    boolean_T           *toplevel;
 
-    int32_T              *errCode;
-    boolean_T            *toplevel;
-
-    /* Marshall in function inputs */
-
-    if (!mxIsStruct(prhs[0]))
+    /* Marshall in inputs and preallocate outputs */
+    if (mxGetNumberOfElements(prhs[0]) && mxGetClassID(prhs[0]) != mxSTRUCT_CLASS)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument nullSp has incorrect data type. struct is expected.");
-    if (mxGetNumberOfFields(prhs[0])!=3)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:InputStructWrongFields",
-            "Input argument nullSp has incorrect number of fields.");
+            "Input argument nullSp has incorrect data type; struct is expected.");
     if (mxGetNumberOfElements(prhs[0]) != 1)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Argument nullSp must contain 1 items.");
+            "Argument nullSp should be a scalar.");
+    marshallin_const_struct0_T(&nullSp, prhs[0], "nullSp");
 
-    _sub_mx1 = mxGetField(prhs[0], 0, "data");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument nullSp does not have the field data.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxUINT8_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxSTRUCT_CLASS)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument nullSp.data has incorrect data type. uint8 is expected.");
-    *(void**)&nullSp.data = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)nullSp.data, "nullSp.data", 1);
-    _sub_mx1 = mxGetField(prhs[0], 0, "type");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument nullSp does not have the field type.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxCHAR_CLASS)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument nullSp.type has incorrect data type. char is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetDimensions(_sub_mx1)[0] != 1)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Dimension 1 of nullSp.type should be equal to 1.");
-    *(void**)&nullSp.type = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)nullSp.type, "nullSp.type", 2);
-    _sub_mx1 = mxGetField(prhs[0], 0, "nitems");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument nullSp does not have the field nitems.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxINT32_CLASS)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument nullSp.nitems has incorrect data type. int32 is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) != 1)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Argument nullSp.nitems should be a scalar.");
-    nullSp.nitems = *(int32_T*)mxGetData(_sub_mx1);
-
-    if (!mxIsStruct(prhs[1]))
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument rmvFunc has incorrect data type. struct is expected.");
-    if (mxGetNumberOfFields(prhs[1])!=3)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:InputStructWrongFields",
-            "Input argument rmvFunc has incorrect number of fields.");
+            "Input argument rmvFunc has incorrect data type; struct is expected.");
     if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Argument rmvFunc must contain 1 items.");
+            "Argument rmvFunc should be a scalar.");
+    marshallin_const_struct0_T(&rmvFunc, prhs[1], "rmvFunc");
 
-    _sub_mx1 = mxGetField(prhs[1], 0, "data");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument rmvFunc does not have the field data.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxUINT8_CLASS)
+    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxSTRUCT_CLASS)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument rmvFunc.data has incorrect data type. uint8 is expected.");
-    *(void**)&rmvFunc.data = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)rmvFunc.data, "rmvFunc.data", 1);
-    _sub_mx1 = mxGetField(prhs[1], 0, "type");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument rmvFunc does not have the field type.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxCHAR_CLASS)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument rmvFunc.type has incorrect data type. char is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetDimensions(_sub_mx1)[0] != 1)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Dimension 1 of rmvFunc.type should be equal to 1.");
-    *(void**)&rmvFunc.type = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)rmvFunc.type, "rmvFunc.type", 2);
-    _sub_mx1 = mxGetField(prhs[1], 0, "nitems");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument rmvFunc does not have the field nitems.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxINT32_CLASS)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument rmvFunc.nitems has incorrect data type. int32 is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) != 1)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Argument rmvFunc.nitems should be a scalar.");
-    rmvFunc.nitems = *(int32_T*)mxGetData(_sub_mx1);
-
-    if (!mxIsStruct(prhs[2]))
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument ctx has incorrect data type. struct is expected.");
-    if (mxGetNumberOfFields(prhs[2])!=4)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:InputStructWrongFields",
-            "Input argument ctx has incorrect number of fields.");
+            "Input argument ctx has incorrect data type; struct is expected.");
     if (mxGetNumberOfElements(prhs[2]) != 1)
         mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Argument ctx must contain 1 items.");
+            "Argument ctx should be a scalar.");
+    marshallin_const_struct1_T(&ctx, prhs[2], "ctx");
 
-    _sub_mx1 = mxGetField(prhs[2], 0, "data");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument ctx does not have the field data.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxUINT64_CLASS)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument ctx.data has incorrect data type. uint64 is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) != 1)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Argument ctx.data should be a scalar.");
-    ctx.data = *(uint64_T*)mxGetData(_sub_mx1);
-    _sub_mx1 = mxGetField(prhs[2], 0, "type");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument ctx does not have the field type.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxCHAR_CLASS)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument ctx.type has incorrect data type. char is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetDimensions(_sub_mx1)[0] != 1)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Dimension 1 of ctx.type should be equal to 1.");
-    *(void**)&ctx.type = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)ctx.type, "ctx.type", 2);
-    _sub_mx1 = mxGetField(prhs[2], 0, "nbytes");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument ctx does not have the field nbytes.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxINT32_CLASS)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument ctx.nbytes has incorrect data type. int32 is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) != 1)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Argument ctx.nbytes should be a scalar.");
-    ctx.nbytes = *(int32_T*)mxGetData(_sub_mx1);
-    _sub_mx1 = mxGetField(prhs[2], 0, "offset");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputStruct",
-            "Input argument ctx does not have the field offset.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxINT32_CLASS)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongInputType",
-            "Input argument ctx.offset has incorrect data type. int32 is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) != 1)
-        mexErrMsgIdAndTxt("petscMatNullSpaceSetFunction:WrongSizeOfInputArg",
-            "Argument ctx.offset should be a scalar.");
-    ctx.offset = *(int32_T*)mxGetData(_sub_mx1);
+    errCode = mxMalloc(sizeof(int32_T));
 
-    /* Preallocate output variables */
-    {mwSize l_size[] = {1, 1};
-    *(void **)&errCode = prealloc_mxArray((mxArray**)&plhs[0], mxINT32_CLASS, 2, l_size); }
-    {mwSize l_size[] = {1, 1};
-    *(void **)&toplevel = prealloc_mxArray((mxArray**)&plhs[1], mxLOGICAL_CLASS, 2, l_size); }
+    toplevel = mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscMatNullSpaceSetFunction(&nullSp, &rmvFunc, &ctx, errCode, toplevel);
 
-    /* Marshall out function outputs */
-    /* Nothing to do for plhs[0] */
-    /* Nothing to do for plhs[1] */
-
-    /* Free temporary variables */
-    free_emxArray((emxArray__common*)nullSp.type); mxFree(nullSp.type);
-    free_emxArray((emxArray__common*)nullSp.data); mxFree(nullSp.data);
-
-    free_emxArray((emxArray__common*)rmvFunc.type); mxFree(rmvFunc.type);
-    free_emxArray((emxArray__common*)rmvFunc.data); mxFree(rmvFunc.data);
-
-    free_emxArray((emxArray__common*)ctx.type); mxFree(ctx.type);
+    /* Deallocate input and marshall out function outputs */
+    destroy_struct0_T(&nullSp);
+    destroy_struct0_T(&rmvFunc);
+    destroy_struct1_T(&ctx);
+    plhs[0] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
+    plhs[1] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 
 }
+
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */

@@ -174,7 +174,7 @@ void petscMatCreate(const struct0_T *comm, struct0_T *mat, int *errCode,
   ptr = (char *)(&t_mat);
   for (k = 1; k <= sizepe; k++) {
     mat->data->data[k - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (*errCode != 0) {
@@ -227,7 +227,7 @@ void petscMatCreate_World(struct0_T *mat, int *errCode, boolean_T *topleve)
   ptr = (char *)(&t_mat);
   for (i = 1; i <= sizepe; i++) {
     mat->data->data[i - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (b_errCode != 0) {

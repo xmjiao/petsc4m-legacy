@@ -155,7 +155,7 @@ void petscMatNullSpaceDestroy(struct0_T *matNull, int *errCode, boolean_T
   ptr = (char *)(&t_mat);
   for (k = 1; k <= sizepe; k++) {
     matNull->data->data[k - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 }
 

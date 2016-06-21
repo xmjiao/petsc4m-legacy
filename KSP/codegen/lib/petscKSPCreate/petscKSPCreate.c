@@ -174,7 +174,7 @@ void petscKSPCreate(const struct0_T *comm, struct0_T *ksp, int *errCode,
   ptr = (char *)(&t_ksp);
   for (k = 1; k <= sizepe; k++) {
     ksp->data->data[k - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (*errCode != 0) {
@@ -227,7 +227,7 @@ void petscKSPCreate_World(struct0_T *ksp, int *errCode, boolean_T *toplevel)
   ptr = (char *)(&t_ksp);
   for (i = 1; i <= sizepe; i++) {
     ksp->data->data[i - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (b_errCode != 0) {

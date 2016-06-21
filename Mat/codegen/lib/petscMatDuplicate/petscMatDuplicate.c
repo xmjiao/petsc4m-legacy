@@ -174,7 +174,7 @@ void petscMatDuplicate(const struct0_T *mat_in, int op, struct0_T *mat_out, int 
   ptr = (char *)(&t_mat_out);
   for (k = 1; k <= sizepe; k++) {
     mat_out->data->data[k - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (*errCode != 0) {

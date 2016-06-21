@@ -20,99 +20,119 @@
 /* Include declaration of some helper functions. */
 #include "lib2mex_helper.c"
 
+
+static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, const char *mname) {
+    mxArray             *sub_mx;
+
+    if (!mxIsStruct(mx))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s has incorrect data type; struct is expected.", mname);
+    if (!mxGetField(mx, 0, "data"))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s is missing the field data.", mname);
+    if (!mxGetField(mx, 0, "type"))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s is missing the field type.", mname);
+    if (!mxGetField(mx, 0, "nitems"))
+        M2C_error("marshallin_const_struct0_T:WrongType",
+            "Input argument %s is missing the field nitems.", mname);
+    if (mxGetNumberOfFields(mx) > 3)
+        M2C_warn("marshallin_const_struct0_T:ExtraFields",
+            "Extra fields in %s and are ignored.", mname);
+
+    sub_mx = mxGetField(mx, 0, "data");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxUINT8_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongInputType",
+            "Input argument data has incorrect data type; uint8 is expected.");
+    if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[1] != 1) 
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
+            "Dimension 2 of data should equal 1.");
+    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    init_emxArray((emxArray__common*)(pStruct->data), 1);
+    alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->data), "data", 1);
+
+    sub_mx = mxGetField(mx, 0, "type");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxCHAR_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongInputType",
+            "Input argument type has incorrect data type; char is expected.");
+    if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
+            "Dimension 1 of type should equal 1.");
+    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    init_emxArray((emxArray__common*)(pStruct->type), 2);
+    alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
+
+    sub_mx = mxGetField(mx, 0, "nitems");
+    if (mxGetNumberOfElements(sub_mx) && mxGetClassID(sub_mx) != mxINT32_CLASS)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongInputType",
+            "Input argument nitems has incorrect data type; int32 is expected.");
+    if (mxGetNumberOfElements(sub_mx) != 1)
+        mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
+            "Argument nitems should be a scalar.");
+    pStruct->nitems = *(int32_T*)mxGetData(sub_mx);
+}
+static void destroy_struct0_T(struct0_T *pStruct) {
+
+    free_emxArray((emxArray__common*)(pStruct->data));
+    mxFree(pStruct->data);
+
+    free_emxArray((emxArray__common*)(pStruct->type));
+    mxFree(pStruct->type);
+
+
+}
+
+
 static void __petscSplitOwnership_api(mxArray **plhs, const mxArray ** prhs) {
-
     struct0_T            comm;
-    mxArray              *_sub_mx1;
+    int32_T             *n;
+    int32_T             *N;
+    int32_T             *errCode;
+    boolean_T           *toplevel;
 
-    int32_T              *n;
-    int32_T              *N;
-    int32_T              *errCode;
-    boolean_T            *toplevel;
-
-    /* Marshall in function inputs */
-
-    if (!mxIsStruct(prhs[0]))
+    /* Marshall in inputs and preallocate outputs */
+    if (mxGetNumberOfElements(prhs[0]) && mxGetClassID(prhs[0]) != mxSTRUCT_CLASS)
         mexErrMsgIdAndTxt("petscSplitOwnership:WrongInputType",
-            "Input argument comm has incorrect data type. struct is expected.");
-    if (mxGetNumberOfFields(prhs[0])!=3)
-        mexErrMsgIdAndTxt("petscSplitOwnership:InputStructWrongFields",
-            "Input argument comm has incorrect number of fields.");
+            "Input argument comm has incorrect data type; struct is expected.");
     if (mxGetNumberOfElements(prhs[0]) != 1)
         mexErrMsgIdAndTxt("petscSplitOwnership:WrongSizeOfInputArg",
-            "Argument comm must contain 1 items.");
+            "Argument comm should be a scalar.");
+    marshallin_const_struct0_T(&comm, prhs[0], "comm");
 
-    _sub_mx1 = mxGetField(prhs[0], 0, "data");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscSplitOwnership:WrongInputStruct",
-            "Input argument comm does not have the field data.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxUINT8_CLASS)
-        mexErrMsgIdAndTxt("petscSplitOwnership:WrongInputType",
-            "Input argument comm.data has incorrect data type. uint8 is expected.");
-    *(void**)&comm.data = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)comm.data, "comm.data", 1);
-    _sub_mx1 = mxGetField(prhs[0], 0, "type");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscSplitOwnership:WrongInputStruct",
-            "Input argument comm does not have the field type.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxCHAR_CLASS)
-        mexErrMsgIdAndTxt("petscSplitOwnership:WrongInputType",
-            "Input argument comm.type has incorrect data type. char is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetDimensions(_sub_mx1)[0] != 1)
-        mexErrMsgIdAndTxt("petscSplitOwnership:WrongSizeOfInputArg",
-            "Dimension 1 of comm.type should be equal to 1.");
-    *(void**)&comm.type = mxCalloc(1, sizeof(emxArray__common));
-    alias_mxArray_to_emxArray(_sub_mx1, (emxArray__common*)comm.type, "comm.type", 2);
-    _sub_mx1 = mxGetField(prhs[0], 0, "nitems");
-    if (_sub_mx1==NULL)
-        mexErrMsgIdAndTxt("petscSplitOwnership:WrongInputStruct",
-            "Input argument comm does not have the field nitems.");
-    if (mxGetNumberOfElements(_sub_mx1) && mxGetClassID(_sub_mx1) != mxINT32_CLASS)
-        mexErrMsgIdAndTxt("petscSplitOwnership:WrongInputType",
-            "Input argument comm.nitems has incorrect data type. int32 is expected.");
-    if (mxGetNumberOfElements(_sub_mx1) != 1)
-        mexErrMsgIdAndTxt("petscSplitOwnership:WrongSizeOfInputArg",
-            "Argument comm.nitems should be a scalar.");
-    comm.nitems = *(int32_T*)mxGetData(_sub_mx1);
-    plhs[0] = mxDuplicateArray(prhs[1]);
-
-    if (mxGetNumberOfElements(plhs[0]) && mxGetClassID(plhs[0]) != mxINT32_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscSplitOwnership:WrongInputType",
             "Input argument n has incorrect data type; int32 is expected.");
-    if (mxGetNumberOfElements(plhs[0]) != 1)
+    if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscSplitOwnership:WrongSizeOfInputArg",
             "Argument n should be a scalar.");
-    n = (int32_T*)mxGetData(plhs[0]);
-    plhs[1] = mxDuplicateArray(prhs[2]);
+    n = mxMalloc(sizeof(int32_T));
+    copy_mxArray_to_DataSize(n, 1, NULL, prhs[1], "n", 1);
 
-    if (mxGetNumberOfElements(plhs[1]) && mxGetClassID(plhs[1]) != mxINT32_CLASS)
+    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscSplitOwnership:WrongInputType",
             "Input argument N has incorrect data type; int32 is expected.");
-    if (mxGetNumberOfElements(plhs[1]) != 1)
+    if (mxGetNumberOfElements(prhs[2]) != 1)
         mexErrMsgIdAndTxt("petscSplitOwnership:WrongSizeOfInputArg",
             "Argument N should be a scalar.");
-    N = (int32_T*)mxGetData(plhs[1]);
+    N = mxMalloc(sizeof(int32_T));
+    copy_mxArray_to_DataSize(N, 1, NULL, prhs[2], "N", 1);
 
-    /* Preallocate output variables */
-    {mwSize l_size[] = {1, 1};
-    *(void **)&errCode = prealloc_mxArray((mxArray**)&plhs[2], mxINT32_CLASS, 2, l_size); }
-    {mwSize l_size[] = {1, 1};
-    *(void **)&toplevel = prealloc_mxArray((mxArray**)&plhs[3], mxLOGICAL_CLASS, 2, l_size); }
+    errCode = mxMalloc(sizeof(int32_T));
+
+    toplevel = mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscSplitOwnership(&comm, n, N, errCode, toplevel);
 
-    /* Marshall out function outputs */
-    /* Nothing to do for plhs[0] */
-    /* Nothing to do for plhs[1] */
-    /* Nothing to do for plhs[2] */
-    /* Nothing to do for plhs[3] */
-
-    /* Free temporary variables */
-    free_emxArray((emxArray__common*)comm.type); mxFree(comm.type);
-    free_emxArray((emxArray__common*)comm.data); mxFree(comm.data);
+    /* Deallocate input and marshall out function outputs */
+    destroy_struct0_T(&comm);
+    plhs[0] = move_ioArray_to_mxArray(n, mxINT32_CLASS, prhs[1]);
+    plhs[1] = move_ioArray_to_mxArray(N, mxINT32_CLASS, prhs[2]);
+    plhs[2] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
+    plhs[3] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 
 }
+
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */

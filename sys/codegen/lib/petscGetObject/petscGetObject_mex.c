@@ -20,48 +20,62 @@
 /* Include declaration of some helper functions. */
 #include "lib2mex_helper.c"
 
+static void prealloc_struct0_T(struct0_T *pStruct) {
+
+
+    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    init_emxArray((emxArray__common*)(pStruct->data), 1);
+
+    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    init_emxArray((emxArray__common*)(pStruct->type), 2);
+
+}
+static mxArray *marshallout_struct0_T(struct0_T *pStruct) {
+    const char           *fields[] = {"data", "type", "nitems"};
+    int                  one=1;
+    mxArray              *mx = create_struct_mxArray(1, &one, 3, fields);
+
+    mxSetField(mx, 0, "data", move_emxArray_to_mxArray((emxArray__common*)(pStruct->data), mxUINT8_CLASS));
+    mxFree(pStruct->data->size);
+    mxFree(pStruct->data);
+
+    mxSetField(mx, 0, "type", move_emxArray_to_mxArray((emxArray__common*)(pStruct->type), mxCHAR_CLASS));
+    mxFree(pStruct->type->size);
+    mxFree(pStruct->type);
+
+    mxSetField(mx, 0, "nitems", copy_scalar_to_mxArray(&pStruct->nitems, mxINT32_CLASS));
+    return mx;
+}
+
+
+
 static void __petscGetObject_api(mxArray **plhs, const mxArray ** prhs) {
-
     emxArray_char_T      name;
-
     struct0_T            obj;
-    mxArray              *_sub_mx1;
+    boolean_T           *toplevel;
 
-    boolean_T            *toplevel;
-
-    /* Marshall in function inputs */
+    /* Marshall in inputs and preallocate outputs */
     if (mxGetNumberOfElements(prhs[0]) && mxGetClassID(prhs[0]) != mxCHAR_CLASS)
         mexErrMsgIdAndTxt("petscGetObject:WrongInputType",
             "Input argument name has incorrect data type; char is expected.");
-    if (mxGetNumberOfElements(prhs[0]) && mxGetDimensions(prhs[0])[0] != 1)
+    if (mxGetNumberOfElements(prhs[0]) && mxGetDimensions(prhs[0])[0] != 1) 
         mexErrMsgIdAndTxt("petscGetObject:WrongSizeOfInputArg",
-            "Dimension 1 of name should be equal to 1.");
-    alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)&name, "name", 2);
+            "Dimension 1 of name should equal 1.");
+    alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&name), "name", 2);
+    prealloc_struct0_T(&obj);
 
-    /* Preallocate output variables */
-    *(void **)&obj.data = mxCalloc(1, sizeof(emxArray__common));    init_emxArray((emxArray__common*)obj.data, 1);
-    *(void **)&obj.type = mxCalloc(1, sizeof(emxArray__common));    init_emxArray((emxArray__common*)obj.type, 2);
-    {mwSize l_size[] = {1, 1};
-    *(void **)&toplevel = prealloc_mxArray((mxArray**)&plhs[1], mxLOGICAL_CLASS, 2, l_size); }
+    toplevel = mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscGetObject(&name, &obj, toplevel);
 
-    /* Marshall out function outputs */
-    {const char *_fields[] = { "data", "type", "nitems",  ""};
-    int32_T _one=1;
-    plhs[0] = create_struct_mxArray(1, &_one, 3, _fields);}
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 0, move_emxArray_to_mxArray((emxArray__common*)obj.data, mxUINT8_CLASS));
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 1, move_emxArray_to_mxArray((emxArray__common*)obj.type, mxCHAR_CLASS));
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 2, copy_scalar_to_mxArray(&obj.nitems, mxINT32_CLASS));
-    /* Nothing to do for plhs[1] */
-
-    /* Free temporary variables */
-    free_emxArray((emxArray__common*)&name);
-    free_emxArray((emxArray__common*)obj.type); mxFree(obj.type);
-    free_emxArray((emxArray__common*)obj.data); mxFree(obj.data);
+    /* Deallocate input and marshall out function outputs */
+    free_emxArray((emxArray__common*)(&name));
+    plhs[0] = marshallout_struct0_T(&obj);
+    plhs[1] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 
 }
+
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */

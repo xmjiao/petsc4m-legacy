@@ -20,55 +20,53 @@
 /* Include declaration of some helper functions. */
 #include "lib2mex_helper.c"
 
-static void __petscOptionsGetInt_api(mxArray **plhs, const mxArray ** prhs) {
 
+static void __petscOptionsGetInt_api(mxArray **plhs, const mxArray ** prhs) {
     emxArray_char_T      pre;
     emxArray_char_T      name;
+    int32_T             *ivalue;
+    int32_T             *found;
+    int32_T             *errCode;
+    boolean_T           *toplevel;
 
-    int32_T              *ivalue;
-    int32_T              *found;
-    int32_T              *errCode;
-    boolean_T            *toplevel;
-
-    /* Marshall in function inputs */
+    /* Marshall in inputs and preallocate outputs */
     if (mxGetNumberOfElements(prhs[0]) && mxGetClassID(prhs[0]) != mxCHAR_CLASS)
         mexErrMsgIdAndTxt("petscOptionsGetInt:WrongInputType",
             "Input argument pre has incorrect data type; char is expected.");
-    if (mxGetNumberOfElements(prhs[0]) && mxGetDimensions(prhs[0])[0] != 1)
+    if (mxGetNumberOfElements(prhs[0]) && mxGetDimensions(prhs[0])[0] != 1) 
         mexErrMsgIdAndTxt("petscOptionsGetInt:WrongSizeOfInputArg",
-            "Dimension 1 of pre should be equal to 1.");
-    alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)&pre, "pre", 2);
+            "Dimension 1 of pre should equal 1.");
+    alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&pre), "pre", 2);
+
     if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxCHAR_CLASS)
         mexErrMsgIdAndTxt("petscOptionsGetInt:WrongInputType",
             "Input argument name has incorrect data type; char is expected.");
-    if (mxGetNumberOfElements(prhs[1]) && mxGetDimensions(prhs[1])[0] != 1)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetDimensions(prhs[1])[0] != 1) 
         mexErrMsgIdAndTxt("petscOptionsGetInt:WrongSizeOfInputArg",
-            "Dimension 1 of name should be equal to 1.");
-    alias_mxArray_to_emxArray(prhs[1], (emxArray__common *)&name, "name", 2);
+            "Dimension 1 of name should equal 1.");
+    alias_mxArray_to_emxArray(prhs[1], (emxArray__common *)(&name), "name", 2);
 
-    /* Preallocate output variables */
-    {mwSize l_size[] = {1, 1};
-    *(void **)&ivalue = prealloc_mxArray((mxArray**)&plhs[0], mxINT32_CLASS, 2, l_size); }
-    {mwSize l_size[] = {1, 1};
-    *(void **)&found = prealloc_mxArray((mxArray**)&plhs[1], mxINT32_CLASS, 2, l_size); }
-    {mwSize l_size[] = {1, 1};
-    *(void **)&errCode = prealloc_mxArray((mxArray**)&plhs[2], mxINT32_CLASS, 2, l_size); }
-    {mwSize l_size[] = {1, 1};
-    *(void **)&toplevel = prealloc_mxArray((mxArray**)&plhs[3], mxLOGICAL_CLASS, 2, l_size); }
+    ivalue = mxMalloc(sizeof(int32_T));
+
+    found = mxMalloc(sizeof(int32_T));
+
+    errCode = mxMalloc(sizeof(int32_T));
+
+    toplevel = mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscOptionsGetInt(&pre, &name, ivalue, found, errCode, toplevel);
 
-    /* Marshall out function outputs */
-    /* Nothing to do for plhs[0] */
-    /* Nothing to do for plhs[1] */
-    /* Nothing to do for plhs[2] */
-    /* Nothing to do for plhs[3] */
+    /* Deallocate input and marshall out function outputs */
+    free_emxArray((emxArray__common*)(&pre));
+    free_emxArray((emxArray__common*)(&name));
+    plhs[0] = move_scalar_to_mxArray(ivalue, mxINT32_CLASS);
+    plhs[1] = move_scalar_to_mxArray(found, mxINT32_CLASS);
+    plhs[2] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
+    plhs[3] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 
-    /* Free temporary variables */
-    free_emxArray((emxArray__common*)&pre);
-    free_emxArray((emxArray__common*)&name);
 }
+
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */

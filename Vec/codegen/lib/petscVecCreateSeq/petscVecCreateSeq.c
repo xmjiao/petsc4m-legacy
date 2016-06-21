@@ -81,7 +81,7 @@ void petscVecCreateSeq(int n, struct0_T *vec, int *errCode, boolean_T *toplevel)
   ptr = (char *)(&t_vec);
   for (i = 1; i <= sizepe; i++) {
     vec->data->data[i - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (*errCode != 0) {

@@ -20,39 +20,35 @@
 /* Include declaration of some helper functions. */
 #include "lib2mex_helper.c"
 
-static void __petscGetString_api(mxArray **plhs, const mxArray ** prhs) {
 
+static void __petscGetString_api(mxArray **plhs, const mxArray ** prhs) {
     emxArray_char_T      name;
     emxArray_char_T      str;
+    boolean_T           *toplevel;
 
-    boolean_T            *toplevel;
-
-    /* Marshall in function inputs */
+    /* Marshall in inputs and preallocate outputs */
     if (mxGetNumberOfElements(prhs[0]) && mxGetClassID(prhs[0]) != mxCHAR_CLASS)
         mexErrMsgIdAndTxt("petscGetString:WrongInputType",
             "Input argument name has incorrect data type; char is expected.");
-    if (mxGetNumberOfElements(prhs[0]) && mxGetDimensions(prhs[0])[0] != 1)
+    if (mxGetNumberOfElements(prhs[0]) && mxGetDimensions(prhs[0])[0] != 1) 
         mexErrMsgIdAndTxt("petscGetString:WrongSizeOfInputArg",
-            "Dimension 1 of name should be equal to 1.");
-    alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)&name, "name", 2);
+            "Dimension 1 of name should equal 1.");
+    alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&name), "name", 2);
+    init_emxArray((emxArray__common*)(&str), 2);
 
-    /* Preallocate output variables */
-    init_emxArray((emxArray__common*)&str, 2);
-    {mwSize l_size[] = {1, 1};
-    *(void **)&toplevel = prealloc_mxArray((mxArray**)&plhs[1], mxLOGICAL_CLASS, 2, l_size); }
+    toplevel = mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscGetString(&name, &str, toplevel);
 
-    /* Marshall out function outputs */
-    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)&str, mxCHAR_CLASS);
+    /* Deallocate input and marshall out function outputs */
+    free_emxArray((emxArray__common*)(&name));
+    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)(&str), mxCHAR_CLASS);
+    mxFree(str.size);
+    plhs[1] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 
-    /* Nothing to do for plhs[1] */
-
-    /* Free temporary variables */
-    free_emxArray((emxArray__common*)&name);
-    free_emxArray((emxArray__common*)&str);
 }
+
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */

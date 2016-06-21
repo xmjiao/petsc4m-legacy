@@ -339,7 +339,7 @@ void petscObjectGetComm(const struct0_T *obj, struct0_T *comm, int *errCode,
   ptr = (char *)(&t_comm);
   for (k = 1; k <= sizepe; k++) {
     comm->data->data[k - 1] = *(ptr);
-    ptr = ptr+1;
+    ptr = ptr + 1;
   }
 
   if (*errCode != 0) {

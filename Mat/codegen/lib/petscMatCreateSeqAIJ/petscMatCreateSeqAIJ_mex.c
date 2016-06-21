@@ -20,20 +20,39 @@
 /* Include declaration of some helper functions. */
 #include "lib2mex_helper.c"
 
+static void prealloc_struct0_T(struct0_T *pStruct) {
+
+
+    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    init_emxArray((emxArray__common*)(pStruct->data), 1);
+
+}
+static mxArray *marshallout_struct0_T(struct0_T *pStruct) {
+    const char           *fields[] = {"data", "type", "nitems"};
+    int                  one=1;
+    mxArray              *mx = create_struct_mxArray(1, &one, 3, fields);
+
+    mxSetField(mx, 0, "data", move_emxArray_to_mxArray((emxArray__common*)(pStruct->data), mxUINT8_CLASS));
+    mxFree(pStruct->data->size);
+    mxFree(pStruct->data);
+
+    mxSetField(mx, 0, "type", copy_array_to_mxArray(pStruct->type.data, mxCHAR_CLASS, 2, pStruct->type.size));
+    mxSetField(mx, 0, "nitems", copy_scalar_to_mxArray(&pStruct->nitems, mxINT32_CLASS));
+    return mx;
+}
+
+
+
 static void __petscMatCreateSeqAIJ_api(mxArray **plhs, const mxArray ** prhs) {
-
-    emxArray_int32_T     nnz;
-
-    struct0_T            mat;
-    mxArray              *_sub_mx1;
-
     int32_T              m;
     int32_T              n;
     int32_T              nz;
-    int32_T              *errCode;
-    boolean_T            *toplevel;
+    emxArray_int32_T     nnz;
+    struct0_T            mat;
+    int32_T             *errCode;
+    boolean_T           *toplevel;
 
-    /* Marshall in function inputs */
+    /* Marshall in inputs and preallocate outputs */
     if (mxGetNumberOfElements(prhs[0]) && mxGetClassID(prhs[0]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ:WrongInputType",
             "Input argument m has incorrect data type; int32 is expected.");
@@ -41,6 +60,7 @@ static void __petscMatCreateSeqAIJ_api(mxArray **plhs, const mxArray ** prhs) {
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ:WrongSizeOfInputArg",
             "Argument m should be a scalar.");
     m = *(int32_T*)mxGetData(prhs[0]);
+
     if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ:WrongInputType",
             "Input argument n has incorrect data type; int32 is expected.");
@@ -48,6 +68,7 @@ static void __petscMatCreateSeqAIJ_api(mxArray **plhs, const mxArray ** prhs) {
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ:WrongSizeOfInputArg",
             "Argument n should be a scalar.");
     n = *(int32_T*)mxGetData(prhs[1]);
+
     if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ:WrongInputType",
             "Input argument nz has incorrect data type; int32 is expected.");
@@ -55,49 +76,43 @@ static void __petscMatCreateSeqAIJ_api(mxArray **plhs, const mxArray ** prhs) {
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ:WrongSizeOfInputArg",
             "Argument nz should be a scalar.");
     nz = *(int32_T*)mxGetData(prhs[2]);
+
     if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ:WrongInputType",
             "Input argument nnz has incorrect data type; int32 is expected.");
-    alias_mxArray_to_emxArray(prhs[3], (emxArray__common *)&nnz, "nnz", 1);
+    if (mxGetNumberOfElements(prhs[3]) && mxGetDimensions(prhs[3])[1] != 1) 
+        mexErrMsgIdAndTxt("petscMatCreateSeqAIJ:WrongSizeOfInputArg",
+            "Dimension 2 of nnz should equal 1.");
+    alias_mxArray_to_emxArray(prhs[3], (emxArray__common *)(&nnz), "nnz", 1);
+    prealloc_struct0_T(&mat);
 
-    /* Preallocate output variables */
-    *(void **)&mat.data = mxCalloc(1, sizeof(emxArray__common));    init_emxArray((emxArray__common*)mat.data, 1);
-    {mwSize l_size[] = {1, 1};
-    *(void **)&errCode = prealloc_mxArray((mxArray**)&plhs[1], mxINT32_CLASS, 2, l_size); }
-    {mwSize l_size[] = {1, 1};
-    *(void **)&toplevel = prealloc_mxArray((mxArray**)&plhs[2], mxLOGICAL_CLASS, 2, l_size); }
+    errCode = mxMalloc(sizeof(int32_T));
+
+    toplevel = mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscMatCreateSeqAIJ(m, n, nz, &nnz, &mat, errCode, toplevel);
 
-    /* Marshall out function outputs */
-    {const char *_fields[] = { "data", "type", "nitems",  ""};
-    int32_T _one=1;
-    plhs[0] = create_struct_mxArray(1, &_one, 3, _fields);}
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 0, move_emxArray_to_mxArray((emxArray__common*)mat.data, mxUINT8_CLASS));
-    {int32_T l_size[] = {1, 3};
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 1, copy_array_to_mxArray(mat.type.data, mxCHAR_CLASS, 2, l_size)); }
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 2, copy_scalar_to_mxArray(&mat.nitems, mxINT32_CLASS));
-    /* Nothing to do for plhs[1] */
-    /* Nothing to do for plhs[2] */
-
-    /* Free temporary variables */
-    free_emxArray((emxArray__common*)&nnz);
-    free_emxArray((emxArray__common*)mat.data); mxFree(mat.data);
+    /* Deallocate input and marshall out function outputs */
+    /* Nothing to be done for m */
+    /* Nothing to be done for n */
+    /* Nothing to be done for nz */
+    free_emxArray((emxArray__common*)(&nnz));
+    plhs[0] = marshallout_struct0_T(&mat);
+    plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
+    plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 
 }
+
 static void __petscMatCreateSeqAIJ_FixedRows_api(mxArray **plhs, const mxArray ** prhs) {
-
-    struct0_T            mat;
-    mxArray              *_sub_mx1;
-
     int32_T              m;
     int32_T              n;
     int32_T              nz;
-    int32_T              *errCode;
-    boolean_T            *topleve;
+    struct0_T            mat;
+    int32_T             *errCode;
+    boolean_T           *topleve;
 
-    /* Marshall in function inputs */
+    /* Marshall in inputs and preallocate outputs */
     if (mxGetNumberOfElements(prhs[0]) && mxGetClassID(prhs[0]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ_FixedRows:WrongInputType",
             "Input argument m has incorrect data type; int32 is expected.");
@@ -105,6 +120,7 @@ static void __petscMatCreateSeqAIJ_FixedRows_api(mxArray **plhs, const mxArray *
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ_FixedRows:WrongSizeOfInputArg",
             "Argument m should be a scalar.");
     m = *(int32_T*)mxGetData(prhs[0]);
+
     if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ_FixedRows:WrongInputType",
             "Input argument n has incorrect data type; int32 is expected.");
@@ -112,6 +128,7 @@ static void __petscMatCreateSeqAIJ_FixedRows_api(mxArray **plhs, const mxArray *
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ_FixedRows:WrongSizeOfInputArg",
             "Argument n should be a scalar.");
     n = *(int32_T*)mxGetData(prhs[1]);
+
     if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ_FixedRows:WrongInputType",
             "Input argument nz has incorrect data type; int32 is expected.");
@@ -119,32 +136,25 @@ static void __petscMatCreateSeqAIJ_FixedRows_api(mxArray **plhs, const mxArray *
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ_FixedRows:WrongSizeOfInputArg",
             "Argument nz should be a scalar.");
     nz = *(int32_T*)mxGetData(prhs[2]);
+    prealloc_struct0_T(&mat);
 
-    /* Preallocate output variables */
-    *(void **)&mat.data = mxCalloc(1, sizeof(emxArray__common));    init_emxArray((emxArray__common*)mat.data, 1);
-    {mwSize l_size[] = {1, 1};
-    *(void **)&errCode = prealloc_mxArray((mxArray**)&plhs[1], mxINT32_CLASS, 2, l_size); }
-    {mwSize l_size[] = {1, 1};
-    *(void **)&topleve = prealloc_mxArray((mxArray**)&plhs[2], mxLOGICAL_CLASS, 2, l_size); }
+    errCode = mxMalloc(sizeof(int32_T));
+
+    topleve = mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscMatCreateSeqAIJ_FixedRows(m, n, nz, &mat, errCode, topleve);
 
-    /* Marshall out function outputs */
-    {const char *_fields[] = { "data", "type", "nitems",  ""};
-    int32_T _one=1;
-    plhs[0] = create_struct_mxArray(1, &_one, 3, _fields);}
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 0, move_emxArray_to_mxArray((emxArray__common*)mat.data, mxUINT8_CLASS));
-    {int32_T l_size[] = {1, 3};
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 1, copy_array_to_mxArray(mat.type.data, mxCHAR_CLASS, 2, l_size)); }
-    mxSetFieldByNumber((mxArray*)(plhs[0]), 0, 2, copy_scalar_to_mxArray(&mat.nitems, mxINT32_CLASS));
-    /* Nothing to do for plhs[1] */
-    /* Nothing to do for plhs[2] */
-
-    /* Free temporary variables */
-    free_emxArray((emxArray__common*)mat.data); mxFree(mat.data);
+    /* Deallocate input and marshall out function outputs */
+    /* Nothing to be done for m */
+    /* Nothing to be done for n */
+    /* Nothing to be done for nz */
+    plhs[0] = marshallout_struct0_T(&mat);
+    plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
+    plhs[2] = move_scalar_to_mxArray(topleve, mxLOGICAL_CLASS);
 
 }
+
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */
