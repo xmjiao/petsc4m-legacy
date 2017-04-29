@@ -123,5 +123,6 @@ strongly recommend using Petsc4m with Octave.
 LIMITATIONS
 ===========
 
-Petsc4m does not support KSPRegister and PCRegister. You need to implement
+Petsc4m does not support `KSPRegister` and `PCRegister`. Therefore, you
+cannot easily use Petsc4m to implement new solvers for PETSc.
 these functions directly in C.
