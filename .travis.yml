@@ -1,0 +1,32 @@
+os: linux
+dist: trusty
+sudo: required
+language: C
+
+env:
+  global:
+  - PETSC_VERSION=3.7.5
+
+before_install:
+# Install Octave libraries
+  - sudo add-apt-repository -y ppa:octave/stable
+  - sudo apt-get update -q
+  - sudo apt-get install -y --no-install-recommends octave bsdtar liboctave-dev
+# Install MATLAB libraries
+  - curl -L "$URL" | sudo bsdtar zxf - -C /usr/local --strip-components 2
+  - sudo ln -s -f /usr/local/MATLAB/R2016b/bin/matlab /usr/local/bin
+  - sudo ln -s -f /usr/local/MATLAB/R2016b/bin/mex /usr/local/bin
+# Inatall paracoder
+  - cd .. && mkdir -p paracoder && curl -s  -L https://github.com/fastsolve/paracoder/archive/master.zip | bsdtar zxf - --strip-components 1 -C paracoder && cd paracoder && octave --eval "build_m2c -force" && octave --eval "build_m2c -force -matlab" && cd ../petsc4m
+# Install dependencies for PETSc
+  - sudo apt-get install -y --no-install-recommends build-essential gfortran cmake bison flex libboost-filesystem-dev libboost-iostreams-dev libboost-program-options-dev libboost-system-dev libboost-thread-dev libboost-timer-dev liblapack-dev libmpich2-dev libopenblas-dev mpich2
+
+
+script:
+# Build PETSc
+  - curl -s http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-${PETSC_VERSION}.tar.gz | tar zx && cd petsc-${PETSC_VERSION} && ./configure --COPTFLAGS="-O2" --CXXOPTFLAGS="-O2" --FOPTFLAGS="-O2" --with-blas-lib=/usr/lib/libopenblas.a --with-lapack-lib=/usr/lib/liblapack.a --with-c-support --with-debugging=0 --with-shared-libraries --download-suitesparse --download-superlu --download-superlu_dist --download-scalapack --download-metis --download-parmetis --download-ptscotch --download-hypre --download-mumps --download-blacs --download-spai --download-ml --prefix=/usr/local/petsc
+  - make && sudo make install && cd ..
+
+# compile petsc4m
+  - PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force"
+  - PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"
