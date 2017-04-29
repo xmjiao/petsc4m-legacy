@@ -15,7 +15,7 @@ function type = PetscMatSolverPackage(arg, wrap) %#codegen
 % See also PetscKSPType, PetscPCType, PETSC_MATSOLVER*
 
 coder.inline('always');
-coder.cinclude('mpetsc.h');
+coder.cinclude('petsc4m.h');
 
 if nargin==0 && isempty(coder.target)
     type = coder.typeof(char(0), [1, inf]);
@@ -23,7 +23,7 @@ if nargin==0 && isempty(coder.target)
 end
 
 if isempty(coder.target) && ~ischar(arg)
-    m2c_error('MPETSc:PetscMatSolverPackage:WrongType', ...
+    m2c_error('Petsc4m:PetscMatSolverPackage:WrongType', ...
         'Incorrect data type of argument. Expected a string.');
 end
 

@@ -13,7 +13,7 @@ function [obj, toplevel] = petscGetObject(name)
 
 %#codegen -args {coder.typeof(char(0),[1,inf])}
 
-coder.cinclude('mpetsc.h');
+coder.cinclude('petsc4m.h');
 
 if isempty(coder.target)
     error('Function petscGetObject must be compiled.');

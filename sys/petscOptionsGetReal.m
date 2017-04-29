@@ -20,11 +20,11 @@ if ~isempty(coder.target)
     toplevel = nargout>3;
     
     if ischar(pre) && ~isempty(pre) && pre(end) && (toplevel || m2c_debug)
-        m2c_error('MPETSc:petscOptionsGetInt:InputError', ...
+        m2c_error('Petsc4m:petscOptionsGetInt:InputError', ...
             'Argument prefix must be a null-terminated string.')
     end
     if ischar(name) && ~isempty(name) && name(end) && (toplevel || m2c_debug)
-        m2c_error('MPETSc:petscOptionsGetInt:InputError', ...
+        m2c_error('Petsc4m:petscOptionsGetInt:InputError', ...
             'Argument name must be a null-terminated character string.')
     end
     value = 0;

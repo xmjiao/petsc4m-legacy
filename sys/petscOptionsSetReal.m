@@ -19,7 +19,7 @@ errCode = int32(-1);
 if ~isempty(coder.target)
     toplevel = nargout>1;
     if ~isempty(iname) && iname(end) && (toplevel || m2c_debug)
-        m2c_error('MPETSc:petscOptionsSetReal:InputError', ...
+        m2c_error('Petsc4m:petscOptionsSetReal:InputError', ...
             'Argument name must be a null-terminated string.')
     end
     

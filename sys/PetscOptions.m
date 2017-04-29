@@ -14,6 +14,6 @@ function opts = PetscOptions(varargin) %#codegen
 % See also PetscMat
 
 coder.inline('always');
-coder.cinclude('mpetsc.h');
+coder.cinclude('petsc4m.h');
 
 opts = m2c_opaque_obj('PetscOptions', varargin{:});

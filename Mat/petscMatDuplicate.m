@@ -26,7 +26,7 @@ if ~isempty(coder.target)
     mat_out = PetscMat(t_mat_out, toplevel);
 
     if errCode && (toplevel || m2c_debug)
-        m2c_error('MPETSc:petscMatDuplicate:RuntimeError', 'MatDuplicate returned error code %d\n', errCode)
+        m2c_error('Petsc4m:petscMatDuplicate:RuntimeError', 'MatDuplicate returned error code %d\n', errCode)
     end
 end
 end

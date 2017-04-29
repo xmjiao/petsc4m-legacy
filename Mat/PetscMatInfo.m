@@ -2,7 +2,7 @@ function [info, nfields] = PetscMatInfo %codegen
 % MATLAB structure corresponding to MatInfo in Petsc
 
 coder.inline('always');
-coder.cinclude('mpetsc.h');
+coder.cinclude('petsc4m.h');
 
 info = struct('block_size', 0, ...        % block size
     'nz_allocated',0, 'nz_used', 0, 'nz_unneeded', 0, ...   % number of nonzeros
@@ -13,7 +13,7 @@ info = struct('block_size', 0, ...        % block size
     'factor_mallocs', 0 ...               % number of mallocs during factorization */
 );
 
-coder.cstructname(info, 'MPetscMatInfo');
+coder.cstructname(info, 'PetscMatInfo');
 
 if nargout>1
     nfields = int32(length(fieldnames(info)));

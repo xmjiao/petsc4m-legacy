@@ -12,6 +12,6 @@ function vec = PetscVec(varargin) %#codegen
 % See also PetscMat
 
 coder.inline('always');
-coder.cinclude('mpetsc.h');
+coder.cinclude('petsc4m.h');
 
 vec = m2c_opaque_obj('Vec', varargin{:});

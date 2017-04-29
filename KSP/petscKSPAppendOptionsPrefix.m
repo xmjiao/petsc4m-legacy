@@ -22,7 +22,7 @@ if ~isempty(coder.target)
 
     toplevel = nargout>1;
     if ~isempty(prefix) && prefix(end) && (toplevel || m2c_debug)
-        m2c_error('MPETSc:petscKSPAppendOptionsPrefix:InputError', ...
+        m2c_error('Petsc4m:petscKSPAppendOptionsPrefix:InputError', ...
             'The 2nd argument must be a null-terminated string.')
     end
     

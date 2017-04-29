@@ -15,7 +15,7 @@ function [n, N, errCode, toplevel] = petscSplitOwnership(comm, n, N)
 %#codegen -args {MPI_Comm, int32(0), int32(0)}
 
 errCode = int32(-1);
-coder.cinclude('mpetsc.h');
+coder.cinclude('petsc4m.h');
 
 if ~isempty(coder.target)
     t_comm = MPI_Comm(comm);

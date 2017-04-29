@@ -16,7 +16,7 @@ finalized = int32(0);
 errCode = int32(-1);
 
 if ~isempty(coder.target)
-    coder.cinclude('mpetsc.h');
+    coder.cinclude('petsc4m.h');
     b = coder.opaque('PetscBool');
     errCode = coder.ceval('PetscFinalized', coder.wref(b));
     

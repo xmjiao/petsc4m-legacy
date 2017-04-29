@@ -21,7 +21,7 @@ function [errCode, toplevel] = petscInitialize
 %#codegen -args {}
 
 errCode = int32(0); %#ok<NASGU>
-coder.cinclude('mpetsc.h');
+coder.cinclude('petsc4m.h');
 
 if ~isempty(coder.target)
     errCode = coder.ceval('PetscInitializeNoArguments');
@@ -31,6 +31,6 @@ if ~isempty(coder.target)
         m2c_error('petsc:RuntimeError', 'PetscInitializeNoArguments returned error code %d\n', errCode)
     end
 else
-    error('To use MPETSc low-level functions, you must compile and load MPETSc. Try to run build_mpetsc and then load_mpetsc.');
+    error('To use Petsc4m low-level functions, you must compile Petsc4m. Try to run build_petsc and then init_petsc.');
 end
 end

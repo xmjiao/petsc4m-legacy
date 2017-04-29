@@ -19,7 +19,7 @@ errCode = int32(-1);
 if ~isempty(coder.target)
     toplevel = nargout>1;
     if ~isempty(in_str) && in_str(end) && (toplevel || m2c_debug)
-        m2c_error('MPETSc:petscOptionsInsertString:InputError', ...
+        m2c_error('Petsc4m:petscOptionsInsertString:InputError', ...
             'The argument must be a null-terminated string.')
     end
 
