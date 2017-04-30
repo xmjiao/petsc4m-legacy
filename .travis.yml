@@ -4,12 +4,15 @@ sudo: required
 language: C
 
 env:
-  global:
-  - PETSC_VERSION=3.7.5
+  matrix:
+  - PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="true"
+  - PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
+  - PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
+  - PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
 
 before_install:
 # Install Octave libraries
-  - sudo add-apt-repository -y ppa:octave/stable
+  - sudo $UPDATE_REPOSITORY
   - sudo apt-get update -q
   - sudo apt-get install -y --no-install-recommends octave bsdtar liboctave-dev mpich2 libmpich2-dev 
 # Install MATLAB libraries
