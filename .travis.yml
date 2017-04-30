@@ -7,7 +7,7 @@ env:
   matrix:
   - PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="true"
   - PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
-  - PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
+  - PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="true"
   - PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
 
 before_install:
