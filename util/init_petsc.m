@@ -1,11 +1,4 @@
-function init_petsc(arg)
 %INIT_PETSC Load Petsc4m into MATLAB/Octave for execution using mex files.
-
-persistent called__;
-if ~isempty(called__)
-    return;
-end
-called__ = true;
 
 if ~isoctave && (~ismac || usejava('jvm')) && ...
         (nargin==0 || ~isequal(arg, '-force'))
@@ -21,24 +14,23 @@ end
 
 % Add mex files into path for faster execution
 addpath([petscroot '/mex'])
-init_mpi;
 
 if exist(['petscInitialize.' mexext], 'file')
     try
-        petscInitialize;
+        if ~petscInitialized
+            init_mpi;
+            petscInitialize;
 
-        if isoctave
-            atexit('uninit_petsc')
+            if isoctave
+                atexit('uninit_petsc')
+            end
         end
     catch
-        warning('petscInitialize failed.')
+        warning('Failed to initialize petsc4m.')
         if isoctave
             warning('Try to set LD_LIBRARY_PATH=$PETSC_DIR/bin in shell and restart Octave');
         end
     end
-
 else
-    warning('Petsc4m has not been built. Run build_petsc and then init_petsc again.')
-end
-
+    warning('Please run build_petsc and then init_petsc again')
 end

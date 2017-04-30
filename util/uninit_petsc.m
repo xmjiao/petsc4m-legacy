@@ -1,5 +1,6 @@
 function uninit_petsc
-% Finalize PETSc. This is called automatically in Octave
+% Finalize PETSc. 
+% It is called automatically in Octave at exit if init_petsc was called
 
 if isoctave
     atexit('uninit_petsc', false)
@@ -12,8 +13,6 @@ try
             petscInitialized && ~petscFinalized
         petscFinalize;
     end
-    
-    uninit_mpi
 catch
 end
 
