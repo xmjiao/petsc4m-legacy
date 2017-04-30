@@ -127,7 +127,7 @@ end
 
 if nargin<11; opts = ''; else opts = varargin{11}; end
 
-[flag, relres, iter, reshis, times] = petscSolve(AMat, bVec, xVec, solver, ...
+[flag, relres, iter, reshis, times] = petscSolveHdls(AMat, bVec, xVec, solver, ...
     double(rtol), int32(maxit), pctype, pcopt, x0Vec, opts);
 
 petscMatDestroy(AMat);
@@ -143,8 +143,7 @@ function test %#ok<DEFNU>
 %!shared A, b, rowptr, colind, vals
 %! A = sprand(100,100,0.3);
 %! A = A + speye(100);
-%! B = bsrCreateFromSparse(A);
-%! rowptr = B.rowptr; colind=B.colind; vals=B.vals;
+%! [rowptr, colind, vals] = crs_matrix(A);
 %! b = rand(100,1);
 
 %!test
