@@ -21,7 +21,10 @@ if exist(['petscInitialize.' mexext], 'file')
     try
         petscInitialize;
     catch
-        warning('petscInitialize failed.');
+        warning('petscInitialize failed.')
+        if isoctave
+            warning('Try to set LD_LIBRARY_PATH=$PETSC_DIR/bin in shell and restart Octave');
+        end
     end
 
     if isoctave
