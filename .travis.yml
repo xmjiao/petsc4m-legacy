@@ -5,16 +5,16 @@ language: C
 
 env:
   matrix:
-  - PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="true"
+  - PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=/usr/local/petsc/lib
   - PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
-  - PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="true"
+  - PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=/usr/local/petsc/lib
   - PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
 
 before_install:
 # Install Octave libraries
   - sudo $UPDATE_REPOSITORY
   - sudo apt-get update -q
-  - sudo apt-get install -y --no-install-recommends octave bsdtar liboctave-dev mpich2 libmpich2-dev 
+  - sudo apt-get install -y --no-install-recommends octave bsdtar liboctave-dev mpich2 libmpich2-dev
 # Install MATLAB libraries
   - curl -L "$URL" | sudo bsdtar zxf - -C /usr/local --strip-components 2
   - sudo ln -s -f /usr/local/MATLAB/R2016b/bin/matlab /usr/local/bin
