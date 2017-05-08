@@ -15,7 +15,8 @@ end
 % Add mex files into path for faster execution
 addpath([petscroot '/mex'])
 
-if exist(['petscInitialize.' mexext], 'file')
+if exist(['petscInitialize.' mexext], 'file') && ...
+    isequal(which('petscInitialize'), which('petscInitialize.mex'))
     try
         if ~petscInitialized
             init_mpi;
