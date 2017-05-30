@@ -1,3 +1,4 @@
+function init_petsc(arg)
 %INIT_PETSC Load Petsc4m into MATLAB/Octave for execution using mex files.
 
 if ~isoctave && (~ismac || usejava('jvm')) && ...
@@ -16,7 +17,7 @@ end
 addpath([petscroot '/mex'])
 
 if exist(['petscInitialize.' mexext], 'file') && ...
-    isequal(which('petscInitialize'), which('petscInitialize.mex'))
+    isequal(which('petscInitialize'), which(['petscInitialize.' mexext]))
     try
         if ~petscInitialized
             init_mpi;
