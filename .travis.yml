@@ -51,13 +51,10 @@ before_install:
          brew tap homebrew/science;
          brew update;
          brew install --without-java octave;
-         brew install
-           mpich2
-           gfortran
-           cmake
-           bison
-           flex
-           boost;
+         brew install mpich2 flex boost;
+         ln -s -f /usr/local/bin/gcc-7 /usr/local/bin/gcc-mp;
+         ln -s -f /usr/local/bin/g++-7 /usr/local/bin/g++-mp;
+         ls -l /usr/local/bin/gcc-* /usr/local/bin/g++-*;
      fi'
 # Inatall paracoder
   - 'cd .. &&
