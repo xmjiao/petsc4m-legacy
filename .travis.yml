@@ -84,5 +84,5 @@ script:
 
 # compile petsc4m
   - PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force"
-  - '[[ "$TRAVIS_OS_NAME" == "linux" ]] &&
+  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] ||
      PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"'
