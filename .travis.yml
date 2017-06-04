@@ -63,7 +63,7 @@ before_install:
          bsdtar zxf - --strip-components 1 -C paracoder &&
      cd paracoder &&
      octave --eval "build_m2c -force" &&
-     [[ "$TRAVIS_OS_NAME" == "linux" ]] &&  octave --eval "build_m2c -force -matlab" &&
+     [[ "$TRAVIS_OS_NAME" != "linux" ]] ||  octave --eval "build_m2c -force -matlab" &&
      cd ../petsc4m'
 
 script:
