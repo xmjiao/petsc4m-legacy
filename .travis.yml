@@ -48,22 +48,25 @@ before_install:
        sudo ln -s -f /usr/local/MATLAB/R2016b/bin/mex /usr/local/bin;
      fi'
   - 'if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-         brew tap homebrew/science;
-         brew update;
-         brew install --without-java octave;
-         brew install mpich2 flex boost;
-         ln -s -f /usr/local/bin/gcc-7 /usr/local/bin/gcc-mp;
-         ln -s -f /usr/local/bin/g++-7 /usr/local/bin/g++-mp;
-         ls -l /usr/local/bin/gcc-* /usr/local/bin/g++-*;
+        brew tap homebrew/science;
+        brew update;
+        brew install --without-java octave;
+        brew install mpich2 flex boost;
+        curl -L "$URL_OSX" | sudo bsdtar zxf - -C /Applications --strip-components 1;
+        sudo ln -s -f /Applications/MATLAB_R*/bin/mex /usr/local/bin;
+        ln -s -f /usr/local/bin/gcc-7 /usr/local/bin/gcc-mp;
+        ln -s -f /usr/local/bin/g++-7 /usr/local/bin/g++-mp;
+        ls -l /usr/local/bin/gcc-* /usr/local/bin/g++-*;
      fi'
-# Inatall paracoder
+
+  # Inatall paracoder
   - 'cd .. &&
      mkdir -p paracoder &&
      curl -s  -L https://github.com/fastsolve/paracoder/archive/master.zip |
          bsdtar zxf - --strip-components 1 -C paracoder &&
      cd paracoder &&
      octave --eval "build_m2c -force" &&
-     [[ "$TRAVIS_OS_NAME" != "linux" ]] ||  octave --eval "build_m2c -force -matlab" &&
+     octave --eval "build_m2c -force -matlab" &&
      cd ../petsc4m'
 
 script:
@@ -84,5 +87,4 @@ script:
 
 # compile petsc4m
   - PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force"
-  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] ||
-     PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"'
+  - PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"
