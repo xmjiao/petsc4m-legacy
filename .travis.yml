@@ -51,7 +51,7 @@ before_install:
         brew tap homebrew/science;
         brew update;
         brew install --without-java octave;
-        brew install mpich2 flex boost;
+        brew install mpich2 flex;
         curl -L "$URL_OSX" | sudo bsdtar zxf - -C /Applications --strip-components 1;
         sudo ln -s -f /Applications/MATLAB_R*/bin/mex /usr/local/bin;
         ln -s -f /usr/local/bin/gcc-7 /usr/local/bin/gcc-mp;
