@@ -19,9 +19,9 @@ matrix:
       sudo: required
       env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
     - os: osx
-      env: PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib MATLAB=1
+      env: BUILD_MATLAB=1 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib
     - os: osx
-      env: PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib MATLAB=0
+      env: BUILD_MATLAB=0 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib
 
 before_install:
   # Install Octave and MATLAB
@@ -86,5 +86,5 @@ script:
      cd ../petsc4m'
 
   # compile petsc4m
-  - '[[ "$MATLAB" == "1" ]] || PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force"'
-  - '[[ "$MATLAB" == "0" ]] || PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"'
+  - '[[ "$BUILD_MATLAB" == "1" ]] || PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force"'
+  - '[[ "$BUILD_MATLAB" == "0" ]] || ls -l /usr/local/bin/mex && PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"'
