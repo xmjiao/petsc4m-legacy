@@ -32,12 +32,17 @@ static void m2c_error(void)
   M2C_error(msgid, fmt);
 }
 
+void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
+{
+  emxInit_char_T(pEmxArray, numDimensions);
+}
+
 void petscOptionsGetBool(const emxArray_char_T *pre, const emxArray_char_T *name,
   int *value, int *found, int *errCode, boolean_T *toplevel)
 {
-  PetscOptions obj;
   PetscBool b_value;
   PetscBool b_flag;
+  PetscOptions obj;
   *toplevel = true;
   if ((!(pre->size[1] == 0)) && (pre->data[pre->size[1] - 1] != '\x00')) {
     m2c_error();

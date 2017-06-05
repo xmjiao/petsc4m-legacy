@@ -3,6 +3,8 @@
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
+static void emxFreeStruct_struct0_T(struct0_T *pStruct);
+static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -11,6 +13,18 @@ static void b_m2c_error(int varargin_3)
   msgid = "Petsc4m:petscMatDuplicate:RuntimeError";
   fmt = "MatDuplicate returned error code %d\n";
   M2C_error(msgid, fmt, varargin_3);
+}
+
+static void emxFreeStruct_struct0_T(struct0_T *pStruct)
+{
+  emxFree_uint8_T(&pStruct->data);
+  emxFree_char_T(&pStruct->type);
+}
+
+static void emxInitStruct_struct0_T(struct0_T *pStruct)
+{
+  emxInit_uint8_T(&pStruct->data, 1);
+  emxInit_char_T(&pStruct->type, 2);
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
@@ -26,7 +40,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -36,12 +50,24 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
+void emxDestroy_struct0_T(struct0_T emxArray)
+{
+  emxFreeStruct_struct0_T(&emxArray);
+}
+
+void emxInit_struct0_T(struct0_T *pStruct)
+{
+  emxInitStruct_struct0_T(pStruct);
+}
+
 void petscMatDuplicate(const struct0_T *mat_in, int op, struct0_T *mat_out, int *
   errCode, boolean_T *toplevel)
 {
+  Mat t_mat_out;
   boolean_T p;
   boolean_T b_p;
   int k;
+  int exitg2;
   boolean_T exitg1;
   emxArray_char_T *b_mat_in;
   static const char cv0[3] = { 'M', 'a', 't' };
@@ -49,7 +75,6 @@ void petscMatDuplicate(const struct0_T *mat_in, int op, struct0_T *mat_out, int 
   emxArray_uint8_T *data0;
   int loop_ub;
   Mat mat;
-  Mat t_mat_out;
   int sizepe;
   char t0_type[3];
   static const char x2[3] = { 'M', 'a', 't' };
@@ -57,9 +82,20 @@ void petscMatDuplicate(const struct0_T *mat_in, int op, struct0_T *mat_out, int 
   char * ptr;
   p = false;
   b_p = false;
-  if (mat_in->type->size[1] == 3) {
-    b_p = true;
-  }
+  k = 0;
+  do {
+    exitg2 = 0;
+    if (k < 2) {
+      if (mat_in->type->size[k] != 1 + (k << 1)) {
+        exitg2 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
 
   if (b_p && (!(mat_in->type->size[1] == 0))) {
     k = 0;
@@ -83,7 +119,7 @@ void petscMatDuplicate(const struct0_T *mat_in, int op, struct0_T *mat_out, int 
     k = b_mat_in->size[0] * b_mat_in->size[1];
     b_mat_in->size[0] = 1;
     b_mat_in->size[1] = mat_in->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat_in, k, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_mat_in, k, (int)sizeof(char));
     loop_ub = mat_in->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_mat_in->data[b_mat_in->size[0] * k] = mat_in->type->data[mat_in->
@@ -98,7 +134,7 @@ void petscMatDuplicate(const struct0_T *mat_in, int op, struct0_T *mat_out, int 
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = mat_in->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   loop_ub = mat_in->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = mat_in->data->data[k];
@@ -106,17 +142,19 @@ void petscMatDuplicate(const struct0_T *mat_in, int op, struct0_T *mat_out, int 
 
   mat = *(Mat*)(&data0->data[0]);
   *errCode = MatDuplicate(mat, op, &t_mat_out);
+  *toplevel = true;
   sizepe = sizeof(Mat);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   for (k = 0; k < 3; k++) {
     t0_type[k] = x2[k];
   }
 
   k = mat_out->data->size[0];
   mat_out->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat_out->data, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)mat_out->data, k, (int)sizeof(unsigned
+    char));
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     mat_out->data->data[k] = data0->data[k];
@@ -126,7 +164,7 @@ void petscMatDuplicate(const struct0_T *mat_in, int op, struct0_T *mat_out, int 
   k = mat_out->type->size[0] * mat_out->type->size[1];
   mat_out->type->size[0] = 1;
   mat_out->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)mat_out->type, k, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)mat_out->type, k, (int)sizeof(char));
   for (k = 0; k < 3; k++) {
     mat_out->type->data[k] = t0_type[k];
   }
@@ -141,8 +179,6 @@ void petscMatDuplicate(const struct0_T *mat_in, int op, struct0_T *mat_out, int 
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }
-
-  *toplevel = true;
 }
 
 void petscMatDuplicate_initialize(void)

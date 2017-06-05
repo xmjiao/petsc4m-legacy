@@ -4,6 +4,8 @@
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
+static void emxFreeStruct_struct0_T(struct0_T *pStruct);
+static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -12,6 +14,18 @@ static void b_m2c_error(int varargin_3)
   msgid = "petsc:RuntimeError";
   fmt = "VecCreate returned error code %d\n";
   M2C_error(msgid, fmt, varargin_3);
+}
+
+static void emxFreeStruct_struct0_T(struct0_T *pStruct)
+{
+  emxFree_uint8_T(&pStruct->data);
+  emxFree_char_T(&pStruct->type);
+}
+
+static void emxInitStruct_struct0_T(struct0_T *pStruct)
+{
+  emxInit_uint8_T(&pStruct->data, 1);
+  emxInit_char_T(&pStruct->type, 2);
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
@@ -27,7 +41,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -37,12 +51,23 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
+void emxDestroy_struct0_T(struct0_T emxArray)
+{
+  emxFreeStruct_struct0_T(&emxArray);
+}
+
+void emxInit_struct0_T(struct0_T *pStruct)
+{
+  emxInitStruct_struct0_T(pStruct);
+}
+
 void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
                     boolean_T *toplevel)
 {
   boolean_T p;
   boolean_T b_p;
   int k;
+  int exitg2;
   boolean_T exitg1;
   emxArray_char_T *b_comm;
   static const char cv0[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
@@ -58,9 +83,20 @@ void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
   char * ptr;
   p = false;
   b_p = false;
-  if (comm->type->size[1] == 8) {
-    b_p = true;
-  }
+  k = 0;
+  do {
+    exitg2 = 0;
+    if (k < 2) {
+      if (comm->type->size[k] != 1 + 7 * k) {
+        exitg2 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
 
   if (b_p && (!(comm->type->size[1] == 0))) {
     k = 0;
@@ -84,7 +120,7 @@ void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
     k = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_comm, k, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_comm, k, (int)sizeof(char));
     loop_ub = comm->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_comm->data[b_comm->size[0] * k] = comm->type->data[comm->type->size[0] *
@@ -99,7 +135,7 @@ void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = comm->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   loop_ub = comm->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = comm->data->data[k];
@@ -107,6 +143,7 @@ void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
 
   t_comm = *(MPI_Comm*)(&data0->data[0]);
   *errCode = VecCreate(t_comm, &t_vec);
+  *toplevel = true;
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }
@@ -114,14 +151,14 @@ void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
   sizepe = sizeof(Vec);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   for (k = 0; k < 3; k++) {
     t1_type[k] = cv1[k];
   }
 
   k = vec->data->size[0];
   vec->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)vec->data, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)vec->data, k, (int)sizeof(unsigned char));
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     vec->data->data[k] = data0->data[k];
@@ -131,7 +168,7 @@ void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
   k = vec->type->size[0] * vec->type->size[1];
   vec->type->size[0] = 1;
   vec->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)vec->type, k, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)vec->type, k, (int)sizeof(char));
   for (k = 0; k < 3; k++) {
     vec->type->data[k] = t1_type[k];
   }
@@ -142,14 +179,13 @@ void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
     vec->data->data[k - 1] = *(ptr);
     ptr = ptr + 1;
   }
-
-  *toplevel = true;
 }
 
 void petscVecCreate_World(struct0_T *vec, int *errCode, boolean_T *topleve)
 {
   MPI_Comm obj;
   Vec t_vec;
+  int b_errCode;
   emxArray_uint8_T *data0;
   int sizepe;
   int i;
@@ -159,23 +195,23 @@ void petscVecCreate_World(struct0_T *vec, int *errCode, boolean_T *topleve)
   int loop_ub;
   char * ptr;
   obj = PETSC_COMM_WORLD;
-  *errCode = VecCreate(obj, &t_vec);
-  if (*errCode != 0) {
-    b_m2c_error(*errCode);
+  b_errCode = VecCreate(obj, &t_vec);
+  if (b_errCode != 0) {
+    b_m2c_error(b_errCode);
   }
 
   emxInit_uint8_T(&data0, 1);
   sizepe = sizeof(Vec);
   i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, i, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, i, (int)sizeof(unsigned char));
   for (i = 0; i < 3; i++) {
     t0_type[i] = cv2[i];
   }
 
   i = vec->data->size[0];
   vec->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)vec->data, i, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)vec->data, i, (int)sizeof(unsigned char));
   loop_ub = data0->size[0];
   for (i = 0; i < loop_ub; i++) {
     vec->data->data[i] = data0->data[i];
@@ -185,7 +221,7 @@ void petscVecCreate_World(struct0_T *vec, int *errCode, boolean_T *topleve)
   i = vec->type->size[0] * vec->type->size[1];
   vec->type->size[0] = 1;
   vec->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)vec->type, i, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)vec->type, i, (int)sizeof(char));
   for (i = 0; i < 3; i++) {
     vec->type->data[i] = t0_type[i];
   }
@@ -197,6 +233,7 @@ void petscVecCreate_World(struct0_T *vec, int *errCode, boolean_T *topleve)
     ptr = ptr + 1;
   }
 
+  *errCode = b_errCode;
   *topleve = true;
 }
 

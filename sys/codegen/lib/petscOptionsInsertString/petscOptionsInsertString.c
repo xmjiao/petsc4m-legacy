@@ -22,6 +22,11 @@ static void m2c_error(void)
   M2C_error(msgid, fmt);
 }
 
+void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
+{
+  emxInit_char_T(pEmxArray, numDimensions);
+}
+
 void petscOptionsInsertString(const emxArray_char_T *in_str, int *errCode,
   boolean_T *toplevel)
 {

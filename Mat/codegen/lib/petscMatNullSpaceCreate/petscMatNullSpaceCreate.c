@@ -5,6 +5,8 @@
 
 static void b_m2c_error(const emxArray_char_T *varargin_3);
 static void c_m2c_error(int varargin_3);
+static void emxFreeStruct_struct0_T(struct0_T *pStruct);
+static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(const emxArray_char_T *varargin_3)
 {
@@ -22,7 +24,7 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
   i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i1 = 0; i1 < loop_ub; i1++) {
     b_varargin_3->data[i1] = varargin_3->data[i1];
@@ -45,6 +47,18 @@ static void c_m2c_error(int varargin_3)
   M2C_error(msgid, fmt, varargin_3);
 }
 
+static void emxFreeStruct_struct0_T(struct0_T *pStruct)
+{
+  emxFree_uint8_T(&pStruct->data);
+  emxFree_char_T(&pStruct->type);
+}
+
+static void emxInitStruct_struct0_T(struct0_T *pStruct)
+{
+  emxInit_uint8_T(&pStruct->data, 1);
+  emxInit_char_T(&pStruct->type, 2);
+}
+
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
@@ -58,7 +72,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -68,24 +82,37 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
+void emxDestroy_struct0_T(struct0_T emxArray)
+{
+  emxFreeStruct_struct0_T(&emxArray);
+}
+
+void emxInit_struct0_T(struct0_T *pStruct)
+{
+  emxInitStruct_struct0_T(pStruct);
+}
+
 void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
   struct0_T *vecs, struct0_T *nullsp, int *errCode, boolean_T *toplevel)
 {
   boolean_T p;
   boolean_T b_p;
   int k;
-  boolean_T exitg1;
+  int exitg4;
+  boolean_T exitg3;
   emxArray_char_T *b_comm;
   static const char cv0[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
 
   emxArray_uint8_T *t_vecs;
   int loop_ub;
   MPI_Comm t_comm;
+  int exitg2;
+  boolean_T exitg1;
   emxArray_char_T *b_vecs;
   static const char cv1[3] = { 'V', 'e', 'c' };
 
-  Vec * ptr;
   MatNullSpace t_nullsp;
+  Vec * ptr;
   int sizepe;
   char t1_type[12];
   static const char cv2[12] = { 'M', 'a', 't', 'N', 'u', 'l', 'l', 'S', 'p', 'a',
@@ -94,17 +121,28 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
   char * b_ptr;
   p = false;
   b_p = false;
-  if (comm->type->size[1] == 8) {
-    b_p = true;
-  }
+  k = 0;
+  do {
+    exitg4 = 0;
+    if (k < 2) {
+      if (comm->type->size[k] != 1 + 7 * k) {
+        exitg4 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg4 = 1;
+    }
+  } while (exitg4 == 0);
 
   if (b_p && (!(comm->type->size[1] == 0))) {
     k = 0;
-    exitg1 = false;
-    while ((!exitg1) && (k < 8)) {
+    exitg3 = false;
+    while ((!exitg3) && (k < 8)) {
       if (!(comm->type->data[k] == cv0[k])) {
         b_p = false;
-        exitg1 = true;
+        exitg3 = true;
       } else {
         k++;
       }
@@ -120,7 +158,7 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
     k = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_comm, k, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_comm, k, (int)sizeof(char));
     loop_ub = comm->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_comm->data[b_comm->size[0] * k] = comm->type->data[comm->type->size[0] *
@@ -135,7 +173,7 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
   emxInit_uint8_T(&t_vecs, 1);
   k = t_vecs->size[0];
   t_vecs->size[0] = comm->data->size[0];
-  emxEnsureCapacity((emxArray__common *)t_vecs, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)t_vecs, k, (int)sizeof(unsigned char));
   loop_ub = comm->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     t_vecs->data[k] = comm->data->data[k];
@@ -144,9 +182,20 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
   t_comm = *(MPI_Comm*)(&t_vecs->data[0]);
   p = false;
   b_p = false;
-  if (vecs->type->size[1] == 3) {
-    b_p = true;
-  }
+  k = 0;
+  do {
+    exitg2 = 0;
+    if (k < 2) {
+      if (vecs->type->size[k] != 1 + (k << 1)) {
+        exitg2 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
 
   if (b_p && (!(vecs->type->size[1] == 0))) {
     k = 0;
@@ -170,7 +219,7 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
     k = b_vecs->size[0] * b_vecs->size[1];
     b_vecs->size[0] = 1;
     b_vecs->size[1] = vecs->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_vecs, k, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_vecs, k, (int)sizeof(char));
     loop_ub = vecs->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_vecs->data[b_vecs->size[0] * k] = vecs->type->data[vecs->type->size[0] *
@@ -184,7 +233,7 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
 
   k = t_vecs->size[0];
   t_vecs->size[0] = vecs->data->size[0];
-  emxEnsureCapacity((emxArray__common *)t_vecs, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)t_vecs, k, (int)sizeof(unsigned char));
   loop_ub = vecs->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     t_vecs->data[k] = vecs->data->data[k];
@@ -192,17 +241,19 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
 
   ptr = (Vec *)(&t_vecs->data[0]);
   *errCode = MatNullSpaceCreate(t_comm, has_cnst, n, ptr, &t_nullsp);
+  *toplevel = true;
   sizepe = sizeof(MatNullSpace);
   k = t_vecs->size[0];
   t_vecs->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)t_vecs, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)t_vecs, k, (int)sizeof(unsigned char));
   for (k = 0; k < 12; k++) {
     t1_type[k] = cv2[k];
   }
 
   k = nullsp->data->size[0];
   nullsp->data->size[0] = t_vecs->size[0];
-  emxEnsureCapacity((emxArray__common *)nullsp->data, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)nullsp->data, k, (int)sizeof(unsigned
+    char));
   loop_ub = t_vecs->size[0];
   for (k = 0; k < loop_ub; k++) {
     nullsp->data->data[k] = t_vecs->data[k];
@@ -212,7 +263,7 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
   k = nullsp->type->size[0] * nullsp->type->size[1];
   nullsp->type->size[0] = 1;
   nullsp->type->size[1] = 12;
-  emxEnsureCapacity((emxArray__common *)nullsp->type, k, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)nullsp->type, k, (int)sizeof(char));
   for (k = 0; k < 12; k++) {
     nullsp->type->data[k] = t1_type[k];
   }
@@ -227,8 +278,6 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
   if (*errCode != 0) {
     c_m2c_error(*errCode);
   }
-
-  *toplevel = true;
 }
 
 void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
@@ -237,6 +286,7 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
   boolean_T p;
   boolean_T b_p;
   int k;
+  int exitg2;
   boolean_T exitg1;
   emxArray_char_T *b_comm;
   static const char cv3[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
@@ -246,6 +296,7 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
   MPI_Comm t_comm;
   Vec * t_vecs;
   MatNullSpace t_nullsp;
+  int b_errCode;
   int sizepe;
   char t0_type[12];
   static const char cv4[12] = { 'M', 'a', 't', 'N', 'u', 'l', 'l', 'S', 'p', 'a',
@@ -254,9 +305,20 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
   char * ptr;
   p = false;
   b_p = false;
-  if (comm->type->size[1] == 8) {
-    b_p = true;
-  }
+  k = 0;
+  do {
+    exitg2 = 0;
+    if (k < 2) {
+      if (comm->type->size[k] != 1 + 7 * k) {
+        exitg2 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
 
   if (b_p && (!(comm->type->size[1] == 0))) {
     k = 0;
@@ -280,7 +342,7 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
     k = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_comm, k, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_comm, k, (int)sizeof(char));
     loop_ub = comm->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_comm->data[b_comm->size[0] * k] = comm->type->data[comm->type->size[0] *
@@ -295,7 +357,7 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = comm->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   loop_ub = comm->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = comm->data->data[k];
@@ -303,18 +365,19 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
 
   t_comm = *(MPI_Comm*)(&data0->data[0]);
   t_vecs = NULL;
-  *errCode = MatNullSpaceCreate(t_comm, has_cnst, 0, t_vecs, &t_nullsp);
+  b_errCode = MatNullSpaceCreate(t_comm, has_cnst, 0, t_vecs, &t_nullsp);
   sizepe = sizeof(MatNullSpace);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   for (k = 0; k < 12; k++) {
     t0_type[k] = cv4[k];
   }
 
   k = nullsp->data->size[0];
   nullsp->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)nullsp->data, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)nullsp->data, k, (int)sizeof(unsigned
+    char));
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     nullsp->data->data[k] = data0->data[k];
@@ -324,7 +387,7 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
   k = nullsp->type->size[0] * nullsp->type->size[1];
   nullsp->type->size[0] = 1;
   nullsp->type->size[1] = 12;
-  emxEnsureCapacity((emxArray__common *)nullsp->type, k, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)nullsp->type, k, (int)sizeof(char));
   for (k = 0; k < 12; k++) {
     nullsp->type->data[k] = t0_type[k];
   }
@@ -336,10 +399,11 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
     ptr = ptr + 1;
   }
 
-  if (*errCode != 0) {
-    c_m2c_error(*errCode);
+  if (b_errCode != 0) {
+    c_m2c_error(b_errCode);
   }
 
+  *errCode = b_errCode;
   *toplevel = true;
 }
 
