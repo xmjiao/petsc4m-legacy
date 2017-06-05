@@ -87,4 +87,4 @@ script:
 
   # compile petsc4m
   - '[[ "$BUILD_MATLAB" == "1" ]] || PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force"'
-  - '[[ "$BUILD_MATLAB" == "0" ]] || ls -l /usr/local/bin/mex && PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"'
+  - '[[ "$BUILD_MATLAB" == "0" ]] || PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"'
