@@ -3,7 +3,22 @@
 #include "petsc4m.h"
 #include "mpi.h"
 
+static void emxFreeStruct_struct0_T(struct0_T *pStruct);
+static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(int varargin_3);
+
+static void emxFreeStruct_struct0_T(struct0_T *pStruct)
+{
+  emxFree_uint8_T(&pStruct->data);
+}
+
+static void emxInitStruct_struct0_T(struct0_T *pStruct)
+{
+  emxInit_uint8_T(&pStruct->data, 1);
+  pStruct->type.size[0] = 0;
+  pStruct->type.size[1] = 0;
+}
+
 static void m2c_error(int varargin_3)
 {
   const char * msgid;
@@ -11,6 +26,16 @@ static void m2c_error(int varargin_3)
   msgid = "petsc:RuntimeError";
   fmt = "VecCreateSeq returned error code %d\n";
   M2C_error(msgid, fmt, varargin_3);
+}
+
+void emxDestroy_struct0_T(struct0_T emxArray)
+{
+  emxFreeStruct_struct0_T(&emxArray);
+}
+
+void emxInit_struct0_T(struct0_T *pStruct)
+{
+  emxInitStruct_struct0_T(pStruct);
 }
 
 void petscVecCreateSeq(int n, struct0_T *vec, int *errCode, boolean_T *toplevel)
@@ -28,17 +53,18 @@ void petscVecCreateSeq(int n, struct0_T *vec, int *errCode, boolean_T *toplevel)
   emxInit_uint8_T(&data0, 1);
   obj = PETSC_COMM_SELF;
   *errCode = VecCreateSeq(obj, n, &t_vec);
+  *toplevel = true;
   sizepe = sizeof(Vec);
   i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, i, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, i, (int)sizeof(unsigned char));
   for (i = 0; i < 3; i++) {
     t0_type[i] = cv0[i];
   }
 
   i = vec->data->size[0];
   vec->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)vec->data, i, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)vec->data, i, (int)sizeof(unsigned char));
   loop_ub = data0->size[0];
   for (i = 0; i < loop_ub; i++) {
     vec->data->data[i] = data0->data[i];
@@ -61,8 +87,6 @@ void petscVecCreateSeq(int n, struct0_T *vec, int *errCode, boolean_T *toplevel)
   if (*errCode != 0) {
     m2c_error(*errCode);
   }
-
-  *toplevel = true;
 }
 
 void petscVecCreateSeq_initialize(void)

@@ -3,6 +3,7 @@
 #include "petsc4m.h"
 
 static void m2c_error(const emxArray_char_T *varargin_3);
+
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
@@ -12,7 +13,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -23,16 +24,23 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
+void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
+{
+  emxInit_char_T(pEmxArray, numDimensions);
+}
+
 void petscGetSizeof(const emxArray_char_T *name, int *sz, boolean_T *toplevel)
 {
   boolean_T b_bool;
   int kstr;
-  int exitg1;
+  int exitg3;
   static const char cv0[8] = { 'P', 'e', 't', 's', 'c', 'V', 'e', 'c' };
 
   emxArray_char_T *b_name;
+  int exitg2;
   static const char cv1[8] = { 'P', 'e', 't', 's', 'c', 'M', 'a', 't' };
 
+  int exitg1;
   static const char cv2[11] = { 'P', 'e', 't', 's', 'c', 'O', 'b', 'j', 'e', 'c',
     't' };
 
@@ -41,18 +49,18 @@ void petscGetSizeof(const emxArray_char_T *name, int *sz, boolean_T *toplevel)
   if (name->size[1] == 8) {
     kstr = 0;
     do {
-      exitg1 = 0;
+      exitg3 = 0;
       if (kstr + 1 < 9) {
         if (name->data[kstr] != cv0[kstr]) {
-          exitg1 = 1;
+          exitg3 = 1;
         } else {
           kstr++;
         }
       } else {
         b_bool = true;
-        exitg1 = 1;
+        exitg3 = 1;
       }
-    } while (exitg1 == 0);
+    } while (exitg3 == 0);
   }
 
   if (b_bool) {
@@ -62,18 +70,18 @@ void petscGetSizeof(const emxArray_char_T *name, int *sz, boolean_T *toplevel)
     if (name->size[1] == 8) {
       kstr = 0;
       do {
-        exitg1 = 0;
+        exitg2 = 0;
         if (kstr + 1 < 9) {
           if (name->data[kstr] != cv1[kstr]) {
-            exitg1 = 1;
+            exitg2 = 1;
           } else {
             kstr++;
           }
         } else {
           b_bool = true;
-          exitg1 = 1;
+          exitg2 = 1;
         }
-      } while (exitg1 == 0);
+      } while (exitg2 == 0);
     }
 
     if (b_bool) {
@@ -128,7 +136,7 @@ void petscGetSizeof(const emxArray_char_T *name, int *sz, boolean_T *toplevel)
     kstr = b_name->size[0] * b_name->size[1];
     b_name->size[0] = 1;
     b_name->size[1] = name->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_name, kstr, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_name, kstr, (int)sizeof(char));
     loop_ub = name->size[1];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       b_name->data[b_name->size[0] * kstr] = name->data[name->size[0] * kstr];

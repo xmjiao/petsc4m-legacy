@@ -3,7 +3,22 @@
 #include "petsc4m.h"
 #include "mpi.h"
 
+static void emxFreeStruct_struct0_T(struct0_T *pStruct);
+static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(int varargin_3);
+
+static void emxFreeStruct_struct0_T(struct0_T *pStruct)
+{
+  emxFree_uint8_T(&pStruct->data);
+}
+
+static void emxInitStruct_struct0_T(struct0_T *pStruct)
+{
+  emxInit_uint8_T(&pStruct->data, 1);
+  pStruct->type.size[0] = 0;
+  pStruct->type.size[1] = 0;
+}
+
 static void m2c_error(int varargin_3)
 {
   const char * msgid;
@@ -11,6 +26,21 @@ static void m2c_error(int varargin_3)
   msgid = "petsc:RuntimeError";
   fmt = "MatCreateSeqAIJ returned error code %d\n";
   M2C_error(msgid, fmt, varargin_3);
+}
+
+void emxDestroy_struct0_T(struct0_T emxArray)
+{
+  emxFreeStruct_struct0_T(&emxArray);
+}
+
+void emxInitArray_int32_T(emxArray_int32_T **pEmxArray, int numDimensions)
+{
+  emxInit_int32_T(pEmxArray, numDimensions);
+}
+
+void emxInit_struct0_T(struct0_T *pStruct)
+{
+  emxInitStruct_struct0_T(pStruct);
 }
 
 void petscMatCreateSeqAIJ(int m, int n, int nz, const emxArray_int32_T *nnz,
@@ -29,17 +59,18 @@ void petscMatCreateSeqAIJ(int m, int n, int nz, const emxArray_int32_T *nnz,
   emxInit_uint8_T(&data0, 1);
   obj = PETSC_COMM_SELF;
   *errCode = MatCreateSeqAIJ(obj, m, n, nz, &nnz->data[0], &t_mat);
+  *toplevel = true;
   sizepe = sizeof(Mat);
   i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, i, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, i, (int)sizeof(unsigned char));
   for (i = 0; i < 3; i++) {
     t1_type[i] = cv0[i];
   }
 
   i = mat->data->size[0];
   mat->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat->data, i, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)mat->data, i, (int)sizeof(unsigned char));
   loop_ub = data0->size[0];
   for (i = 0; i < loop_ub; i++) {
     mat->data->data[i] = data0->data[i];
@@ -62,8 +93,6 @@ void petscMatCreateSeqAIJ(int m, int n, int nz, const emxArray_int32_T *nnz,
   if (*errCode != 0) {
     m2c_error(*errCode);
   }
-
-  *toplevel = true;
 }
 
 void petscMatCreateSeqAIJ_FixedRows(int m, int n, int nz, struct0_T *mat, int
@@ -73,6 +102,7 @@ void petscMatCreateSeqAIJ_FixedRows(int m, int n, int nz, struct0_T *mat, int
   MPI_Comm obj;
   PetscInt * nnz;
   Mat t_mat;
+  int b_errCode;
   int sizepe;
   int i;
   char t0_type[3];
@@ -83,18 +113,18 @@ void petscMatCreateSeqAIJ_FixedRows(int m, int n, int nz, struct0_T *mat, int
   emxInit_uint8_T(&data0, 1);
   obj = PETSC_COMM_SELF;
   nnz = NULL;
-  *errCode = MatCreateSeqAIJ(obj, m, n, nz, nnz, &t_mat);
+  b_errCode = MatCreateSeqAIJ(obj, m, n, nz, nnz, &t_mat);
   sizepe = sizeof(Mat);
   i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, i, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, i, (int)sizeof(unsigned char));
   for (i = 0; i < 3; i++) {
     t0_type[i] = cv1[i];
   }
 
   i = mat->data->size[0];
   mat->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat->data, i, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)mat->data, i, (int)sizeof(unsigned char));
   loop_ub = data0->size[0];
   for (i = 0; i < loop_ub; i++) {
     mat->data->data[i] = data0->data[i];
@@ -114,10 +144,11 @@ void petscMatCreateSeqAIJ_FixedRows(int m, int n, int nz, struct0_T *mat, int
     ptr = ptr + 1;
   }
 
-  if (*errCode != 0) {
-    m2c_error(*errCode);
+  if (b_errCode != 0) {
+    m2c_error(b_errCode);
   }
 
+  *errCode = b_errCode;
   *topleve = true;
 }
 

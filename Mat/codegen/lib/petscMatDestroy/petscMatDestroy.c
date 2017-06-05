@@ -26,7 +26,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -41,6 +41,7 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
   boolean_T p;
   boolean_T b_p;
   int k;
+  int exitg2;
   boolean_T exitg1;
   emxArray_char_T *b_mat;
   static const char cv0[3] = { 'M', 'a', 't' };
@@ -55,9 +56,20 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
   char * ptr;
   p = false;
   b_p = false;
-  if (mat->type->size[1] == 3) {
-    b_p = true;
-  }
+  k = 0;
+  do {
+    exitg2 = 0;
+    if (k < 2) {
+      if (mat->type->size[k] != 1 + (k << 1)) {
+        exitg2 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
 
   if (b_p && (!(mat->type->size[1] == 0))) {
     k = 0;
@@ -81,7 +93,7 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
     k = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat, k, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_mat, k, (int)sizeof(char));
     loop_ub = mat->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_mat->data[b_mat->size[0] * k] = mat->type->data[mat->type->size[0] * k];
@@ -95,7 +107,7 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   loop_ub = mat->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = mat->data->data[k];
@@ -111,14 +123,14 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
   sizepe = sizeof(Mat);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   for (k = 0; k < 3; k++) {
     t0_type[k] = x2[k];
   }
 
   k = mat->data->size[0];
   mat->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat->data, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)mat->data, k, (int)sizeof(unsigned char));
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     mat->data->data[k] = data0->data[k];
@@ -128,7 +140,7 @@ void petscMatDestroy(struct0_T *mat, int *errCode, boolean_T *toplevel)
   k = mat->type->size[0] * mat->type->size[1];
   mat->type->size[0] = 1;
   mat->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)mat->type, k, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)mat->type, k, (int)sizeof(char));
   for (k = 0; k < 3; k++) {
     mat->type->data[k] = t0_type[k];
   }

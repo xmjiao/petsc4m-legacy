@@ -22,13 +22,18 @@ static void m2c_error(void)
   M2C_error(msgid, fmt);
 }
 
+void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
+{
+  emxInit_char_T(pEmxArray, numDimensions);
+}
+
 void petscOptionsSetReal(const emxArray_char_T *iname, double value, int
   *errCode, boolean_T *toplevel)
 {
-  char * ptr;
   unsigned char t_str[32];
-  int i0;
+  char * ptr;
   char str[32];
+  int i0;
   PetscOptions obj;
   *toplevel = true;
   if ((!(iname->size[1] == 0)) && (iname->data[iname->size[1] - 1] != '\x00')) {

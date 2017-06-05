@@ -6,6 +6,27 @@
 #include "rtwtypes.h"
 #include "petscSolveCRS_types.h"
 
+extern emxArray_char_T *emxCreateND_char_T(int numDimensions, int *size);
+extern emxArray_int32_T *emxCreateND_int32_T(int numDimensions, int *size);
+extern emxArray_real_T *emxCreateND_real_T(int numDimensions, int *size);
+extern emxArray_char_T *emxCreateWrapperND_char_T(char *data, int numDimensions,
+  int *size);
+extern emxArray_int32_T *emxCreateWrapperND_int32_T(int *data, int numDimensions,
+  int *size);
+extern emxArray_real_T *emxCreateWrapperND_real_T(double *data, int
+  numDimensions, int *size);
+extern emxArray_char_T *emxCreateWrapper_char_T(char *data, int rows, int cols);
+extern emxArray_int32_T *emxCreateWrapper_int32_T(int *data, int rows, int cols);
+extern emxArray_real_T *emxCreateWrapper_real_T(double *data, int rows, int cols);
+extern emxArray_char_T *emxCreate_char_T(int rows, int cols);
+extern emxArray_int32_T *emxCreate_int32_T(int rows, int cols);
+extern emxArray_real_T *emxCreate_real_T(int rows, int cols);
+extern void emxDestroyArray_char_T(emxArray_char_T *emxArray);
+extern void emxDestroyArray_int32_T(emxArray_int32_T *emxArray);
+extern void emxDestroyArray_real_T(emxArray_real_T *emxArray);
+extern void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions);
+extern void emxInitArray_int32_T(emxArray_int32_T **pEmxArray, int numDimensions);
+extern void emxInitArray_real_T(emxArray_real_T **pEmxArray, int numDimensions);
 extern void petscSolveCRS(int *flag, double *relres, int *iter, double times[2]);
 extern void petscSolveCRS_10args(const emxArray_int32_T *Arows, const
   emxArray_int32_T *Acols, const emxArray_real_T *Avals, const emxArray_real_T

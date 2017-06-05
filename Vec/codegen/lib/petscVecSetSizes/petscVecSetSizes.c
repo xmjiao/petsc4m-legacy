@@ -3,6 +3,8 @@
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
+static void emxFreeStruct_struct0_T(struct0_T *pStruct);
+static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -11,6 +13,18 @@ static void b_m2c_error(int varargin_3)
   msgid = "petsc:RuntimeError";
   fmt = "VecSetSizes returned error code %d\n";
   M2C_error(msgid, fmt, varargin_3);
+}
+
+static void emxFreeStruct_struct0_T(struct0_T *pStruct)
+{
+  emxFree_uint8_T(&pStruct->data);
+  emxFree_char_T(&pStruct->type);
+}
+
+static void emxInitStruct_struct0_T(struct0_T *pStruct)
+{
+  emxInit_uint8_T(&pStruct->data, 1);
+  emxInit_char_T(&pStruct->type, 2);
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
@@ -26,7 +40,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -36,12 +50,23 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
+void emxDestroy_struct0_T(struct0_T emxArray)
+{
+  emxFreeStruct_struct0_T(&emxArray);
+}
+
+void emxInit_struct0_T(struct0_T *pStruct)
+{
+  emxInitStruct_struct0_T(pStruct);
+}
+
 void petscVecSetSizes(const struct0_T *vec, int n, int N, int *errCode,
                       boolean_T *toplevel)
 {
   boolean_T p;
   boolean_T b_p;
   int k;
+  int exitg2;
   boolean_T exitg1;
   emxArray_char_T *b_vec;
   static const char cv0[3] = { 'V', 'e', 'c' };
@@ -51,9 +76,20 @@ void petscVecSetSizes(const struct0_T *vec, int n, int N, int *errCode,
   Vec t_vec;
   p = false;
   b_p = false;
-  if (vec->type->size[1] == 3) {
-    b_p = true;
-  }
+  k = 0;
+  do {
+    exitg2 = 0;
+    if (k < 2) {
+      if (vec->type->size[k] != 1 + (k << 1)) {
+        exitg2 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
 
   if (b_p && (!(vec->type->size[1] == 0))) {
     k = 0;
@@ -77,7 +113,7 @@ void petscVecSetSizes(const struct0_T *vec, int n, int N, int *errCode,
     k = b_vec->size[0] * b_vec->size[1];
     b_vec->size[0] = 1;
     b_vec->size[1] = vec->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_vec, k, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_vec, k, (int)sizeof(char));
     loop_ub = vec->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_vec->data[b_vec->size[0] * k] = vec->type->data[vec->type->size[0] * k];
@@ -91,7 +127,7 @@ void petscVecSetSizes(const struct0_T *vec, int n, int N, int *errCode,
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = vec->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data, k, (int)sizeof(unsigned char));
   loop_ub = vec->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = vec->data->data[k];
@@ -112,6 +148,7 @@ void petscVecSetSizes_Local(const struct0_T *vec, int n, int *errCode, boolean_T
   boolean_T p;
   boolean_T b_p;
   int N;
+  int exitg2;
   boolean_T exitg1;
   emxArray_char_T *b_vec;
   static const char cv1[3] = { 'V', 'e', 'c' };
@@ -121,9 +158,20 @@ void petscVecSetSizes_Local(const struct0_T *vec, int n, int *errCode, boolean_T
   Vec t_vec;
   p = false;
   b_p = false;
-  if (vec->type->size[1] == 3) {
-    b_p = true;
-  }
+  N = 0;
+  do {
+    exitg2 = 0;
+    if (N < 2) {
+      if (vec->type->size[N] != 1 + (N << 1)) {
+        exitg2 = 1;
+      } else {
+        N++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
 
   if (b_p && (!(vec->type->size[1] == 0))) {
     N = 0;
@@ -147,7 +195,7 @@ void petscVecSetSizes_Local(const struct0_T *vec, int n, int *errCode, boolean_T
     N = b_vec->size[0] * b_vec->size[1];
     b_vec->size[0] = 1;
     b_vec->size[1] = vec->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_vec, N, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_vec, N, (int)sizeof(char));
     loop_ub = vec->type->size[1];
     for (N = 0; N < loop_ub; N++) {
       b_vec->data[b_vec->size[0] * N] = vec->type->data[vec->type->size[0] * N];
@@ -161,7 +209,7 @@ void petscVecSetSizes_Local(const struct0_T *vec, int n, int *errCode, boolean_T
   emxInit_uint8_T(&data, 1);
   N = data->size[0];
   data->size[0] = vec->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, N, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data, N, (int)sizeof(unsigned char));
   loop_ub = vec->data->size[0];
   for (N = 0; N < loop_ub; N++) {
     data->data[N] = vec->data->data[N];

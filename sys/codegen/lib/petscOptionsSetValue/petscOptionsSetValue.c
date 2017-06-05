@@ -32,6 +32,11 @@ static void m2c_error(void)
   M2C_error(msgid, fmt);
 }
 
+void emxInitArray_char_T(emxArray_char_T **pEmxArray, int numDimensions)
+{
+  emxInit_char_T(pEmxArray, numDimensions);
+}
+
 void petscOptionsSetValue(const emxArray_char_T *iname, const emxArray_char_T
   *value, int *errCode, boolean_T *toplevel)
 {

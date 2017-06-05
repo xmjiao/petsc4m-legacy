@@ -3,6 +3,8 @@
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
+static void emxFreeStruct_struct0_T(struct0_T *pStruct);
+static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -11,6 +13,18 @@ static void b_m2c_error(int varargin_3)
   msgid = "petsc:RuntimeError";
   fmt = "MatNullSpaceCreateRigidBody returned error code %d\n";
   M2C_error(msgid, fmt, varargin_3);
+}
+
+static void emxFreeStruct_struct0_T(struct0_T *pStruct)
+{
+  emxFree_uint8_T(&pStruct->data);
+  emxFree_char_T(&pStruct->type);
+}
+
+static void emxInitStruct_struct0_T(struct0_T *pStruct)
+{
+  emxInit_uint8_T(&pStruct->data, 1);
+  emxInit_char_T(&pStruct->type, 2);
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
@@ -26,7 +40,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -36,12 +50,23 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
+void emxDestroy_struct0_T(struct0_T emxArray)
+{
+  emxFreeStruct_struct0_T(&emxArray);
+}
+
+void emxInit_struct0_T(struct0_T *pStruct)
+{
+  emxInitStruct_struct0_T(pStruct);
+}
+
 void petscMatNullSpaceCreateRigidBody(const struct0_T *coords, struct0_T *nullsp,
   int *errCode, boolean_T *toplevel)
 {
   boolean_T p;
   boolean_T b_p;
   int k;
+  int exitg2;
   boolean_T exitg1;
   emxArray_char_T *b_coords;
   static const char cv0[3] = { 'V', 'e', 'c' };
@@ -58,9 +83,20 @@ void petscMatNullSpaceCreateRigidBody(const struct0_T *coords, struct0_T *nullsp
   char * ptr;
   p = false;
   b_p = false;
-  if (coords->type->size[1] == 3) {
-    b_p = true;
-  }
+  k = 0;
+  do {
+    exitg2 = 0;
+    if (k < 2) {
+      if (coords->type->size[k] != 1 + (k << 1)) {
+        exitg2 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
 
   if (b_p && (!(coords->type->size[1] == 0))) {
     k = 0;
@@ -84,7 +120,7 @@ void petscMatNullSpaceCreateRigidBody(const struct0_T *coords, struct0_T *nullsp
     k = b_coords->size[0] * b_coords->size[1];
     b_coords->size[0] = 1;
     b_coords->size[1] = coords->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_coords, k, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_coords, k, (int)sizeof(char));
     loop_ub = coords->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_coords->data[b_coords->size[0] * k] = coords->type->data[coords->
@@ -99,7 +135,7 @@ void petscMatNullSpaceCreateRigidBody(const struct0_T *coords, struct0_T *nullsp
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = coords->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   loop_ub = coords->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = coords->data->data[k];
@@ -107,17 +143,19 @@ void petscMatNullSpaceCreateRigidBody(const struct0_T *coords, struct0_T *nullsp
 
   t_coords = *(Vec*)(&data0->data[0]);
   *errCode = MatNullSpaceCreateRigidBody(t_coords, &t_nullsp);
+  *toplevel = true;
   sizepe = sizeof(MatNullSpace);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   for (k = 0; k < 12; k++) {
     t0_type[k] = cv1[k];
   }
 
   k = nullsp->data->size[0];
   nullsp->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)nullsp->data, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)nullsp->data, k, (int)sizeof(unsigned
+    char));
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     nullsp->data->data[k] = data0->data[k];
@@ -127,7 +165,7 @@ void petscMatNullSpaceCreateRigidBody(const struct0_T *coords, struct0_T *nullsp
   k = nullsp->type->size[0] * nullsp->type->size[1];
   nullsp->type->size[0] = 1;
   nullsp->type->size[1] = 12;
-  emxEnsureCapacity((emxArray__common *)nullsp->type, k, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)nullsp->type, k, (int)sizeof(char));
   for (k = 0; k < 12; k++) {
     nullsp->type->data[k] = t0_type[k];
   }
@@ -142,8 +180,6 @@ void petscMatNullSpaceCreateRigidBody(const struct0_T *coords, struct0_T *nullsp
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }
-
-  *toplevel = true;
 }
 
 void petscMatNullSpaceCreateRigidBody_initialize(void)

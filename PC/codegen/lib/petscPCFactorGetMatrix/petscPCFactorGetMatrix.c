@@ -3,6 +3,8 @@
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
+static void emxFreeStruct_struct0_T(struct0_T *pStruct);
+static void emxInitStruct_struct0_T(struct0_T *pStruct);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -11,6 +13,18 @@ static void b_m2c_error(int varargin_3)
   msgid = "petsc:RuntimeError";
   fmt = "PCFactorGetMatrix returned error code %d\n";
   M2C_error(msgid, fmt, varargin_3);
+}
+
+static void emxFreeStruct_struct0_T(struct0_T *pStruct)
+{
+  emxFree_uint8_T(&pStruct->data);
+  emxFree_char_T(&pStruct->type);
+}
+
+static void emxInitStruct_struct0_T(struct0_T *pStruct)
+{
+  emxInit_uint8_T(&pStruct->data, 1);
+  emxInit_char_T(&pStruct->type, 2);
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
@@ -26,7 +40,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, (int)sizeof(char));
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -36,12 +50,24 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
+void emxDestroy_struct0_T(struct0_T emxArray)
+{
+  emxFreeStruct_struct0_T(&emxArray);
+}
+
+void emxInit_struct0_T(struct0_T *pStruct)
+{
+  emxInitStruct_struct0_T(pStruct);
+}
+
 void petscPCFactorGetMatrix(const struct0_T *pc, struct0_T *mat, int *errCode,
   boolean_T *toplevel)
 {
+  Mat t_mat;
   boolean_T p;
   boolean_T b_p;
   int k;
+  int exitg2;
   boolean_T exitg1;
   emxArray_char_T *b_pc;
   static const char cv0[2] = { 'P', 'C' };
@@ -49,7 +75,6 @@ void petscPCFactorGetMatrix(const struct0_T *pc, struct0_T *mat, int *errCode,
   emxArray_uint8_T *data0;
   int loop_ub;
   PC c_pc;
-  Mat t_mat;
   int sizepe;
   char t0_type[3];
   static const char cv1[3] = { 'M', 'a', 't' };
@@ -57,9 +82,20 @@ void petscPCFactorGetMatrix(const struct0_T *pc, struct0_T *mat, int *errCode,
   char * ptr;
   p = false;
   b_p = false;
-  if (pc->type->size[1] == 2) {
-    b_p = true;
-  }
+  k = 0;
+  do {
+    exitg2 = 0;
+    if (k < 2) {
+      if (pc->type->size[k] != 1 + k) {
+        exitg2 = 1;
+      } else {
+        k++;
+      }
+    } else {
+      b_p = true;
+      exitg2 = 1;
+    }
+  } while (exitg2 == 0);
 
   if (b_p && (!(pc->type->size[1] == 0))) {
     k = 0;
@@ -83,7 +119,7 @@ void petscPCFactorGetMatrix(const struct0_T *pc, struct0_T *mat, int *errCode,
     k = b_pc->size[0] * b_pc->size[1];
     b_pc->size[0] = 1;
     b_pc->size[1] = pc->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_pc, k, sizeof(char));
+    emxEnsureCapacity((emxArray__common *)b_pc, k, (int)sizeof(char));
     loop_ub = pc->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_pc->data[b_pc->size[0] * k] = pc->type->data[pc->type->size[0] * k];
@@ -97,7 +133,7 @@ void petscPCFactorGetMatrix(const struct0_T *pc, struct0_T *mat, int *errCode,
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = pc->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   loop_ub = pc->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = pc->data->data[k];
@@ -105,17 +141,18 @@ void petscPCFactorGetMatrix(const struct0_T *pc, struct0_T *mat, int *errCode,
 
   c_pc = *(PC*)(&data0->data[0]);
   *errCode = PCFactorGetMatrix(c_pc, &t_mat);
+  *toplevel = true;
   sizepe = sizeof(Mat);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)data0, k, (int)sizeof(unsigned char));
   for (k = 0; k < 3; k++) {
     t0_type[k] = cv1[k];
   }
 
   k = mat->data->size[0];
   mat->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat->data, k, sizeof(unsigned char));
+  emxEnsureCapacity((emxArray__common *)mat->data, k, (int)sizeof(unsigned char));
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     mat->data->data[k] = data0->data[k];
@@ -125,7 +162,7 @@ void petscPCFactorGetMatrix(const struct0_T *pc, struct0_T *mat, int *errCode,
   k = mat->type->size[0] * mat->type->size[1];
   mat->type->size[0] = 1;
   mat->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)mat->type, k, sizeof(char));
+  emxEnsureCapacity((emxArray__common *)mat->type, k, (int)sizeof(char));
   for (k = 0; k < 3; k++) {
     mat->type->data[k] = t0_type[k];
   }
@@ -140,8 +177,6 @@ void petscPCFactorGetMatrix(const struct0_T *pc, struct0_T *mat, int *errCode,
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }
-
-  *toplevel = true;
 }
 
 void petscPCFactorGetMatrix_initialize(void)
