@@ -23,7 +23,7 @@ static void petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   double *time);
 static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   emxArray_int32_T *col_ind, const emxArray_real_T *val);
-static void petscSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver,
+static void petscSolveHdls(Mat A, Vec b, Vec x, const emxArray_char_T *solver,
   double rtol, int maxit, const emxArray_char_T *pctype, const emxArray_char_T
   *pcopt, Vec x0, int *flag, double *relres, int *iter, emxArray_real_T *reshis,
   double times[2]);
@@ -707,7 +707,7 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   return mat;
 }
 
-static void petscSolve(Mat A, Vec b, Vec x, const emxArray_char_T *solver,
+static void petscSolveHdls(Mat A, Vec b, Vec x, const emxArray_char_T *solver,
   double rtol, int maxit, const emxArray_char_T *pctype, const emxArray_char_T
   *pcopt, Vec x0, int *flag, double *relres, int *iter, emxArray_real_T *reshis,
   double times[2])
@@ -863,8 +863,8 @@ void petscSolveCRS_10args(const emxArray_int32_T *Arows, const emxArray_int32_T 
     xVec = x0Vec;
   }
 
-  petscSolve(AMat, bVec, xVec, solver, rtol, maxiter, pctype, solpack, x0Vec,
-             flag, relres, iter, reshis, times);
+  petscSolveHdls(AMat, bVec, xVec, solver, rtol, maxiter, pctype, solpack, x0Vec,
+                 flag, relres, iter, reshis, times);
   t_mat = AMat;
   MatDestroy(&t_mat);
   t_vec = bVec;
@@ -1358,8 +1358,8 @@ void petscSolveCRS_9args(const emxArray_int32_T *Arows, const emxArray_int32_T
   AMat = petscMatCreateAIJFromCRS(Arows, Acols, Avals);
   bVec = petscVecCreateFromArray(b);
   VecDuplicate(bVec, &t_vec_out);
-  petscSolve(AMat, bVec, t_vec_out, solver, rtol, maxiter, pctype, solpack, NULL,
-             flag, relres, iter, reshis, times);
+  petscSolveHdls(AMat, bVec, t_vec_out, solver, rtol, maxiter, pctype, solpack,
+                 NULL, flag, relres, iter, reshis, times);
   t_mat = AMat;
   MatDestroy(&t_mat);
   t_vec = bVec;
