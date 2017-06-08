@@ -121,7 +121,7 @@ static void __petscMatGetLocalSize_api(mxArray **plhs, const mxArray ** prhs) {
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */
-    mxArray *outputs[4];
+    mxArray *outputs[4] = {NULL, NULL, NULL, NULL};
     int i;
     int nOutputs = (nlhs < 1 ? 1 : nlhs);
 

@@ -151,7 +151,7 @@ static void __petscMatAssemblyEnd_Final_api(mxArray **plhs, const mxArray ** prh
 
 void mexFunction(int nlhs, mxArray *plhs[], int nrhs, const mxArray *prhs[]) {
     /* Temporary copy for mex outputs. */
-    mxArray *outputs[2];
+    mxArray *outputs[2] = {NULL, NULL};
     int i;
     int nOutputs = (nlhs < 1 ? 1 : nlhs);
 
