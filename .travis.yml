@@ -19,10 +19,12 @@ matrix:
       sudo: required
       env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
     - os: osx
-      env: PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib
+      env: BUILD_MATLAB=1 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib
+    - os: osx
+      env: BUILD_MATLAB=0 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib
 
 before_install:
-# Install Octave and MATLAB
+  # Install Octave and MATLAB
   - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo $UPDATE_REPOSITORY;
         sudo apt-get update -q;
@@ -59,18 +61,7 @@ before_install:
         ls -l /usr/local/bin/gcc-* /usr/local/bin/g++-*;
      fi'
 
-  # Inatall paracoder
-  - 'cd .. &&
-     mkdir -p paracoder &&
-     curl -s  -L https://github.com/fastsolve/paracoder/archive/master.zip |
-         bsdtar zxf - --strip-components 1 -C paracoder &&
-     cd paracoder &&
-     octave --eval "build_m2c -force" &&
-     octave --eval "build_m2c -force -matlab" &&
-     cd ../petsc4m'
-
-script:
-# Build PETSc
+ # Build PETSc
   - 'curl -s http://ftp.mcs.anl.gov/pub/petsc/release-snapshots/petsc-lite-${PETSC_VERSION}.tar.gz |
           tar zx &&
      cd petsc-${PETSC_VERSION} &&
@@ -85,6 +76,15 @@ script:
         --download-spai --download-ml --prefix=/usr/local/petsc'
   - make && sudo make install && cd ..
 
-# compile petsc4m
-  - PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force"
-  - PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"
+script:
+  # Inatall paracoder
+  - 'cd .. &&
+     mkdir -p paracoder &&
+     curl -s  -L https://github.com/fastsolve/paracoder/archive/master.zip |
+         bsdtar zxf - --strip-components 1 -C paracoder &&
+     cd paracoder &&
+     cd ../petsc4m'
+
+  # compile petsc4m
+  - '[[ "$BUILD_MATLAB" == "1" ]] || PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force"'
+  - '[[ "$BUILD_MATLAB" == "0" ]] || PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"'

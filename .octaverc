@@ -1,6 +1,10 @@
-warning('off', 'Octave:precedence-change');
-warning('off', 'Octave:resize-on-range-error');
 more off;
 
-load_petsc
-init_petsc
+% Check the version of Octave
+verstr = version;
+[S,E]=regexp(verstr,'[0-9]+.[0-9]+');
+
+if str2double(verstr(S:E))<4.2
+    % Set path for PETSc
+    load_petsc
+end
