@@ -146,28 +146,29 @@ function test %#ok<DEFNU>
 %! [rowptr, colind, vals] = crs_matrix(A);
 %! b = rand(100,1);
 
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b);
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, '');
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     '', 1.e-6);
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     PETSC_KSPBCGS, 1.e-6, int32(100));
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     PETSC_KSPTFQMR, 1.e-6, int32(100));
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     PETSC_KSPBCGS, 1.e-10, int32(10), PETSC_PCJACOBI, 'right', ...
-%!     zeros(0,1), '-ksp_monitor_true_residual');
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     PETSC_KSPBCGS, 1.e-6, int32(100), PETSC_PCILU, '');
-%!test
 %! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
 %!     PETSC_KSPPREONLY, 1.e-6, int32(100), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
+%! assert(norm(b - A*x) < 1.e-12)
+
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b);
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, '');
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%%!     '', 1.e-6);
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%%!     PETSC_KSPBCGS, 1.e-6, int32(100));
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%%!     PETSC_KSPTFQMR, 1.e-6, int32(100));
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%%!     PETSC_KSPBCGS, 1.e-10, int32(10), PETSC_PCJACOBI, 'right', ...
+%%!     zeros(0,1), '-ksp_monitor_true_residual');
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%%!     PETSC_KSPBCGS, 1.e-6, int32(100), PETSC_PCILU, '');
 
 end

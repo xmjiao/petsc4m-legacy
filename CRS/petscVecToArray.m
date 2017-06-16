@@ -14,7 +14,7 @@ n = petscVecGetLocalSize(vec);
 arr = coder.nullcopy(zeros(n, 1));
 
 % Obtain values
-idx = (0:int32(n)-1)';
+idx = int32(0:n-1)';
 arr = petscVecGetValues(vec, n, idx, arr);
 
 end

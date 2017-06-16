@@ -34,7 +34,7 @@ else
 end
 
 % Set values
-idx = (0:int32(n)-1)';
+idx = int32(0:n-1)';
 petscVecSetValues(vec, n, idx, arr);
 
 % Call assembly
@@ -50,4 +50,3 @@ function test %#ok<DEFNU>
 %! arr = petscVecToArray(vec);
 %! assert(isequal(b, arr));
 end
-

@@ -77,7 +77,7 @@ end
 function test %#ok<DEFNU>
 %!test
 %! A = sprand(100,100,0.3);
-%! [rowptr, colind, val] = crs_createFromSparse(A); % This requires NumGeom
+%! [rowptr, colind, val] = crs_matrix(A); % This requires NumGeom
 %! mat = petscMatCreateAIJFromCRS(rowptr, colind, val);
 %! [rowptr2, colind2, val2] = petscMatAIJToCRS(mat);
 %! assert(isequal(rowptr, rowptr2) && isequal(colind, colind2) && isequal(val, val2));

@@ -79,53 +79,45 @@ elseif isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file')
     error('You must have built either the executible built when running in MATLAB.');
 end
 
-[Arows, Acols, Avals] = crs_matrix(A);
+[Arows, Acols, Avals] = crs_matrix(varargin{1});
 b = varargin{2};
 
 % Setup KSP
-[flag, relres, iter, reshis, times] = petscSolveCRS(Arows, Acols, Avals, b, varargin{3:});
-
-[flag, relres, iter, reshis, times] = petscSolveHdls(AMat, bVec, xVec, solver, ...
-    double(rtol), int32(maxit), pctype, pcopt, x0Vec, opts);
-
-petscMatDestroy(AMat);
-petscVecDestroy(bVec);
-
-x = petscVecToArray(xVec);
-petscVecDestroy(xVec);
+[x, flag, relres, iter, reshis, times] = petscSolveCRS(Arows, Acols, Avals, b, varargin{3:end});
 
 end
 
 function test %#ok<DEFNU>
 %!test
-%!shared A, b, rowptr, colind, vals
+%!shared A, b
 %! A = sprand(100,100,0.3);
 %! A = A + speye(100);
-%! [rowptr, colind, vals] = crs_matrix(A);
 %! b = rand(100,1);
 
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b);
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, '');
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     '', 1.e-6);
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     PETSC_KSPBCGS, 1.e-6, int32(100));
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     PETSC_KSPTFQMR, 1.e-6, int32(100));
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     PETSC_KSPBCGS, 1.e-10, int32(10), PETSC_PCJACOBI, 'right', ...
-%!     zeros(0,1), '-ksp_monitor_true_residual');
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     PETSC_KSPBCGS, 1.e-6, int32(100), PETSC_PCILU, '');
-%!test
-%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%! [x,flag,relres,iter,reshis,times] = petscSolve(A, b, ...
 %!     PETSC_KSPPREONLY, 1.e-6, int32(100), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
+%! assert(norm(b - A*x) < 1.e-12)
+
+
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolve(A, b);
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolve(A, b, '');
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolve(A, b, ...
+%%!     '', 1.e-6);
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolve(A, b, ...
+%%!     PETSC_KSPBCGS, 1.e-6, int32(100));
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolve(A, b, ...
+%%!     PETSC_KSPTFQMR, 1.e-6, int32(100));
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolve(A, b, ...
+%%!     PETSC_KSPBCGS, 1.e-10, int32(10), PETSC_PCJACOBI, 'right', ...
+%%!     zeros(0,1), '-ksp_monitor_true_residual');
+%%!test
+%%! [x,flag,relres,iter,reshis,times] = petscSolve(A, b, ...
+%%!     PETSC_KSPBCGS, 1.e-6, int32(100), PETSC_PCILU, '');
 
 end
