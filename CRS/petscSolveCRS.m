@@ -107,11 +107,31 @@ Avals = varargin{3};
 b = varargin{4};
 
 % Setup KSP
-if nargin<5; solver = ''; else solver = varargin{5}; end % Use default
-if nargin<6; rtol = 0; else rtol = varargin{6}; end
-if nargin<7; maxit = int32(0); else maxit = varargin{7}; end
-if nargin<8; pctype = ''; else pctype = varargin{8}; end
-if nargin<9; pcopt = ''; else pcopt = varargin{9}; end
+if nargin<5
+    solver = ''; 
+else
+    solver = varargin{5};
+end % Use default
+if nargin<6
+    rtol = 0;
+else
+    rtol = varargin{6};
+end
+if nargin<7
+    maxit = int32(0);
+else
+    maxit = varargin{7};
+end
+if nargin<8
+    pctype = '';
+else
+    pctype = varargin{8};
+end
+if nargin<9
+    pcopt = '';
+else
+    pcopt = varargin{9}; 
+end
 
 AMat = petscMatCreateAIJFromCRS(Arows, Acols, Avals);
 bVec = petscVecCreateFromArray(b);
@@ -125,7 +145,11 @@ else
     xVec = x0Vec;
 end
 
-if nargin<11; opts = ''; else opts = varargin{11}; end
+if nargin<11
+    opts = '';
+else
+    opts = varargin{11};
+end
 
 [flag, relres, iter, reshis, times] = petscSolveHdls(AMat, bVec, xVec, solver, ...
     double(rtol), int32(maxit), pctype, pcopt, x0Vec, opts);
@@ -152,8 +176,10 @@ function test %#ok<DEFNU>
 
 %%!test
 %%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b);
+
 %%!test
 %%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, '');
+
 %%!test
 %%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
 %%!     '', 1.e-6);

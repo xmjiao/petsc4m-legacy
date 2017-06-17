@@ -16,10 +16,26 @@ errCode = int32(-1);
 
 if ~isempty(coder.target)
     errCode = coder.ceval('VecAYPX', PetscVec(y), a, PetscVec(x));
-    
+
     toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecAYPX returned error code %d\n', errCode)
     end
 end
+end
+
+function test %#ok<DEFNU>
+%!test
+%! y = rand(10,1);
+%! a = 2;
+%! x = rand(10,1);
+%!
+%! vec_y = petscVecCreateFromArray(y);
+%! vec_x = petscVecCreateFromArray(x);
+%!
+%! errCode = petscVecAYPX(vec_y, a, vec_x);
+%!
+%! result = petscVecToArray(vec_y);
+%!
+%! assert(errCode == 0 && norm(result - (a*y + x)) <= 1.e-12);
 end

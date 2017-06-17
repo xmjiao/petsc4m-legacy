@@ -23,3 +23,19 @@ if ~isempty(coder.target)
     end
 end
 end
+
+function test %#ok<DEFNU>
+%!test
+%! y = rand(10,1);
+%! a = 2;
+%! x = rand(10,1);
+%!
+%! vec_y = petscVecCreateFromArray(y);
+%! vec_x = petscVecCreateFromArray(x);
+%!
+%! errCode = petscVecAXPY(vec_y, a, vec_x);
+%!
+%! result = petscVecToArray(vec_y);
+%!
+%! assert(errCode == 0 && norm(result - (y + a * x)) <= 1.e-12);
+end

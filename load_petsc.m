@@ -31,6 +31,6 @@ addpath([petscroot '/util'])
 addpath([petscroot '/sys'])
 addpath([petscroot '/exe'])
 
-if isoctave
+if isoctave || ~usejava('jvm')
     init_petsc
 end
