@@ -16,7 +16,7 @@ errCode = int32(-1);
 
 if ~isempty(coder.target)
     errCode = coder.ceval('VecAXPY', PetscVec(y), a, PetscVec(x));
-    
+
     toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecAXPY returned error code %d\n', errCode)
@@ -36,6 +36,8 @@ function test %#ok<DEFNU>
 %! errCode = petscVecAXPY(vec_y, a, vec_x);
 %!
 %! result = petscVecToArray(vec_y);
+%! petscVecDestroy(vec_x);
+%! petscVecDestroy(vec_y);
 %!
 %! assert(errCode == 0 && norm(result - (y + a * x)) <= 1.e-12);
 end

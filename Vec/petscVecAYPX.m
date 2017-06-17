@@ -36,6 +36,8 @@ function test %#ok<DEFNU>
 %! errCode = petscVecAYPX(vec_y, a, vec_x);
 %!
 %! result = petscVecToArray(vec_y);
+%! petscVecDestroy(vec_x);
+%! petscVecDestroy(vec_y);
 %!
 %! assert(errCode == 0 && norm(result - (a*y + x)) <= 1.e-12);
 end

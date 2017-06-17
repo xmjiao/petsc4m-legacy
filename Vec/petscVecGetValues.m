@@ -1,5 +1,5 @@
 function [y, errCode, toplevel] = petscVecGetValues(vec, ni, ix, y)
-%Gets values from certain locations of a vector. 
+%Gets values from certain locations of a vector.
 %Currently can only get values on the same processor
 %
 %  [y, errCode] = petscVecGetValues(vec, ni, ix)
@@ -27,7 +27,7 @@ if ~isempty(coder.target)
     elseif length(y) < ni
         m2c_error('Output array y is too small.');
     end
-    
+
     t_vec = PetscVec(vec);
     errCode = coder.ceval('VecGetValues', t_vec, ni, coder.rref(ix), coder.ref(y));
 
@@ -36,4 +36,19 @@ if ~isempty(coder.target)
         m2c_error('petsc:RuntimeError', 'VecGetValues returned error code %d\n', errCode)
     end
 end
+end
+
+
+function test %#ok<DEFNU>
+%!test
+%! x = rand(10,1);
+%!
+%! vec_x = petscVecCreateFromArray(x);
+%! y = zeros(5, 1);
+%! idx = int32(5:9)';
+%!
+%! [y, errCode, toplevel] = petscVecGetValues(vec_x, int32(5),idx, y);
+%! petscVecDestroy(vec_x);
+%!
+%! assert(errCode == 0 && isequal(y, x(idx+1)));
 end

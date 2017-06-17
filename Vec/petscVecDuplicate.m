@@ -17,9 +17,9 @@ errCode = int32(-1);
 
 if ~isempty(coder.target)
     t_vec_out = coder.opaque('Vec');
-    
+
     errCode = coder.ceval('VecDuplicate', PetscVec(vec_in), coder.wref(t_vec_out));
-    
+
     toplevel = nargout>2;
     vec_out = PetscVec(t_vec_out, toplevel);
 
@@ -27,4 +27,19 @@ if ~isempty(coder.target)
         m2c_error('petsc:RuntimeError', 'VecDuplicate returned error code %d\n', errCode)
     end
 end
+end
+
+function test %#ok<DEFNU>
+%!test
+%! x = rand(10,1);
+%!
+%! vec_x = petscVecCreateFromArray(x);
+%! vec_y = petscVecDuplicate(vec_x);
+%! errCode = petscVecCopy(vec_x, vec_y);
+%!
+%! y = petscVecToArray(vec_y);
+%! petscVecDestroy(vec_x);
+%! petscVecDestroy(vec_y);
+%!
+%! assert(errCode == 0 && isequal(y, x));
 end

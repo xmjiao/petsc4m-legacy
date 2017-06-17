@@ -18,16 +18,27 @@ errCode = int32(-1);
 
 if ~isempty(coder.target)
     t_vec = PetscVec(vec);
-    
+
     first_row = int32(0);
     last_row = int32(0);
-    
+
     errCode = coder.ceval('VecGetOwnershipRange', t_vec, ...
         coder.wref(first_row), coder.wref(last_row));
-    
+
     toplevel = nargout>3;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecGetOwnershipRange returned error code %d\first_row', errCode)
     end
 end
+end
+
+
+function test %#ok<DEFNU>
+%!test
+%! x = rand(10,1);
+%!
+%! vec_x = petscVecCreateFromArray(x);
+%! [first_row, last_row, errCode] = petscVecGetOwnershipRange(vec_x);
+%!
+%! assert(errCode == 0 && first_row == 0 && last_row == 10);
 end

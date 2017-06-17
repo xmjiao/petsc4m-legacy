@@ -25,10 +25,24 @@ if ~isempty(coder.target)
         nrm = double(0);
     end
     errCode = coder.ceval('VecNorm', PetscVec(x), type, coder.wref(nrm));
-    
+
     toplevel = nargout>2;
     if errCode && (toplevel || m2c_debug)
         m2c_error('petsc:RuntimeError', 'VecNorm returned error code %d\n', errCode)
     end
 end
+end
+
+
+function test %#ok<DEFNU>
+%!test
+%! x = rand(10,1);
+%!
+%! vec_x = petscVecCreateFromArray(x);
+%!
+%! [result, errCode] = petscVecNorm(vec_x, PETSC_NORM_2);
+%!
+%! petscVecDestroy(vec_x);
+%!
+%! assert(errCode == 0 && norm(result - norm(x)) < 1.e-12);
 end
