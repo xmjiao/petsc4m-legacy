@@ -5,7 +5,7 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=/usr/local/petsc/lib
+      env: PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=$HOME/petsc/lib
     - os: linux
       dist: trusty
       sudo: required
@@ -13,18 +13,20 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=/usr/local/petsc/lib
+      env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=$HOME/petsc/lib
     - os: linux
       dist: trusty
       sudo: required
       env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
     - os: osx
-      env: BUILD_MATLAB=1 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib
+      env: BUILD_MATLAB=1 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=$HOME/petsc/lib
     - os: osx
-      env: BUILD_MATLAB=0 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib
+      env: BUILD_MATLAB=0 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=$HOME/petsc/lib
 
 before_install:
   # Install Octave and MATLAB
+  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || echo $(ifconfig eth0 | grep HWaddr)'
+  - '[[ "$TRAVIS_OS_NAME" != "osx" ]] || echo $(ifconfig en0 | grep ether)'
   - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo $UPDATE_REPOSITORY;
         sudo apt-get update -q;
@@ -38,13 +40,7 @@ before_install:
            gfortran
            cmake
            bison
-           flex
-           libboost-filesystem-dev
-           libboost-iostreams-dev
-           libboost-program-options-dev
-           libboost-system-dev
-           libboost-thread-dev
-           libboost-timer-dev;
+           flex;
        curl -L "$URL" | sudo bsdtar zxf - -C /usr/local --strip-components 2;
        sudo ln -s -f /usr/local/MATLAB/R2016b/bin/matlab /usr/local/bin;
        sudo ln -s -f /usr/local/MATLAB/R2016b/bin/mex /usr/local/bin;
@@ -56,9 +52,9 @@ before_install:
         brew install mpich2 flex;
         curl -L "$URL_OSX" | sudo bsdtar zxf - -C /Applications --strip-components 1;
         sudo ln -s -f /Applications/MATLAB_R*/bin/mex /usr/local/bin;
-        ln -s -f /usr/local/bin/gcc-7 /usr/local/bin/gcc-mp;
-        ln -s -f /usr/local/bin/g++-7 /usr/local/bin/g++-mp;
-        ls -l /usr/local/bin/gcc-* /usr/local/bin/g++-*;
+        sudo ln -s -f /usr/local/bin/gcc-7 /usr/local/bin/gcc-mp;
+        sudo ln -s -f /usr/local/bin/g++-7 /usr/local/bin/g++-mp;
+        sudo ls -l /usr/local/bin/gcc-* /usr/local/bin/g++-*;
      fi'
 
  # Build PETSc
@@ -69,11 +65,11 @@ before_install:
         --with-c-support --with-debugging=1 --with-shared-libraries
         --download-blas --download-lapack
         --download-suitesparse --download-superlu
-        --download-superlu_dist --download-scalapack
+        --download-scalapack
         --download-metis --download-parmetis
         --download-ptscotch --download-hypre
         --download-mumps --download-blacs
-        --download-spai --download-ml --prefix=/usr/local/petsc'
+        --download-spai --prefix=$HOME/petsc'
   - make && sudo make install && cd ..
 
 script:
@@ -86,5 +82,5 @@ script:
      cd ../petsc4m'
 
   # compile and test petsc4m
-  - '[[ "$BUILD_MATLAB" == "1" ]] || PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force; run tests/test_petsc"'
-  - '[[ "$BUILD_MATLAB" == "0" ]] || PETSC_DIR=/usr/local/petsc octave --eval "build_petsc -force -matlab"'
+  - '[[ "$BUILD_MATLAB" == "1" ]] || PETSC_DIR=$HOME/petsc octave --eval "build_petsc -force; run tests/test_petsc"'
+  - '[[ "$BUILD_MATLAB" == "0" ]] || PETSC_DIR=$HOME/petsc octave --eval "build_petsc -force -matlab"'
