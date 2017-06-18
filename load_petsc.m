@@ -1,3 +1,5 @@
+function load_petsc(varargin)
+
 % petsc4m depends on paracoder. Need to load it first
 if ~exist('load_m2c.m', 'file')
     if exist('../paracoder/load_m2c.m', 'file')
@@ -31,6 +33,6 @@ addpath([petscroot '/util'])
 addpath([petscroot '/sys'])
 addpath([petscroot '/exe'])
 
-if isoctave || ~usejava('jvm')
-    init_petsc
+if isoctave || ~usejava('jvm') || nargin>0
+    init_petsc(varargin{:})
 end

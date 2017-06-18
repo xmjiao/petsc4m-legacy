@@ -4,7 +4,10 @@ function build_petsc(varargin)
 curpath = pwd;
 cd(petscroot);
 
-build_petsc_essential(varargin{:});
+try
+    build_petsc_main(varargin{:});
+catch
+end
 
 %Compile all other system-level and low-level functions with hidden mex files
 lines = [grep_pattern('sys/petscInitialize.m', '\n%#codegen\s+-args'), ...
@@ -31,17 +34,7 @@ end
 cd(curpath);
 end
 
-function build_petsc_essential(varargin)
-
-%Compile top-level functions for CRS and time top-level KSP functions
-if isoctave
-    mexdir = {};
-else
-    mexdir = {'{''mex/''}'};
-end
-opts = [{'-petsc', '-exe', '{''exe/''}', '-mex'}, mexdir{:}, ...
-    '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
-m2c(opts{:}, 'petscSolveCRS');
+function build_petsc_main(varargin)
 
 %Compile critical system-level functions into their own directory
 opts = [{'-petsc', '-O', '-mex'} varargin{:}];
@@ -52,8 +45,17 @@ for i=1:length(files)
     m2c(opts{:}, files{i}{1});
 end
 
+%Compile top-level functions for CRS and time top-level KSP functions
+if isoctave
+    mexdir = {};
+else
+    mexdir = {'{''../mex/''}'};
 end
+opts = [{'-petsc', '-exe', '{''../exe/''}', '-mex'}, mexdir{:}, ...
+    '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
+exm2c(opts{:}, 'petscSolveCRS');
 
+end
 % TODO:
 %
 % 4.4.9 Multigrid Preconditioners

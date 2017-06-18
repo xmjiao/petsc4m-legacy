@@ -13,7 +13,9 @@ if ~isoctave && usejava('jvm') && (nargin==0 || ~isequal(arg, '-force'))
 end
 
 % Add mex files into path for faster execution
-addpath([petscroot '/mex'])
+if ~isoctave
+    addpath([petscroot '/mex'])
+end
 
 if exist(['petscInitialize.' mexext], 'file') && ...
     isequal(which('petscInitialize'), which(['petscInitialize.' mexext]))
