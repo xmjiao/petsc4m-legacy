@@ -25,8 +25,8 @@ matrix:
 
 before_install:
   # Install Octave and MATLAB
-  - [[ "$TRAVIS_OS_NAME" != "linux" ]] || echo "HOSTID is $(ifconfig eth0 | grep HWaddr | perl -pe 's/.+HWaddr ([\w:]+)/$1/g ; s/://g')"
-  - [[ "$TRAVIS_OS_NAME" != "osx" ]] || echo "HOSTID is $(ifconfig en0 | grep ether | perl -pe 's/.+ether ([\w:]+)/$1/g ; s/://g')"
+  - '[[ "$TRAVIS_OS_NAME" != "linux" ]] || echo $(ifconfig eth0 | grep HWaddr)'
+  - '[[ "$TRAVIS_OS_NAME" != "osx" ]] || echo $(ifconfig en0 | grep ether)'
   - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo $UPDATE_REPOSITORY;
         sudo apt-get update -q;
