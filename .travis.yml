@@ -5,26 +5,33 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=/usr/local/petsc/lib
+      env: PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=/usr/local/petsc/lib \
+           HOSTID=$(ifconfig eth0 | grep HWaddr | perl -pe "s/.+HWaddr ([\w:]+)/\$1/g ; s/://g")
     - os: linux
       dist: trusty
       sudo: required
-      env: PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
+      env: PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable" \
+           HOSTID=$(ifconfig eth0 | grep HWaddr | perl -pe "s/.+HWaddr ([\w:]+)/\$1/g ; s/://g")
     - os: linux
       dist: trusty
       sudo: required
-      env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=/usr/local/petsc/lib
+      env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=/usr/local/petsc/lib \
+           HOSTID=$(ifconfig eth0 | grep HWaddr | perl -pe "s/.+HWaddr ([\w:]+)/\$1/g ; s/://g")
     - os: linux
       dist: trusty
       sudo: required
-      env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
+      env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable" \
+           HOSTID=$(ifconfig eth0 | grep HWaddr | perl -pe "s/.+HWaddr ([\w:]+)/\$1/g ; s/://g")
     - os: osx
-      env: BUILD_MATLAB=1 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib
+      env: BUILD_MATLAB=1 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib \
+           HOSTID=$(ifconfig en0 | grep ether | perl -pe "s/.+ether ([\w:]+)/\$1/g ; s/://g")
     - os: osx
-      env: BUILD_MATLAB=0 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib
+      env: BUILD_MATLAB=0 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=/usr/local/petsc/lib \
+           HOSTID=$(ifconfig en0 | grep ether | perl -pe "s/.+ether ([\w:]+)/\$1/g ; s/://g")
 
 before_install:
   # Install Octave and MATLAB
+  - echo "HOSTID is $HOSTID"
   - 'if [[ "$TRAVIS_OS_NAME" == "linux" ]]; then
         sudo $UPDATE_REPOSITORY;
         sudo apt-get update -q;
