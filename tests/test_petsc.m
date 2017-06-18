@@ -22,7 +22,6 @@ for j=1:length(files)
     [n, nmax] = test_hdl(file);
     if n<nmax
         error('FAILED %d out of %d tests\n', nmax-n, nmax)
-        break
     else
         fprintf(1, 'PASSED %d out of %d tests\n', n, nmax);
     end
