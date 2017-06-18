@@ -40,13 +40,7 @@ before_install:
            gfortran
            cmake
            bison
-           flex
-           libboost-filesystem-dev
-           libboost-iostreams-dev
-           libboost-program-options-dev
-           libboost-system-dev
-           libboost-thread-dev
-           libboost-timer-dev;
+           flex;
        curl -L "$URL" | sudo bsdtar zxf - -C /usr/local --strip-components 2;
        sudo ln -s -f /usr/local/MATLAB/R2016b/bin/matlab /usr/local/bin;
        sudo ln -s -f /usr/local/MATLAB/R2016b/bin/mex /usr/local/bin;
