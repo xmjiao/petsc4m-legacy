@@ -69,21 +69,9 @@ if nargin==0
     return;
 end
 
-if isempty(coder.target) && ~exist(['petscSolveCRS.' mexext], 'file') && ...
-        exist('run_petscSolveCRS_exe', 'file')
-    % Is running in MATLAB and mex files are not available
-    [x, flag, relres, iter, reshis, times] = run_petscSolveCRS_exe(varargin{:});
-    fprintf('KSP setup took %g seconds and solver took %g seconds\n', times(1), times(2));
-    return;
-elseif isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file')
-    error('You must have built either the executible built when running in MATLAB.');
-end
-
 [Arows, Acols, Avals] = crs_matrix(varargin{1});
-b = varargin{2};
 
-% Setup KSP
-[x, flag, relres, iter, reshis, times] = petscSolveCRS(Arows, Acols, Avals, b, varargin{3:end});
+[x, flag, relres, iter, reshis, times] = petscSolveCRS(Arows, Acols, Avals, varargin{2:end});
 
 end
 
@@ -95,8 +83,8 @@ function test %#ok<DEFNU>
 %! b = rand(100,1);
 
 %! [x,flag,relres,iter,reshis,times] = petscSolve(A, b, ...
-%!     PETSC_KSPPREONLY, 1.e-6, int32(100), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
-%! assert(norm(b - A*x) < 1.e-12)
+%!     PETSC_KSPPREONLY, 1.e-6, int32(100), PETSC_PCLU, PETSC_MATSOLVERUMFPACK);
+%! assert(norm(b - A*x) < 1.e-10)
 
 
 %%!test

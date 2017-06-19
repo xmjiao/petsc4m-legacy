@@ -21,11 +21,7 @@ lines = [grep_pattern('sys/petscInitialize.m', '\n%#codegen\s+-args'), ...
     grep_pattern('PC/petsc*.m', '\n%#codegen\s+-args')];
 files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
 
-if isoctave
-    mexdir = {};
-else
-    mexdir = {'{''../mex/''}'};
-end
+mexdir = {'{''../mex/''}'};
 opts = [{'-petsc', ['-I' petscroot '/include'], '-O3', '-mex'} mexdir{:}, varargin{:}];
 for i=1:length(files)
     m2c(opts{:}, files{i}{1});
@@ -46,11 +42,7 @@ for i=1:length(files)
 end
 
 %Compile top-level functions for CRS and time top-level KSP functions
-if isoctave
-    mexdir = {};
-else
-    mexdir = {'{''../mex/''}'};
-end
+mexdir = {'{''../mex/''}'};
 opts = [{'-petsc', '-exe', '{''../exe/''}', '-mex'}, mexdir{:}, ...
     '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
 m2c(opts{:}, 'petscSolveCRS');

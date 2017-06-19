@@ -171,8 +171,8 @@ function test %#ok<DEFNU>
 %! b = rand(100,1);
 
 %! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%!     PETSC_KSPPREONLY, 1.e-6, int32(100), PETSC_PCLU, PETSC_MATSOLVERSUPERLU);
-%! assert(norm(b - A*x) < 1.e-12)
+%!     PETSC_KSPPREONLY, 1.e-6, int32(100), PETSC_PCLU, PETSC_MATSOLVERUMFPACK);
+%! assert(norm(b - A*x) < 1.e-10)
 
 %%!test
 %%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b);
