@@ -53,7 +53,7 @@ else
 end
 opts = [{'-petsc', '-exe', '{''../exe/''}', '-mex'}, mexdir{:}, ...
     '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
-exm2c(opts{:}, 'petscSolveCRS');
+m2c(opts{:}, 'petscSolveCRS');
 
 end
 % TODO:
