@@ -1,6 +1,10 @@
 function test_petsc
 % test script for petsc4m
 
+if ~petscInitialized
+    load_petsc
+end
+
 if isoctave
     test_hdl = @test;
 else
