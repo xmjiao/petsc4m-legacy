@@ -19,7 +19,7 @@ if exist(['petscInitialize.' mexext], 'file') && ...
     isequal(which('petscInitialize'), which(['petscInitialize.' mexext]))
     try
         if ~petscInitialized
-            init_mpi;
+            %init_mpi;
             petscInitialize;
 
             if isoctave

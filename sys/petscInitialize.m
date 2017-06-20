@@ -1,5 +1,5 @@
 function [errCode, toplevel] = petscInitialize
-%Initialize PETSc by calling PetscInitializeNoArguments()
+%Initialize PETSc by calling PetscInitializeNoPointers()
 %   errCode = petscInitialize
 %
 %   errCode(int) return code (0 indicates OK)
@@ -10,13 +10,14 @@ function [errCode, toplevel] = petscInitialize
 %
 %In a parallel setting, MPI_Init must be called before petscInitialize
 %by passing the command-line options to it. This is done automatically
-%by loading MMPI before loading PETSc.
+%by loading M2C before loading PETSc.
 %
 % SEE ALSO: petscInitialized, petscFinalize, PetscFinalized
 %
 % PETSc C interface:
-%   PetscErrorCode  PetscInitializeNoArguments(void)
-% http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Sys/PetscInitializeNoArguments.html
+%   PetscErrorCode  PetscInitializeNoPointers(int argc,char **args,const char *filename,const char *help)
+% This is an undocumented function in PETSc. It turns off PETSc signal handling because 
+% that can interact with MATLAB's signal handling causing random crashes.
 
 %#codegen -args {}
 
@@ -24,11 +25,12 @@ errCode = int32(0); %#ok<NASGU>
 coder.cinclude('petsc4m.h');
 
 if ~isempty(coder.target)
-    errCode = coder.ceval('PetscInitializeNoArguments');
+    
+    errCode = coder.ceval('PetscInitializeNoPointers', int32(0), PETSC_NULL, PETSC_NULL, PETSC_NULL);
     
     toplevel = nargout>1;
     if errCode && (toplevel || m2c_debug)
-        m2c_error('petsc:RuntimeError', 'PetscInitializeNoArguments returned error code %d\n', errCode)
+        m2c_error('petsc:RuntimeError', 'PetscInitializeNoPointers returned error code %d\n', errCode)
     end
 else
     error('To use Petsc4m low-level functions, you must compile Petsc4m. Try to run build_petsc and then init_petsc.');

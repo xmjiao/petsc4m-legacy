@@ -6,12 +6,12 @@ static void m2c_error(int varargin_3);
 static void m2c_error(int varargin_3)
 {
   M2C_error("petsc:RuntimeError",
-            "PetscInitializeNoArguments returned error code %d\n", varargin_3);
+            "PetscInitializeNoPointers returned error code %d\n", varargin_3);
 }
 
 void petscInitialize(int *errCode, boolean_T *toplevel)
 {
-  *errCode = PetscInitializeNoArguments();
+  *errCode = PetscInitializeNoPointers(0, NULL, NULL, NULL);
   *toplevel = true;
   if (*errCode != 0) {
     m2c_error(*errCode);
