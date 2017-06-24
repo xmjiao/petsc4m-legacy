@@ -42,15 +42,15 @@ before_install:
            cmake
            bison
            flex;
-       pip install -U requests progressbar2;
+       pip install -U requests;
        [[ "$BUILD_MATLAB" == "0" ]] || (curl -s -L
        https://raw.githubusercontent.com/hpdata/gdutil/master/gd_get_pub.py |
        python - -o - -i "$MEX_LINUX" |
        sudo bsdtar zxf - -C /usr/local --strip-components 2;
-       sudo ln -s -f /usr/local/MATLAB/R2016b/bin/mex /usr/local/bin);
+       sudo ln -s -f /usr/local/MATLAB/R*/bin/mex /usr/local/bin);
      fi'
   - 'if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
-        pip install -U requests progressbar2;
+        pip install -U requests;
         [[ "$BUILD_MATLAB" == "0" ]] || (curl -s -L
         https://raw.githubusercontent.com/hpdata/gdutil/master/gd_get_pub.py |
         python - -o - -i "$MEX_OSX" |
