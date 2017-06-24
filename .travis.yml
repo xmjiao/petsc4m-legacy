@@ -31,7 +31,7 @@ before_install:
         sudo $UPDATE_REPOSITORY;
         sudo apt-get update -q;
         sudo apt-get install -y --no-install-recommends
-           coreutils
+           realpath
            octave
            bsdtar
            liboctave-dev
@@ -42,17 +42,14 @@ before_install:
            cmake
            bison
            flex;
-       curl -L "$URL" | sudo bsdtar zxf - -C /usr/local --strip-components 2;
-       sudo ln -s -f /usr/local/MATLAB/R2016b/bin/matlab /usr/local/bin;
-       sudo ln -s -f /usr/local/MATLAB/R2016b/bin/mex /usr/local/bin;
+       [[ "$BUILD_MATLAB" == "0" ]] || (curl -L "$URL" | sudo bsdtar zxf - -C /usr/local --strip-components 2; sudo ln -s -f /usr/local/MATLAB/R2016b/bin/mex /usr/local/bin);
      fi'
   - 'if [[ "$TRAVIS_OS_NAME" == "osx" ]]; then
+        [[ "$BUILD_MATLAB" == "0" ]] || (curl -L "$URL_OSX" | sudo bsdtar zxf - -C /Applications --strip-components 1; sudo ln -s -f /Applications/MATLAB_R*/bin/mex /usr/local/bin);
         brew tap homebrew/science;
         brew update;
         brew install --without-java octave;
-        brew install mpich2 flex coreutils;
-        curl -L "$URL_OSX" | sudo bsdtar zxf - -C /Applications --strip-components 1;
-        sudo ln -s -f /Applications/MATLAB_R*/bin/mex /usr/local/bin;
+        brew install mpich2 flex realpath;
         sudo ln -s -f /usr/local/bin/gcc-7 /usr/local/bin/gcc-mp;
         sudo ln -s -f /usr/local/bin/g++-7 /usr/local/bin/g++-mp;
         sudo ls -l /usr/local/bin/gcc-* /usr/local/bin/g++-*;
