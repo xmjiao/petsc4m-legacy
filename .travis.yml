@@ -31,6 +31,7 @@ before_install:
         sudo $UPDATE_REPOSITORY;
         sudo apt-get update -q;
         sudo apt-get install -y --no-install-recommends
+           coreutils
            octave
            bsdtar
            liboctave-dev
@@ -49,7 +50,7 @@ before_install:
         brew tap homebrew/science;
         brew update;
         brew install --without-java octave;
-        brew install mpich2 flex;
+        brew install mpich2 flex coreutils;
         curl -L "$URL_OSX" | sudo bsdtar zxf - -C /Applications --strip-components 1;
         sudo ln -s -f /Applications/MATLAB_R*/bin/mex /usr/local/bin;
         sudo ln -s -f /usr/local/bin/gcc-7 /usr/local/bin/gcc-mp;
