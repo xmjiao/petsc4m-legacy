@@ -57,7 +57,7 @@ before_install:
         brew tap homebrew/science;
         brew update;
         brew install --without-java octave;
-        brew install mpich2 flex realpath;
+        brew install mpich2 flex;
         sudo ln -s -f /usr/local/bin/gcc-7 /usr/local/bin/gcc-mp;
         sudo ln -s -f /usr/local/bin/g++-7 /usr/local/bin/g++-mp;
         sudo ls -l /usr/local/bin/gcc-* /usr/local/bin/g++-*;
