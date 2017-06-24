@@ -46,7 +46,7 @@ function varargout = bicgstabHypre(varargin)
 %    test (typically preconditioned residual), and the execution times in
 %    setup and solve.
 %
-% SEE ALSO: gmresHypre, bicgstabPetsc, petscSolve
+% SEE ALSO: gmresHypre, petscSolveCRS
 
 if nargin==0
     help bicgstabHypre

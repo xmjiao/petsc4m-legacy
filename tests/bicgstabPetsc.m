@@ -31,7 +31,7 @@ function varargout = bicgstabPetsc(varargin)
 %    test (typically preconditioned residual), and the execution times in
 %    setup and solve.
 %
-% SEE ALSO: bicgstabHypre, bicgstabPetsc, petscSolve
+% SEE ALSO: bicgstabHypre, bicgstabPetsc, petscSolveCRS
 
 if nargin==0
     help bicgstabPetsc
