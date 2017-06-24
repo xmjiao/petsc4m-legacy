@@ -100,7 +100,7 @@ end
 function test %#ok<DEFNU>
 %!test
 %!shared A, b
-%! system('gd-get -q -O DataRepository/Matrices/test_matrices_lired/FL/fem2d"*".mat');
+%! system('gd-get -q -O -p 0ByTwsK5_Tl_PemN0QVlYem11Y00 fem2d"*".mat');
 %! s = load('fem2d_cd.mat');
 %! A = s.A;
 %! s = load('fem2d_vec_cd.mat');
