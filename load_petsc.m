@@ -36,3 +36,8 @@ addpath([petscroot '/exe'])
 if isoctave || ~usejava('jvm') || nargin>0
     init_petsc(varargin{:})
 end
+
+% Show help message
+if ~exist(['petscInitialized.' mexext], 'file')
+    disp('Please run build_petsc to compile Petsc4m.');
+end

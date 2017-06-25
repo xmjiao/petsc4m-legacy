@@ -2,9 +2,10 @@ function varargout = bicgstabPetsc(varargin)
 % Solves a sparse system using BiCGStab and a right-preconditioner
 %
 % Syntax:
-%    x = bicgstabPetsc(A, b) solves a sparse linear system for a matrix in
-%    MATLAB's built-in sparse format using PETSc's BiCGStab solver with a
-%    right preconditioner. The default preconditioner is ILU0.
+%    x = bicgstabPetsc(A, b) solves a sparse linear system using PETSc's BiCGStab
+%    solver with a right preconditioner. Matrix A can be in MATLAB's built-in
+%    sparse format or in CRS rormat created using crs_matrix. The default 
+%    preconditioner is ILU0.
 %
 %    x = bicgstabPetsc(rowptr, colind, vals, b) takes a matrix in the CRS
 %    format instead of MATLAB's built-in sparse format.
@@ -40,6 +41,11 @@ end
 
 if issparse(varargin{1})
     [Arows, Acols, Avals] = crs_matrix(varargin{1});
+    next_index = 2;
+elseif isstruct(varargin{1})
+    Arows = varargin{1}.row_ptr;
+    Acols = varargin{1}.col_ind;
+    Avals = varargin{1}.val;
     next_index = 2;
 else
     Arows = varargin{1};

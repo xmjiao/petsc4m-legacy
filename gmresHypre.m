@@ -2,10 +2,10 @@ function varargout = gmresHypre(varargin)
 % Solves a sparse system using GMRES with BoomerAMG as right-preconditioning
 %
 % Syntax:
-%    x = gmresHypre(A, b) solves a sparse linear system for a matrix in
-%    MATLAB's built-in sparse format using PETSc's GMRES solver with 
-%    Hypre's BoomerAMG as the right preconditioner.
-%    By default, HMIS coarsening and FF1 interpolation are used with Hypre. 
+%    x = gmresHypre(A, b) solves a sparse linear system using PETSc's GMRES
+%    solver with Hypre's BoomerAMG as the right preconditioner. Matrix A can be in
+%    MATLAB's built-in sparse format or in CRS format created using crs_matrix.
+%    By default, HMIS coarsening and FF1 interpolation are used with Hypre.
 %
 %    x = gmresHypre(rowptr, colind, vals, b) takes a matrix in the CRS
 %    format instead of MATLAB's built-in sparse format.
@@ -60,6 +60,11 @@ end
 
 if issparse(varargin{1})
     [Arows, Acols, Avals] = crs_matrix(varargin{1});
+    next_index = 2;
+elseif isstruct(varargin{1})
+    Arows = varargin{1}.row_ptr;
+    Acols = varargin{1}.col_ind;
+    Avals = varargin{1}.val;
     next_index = 2;
 else
     Arows = varargin{1};
