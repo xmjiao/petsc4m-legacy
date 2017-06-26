@@ -1,5 +1,7 @@
 function test_aes_fem
 
+%Note: gmresHypre fails for all these cases
+
 [~, output] = system('gd-ls -p 0ByTwsK5_Tl_PdDVSWUZzUmxpMWs "Neumann_*_d=[24].mat"');
 
 files = strsplit(output, '\n');
