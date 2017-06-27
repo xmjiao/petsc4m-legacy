@@ -1,5 +1,3 @@
-more off;
-
 % Check the version of Octave
 verstr = version;
 [S,E]=regexp(verstr,'[0-9]+.[0-9]+');
