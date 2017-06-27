@@ -14,8 +14,8 @@ for i=1:length(files)
         s = load(fname);
 
         fprintf(1, 'Solving %s\n', fname);
-        A = crs_matrix({s.aes_fe3_linsys.row_ptr, ...
-            s.aes_fe3_linsys.col_ind, s.aes_fe3_linsys.val});
+        A = crs_matrix(s.aes_fe3_linsys.row_ptr, ...
+            s.aes_fe3_linsys.col_ind, s.aes_fe3_linsys.val);
 
         b = s.aes_fe3_linsys.b;
         x = gmresHypre(A, b, [], rtol);
