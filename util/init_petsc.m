@@ -1,7 +1,7 @@
 function init_petsc(arg)
 %INIT_PETSC Load Petsc4m into MATLAB/Octave for execution using mex files.
 
-if ~isoctave && usejava('jvm') && (nargin==0 || ~isequal(arg, '-force'))
+if ~exist('OCTAVE_VERSION', 'builtin') && usejava('jvm') && (nargin==0 || ~isequal(arg, '-force'))
     fprintf(1, '%s\n', ...
         'Note: The mex subdirectory was not added to the path, because PETSC is prone', ...
         'to crashing in MATLAB on Linux or in MATLAB with JVM on Mac. The top-level', ...
@@ -22,13 +22,13 @@ if exist(['petscInitialize.' mexext], 'file') && ...
             %init_mpi;
             petscInitialize;
 
-            if isoctave
+            if exist('OCTAVE_VERSION', 'builtin')
                 atexit('uninit_petsc')
             end
         end
     catch
         warning('Failed to initialize petsc4m.')
-        if isoctave
+        if exist('OCTAVE_VERSION', 'builtin')
             warning('Try to set LD_LIBRARY_PATH=$PETSC_DIR/bin in shell and restart Octave');
         end
     end
