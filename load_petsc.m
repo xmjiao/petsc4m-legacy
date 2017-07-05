@@ -11,8 +11,8 @@ end
 
 % petsc4m depends on paracoder. Need to load it first
 if ~exist('load_m2c.m', 'file')
-    if exist('../paracoder/load_m2c.m', 'file')
-        run('../paracoder/load_m2c.m')
+    if exist('../paracoder/startup.m', 'file')
+        run('../paracoder/startup.m')
     else
         error('Petsc4m depends on paracoder. Please install paracoder properly.')
     end
@@ -41,10 +41,6 @@ addpath([petscroot '/CRS']);
 addpath([petscroot '/util'])
 addpath([petscroot '/sys'])
 addpath([petscroot '/exe'])
-
-if exist('OCTAVE_VERSION', 'builtin')
-  rehash
-end
 
 if isoctave || ~usejava('jvm') || nargin>0
     init_petsc(varargin{:})
