@@ -1,5 +1,14 @@
 function load_petsc(varargin)
 
+persistent loaded;
+
+% Load only once
+if ~isempty(loaded)
+  return
+else
+  loaded = true;
+end
+
 % petsc4m depends on paracoder. Need to load it first
 if ~exist('load_m2c.m', 'file')
     if exist('../paracoder/load_m2c.m', 'file')

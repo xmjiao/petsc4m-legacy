@@ -2,7 +2,5 @@
 verstr = version;
 [S,E]=regexp(verstr,'[0-9]+.[0-9]+');
 
-if str2double(verstr(S:E))<4.2
-    % Set path for PETSc
-    load_petsc
-end
+% Set path for PETSc
+load_petsc
