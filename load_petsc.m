@@ -42,7 +42,11 @@ addpath([petscroot '/util'])
 addpath([petscroot '/sys'])
 addpath([petscroot '/exe'])
 
-if exist('OCTAVE_VERSION', 'builtin') || ~usejava('jvm') || nargin>0
+if exist('OCTAVE_VERSION', 'builtin')
+  rehash
+end
+
+if isoctave || ~usejava('jvm') || nargin>0
     init_petsc(varargin{:})
 end
 
