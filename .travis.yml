@@ -18,10 +18,6 @@ matrix:
       dist: trusty
       sudo: required
       env: PETSC_VERSION=3.7.6 UPDATE_REPOSITORY="add-apt-repository -y ppa:octave/stable"
-    - os: osx
-      env: BUILD_MATLAB=1 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=$HOME/petsc/lib
-    - os: osx
-      env: BUILD_MATLAB=0 PETSC_VERSION=3.7.6 LD_LIBRARY_PATH=$HOME/petsc/lib
 
 before_install:
   # Install Octave and MATLAB
