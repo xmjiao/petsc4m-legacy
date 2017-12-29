@@ -5,7 +5,7 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: PETSC_VERSION=3.7.5 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=$HOME/petsc/lib
+      env: PETSC_VERSION=3.7.7 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=$HOME/petsc/lib
     - os: linux
       dist: trusty
       sudo: required
