@@ -79,4 +79,4 @@ script:
 
   # compile and test petsc4m
   - '[[ "$BUILD_MATLAB" == "1" ]] || PETSC_DIR=$HOME/petsc octave --eval "build_petsc -force; run tests/test_petsc"'
-  - '[[ "$BUILD_MATLAB" == "0" ]] || PETSC_DIR=$HOME/petsc octave --eval "build_petsc -force -matlab"'
+  # '[[ "$BUILD_MATLAB" == "0" ]] || PETSC_DIR=$HOME/petsc octave --eval "build_petsc -force -matlab"'
