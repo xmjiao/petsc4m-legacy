@@ -18,7 +18,7 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
   i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i1);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i1 = 0; i1 < loop_ub; i1++) {
     b_varargin_3->data[i1] = varargin_3->data[i1];
@@ -50,7 +50,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -73,11 +73,9 @@ void petscKSPSetOperators(const struct0_T *ksp, const struct0_T *Amat, const
   emxArray_uint8_T *data;
   int loop_ub;
   KSP t_ksp;
-  emxArray_char_T *b_Amat;
   static const char cv1[3] = { 'M', 'a', 't' };
 
   Mat t_Amat;
-  emxArray_char_T *b_Pmat;
   Mat t_Pmat;
   p = false;
   b_p = false;
@@ -102,12 +100,12 @@ void petscKSPSetOperators(const struct0_T *ksp, const struct0_T *Amat, const
     p = true;
   }
 
+  emxInit_char_T(&b_ksp, 2);
   if (!p) {
-    emxInit_char_T(&b_ksp, 2);
     k = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_ksp, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = ksp->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_ksp->data[b_ksp->size[0] * k] = ksp->type->data[ksp->type->size[0] * k];
@@ -115,13 +113,12 @@ void petscKSPSetOperators(const struct0_T *ksp, const struct0_T *Amat, const
 
     b_ksp->data[b_ksp->size[0] * ksp->type->size[1]] = '\x00';
     m2c_error(b_ksp);
-    emxFree_char_T(&b_ksp);
   }
 
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = ksp->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = ksp->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = ksp->data->data[k];
@@ -152,25 +149,22 @@ void petscKSPSetOperators(const struct0_T *ksp, const struct0_T *Amat, const
   }
 
   if (!p) {
-    emxInit_char_T(&b_Amat, 2);
-    k = b_Amat->size[0] * b_Amat->size[1];
-    b_Amat->size[0] = 1;
-    b_Amat->size[1] = Amat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_Amat, k, sizeof(char));
+    k = b_ksp->size[0] * b_ksp->size[1];
+    b_ksp->size[0] = 1;
+    b_ksp->size[1] = Amat->type->size[1] + 1;
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = Amat->type->size[1];
     for (k = 0; k < loop_ub; k++) {
-      b_Amat->data[b_Amat->size[0] * k] = Amat->type->data[Amat->type->size[0] *
-        k];
+      b_ksp->data[b_ksp->size[0] * k] = Amat->type->data[Amat->type->size[0] * k];
     }
 
-    b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
-    b_m2c_error(b_Amat);
-    emxFree_char_T(&b_Amat);
+    b_ksp->data[b_ksp->size[0] * Amat->type->size[1]] = '\x00';
+    b_m2c_error(b_ksp);
   }
 
   k = data->size[0];
   data->size[0] = Amat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = Amat->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = Amat->data->data[k];
@@ -201,25 +195,23 @@ void petscKSPSetOperators(const struct0_T *ksp, const struct0_T *Amat, const
   }
 
   if (!p) {
-    emxInit_char_T(&b_Pmat, 2);
-    k = b_Pmat->size[0] * b_Pmat->size[1];
-    b_Pmat->size[0] = 1;
-    b_Pmat->size[1] = Pmat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_Pmat, k, sizeof(char));
+    k = b_ksp->size[0] * b_ksp->size[1];
+    b_ksp->size[0] = 1;
+    b_ksp->size[1] = Pmat->type->size[1] + 1;
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = Pmat->type->size[1];
     for (k = 0; k < loop_ub; k++) {
-      b_Pmat->data[b_Pmat->size[0] * k] = Pmat->type->data[Pmat->type->size[0] *
-        k];
+      b_ksp->data[b_ksp->size[0] * k] = Pmat->type->data[Pmat->type->size[0] * k];
     }
 
-    b_Pmat->data[b_Pmat->size[0] * Pmat->type->size[1]] = '\x00';
-    b_m2c_error(b_Pmat);
-    emxFree_char_T(&b_Pmat);
+    b_ksp->data[b_ksp->size[0] * Pmat->type->size[1]] = '\x00';
+    b_m2c_error(b_ksp);
   }
 
+  emxFree_char_T(&b_ksp);
   k = data->size[0];
   data->size[0] = Pmat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = Pmat->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = Pmat->data->data[k];
@@ -247,7 +239,6 @@ void petscKSPSetOperators_AforP(const struct0_T *ksp, const struct0_T *Amat, int
   emxArray_uint8_T *data;
   int loop_ub;
   KSP t_ksp;
-  emxArray_char_T *b_Amat;
   static const char cv3[3] = { 'M', 'a', 't' };
 
   Mat t_Amat;
@@ -274,12 +265,12 @@ void petscKSPSetOperators_AforP(const struct0_T *ksp, const struct0_T *Amat, int
     p = true;
   }
 
+  emxInit_char_T(&b_ksp, 2);
   if (!p) {
-    emxInit_char_T(&b_ksp, 2);
     k = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_ksp, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = ksp->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_ksp->data[b_ksp->size[0] * k] = ksp->type->data[ksp->type->size[0] * k];
@@ -287,13 +278,12 @@ void petscKSPSetOperators_AforP(const struct0_T *ksp, const struct0_T *Amat, int
 
     b_ksp->data[b_ksp->size[0] * ksp->type->size[1]] = '\x00';
     m2c_error(b_ksp);
-    emxFree_char_T(&b_ksp);
   }
 
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = ksp->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = ksp->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = ksp->data->data[k];
@@ -324,25 +314,23 @@ void petscKSPSetOperators_AforP(const struct0_T *ksp, const struct0_T *Amat, int
   }
 
   if (!p) {
-    emxInit_char_T(&b_Amat, 2);
-    k = b_Amat->size[0] * b_Amat->size[1];
-    b_Amat->size[0] = 1;
-    b_Amat->size[1] = Amat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_Amat, k, sizeof(char));
+    k = b_ksp->size[0] * b_ksp->size[1];
+    b_ksp->size[0] = 1;
+    b_ksp->size[1] = Amat->type->size[1] + 1;
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = Amat->type->size[1];
     for (k = 0; k < loop_ub; k++) {
-      b_Amat->data[b_Amat->size[0] * k] = Amat->type->data[Amat->type->size[0] *
-        k];
+      b_ksp->data[b_ksp->size[0] * k] = Amat->type->data[Amat->type->size[0] * k];
     }
 
-    b_Amat->data[b_Amat->size[0] * Amat->type->size[1]] = '\x00';
-    b_m2c_error(b_Amat);
-    emxFree_char_T(&b_Amat);
+    b_ksp->data[b_ksp->size[0] * Amat->type->size[1]] = '\x00';
+    b_m2c_error(b_ksp);
   }
 
+  emxFree_char_T(&b_ksp);
   k = data->size[0];
   data->size[0] = Amat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = Amat->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = Amat->data->data[k];

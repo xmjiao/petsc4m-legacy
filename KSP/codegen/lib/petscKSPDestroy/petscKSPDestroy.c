@@ -26,7 +26,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -82,7 +82,7 @@ void petscKSPDestroy(const struct0_T *ksp, struct0_T *ksp_out, int *errCode,
     k = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_ksp, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = ksp->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_ksp->data[b_ksp->size[0] * k] = ksp->type->data[ksp->type->size[0] * k];
@@ -96,7 +96,7 @@ void petscKSPDestroy(const struct0_T *ksp, struct0_T *ksp_out, int *errCode,
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = ksp->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   loop_ub = ksp->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = ksp->data->data[k];
@@ -107,14 +107,14 @@ void petscKSPDestroy(const struct0_T *ksp, struct0_T *ksp_out, int *errCode,
   sizepe = sizeof(KSP);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   for (k = 0; k < 3; k++) {
     t0_type[k] = x2[k];
   }
 
   k = ksp_out->data->size[0];
   ksp_out->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)ksp_out->data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(ksp_out->data, k);
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     ksp_out->data->data[k] = data0->data[k];
@@ -124,7 +124,7 @@ void petscKSPDestroy(const struct0_T *ksp, struct0_T *ksp_out, int *errCode,
   k = ksp_out->type->size[0] * ksp_out->type->size[1];
   ksp_out->type->size[0] = 1;
   ksp_out->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)ksp_out->type, k, sizeof(char));
+  emxEnsureCapacity_char_T(ksp_out->type, k);
   for (k = 0; k < 3; k++) {
     ksp_out->type->data[k] = t0_type[k];
   }

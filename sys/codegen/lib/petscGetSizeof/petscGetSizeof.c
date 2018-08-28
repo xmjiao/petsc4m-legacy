@@ -12,7 +12,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -128,7 +128,7 @@ void petscGetSizeof(const emxArray_char_T *name, int *sz, boolean_T *toplevel)
     kstr = b_name->size[0] * b_name->size[1];
     b_name->size[0] = 1;
     b_name->size[1] = name->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_name, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(b_name, kstr);
     loop_ub = name->size[1];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       b_name->data[b_name->size[0] * kstr] = name->data[name->size[0] * kstr];

@@ -26,7 +26,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -77,7 +77,7 @@ void petscMatNorm(const struct0_T *A, int type, double *nrm, int *errCode,
     k = b_A->size[0] * b_A->size[1];
     b_A->size[0] = 1;
     b_A->size[1] = A->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_A, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_A, k);
     loop_ub = A->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_A->data[b_A->size[0] * k] = A->type->data[A->type->size[0] * k];
@@ -91,7 +91,7 @@ void petscMatNorm(const struct0_T *A, int type, double *nrm, int *errCode,
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = A->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = A->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = A->data->data[k];

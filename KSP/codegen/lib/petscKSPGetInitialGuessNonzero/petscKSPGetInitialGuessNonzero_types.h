@@ -1,7 +1,6 @@
 #ifndef PETSCKSPGETINITIALGUESSNONZERO_TYPES_H
 #define PETSCKSPGETINITIALGUESSNONZERO_TYPES_H
 #include "rtwtypes.h"
-
 #ifndef struct_emxArray_char_T
 #define struct_emxArray_char_T
 

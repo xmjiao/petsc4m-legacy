@@ -19,7 +19,6 @@ typedef struct {
 
 #endif
 
-
 #ifndef struct_emxArray_char_T
 #define struct_emxArray_char_T
 

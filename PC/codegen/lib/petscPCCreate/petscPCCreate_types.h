@@ -1,7 +1,6 @@
 #ifndef PETSCPCCREATE_TYPES_H
 #define PETSCPCCREATE_TYPES_H
 #include "rtwtypes.h"
-
 #ifndef struct_emxArray_char_T
 #define struct_emxArray_char_T
 

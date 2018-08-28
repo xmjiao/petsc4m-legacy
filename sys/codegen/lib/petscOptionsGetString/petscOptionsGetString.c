@@ -41,7 +41,6 @@ void petscOptionsGetString(const emxArray_char_T *pre, const emxArray_char_T
   PetscBool b_flag;
   int i;
   boolean_T exitg1;
-  int i0;
   *toplevel = true;
   if ((!(pre->size[1] == 0)) && (pre->data[pre->size[1] - 1] != '\x00')) {
     m2c_error();
@@ -63,10 +62,7 @@ void petscOptionsGetString(const emxArray_char_T *pre, const emxArray_char_T
     if ((unsigned char)str0[i] == 0) {
       str_size[0] = 1;
       str_size[1] = i + 1;
-      for (i0 = 0; i0 <= i; i0++) {
-        str_data[i0] = str0[i0];
-      }
-
+      memcpy(&str_data[0], &str0[0], (unsigned int)((i + 1) * (int)sizeof(char)));
       exitg1 = true;
     } else {
       i++;

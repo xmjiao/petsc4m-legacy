@@ -36,7 +36,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i1);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i1 = 0; i1 < loop_ub; i1++) {
     b_varargin_3->data[i1] = varargin_3->data[i1];
@@ -90,7 +90,7 @@ void petscMatGetRow(const struct0_T *mat, int row, int *ncols, emxArray_int32_T 
     i0 = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat, i0, sizeof(char));
+    emxEnsureCapacity_char_T(b_mat, i0);
     t_ncols = mat->type->size[1];
     for (i0 = 0; i0 < t_ncols; i0++) {
       b_mat->data[b_mat->size[0] * i0] = mat->type->data[mat->type->size[0] * i0];
@@ -104,7 +104,7 @@ void petscMatGetRow(const struct0_T *mat, int row, int *ncols, emxArray_int32_T 
   emxInit_uint8_T(&data, 1);
   i0 = data->size[0];
   data->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, i0);
   t_ncols = mat->data->size[0];
   for (i0 = 0; i0 < t_ncols; i0++) {
     data->data[i0] = mat->data->data[i0];
@@ -121,10 +121,10 @@ void petscMatGetRow(const struct0_T *mat, int row, int *ncols, emxArray_int32_T 
   *ncols = t_ncols;
   i0 = cols->size[0];
   cols->size[0] = t_ncols;
-  emxEnsureCapacity((emxArray__common *)cols, i0, sizeof(int));
+  emxEnsureCapacity_int32_T(cols, i0);
   i0 = vals->size[0];
   vals->size[0] = t_ncols;
-  emxEnsureCapacity((emxArray__common *)vals, i0, sizeof(double));
+  emxEnsureCapacity_real_T(vals, i0);
   memcpy(&cols->data[0], t_cols, t_ncols << 2);
   memcpy(&vals->data[0], t_vals, t_ncols << 3);
   *errCode = MatRestoreRow(t_mat, row, &t_ncols, &t_cols, &t_vals);

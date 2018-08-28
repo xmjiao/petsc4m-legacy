@@ -18,7 +18,7 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
   i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i1);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i1 = 0; i1 < loop_ub; i1++) {
     b_varargin_3->data[i1] = varargin_3->data[i1];
@@ -50,7 +50,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -73,11 +73,9 @@ void petscPCApply(const struct0_T *pc, const struct0_T *b, const struct0_T *x,
   emxArray_uint8_T *data;
   int loop_ub;
   PC t_pc;
-  emxArray_char_T *b_b;
   static const char cv1[3] = { 'V', 'e', 'c' };
 
   Vec t_b;
-  emxArray_char_T *b_x;
   Vec t_x;
   p = false;
   b_p = false;
@@ -102,12 +100,12 @@ void petscPCApply(const struct0_T *pc, const struct0_T *b, const struct0_T *x,
     p = true;
   }
 
+  emxInit_char_T(&b_pc, 2);
   if (!p) {
-    emxInit_char_T(&b_pc, 2);
     k = b_pc->size[0] * b_pc->size[1];
     b_pc->size[0] = 1;
     b_pc->size[1] = pc->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_pc, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_pc, k);
     loop_ub = pc->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_pc->data[b_pc->size[0] * k] = pc->type->data[pc->type->size[0] * k];
@@ -115,13 +113,12 @@ void petscPCApply(const struct0_T *pc, const struct0_T *b, const struct0_T *x,
 
     b_pc->data[b_pc->size[0] * pc->type->size[1]] = '\x00';
     m2c_error(b_pc);
-    emxFree_char_T(&b_pc);
   }
 
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = pc->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = pc->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = pc->data->data[k];
@@ -152,24 +149,22 @@ void petscPCApply(const struct0_T *pc, const struct0_T *b, const struct0_T *x,
   }
 
   if (!p) {
-    emxInit_char_T(&b_b, 2);
-    k = b_b->size[0] * b_b->size[1];
-    b_b->size[0] = 1;
-    b_b->size[1] = b->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_b, k, sizeof(char));
+    k = b_pc->size[0] * b_pc->size[1];
+    b_pc->size[0] = 1;
+    b_pc->size[1] = b->type->size[1] + 1;
+    emxEnsureCapacity_char_T(b_pc, k);
     loop_ub = b->type->size[1];
     for (k = 0; k < loop_ub; k++) {
-      b_b->data[b_b->size[0] * k] = b->type->data[b->type->size[0] * k];
+      b_pc->data[b_pc->size[0] * k] = b->type->data[b->type->size[0] * k];
     }
 
-    b_b->data[b_b->size[0] * b->type->size[1]] = '\x00';
-    b_m2c_error(b_b);
-    emxFree_char_T(&b_b);
+    b_pc->data[b_pc->size[0] * b->type->size[1]] = '\x00';
+    b_m2c_error(b_pc);
   }
 
   k = data->size[0];
   data->size[0] = b->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = b->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = b->data->data[k];
@@ -200,24 +195,23 @@ void petscPCApply(const struct0_T *pc, const struct0_T *b, const struct0_T *x,
   }
 
   if (!p) {
-    emxInit_char_T(&b_x, 2);
-    k = b_x->size[0] * b_x->size[1];
-    b_x->size[0] = 1;
-    b_x->size[1] = x->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_x, k, sizeof(char));
+    k = b_pc->size[0] * b_pc->size[1];
+    b_pc->size[0] = 1;
+    b_pc->size[1] = x->type->size[1] + 1;
+    emxEnsureCapacity_char_T(b_pc, k);
     loop_ub = x->type->size[1];
     for (k = 0; k < loop_ub; k++) {
-      b_x->data[b_x->size[0] * k] = x->type->data[x->type->size[0] * k];
+      b_pc->data[b_pc->size[0] * k] = x->type->data[x->type->size[0] * k];
     }
 
-    b_x->data[b_x->size[0] * x->type->size[1]] = '\x00';
-    b_m2c_error(b_x);
-    emxFree_char_T(&b_x);
+    b_pc->data[b_pc->size[0] * x->type->size[1]] = '\x00';
+    b_m2c_error(b_pc);
   }
 
+  emxFree_char_T(&b_pc);
   k = data->size[0];
   data->size[0] = x->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = x->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = x->data->data[k];
@@ -245,7 +239,6 @@ void petscPCApply_2args(const struct0_T *ksp, const struct0_T *b, int *errCode,
   emxArray_uint8_T *data;
   int loop_ub;
   PC t_pc;
-  emxArray_char_T *b_b;
   static const char cv3[3] = { 'V', 'e', 'c' };
 
   Vec t_b;
@@ -272,12 +265,12 @@ void petscPCApply_2args(const struct0_T *ksp, const struct0_T *b, int *errCode,
     p = true;
   }
 
+  emxInit_char_T(&b_ksp, 2);
   if (!p) {
-    emxInit_char_T(&b_ksp, 2);
     k = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_ksp, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = ksp->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_ksp->data[b_ksp->size[0] * k] = ksp->type->data[ksp->type->size[0] * k];
@@ -285,13 +278,12 @@ void petscPCApply_2args(const struct0_T *ksp, const struct0_T *b, int *errCode,
 
     b_ksp->data[b_ksp->size[0] * ksp->type->size[1]] = '\x00';
     m2c_error(b_ksp);
-    emxFree_char_T(&b_ksp);
   }
 
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = ksp->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = ksp->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = ksp->data->data[k];
@@ -322,24 +314,23 @@ void petscPCApply_2args(const struct0_T *ksp, const struct0_T *b, int *errCode,
   }
 
   if (!p) {
-    emxInit_char_T(&b_b, 2);
-    k = b_b->size[0] * b_b->size[1];
-    b_b->size[0] = 1;
-    b_b->size[1] = b->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_b, k, sizeof(char));
+    k = b_ksp->size[0] * b_ksp->size[1];
+    b_ksp->size[0] = 1;
+    b_ksp->size[1] = b->type->size[1] + 1;
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = b->type->size[1];
     for (k = 0; k < loop_ub; k++) {
-      b_b->data[b_b->size[0] * k] = b->type->data[b->type->size[0] * k];
+      b_ksp->data[b_ksp->size[0] * k] = b->type->data[b->type->size[0] * k];
     }
 
-    b_b->data[b_b->size[0] * b->type->size[1]] = '\x00';
-    b_m2c_error(b_b);
-    emxFree_char_T(&b_b);
+    b_ksp->data[b_ksp->size[0] * b->type->size[1]] = '\x00';
+    b_m2c_error(b_ksp);
   }
 
+  emxFree_char_T(&b_ksp);
   k = data->size[0];
   data->size[0] = b->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = b->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = b->data->data[k];

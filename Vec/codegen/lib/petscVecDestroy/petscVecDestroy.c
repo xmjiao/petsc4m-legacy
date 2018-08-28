@@ -26,7 +26,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -81,7 +81,7 @@ void petscVecDestroy(struct0_T *vec, int *errCode, boolean_T *toplevel)
     k = b_vec->size[0] * b_vec->size[1];
     b_vec->size[0] = 1;
     b_vec->size[1] = vec->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_vec, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_vec, k);
     loop_ub = vec->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_vec->data[b_vec->size[0] * k] = vec->type->data[vec->type->size[0] * k];
@@ -95,7 +95,7 @@ void petscVecDestroy(struct0_T *vec, int *errCode, boolean_T *toplevel)
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = vec->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   loop_ub = vec->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = vec->data->data[k];
@@ -107,14 +107,14 @@ void petscVecDestroy(struct0_T *vec, int *errCode, boolean_T *toplevel)
   sizepe = sizeof(Vec);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   for (k = 0; k < 3; k++) {
     t0_type[k] = x2[k];
   }
 
   k = vec->data->size[0];
   vec->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)vec->data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(vec->data, k);
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     vec->data->data[k] = data0->data[k];
@@ -124,7 +124,7 @@ void petscVecDestroy(struct0_T *vec, int *errCode, boolean_T *toplevel)
   k = vec->type->size[0] * vec->type->size[1];
   vec->type->size[0] = 1;
   vec->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)vec->type, k, sizeof(char));
+  emxEnsureCapacity_char_T(vec->type, k);
   for (k = 0; k < 3; k++) {
     vec->type->data[k] = t0_type[k];
   }

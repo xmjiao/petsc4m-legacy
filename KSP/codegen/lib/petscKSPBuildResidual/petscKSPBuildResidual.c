@@ -18,7 +18,7 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
   i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i1);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i1 = 0; i1 < loop_ub; i1++) {
     b_varargin_3->data[i1] = varargin_3->data[i1];
@@ -50,7 +50,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -73,7 +73,6 @@ void petscKSPBuildResidual(const struct0_T *ksp, const struct0_T *v, int
   emxArray_uint8_T *data;
   int loop_ub;
   KSP t_ksp;
-  emxArray_char_T *b_v;
   static const char cv1[3] = { 'V', 'e', 'c' };
 
   Vec t_v;
@@ -102,12 +101,12 @@ void petscKSPBuildResidual(const struct0_T *ksp, const struct0_T *v, int
     p = true;
   }
 
+  emxInit_char_T(&b_ksp, 2);
   if (!p) {
-    emxInit_char_T(&b_ksp, 2);
     k = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_ksp, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = ksp->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_ksp->data[b_ksp->size[0] * k] = ksp->type->data[ksp->type->size[0] * k];
@@ -115,13 +114,12 @@ void petscKSPBuildResidual(const struct0_T *ksp, const struct0_T *v, int
 
     b_ksp->data[b_ksp->size[0] * ksp->type->size[1]] = '\x00';
     m2c_error(b_ksp);
-    emxFree_char_T(&b_ksp);
   }
 
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = ksp->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = ksp->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = ksp->data->data[k];
@@ -152,24 +150,23 @@ void petscKSPBuildResidual(const struct0_T *ksp, const struct0_T *v, int
   }
 
   if (!p) {
-    emxInit_char_T(&b_v, 2);
-    k = b_v->size[0] * b_v->size[1];
-    b_v->size[0] = 1;
-    b_v->size[1] = v->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_v, k, sizeof(char));
+    k = b_ksp->size[0] * b_ksp->size[1];
+    b_ksp->size[0] = 1;
+    b_ksp->size[1] = v->type->size[1] + 1;
+    emxEnsureCapacity_char_T(b_ksp, k);
     loop_ub = v->type->size[1];
     for (k = 0; k < loop_ub; k++) {
-      b_v->data[b_v->size[0] * k] = v->type->data[v->type->size[0] * k];
+      b_ksp->data[b_ksp->size[0] * k] = v->type->data[v->type->size[0] * k];
     }
 
-    b_v->data[b_v->size[0] * v->type->size[1]] = '\x00';
-    b_m2c_error(b_v);
-    emxFree_char_T(&b_v);
+    b_ksp->data[b_ksp->size[0] * v->type->size[1]] = '\x00';
+    b_m2c_error(b_ksp);
   }
 
+  emxFree_char_T(&b_ksp);
   k = data->size[0];
   data->size[0] = v->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = v->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = v->data->data[k];

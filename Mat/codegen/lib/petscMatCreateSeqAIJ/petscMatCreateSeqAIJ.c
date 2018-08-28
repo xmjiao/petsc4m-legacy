@@ -32,14 +32,14 @@ void petscMatCreateSeqAIJ(int m, int n, int nz, const emxArray_int32_T *nnz,
   sizepe = sizeof(Mat);
   i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, i, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, i);
   for (i = 0; i < 3; i++) {
     t1_type[i] = cv0[i];
   }
 
   i = mat->data->size[0];
   mat->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat->data, i, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(mat->data, i);
   loop_ub = data0->size[0];
   for (i = 0; i < loop_ub; i++) {
     mat->data->data[i] = data0->data[i];
@@ -87,14 +87,14 @@ void petscMatCreateSeqAIJ_FixedRows(int m, int n, int nz, struct0_T *mat, int
   sizepe = sizeof(Mat);
   i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, i, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, i);
   for (i = 0; i < 3; i++) {
     t0_type[i] = cv1[i];
   }
 
   i = mat->data->size[0];
   mat->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat->data, i, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(mat->data, i);
   loop_ub = data0->size[0];
   for (i = 0; i < loop_ub; i++) {
     mat->data->data[i] = data0->data[i];

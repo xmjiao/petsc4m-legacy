@@ -26,7 +26,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -84,7 +84,7 @@ void petscMatGetNullSpace(const struct0_T *mat, struct0_T *nullsp, int *errCode,
     k = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_mat, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_mat, k);
     loop_ub = mat->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_mat->data[b_mat->size[0] * k] = mat->type->data[mat->type->size[0] * k];
@@ -98,7 +98,7 @@ void petscMatGetNullSpace(const struct0_T *mat, struct0_T *nullsp, int *errCode,
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = mat->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   loop_ub = mat->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = mat->data->data[k];
@@ -109,14 +109,14 @@ void petscMatGetNullSpace(const struct0_T *mat, struct0_T *nullsp, int *errCode,
   sizepe = sizeof(MatNullSpace);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   for (k = 0; k < 12; k++) {
     t0_type[k] = cv1[k];
   }
 
   k = nullsp->data->size[0];
   nullsp->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)nullsp->data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(nullsp->data, k);
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     nullsp->data->data[k] = data0->data[k];
@@ -126,7 +126,7 @@ void petscMatGetNullSpace(const struct0_T *mat, struct0_T *nullsp, int *errCode,
   k = nullsp->type->size[0] * nullsp->type->size[1];
   nullsp->type->size[0] = 1;
   nullsp->type->size[1] = 12;
-  emxEnsureCapacity((emxArray__common *)nullsp->type, k, sizeof(char));
+  emxEnsureCapacity_char_T(nullsp->type, k);
   for (k = 0; k < 12; k++) {
     nullsp->type->data[k] = t0_type[k];
   }

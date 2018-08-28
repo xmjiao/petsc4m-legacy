@@ -26,7 +26,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -77,7 +77,7 @@ void petscVecNorm(const struct0_T *x, int type, double nrm[2], int *errCode,
     k = b_x->size[0] * b_x->size[1];
     b_x->size[0] = 1;
     b_x->size[1] = x->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_x, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_x, k);
     loop_ub = x->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_x->data[b_x->size[0] * k] = x->type->data[x->type->size[0] * k];
@@ -91,7 +91,7 @@ void petscVecNorm(const struct0_T *x, int type, double nrm[2], int *errCode,
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = x->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = x->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = x->data->data[k];
@@ -147,7 +147,7 @@ void petscVecNorm_2args(const struct0_T *x, int type, double *nrm, int *errCode,
     k = b_x->size[0] * b_x->size[1];
     b_x->size[0] = 1;
     b_x->size[1] = x->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_x, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_x, k);
     loop_ub = x->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_x->data[b_x->size[0] * k] = x->type->data[x->type->size[0] * k];
@@ -161,7 +161,7 @@ void petscVecNorm_2args(const struct0_T *x, int type, double *nrm, int *errCode,
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = x->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = x->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = x->data->data[k];

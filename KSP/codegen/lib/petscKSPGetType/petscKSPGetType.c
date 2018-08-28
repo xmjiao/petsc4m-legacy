@@ -26,7 +26,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i1);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i1 = 0; i1 < loop_ub; i1++) {
     b_varargin_3->data[i1] = varargin_3->data[i1];
@@ -82,7 +82,7 @@ void petscKSPGetType(const struct0_T *ksp, emxArray_char_T *type, int *errCode,
     i0 = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_ksp, i0, sizeof(char));
+    emxEnsureCapacity_char_T(b_ksp, i0);
     empty = ksp->type->size[1];
     for (i0 = 0; i0 < empty; i0++) {
       b_ksp->data[b_ksp->size[0] * i0] = ksp->type->data[ksp->type->size[0] * i0];
@@ -96,7 +96,7 @@ void petscKSPGetType(const struct0_T *ksp, emxArray_char_T *type, int *errCode,
   emxInit_uint8_T(&data, 1);
   i0 = data->size[0];
   data->size[0] = ksp->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, i0);
   empty = ksp->data->size[0];
   for (i0 = 0; i0 < empty; i0++) {
     data->data[i0] = ksp->data->data[i0];
@@ -113,7 +113,7 @@ void petscKSPGetType(const struct0_T *ksp, emxArray_char_T *type, int *errCode,
     i0 = str1->size[0] * str1->size[1];
     str1->size[0] = 1;
     str1->size[1] = n;
-    emxEnsureCapacity((emxArray__common *)str1, i0, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(str1, i0);
     for (i0 = 0; i0 < n; i0++) {
       str1->data[i0] = 0;
     }
@@ -127,13 +127,13 @@ void petscKSPGetType(const struct0_T *ksp, emxArray_char_T *type, int *errCode,
     i0 = str1->size[0] * str1->size[1];
     str1->size[0] = 1;
     str1->size[1] = 0;
-    emxEnsureCapacity((emxArray__common *)str1, i0, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(str1, i0);
   }
 
   i0 = type->size[0] * type->size[1];
   type->size[0] = 1;
   type->size[1] = str1->size[1];
-  emxEnsureCapacity((emxArray__common *)type, i0, sizeof(char));
+  emxEnsureCapacity_char_T(type, i0);
   empty = str1->size[1];
   for (i0 = 0; i0 < empty; i0++) {
     type->data[i0] = (signed char)str1->data[i0];

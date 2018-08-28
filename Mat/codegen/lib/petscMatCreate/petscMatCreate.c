@@ -27,7 +27,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -84,7 +84,7 @@ void petscMatCreate(const struct0_T *comm, struct0_T *mat, int *errCode,
     k = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_comm, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_comm, k);
     loop_ub = comm->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_comm->data[b_comm->size[0] * k] = comm->type->data[comm->type->size[0] *
@@ -99,7 +99,7 @@ void petscMatCreate(const struct0_T *comm, struct0_T *mat, int *errCode,
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = comm->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   loop_ub = comm->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = comm->data->data[k];
@@ -110,14 +110,14 @@ void petscMatCreate(const struct0_T *comm, struct0_T *mat, int *errCode,
   sizepe = sizeof(Mat);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   for (k = 0; k < 3; k++) {
     t1_type[k] = cv1[k];
   }
 
   k = mat->data->size[0];
   mat->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat->data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(mat->data, k);
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     mat->data->data[k] = data0->data[k];
@@ -127,7 +127,7 @@ void petscMatCreate(const struct0_T *comm, struct0_T *mat, int *errCode,
   k = mat->type->size[0] * mat->type->size[1];
   mat->type->size[0] = 1;
   mat->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)mat->type, k, sizeof(char));
+  emxEnsureCapacity_char_T(mat->type, k);
   for (k = 0; k < 3; k++) {
     mat->type->data[k] = t1_type[k];
   }
@@ -164,14 +164,14 @@ void petscMatCreate_World(struct0_T *mat, int *errCode, boolean_T *topleve)
   sizepe = sizeof(Mat);
   i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, i, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, i);
   for (i = 0; i < 3; i++) {
     t0_type[i] = cv2[i];
   }
 
   i = mat->data->size[0];
   mat->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)mat->data, i, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(mat->data, i);
   loop_ub = data0->size[0];
   for (i = 0; i < loop_ub; i++) {
     mat->data->data[i] = data0->data[i];
@@ -181,7 +181,7 @@ void petscMatCreate_World(struct0_T *mat, int *errCode, boolean_T *topleve)
   i = mat->type->size[0] * mat->type->size[1];
   mat->type->size[0] = 1;
   mat->type->size[1] = 3;
-  emxEnsureCapacity((emxArray__common *)mat->type, i, sizeof(char));
+  emxEnsureCapacity_char_T(mat->type, i);
   for (i = 0; i < 3; i++) {
     mat->type->data[i] = t0_type[i];
   }

@@ -31,14 +31,14 @@ void petscVecCreateSeq(int n, struct0_T *vec, int *errCode, boolean_T *toplevel)
   sizepe = sizeof(Vec);
   i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, i, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, i);
   for (i = 0; i < 3; i++) {
     t0_type[i] = cv0[i];
   }
 
   i = vec->data->size[0];
   vec->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)vec->data, i, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(vec->data, i);
   loop_ub = data0->size[0];
   for (i = 0; i < loop_ub; i++) {
     vec->data->data[i] = data0->data[i];

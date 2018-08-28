@@ -8,28 +8,26 @@ function [str, toplevel] = petscGetString(name)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatType.html
 % MatType:  MATSAME, MATMAIJ, MATSEQMAIJ, MATMPIMAIJ, MATIS, MATAIJ,
 %     MATSEQAIJ, MATMPIAIJ, MATAIJCRL, MATSEQAIJCRL, MATMPIAIJCRL,
-%     MATAIJCUSP, MATSEQAIJCUSP, MATMPIAIJCUSP, MATAIJCUSPARSE,
-%     MATSEQAIJCUSPARSE, MATMPIAIJCUSPARSE, MATAIJVIENNACL,
+%     MATAIJCUSPARSE, MATSEQAIJCUSPARSE, MATMPIAIJCUSPARSE, MATAIJVIENNACL,
 %     MATSEQAIJVIENNACL, MATMPIAIJVIENNACL, MATAIJPERM,
 %     MATSEQAIJPERM, MATMPIAIJPERM, MATSHELL, MATDENSE,
 %     MATSEQDENSE, MATMPIDENSE, MATELEMENTAL, MATBAIJ,
 %     MATSEQBAIJ, MATMPIBAIJ, MATMPIADJ, MATSBAIJ, MATSEQSBAIJ,
-%     MATMPISBAIJ, MATSEQBSTRM, MATMPIBSTRM, MATBSTRM, MATSEQSBSTRM,
-%     MATMPISBSTRM, MATSBSTRM, MATDAAD, MATMFFD, MATNORMAL,
+%     MATMPISBAIJ, MATDAAD, MATMFFD, MATNORMAL,
 %     MATNORMALHERMITIAN, MATLRC, MATSCATTER, MATBLOCKMAT,
 %     MATCOMPOSITE, MATFFT, MATFFTW, MATSEQCUFFT, MATTRANSPOSEMAT,
 %     MATSCHURCOMPLEMENT, MATPYTHON, MATHYPRESTRUCT, MATHYPRESSTRUCT,
 %     MATSUBMATRIX, MATLOCALREF, MATNEST, MATPREALLOCATOR
 %
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecType.html
-% VecType: VECSEQ, VECMPI, VECSTANDARD, VECSHARED, VECSEQCUSP,
-%          VECMPICUSP, VECCUSP, VECSEQVIENNACL, VECMPIVIENNACL,
+% VecType: VECSEQ, VECMPI, VECSTANDARD, VECSHARED,
+%          VECSEQVIENNACL, VECMPIVIENNACL,
 %          VECVIENNACL, VECSEQCUDA, VECMPICUDA, VECCUDA, VECNEST
 %
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPType.html
 % KSPType: KSPRICHARDSON, KSPCHEBYSHEV, KSPCG, KSPGROPPCG,
-%     KSPPIPECG, KSPPIPECGRR, KSPCGNE, KSPNASH,
-%     KSPSTCG, KSPGLTR, KSPFCG, KSPPIPEFCG, KSPGMRES,
+%     KSPPIPECG, KSPPIPECGRR, KSPCGNE,
+%     KSPFCG, KSPPIPEFCG, KSPGMRES,
 %     KSPPIPEFGMRES, KSPFGMRES, KSPLGMRES, KSPDGMRES,
 %     KSPPGMRES, KSPTCQMR, KSPBCGS, KSPIBCGS, KSPFBCGS,
 %     KSPFBCGSR, KSPBCGSL, KSPCGS, KSPTFQMR, KSPCR, KSPPIPECR,
@@ -42,16 +40,14 @@ function [str, toplevel] = petscGetString(name)
 %     PCREDUNDANT, PCSPAI, PCNN, PCCHOLESKY, PCPBJACOBI, PCMAT, PCHYPRE,
 %     PCPARMS, PCFIELDSPLIT, PCTFS, PCML, PCGALERKIN, PCEXOTIC, PCCP,
 %     PCBFBT, PCLSC, PCPYTHON, PCPFMG, PCSYSPFMG, PCREDISTRIBUTE, PCSVD,
-%     PCGAMG, PCSACUSP, PCSACUSPPOLY, PCBICGSTABCUSP, PCAINVCUSP,
-%     PCBDDC, PCKACZMARZ, PCTELESCOPE
+%     PCGAMG, PCBDDC, PCKACZMARZ, PCTELESCOPE
 %
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatSolverPackage.html
 % MatSolverPackage: MatSolverPackage, MATSOLVERSUPERLU, MATSOLVERSUPERLU_DIST,
-%    MATSOLVERUMFPACK, MATSOLVERCHOLMOD, MATSOLVERCLIQUE, MATSOLVERKLU,
+%    MATSOLVERUMFPACK, MATSOLVERCHOLMOD, MATSOLVERKLU,
 %    MATSOLVERELEMENTAL, MATSOLVERESSL, MATSOLVERLUSOL, MATSOLVERMUMPS,
 %    MATSOLVERMKL_PARDISO, MATSOLVERMKL_CPARDISO, MATSOLVERPASTIX.
-%    MATSOLVERMATLAB, MATSOLVERPETSC, MATSOLVERBAS, MATSOLVERCUSPARSE.
-%    MATSOLVERBSTRM, MATSOLVERSBSTRM
+%    MATSOLVERMATLAB, MATSOLVERPETSC, MATSOLVERBAS, MATSOLVERCUSPARSE
 %
 % Other: PETSC_NULL_STRING
 
@@ -86,12 +82,6 @@ elseif isequal(name,  'MATSEQAIJCRL')
     [str, toplevel] = get_string('MatType', 'MATSEQAIJCRL', nargout>1);
 elseif isequal(name,  'MATMPIAIJCRL')
     [str, toplevel] = get_string('MatType', 'MATMPIAIJCRL', nargout>1);
-elseif isequal(name,  'MATAIJCUSP')
-    [str, toplevel] = get_string('MatType', 'MATAIJCUSP', nargout>1);
-elseif isequal(name,  'MATSEQAIJCUSP')
-    [str, toplevel] = get_string('MatType', 'MATSEQAIJCUSP', nargout>1);
-elseif isequal(name,  'MATMPIAIJCUSP')
-    [str, toplevel] = get_string('MatType', 'MATMPIAIJCUSP', nargout>1);
 elseif isequal(name,  'MATAIJCUSPARSE')
     [str, toplevel] = get_string('MatType', 'MATAIJCUSPARSE', nargout>1);
 elseif isequal(name,  'MATSEQAIJCUSPARSE')
@@ -134,18 +124,6 @@ elseif isequal(name,  'MATSEQSBAIJ')
     [str, toplevel] = get_string('MatType', 'MATSEQSBAIJ', nargout>1);
 elseif isequal(name,  'MATMPISBAIJ')
     [str, toplevel] = get_string('MatType', 'MATMPISBAIJ', nargout>1);
-elseif isequal(name,  'MATSEQBSTRM')
-    [str, toplevel] = get_string('MatType', 'MATSEQBSTRM', nargout>1);
-elseif isequal(name,  'MATMPIBSTRM')
-    [str, toplevel] = get_string('MatType', 'MATMPIBSTRM', nargout>1);
-elseif isequal(name,  'MATBSTRM')
-    [str, toplevel] = get_string('MatType', 'MATBSTRM', nargout>1);
-elseif isequal(name,  'MATSEQSBSTRM')
-    [str, toplevel] = get_string('MatType', 'MATSEQSBSTRM', nargout>1);
-elseif isequal(name,  'MATMPISBSTRM')
-    [str, toplevel] = get_string('MatType', 'MATMPISBSTRM', nargout>1);
-elseif isequal(name,  'MATSBSTRM')
-    [str, toplevel] = get_string('MatType', 'MATSBSTRM', nargout>1);
 elseif isequal(name,  'MATDAAD')
     [str, toplevel] = get_string('MatType', 'MATDAAD', nargout>1);
 elseif isequal(name,  'MATMFFD')
@@ -194,12 +172,6 @@ elseif isequal(name,  'VECSTANDARD')
     [str, toplevel] = get_string('VecType', 'VECSTANDARD', nargout>1);
 elseif isequal(name,  'VECSHARED')
     [str, toplevel] = get_string('VecType', 'VECSHARED', nargout>1);
-elseif isequal(name,  'VECSEQCUSP')
-    [str, toplevel] = get_string('VecType', 'VECSEQCUSP', nargout>1);
-elseif isequal(name,  'VECMPICUSP')
-    [str, toplevel] = get_string('VecType', 'VECMPICUSP', nargout>1);
-elseif isequal(name,  'VECCUSP')
-    [str, toplevel] = get_string('VecType', 'VECCUSP', nargout>1);
 elseif isequal(name,  'VECSEQVIENNACL')
     [str, toplevel] = get_string('VecType', 'VECSEQVIENNACL', nargout>1);
 elseif isequal(name,  'VECMPIVIENNACL')
@@ -228,12 +200,6 @@ elseif isequal(name,  'KSPPIPECGRR')
     [str, toplevel] = get_string('KSPType', 'KSPPIPECGRR', nargout>1);
 elseif isequal(name,  'KSPCGNE')
     [str, toplevel] = get_string('KSPType', 'KSPCGNE', nargout>1);
-elseif isequal(name,  'KSPNASH')
-    [str, toplevel] = get_string('KSPType', 'KSPNASH', nargout>1);
-elseif isequal(name,  'KSPSTCG')
-    [str, toplevel] = get_string('KSPType', 'KSPSTCG', nargout>1);
-elseif isequal(name,  'KSPGLTR')
-    [str, toplevel] = get_string('KSPType', 'KSPGLTR', nargout>1);
 elseif isequal(name,  'KSPFCG')
     [str, toplevel] = get_string('KSPType', 'KSPFCG', nargout>1);
 elseif isequal(name,  'KSPPIPEFCG')
@@ -366,14 +332,6 @@ elseif isequal(name,  'PCSVD')
     [str, toplevel] = get_string('PCType', 'PCSVD', nargout>1);
 elseif isequal(name,  'PCGAMG')
     [str, toplevel] = get_string('PCType', 'PCGAMG', nargout>1);
-elseif isequal(name,  'PCSACUSP')
-    [str, toplevel] = get_string('PCType', 'PCSACUSP', nargout>1);
-elseif isequal(name,  'PCSACUSPPOLY')
-    [str, toplevel] = get_string('PCType', 'PCSACUSPPOLY', nargout>1);
-elseif isequal(name,  'PCBICGSTABCUSP')
-    [str, toplevel] = get_string('PCType', 'PCBICGSTABCUSP', nargout>1);
-elseif isequal(name,  'PCAINVCUSP')
-    [str, toplevel] = get_string('PCType', 'PCAINVCUSP', nargout>1);
 elseif isequal(name,  'PCBDDC')
     [str, toplevel] = get_string('PCType', 'PCBDDC', nargout>1);
 elseif isequal(name,  'PCKACZMARZ')
@@ -388,8 +346,6 @@ elseif isequal(name,  'MATSOLVERUMFPACK')
     [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERUMFPACK', nargout>1);
 elseif isequal(name,  'MATSOLVERCHOLMOD')
     [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERCHOLMOD', nargout>1);
-elseif isequal(name,  'MATSOLVERCLIQUE')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERCLIQUE', nargout>1);
 elseif isequal(name,  'MATSOLVERKLU')
     [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERKLU', nargout>1);
 elseif isequal(name,  'MATSOLVERELEMENTAL')
@@ -414,10 +370,6 @@ elseif isequal(name,  'MATSOLVERBAS')
     [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERBAS', nargout>1);
 elseif isequal(name,  'MATSOLVERCUSPARSE')
     [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERCUSPARSE', nargout>1);
-elseif isequal(name,  'MATSOLVERBSTRM')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERBSTRM', nargout>1);
-elseif isequal(name,  'MATSOLVERSBSTRM')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERSBSTRM', nargout>1);
 else
     m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
     if nargout>1

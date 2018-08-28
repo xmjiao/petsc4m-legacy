@@ -26,7 +26,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i1, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i1);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i1 = 0; i1 < loop_ub; i1++) {
     b_varargin_3->data[i1] = varargin_3->data[i1];
@@ -79,7 +79,7 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
     i0 = b_pc->size[0] * b_pc->size[1];
     b_pc->size[0] = 1;
     b_pc->size[1] = pc->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_pc, i0, sizeof(char));
+    emxEnsureCapacity_char_T(b_pc, i0);
     noprefx = pc->type->size[1];
     for (i0 = 0; i0 < noprefx; i0++) {
       b_pc->data[b_pc->size[0] * i0] = pc->type->data[pc->type->size[0] * i0];
@@ -93,7 +93,7 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
   emxInit_uint8_T(&data, 1);
   i0 = data->size[0];
   data->size[0] = pc->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, i0, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, i0);
   noprefx = pc->data->size[0];
   for (i0 = 0; i0 < noprefx; i0++) {
     data->data[i0] = pc->data->data[i0];
@@ -113,7 +113,7 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
     i0 = str1->size[0] * str1->size[1];
     str1->size[0] = 1;
     str1->size[1] = noprefx;
-    emxEnsureCapacity((emxArray__common *)str1, i0, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(str1, i0);
     for (i0 = 0; i0 < noprefx; i0++) {
       str1->data[i0] = 0;
     }
@@ -123,13 +123,13 @@ void petscPCGetOptionsPrefix(const struct0_T *pc, emxArray_char_T *str, int
     i0 = str1->size[0] * str1->size[1];
     str1->size[0] = 1;
     str1->size[1] = 0;
-    emxEnsureCapacity((emxArray__common *)str1, i0, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(str1, i0);
   }
 
   i0 = str->size[0] * str->size[1];
   str->size[0] = 1;
   str->size[1] = str1->size[1];
-  emxEnsureCapacity((emxArray__common *)str, i0, sizeof(char));
+  emxEnsureCapacity_char_T(str, i0);
   noprefx = str1->size[1];
   for (i0 = 0; i0 < noprefx; i0++) {
     str->data[i0] = (signed char)str1->data[i0];

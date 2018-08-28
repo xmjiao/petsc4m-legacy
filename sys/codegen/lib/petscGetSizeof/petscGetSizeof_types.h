@@ -1,7 +1,6 @@
 #ifndef PETSCGETSIZEOF_TYPES_H
 #define PETSCGETSIZEOF_TYPES_H
 #include "rtwtypes.h"
-
 #ifndef struct_emxArray_char_T
 #define struct_emxArray_char_T
 

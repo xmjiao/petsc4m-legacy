@@ -1,7 +1,6 @@
 #ifndef PETSCMATCREATESEQAIJ_TYPES_H
 #define PETSCMATCREATESEQAIJ_TYPES_H
 #include "rtwtypes.h"
-
 #ifndef struct_emxArray_char_T_1x3
 #define struct_emxArray_char_T_1x3
 

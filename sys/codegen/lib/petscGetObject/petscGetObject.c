@@ -12,7 +12,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -320,14 +320,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       t1_type[kstr] = cv3[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -336,7 +336,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 8;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       obj->type->data[kstr] = t1_type[kstr];
     }
@@ -354,14 +354,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       t1_type[kstr] = cv3[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -370,7 +370,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 8;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       obj->type->data[kstr] = t1_type[kstr];
     }
@@ -388,14 +388,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       t1_type[kstr] = cv3[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -404,7 +404,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 8;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       obj->type->data[kstr] = t1_type[kstr];
     }
@@ -422,14 +422,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(MPI_Comm);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       t1_type[kstr] = cv3[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -438,7 +438,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 8;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       obj->type->data[kstr] = t1_type[kstr];
     }
@@ -456,14 +456,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(void *);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 6; kstr++) {
       t0_type[kstr] = cv4[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -472,7 +472,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 6;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 6; kstr++) {
       obj->type->data[kstr] = t0_type[kstr];
     }
@@ -490,14 +490,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(PetscOptions);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 12; kstr++) {
       t2_type[kstr] = cv5[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -506,7 +506,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 12;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 12; kstr++) {
       obj->type->data[kstr] = t2_type[kstr];
     }
@@ -524,14 +524,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(Mat);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 3; kstr++) {
       t3_type[kstr] = cv6[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -540,7 +540,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 3;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 3; kstr++) {
       obj->type->data[kstr] = t3_type[kstr];
     }
@@ -558,14 +558,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(Vec);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 3; kstr++) {
       t3_type[kstr] = cv7[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -574,7 +574,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 3;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 3; kstr++) {
       obj->type->data[kstr] = t3_type[kstr];
     }
@@ -592,14 +592,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(int *);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 5; kstr++) {
       t4_type[kstr] = cv8[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -608,7 +608,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 5;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 5; kstr++) {
       obj->type->data[kstr] = t4_type[kstr];
     }
@@ -626,14 +626,14 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(double *);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       t1_type[kstr] = cv9[kstr];
     }
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -642,7 +642,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 8;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 8; kstr++) {
       obj->type->data[kstr] = t1_type[kstr];
     }
@@ -660,7 +660,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = b_name->size[0] * b_name->size[1];
     b_name->size[0] = 1;
     b_name->size[1] = name->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_name, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(b_name, kstr);
     loop_ub = name->size[1];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       b_name->data[b_name->size[0] * kstr] = name->data[name->size[0] * kstr];
@@ -672,7 +672,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     sizepe = sizeof(void *);
     kstr = data0->size[0];
     data0->size[0] = sizepe;
-    emxEnsureCapacity((emxArray__common *)data0, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(data0, kstr);
     emxFree_char_T(&b_name);
     for (kstr = 0; kstr < 6; kstr++) {
       t0_type[kstr] = cv4[kstr];
@@ -680,7 +680,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
 
     kstr = obj->data->size[0];
     obj->data->size[0] = data0->size[0];
-    emxEnsureCapacity((emxArray__common *)obj->data, kstr, sizeof(unsigned char));
+    emxEnsureCapacity_uint8_T(obj->data, kstr);
     loop_ub = data0->size[0];
     for (kstr = 0; kstr < loop_ub; kstr++) {
       obj->data->data[kstr] = data0->data[kstr];
@@ -689,7 +689,7 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj, boolean_T
     kstr = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
     obj->type->size[1] = 6;
-    emxEnsureCapacity((emxArray__common *)obj->type, kstr, sizeof(char));
+    emxEnsureCapacity_char_T(obj->type, kstr);
     for (kstr = 0; kstr < 6; kstr++) {
       obj->type->data[kstr] = t0_type[kstr];
     }

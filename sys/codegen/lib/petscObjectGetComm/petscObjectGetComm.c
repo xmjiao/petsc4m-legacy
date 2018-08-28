@@ -27,7 +27,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -189,7 +189,7 @@ void petscObjectGetComm(const struct0_T *obj, struct0_T *comm, int *errCode,
             k = b_obj->size[0] * b_obj->size[1];
             b_obj->size[0] = 1;
             b_obj->size[1] = obj->type->size[1] + 1;
-            emxEnsureCapacity((emxArray__common *)b_obj, k, sizeof(char));
+            emxEnsureCapacity_char_T(b_obj, k);
             loop_ub = obj->type->size[1];
             for (k = 0; k < loop_ub; k++) {
               b_obj->data[b_obj->size[0] * k] = obj->type->data[obj->type->size
@@ -208,7 +208,7 @@ void petscObjectGetComm(const struct0_T *obj, struct0_T *comm, int *errCode,
   emxInit_uint8_T(&data0, 1);
   k = data0->size[0];
   data0->size[0] = obj->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   loop_ub = obj->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data0->data[k] = obj->data->data[k];
@@ -219,14 +219,14 @@ void petscObjectGetComm(const struct0_T *obj, struct0_T *comm, int *errCode,
   sizepe = sizeof(MPI_Comm);
   k = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity((emxArray__common *)data0, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data0, k);
   for (k = 0; k < 8; k++) {
     t0_type[k] = cv2[k];
   }
 
   k = comm->data->size[0];
   comm->data->size[0] = data0->size[0];
-  emxEnsureCapacity((emxArray__common *)comm->data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(comm->data, k);
   loop_ub = data0->size[0];
   for (k = 0; k < loop_ub; k++) {
     comm->data->data[k] = data0->data[k];
@@ -236,7 +236,7 @@ void petscObjectGetComm(const struct0_T *obj, struct0_T *comm, int *errCode,
   k = comm->type->size[0] * comm->type->size[1];
   comm->type->size[0] = 1;
   comm->type->size[1] = 8;
-  emxEnsureCapacity((emxArray__common *)comm->type, k, sizeof(char));
+  emxEnsureCapacity_char_T(comm->type, k);
   for (k = 0; k < 8; k++) {
     comm->type->data[k] = t0_type[k];
   }

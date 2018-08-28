@@ -36,7 +36,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_3, i0, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_3, i0);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
   for (i0 = 0; i0 < loop_ub; i0++) {
     b_varargin_3->data[i0] = varargin_3->data[i0];
@@ -87,7 +87,7 @@ void petscVecSetOptionsPrefix(const struct0_T *vec, const emxArray_char_T
     k = b_vec->size[0] * b_vec->size[1];
     b_vec->size[0] = 1;
     b_vec->size[1] = vec->type->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)b_vec, k, sizeof(char));
+    emxEnsureCapacity_char_T(b_vec, k);
     loop_ub = vec->type->size[1];
     for (k = 0; k < loop_ub; k++) {
       b_vec->data[b_vec->size[0] * k] = vec->type->data[vec->type->size[0] * k];
@@ -101,7 +101,7 @@ void petscVecSetOptionsPrefix(const struct0_T *vec, const emxArray_char_T
   emxInit_uint8_T(&data, 1);
   k = data->size[0];
   data->size[0] = vec->data->size[0];
-  emxEnsureCapacity((emxArray__common *)data, k, sizeof(unsigned char));
+  emxEnsureCapacity_uint8_T(data, k);
   loop_ub = vec->data->size[0];
   for (k = 0; k < loop_ub; k++) {
     data->data[k] = vec->data->data[k];
