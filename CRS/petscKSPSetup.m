@@ -55,6 +55,7 @@ if nargin>1
                     pctype0 = pctype;
                 end
                 petscPCSetType(t_pc, pctype0);
+                petscPCFactorSetMatSolverPackage(t_pc, PETSC_MATSOLVERSUPERLU);
             end
             
             if hasOpt
@@ -64,14 +65,6 @@ if nargin>1
                     petscKSPSetPCSide(ksp, PETSC_PC_RIGHT);
                 elseif isequal(pcopt, 'symmetric')
                     petscKSPSetPCSide(ksp, PETSC_PC_SYMMETRIC);
-                else
-                    if ischar(pcopt) && pcopt(end)~=char(0)
-                        % null-terminate the string if not terminated properly
-                        pcopt0 = [pcopt char(0)];
-                    else
-                        pcopt0 = pcopt;
-                    end
-                    petscPCFactorSetMatSolverPackage(t_pc,pcopt0);
                 end
             end
         end

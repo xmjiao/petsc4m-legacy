@@ -3,6 +3,8 @@
 #include "petsc4m.h"
 #include "mpi.h"
 
+static const char cv0[9] = { 's', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c' };
+
 static void b_m2c_error(void);
 static void b_m2c_printf(double varargin_2, int varargin_3);
 static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec
@@ -63,11 +65,9 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec
   PetscReal * a;
   int na;
   int b_side;
-  static const char cv6[9] = { 's', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c' };
+  static const char cv5[4] = { 'l', 'e', 'f', 't' };
 
-  static const char cv7[4] = { 'l', 'e', 'f', 't' };
-
-  static const char cv8[5] = { 'r', 'i', 'g', 'h', 't' };
+  static const char cv6[5] = { 'r', 'i', 'g', 'h', 't' };
 
   KSPType t_type;
   PCType b_t_type;
@@ -125,9 +125,9 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec
       val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 4;
-      emxEnsureCapacity((emxArray__common *)side, val, sizeof(char));
+      emxEnsureCapacity_char_T(side, val);
       for (val = 0; val < 4; val++) {
-        side->data[val] = cv7[val];
+        side->data[val] = cv5[val];
       }
       break;
 
@@ -135,9 +135,9 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec
       val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 5;
-      emxEnsureCapacity((emxArray__common *)side, val, sizeof(char));
+      emxEnsureCapacity_char_T(side, val);
       for (val = 0; val < 5; val++) {
-        side->data[val] = cv8[val];
+        side->data[val] = cv6[val];
       }
       break;
 
@@ -145,9 +145,9 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec
       val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 9;
-      emxEnsureCapacity((emxArray__common *)side, val, sizeof(char));
+      emxEnsureCapacity_char_T(side, val);
       for (val = 0; val < 9; val++) {
-        side->data[val] = cv6[val];
+        side->data[val] = cv0[val];
       }
       break;
     }
@@ -165,7 +165,7 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits, Vec
   KSPGetResidualHistory(ksp, &a, &na);
   val = reshis->size[0];
   reshis->size[0] = na;
-  emxEnsureCapacity((emxArray__common *)reshis, val, sizeof(double));
+  emxEnsureCapacity_real_T(reshis, val);
   for (val = 0; val < na; val++) {
     reshis->data[val] = 0.0;
   }
@@ -184,7 +184,6 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   boolean_T hasPC;
   boolean_T hasOpt;
   emxArray_char_T *pctype0;
-  emxArray_char_T *pcopt0;
   PC t_pc;
   emxArray_char_T *ksptype0;
   int k;
@@ -192,12 +191,10 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   boolean_T b_p;
   int loop_ub;
   boolean_T exitg1;
-  static const char cv9[4] = { 'l', 'e', 'f', 't' };
-
-  static const char cv10[5] = { 'r', 'i', 'g', 'h', 't' };
+  static const char cv7[4] = { 'l', 'e', 'f', 't' };
 
   double secs;
-  static const char cv11[9] = { 's', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c' };
+  static const char cv8[5] = { 'r', 'i', 'g', 'h', 't' };
 
   t_obj = (PetscObject)(Amat);
   PetscObjectGetComm(t_obj, &t_comm);
@@ -211,7 +208,6 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   hasPC = !(pctype->size[1] == 0);
   hasOpt = !(pcopt->size[1] == 0);
   emxInit_char_T(&pctype0, 2);
-  emxInit_char_T(&pcopt0, 2);
   if (hasPC || hasOpt) {
     KSPGetPC(t_ksp, &t_pc);
     if (hasPC) {
@@ -219,7 +215,7 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         k = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1] + 1;
-        emxEnsureCapacity((emxArray__common *)pctype0, k, sizeof(char));
+        emxEnsureCapacity_char_T(pctype0, k);
         loop_ub = pctype->size[1];
         for (k = 0; k < loop_ub; k++) {
           pctype0->data[pctype0->size[0] * k] = pctype->data[pctype->size[0] * k];
@@ -230,7 +226,7 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         k = pctype0->size[0] * pctype0->size[1];
         pctype0->size[0] = 1;
         pctype0->size[1] = pctype->size[1];
-        emxEnsureCapacity((emxArray__common *)pctype0, k, sizeof(char));
+        emxEnsureCapacity_char_T(pctype0, k);
         loop_ub = pctype->size[0] * pctype->size[1];
         for (k = 0; k < loop_ub; k++) {
           pctype0->data[k] = pctype->data[k];
@@ -238,6 +234,7 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       }
 
       PCSetType(t_pc, &pctype0->data[0]);
+      PCFactorSetMatSolverPackage(t_pc, MATSOLVERSUPERLU);
     }
 
     if (hasOpt) {
@@ -251,7 +248,7 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
         k = 0;
         exitg1 = false;
         while ((!exitg1) && (k < 4)) {
-          if (!(pcopt->data[k] == cv9[k])) {
+          if (!(pcopt->data[k] == cv7[k])) {
             b_p = false;
             exitg1 = true;
           } else {
@@ -278,7 +275,7 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
           k = 0;
           exitg1 = false;
           while ((!exitg1) && (k < 5)) {
-            if (!(pcopt->data[k] == cv10[k])) {
+            if (!(pcopt->data[k] == cv8[k])) {
               b_p = false;
               exitg1 = true;
             } else {
@@ -305,7 +302,7 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
             k = 0;
             exitg1 = false;
             while ((!exitg1) && (k < 9)) {
-              if (!(pcopt->data[k] == cv11[k])) {
+              if (!(pcopt->data[k] == cv0[k])) {
                 b_p = false;
                 exitg1 = true;
               } else {
@@ -321,38 +318,12 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
           if (p) {
             k = (PC_SYMMETRIC);
             KSPSetPCSide(t_ksp, k);
-          } else {
-            if (pcopt->data[pcopt->size[1] - 1] != '\x00') {
-              k = pcopt0->size[0] * pcopt0->size[1];
-              pcopt0->size[0] = 1;
-              pcopt0->size[1] = pcopt->size[1] + 1;
-              emxEnsureCapacity((emxArray__common *)pcopt0, k, sizeof(char));
-              loop_ub = pcopt->size[1];
-              for (k = 0; k < loop_ub; k++) {
-                pcopt0->data[pcopt0->size[0] * k] = pcopt->data[pcopt->size[0] *
-                  k];
-              }
-
-              pcopt0->data[pcopt0->size[0] * pcopt->size[1]] = '\x00';
-            } else {
-              k = pcopt0->size[0] * pcopt0->size[1];
-              pcopt0->size[0] = 1;
-              pcopt0->size[1] = pcopt->size[1];
-              emxEnsureCapacity((emxArray__common *)pcopt0, k, sizeof(char));
-              loop_ub = pcopt->size[0] * pcopt->size[1];
-              for (k = 0; k < loop_ub; k++) {
-                pcopt0->data[k] = pcopt->data[k];
-              }
-            }
-
-            PCFactorSetMatSolverPackage(t_pc, &pcopt0->data[0]);
           }
         }
       }
     }
   }
 
-  emxFree_char_T(&pcopt0);
   emxFree_char_T(&pctype0);
   emxInit_char_T(&ksptype0, 2);
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
@@ -360,7 +331,7 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     k = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = ksptype->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)ksptype0, k, sizeof(char));
+    emxEnsureCapacity_char_T(ksptype0, k);
     loop_ub = ksptype->size[1];
     for (k = 0; k < loop_ub; k++) {
       ksptype0->data[ksptype0->size[0] * k] = ksptype->data[ksptype->size[0] * k];
@@ -371,7 +342,7 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
     k = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = ksptype->size[1];
-    emxEnsureCapacity((emxArray__common *)ksptype0, k, sizeof(char));
+    emxEnsureCapacity_char_T(ksptype0, k);
     loop_ub = ksptype->size[0] * ksptype->size[1];
     for (k = 0; k < loop_ub; k++) {
       ksptype0->data[k] = ksptype->data[k];
@@ -433,7 +404,7 @@ static void m2c_printf(KSPType varargin_2, PCType varargin_3, const
   i2 = b_varargin_4->size[0] * b_varargin_4->size[1];
   b_varargin_4->size[0] = 1;
   b_varargin_4->size[1] = varargin_4->size[1];
-  emxEnsureCapacity((emxArray__common *)b_varargin_4, i2, sizeof(char));
+  emxEnsureCapacity_char_T(b_varargin_4, i2);
   loop_ub = varargin_4->size[0] * varargin_4->size[1];
   for (i2 = 0; i2 < loop_ub; i2++) {
     b_varargin_4->data[i2] = varargin_4->data[i2];
@@ -465,8 +436,6 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double
   PC t_pc;
   PetscReal * a;
   int na;
-  static const char cv0[9] = { 's', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c' };
-
   static const char cv1[4] = { 'l', 'e', 'f', 't' };
 
   static const char cv2[5] = { 'r', 'i', 'g', 'h', 't' };
@@ -520,7 +489,7 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double
       c_val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 4;
-      emxEnsureCapacity((emxArray__common *)side, c_val, sizeof(char));
+      emxEnsureCapacity_char_T(side, c_val);
       for (c_val = 0; c_val < 4; c_val++) {
         side->data[c_val] = cv1[c_val];
       }
@@ -530,7 +499,7 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double
       c_val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 5;
-      emxEnsureCapacity((emxArray__common *)side, c_val, sizeof(char));
+      emxEnsureCapacity_char_T(side, c_val);
       for (c_val = 0; c_val < 5; c_val++) {
         side->data[c_val] = cv2[c_val];
       }
@@ -540,7 +509,7 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double
       c_val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 9;
-      emxEnsureCapacity((emxArray__common *)side, c_val, sizeof(char));
+      emxEnsureCapacity_char_T(side, c_val);
       for (c_val = 0; c_val < 9; c_val++) {
         side->data[c_val] = cv0[c_val];
       }
@@ -560,7 +529,7 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag, double
   KSPGetResidualHistory(ksp, &a, &na);
   c_val = reshis->size[0];
   reshis->size[0] = na;
-  emxEnsureCapacity((emxArray__common *)reshis, c_val, sizeof(double));
+  emxEnsureCapacity_real_T(reshis, c_val);
   for (c_val = 0; c_val < na; c_val++) {
     reshis->data[c_val] = 0.0;
   }
@@ -595,7 +564,7 @@ static void petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
     val = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = ksptype->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)ksptype0, val, sizeof(char));
+    emxEnsureCapacity_char_T(ksptype0, val);
     loop_ub = ksptype->size[1];
     for (val = 0; val < loop_ub; val++) {
       ksptype0->data[ksptype0->size[0] * val] = ksptype->data[ksptype->size[0] *
@@ -607,7 +576,7 @@ static void petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
     val = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = ksptype->size[1];
-    emxEnsureCapacity((emxArray__common *)ksptype0, val, sizeof(char));
+    emxEnsureCapacity_char_T(ksptype0, val);
     loop_ub = ksptype->size[0] * ksptype->size[1];
     for (val = 0; val < loop_ub; val++) {
       ksptype0->data[val] = ksptype->data[val];
@@ -647,7 +616,7 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
   n = row_ptr->size[0] - 1;
   i0 = nnz->size[0];
   nnz->size[0] = n;
-  emxEnsureCapacity((emxArray__common *)nnz, i0, sizeof(int));
+  emxEnsureCapacity_int32_T(nnz, i0);
   for (i = 1; i <= n; i++) {
     nnz->data[i - 1] = row_ptr->data[i] - row_ptr->data[i - 1];
   }
@@ -669,7 +638,7 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
 
     b_val = jidx->size[0];
     jidx->size[0] = i1 - i0;
-    emxEnsureCapacity((emxArray__common *)jidx, b_val, sizeof(int));
+    emxEnsureCapacity_int32_T(jidx, b_val);
     b_val = i1 - i0;
     for (i1 = 0; i1 < b_val; i1++) {
       jidx->data[i1] = col_ind->data[i0 + i1] - 1;
@@ -685,7 +654,7 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr, const
 
     b_val = rowval->size[0];
     rowval->size[0] = i1 - i0;
-    emxEnsureCapacity((emxArray__common *)rowval, b_val, sizeof(double));
+    emxEnsureCapacity_real_T(rowval, b_val);
     b_val = i1 - i0;
     for (i1 = 0; i1 < b_val; i1++) {
       rowval->data[i1] = val->data[i0 + i1];
@@ -749,7 +718,7 @@ static Vec petscVecCreateFromArray(const emxArray_real_T *arr)
   k = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = b_n;
-  emxEnsureCapacity((emxArray__common *)y, k, sizeof(int));
+  emxEnsureCapacity_int32_T(y, k);
   if (b_n > 0) {
     y->data[0] = 0;
     yk = 0;
@@ -762,7 +731,7 @@ static Vec petscVecCreateFromArray(const emxArray_real_T *arr)
   emxInit_int32_T(&idx, 1);
   k = idx->size[0];
   idx->size[0] = y->size[1];
-  emxEnsureCapacity((emxArray__common *)idx, k, sizeof(int));
+  emxEnsureCapacity_int32_T(idx, k);
   yk = y->size[1];
   for (k = 0; k < yk; k++) {
     idx->data[k] = y->data[y->size[0] * k];
@@ -789,7 +758,7 @@ static void petscVecToArray(Vec vec, emxArray_real_T *arr)
   VecGetLocalSize(vec, &n);
   k = arr->size[0];
   arr->size[0] = n;
-  emxEnsureCapacity((emxArray__common *)arr, k, sizeof(double));
+  emxEnsureCapacity_real_T(arr, k);
   if (n - 1 < 0) {
     b_n = 0;
   } else {
@@ -799,7 +768,7 @@ static void petscVecToArray(Vec vec, emxArray_real_T *arr)
   k = y->size[0] * y->size[1];
   y->size[0] = 1;
   y->size[1] = b_n;
-  emxEnsureCapacity((emxArray__common *)y, k, sizeof(int));
+  emxEnsureCapacity_int32_T(y, k);
   if (b_n > 0) {
     y->data[0] = 0;
     yk = 0;
@@ -812,7 +781,7 @@ static void petscVecToArray(Vec vec, emxArray_real_T *arr)
   emxInit_int32_T(&idx, 1);
   k = idx->size[0];
   idx->size[0] = y->size[1];
-  emxEnsureCapacity((emxArray__common *)idx, k, sizeof(int));
+  emxEnsureCapacity_int32_T(idx, k);
   yk = y->size[1];
   for (k = 0; k < yk; k++) {
     idx->data[k] = y->data[y->size[0] * k];
@@ -899,7 +868,7 @@ void petscSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T 
   errCode = varargin_11->size[0] * varargin_11->size[1];
   varargin_11->size[0] = 1;
   varargin_11->size[1] = opts->size[1];
-  emxEnsureCapacity((emxArray__common *)varargin_11, errCode, sizeof(char));
+  emxEnsureCapacity_char_T(varargin_11, errCode);
   loop_ub = opts->size[0] * opts->size[1];
   for (errCode = 0; errCode < loop_ub; errCode++) {
     varargin_11->data[errCode] = opts->data[errCode];
@@ -921,7 +890,7 @@ void petscSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T 
       errCode = varargin_11->size[0] * varargin_11->size[1];
       varargin_11->size[0] = 1;
       varargin_11->size[1] = opts->size[1] + 1;
-      emxEnsureCapacity((emxArray__common *)varargin_11, errCode, sizeof(char));
+      emxEnsureCapacity_char_T(varargin_11, errCode);
       loop_ub = opts->size[1];
       for (errCode = 0; errCode < loop_ub; errCode++) {
         varargin_11->data[varargin_11->size[0] * errCode] = opts->data
@@ -1072,11 +1041,9 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   KSP t_ksp;
   Mat t_mat;
   Vec t_vec;
-  static const char cv3[9] = { 's', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c' };
+  static const char cv3[4] = { 'l', 'e', 'f', 't' };
 
-  static const char cv4[4] = { 'l', 'e', 'f', 't' };
-
-  static const char cv5[5] = { 'r', 'i', 'g', 'h', 't' };
+  static const char cv4[5] = { 'r', 'i', 'g', 'h', 't' };
 
   KSPType t_type;
   PCType b_t_type;
@@ -1137,9 +1104,9 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
       val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 4;
-      emxEnsureCapacity((emxArray__common *)side, val, sizeof(char));
+      emxEnsureCapacity_char_T(side, val);
       for (val = 0; val < 4; val++) {
-        side->data[val] = cv4[val];
+        side->data[val] = cv3[val];
       }
       break;
 
@@ -1147,9 +1114,9 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
       val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 5;
-      emxEnsureCapacity((emxArray__common *)side, val, sizeof(char));
+      emxEnsureCapacity_char_T(side, val);
       for (val = 0; val < 5; val++) {
-        side->data[val] = cv5[val];
+        side->data[val] = cv4[val];
       }
       break;
 
@@ -1157,9 +1124,9 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
       val = side->size[0] * side->size[1];
       side->size[0] = 1;
       side->size[1] = 9;
-      emxEnsureCapacity((emxArray__common *)side, val, sizeof(char));
+      emxEnsureCapacity_char_T(side, val);
       for (val = 0; val < 9; val++) {
-        side->data[val] = cv3[val];
+        side->data[val] = cv0[val];
       }
       break;
     }
@@ -1177,7 +1144,7 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows, const emxArray_int32_T
   KSPGetResidualHistory(ksp, &a, &na);
   val = reshis->size[0];
   reshis->size[0] = na;
-  emxEnsureCapacity((emxArray__common *)reshis, val, sizeof(double));
+  emxEnsureCapacity_real_T(reshis, val);
   for (val = 0; val < na; val++) {
     reshis->data[val] = 0.0;
   }
@@ -1271,7 +1238,7 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       val = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1] + 1;
-      emxEnsureCapacity((emxArray__common *)pctype0, val, sizeof(char));
+      emxEnsureCapacity_char_T(pctype0, val);
       loop_ub = pctype->size[1];
       for (val = 0; val < loop_ub; val++) {
         pctype0->data[pctype0->size[0] * val] = pctype->data[pctype->size[0] *
@@ -1283,7 +1250,7 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
       val = pctype0->size[0] * pctype0->size[1];
       pctype0->size[0] = 1;
       pctype0->size[1] = pctype->size[1];
-      emxEnsureCapacity((emxArray__common *)pctype0, val, sizeof(char));
+      emxEnsureCapacity_char_T(pctype0, val);
       loop_ub = pctype->size[0] * pctype->size[1];
       for (val = 0; val < loop_ub; val++) {
         pctype0->data[val] = pctype->data[val];
@@ -1291,6 +1258,7 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
 
     PCSetType(t_pc, &pctype0->data[0]);
+    PCFactorSetMatSolverPackage(t_pc, MATSOLVERSUPERLU);
     emxFree_char_T(&pctype0);
   }
 
@@ -1300,7 +1268,7 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = solver->size[1] + 1;
-    emxEnsureCapacity((emxArray__common *)ksptype0, val, sizeof(char));
+    emxEnsureCapacity_char_T(ksptype0, val);
     loop_ub = solver->size[1];
     for (val = 0; val < loop_ub; val++) {
       ksptype0->data[ksptype0->size[0] * val] = solver->data[solver->size[0] *
@@ -1312,7 +1280,7 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     val = ksptype0->size[0] * ksptype0->size[1];
     ksptype0->size[0] = 1;
     ksptype0->size[1] = solver->size[1];
-    emxEnsureCapacity((emxArray__common *)ksptype0, val, sizeof(char));
+    emxEnsureCapacity_char_T(ksptype0, val);
     loop_ub = solver->size[0] * solver->size[1];
     for (val = 0; val < loop_ub; val++) {
       ksptype0->data[val] = solver->data[val];
