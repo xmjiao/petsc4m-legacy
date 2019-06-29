@@ -180,11 +180,10 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   PetscObject t_obj;
   MPI_Comm t_comm;
   KSP t_ksp;
-  double t;
+  PC t_pc;
   boolean_T hasPC;
   boolean_T hasOpt;
   emxArray_char_T *pctype0;
-  PC t_pc;
   emxArray_char_T *ksptype0;
   int k;
   boolean_T p;
@@ -193,23 +192,20 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   boolean_T exitg1;
   static const char cv7[4] = { 'l', 'e', 'f', 't' };
 
-  double secs;
   static const char cv8[5] = { 'r', 'i', 'g', 'h', 't' };
 
+  double t;
+  double secs;
   t_obj = (PetscObject)(Amat);
   PetscObjectGetComm(t_obj, &t_comm);
   KSPCreate(t_comm, &t_ksp);
   *ksp = t_ksp;
-  t_obj = (PetscObject)(t_ksp);
-  PetscObjectGetComm(t_obj, &t_comm);
-  MPI_Barrier(t_comm);
-  t = MPI_Wtime();
+  KSPGetPC(t_ksp, &t_pc);
   KSPSetOperators(t_ksp, Amat, Amat);
   hasPC = !(pctype->size[1] == 0);
   hasOpt = !(pcopt->size[1] == 0);
   emxInit_char_T(&pctype0, 2);
   if (hasPC || hasOpt) {
-    KSPGetPC(t_ksp, &t_pc);
     if (hasPC) {
       if (pctype->data[pctype->size[1] - 1] != '\x00') {
         k = pctype0->size[0] * pctype0->size[1];
@@ -234,7 +230,6 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
       }
 
       PCSetType(t_pc, &pctype0->data[0]);
-      PCFactorSetMatSolverPackage(t_pc, MATSOLVERSUPERLU);
     }
 
     if (hasOpt) {
@@ -360,6 +355,10 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, const
   }
 
   KSPSetFromOptions(t_ksp);
+  t_obj = (PetscObject)(t_ksp);
+  PetscObjectGetComm(t_obj, &t_comm);
+  MPI_Barrier(t_comm);
+  t = MPI_Wtime();
   KSPSetUp(t_ksp);
   MPI_Barrier(t_comm);
   secs = MPI_Wtime();
@@ -544,19 +543,17 @@ static void petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   PetscObject t_obj;
   MPI_Comm t_comm;
   KSP t_ksp;
-  double t;
+  PC t_pc;
   emxArray_char_T *ksptype0;
   int val;
   int loop_ub;
+  double t;
   double secs;
   t_obj = (PetscObject)(Amat);
   PetscObjectGetComm(t_obj, &t_comm);
   KSPCreate(t_comm, &t_ksp);
   *ksp = t_ksp;
-  t_obj = (PetscObject)(t_ksp);
-  PetscObjectGetComm(t_obj, &t_comm);
-  MPI_Barrier(t_comm);
-  t = MPI_Wtime();
+  KSPGetPC(t_ksp, &t_pc);
   KSPSetOperators(t_ksp, Amat, Amat);
   emxInit_char_T(&ksptype0, 2);
   if ((!(ksptype->size[1] == 0)) && ((unsigned char)ksptype->data[ksptype->size
@@ -591,6 +588,10 @@ static void petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   val = (PC_RIGHT);
   KSPSetPCSide(t_ksp, val);
   KSPSetFromOptions(t_ksp);
+  t_obj = (PetscObject)(t_ksp);
+  PetscObjectGetComm(t_obj, &t_comm);
+  MPI_Barrier(t_comm);
+  t = MPI_Wtime();
   KSPSetUp(t_ksp);
   MPI_Barrier(t_comm);
   secs = MPI_Wtime();
@@ -850,30 +851,28 @@ void petscSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T 
   emxArray_char_T *opts, emxArray_real_T *x, int *flag, double *relres, int
   *iter, emxArray_real_T *reshis, double times[2])
 {
-  emxArray_char_T *varargin_11;
-  int errCode;
-  int loop_ub;
   Mat AMat;
   Vec bVec;
   Vec x0Vec;
   Vec xVec;
   Vec t_vec_out;
+  emxArray_char_T *opts1;
   KSP ksp;
   double time_setup;
+  int matchPos;
+  int exitg1;
+  int j;
+  static const char cv9[24] = { '-', 'm', 'a', 't', '_', 's', 'u', 'p', 'e', 'r',
+    'l', 'u', '_', 'p', 'r', 'i', 'n', 't', 's', 't', 'a', 't', ' ', '1' };
+
   double time_solve;
   KSP t_ksp;
+  static const char in_str[25] = { '-', 'm', 'a', 't', '_', 's', 'u', 'p', 'e',
+    'r', 'l', 'u', '_', 'p', 'r', 'i', 'n', 't', 's', 't', 'a', 't', ' ', '0',
+    '\x00' };
+
   Mat t_mat;
   Vec t_vec;
-  emxInit_char_T(&varargin_11, 2);
-  errCode = varargin_11->size[0] * varargin_11->size[1];
-  varargin_11->size[0] = 1;
-  varargin_11->size[1] = opts->size[1];
-  emxEnsureCapacity_char_T(varargin_11, errCode);
-  loop_ub = opts->size[0] * opts->size[1];
-  for (errCode = 0; errCode < loop_ub; errCode++) {
-    varargin_11->data[errCode] = opts->data[errCode];
-  }
-
   AMat = petscMatCreateAIJFromCRS(Arows, Acols, Avals);
   bVec = petscVecCreateFromArray(b);
   if (x0->size[0] == 0) {
@@ -886,33 +885,73 @@ void petscSolveCRS_11args(const emxArray_int32_T *Arows, const emxArray_int32_T 
   }
 
   if (!(opts->size[1] == 0)) {
+    emxInit_char_T(&opts1, 2);
     if (opts->data[opts->size[1] - 1] != '\x00') {
-      errCode = varargin_11->size[0] * varargin_11->size[1];
-      varargin_11->size[0] = 1;
-      varargin_11->size[1] = opts->size[1] + 1;
-      emxEnsureCapacity_char_T(varargin_11, errCode);
-      loop_ub = opts->size[1];
-      for (errCode = 0; errCode < loop_ub; errCode++) {
-        varargin_11->data[varargin_11->size[0] * errCode] = opts->data
-          [opts->size[0] * errCode];
+      matchPos = opts1->size[0] * opts1->size[1];
+      opts1->size[0] = 1;
+      opts1->size[1] = opts->size[1] + 1;
+      emxEnsureCapacity_char_T(opts1, matchPos);
+      j = opts->size[1];
+      for (matchPos = 0; matchPos < j; matchPos++) {
+        opts1->data[opts1->size[0] * matchPos] = opts->data[opts->size[0] *
+          matchPos];
       }
 
-      varargin_11->data[varargin_11->size[0] * opts->size[1]] = '\x00';
+      opts1->data[opts1->size[0] * opts->size[1]] = '\x00';
+    } else {
+      matchPos = opts1->size[0] * opts1->size[1];
+      opts1->size[0] = 1;
+      opts1->size[1] = opts->size[1];
+      emxEnsureCapacity_char_T(opts1, matchPos);
+      j = opts->size[0] * opts->size[1];
+      for (matchPos = 0; matchPos < j; matchPos++) {
+        opts1->data[matchPos] = opts->data[matchPos];
+      }
     }
 
-    if ((!(varargin_11->size[1] == 0)) && (varargin_11->data[varargin_11->size[1]
-         - 1] != '\x00')) {
+    if (opts1->data[opts1->size[1] - 1] != '\x00') {
       b_m2c_error();
     }
 
-    errCode = PetscOptionsInsertString(NULL, &varargin_11->data[0]);
-    if (errCode != 0) {
-      c_m2c_error(errCode);
+    matchPos = PetscOptionsInsertString(NULL, &opts1->data[0]);
+    emxFree_char_T(&opts1);
+    if (matchPos != 0) {
+      c_m2c_error(matchPos);
     }
   }
 
-  emxFree_char_T(&varargin_11);
   b_petscKSPSetup(AMat, solver, pctype, solpack, &ksp, &time_setup);
+  matchPos = 1;
+  do {
+    exitg1 = 0;
+    if (matchPos <= opts->size[1] - 23) {
+      j = 1;
+      while ((j <= 24) && (opts->data[(matchPos + j) - 2] == cv9[j - 1])) {
+        j++;
+      }
+
+      if (j > 24) {
+        exitg1 = 1;
+      } else {
+        matchPos++;
+      }
+    } else {
+      matchPos = 0;
+      exitg1 = 1;
+    }
+  } while (exitg1 == 0);
+
+  if (matchPos > 0) {
+    t_ksp = ksp;
+    KSPDestroy(&t_ksp);
+    matchPos = PetscOptionsInsertString(NULL, in_str);
+    if (matchPos != 0) {
+      c_m2c_error(matchPos);
+    }
+
+    b_petscKSPSetup(AMat, solver, pctype, solpack, &ksp, &time_setup);
+  }
+
   b_petscKSPDriver(ksp, bVec, xVec, rtol, maxiter, x0Vec, flag, relres, iter,
                    reshis, &time_solve);
   t_ksp = ksp;
@@ -939,8 +978,9 @@ void petscSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   PetscObject t_obj;
   MPI_Comm t_comm;
   KSP t_ksp;
-  double t;
+  PC t_pc;
   int val;
+  double t;
   double secs;
   double time_solve;
   Mat t_mat;
@@ -951,14 +991,15 @@ void petscSolveCRS_4args(const emxArray_int32_T *Arows, const emxArray_int32_T
   t_obj = (PetscObject)(AMat);
   PetscObjectGetComm(t_obj, &t_comm);
   KSPCreate(t_comm, &t_ksp);
-  t_obj = (PetscObject)(t_ksp);
-  PetscObjectGetComm(t_obj, &t_comm);
-  MPI_Barrier(t_comm);
-  t = MPI_Wtime();
+  KSPGetPC(t_ksp, &t_pc);
   KSPSetOperators(t_ksp, AMat, AMat);
   val = (PC_RIGHT);
   KSPSetPCSide(t_ksp, val);
   KSPSetFromOptions(t_ksp);
+  t_obj = (PetscObject)(t_ksp);
+  PetscObjectGetComm(t_obj, &t_comm);
+  MPI_Barrier(t_comm);
+  t = MPI_Wtime();
   KSPSetUp(t_ksp);
   MPI_Barrier(t_comm);
   secs = MPI_Wtime();
@@ -1208,13 +1249,13 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   PetscObject t_obj;
   MPI_Comm t_comm;
   KSP t_ksp;
-  double t;
-  boolean_T hasPC;
-  emxArray_char_T *ksptype0;
   PC t_pc;
-  int val;
+  boolean_T hasPC;
   emxArray_char_T *pctype0;
+  emxArray_char_T *ksptype0;
+  int val;
   int loop_ub;
+  double t;
   double secs;
   double time_solve;
   Mat t_mat;
@@ -1225,14 +1266,10 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   t_obj = (PetscObject)(AMat);
   PetscObjectGetComm(t_obj, &t_comm);
   KSPCreate(t_comm, &t_ksp);
-  t_obj = (PetscObject)(t_ksp);
-  PetscObjectGetComm(t_obj, &t_comm);
-  MPI_Barrier(t_comm);
-  t = MPI_Wtime();
+  KSPGetPC(t_ksp, &t_pc);
   KSPSetOperators(t_ksp, AMat, AMat);
   hasPC = !(pctype->size[1] == 0);
   if (hasPC) {
-    KSPGetPC(t_ksp, &t_pc);
     emxInit_char_T(&pctype0, 2);
     if (pctype->data[pctype->size[1] - 1] != '\x00') {
       val = pctype0->size[0] * pctype0->size[1];
@@ -1258,7 +1295,6 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
     }
 
     PCSetType(t_pc, &pctype0->data[0]);
-    PCFactorSetMatSolverPackage(t_pc, MATSOLVERSUPERLU);
     emxFree_char_T(&pctype0);
   }
 
@@ -1295,6 +1331,10 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows, const emxArray_int32_T
   val = (PC_RIGHT);
   KSPSetPCSide(t_ksp, val);
   KSPSetFromOptions(t_ksp);
+  t_obj = (PetscObject)(t_ksp);
+  PetscObjectGetComm(t_obj, &t_comm);
+  MPI_Barrier(t_comm);
+  t = MPI_Wtime();
   KSPSetUp(t_ksp);
   MPI_Barrier(t_comm);
   secs = MPI_Wtime();

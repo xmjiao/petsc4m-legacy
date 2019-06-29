@@ -33,7 +33,7 @@ end
 function build_petsc_main(varargin)
 
 %Compile critical system-level functions into their own directory
-opts = [{'-petsc', '-O', '-mex'} varargin{:}];
+opts = [{'-petsc', '-ckdep', '-O', '-mex'} varargin{:}];
 lines = [grep_pattern('sys/petscGet*.m', '\n%#codegen\s+-args'), ...
     grep_pattern('sys/petsc*ed.m', '\n%#codegen\s+-args')];
 files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
@@ -43,7 +43,7 @@ end
 
 %Compile top-level functions for CRS and time top-level KSP functions
 mexdir = {'{''../mex/''}'};
-opts = [{'-petsc', '-exe', '{''../exe/''}', '-mex'}, mexdir{:}, ...
+opts = [{'-petsc', '-ckdep', '-exe', '{''../exe/''}', '-mex'}, mexdir{:}, ...
     '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
 m2c(opts{:}, 'petscSolveCRS');
 

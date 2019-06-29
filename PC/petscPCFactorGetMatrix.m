@@ -8,7 +8,8 @@ function [mat, errCode, toplevel] = petscPCFactorGetMatrix(pc)
 % Notes: It does not increase the reference count for the matrix, so DO NOT
 % destroy it.
 %
-%  SEE ALSO:  petscPCFactorSetMatSolverPackage, petscPCFactorSetUpMatSolverPackage
+%  SEE ALSO:  petscPCFactorSetMatSolverType,
+%  petscPCFactorSetUpMatSolverType
 %
 % PETSc C interface:
 %   PetscErrorCode  PCFactorGetMatrix(PC pc,Mat *mat)

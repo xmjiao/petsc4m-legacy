@@ -6,6 +6,7 @@ function [ksp, time] = petscKSPSetup(Amat, ksptype, pctype, pcopt)
 %  ksp = petscKSPSetup(A, ksptype)
 %  ksp = petscKSPSetup(A, ksptype, pctype)
 %  ksp = petscKSPSetup(A, ksptype, pctype, pcopt)
+%  [ksp, time] = petscKSPSetup(...)
 %
 % Description:
 %  ksp = petscKSPSetup(A) sets up a KSP using matrix A.
@@ -27,14 +28,7 @@ function [ksp, time] = petscKSPSetup(Amat, ksptype, pctype, pcopt)
 
 t_Amat = Amat;
 ksp = petscKSPCreate(petscObjectGetComm(t_Amat));
-
-if nargout>1;
-    time = 0;
-    comm = petscObjectGetComm(ksp);
-    % When timing the run, use mpi_Barrier for more accurate results.
-    mpi_Barrier(comm);
-    t = mpi_Wtime();
-end
+t_pc = petscKSPGetPC(ksp);
 
 % Setup KSP
 petscKSPSetOperators(ksp, PetscMat(t_Amat));
@@ -44,9 +38,7 @@ if nargin>1
         hasPC = ~ischar(pctype) || ~isempty(pctype);
         hasOpt = nargin>3 && (~ischar(pcopt) || ~isempty(pcopt));
         
-        if hasPC || hasOpt
-            t_pc = petscKSPGetPC(ksp);
-            
+        if hasPC || hasOpt           
             if hasPC
                 if ischar(pctype) && pctype(end)~=char(0)
                     % null-terminate the string if not terminated properly
@@ -55,7 +47,6 @@ if nargin>1
                     pctype0 = pctype;
                 end
                 petscPCSetType(t_pc, pctype0);
-                petscPCFactorSetMatSolverPackage(t_pc, PETSC_MATSOLVERSUPERLU);
             end
             
             if hasOpt
@@ -89,6 +80,14 @@ end
 
 petscKSPSetFromOptions(ksp);
 
+if nargout>1
+    time = 0;
+    comm = petscObjectGetComm(ksp);
+    % When timing the run, use mpi_Barrier for more accurate results.
+    mpi_Barrier(comm);
+    t = mpi_Wtime();
+end
+
 petscKSPSetUp(ksp);
 
 if nargout>1
@@ -96,5 +95,4 @@ if nargout>1
     mpi_Barrier(comm);
     time = mpi_Wtime()-t;
 end
-
 end

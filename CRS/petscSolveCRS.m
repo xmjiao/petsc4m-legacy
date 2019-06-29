@@ -76,13 +76,13 @@ function [x, flag, relres, iter, reshis, times] = petscSolveCRS(varargin)
 %#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType, 0, int32(0), PetscPCType}
 %#codegen petscSolveCRS_9args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
 %#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType, 0, int32(0),
-%#codegen PetscPCType, PetscMatSolverPackage}
+%#codegen PetscPCType, PetscMatSolverType}
 %#codegen petscSolveCRS_10args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
 %#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType, 0, int32(0),
-%#codegen PetscPCType, PetscMatSolverPackage, coder.typeof(0, [inf,1])}
+%#codegen PetscPCType, PetscMatSolverType, coder.typeof(0, [inf,1])}
 %#codegen petscSolveCRS_11args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
 %#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType,
-%#codegen 0, int32(0), PetscPCType, PetscMatSolverPackage,
+%#codegen 0, int32(0), PetscPCType, PetscMatSolverType,
 %#codegen coder.typeof(0, [inf,1]), coder.typeof(char(0), [1, inf])}
 
 if nargin==0

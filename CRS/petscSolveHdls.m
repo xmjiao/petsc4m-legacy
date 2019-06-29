@@ -72,8 +72,14 @@ if nargin<9; x0 = PETSC_NULL_VEC; end
 if nargin==10 && ~isempty(opts)
     petscOptionsInsert(opts);
 end
-
 [ksp, time_setup] = petscKSPSetup(A, solver, pctype, pcopt);
+
+if contains(opts, '-mat_superlu_printstat 1')
+    % If enabled getting statistics, disable it and rerun KSPSetup
+    petscKSPCleanup(ksp);
+    petscOptionsInsert('-mat_superlu_printstat 0');
+    [ksp, time_setup] = petscKSPSetup(A, solver, pctype, pcopt);
+end
 
 [flag, relres, iter, reshis, time_solve] = petscKSPDriver(ksp, b, x, ...
     double(rtol), int32(maxit), x0);

@@ -13,9 +13,11 @@ function errCode = petscOptionsInsert(opts)
 
 %This function is codegen compatbile, but no need to a top-level function
 if ~isempty(opts) && opts(end)~=char(0)
-    opts = [opts char(0)];
+    opts1 = [opts char(0)];
+else
+    opts1 = opts;
 end
 
 % Insert into options database and enforce error checking
-[errCode,~] = petscOptionsInsertString(opts);
+[errCode,~] = petscOptionsInsertString(opts1);
 end

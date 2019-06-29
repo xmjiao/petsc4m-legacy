@@ -140,7 +140,7 @@ if params_start > next_index + 1 && ~ischar(varargin{next_index+1})
         rtol = double(varargin{next_index+2});
 
         if params_start > next_index + 3 && ~ischar(varargin{next_index+3})
-            maxit = int32(varargin{next_index+3});
+            maxiter = int32(varargin{next_index+3});
 
             if nargin >= next_index + 4 && ~ischar(varargin{next_index + 4})
                 x0 = varargin{next_index + 4};
@@ -164,13 +164,13 @@ for i = params_start:2:length(varargin)-1
         case {'verb', 'verbose'}
             verbose = int32(varargin{i+1});
         case {'equil', 'matching'}
-            opts = [opts ' -mat_superlu_equil ' int2str(varargin{i+1})];
+            opts = [opts ' -mat_superlu_equil ' int2str(varargin{i+1})]; %#ok<*AGROW>
         case {'replacetinypivot', 'replacepivot'}
-            replacetinypivot = int(varargin{i+1});
+            replacetinypivot = int32(varargin{i+1});
         case {'symmetric', 'issymmetric'}
             opts = [opts ' -mat_superlu_symmetricmode ' int2str(varargin{i+1})];
         case {'modified', 'milu'}
-            modified = int(varargin{i+1});
+            modified = int32(varargin{i+1});
         case {'norm', 'ilu_norm'}
             opts = [opts ' -mat_superlu_ilu_norm ' num2str(varargin{i+1})];
         case 'droptol'
@@ -185,7 +185,8 @@ end
 opts = [opts ' -ksp_gmres_restart ' int2str(restart)];
 opts = [opts ' -mat_superlu_ilu_droptol ' num2str(droptol)];
 opts = [opts ' -mat_superlu_replacetinypivot '  int2str(replacetinypivot)];
-opts = [opts ' -mat_superlu_ilu_milu '  int2str(replacetinypivot)];
+opts = [opts ' -mat_superlu_ilu_milu '  int2str(modified)];
+opts = [opts ' -mat_superlu_printstat ' int2str(verbose>1)];
 
 if verbose>1; opts = [opts ' -ksp_view ']; end
 
@@ -204,7 +205,7 @@ end
 if verbose
     fprintf(1, 'Finished solve with residual %g in %d iterations and %.2f seconds.\n', ...
         relres, iter, sum(times));
-    fprintf(1, 'SuperLU setup took %g seconds and GMRES took %g seconds\n', ...
+    fprintf(1, 'SuperLU setup took %g seconds and GMRES took %g seconds.\n', ...
         times(1), times(2));
 
     fprintf(1, 'Convergence history:\n');

@@ -42,8 +42,8 @@ function [str, toplevel] = petscGetString(name)
 %     PCBFBT, PCLSC, PCPYTHON, PCPFMG, PCSYSPFMG, PCREDISTRIBUTE, PCSVD,
 %     PCGAMG, PCBDDC, PCKACZMARZ, PCTELESCOPE
 %
-% http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatSolverPackage.html
-% MatSolverPackage: MatSolverPackage, MATSOLVERSUPERLU, MATSOLVERSUPERLU_DIST,
+% http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatSolverType.html
+% MatSolverType: MATSOLVERSUPERLU, MATSOLVERSUPERLU_DIST,
 %    MATSOLVERUMFPACK, MATSOLVERCHOLMOD, MATSOLVERKLU,
 %    MATSOLVERELEMENTAL, MATSOLVERESSL, MATSOLVERLUSOL, MATSOLVERMUMPS,
 %    MATSOLVERMKL_PARDISO, MATSOLVERMKL_CPARDISO, MATSOLVERPASTIX.
@@ -339,37 +339,37 @@ elseif isequal(name,  'PCKACZMARZ')
 elseif isequal(name,  'PCTELESCOPE')
     [str, toplevel] = get_string('PCType', 'PCTELESCOPE', nargout>1);
 elseif isequal(name,  'MATSOLVERSUPERLU')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERSUPERLU', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERSUPERLU', nargout>1);
 elseif isequal(name,  'MATSOLVERSUPERLU_DIST')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERSUPERLU_DIST', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERSUPERLU_DIST', nargout>1);
 elseif isequal(name,  'MATSOLVERUMFPACK')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERUMFPACK', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERUMFPACK', nargout>1);
 elseif isequal(name,  'MATSOLVERCHOLMOD')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERCHOLMOD', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERCHOLMOD', nargout>1);
 elseif isequal(name,  'MATSOLVERKLU')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERKLU', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERKLU', nargout>1);
 elseif isequal(name,  'MATSOLVERELEMENTAL')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERELEMENTAL', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERELEMENTAL', nargout>1);
 elseif isequal(name,  'MATSOLVERESSL')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERESSL', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERESSL', nargout>1);
 elseif isequal(name,  'MATSOLVERLUSOL')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERLUSOL', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERLUSOL', nargout>1);
 elseif isequal(name,  'MATSOLVERMUMPS')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERMUMPS', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERMUMPS', nargout>1);
 elseif isequal(name,  'MATSOLVERMKL_PARDISO')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERMKL_PARDISO', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERMKL_PARDISO', nargout>1);
 elseif isequal(name,  'MATSOLVERMKL_CPARDISO')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERMKL_CPARDISO', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERMKL_CPARDISO', nargout>1);
 elseif isequal(name,  'MATSOLVERPASTIX')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERPASTIX', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERPASTIX', nargout>1);
 elseif isequal(name,  'MATSOLVERMATLAB')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERMATLAB', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERMATLAB', nargout>1);
 elseif isequal(name,  'MATSOLVERPETSC')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERPETSC', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERPETSC', nargout>1);
 elseif isequal(name,  'MATSOLVERBAS')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERBAS', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERBAS', nargout>1);
 elseif isequal(name,  'MATSOLVERCUSPARSE')
-    [str, toplevel] = get_string('const MatSolverPackage', 'MATSOLVERCUSPARSE', nargout>1);
+    [str, toplevel] = get_string('const MatSolverType', 'MATSOLVERCUSPARSE', nargout>1);
 else
     m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
     if nargout>1
