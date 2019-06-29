@@ -53,9 +53,19 @@ function [x, flag, iter, reshis, times] = gmresSuperLU(varargin)
 %   'equil' [1]: whether to equilibrate matrix by using MC64.
 %
 %   'droptol' [0.001]: Threshold for dropping small entries during the
-%    computation of the ILU factorization.
+%    computation of the ILU factorization. Use droptol=0 for direct solver.
 %
-%   'fillfactor' [0]: Fill factor.
+%   'fillfactor' [0]: Fill factor (0 for default).
+%
+%   'issymmetric' [0]: Treat the matrix as symmetric.
+%
+%   'replacetinypivot' [1]: Replace tiny pivots.
+%
+%   'modified' [1]: Use modified ILU.
+%
+%   'norm' [0]: Change the norm to be used by SuperLU.
+%
+%   'nthreads' [1]: Maximal number of threads to use.
 %
 %    [x, flag] = gmresSuperLU(...) returns a convergence flag.
 %    flag: 0 - converged to the desired tolerance TOL within MAXIT iterations.
@@ -106,8 +116,9 @@ maxiter = int32(500);
 restart = int32(30);
 x0 = cast([], class(b));
 nthreads = int32(1);
-orth = 'MGS';
 droptol = 1.e-4;
+replacetinypivot = 0;
+modified = 0;
 
 params_start = nargin;
 for i = next_index+1:nargin
@@ -118,29 +129,28 @@ for i = next_index+1:nargin
 end
 
 % Process positional arguments
-if params_start > next_index + 1 && ~isempty(varargin{next_index+1})
+if params_start > next_index + 1 && ~ischar(varargin{next_index+1})
     restart = int32(varargin{next_index+1});
-end
 
-if restart > 100
-    m2c_warning('You set restart to %d. It is recommended to maker it no greater than 100.\n', restart);
-end
+    if restart > 100
+        m2c_warning('You set restart to %d. It is recommended to maker it no greater than 100.\n', restart);
+    end
 
-if params_start > next_index + 2 && ~isempty(varargin{next_index+2})
-    rtol = double(varargin{next_index+2});
-end
+    if params_start > next_index + 2 && ~ischar(varargin{next_index+2})
+        rtol = double(varargin{next_index+2});
 
-if params_start > next_index + 3 && ~isempty(varargin{next_index+3})
-    maxit = int32(varargin{next_index+3});
-end
+        if params_start > next_index + 3 && ~ischar(varargin{next_index+3})
+            maxit = int32(varargin{next_index+3});
 
-
-if nargin >= next_index + 4 && ~isempty(varargin{next_index + 4})
-    x0 = varargin{next_index + 4};
+            if nargin >= next_index + 4 && ~ischar(varargin{next_index + 4})
+                x0 = varargin{next_index + 4};
+            end
+        end
+    end
 end
 
 % Process argument-value pairs to update arguments
-opts = '-pc_factor_mat_solver_package superlu';
+opts = '-pc_factor_mat_solver_type superlu';
 for i = params_start:2:length(varargin)-1
     switch lower(varargin{i})
         case {'maxit', 'maxiter'}
@@ -153,10 +163,16 @@ for i = params_start:2:length(varargin)-1
             rtol = varargin{i+1};
         case {'verb', 'verbose'}
             verbose = int32(varargin{i+1});
-        case 'orth'
-            orth = varargin{i+1};
         case {'equil', 'matching'}
             opts = [opts ' -mat_superlu_equil ' int2str(varargin{i+1})];
+        case {'replacetinypivot', 'replacepivot'}
+            replacetinypivot = int(varargin{i+1});
+        case {'symmetric', 'issymmetric'}
+            opts = [opts ' -mat_superlu_symmetricmode ' int2str(varargin{i+1})];
+        case {'modified', 'milu'}
+            modified = int(varargin{i+1});
+        case {'norm', 'ilu_norm'}
+            opts = [opts ' -mat_superlu_ilu_norm ' num2str(varargin{i+1})];
         case 'droptol'
             droptol = varargin{i+1};
         case 'fillfactor'
@@ -168,16 +184,33 @@ end
 
 opts = [opts ' -ksp_gmres_restart ' int2str(restart)];
 opts = [opts ' -mat_superlu_ilu_droptol ' num2str(droptol)];
-if verbose>1; opts = [opts ' -ksp_view']; end
+opts = [opts ' -mat_superlu_replacetinypivot '  int2str(replacetinypivot)];
+opts = [opts ' -mat_superlu_ilu_milu '  int2str(replacetinypivot)];
+
+if verbose>1; opts = [opts ' -ksp_view ']; end
+
+if droptol>0
+    pctype = PETSC_PCILU;
+else
+    pctype = PETSC_PCLU;
+    if nthreads>1
+        opts = [opts ' -pc_factor_mat_solver_type ' num2str(droptol)];
+    end
+end
 
 [x, flag, relres, iter, reshis, times] = petscSolveCRS(Arows, Acols, Avals, ...
-    b, PETSC_KSPGMRES, rtol, maxiter, PETSC_PCILU, 'right', x0, opts);
+    b, PETSC_KSPGMRES, rtol, maxiter, pctype, 'right', x0, opts);
 
 if verbose
     fprintf(1, 'Finished solve with residual %g in %d iterations and %.2f seconds.\n', ...
         relres, iter, sum(times));
     fprintf(1, 'SuperLU setup took %g seconds and GMRES took %g seconds\n', ...
         times(1), times(2));
+
+    fprintf(1, 'Convergence history:\n');
+    for i=1:ceil(length(reshis)/10):length(reshis)
+        fprintf(1, '\titeration %d: %g\n', i-1, reshis(i));
+    end
 end
 end
 
