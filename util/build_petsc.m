@@ -4,10 +4,7 @@ function build_petsc(varargin)
 curpath = pwd;
 cd(petscroot);
 
-try
-    build_petsc_main(varargin{:});
-catch
-end
+build_petsc_main(curpath, varargin{:});
 
 %Compile all other system-level and low-level functions with hidden mex files
 lines = [grep_pattern('sys/petscInitialize.m', '\n%#codegen\s+-args'), ...
@@ -24,13 +21,20 @@ files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
 mexdir = {'{''../mex/''}'};
 opts = [{'-petsc', ['-I' petscroot '/include'], '-O3', '-mex'} mexdir{:}, varargin{:}];
 for i=1:length(files)
-    m2c(opts{:}, files{i}{1});
+    try
+        m2c(opts{:}, files{i}{1});
+    catch ME
+        if any(strcmp(varargin, '-force'))
+            cd(curpath);
+            rethrow(ME)
+        end
+    end
 end
 
 cd(curpath);
 end
 
-function build_petsc_main(varargin)
+function build_petsc_main(curpath, varargin)
 
 %Compile critical system-level functions into their own directory
 opts = [{'-petsc', '-ckdep', '-O', '-mex'} varargin{:}];
@@ -38,7 +42,14 @@ lines = [grep_pattern('sys/petscGet*.m', '\n%#codegen\s+-args'), ...
     grep_pattern('sys/petsc*ed.m', '\n%#codegen\s+-args')];
 files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
 for i=1:length(files)
-    m2c(opts{:}, files{i}{1});
+    try
+        m2c(opts{:}, files{i}{1});
+    catch ME
+        if any(strcmp(varargin, '-force'))
+            cd(curpath);
+            rethrow(ME)
+        end
+    end
 end
 
 %Compile top-level functions for CRS and time top-level KSP functions
