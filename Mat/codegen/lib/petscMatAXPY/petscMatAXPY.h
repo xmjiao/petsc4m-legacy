@@ -2,7 +2,6 @@
 #define PETSCMATAXPY_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscMatAXPY_types.h"
 

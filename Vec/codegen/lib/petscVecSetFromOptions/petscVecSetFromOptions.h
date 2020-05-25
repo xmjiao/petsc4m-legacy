@@ -2,7 +2,6 @@
 #define PETSCVECSETFROMOPTIONS_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscVecSetFromOptions_types.h"
 

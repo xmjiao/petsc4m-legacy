@@ -2,7 +2,6 @@
 #define PETSCOPTIONSGETREAL_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscOptionsGetReal_types.h"
 

@@ -43,17 +43,6 @@ typedef struct emxArray_uint8_T emxArray_uint8_T;
 
 #endif
 
-#ifndef typedef_struct0_T
-#define typedef_struct0_T
-
-typedef struct {
-  emxArray_uint8_T *data;
-  emxArray_char_T *type;
-  int nitems;
-} struct0_T;
-
-#endif
-
 #ifndef typedef_struct1_T
 #define typedef_struct1_T
 
@@ -63,6 +52,17 @@ typedef struct {
   int nbytes;
   int offset;
 } struct1_T;
+
+#endif
+
+#ifndef typedef_struct0_T
+#define typedef_struct0_T
+
+typedef struct {
+  emxArray_uint8_T *data;
+  emxArray_char_T *type;
+  int nitems;
+} struct0_T;
 
 #endif
 #endif

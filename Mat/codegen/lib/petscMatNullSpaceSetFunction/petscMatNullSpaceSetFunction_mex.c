@@ -45,7 +45,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
             "Input argument data has incorrect data type; uint8 is expected.");
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[1] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
-            "Dimension 2 of data should equal 1.");
+            "Dimension 2 of data should be equal to 1.");
     pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
     init_emxArray((emxArray__common*)(pStruct->data), 1);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->data), "data", 1);
@@ -56,7 +56,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
             "Input argument type has incorrect data type; char is expected.");
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
-            "Dimension 1 of type should equal 1.");
+            "Dimension 1 of type should be equal to 1.");
     pStruct->type = mxMalloc(sizeof(emxArray_char_T));
     init_emxArray((emxArray__common*)(pStruct->type), 2);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
@@ -119,7 +119,7 @@ static void marshallin_const_struct1_T(struct1_T *pStruct, const mxArray *mx, co
             "Input argument type has incorrect data type; char is expected.");
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct1_T:WrongSizeOfInputArg",
-            "Dimension 1 of type should equal 1.");
+            "Dimension 1 of type should be equal to 1.");
     pStruct->type = mxMalloc(sizeof(emxArray_char_T));
     init_emxArray((emxArray__common*)(pStruct->type), 2);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);

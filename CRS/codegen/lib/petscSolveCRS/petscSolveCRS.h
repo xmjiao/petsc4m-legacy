@@ -2,7 +2,6 @@
 #define PETSCSOLVECRS_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscSolveCRS_types.h"
 

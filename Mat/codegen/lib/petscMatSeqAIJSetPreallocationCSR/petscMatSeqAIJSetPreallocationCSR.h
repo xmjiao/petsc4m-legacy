@@ -2,7 +2,6 @@
 #define PETSCMATSEQAIJSETPREALLOCATIONCSR_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscMatSeqAIJSetPreallocationCSR_types.h"
 

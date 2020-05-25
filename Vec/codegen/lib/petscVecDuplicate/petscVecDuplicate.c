@@ -3,6 +3,7 @@
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
+static Vec m2c_castdata(const emxArray_uint8_T *data);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -13,23 +14,28 @@ static void b_m2c_error(int varargin_3)
   M2C_error(msgid, fmt, varargin_3);
 }
 
+static Vec m2c_castdata(const emxArray_uint8_T *data)
+{
+  return *(Vec*)(&data->data[0]);
+}
+
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
   const char * msgid;
   const char * fmt;
-  int i0;
+  int i;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
   msgid = "m2c_opaque_obj:WrongInput";
   fmt = "Incorrect data type %s. Expected Vec.\n";
-  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity_char_T(b_varargin_3, i0);
+  emxEnsureCapacity_char_T(b_varargin_3, i);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i0 = 0; i0 < loop_ub; i0++) {
-    b_varargin_3->data[i0] = varargin_3->data[i0];
+  for (i = 0; i < loop_ub; i++) {
+    b_varargin_3->data[i] = varargin_3->data[i];
   }
 
   M2C_error(msgid, fmt, &b_varargin_3->data[0]);
@@ -40,101 +46,74 @@ void petscVecDuplicate(const struct0_T *vec_in, struct0_T *vec_out, int *errCode
   boolean_T *toplevel)
 {
   boolean_T p;
+  int sizepe;
   boolean_T b_p;
-  int k;
   boolean_T exitg1;
   emxArray_char_T *b_vec_in;
-  static const char cv0[3] = { 'V', 'e', 'c' };
-
   emxArray_uint8_T *data0;
-  int loop_ub;
+  int i;
+  static const char cv[3] = { 'V', 'e', 'c' };
+
   Vec vec;
-  Vec t_vec_out;
-  int sizepe;
-  char t0_type[3];
-  static const char x2[3] = { 'V', 'e', 'c' };
-
+  Vec arg;
   char * ptr;
-  p = false;
-  b_p = false;
-  if (vec_in->type->size[1] == 3) {
-    b_p = true;
-  }
-
-  if (b_p && (!(vec_in->type->size[1] == 0))) {
-    k = 0;
+  p = (vec_in->type->size[1] == 3);
+  if (p && (vec_in->type->size[1] != 0)) {
+    sizepe = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 3)) {
-      if (!(vec_in->type->data[k] == cv0[k])) {
-        b_p = false;
+    while ((!exitg1) && (sizepe < 3)) {
+      if (!(vec_in->type->data[sizepe] == cv[sizepe])) {
+        p = false;
         exitg1 = true;
       } else {
-        k++;
+        sizepe++;
       }
     }
   }
 
-  if (b_p) {
-    p = true;
-  }
-
-  if (!p) {
+  b_p = (int)p;
+  if (!b_p) {
     emxInit_char_T(&b_vec_in, 2);
-    k = b_vec_in->size[0] * b_vec_in->size[1];
+    i = b_vec_in->size[0] * b_vec_in->size[1];
     b_vec_in->size[0] = 1;
     b_vec_in->size[1] = vec_in->type->size[1] + 1;
-    emxEnsureCapacity_char_T(b_vec_in, k);
-    loop_ub = vec_in->type->size[1];
-    for (k = 0; k < loop_ub; k++) {
-      b_vec_in->data[b_vec_in->size[0] * k] = vec_in->type->data[vec_in->
-        type->size[0] * k];
+    emxEnsureCapacity_char_T(b_vec_in, i);
+    sizepe = vec_in->type->size[1];
+    for (i = 0; i < sizepe; i++) {
+      b_vec_in->data[i] = vec_in->type->data[i];
     }
 
-    b_vec_in->data[b_vec_in->size[0] * vec_in->type->size[1]] = '\x00';
+    b_vec_in->data[vec_in->type->size[1]] = '\x00';
     m2c_error(b_vec_in);
     emxFree_char_T(&b_vec_in);
   }
 
   emxInit_uint8_T(&data0, 1);
-  k = data0->size[0];
-  data0->size[0] = vec_in->data->size[0];
-  emxEnsureCapacity_uint8_T(data0, k);
-  loop_ub = vec_in->data->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    data0->data[k] = vec_in->data->data[k];
-  }
-
-  vec = *(Vec*)(&data0->data[0]);
-  *errCode = VecDuplicate(vec, &t_vec_out);
+  vec = m2c_castdata(vec_in->data);
+  *errCode = VecDuplicate(vec, &arg);
   sizepe = sizeof(Vec);
-  k = data0->size[0];
+  i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity_uint8_T(data0, k);
-  for (k = 0; k < 3; k++) {
-    t0_type[k] = x2[k];
-  }
-
-  k = vec_out->data->size[0];
-  vec_out->data->size[0] = data0->size[0];
-  emxEnsureCapacity_uint8_T(vec_out->data, k);
-  loop_ub = data0->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    vec_out->data->data[k] = data0->data[k];
+  emxEnsureCapacity_uint8_T(data0, i);
+  i = vec_out->data->size[0];
+  vec_out->data->size[0] = sizepe;
+  emxEnsureCapacity_uint8_T(vec_out->data, i);
+  for (i = 0; i < sizepe; i++) {
+    vec_out->data->data[i] = data0->data[i];
   }
 
   emxFree_uint8_T(&data0);
-  k = vec_out->type->size[0] * vec_out->type->size[1];
+  i = vec_out->type->size[0] * vec_out->type->size[1];
   vec_out->type->size[0] = 1;
   vec_out->type->size[1] = 3;
-  emxEnsureCapacity_char_T(vec_out->type, k);
-  for (k = 0; k < 3; k++) {
-    vec_out->type->data[k] = t0_type[k];
-  }
-
+  emxEnsureCapacity_char_T(vec_out->type, i);
+  vec_out->type->data[0] = 'V';
+  vec_out->type->data[1] = 'e';
+  vec_out->type->data[2] = 'c';
   vec_out->nitems = 1;
-  ptr = (char *)(&t_vec_out);
-  for (k = 1; k <= sizepe; k++) {
-    vec_out->data->data[k - 1] = *(ptr);
+  ptr = (char *)(&arg);
+  for (i = 0; i < sizepe; i++) {
+    vec_out->data->data[i] = *(ptr);
     ptr = ptr + 1;
   }
 

@@ -2,7 +2,6 @@
 #define PETSCVECNORM_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscVecNorm_types.h"
 

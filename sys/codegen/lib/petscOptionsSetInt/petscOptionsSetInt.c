@@ -27,18 +27,18 @@ void petscOptionsSetInt(const emxArray_char_T *iname, int value, int *errCode,
 {
   char * ptr;
   signed char t_str[20];
-  int i0;
+  int i;
   char str[20];
   PetscOptions obj;
   *toplevel = true;
-  if ((!(iname->size[1] == 0)) && (iname->data[iname->size[1] - 1] != '\x00')) {
+  if ((iname->size[1] != 0) && (iname->data[iname->size[1] - 1] != '\x00')) {
     m2c_error();
   }
 
   ptr = (char *)(t_str);
   sprintf(ptr, "%d", value);
-  for (i0 = 0; i0 < 20; i0++) {
-    str[i0] = t_str[i0];
+  for (i = 0; i < 20; i++) {
+    str[i] = t_str[i];
   }
 
   obj = NULL;

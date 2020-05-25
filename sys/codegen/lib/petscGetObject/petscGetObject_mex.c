@@ -59,7 +59,7 @@ static void __petscGetObject_api(mxArray **plhs, const mxArray ** prhs) {
             "Input argument name has incorrect data type; char is expected.");
     if (mxGetNumberOfElements(prhs[0]) && mxGetDimensions(prhs[0])[0] != 1) 
         mexErrMsgIdAndTxt("petscGetObject:WrongSizeOfInputArg",
-            "Dimension 1 of name should equal 1.");
+            "Dimension 1 of name should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&name), "name", 2);
     prealloc_struct0_T(&obj);
 

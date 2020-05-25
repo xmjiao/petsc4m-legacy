@@ -2,7 +2,6 @@
 #define PETSCKSPGETRESIDUALHISTORY_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscKSPGetResidualHistory_types.h"
 

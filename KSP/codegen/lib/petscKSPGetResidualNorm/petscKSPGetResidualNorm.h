@@ -2,7 +2,6 @@
 #define PETSCKSPGETRESIDUALNORM_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscKSPGetResidualNorm_types.h"
 

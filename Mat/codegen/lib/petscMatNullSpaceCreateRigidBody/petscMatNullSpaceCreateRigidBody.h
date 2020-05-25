@@ -2,7 +2,6 @@
 #define PETSCMATNULLSPACECREATERIGIDBODY_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscMatNullSpaceCreateRigidBody_types.h"
 

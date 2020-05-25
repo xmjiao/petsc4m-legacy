@@ -2,7 +2,6 @@
 #define PETSCPCCREATE_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscPCCreate_types.h"
 

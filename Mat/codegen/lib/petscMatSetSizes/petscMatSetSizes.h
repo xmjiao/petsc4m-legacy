@@ -2,7 +2,6 @@
 #define PETSCMATSETSIZES_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscMatSetSizes_types.h"
 

@@ -3,6 +3,7 @@
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
+static PC m2c_castdata(const emxArray_uint8_T *data);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -13,23 +14,28 @@ static void b_m2c_error(int varargin_3)
   M2C_error(msgid, fmt, varargin_3);
 }
 
+static PC m2c_castdata(const emxArray_uint8_T *data)
+{
+  return *(PC*)(&data->data[0]);
+}
+
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
   const char * msgid;
   const char * fmt;
-  int i1;
+  int i;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
   msgid = "m2c_opaque_obj:WrongInput";
   fmt = "Incorrect data type %s. Expected PC.\n";
-  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity_char_T(b_varargin_3, i1);
+  emxEnsureCapacity_char_T(b_varargin_3, i);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i1 = 0; i1 < loop_ub; i1++) {
-    b_varargin_3->data[i1] = varargin_3->data[i1];
+  for (i = 0; i < loop_ub; i++) {
+    b_varargin_3->data[i] = varargin_3->data[i];
   }
 
   M2C_error(msgid, fmt, &b_varargin_3->data[0]);
@@ -40,32 +46,26 @@ void petscPCGetType(const struct0_T *pc, emxArray_char_T *type, int *errCode,
                     boolean_T *toplevel)
 {
   boolean_T p;
-  boolean_T b_p;
   int empty;
+  boolean_T b_p;
   boolean_T exitg1;
   emxArray_char_T *b_pc;
-  static const char cv0[2] = { 'P', 'C' };
-
-  emxArray_uint8_T *data;
-  int i0;
   PC c_pc;
-  PCType t_type;
+  int i;
+  static const char cv[2] = { 'P', 'C' };
+
+  PCType str_in;
   const char * str;
   emxArray_uint8_T *str1;
   int n;
   char * ptr;
-  p = false;
-  b_p = false;
-  if (pc->type->size[1] == 2) {
-    b_p = true;
-  }
-
-  if (b_p && (!(pc->type->size[1] == 0))) {
+  p = (pc->type->size[1] == 2);
+  if (p && (pc->type->size[1] != 0)) {
     empty = 0;
     exitg1 = false;
     while ((!exitg1) && (empty < 2)) {
-      if (!(pc->type->data[empty] == cv0[empty])) {
-        b_p = false;
+      if (!(pc->type->data[empty] == cv[empty])) {
+        p = false;
         exitg1 = true;
       } else {
         empty++;
@@ -73,70 +73,56 @@ void petscPCGetType(const struct0_T *pc, emxArray_char_T *type, int *errCode,
     }
   }
 
-  if (b_p) {
-    p = true;
-  }
-
-  if (!p) {
+  b_p = (int)p;
+  if (!b_p) {
     emxInit_char_T(&b_pc, 2);
-    i0 = b_pc->size[0] * b_pc->size[1];
+    i = b_pc->size[0] * b_pc->size[1];
     b_pc->size[0] = 1;
     b_pc->size[1] = pc->type->size[1] + 1;
-    emxEnsureCapacity_char_T(b_pc, i0);
+    emxEnsureCapacity_char_T(b_pc, i);
     empty = pc->type->size[1];
-    for (i0 = 0; i0 < empty; i0++) {
-      b_pc->data[b_pc->size[0] * i0] = pc->type->data[pc->type->size[0] * i0];
+    for (i = 0; i < empty; i++) {
+      b_pc->data[i] = pc->type->data[i];
     }
 
-    b_pc->data[b_pc->size[0] * pc->type->size[1]] = '\x00';
+    b_pc->data[pc->type->size[1]] = '\x00';
     m2c_error(b_pc);
     emxFree_char_T(&b_pc);
   }
 
-  emxInit_uint8_T(&data, 1);
-  i0 = data->size[0];
-  data->size[0] = pc->data->size[0];
-  emxEnsureCapacity_uint8_T(data, i0);
-  empty = pc->data->size[0];
-  for (i0 = 0; i0 < empty; i0++) {
-    data->data[i0] = pc->data->data[i0];
-  }
-
-  c_pc = *(PC*)(&data->data[0]);
-  *errCode = PCGetType(c_pc, &t_type);
-  str = (t_type);
+  c_pc = m2c_castdata(pc->data);
+  *errCode = PCGetType(c_pc, &str_in);
+  str = (str_in);
   empty = !(str);
-  emxFree_uint8_T(&data);
   emxInit_uint8_T(&str1, 2);
-  if (!(empty != 0)) {
-    n = strlen(str) + 1;
-    i0 = str1->size[0] * str1->size[1];
+  if (empty == 0) {
+    n = strlen(str);
+    i = str1->size[0] * str1->size[1];
     str1->size[0] = 1;
-    str1->size[1] = n;
-    emxEnsureCapacity_uint8_T(str1, i0);
-    for (i0 = 0; i0 < n; i0++) {
-      str1->data[i0] = 0;
+    str1->size[1] = n + 1;
+    emxEnsureCapacity_uint8_T(str1, i);
+    empty = n + 1;
+    for (i = 0; i < empty; i++) {
+      str1->data[i] = 0U;
     }
 
     ptr = (char *)(str);
-    for (empty = 1; empty <= n; empty++) {
-      str1->data[empty - 1] = *(ptr);
+    for (empty = 0; empty <= n; empty++) {
+      str1->data[empty] = *(ptr);
       ptr = ptr + 1;
     }
   } else {
-    i0 = str1->size[0] * str1->size[1];
     str1->size[0] = 1;
     str1->size[1] = 0;
-    emxEnsureCapacity_uint8_T(str1, i0);
   }
 
-  i0 = type->size[0] * type->size[1];
+  i = type->size[0] * type->size[1];
   type->size[0] = 1;
   type->size[1] = str1->size[1];
-  emxEnsureCapacity_char_T(type, i0);
+  emxEnsureCapacity_char_T(type, i);
   empty = str1->size[1];
-  for (i0 = 0; i0 < empty; i0++) {
-    type->data[i0] = (signed char)str1->data[i0];
+  for (i = 0; i < empty; i++) {
+    type->data[i] = (signed char)str1->data[i];
   }
 
   emxFree_uint8_T(&str1);

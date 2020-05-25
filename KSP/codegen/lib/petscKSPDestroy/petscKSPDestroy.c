@@ -3,6 +3,7 @@
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
+static KSP m2c_castdata(const emxArray_uint8_T *data);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -13,23 +14,28 @@ static void b_m2c_error(int varargin_3)
   M2C_error(msgid, fmt, varargin_3);
 }
 
+static KSP m2c_castdata(const emxArray_uint8_T *data)
+{
+  return *(KSP*)(&data->data[0]);
+}
+
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
   const char * msgid;
   const char * fmt;
-  int i0;
+  int i;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
   msgid = "m2c_opaque_obj:WrongInput";
   fmt = "Incorrect data type %s. Expected KSP.\n";
-  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity_char_T(b_varargin_3, i0);
+  emxEnsureCapacity_char_T(b_varargin_3, i);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i0 = 0; i0 < loop_ub; i0++) {
-    b_varargin_3->data[i0] = varargin_3->data[i0];
+  for (i = 0; i < loop_ub; i++) {
+    b_varargin_3->data[i] = varargin_3->data[i];
   }
 
   M2C_error(msgid, fmt, &b_varargin_3->data[0]);
@@ -40,99 +46,73 @@ void petscKSPDestroy(const struct0_T *ksp, struct0_T *ksp_out, int *errCode,
                      boolean_T *toplevel)
 {
   boolean_T p;
+  int sizepe;
   boolean_T b_p;
-  int k;
   boolean_T exitg1;
   emxArray_char_T *b_ksp;
-  static const char cv0[3] = { 'K', 'S', 'P' };
-
   emxArray_uint8_T *data0;
-  int loop_ub;
-  KSP t_ksp;
-  int sizepe;
-  char t0_type[3];
-  static const char x2[3] = { 'K', 'S', 'P' };
+  int i;
+  static const char cv[3] = { 'K', 'S', 'P' };
 
+  KSP arg;
   char * ptr;
-  p = false;
-  b_p = false;
-  if (ksp->type->size[1] == 3) {
-    b_p = true;
-  }
-
-  if (b_p && (!(ksp->type->size[1] == 0))) {
-    k = 0;
+  p = (ksp->type->size[1] == 3);
+  if (p && (ksp->type->size[1] != 0)) {
+    sizepe = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 3)) {
-      if (!(ksp->type->data[k] == cv0[k])) {
-        b_p = false;
+    while ((!exitg1) && (sizepe < 3)) {
+      if (!(ksp->type->data[sizepe] == cv[sizepe])) {
+        p = false;
         exitg1 = true;
       } else {
-        k++;
+        sizepe++;
       }
     }
   }
 
-  if (b_p) {
-    p = true;
-  }
-
-  if (!p) {
+  b_p = (int)p;
+  if (!b_p) {
     emxInit_char_T(&b_ksp, 2);
-    k = b_ksp->size[0] * b_ksp->size[1];
+    i = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity_char_T(b_ksp, k);
-    loop_ub = ksp->type->size[1];
-    for (k = 0; k < loop_ub; k++) {
-      b_ksp->data[b_ksp->size[0] * k] = ksp->type->data[ksp->type->size[0] * k];
+    emxEnsureCapacity_char_T(b_ksp, i);
+    sizepe = ksp->type->size[1];
+    for (i = 0; i < sizepe; i++) {
+      b_ksp->data[i] = ksp->type->data[i];
     }
 
-    b_ksp->data[b_ksp->size[0] * ksp->type->size[1]] = '\x00';
+    b_ksp->data[ksp->type->size[1]] = '\x00';
     m2c_error(b_ksp);
     emxFree_char_T(&b_ksp);
   }
 
   emxInit_uint8_T(&data0, 1);
-  k = data0->size[0];
-  data0->size[0] = ksp->data->size[0];
-  emxEnsureCapacity_uint8_T(data0, k);
-  loop_ub = ksp->data->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    data0->data[k] = ksp->data->data[k];
-  }
-
-  t_ksp = *(KSP*)(&data0->data[0]);
-  *errCode = KSPDestroy(&t_ksp);
+  arg = m2c_castdata(ksp->data);
+  *errCode = KSPDestroy(&arg);
   sizepe = sizeof(KSP);
-  k = data0->size[0];
+  i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity_uint8_T(data0, k);
-  for (k = 0; k < 3; k++) {
-    t0_type[k] = x2[k];
-  }
-
-  k = ksp_out->data->size[0];
-  ksp_out->data->size[0] = data0->size[0];
-  emxEnsureCapacity_uint8_T(ksp_out->data, k);
-  loop_ub = data0->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    ksp_out->data->data[k] = data0->data[k];
+  emxEnsureCapacity_uint8_T(data0, i);
+  i = ksp_out->data->size[0];
+  ksp_out->data->size[0] = sizepe;
+  emxEnsureCapacity_uint8_T(ksp_out->data, i);
+  for (i = 0; i < sizepe; i++) {
+    ksp_out->data->data[i] = data0->data[i];
   }
 
   emxFree_uint8_T(&data0);
-  k = ksp_out->type->size[0] * ksp_out->type->size[1];
+  i = ksp_out->type->size[0] * ksp_out->type->size[1];
   ksp_out->type->size[0] = 1;
   ksp_out->type->size[1] = 3;
-  emxEnsureCapacity_char_T(ksp_out->type, k);
-  for (k = 0; k < 3; k++) {
-    ksp_out->type->data[k] = t0_type[k];
-  }
-
+  emxEnsureCapacity_char_T(ksp_out->type, i);
+  ksp_out->type->data[0] = 'K';
+  ksp_out->type->data[1] = 'S';
+  ksp_out->type->data[2] = 'P';
   ksp_out->nitems = 1;
-  ptr = (char *)(&t_ksp);
-  for (k = 1; k <= sizepe; k++) {
-    ksp_out->data->data[k - 1] = *(ptr);
+  ptr = (char *)(&arg);
+  for (i = 0; i < sizepe; i++) {
+    ksp_out->data->data[i] = *(ptr);
     ptr = ptr + 1;
   }
 

@@ -3,6 +3,7 @@
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
+static Mat m2c_castdata(const emxArray_uint8_T *data);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(int varargin_3)
 {
@@ -13,23 +14,28 @@ static void b_m2c_error(int varargin_3)
   M2C_error(msgid, fmt, varargin_3);
 }
 
+static Mat m2c_castdata(const emxArray_uint8_T *data)
+{
+  return *(Mat*)(&data->data[0]);
+}
+
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
   const char * msgid;
   const char * fmt;
-  int i0;
+  int i;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
   msgid = "m2c_opaque_obj:WrongInput";
   fmt = "Incorrect data type %s. Expected Mat.\n";
-  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity_char_T(b_varargin_3, i0);
+  emxEnsureCapacity_char_T(b_varargin_3, i);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i0 = 0; i0 < loop_ub; i0++) {
-    b_varargin_3->data[i0] = varargin_3->data[i0];
+  for (i = 0; i < loop_ub; i++) {
+    b_varargin_3->data[i] = varargin_3->data[i];
   }
 
   M2C_error(msgid, fmt, &b_varargin_3->data[0]);
@@ -40,101 +46,78 @@ void petscMatGetNullSpace(const struct0_T *mat, struct0_T *nullsp, int *errCode,
   boolean_T *toplevel)
 {
   boolean_T p;
+  int sizepe;
   boolean_T b_p;
-  int k;
   boolean_T exitg1;
   emxArray_char_T *b_mat;
-  static const char cv0[3] = { 'M', 'a', 't' };
-
   emxArray_uint8_T *data0;
-  int loop_ub;
+  int i;
+  static const char cv[3] = { 'M', 'a', 't' };
+
   Mat c_mat;
-  MatNullSpace t_nullsp;
-  int sizepe;
-  char t0_type[12];
-  static const char cv1[12] = { 'M', 'a', 't', 'N', 'u', 'l', 'l', 'S', 'p', 'a',
-    'c', 'e' };
+  MatNullSpace arg;
+  static const char t0_type[12] = { 'M', 'a', 't', 'N', 'u', 'l', 'l', 'S', 'p',
+    'a', 'c', 'e' };
 
   char * ptr;
-  p = false;
-  b_p = false;
-  if (mat->type->size[1] == 3) {
-    b_p = true;
-  }
-
-  if (b_p && (!(mat->type->size[1] == 0))) {
-    k = 0;
+  p = (mat->type->size[1] == 3);
+  if (p && (mat->type->size[1] != 0)) {
+    sizepe = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 3)) {
-      if (!(mat->type->data[k] == cv0[k])) {
-        b_p = false;
+    while ((!exitg1) && (sizepe < 3)) {
+      if (!(mat->type->data[sizepe] == cv[sizepe])) {
+        p = false;
         exitg1 = true;
       } else {
-        k++;
+        sizepe++;
       }
     }
   }
 
-  if (b_p) {
-    p = true;
-  }
-
-  if (!p) {
+  b_p = (int)p;
+  if (!b_p) {
     emxInit_char_T(&b_mat, 2);
-    k = b_mat->size[0] * b_mat->size[1];
+    i = b_mat->size[0] * b_mat->size[1];
     b_mat->size[0] = 1;
     b_mat->size[1] = mat->type->size[1] + 1;
-    emxEnsureCapacity_char_T(b_mat, k);
-    loop_ub = mat->type->size[1];
-    for (k = 0; k < loop_ub; k++) {
-      b_mat->data[b_mat->size[0] * k] = mat->type->data[mat->type->size[0] * k];
+    emxEnsureCapacity_char_T(b_mat, i);
+    sizepe = mat->type->size[1];
+    for (i = 0; i < sizepe; i++) {
+      b_mat->data[i] = mat->type->data[i];
     }
 
-    b_mat->data[b_mat->size[0] * mat->type->size[1]] = '\x00';
+    b_mat->data[mat->type->size[1]] = '\x00';
     m2c_error(b_mat);
     emxFree_char_T(&b_mat);
   }
 
   emxInit_uint8_T(&data0, 1);
-  k = data0->size[0];
-  data0->size[0] = mat->data->size[0];
-  emxEnsureCapacity_uint8_T(data0, k);
-  loop_ub = mat->data->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    data0->data[k] = mat->data->data[k];
-  }
-
-  c_mat = *(Mat*)(&data0->data[0]);
-  *errCode = MatGetNullSpace(c_mat, &t_nullsp);
+  c_mat = m2c_castdata(mat->data);
+  *errCode = MatGetNullSpace(c_mat, &arg);
   sizepe = sizeof(MatNullSpace);
-  k = data0->size[0];
+  i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity_uint8_T(data0, k);
-  for (k = 0; k < 12; k++) {
-    t0_type[k] = cv1[k];
-  }
-
-  k = nullsp->data->size[0];
-  nullsp->data->size[0] = data0->size[0];
-  emxEnsureCapacity_uint8_T(nullsp->data, k);
-  loop_ub = data0->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    nullsp->data->data[k] = data0->data[k];
+  emxEnsureCapacity_uint8_T(data0, i);
+  i = nullsp->data->size[0];
+  nullsp->data->size[0] = sizepe;
+  emxEnsureCapacity_uint8_T(nullsp->data, i);
+  for (i = 0; i < sizepe; i++) {
+    nullsp->data->data[i] = data0->data[i];
   }
 
   emxFree_uint8_T(&data0);
-  k = nullsp->type->size[0] * nullsp->type->size[1];
+  i = nullsp->type->size[0] * nullsp->type->size[1];
   nullsp->type->size[0] = 1;
   nullsp->type->size[1] = 12;
-  emxEnsureCapacity_char_T(nullsp->type, k);
-  for (k = 0; k < 12; k++) {
-    nullsp->type->data[k] = t0_type[k];
+  emxEnsureCapacity_char_T(nullsp->type, i);
+  for (i = 0; i < 12; i++) {
+    nullsp->type->data[i] = t0_type[i];
   }
 
   nullsp->nitems = 1;
-  ptr = (char *)(&t_nullsp);
-  for (k = 1; k <= sizepe; k++) {
-    nullsp->data->data[k - 1] = *(ptr);
+  ptr = (char *)(&arg);
+  for (i = 0; i < sizepe; i++) {
+    nullsp->data->data[i] = *(ptr);
     ptr = ptr + 1;
   }
 

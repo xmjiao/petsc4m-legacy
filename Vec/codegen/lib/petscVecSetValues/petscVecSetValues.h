@@ -2,7 +2,6 @@
 #define PETSCVECSETVALUES_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscVecSetValues_types.h"
 

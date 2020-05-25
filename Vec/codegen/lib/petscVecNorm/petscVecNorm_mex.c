@@ -45,7 +45,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
             "Input argument data has incorrect data type; uint8 is expected.");
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[1] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
-            "Dimension 2 of data should equal 1.");
+            "Dimension 2 of data should be equal to 1.");
     pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
     init_emxArray((emxArray__common*)(pStruct->data), 1);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->data), "data", 1);
@@ -56,7 +56,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
             "Input argument type has incorrect data type; char is expected.");
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
-            "Dimension 1 of type should equal 1.");
+            "Dimension 1 of type should be equal to 1.");
     pStruct->type = mxMalloc(sizeof(emxArray_char_T));
     init_emxArray((emxArray__common*)(pStruct->type), 2);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
@@ -111,10 +111,10 @@ static void __petscVecNorm_api(mxArray **plhs, const mxArray ** prhs) {
             "Input argument nrm has incorrect data type; double is expected.");
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[0] != 2) 
         mexErrMsgIdAndTxt("petscVecNorm:WrongSizeOfInputArg",
-            "Dimension 1 of nrm should equal 2.");
+            "Dimension 1 of nrm should be equal to 2.");
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[1] != 1) 
         mexErrMsgIdAndTxt("petscVecNorm:WrongSizeOfInputArg",
-            "Dimension 2 of nrm should equal 1.");
+            "Dimension 2 of nrm should be equal to 1.");
     nrm = mxMalloc(sizeof(real64_T) * 2);
     copy_mxArray_to_DataSize(nrm, 1, NULL, prhs[2], "nrm", 2);
 

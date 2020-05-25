@@ -2,7 +2,6 @@
 #define PETSCMATNULLSPACECREATE_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscMatNullSpaceCreate_types.h"
 

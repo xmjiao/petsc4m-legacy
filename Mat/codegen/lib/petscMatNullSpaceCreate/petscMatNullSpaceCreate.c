@@ -3,38 +3,38 @@
 #include "mpi.h"
 #include "petsc4m.h"
 
-static const char cv0[12] = { 'M', 'a', 't', 'N', 'u', 'l', 'l', 'S', 'p', 'a',
+static const char cv[12] = { 'M', 'a', 't', 'N', 'u', 'l', 'l', 'S', 'p', 'a',
   'c', 'e' };
 
 static void b_m2c_error(const emxArray_char_T *varargin_3);
 static void c_m2c_error(int varargin_3);
+static MPI_Comm m2c_castdata(const emxArray_uint8_T *data);
 static void m2c_error(const emxArray_char_T *varargin_3);
 static void b_m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
   const char * msgid;
   const char * fmt;
-  int i1;
+  int i;
   int loop_ub;
   char varargin_4[4];
-  static const char b_varargin_4[4] = { 'V', 'e', 'c', '\x00' };
-
+  static const char b_varargin_4[4] = "Vec";
   emxInit_char_T(&b_varargin_3, 2);
   msgid = "m2c_opaque_array:TypeMismatch";
   fmt = "Incorrect data type &s. Expected %s.\n";
-  i1 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity_char_T(b_varargin_3, i1);
+  emxEnsureCapacity_char_T(b_varargin_3, i);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i1 = 0; i1 < loop_ub; i1++) {
-    b_varargin_3->data[i1] = varargin_3->data[i1];
+  for (i = 0; i < loop_ub; i++) {
+    b_varargin_3->data[i] = varargin_3->data[i];
   }
 
-  for (i1 = 0; i1 < 4; i1++) {
-    varargin_4[i1] = b_varargin_4[i1];
-  }
-
+  varargin_4[0] = b_varargin_4[0];
+  varargin_4[1] = b_varargin_4[1];
+  varargin_4[2] = b_varargin_4[2];
+  varargin_4[3] = b_varargin_4[3];
   M2C_error(msgid, fmt, &b_varargin_3->data[0], varargin_4);
   emxFree_char_T(&b_varargin_3);
 }
@@ -48,23 +48,28 @@ static void c_m2c_error(int varargin_3)
   M2C_error(msgid, fmt, varargin_3);
 }
 
+static MPI_Comm m2c_castdata(const emxArray_uint8_T *data)
+{
+  return *(MPI_Comm*)(&data->data[0]);
+}
+
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   emxArray_char_T *b_varargin_3;
   const char * msgid;
   const char * fmt;
-  int i0;
+  int i;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
   msgid = "m2c_opaque_obj:WrongInput";
   fmt = "Incorrect data type %s. Expected MPI_Comm.\n";
-  i0 = b_varargin_3->size[0] * b_varargin_3->size[1];
+  i = b_varargin_3->size[0] * b_varargin_3->size[1];
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
-  emxEnsureCapacity_char_T(b_varargin_3, i0);
+  emxEnsureCapacity_char_T(b_varargin_3, i);
   loop_ub = varargin_3->size[0] * varargin_3->size[1];
-  for (i0 = 0; i0 < loop_ub; i0++) {
-    b_varargin_3->data[i0] = varargin_3->data[i0];
+  for (i = 0; i < loop_ub; i++) {
+    b_varargin_3->data[i] = varargin_3->data[i];
   }
 
   M2C_error(msgid, fmt, &b_varargin_3->data[0]);
@@ -75,149 +80,108 @@ void petscMatNullSpaceCreate(const struct0_T *comm, int has_cnst, int n, const
   struct0_T *vecs, struct0_T *nullsp, int *errCode, boolean_T *toplevel)
 {
   boolean_T p;
+  int sizepe;
   boolean_T b_p;
-  int k;
   boolean_T exitg1;
   emxArray_char_T *b_comm;
-  static const char cv1[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
+  int i;
+  static const char b_cv[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
 
-  emxArray_uint8_T *t_vecs;
-  int loop_ub;
   MPI_Comm t_comm;
-  static const char cv2[3] = { 'V', 'e', 'c' };
+  static const char cv1[3] = { 'V', 'e', 'c' };
 
+  emxArray_uint8_T *data0;
   Vec * ptr;
-  MatNullSpace t_nullsp;
-  int sizepe;
-  char t1_type[12];
+  MatNullSpace arg;
   char * b_ptr;
-  p = false;
-  b_p = false;
-  if (comm->type->size[1] == 8) {
-    b_p = true;
-  }
-
-  if (b_p && (!(comm->type->size[1] == 0))) {
-    k = 0;
+  p = (comm->type->size[1] == 8);
+  if (p && (comm->type->size[1] != 0)) {
+    sizepe = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 8)) {
-      if (!(comm->type->data[k] == cv1[k])) {
-        b_p = false;
+    while ((!exitg1) && (sizepe < 8)) {
+      if (!(comm->type->data[sizepe] == b_cv[sizepe])) {
+        p = false;
         exitg1 = true;
       } else {
-        k++;
+        sizepe++;
       }
     }
   }
 
-  if (b_p) {
-    p = true;
-  }
-
+  b_p = (int)p;
   emxInit_char_T(&b_comm, 2);
-  if (!p) {
-    k = b_comm->size[0] * b_comm->size[1];
+  if (!b_p) {
+    i = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
-    emxEnsureCapacity_char_T(b_comm, k);
-    loop_ub = comm->type->size[1];
-    for (k = 0; k < loop_ub; k++) {
-      b_comm->data[b_comm->size[0] * k] = comm->type->data[comm->type->size[0] *
-        k];
+    emxEnsureCapacity_char_T(b_comm, i);
+    sizepe = comm->type->size[1];
+    for (i = 0; i < sizepe; i++) {
+      b_comm->data[i] = comm->type->data[i];
     }
 
-    b_comm->data[b_comm->size[0] * comm->type->size[1]] = '\x00';
+    b_comm->data[comm->type->size[1]] = '\x00';
     m2c_error(b_comm);
   }
 
-  emxInit_uint8_T(&t_vecs, 1);
-  k = t_vecs->size[0];
-  t_vecs->size[0] = comm->data->size[0];
-  emxEnsureCapacity_uint8_T(t_vecs, k);
-  loop_ub = comm->data->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    t_vecs->data[k] = comm->data->data[k];
-  }
-
-  t_comm = *(MPI_Comm*)(&t_vecs->data[0]);
-  p = false;
-  b_p = false;
-  if (vecs->type->size[1] == 3) {
-    b_p = true;
-  }
-
-  if (b_p && (!(vecs->type->size[1] == 0))) {
-    k = 0;
+  t_comm = m2c_castdata(comm->data);
+  p = (vecs->type->size[1] == 3);
+  if (p && (vecs->type->size[1] != 0)) {
+    sizepe = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 3)) {
-      if (!(vecs->type->data[k] == cv2[k])) {
-        b_p = false;
+    while ((!exitg1) && (sizepe < 3)) {
+      if (!(vecs->type->data[sizepe] == cv1[sizepe])) {
+        p = false;
         exitg1 = true;
       } else {
-        k++;
+        sizepe++;
       }
     }
   }
 
-  if (b_p) {
-    p = true;
-  }
-
-  if (!p) {
-    k = b_comm->size[0] * b_comm->size[1];
+  b_p = (int)p;
+  if (!b_p) {
+    i = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = vecs->type->size[1] + 1;
-    emxEnsureCapacity_char_T(b_comm, k);
-    loop_ub = vecs->type->size[1];
-    for (k = 0; k < loop_ub; k++) {
-      b_comm->data[b_comm->size[0] * k] = vecs->type->data[vecs->type->size[0] *
-        k];
+    emxEnsureCapacity_char_T(b_comm, i);
+    sizepe = vecs->type->size[1];
+    for (i = 0; i < sizepe; i++) {
+      b_comm->data[i] = vecs->type->data[i];
     }
 
-    b_comm->data[b_comm->size[0] * vecs->type->size[1]] = '\x00';
+    b_comm->data[vecs->type->size[1]] = '\x00';
     b_m2c_error(b_comm);
   }
 
   emxFree_char_T(&b_comm);
-  k = t_vecs->size[0];
-  t_vecs->size[0] = vecs->data->size[0];
-  emxEnsureCapacity_uint8_T(t_vecs, k);
-  loop_ub = vecs->data->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    t_vecs->data[k] = vecs->data->data[k];
-  }
-
-  ptr = (Vec *)(&t_vecs->data[0]);
-  *errCode = MatNullSpaceCreate(t_comm, has_cnst, n, ptr, &t_nullsp);
+  emxInit_uint8_T(&data0, 1);
+  ptr = (Vec *)(&vecs->data->data[0]);
+  *errCode = MatNullSpaceCreate(t_comm, has_cnst, n, ptr, &arg);
   sizepe = sizeof(MatNullSpace);
-  k = t_vecs->size[0];
-  t_vecs->size[0] = sizepe;
-  emxEnsureCapacity_uint8_T(t_vecs, k);
-  for (k = 0; k < 12; k++) {
-    t1_type[k] = cv0[k];
+  i = data0->size[0];
+  data0->size[0] = sizepe;
+  emxEnsureCapacity_uint8_T(data0, i);
+  i = nullsp->data->size[0];
+  nullsp->data->size[0] = sizepe;
+  emxEnsureCapacity_uint8_T(nullsp->data, i);
+  for (i = 0; i < sizepe; i++) {
+    nullsp->data->data[i] = data0->data[i];
   }
 
-  k = nullsp->data->size[0];
-  nullsp->data->size[0] = t_vecs->size[0];
-  emxEnsureCapacity_uint8_T(nullsp->data, k);
-  loop_ub = t_vecs->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    nullsp->data->data[k] = t_vecs->data[k];
-  }
-
-  emxFree_uint8_T(&t_vecs);
-  k = nullsp->type->size[0] * nullsp->type->size[1];
+  emxFree_uint8_T(&data0);
+  i = nullsp->type->size[0] * nullsp->type->size[1];
   nullsp->type->size[0] = 1;
   nullsp->type->size[1] = 12;
-  emxEnsureCapacity_char_T(nullsp->type, k);
-  for (k = 0; k < 12; k++) {
-    nullsp->type->data[k] = t1_type[k];
+  emxEnsureCapacity_char_T(nullsp->type, i);
+  for (i = 0; i < 12; i++) {
+    nullsp->type->data[i] = cv[i];
   }
 
   nullsp->nitems = 1;
-  b_ptr = (char *)(&t_nullsp);
-  for (k = 1; k <= sizepe; k++) {
-    nullsp->data->data[k - 1] = *(b_ptr);
+  b_ptr = (char *)(&arg);
+  for (i = 0; i < sizepe; i++) {
+    nullsp->data->data[i] = *(b_ptr);
     b_ptr = b_ptr + 1;
   }
 
@@ -232,102 +196,78 @@ void petscMatNullSpaceCreate_2args(const struct0_T *comm, int has_cnst,
   struct0_T *nullsp, int *errCode, boolean_T *toplevel)
 {
   boolean_T p;
+  int sizepe;
   boolean_T b_p;
-  int k;
   boolean_T exitg1;
   emxArray_char_T *b_comm;
-  static const char cv3[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
-
   emxArray_uint8_T *data0;
-  int loop_ub;
-  MPI_Comm t_comm;
-  Vec * t_vecs;
-  MatNullSpace t_nullsp;
-  int sizepe;
-  char t0_type[12];
-  char * ptr;
-  p = false;
-  b_p = false;
-  if (comm->type->size[1] == 8) {
-    b_p = true;
-  }
+  int i;
+  static const char b_cv[8] = { 'M', 'P', 'I', '_', 'C', 'o', 'm', 'm' };
 
-  if (b_p && (!(comm->type->size[1] == 0))) {
-    k = 0;
+  MPI_Comm t_comm;
+  Vec * ptr;
+  MatNullSpace arg;
+  char * b_ptr;
+  p = (comm->type->size[1] == 8);
+  if (p && (comm->type->size[1] != 0)) {
+    sizepe = 0;
     exitg1 = false;
-    while ((!exitg1) && (k < 8)) {
-      if (!(comm->type->data[k] == cv3[k])) {
-        b_p = false;
+    while ((!exitg1) && (sizepe < 8)) {
+      if (!(comm->type->data[sizepe] == b_cv[sizepe])) {
+        p = false;
         exitg1 = true;
       } else {
-        k++;
+        sizepe++;
       }
     }
   }
 
-  if (b_p) {
-    p = true;
-  }
-
-  if (!p) {
+  b_p = (int)p;
+  if (!b_p) {
     emxInit_char_T(&b_comm, 2);
-    k = b_comm->size[0] * b_comm->size[1];
+    i = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
-    emxEnsureCapacity_char_T(b_comm, k);
-    loop_ub = comm->type->size[1];
-    for (k = 0; k < loop_ub; k++) {
-      b_comm->data[b_comm->size[0] * k] = comm->type->data[comm->type->size[0] *
-        k];
+    emxEnsureCapacity_char_T(b_comm, i);
+    sizepe = comm->type->size[1];
+    for (i = 0; i < sizepe; i++) {
+      b_comm->data[i] = comm->type->data[i];
     }
 
-    b_comm->data[b_comm->size[0] * comm->type->size[1]] = '\x00';
+    b_comm->data[comm->type->size[1]] = '\x00';
     m2c_error(b_comm);
     emxFree_char_T(&b_comm);
   }
 
   emxInit_uint8_T(&data0, 1);
-  k = data0->size[0];
-  data0->size[0] = comm->data->size[0];
-  emxEnsureCapacity_uint8_T(data0, k);
-  loop_ub = comm->data->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    data0->data[k] = comm->data->data[k];
-  }
-
-  t_comm = *(MPI_Comm*)(&data0->data[0]);
-  t_vecs = NULL;
-  *errCode = MatNullSpaceCreate(t_comm, has_cnst, 0, t_vecs, &t_nullsp);
+  t_comm = m2c_castdata(comm->data);
+  ptr = NULL;
+  *errCode = MatNullSpaceCreate(t_comm, has_cnst, 0, ptr, &arg);
   sizepe = sizeof(MatNullSpace);
-  k = data0->size[0];
+  i = data0->size[0];
   data0->size[0] = sizepe;
-  emxEnsureCapacity_uint8_T(data0, k);
-  for (k = 0; k < 12; k++) {
-    t0_type[k] = cv0[k];
-  }
-
-  k = nullsp->data->size[0];
-  nullsp->data->size[0] = data0->size[0];
-  emxEnsureCapacity_uint8_T(nullsp->data, k);
-  loop_ub = data0->size[0];
-  for (k = 0; k < loop_ub; k++) {
-    nullsp->data->data[k] = data0->data[k];
+  emxEnsureCapacity_uint8_T(data0, i);
+  i = nullsp->data->size[0];
+  nullsp->data->size[0] = sizepe;
+  emxEnsureCapacity_uint8_T(nullsp->data, i);
+  for (i = 0; i < sizepe; i++) {
+    nullsp->data->data[i] = data0->data[i];
   }
 
   emxFree_uint8_T(&data0);
-  k = nullsp->type->size[0] * nullsp->type->size[1];
+  i = nullsp->type->size[0] * nullsp->type->size[1];
   nullsp->type->size[0] = 1;
   nullsp->type->size[1] = 12;
-  emxEnsureCapacity_char_T(nullsp->type, k);
-  for (k = 0; k < 12; k++) {
-    nullsp->type->data[k] = t0_type[k];
+  emxEnsureCapacity_char_T(nullsp->type, i);
+  for (i = 0; i < 12; i++) {
+    nullsp->type->data[i] = cv[i];
   }
 
   nullsp->nitems = 1;
-  ptr = (char *)(&t_nullsp);
-  for (k = 1; k <= sizepe; k++) {
-    nullsp->data->data[k - 1] = *(ptr);
-    ptr = ptr + 1;
+  b_ptr = (char *)(&arg);
+  for (i = 0; i < sizepe; i++) {
+    nullsp->data->data[i] = *(b_ptr);
+    b_ptr = b_ptr + 1;
   }
 
   if (*errCode != 0) {

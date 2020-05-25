@@ -81,7 +81,7 @@ static void __petscMatCreateSeqAIJ_api(mxArray **plhs, const mxArray ** prhs) {
             "Input argument nnz has incorrect data type; int32 is expected.");
     if (mxGetNumberOfElements(prhs[3]) && mxGetDimensions(prhs[3])[1] != 1) 
         mexErrMsgIdAndTxt("petscMatCreateSeqAIJ:WrongSizeOfInputArg",
-            "Dimension 2 of nnz should equal 1.");
+            "Dimension 2 of nnz should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[3], (emxArray__common *)(&nnz), "nnz", 1);
     prealloc_struct0_T(&mat);
 

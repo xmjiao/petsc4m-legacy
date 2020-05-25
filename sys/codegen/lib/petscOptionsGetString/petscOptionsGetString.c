@@ -1,6 +1,7 @@
 #include "petscOptionsGetString.h"
 #include "m2c.h"
 #include "petsc4m.h"
+#include <string.h>
 
 static void b_m2c_error(void);
 static void c_m2c_error(int varargin_3);
@@ -42,11 +43,11 @@ void petscOptionsGetString(const emxArray_char_T *pre, const emxArray_char_T
   int i;
   boolean_T exitg1;
   *toplevel = true;
-  if ((!(pre->size[1] == 0)) && (pre->data[pre->size[1] - 1] != '\x00')) {
+  if ((pre->size[1] != 0) && (pre->data[pre->size[1] - 1] != '\x00')) {
     m2c_error();
   }
 
-  if ((!(name->size[1] == 0)) && (name->data[name->size[1] - 1] != '\x00')) {
+  if ((name->size[1] != 0) && (name->data[name->size[1] - 1] != '\x00')) {
     b_m2c_error();
   }
 
@@ -62,7 +63,10 @@ void petscOptionsGetString(const emxArray_char_T *pre, const emxArray_char_T
     if ((unsigned char)str0[i] == 0) {
       str_size[0] = 1;
       str_size[1] = i + 1;
-      memcpy(&str_data[0], &str0[0], (unsigned int)((i + 1) * (int)sizeof(char)));
+      if (0 <= i) {
+        memcpy(&str_data[0], &str0[0], (i + 1) * sizeof(char));
+      }
+
       exitg1 = true;
     } else {
       i++;

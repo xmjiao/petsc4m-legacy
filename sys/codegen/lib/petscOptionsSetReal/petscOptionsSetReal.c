@@ -27,18 +27,18 @@ void petscOptionsSetReal(const emxArray_char_T *iname, double value, int
 {
   char * ptr;
   unsigned char t_str[32];
-  int i0;
+  int i;
   char str[32];
   PetscOptions obj;
   *toplevel = true;
-  if ((!(iname->size[1] == 0)) && (iname->data[iname->size[1] - 1] != '\x00')) {
+  if ((iname->size[1] != 0) && (iname->data[iname->size[1] - 1] != '\x00')) {
     m2c_error();
   }
 
   ptr = (char *)(t_str);
   sprintf(ptr, "%.17g", value);
-  for (i0 = 0; i0 < 32; i0++) {
-    str[i0] = (signed char)t_str[i0];
+  for (i = 0; i < 32; i++) {
+    str[i] = (signed char)t_str[i];
   }
 
   obj = NULL;

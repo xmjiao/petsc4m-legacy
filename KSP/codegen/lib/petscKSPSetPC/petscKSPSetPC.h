@@ -2,7 +2,6 @@
 #define PETSCKSPSETPC_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscKSPSetPC_types.h"
 

@@ -1,7 +1,7 @@
 #include "petscVecCreateSeq.h"
 #include "m2c.h"
-#include "petsc4m.h"
 #include "mpi.h"
+#include "petsc4m.h"
 
 static void m2c_error(int varargin_3);
 static void m2c_error(int varargin_3)
@@ -16,45 +16,35 @@ static void m2c_error(int varargin_3)
 void petscVecCreateSeq(int n, struct0_T *vec, int *errCode, boolean_T *toplevel)
 {
   emxArray_uint8_T *data0;
-  MPI_Comm obj;
-  Vec t_vec;
+  MPI_Comm comm;
+  Vec arg;
   int sizepe;
   int i;
-  char t0_type[3];
-  static const char cv0[3] = { 'V', 'e', 'c' };
-
-  int loop_ub;
   char * ptr;
   emxInit_uint8_T(&data0, 1);
-  obj = PETSC_COMM_SELF;
-  *errCode = VecCreateSeq(obj, n, &t_vec);
+  comm = PETSC_COMM_SELF;
+  *errCode = VecCreateSeq(comm, n, &arg);
   sizepe = sizeof(Vec);
   i = data0->size[0];
   data0->size[0] = sizepe;
   emxEnsureCapacity_uint8_T(data0, i);
-  for (i = 0; i < 3; i++) {
-    t0_type[i] = cv0[i];
-  }
-
   i = vec->data->size[0];
-  vec->data->size[0] = data0->size[0];
+  vec->data->size[0] = sizepe;
   emxEnsureCapacity_uint8_T(vec->data, i);
-  loop_ub = data0->size[0];
-  for (i = 0; i < loop_ub; i++) {
+  for (i = 0; i < sizepe; i++) {
     vec->data->data[i] = data0->data[i];
   }
 
   emxFree_uint8_T(&data0);
   vec->type.size[0] = 1;
   vec->type.size[1] = 3;
-  for (i = 0; i < 3; i++) {
-    vec->type.data[i] = t0_type[i];
-  }
-
+  vec->type.data[0] = 'V';
+  vec->type.data[1] = 'e';
+  vec->type.data[2] = 'c';
   vec->nitems = 1;
-  ptr = (char *)(&t_vec);
-  for (i = 1; i <= sizepe; i++) {
-    vec->data->data[i - 1] = *(ptr);
+  ptr = (char *)(&arg);
+  for (i = 0; i < sizepe; i++) {
+    vec->data->data[i] = *(ptr);
     ptr = ptr + 1;
   }
 

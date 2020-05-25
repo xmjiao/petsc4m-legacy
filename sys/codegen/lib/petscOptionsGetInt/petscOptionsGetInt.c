@@ -38,11 +38,11 @@ void petscOptionsGetInt(const emxArray_char_T *pre, const emxArray_char_T *name,
   PetscOptions obj;
   PetscBool b_flag;
   *toplevel = true;
-  if ((!(pre->size[1] == 0)) && (pre->data[pre->size[1] - 1] != '\x00')) {
+  if ((pre->size[1] != 0) && (pre->data[pre->size[1] - 1] != '\x00')) {
     m2c_error();
   }
 
-  if ((!(name->size[1] == 0)) && (name->data[name->size[1] - 1] != '\x00')) {
+  if ((name->size[1] != 0) && (name->data[name->size[1] - 1] != '\x00')) {
     b_m2c_error();
   }
 

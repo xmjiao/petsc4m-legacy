@@ -2,7 +2,6 @@
 #define PETSCKSPSETFROMOPTIONS_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscKSPSetFromOptions_types.h"
 

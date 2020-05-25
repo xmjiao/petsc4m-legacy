@@ -31,7 +31,7 @@ static void __petscOptionsInsertString_api(mxArray **plhs, const mxArray ** prhs
             "Input argument in_str has incorrect data type; char is expected.");
     if (mxGetNumberOfElements(prhs[0]) && mxGetDimensions(prhs[0])[0] != 1) 
         mexErrMsgIdAndTxt("petscOptionsInsertString:WrongSizeOfInputArg",
-            "Dimension 1 of in_str should equal 1.");
+            "Dimension 1 of in_str should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&in_str), "in_str", 2);
 
     errCode = mxMalloc(sizeof(int32_T));

@@ -32,7 +32,7 @@ static void __petscOptionsSetValue_api(mxArray **plhs, const mxArray ** prhs) {
             "Input argument iname has incorrect data type; char is expected.");
     if (mxGetNumberOfElements(prhs[0]) && mxGetDimensions(prhs[0])[0] != 1) 
         mexErrMsgIdAndTxt("petscOptionsSetValue:WrongSizeOfInputArg",
-            "Dimension 1 of iname should equal 1.");
+            "Dimension 1 of iname should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&iname), "iname", 2);
 
     if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxCHAR_CLASS)
@@ -40,7 +40,7 @@ static void __petscOptionsSetValue_api(mxArray **plhs, const mxArray ** prhs) {
             "Input argument value has incorrect data type; char is expected.");
     if (mxGetNumberOfElements(prhs[1]) && mxGetDimensions(prhs[1])[0] != 1) 
         mexErrMsgIdAndTxt("petscOptionsSetValue:WrongSizeOfInputArg",
-            "Dimension 1 of value should equal 1.");
+            "Dimension 1 of value should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[1], (emxArray__common *)(&value), "value", 2);
 
     errCode = mxMalloc(sizeof(int32_T));

@@ -61,22 +61,14 @@ typedef struct emxArray_uint8_T emxArray_uint8_T;
 
 #endif
 
-#ifndef struct_sKTBSjZ5yUw4dNg83KSwzI
-#define struct_sKTBSjZ5yUw4dNg83KSwzI
-
-struct sKTBSjZ5yUw4dNg83KSwzI
-{
-  emxArray_uint8_T *data;
-  emxArray_char_T_1x3 type;
-  int nitems;
-};
-
-#endif
-
 #ifndef typedef_struct0_T
 #define typedef_struct0_T
 
-typedef struct sKTBSjZ5yUw4dNg83KSwzI struct0_T;
+typedef struct {
+  emxArray_uint8_T *data;
+  emxArray_char_T_1x3 type;
+  int nitems;
+} struct0_T;
 
 #endif
 #endif

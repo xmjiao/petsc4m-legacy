@@ -45,7 +45,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
             "Input argument data has incorrect data type; uint8 is expected.");
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[1] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
-            "Dimension 2 of data should equal 1.");
+            "Dimension 2 of data should be equal to 1.");
     pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
     init_emxArray((emxArray__common*)(pStruct->data), 1);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->data), "data", 1);
@@ -56,7 +56,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
             "Input argument type has incorrect data type; char is expected.");
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
-            "Dimension 1 of type should equal 1.");
+            "Dimension 1 of type should be equal to 1.");
     pStruct->type = mxMalloc(sizeof(emxArray_char_T));
     init_emxArray((emxArray__common*)(pStruct->type), 2);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
@@ -112,7 +112,7 @@ static void __petscVecGetValues_api(mxArray **plhs, const mxArray ** prhs) {
             "Input argument ix has incorrect data type; int32 is expected.");
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[1] != 1) 
         mexErrMsgIdAndTxt("petscVecGetValues:WrongSizeOfInputArg",
-            "Dimension 2 of ix should equal 1.");
+            "Dimension 2 of ix should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[2], (emxArray__common *)(&ix), "ix", 1);
 
     if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxDOUBLE_CLASS)
@@ -120,7 +120,7 @@ static void __petscVecGetValues_api(mxArray **plhs, const mxArray ** prhs) {
             "Input argument y has incorrect data type; double is expected.");
     if (mxGetNumberOfElements(prhs[3]) && mxGetDimensions(prhs[3])[1] != 1) 
         mexErrMsgIdAndTxt("petscVecGetValues:WrongSizeOfInputArg",
-            "Dimension 2 of y should equal 1.");
+            "Dimension 2 of y should be equal to 1.");
     copy_mxArray_to_emxArray(prhs[3], (emxArray__common *)(&y), "y", 1);
 
     errCode = mxMalloc(sizeof(int32_T));
@@ -171,7 +171,7 @@ static void __petscVecGetValues_Alloc_api(mxArray **plhs, const mxArray ** prhs)
             "Input argument ix has incorrect data type; int32 is expected.");
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[1] != 1) 
         mexErrMsgIdAndTxt("petscVecGetValues_Alloc:WrongSizeOfInputArg",
-            "Dimension 2 of ix should equal 1.");
+            "Dimension 2 of ix should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[2], (emxArray__common *)(&ix), "ix", 1);
     init_emxArray((emxArray__common*)(&y), 1);
 

@@ -27,8 +27,7 @@ void petscOptionsInsertString(const emxArray_char_T *in_str, int *errCode,
 {
   PetscOptions obj;
   *toplevel = true;
-  if ((!(in_str->size[1] == 0)) && (in_str->data[in_str->size[1] - 1] != '\x00'))
-  {
+  if ((in_str->size[1] != 0) && (in_str->data[in_str->size[1] - 1] != '\x00')) {
     m2c_error();
   }
 

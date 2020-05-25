@@ -2,7 +2,6 @@
 #define PETSCKSPGETINITIALGUESSNONZERO_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscKSPGetInitialGuessNonzero_types.h"
 

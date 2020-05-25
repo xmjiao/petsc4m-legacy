@@ -36,11 +36,11 @@ void petscOptionsSetValue(const emxArray_char_T *iname, const emxArray_char_T
   *value, int *errCode, boolean_T *toplevel)
 {
   PetscOptions obj;
-  if ((!(iname->size[1] == 0)) && (iname->data[iname->size[1] - 1] != '\x00')) {
+  if ((iname->size[1] != 0) && (iname->data[iname->size[1] - 1] != '\x00')) {
     m2c_error();
   }
 
-  if ((!(value->size[1] == 0)) && (value->data[value->size[1] - 1] != '\x00')) {
+  if ((value->size[1] != 0) && (value->data[value->size[1] - 1] != '\x00')) {
     b_m2c_error();
   }
 

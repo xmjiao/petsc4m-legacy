@@ -2,7 +2,6 @@
 #define PETSCOPTIONSINSERTFILE_H
 #include <stddef.h>
 #include <stdlib.h>
-#include <string.h>
 #include "rtwtypes.h"
 #include "petscOptionsInsertFile_types.h"
 
