@@ -30,13 +30,13 @@ static void __petscSolveCRS_api(mxArray **plhs, const mxArray ** prhs) {
     int                  _dims[1];
 
     /* Marshall in inputs and preallocate outputs */
-    flag = mxMalloc(sizeof(int32_T));
+    flag = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    relres = mxMalloc(sizeof(real64_T));
+    relres = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    iter = mxMalloc(sizeof(int32_T));
+    iter = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    times = mxMalloc(sizeof(real64_T) * 2);
+    times = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
 
     /* Invoke the target function */
     _timestamp = M2C_wtime();
@@ -108,14 +108,14 @@ static void __petscSolveCRS_4args_api(mxArray **plhs, const mxArray ** prhs) {
     alias_mxArray_to_emxArray(prhs[3], (emxArray__common *)(&b), "b", 1);
     init_emxArray((emxArray__common*)(&x), 1);
 
-    flag = mxMalloc(sizeof(int32_T));
+    flag = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    relres = mxMalloc(sizeof(real64_T));
+    relres = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    iter = mxMalloc(sizeof(int32_T));
+    iter = (int32_T*)mxMalloc(sizeof(int32_T));
     init_emxArray((emxArray__common*)(&reshis), 1);
 
-    times = mxMalloc(sizeof(real64_T) * 2);
+    times = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
 
     /* Invoke the target function */
     _timestamp = M2C_wtime();
@@ -198,14 +198,14 @@ static void __petscSolveCRS_5args_api(mxArray **plhs, const mxArray ** prhs) {
     alias_mxArray_to_emxArray(prhs[4], (emxArray__common *)(&solver), "solver", 2);
     init_emxArray((emxArray__common*)(&x), 1);
 
-    flag = mxMalloc(sizeof(int32_T));
+    flag = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    relres = mxMalloc(sizeof(real64_T));
+    relres = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    iter = mxMalloc(sizeof(int32_T));
+    iter = (int32_T*)mxMalloc(sizeof(int32_T));
     init_emxArray((emxArray__common*)(&reshis), 1);
 
-    times = mxMalloc(sizeof(real64_T) * 2);
+    times = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
 
     /* Invoke the target function */
     _timestamp = M2C_wtime();
@@ -298,14 +298,14 @@ static void __petscSolveCRS_6args_api(mxArray **plhs, const mxArray ** prhs) {
     rtol = *(real64_T*)mxGetData(prhs[5]);
     init_emxArray((emxArray__common*)(&x), 1);
 
-    flag = mxMalloc(sizeof(int32_T));
+    flag = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    relres = mxMalloc(sizeof(real64_T));
+    relres = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    iter = mxMalloc(sizeof(int32_T));
+    iter = (int32_T*)mxMalloc(sizeof(int32_T));
     init_emxArray((emxArray__common*)(&reshis), 1);
 
-    times = mxMalloc(sizeof(real64_T) * 2);
+    times = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
 
     /* Invoke the target function */
     _timestamp = M2C_wtime();
@@ -408,14 +408,14 @@ static void __petscSolveCRS_7args_api(mxArray **plhs, const mxArray ** prhs) {
     maxiter = *(int32_T*)mxGetData(prhs[6]);
     init_emxArray((emxArray__common*)(&x), 1);
 
-    flag = mxMalloc(sizeof(int32_T));
+    flag = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    relres = mxMalloc(sizeof(real64_T));
+    relres = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    iter = mxMalloc(sizeof(int32_T));
+    iter = (int32_T*)mxMalloc(sizeof(int32_T));
     init_emxArray((emxArray__common*)(&reshis), 1);
 
-    times = mxMalloc(sizeof(real64_T) * 2);
+    times = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
 
     /* Invoke the target function */
     _timestamp = M2C_wtime();
@@ -528,14 +528,14 @@ static void __petscSolveCRS_8args_api(mxArray **plhs, const mxArray ** prhs) {
     alias_mxArray_to_emxArray(prhs[7], (emxArray__common *)(&pctype), "pctype", 2);
     init_emxArray((emxArray__common*)(&x), 1);
 
-    flag = mxMalloc(sizeof(int32_T));
+    flag = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    relres = mxMalloc(sizeof(real64_T));
+    relres = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    iter = mxMalloc(sizeof(int32_T));
+    iter = (int32_T*)mxMalloc(sizeof(int32_T));
     init_emxArray((emxArray__common*)(&reshis), 1);
 
-    times = mxMalloc(sizeof(real64_T) * 2);
+    times = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
 
     /* Invoke the target function */
     _timestamp = M2C_wtime();
@@ -658,14 +658,14 @@ static void __petscSolveCRS_9args_api(mxArray **plhs, const mxArray ** prhs) {
     alias_mxArray_to_emxArray(prhs[8], (emxArray__common *)(&solpack), "solpack", 2);
     init_emxArray((emxArray__common*)(&x), 1);
 
-    flag = mxMalloc(sizeof(int32_T));
+    flag = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    relres = mxMalloc(sizeof(real64_T));
+    relres = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    iter = mxMalloc(sizeof(int32_T));
+    iter = (int32_T*)mxMalloc(sizeof(int32_T));
     init_emxArray((emxArray__common*)(&reshis), 1);
 
-    times = mxMalloc(sizeof(real64_T) * 2);
+    times = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
 
     /* Invoke the target function */
     _timestamp = M2C_wtime();
@@ -798,14 +798,14 @@ static void __petscSolveCRS_10args_api(mxArray **plhs, const mxArray ** prhs) {
     alias_mxArray_to_emxArray(prhs[9], (emxArray__common *)(&x0), "x0", 1);
     init_emxArray((emxArray__common*)(&x), 1);
 
-    flag = mxMalloc(sizeof(int32_T));
+    flag = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    relres = mxMalloc(sizeof(real64_T));
+    relres = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    iter = mxMalloc(sizeof(int32_T));
+    iter = (int32_T*)mxMalloc(sizeof(int32_T));
     init_emxArray((emxArray__common*)(&reshis), 1);
 
-    times = mxMalloc(sizeof(real64_T) * 2);
+    times = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
 
     /* Invoke the target function */
     _timestamp = M2C_wtime();
@@ -948,14 +948,14 @@ static void __petscSolveCRS_11args_api(mxArray **plhs, const mxArray ** prhs) {
     alias_mxArray_to_emxArray(prhs[10], (emxArray__common *)(&opts), "opts", 2);
     init_emxArray((emxArray__common*)(&x), 1);
 
-    flag = mxMalloc(sizeof(int32_T));
+    flag = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    relres = mxMalloc(sizeof(real64_T));
+    relres = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    iter = mxMalloc(sizeof(int32_T));
+    iter = (int32_T*)mxMalloc(sizeof(int32_T));
     init_emxArray((emxArray__common*)(&reshis), 1);
 
-    times = mxMalloc(sizeof(real64_T) * 2);
+    times = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
 
     /* Invoke the target function */
     _timestamp = M2C_wtime();

@@ -46,7 +46,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[1] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
             "Dimension 2 of data should be equal to 1.");
-    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    pStruct->data = (emxArray_uint8_T*)mxMalloc(sizeof(emxArray_uint8_T));
     init_emxArray((emxArray__common*)(pStruct->data), 1);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->data), "data", 1);
 
@@ -57,7 +57,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
             "Dimension 1 of type should be equal to 1.");
-    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    pStruct->type = (emxArray_char_T*)mxMalloc(sizeof(emxArray_char_T));
     init_emxArray((emxArray__common*)(pStruct->type), 2);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
 
@@ -115,12 +115,12 @@ static void __petscVecNorm_api(mxArray **plhs, const mxArray ** prhs) {
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[1] != 1) 
         mexErrMsgIdAndTxt("petscVecNorm:WrongSizeOfInputArg",
             "Dimension 2 of nrm should be equal to 1.");
-    nrm = mxMalloc(sizeof(real64_T) * 2);
+    nrm = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
     copy_mxArray_to_DataSize(nrm, 1, NULL, prhs[2], "nrm", 2);
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscVecNorm(&x, type, nrm, errCode, toplevel);
@@ -158,11 +158,11 @@ static void __petscVecNorm_2args_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument type should be a scalar.");
     type = *(int32_T*)mxGetData(prhs[1]);
 
-    nrm = mxMalloc(sizeof(real64_T));
+    nrm = (real64_T*)mxMalloc(sizeof(real64_T));
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscVecNorm_2args(&x, type, nrm, errCode, toplevel);

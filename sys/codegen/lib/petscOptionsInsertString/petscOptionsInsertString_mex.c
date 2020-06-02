@@ -34,9 +34,9 @@ static void __petscOptionsInsertString_api(mxArray **plhs, const mxArray ** prhs
             "Dimension 1 of in_str should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&in_str), "in_str", 2);
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscOptionsInsertString(&in_str, errCode, toplevel);

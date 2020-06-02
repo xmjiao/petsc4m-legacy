@@ -35,7 +35,7 @@ static void __petscGetString_api(mxArray **plhs, const mxArray ** prhs) {
     alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&name), "name", 2);
     init_emxArray((emxArray__common*)(&str), 2);
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscGetString(&name, &str, toplevel);

@@ -43,9 +43,9 @@ static void __petscOptionsSetReal_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument value should be a scalar.");
     value = *(real64_T*)mxGetData(prhs[1]);
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscOptionsSetReal(&iname, value, errCode, toplevel);

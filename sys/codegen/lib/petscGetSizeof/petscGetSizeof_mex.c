@@ -34,9 +34,9 @@ static void __petscGetSizeof_api(mxArray **plhs, const mxArray ** prhs) {
             "Dimension 1 of name should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&name), "name", 2);
 
-    sz = mxMalloc(sizeof(int32_T));
+    sz = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscGetSizeof(&name, sz, toplevel);

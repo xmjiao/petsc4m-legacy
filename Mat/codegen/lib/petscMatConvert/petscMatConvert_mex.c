@@ -46,7 +46,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[1] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
             "Dimension 2 of data should be equal to 1.");
-    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    pStruct->data = (emxArray_uint8_T*)mxMalloc(sizeof(emxArray_uint8_T));
     init_emxArray((emxArray__common*)(pStruct->data), 1);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->data), "data", 1);
 
@@ -57,7 +57,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
             "Dimension 1 of type should be equal to 1.");
-    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    pStruct->type = (emxArray_char_T*)mxMalloc(sizeof(emxArray_char_T));
     init_emxArray((emxArray__common*)(pStruct->type), 2);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
 
@@ -73,10 +73,10 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
 static void prealloc_struct0_T(struct0_T *pStruct) {
 
 
-    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    pStruct->data = (emxArray_uint8_T*)mxMalloc(sizeof(emxArray_uint8_T));
     init_emxArray((emxArray__common*)(pStruct->data), 1);
 
-    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    pStruct->type = (emxArray_char_T*)mxMalloc(sizeof(emxArray_char_T));
     init_emxArray((emxArray__common*)(pStruct->type), 2);
 
 }
@@ -142,9 +142,9 @@ static void __petscMatConvert_api(mxArray **plhs, const mxArray ** prhs) {
     reuse = *(int32_T*)mxGetData(prhs[2]);
     prealloc_struct0_T(&mat_out);
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscMatConvert(&mat_in, &newtype, reuse, &mat_out, errCode, toplevel);

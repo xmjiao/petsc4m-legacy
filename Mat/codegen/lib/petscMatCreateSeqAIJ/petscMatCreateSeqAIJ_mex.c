@@ -22,7 +22,7 @@
 static void prealloc_struct0_T(struct0_T *pStruct) {
 
 
-    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    pStruct->data = (emxArray_uint8_T*)mxMalloc(sizeof(emxArray_uint8_T));
     init_emxArray((emxArray__common*)(pStruct->data), 1);
 
 }
@@ -85,9 +85,9 @@ static void __petscMatCreateSeqAIJ_api(mxArray **plhs, const mxArray ** prhs) {
     alias_mxArray_to_emxArray(prhs[3], (emxArray__common *)(&nnz), "nnz", 1);
     prealloc_struct0_T(&mat);
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscMatCreateSeqAIJ(m, n, nz, &nnz, &mat, errCode, toplevel);
@@ -137,9 +137,9 @@ static void __petscMatCreateSeqAIJ_FixedRows_api(mxArray **plhs, const mxArray *
     nz = *(int32_T*)mxGetData(prhs[2]);
     prealloc_struct0_T(&mat);
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    topleve = mxMalloc(sizeof(boolean_T));
+    topleve = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscMatCreateSeqAIJ_FixedRows(m, n, nz, &mat, errCode, topleve);

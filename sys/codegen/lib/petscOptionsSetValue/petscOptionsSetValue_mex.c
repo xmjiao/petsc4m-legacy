@@ -43,9 +43,9 @@ static void __petscOptionsSetValue_api(mxArray **plhs, const mxArray ** prhs) {
             "Dimension 1 of value should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[1], (emxArray__common *)(&value), "value", 2);
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscOptionsSetValue(&iname, &value, errCode, toplevel);

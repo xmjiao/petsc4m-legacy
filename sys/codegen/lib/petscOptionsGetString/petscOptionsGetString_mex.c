@@ -46,15 +46,15 @@ static void __petscOptionsGetString_api(mxArray **plhs, const mxArray ** prhs) {
             "Dimension 1 of name should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[1], (emxArray__common *)(&name), "name", 2);
 
-    str_data = mxMalloc(sizeof(char_T) * 22);
+    str_data = (char_T*)mxMalloc(sizeof(char_T) * 22);
     str_size[0] = 1;
     str_size[1] = 21;
 
-    found = mxMalloc(sizeof(int32_T));
+    found = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscOptionsGetString(&pre, &name, str_data, str_size, found, errCode, toplevel);

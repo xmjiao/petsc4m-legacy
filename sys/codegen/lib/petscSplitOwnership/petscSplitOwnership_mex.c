@@ -46,7 +46,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[1] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
             "Dimension 2 of data should be equal to 1.");
-    pStruct->data = mxMalloc(sizeof(emxArray_uint8_T));
+    pStruct->data = (emxArray_uint8_T*)mxMalloc(sizeof(emxArray_uint8_T));
     init_emxArray((emxArray__common*)(pStruct->data), 1);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->data), "data", 1);
 
@@ -57,7 +57,7 @@ static void marshallin_const_struct0_T(struct0_T *pStruct, const mxArray *mx, co
     if (mxGetNumberOfElements(sub_mx) && mxGetDimensions(sub_mx)[0] != 1) 
         mexErrMsgIdAndTxt("marshallin_const_struct0_T:WrongSizeOfInputArg",
             "Dimension 1 of type should be equal to 1.");
-    pStruct->type = mxMalloc(sizeof(emxArray_char_T));
+    pStruct->type = (emxArray_char_T*)mxMalloc(sizeof(emxArray_char_T));
     init_emxArray((emxArray__common*)(pStruct->type), 2);
     alias_mxArray_to_emxArray(sub_mx, (emxArray__common *)(pStruct->type), "type", 2);
 
@@ -104,7 +104,7 @@ static void __petscSplitOwnership_api(mxArray **plhs, const mxArray ** prhs) {
     if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscSplitOwnership:WrongSizeOfInputArg",
             "Argument n should be a scalar.");
-    n = mxMalloc(sizeof(int32_T));
+    n = (int32_T*)mxMalloc(sizeof(int32_T));
     copy_mxArray_to_DataSize(n, 1, NULL, prhs[1], "n", 1);
 
     if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxINT32_CLASS)
@@ -113,12 +113,12 @@ static void __petscSplitOwnership_api(mxArray **plhs, const mxArray ** prhs) {
     if (mxGetNumberOfElements(prhs[2]) != 1)
         mexErrMsgIdAndTxt("petscSplitOwnership:WrongSizeOfInputArg",
             "Argument N should be a scalar.");
-    N = mxMalloc(sizeof(int32_T));
+    N = (int32_T*)mxMalloc(sizeof(int32_T));
     copy_mxArray_to_DataSize(N, 1, NULL, prhs[2], "N", 1);
 
-    errCode = mxMalloc(sizeof(int32_T));
+    errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
-    toplevel = mxMalloc(sizeof(boolean_T));
+    toplevel = (boolean_T*)mxMalloc(sizeof(boolean_T));
 
     /* Invoke the target function */
     petscSplitOwnership(&comm, n, N, errCode, toplevel);
