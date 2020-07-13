@@ -5,11 +5,7 @@ matrix:
     - os: linux
       dist: trusty
       sudo: required
-      env: PETSC_VERSION=3.7.7 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=$HOME/petsc/lib
-    - os: linux
-      dist: trusty
-      sudo: required
-      env: PETSC_VERSION=3.8.3 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=$HOME/petsc/lib
+      env: PETSC_VERSION=3.13.3 UPDATE_REPOSITORY="true" LD_LIBRARY_PATH=$HOME/petsc/lib
 
 before_install:
   # Install Octave and MATLAB
