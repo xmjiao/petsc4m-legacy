@@ -84,7 +84,5 @@ end
 % petscMatCreateAIJ, petscVecCreateMPI,
 % MatGetType, MatCreateMPIAIJWithArrays, MatCreateSeqAIJWithArrays
 % MatMPIAIJSetPreallocation, MatSeqAIJSetPreallocation
-%
-% PCGetOperators, KSPGetOperators
 
 % Unsupported: KSPRegister, PCRegister
