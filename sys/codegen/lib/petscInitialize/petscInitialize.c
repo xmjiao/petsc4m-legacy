@@ -3,6 +3,7 @@
 #include "petsc4m.h"
 
 static void m2c_error(int varargin_3);
+
 static void m2c_error(int varargin_3)
 {
   M2C_error("petsc:RuntimeError",

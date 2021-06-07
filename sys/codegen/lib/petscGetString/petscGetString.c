@@ -1,4 +1,5 @@
 #include "petscGetString.h"
+#include "petscGetString_types.h"
 #include "m2c.h"
 #include "petsc4m.h"
 
@@ -161,15 +162,19 @@ static boolean_T ye_isequal(const emxArray_char_T *varargin_1);
 static boolean_T yf_isequal(const emxArray_char_T *varargin_1);
 static boolean_T ab_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[12] = { 'M', 'A', 'T', 'E', 'L', 'E', 'M', 'E', 'N', 'T',
     'A', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 12);
+  b_p = false;
+  if (varargin_1->size[1] == 12) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -188,15 +193,19 @@ static boolean_T ab_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ac_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'M', 'A', 'T', 'L', 'O', 'C', 'A', 'L', 'R', 'E',
     'F' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -215,14 +224,18 @@ static boolean_T ac_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ad_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'F', 'G', 'M', 'R', 'E', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -241,14 +254,18 @@ static boolean_T ad_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ae_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'K', 'S', 'P', 'C', 'G', 'L', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -267,14 +284,18 @@ static boolean_T ae_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T af_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[4] = { 'P', 'C', 'M', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 4);
+  b_p = false;
+  if (varargin_1->size[1] == 4) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -293,15 +314,19 @@ static boolean_T af_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ag_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[21] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'M',
     'K', 'L', '_', 'C', 'P', 'A', 'R', 'D', 'I', 'S', 'O' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 21);
+  b_p = false;
+  if (varargin_1->size[1] == 21) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -320,14 +345,18 @@ static boolean_T ag_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T b_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'M', 'A', 'T', 'S', 'A', 'M', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -346,14 +375,18 @@ static boolean_T b_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T bb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'M', 'A', 'T', 'B', 'A', 'I', 'J' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -372,14 +405,18 @@ static boolean_T bb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T bc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'M', 'A', 'T', 'N', 'E', 'S', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -398,14 +435,18 @@ static boolean_T bc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T bd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'L', 'G', 'M', 'R', 'E', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -424,14 +465,18 @@ static boolean_T bd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T be_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'P', 'C', 'N', 'O', 'N', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -450,15 +495,19 @@ static boolean_T be_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T bf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'P', 'C', 'G', 'A', 'L', 'E', 'R', 'K', 'I', 'N'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -477,15 +526,19 @@ static boolean_T bf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T bg_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[15] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'P',
     'A', 'S', 'T', 'I', 'X' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 15);
+  b_p = false;
+  if (varargin_1->size[1] == 15) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -504,14 +557,18 @@ static boolean_T bg_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T c_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'M', 'A', 'T', 'M', 'A', 'I', 'J' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -530,15 +587,19 @@ static boolean_T c_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T cb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'B', 'A', 'I', 'J'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -557,15 +618,19 @@ static boolean_T cb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T cc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[15] = { 'M', 'A', 'T', 'P', 'R', 'E', 'A', 'L', 'L', 'O',
     'C', 'A', 'T', 'O', 'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 15);
+  b_p = false;
+  if (varargin_1->size[1] == 15) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -584,14 +649,18 @@ static boolean_T cc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T cd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'D', 'G', 'M', 'R', 'E', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -610,14 +679,18 @@ static boolean_T cd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ce_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'P', 'C', 'J', 'A', 'C', 'O', 'B', 'I' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -636,14 +709,18 @@ static boolean_T ce_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T cf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'P', 'C', 'E', 'X', 'O', 'T', 'I', 'C' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -662,15 +739,19 @@ static boolean_T cf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T cg_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[15] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'M',
     'A', 'T', 'L', 'A', 'B' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 15);
+  b_p = false;
+  if (varargin_1->size[1] == 15) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -689,15 +770,19 @@ static boolean_T cg_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T d_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'M', 'A', 'I', 'J'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -716,15 +801,19 @@ static boolean_T d_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T db_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'M', 'A', 'T', 'M', 'P', 'I', 'B', 'A', 'I', 'J'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -743,14 +832,18 @@ static boolean_T db_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T dc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'V', 'E', 'C', 'S', 'E', 'Q' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -769,14 +862,18 @@ static boolean_T dc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T dd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'P', 'G', 'M', 'R', 'E', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -795,14 +892,18 @@ static boolean_T dd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T de_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'P', 'C', 'S', 'O', 'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -821,14 +922,18 @@ static boolean_T de_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T df_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[4] = { 'P', 'C', 'C', 'P' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 4);
+  b_p = false;
+  if (varargin_1->size[1] == 4) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -847,15 +952,19 @@ static boolean_T df_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T dg_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[14] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'P',
     'E', 'T', 'S', 'C' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 14);
+  b_p = false;
+  if (varargin_1->size[1] == 14) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -874,15 +983,19 @@ static boolean_T dg_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T e_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'M', 'A', 'T', 'M', 'P', 'I', 'M', 'A', 'I', 'J'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -901,14 +1014,18 @@ static boolean_T e_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T eb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'M', 'A', 'T', 'M', 'P', 'I', 'A', 'D', 'J' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -927,14 +1044,18 @@ static boolean_T eb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ec_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'V', 'E', 'C', 'M', 'P', 'I' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -953,14 +1074,18 @@ static boolean_T ec_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ed_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'K', 'S', 'P', 'T', 'C', 'Q', 'M', 'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -979,14 +1104,18 @@ static boolean_T ed_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ee_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[4] = { 'P', 'C', 'L', 'U' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 4);
+  b_p = false;
+  if (varargin_1->size[1] == 4) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1005,14 +1134,18 @@ static boolean_T ee_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ef_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'P', 'C', 'B', 'F', 'B', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1031,15 +1164,19 @@ static boolean_T ef_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T eg_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[12] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'B',
     'A', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 12);
+  b_p = false;
+  if (varargin_1->size[1] == 12) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1058,14 +1195,18 @@ static boolean_T eg_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T f_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'M', 'A', 'T', 'I', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1084,14 +1225,18 @@ static boolean_T f_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T fb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'M', 'A', 'T', 'S', 'B', 'A', 'I', 'J' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1110,15 +1255,19 @@ static boolean_T fb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T fc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'V', 'E', 'C', 'S', 'T', 'A', 'N', 'D', 'A', 'R',
     'D' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1137,14 +1286,18 @@ static boolean_T fc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T fd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'K', 'S', 'P', 'B', 'C', 'G', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1163,14 +1316,18 @@ static boolean_T fd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T fe_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'P', 'C', 'S', 'H', 'E', 'L', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1189,14 +1346,18 @@ static boolean_T fe_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ff_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'P', 'C', 'L', 'S', 'C' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1215,15 +1376,19 @@ static boolean_T ff_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T fg_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[17] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'C',
     'U', 'S', 'P', 'A', 'R', 'S', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 17);
+  b_p = false;
+  if (varargin_1->size[1] == 17) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1242,14 +1407,18 @@ static boolean_T fg_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T g_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'M', 'A', 'T', 'A', 'I', 'J' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1268,15 +1437,19 @@ static boolean_T g_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T gb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'S', 'B', 'A', 'I',
     'J' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1295,14 +1468,18 @@ static boolean_T gb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T gc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'V', 'E', 'C', 'S', 'H', 'A', 'R', 'E', 'D' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1321,14 +1498,18 @@ static boolean_T gc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T gd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'K', 'S', 'P', 'I', 'B', 'C', 'G', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1347,14 +1528,18 @@ static boolean_T gd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ge_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'P', 'C', 'B', 'J', 'A', 'C', 'O', 'B', 'I' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1373,14 +1558,18 @@ static boolean_T ge_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T gf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'P', 'C', 'P', 'Y', 'T', 'H', 'O', 'N' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1399,14 +1588,18 @@ static boolean_T gf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T h_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'A', 'I', 'J' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1425,15 +1618,19 @@ static boolean_T h_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T hb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'M', 'A', 'T', 'M', 'P', 'I', 'S', 'B', 'A', 'I',
     'J' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1452,15 +1649,19 @@ static boolean_T hb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T hc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[14] = { 'V', 'E', 'C', 'S', 'E', 'Q', 'V', 'I', 'E', 'N',
     'N', 'A', 'C', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 14);
+  b_p = false;
+  if (varargin_1->size[1] == 14) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1479,14 +1680,18 @@ static boolean_T hc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T hd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'K', 'S', 'P', 'F', 'B', 'C', 'G', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1505,14 +1710,18 @@ static boolean_T hd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T he_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[4] = { 'P', 'C', 'M', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 4);
+  b_p = false;
+  if (varargin_1->size[1] == 4) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1531,14 +1740,18 @@ static boolean_T he_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T hf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'P', 'C', 'P', 'F', 'M', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1557,14 +1770,18 @@ static boolean_T hf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T i_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'M', 'A', 'T', 'M', 'P', 'I', 'A', 'I', 'J' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1583,14 +1800,18 @@ static boolean_T i_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ib_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'M', 'A', 'T', 'D', 'A', 'A', 'D' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1609,15 +1830,19 @@ static boolean_T ib_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ic_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[14] = { 'V', 'E', 'C', 'M', 'P', 'I', 'V', 'I', 'E', 'N',
     'N', 'A', 'C', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 14);
+  b_p = false;
+  if (varargin_1->size[1] == 14) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1636,14 +1861,18 @@ static boolean_T ic_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T id_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'F', 'B', 'C', 'G', 'S', 'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1662,15 +1891,19 @@ static boolean_T id_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ie_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'P', 'C', 'E', 'I', 'S', 'E', 'N', 'S', 'T', 'A',
     'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1689,14 +1922,18 @@ static boolean_T ie_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T if_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'P', 'C', 'S', 'Y', 'S', 'P', 'F', 'M', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1715,15 +1952,19 @@ static boolean_T if_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[17] = { 'P', 'E', 'T', 'S', 'C', '_', 'N', 'U', 'L', 'L',
     '_', 'S', 'T', 'R', 'I', 'N', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 17);
+  b_p = false;
+  if (varargin_1->size[1] == 17) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1742,14 +1983,18 @@ static boolean_T isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T j_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'M', 'A', 'T', 'A', 'I', 'J', 'C', 'R', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1768,14 +2013,18 @@ static boolean_T j_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T jb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'M', 'A', 'T', 'M', 'F', 'F', 'D' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1794,15 +2043,19 @@ static boolean_T jb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T jc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'V', 'E', 'C', 'V', 'I', 'E', 'N', 'N', 'A', 'C',
     'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1821,14 +2074,18 @@ static boolean_T jc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T jd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'K', 'S', 'P', 'B', 'C', 'G', 'S', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1847,14 +2104,18 @@ static boolean_T jd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T je_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'P', 'C', 'I', 'L', 'U' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1873,15 +2134,19 @@ static boolean_T je_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T jf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[14] = { 'P', 'C', 'R', 'E', 'D', 'I', 'S', 'T', 'R', 'I',
     'B', 'U', 'T', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 14);
+  b_p = false;
+  if (varargin_1->size[1] == 14) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1900,15 +2165,19 @@ static boolean_T jf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T k_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[12] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'A', 'I', 'J', 'C',
     'R', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 12);
+  b_p = false;
+  if (varargin_1->size[1] == 12) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1927,14 +2196,18 @@ static boolean_T k_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T kb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'M', 'A', 'T', 'N', 'O', 'R', 'M', 'A', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1953,15 +2226,19 @@ static boolean_T kb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T kc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'V', 'E', 'C', 'S', 'E', 'Q', 'C', 'U', 'D', 'A'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -1980,14 +2257,18 @@ static boolean_T kc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T kd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'K', 'S', 'P', 'C', 'G', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2006,14 +2287,18 @@ static boolean_T kd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ke_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'P', 'C', 'I', 'C', 'C' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2032,14 +2317,18 @@ static boolean_T ke_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T kf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'P', 'C', 'S', 'V', 'D' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2058,15 +2347,19 @@ static boolean_T kf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T l_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[12] = { 'M', 'A', 'T', 'M', 'P', 'I', 'A', 'I', 'J', 'C',
     'R', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 12);
+  b_p = false;
+  if (varargin_1->size[1] == 12) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2085,15 +2378,19 @@ static boolean_T l_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T lb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[18] = { 'M', 'A', 'T', 'N', 'O', 'R', 'M', 'A', 'L', 'H',
     'E', 'R', 'M', 'I', 'T', 'I', 'A', 'N' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 18);
+  b_p = false;
+  if (varargin_1->size[1] == 18) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2112,15 +2409,19 @@ static boolean_T lb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T lc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'V', 'E', 'C', 'M', 'P', 'I', 'C', 'U', 'D', 'A'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2139,14 +2440,18 @@ static boolean_T lc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ld_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'K', 'S', 'P', 'T', 'F', 'Q', 'M', 'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2165,14 +2470,18 @@ static boolean_T ld_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T le_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'P', 'C', 'A', 'S', 'M' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2191,14 +2500,18 @@ static boolean_T le_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T lf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'P', 'C', 'G', 'A', 'M', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2225,7 +2538,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
   emxEnsureCapacity_char_T(b_varargin_3, i);
-  loop_ub = varargin_3->size[0] * varargin_3->size[1];
+  loop_ub = varargin_3->size[1];
   for (i = 0; i < loop_ub; i++) {
     b_varargin_3->data[i] = varargin_3->data[i];
   }
@@ -2237,15 +2550,19 @@ static void m2c_error(const emxArray_char_T *varargin_3)
 
 static boolean_T m_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[14] = { 'M', 'A', 'T', 'A', 'I', 'J', 'C', 'U', 'S', 'P',
     'A', 'R', 'S', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 14);
+  b_p = false;
+  if (varargin_1->size[1] == 14) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2264,14 +2581,18 @@ static boolean_T m_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T mb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'M', 'A', 'T', 'L', 'R', 'C' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2290,14 +2611,18 @@ static boolean_T mb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T mc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'V', 'E', 'C', 'C', 'U', 'D', 'A' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2316,14 +2641,18 @@ static boolean_T mc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T md_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'K', 'S', 'P', 'C', 'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2342,14 +2671,18 @@ static boolean_T md_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T me_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'P', 'C', 'G', 'A', 'S', 'M' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2368,14 +2701,18 @@ static boolean_T me_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T mf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'P', 'C', 'B', 'D', 'D', 'C' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2394,15 +2731,19 @@ static boolean_T mf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T n_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[17] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'A', 'I', 'J', 'C',
     'U', 'S', 'P', 'A', 'R', 'S', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 17);
+  b_p = false;
+  if (varargin_1->size[1] == 17) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2421,15 +2762,19 @@ static boolean_T n_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T nb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'M', 'A', 'T', 'S', 'C', 'A', 'T', 'T', 'E', 'R'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2448,14 +2793,18 @@ static boolean_T nb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T nc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'V', 'E', 'C', 'N', 'E', 'S', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2474,14 +2823,18 @@ static boolean_T nc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T nd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'P', 'I', 'P', 'E', 'C', 'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2500,14 +2853,18 @@ static boolean_T nd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ne_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'P', 'C', 'K', 'S', 'P' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2526,15 +2883,19 @@ static boolean_T ne_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T nf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'P', 'C', 'K', 'A', 'C', 'Z', 'M', 'A', 'R', 'Z'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2553,15 +2914,19 @@ static boolean_T nf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T o_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[17] = { 'M', 'A', 'T', 'M', 'P', 'I', 'A', 'I', 'J', 'C',
     'U', 'S', 'P', 'A', 'R', 'S', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 17);
+  b_p = false;
+  if (varargin_1->size[1] == 17) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2580,15 +2945,19 @@ static boolean_T o_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ob_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'M', 'A', 'T', 'B', 'L', 'O', 'C', 'K', 'M', 'A',
     'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2607,15 +2976,19 @@ static boolean_T ob_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T oc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[13] = { 'K', 'S', 'P', 'R', 'I', 'C', 'H', 'A', 'R', 'D',
     'S', 'O', 'N' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 13);
+  b_p = false;
+  if (varargin_1->size[1] == 13) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2634,14 +3007,18 @@ static boolean_T oc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T od_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'K', 'S', 'P', 'L', 'S', 'Q', 'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2660,15 +3037,19 @@ static boolean_T od_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T oe_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'P', 'C', 'C', 'O', 'M', 'P', 'O', 'S', 'I', 'T',
     'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2687,15 +3068,19 @@ static boolean_T oe_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T of_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'P', 'C', 'T', 'E', 'L', 'E', 'S', 'C', 'O', 'P',
     'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2714,15 +3099,19 @@ static boolean_T of_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T p_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[14] = { 'M', 'A', 'T', 'A', 'I', 'J', 'V', 'I', 'E', 'N',
     'N', 'A', 'C', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 14);
+  b_p = false;
+  if (varargin_1->size[1] == 14) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2741,15 +3130,19 @@ static boolean_T p_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T pb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[12] = { 'M', 'A', 'T', 'C', 'O', 'M', 'P', 'O', 'S', 'I',
     'T', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 12);
+  b_p = false;
+  if (varargin_1->size[1] == 12) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2768,15 +3161,19 @@ static boolean_T pb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T pc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[12] = { 'K', 'S', 'P', 'C', 'H', 'E', 'B', 'Y', 'S', 'H',
     'E', 'V' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 12);
+  b_p = false;
+  if (varargin_1->size[1] == 12) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2795,15 +3192,19 @@ static boolean_T pc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T pd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'K', 'S', 'P', 'P', 'R', 'E', 'O', 'N', 'L', 'Y'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2822,15 +3223,19 @@ static boolean_T pd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T pe_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'P', 'C', 'R', 'E', 'D', 'U', 'N', 'D', 'A', 'N',
     'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2849,15 +3254,19 @@ static boolean_T pe_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T pf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[16] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'S',
     'U', 'P', 'E', 'R', 'L', 'U' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 16);
+  b_p = false;
+  if (varargin_1->size[1] == 16) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2876,15 +3285,19 @@ static boolean_T pf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T q_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[17] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'A', 'I', 'J', 'V',
     'I', 'E', 'N', 'N', 'A', 'C', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 17);
+  b_p = false;
+  if (varargin_1->size[1] == 17) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2903,14 +3316,18 @@ static boolean_T q_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T qb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'M', 'A', 'T', 'F', 'F', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2929,14 +3346,18 @@ static boolean_T qb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T qc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'K', 'S', 'P', 'C', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2955,14 +3376,18 @@ static boolean_T qc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T qd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'K', 'S', 'P', 'Q', 'C', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -2981,14 +3406,18 @@ static boolean_T qd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T qe_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'P', 'C', 'S', 'P', 'A', 'I' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3007,15 +3436,19 @@ static boolean_T qe_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T qf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[21] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'S',
     'U', 'P', 'E', 'R', 'L', 'U', '_', 'D', 'I', 'S', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 21);
+  b_p = false;
+  if (varargin_1->size[1] == 21) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3034,15 +3467,19 @@ static boolean_T qf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T r_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[17] = { 'M', 'A', 'T', 'M', 'P', 'I', 'A', 'I', 'J', 'V',
     'I', 'E', 'N', 'N', 'A', 'C', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 17);
+  b_p = false;
+  if (varargin_1->size[1] == 17) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3061,14 +3498,18 @@ static boolean_T r_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T rb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'M', 'A', 'T', 'F', 'F', 'T', 'W' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3087,15 +3528,19 @@ static boolean_T rb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T rc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'K', 'S', 'P', 'G', 'R', 'O', 'P', 'P', 'C', 'G'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3114,14 +3559,18 @@ static boolean_T rc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T rd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'K', 'S', 'P', 'B', 'I', 'C', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3140,14 +3589,18 @@ static boolean_T rd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T re_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[4] = { 'P', 'C', 'N', 'N' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 4);
+  b_p = false;
+  if (varargin_1->size[1] == 4) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3166,15 +3619,19 @@ static boolean_T re_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T rf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[16] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'U',
     'M', 'F', 'P', 'A', 'C', 'K' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 16);
+  b_p = false;
+  if (varargin_1->size[1] == 16) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3193,15 +3650,19 @@ static boolean_T rf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T s_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'M', 'A', 'T', 'A', 'I', 'J', 'P', 'E', 'R', 'M'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3220,15 +3681,19 @@ static boolean_T s_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T sb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'C', 'U', 'F', 'F',
     'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3247,14 +3712,18 @@ static boolean_T sb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T sc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'P', 'I', 'P', 'E', 'C', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3273,14 +3742,18 @@ static boolean_T sc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T sd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'M', 'I', 'N', 'R', 'E', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3299,15 +3772,19 @@ static boolean_T sd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T se_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'P', 'C', 'C', 'H', 'O', 'L', 'E', 'S', 'K', 'Y'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3326,15 +3803,19 @@ static boolean_T se_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T sf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[16] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'C',
     'H', 'O', 'L', 'M', 'O', 'D' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 16);
+  b_p = false;
+  if (varargin_1->size[1] == 16) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3353,15 +3834,19 @@ static boolean_T sf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T t_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[13] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'A', 'I', 'J', 'P',
     'E', 'R', 'M' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 13);
+  b_p = false;
+  if (varargin_1->size[1] == 13) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3380,15 +3865,19 @@ static boolean_T t_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T tb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[15] = { 'M', 'A', 'T', 'T', 'R', 'A', 'N', 'S', 'P', 'O',
     'S', 'E', 'M', 'A', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 15);
+  b_p = false;
+  if (varargin_1->size[1] == 15) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3407,15 +3896,19 @@ static boolean_T tb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T tc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'K', 'S', 'P', 'P', 'I', 'P', 'E', 'C', 'G', 'R',
     'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3434,14 +3927,18 @@ static boolean_T tc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T td_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'S', 'Y', 'M', 'M', 'L', 'Q' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3460,15 +3957,19 @@ static boolean_T td_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T te_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'P', 'C', 'P', 'B', 'J', 'A', 'C', 'O', 'B', 'I'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3487,15 +3988,19 @@ static boolean_T te_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T tf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[12] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'K',
     'L', 'U' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 12);
+  b_p = false;
+  if (varargin_1->size[1] == 12) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3514,15 +4019,19 @@ static boolean_T tf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T u_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[13] = { 'M', 'A', 'T', 'M', 'P', 'I', 'A', 'I', 'J', 'P',
     'E', 'R', 'M' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 13);
+  b_p = false;
+  if (varargin_1->size[1] == 13) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3541,15 +4050,19 @@ static boolean_T u_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ub_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[18] = { 'M', 'A', 'T', 'S', 'C', 'H', 'U', 'R', 'C', 'O',
     'M', 'P', 'L', 'E', 'M', 'E', 'N', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 18);
+  b_p = false;
+  if (varargin_1->size[1] == 18) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3568,14 +4081,18 @@ static boolean_T ub_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T uc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'K', 'S', 'P', 'C', 'G', 'N', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3594,14 +4111,18 @@ static boolean_T uc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ud_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'K', 'S', 'P', 'L', 'C', 'D' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3620,14 +4141,18 @@ static boolean_T ud_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ue_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'P', 'C', 'M', 'A', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3646,15 +4171,19 @@ static boolean_T ue_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T uf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[18] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'E',
     'L', 'E', 'M', 'E', 'N', 'T', 'A', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 18);
+  b_p = false;
+  if (varargin_1->size[1] == 18) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3673,14 +4202,18 @@ static boolean_T uf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T v_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'M', 'A', 'T', 'S', 'H', 'E', 'L', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3699,14 +4232,18 @@ static boolean_T v_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T vb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'M', 'A', 'T', 'P', 'Y', 'T', 'H', 'O', 'N' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3725,14 +4262,18 @@ static boolean_T vb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T vc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'K', 'S', 'P', 'F', 'C', 'G' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3751,14 +4292,18 @@ static boolean_T vc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T vd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[9] = { 'K', 'S', 'P', 'P', 'Y', 'T', 'H', 'O', 'N' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 9);
+  b_p = false;
+  if (varargin_1->size[1] == 9) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3777,14 +4322,18 @@ static boolean_T vd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ve_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'P', 'C', 'H', 'Y', 'P', 'R', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3803,15 +4352,19 @@ static boolean_T ve_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T vf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[13] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'E',
     'S', 'S', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 13);
+  b_p = false;
+  if (varargin_1->size[1] == 13) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3830,14 +4383,18 @@ static boolean_T vf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T w_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'M', 'A', 'T', 'D', 'E', 'N', 'S', 'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3856,15 +4413,19 @@ static boolean_T w_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T wb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[14] = { 'M', 'A', 'T', 'H', 'Y', 'P', 'R', 'E', 'S', 'T',
     'R', 'U', 'C', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 14);
+  b_p = false;
+  if (varargin_1->size[1] == 14) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3883,15 +4444,19 @@ static boolean_T wb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T wc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'K', 'S', 'P', 'P', 'I', 'P', 'E', 'F', 'C', 'G'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3910,14 +4475,18 @@ static boolean_T wc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T wd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[6] = { 'K', 'S', 'P', 'G', 'C', 'R' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 6);
+  b_p = false;
+  if (varargin_1->size[1] == 6) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3936,14 +4505,18 @@ static boolean_T wd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T we_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[7] = { 'P', 'C', 'P', 'A', 'R', 'M', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 7);
+  b_p = false;
+  if (varargin_1->size[1] == 7) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3962,15 +4535,19 @@ static boolean_T we_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T wf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[14] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'L',
     'U', 'S', 'O', 'L' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 14);
+  b_p = false;
+  if (varargin_1->size[1] == 14) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -3989,15 +4566,19 @@ static boolean_T wf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T x_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'M', 'A', 'T', 'S', 'E', 'Q', 'D', 'E', 'N', 'S',
     'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4016,15 +4597,19 @@ static boolean_T x_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T xb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[15] = { 'M', 'A', 'T', 'H', 'Y', 'P', 'R', 'E', 'S', 'S',
     'T', 'R', 'U', 'C', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 15);
+  b_p = false;
+  if (varargin_1->size[1] == 15) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4043,14 +4628,18 @@ static boolean_T xb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T xc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'K', 'S', 'P', 'G', 'M', 'R', 'E', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4069,15 +4658,19 @@ static boolean_T xc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T xd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[10] = { 'K', 'S', 'P', 'P', 'I', 'P', 'E', 'G', 'C', 'R'
   };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 10);
+  b_p = false;
+  if (varargin_1->size[1] == 10) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4096,15 +4689,19 @@ static boolean_T xd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T xe_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[12] = { 'P', 'C', 'F', 'I', 'E', 'L', 'D', 'S', 'P', 'L',
     'I', 'T' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 12);
+  b_p = false;
+  if (varargin_1->size[1] == 12) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4123,15 +4720,19 @@ static boolean_T xe_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T xf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[14] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'M',
     'U', 'M', 'P', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 14);
+  b_p = false;
+  if (varargin_1->size[1] == 14) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4150,15 +4751,19 @@ static boolean_T xf_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T y_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[11] = { 'M', 'A', 'T', 'M', 'P', 'I', 'D', 'E', 'N', 'S',
     'E' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 11);
+  b_p = false;
+  if (varargin_1->size[1] == 11) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4177,15 +4782,19 @@ static boolean_T y_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T yb_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[12] = { 'M', 'A', 'T', 'S', 'U', 'B', 'M', 'A', 'T', 'R',
     'I', 'X' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 12);
+  b_p = false;
+  if (varargin_1->size[1] == 12) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4204,15 +4813,19 @@ static boolean_T yb_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T yc_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[13] = { 'K', 'S', 'P', 'P', 'I', 'P', 'E', 'F', 'G', 'M',
     'R', 'E', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 13);
+  b_p = false;
+  if (varargin_1->size[1] == 13) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4231,14 +4844,18 @@ static boolean_T yc_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T yd_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[8] = { 'K', 'S', 'P', 'T', 'S', 'I', 'R', 'M' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 8);
+  b_p = false;
+  if (varargin_1->size[1] == 8) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4257,14 +4874,18 @@ static boolean_T yd_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T ye_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[5] = { 'P', 'C', 'T', 'F', 'S' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 5);
+  b_p = false;
+  if (varargin_1->size[1] == 5) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4283,15 +4904,19 @@ static boolean_T ye_isequal(const emxArray_char_T *varargin_1)
 
 static boolean_T yf_isequal(const emxArray_char_T *varargin_1)
 {
-  boolean_T p;
-  boolean_T b_p;
-  int k;
-  boolean_T exitg1;
   static const char cv[20] = { 'M', 'A', 'T', 'S', 'O', 'L', 'V', 'E', 'R', 'M',
     'K', 'L', '_', 'P', 'A', 'R', 'D', 'I', 'S', 'O' };
 
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
   p = false;
-  b_p = (varargin_1->size[1] == 20);
+  b_p = false;
+  if (varargin_1->size[1] == 20) {
+    b_p = true;
+  }
+
   if (b_p && (varargin_1->size[1] != 0)) {
     k = 0;
     exitg1 = false;
@@ -4311,14 +4936,13 @@ static boolean_T yf_isequal(const emxArray_char_T *varargin_1)
 void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
                     *toplevel)
 {
-  emxArray_uint8_T *str1;
   const char * b_str;
-  int empty;
-  int n;
-  int i;
-  unsigned int unnamed_idx_1;
   char * ptr;
   emxArray_char_T *b_name;
+  emxArray_uint8_T *str1;
+  int empty;
+  int i;
+  int n;
   emxInit_uint8_T(&str1, 2);
   if (isequal(name)) {
     b_str = (NULL);
@@ -4344,12 +4968,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4377,12 +5000,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4410,12 +5032,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4443,12 +5064,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4476,12 +5096,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4509,12 +5128,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4542,12 +5160,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4575,12 +5192,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4608,12 +5224,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4641,12 +5256,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4674,12 +5288,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4707,12 +5320,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4740,12 +5352,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4773,12 +5384,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4806,12 +5416,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4839,12 +5448,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4872,12 +5480,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4905,12 +5512,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4938,12 +5544,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -4971,12 +5576,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5004,12 +5608,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5037,12 +5640,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5070,12 +5672,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5103,12 +5704,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5136,12 +5736,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5169,12 +5768,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5202,12 +5800,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5235,12 +5832,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5268,12 +5864,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5301,12 +5896,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5334,12 +5928,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5367,12 +5960,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5400,12 +5992,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5433,12 +6024,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5466,12 +6056,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5499,12 +6088,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5532,12 +6120,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5565,12 +6152,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5598,12 +6184,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5631,12 +6216,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5664,12 +6248,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5697,12 +6280,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5730,12 +6312,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5763,12 +6344,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5796,12 +6376,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5829,12 +6408,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5862,12 +6440,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5895,12 +6472,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5928,12 +6504,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5961,12 +6536,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -5994,12 +6568,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6027,12 +6600,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6060,12 +6632,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6093,12 +6664,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6126,12 +6696,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6159,12 +6728,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6192,12 +6760,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6225,12 +6792,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6258,12 +6824,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6291,12 +6856,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6324,12 +6888,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6357,12 +6920,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6390,12 +6952,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6423,12 +6984,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6456,12 +7016,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6489,12 +7048,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6522,12 +7080,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6555,12 +7112,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6588,12 +7144,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6621,12 +7176,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6654,12 +7208,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6687,12 +7240,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6720,12 +7272,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6753,12 +7304,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6786,12 +7336,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6819,12 +7368,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6852,12 +7400,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6885,12 +7432,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6918,12 +7464,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6951,12 +7496,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -6984,12 +7528,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7017,12 +7560,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7050,12 +7592,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7083,12 +7624,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7116,12 +7656,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7149,12 +7688,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7182,12 +7720,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7215,12 +7752,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7248,12 +7784,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7281,12 +7816,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7314,12 +7848,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7347,12 +7880,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7380,12 +7912,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7413,12 +7944,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7446,12 +7976,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7479,12 +8008,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7512,12 +8040,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7545,12 +8072,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7578,12 +8104,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7611,12 +8136,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7644,12 +8168,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7677,12 +8200,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7710,12 +8232,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7743,12 +8264,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7776,12 +8296,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7809,12 +8328,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7842,12 +8360,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7875,12 +8392,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7908,12 +8424,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7941,12 +8456,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -7974,12 +8488,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8007,12 +8520,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8040,12 +8552,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8073,12 +8584,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8106,12 +8616,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8139,12 +8648,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8172,12 +8680,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8205,12 +8712,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8238,12 +8744,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8271,12 +8776,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8304,12 +8808,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8337,12 +8840,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8370,12 +8872,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8403,12 +8904,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8436,12 +8936,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8469,12 +8968,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8502,12 +9000,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8535,12 +9032,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8568,12 +9064,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8601,12 +9096,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8634,12 +9128,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8667,12 +9160,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8700,12 +9192,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8733,12 +9224,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8766,12 +9256,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8799,12 +9288,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8832,12 +9320,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8865,12 +9352,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8898,12 +9384,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8931,12 +9416,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8964,12 +9448,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -8997,12 +9480,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9030,12 +9512,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9063,12 +9544,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9096,12 +9576,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9129,12 +9608,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9162,12 +9640,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9195,12 +9672,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9228,12 +9704,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9261,12 +9736,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9294,12 +9768,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9327,12 +9800,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9360,12 +9832,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9393,12 +9864,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9426,12 +9896,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }
@@ -9459,12 +9928,11 @@ void petscGetString(const emxArray_char_T *name, emxArray_char_T *str, boolean_T
       str1->size[1] = 0;
     }
 
-    unnamed_idx_1 = (unsigned int)str1->size[1];
     i = str->size[0] * str->size[1];
     str->size[0] = 1;
-    str->size[1] = (int)unnamed_idx_1;
+    str->size[1] = str1->size[1];
     emxEnsureCapacity_char_T(str, i);
-    empty = (int)unnamed_idx_1;
+    empty = str1->size[1];
     for (i = 0; i < empty; i++) {
       str->data[i] = (signed char)str1->data[i];
     }

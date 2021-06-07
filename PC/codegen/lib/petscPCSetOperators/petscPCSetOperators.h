@@ -1,15 +1,30 @@
 #ifndef PETSCPCSETOPERATORS_H
 #define PETSCPCSETOPERATORS_H
+
+#include "petscPCSetOperators_types.h"
+#include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-#include "rtwtypes.h"
-#include "petscPCSetOperators_types.h"
 
-extern void petscPCSetOperators(const struct0_T *pc, const struct0_T *Amat,
-  const struct0_T *Pmat, int *errCode, boolean_T *toplevel);
-extern void petscPCSetOperators_AforP(const struct0_T *ksp, const struct0_T
-  *Amat, int *errCode, boolean_T *toplevel);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern void petscPCSetOperators(const M2C_OpaqueType *pc,
+                                const M2C_OpaqueType *Amat,
+                                const M2C_OpaqueType *Pmat, int *errCode,
+                                boolean_T *toplevel);
+
+extern void petscPCSetOperators_AforP(const M2C_OpaqueType *ksp,
+                                      const M2C_OpaqueType *Amat, int *errCode,
+                                      boolean_T *toplevel);
+
 extern void petscPCSetOperators_initialize(void);
+
 extern void petscPCSetOperators_terminate(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

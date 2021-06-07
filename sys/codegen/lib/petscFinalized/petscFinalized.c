@@ -3,6 +3,7 @@
 #include "petsc4m.h"
 
 static void m2c_error(int varargin_3);
+
 static void m2c_error(int varargin_3)
 {
   M2C_error("petsc:RuntimeError", "PetscFinalized returned error code %d\n",
@@ -17,7 +18,6 @@ void petscFinalized(int *finalized, int *errCode, boolean_T *toplevel)
   if (*errCode != 0) {
     m2c_error(*errCode);
   }
-
   *finalized = (b);
 }
 

@@ -1,29 +1,55 @@
 #include "petscKSPSetResidualHistory.h"
+#include "petscKSPSetResidualHistory_types.h"
 #include "m2c.h"
 #include "petsc4m.h"
 
 static void b_m2c_error(int varargin_3);
-static KSP m2c_castdata(const emxArray_uint8_T *data);
+
+static boolean_T isequal(const emxArray_char_T *varargin_1);
+
 static void m2c_error(const emxArray_char_T *varargin_3);
+
 static void b_m2c_error(int varargin_3)
 {
-  const char * msgid;
-  const char * fmt;
+  const char *fmt;
+  const char *msgid;
   msgid = "petsc:RuntimeError";
   fmt = "petscKSPSetResidualHistory returned error code %d\n";
   M2C_error(msgid, fmt, varargin_3);
 }
 
-static KSP m2c_castdata(const emxArray_uint8_T *data)
+static boolean_T isequal(const emxArray_char_T *varargin_1)
 {
-  return *(KSP*)(&data->data[0]);
+  static const char cv[3] = {'K', 'S', 'P'};
+  int k;
+  boolean_T b_p;
+  boolean_T exitg1;
+  boolean_T p;
+  p = false;
+  b_p = false;
+  if (varargin_1->size[1] == 3) {
+    b_p = true;
+  }
+  if (b_p && (varargin_1->size[1] != 0)) {
+    k = 0;
+    exitg1 = false;
+    while ((!exitg1) && (k < 3)) {
+      if (!(varargin_1->data[k] == cv[k])) {
+        b_p = false;
+        exitg1 = true;
+      } else {
+        k++;
+      }
+    }
+  }
+  return b_p || p;
 }
 
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
+  const char *fmt;
+  const char *msgid;
   emxArray_char_T *b_varargin_3;
-  const char * msgid;
-  const char * fmt;
   int i;
   int loop_ub;
   emxInit_char_T(&b_varargin_3, 2);
@@ -33,44 +59,23 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
   emxEnsureCapacity_char_T(b_varargin_3, i);
-  loop_ub = varargin_3->size[0] * varargin_3->size[1];
+  loop_ub = varargin_3->size[1];
   for (i = 0; i < loop_ub; i++) {
     b_varargin_3->data[i] = varargin_3->data[i];
   }
-
   M2C_error(msgid, fmt, &b_varargin_3->data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscKSPSetResidualHistory(const struct0_T *ksp, int *errCode, boolean_T
-  *toplevel)
+void petscKSPSetResidualHistory(const M2C_OpaqueType *ksp, int *errCode,
+                                boolean_T *toplevel)
 {
-  boolean_T p;
-  int na;
-  boolean_T b_p;
-  boolean_T exitg1;
-  emxArray_char_T *b_ksp;
   KSP t_ksp;
+  PetscReal *a;
+  emxArray_char_T *b_ksp;
+  int na;
   int reset;
-  static const char cv[3] = { 'K', 'S', 'P' };
-
-  PetscReal * a;
-  p = (ksp->type->size[1] == 3);
-  if (p && (ksp->type->size[1] != 0)) {
-    na = 0;
-    exitg1 = false;
-    while ((!exitg1) && (na < 3)) {
-      if (!(ksp->type->data[na] == cv[na])) {
-        p = false;
-        exitg1 = true;
-      } else {
-        na++;
-      }
-    }
-  }
-
-  b_p = (int)p;
-  if (!b_p) {
+  if (!isequal(ksp->type)) {
     emxInit_char_T(&b_ksp, 2);
     reset = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
@@ -80,13 +85,11 @@ void petscKSPSetResidualHistory(const struct0_T *ksp, int *errCode, boolean_T
     for (reset = 0; reset < na; reset++) {
       b_ksp->data[reset] = ksp->type->data[reset];
     }
-
     b_ksp->data[ksp->type->size[1]] = '\x00';
     m2c_error(b_ksp);
     emxFree_char_T(&b_ksp);
   }
-
-  t_ksp = m2c_castdata(ksp->data);
+  t_ksp = *(KSP *)(&ksp->data->data[0]);
   na = (PETSC_DECIDE);
   reset = (PETSC_TRUE);
   a = NULL;
@@ -97,35 +100,15 @@ void petscKSPSetResidualHistory(const struct0_T *ksp, int *errCode, boolean_T
   }
 }
 
-void petscKSPSetResidualHistory_2args(const struct0_T *ksp, int na, int *errCode,
-  boolean_T *toplevel)
+void petscKSPSetResidualHistory_2args(const M2C_OpaqueType *ksp, int na,
+                                      int *errCode, boolean_T *toplevel)
 {
-  boolean_T p;
-  int reset;
-  boolean_T b_p;
-  boolean_T exitg1;
-  emxArray_char_T *b_ksp;
   KSP t_ksp;
+  PetscReal *a;
+  emxArray_char_T *b_ksp;
   int i;
-  static const char cv[3] = { 'K', 'S', 'P' };
-
-  PetscReal * a;
-  p = (ksp->type->size[1] == 3);
-  if (p && (ksp->type->size[1] != 0)) {
-    reset = 0;
-    exitg1 = false;
-    while ((!exitg1) && (reset < 3)) {
-      if (!(ksp->type->data[reset] == cv[reset])) {
-        p = false;
-        exitg1 = true;
-      } else {
-        reset++;
-      }
-    }
-  }
-
-  b_p = (int)p;
-  if (!b_p) {
+  int reset;
+  if (!isequal(ksp->type)) {
     emxInit_char_T(&b_ksp, 2);
     i = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
@@ -135,74 +118,49 @@ void petscKSPSetResidualHistory_2args(const struct0_T *ksp, int na, int *errCode
     for (i = 0; i < reset; i++) {
       b_ksp->data[i] = ksp->type->data[i];
     }
-
     b_ksp->data[ksp->type->size[1]] = '\x00';
     m2c_error(b_ksp);
     emxFree_char_T(&b_ksp);
   }
-
-  t_ksp = m2c_castdata(ksp->data);
+  t_ksp = *(KSP *)(&ksp->data->data[0]);
   reset = (PETSC_TRUE);
   a = NULL;
   *errCode = KSPSetResidualHistory(t_ksp, a, na, reset);
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }
-
   *toplevel = true;
 }
 
-void petscKSPSetResidualHistory_3args(const struct0_T *ksp, int na, int reset,
-  int *errCode, boolean_T *toplevel)
+void petscKSPSetResidualHistory_3args(const M2C_OpaqueType *ksp, int na,
+                                      int reset, int *errCode,
+                                      boolean_T *toplevel)
 {
-  boolean_T p;
-  int k;
-  boolean_T b_p;
-  boolean_T exitg1;
-  emxArray_char_T *b_ksp;
   KSP t_ksp;
+  PetscReal *a;
+  emxArray_char_T *b_ksp;
   int i;
-  static const char cv[3] = { 'K', 'S', 'P' };
-
-  PetscReal * a;
-  p = (ksp->type->size[1] == 3);
-  if (p && (ksp->type->size[1] != 0)) {
-    k = 0;
-    exitg1 = false;
-    while ((!exitg1) && (k < 3)) {
-      if (!(ksp->type->data[k] == cv[k])) {
-        p = false;
-        exitg1 = true;
-      } else {
-        k++;
-      }
-    }
-  }
-
-  b_p = (int)p;
-  if (!b_p) {
+  int loop_ub;
+  if (!isequal(ksp->type)) {
     emxInit_char_T(&b_ksp, 2);
     i = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
     emxEnsureCapacity_char_T(b_ksp, i);
-    k = ksp->type->size[1];
-    for (i = 0; i < k; i++) {
+    loop_ub = ksp->type->size[1];
+    for (i = 0; i < loop_ub; i++) {
       b_ksp->data[i] = ksp->type->data[i];
     }
-
     b_ksp->data[ksp->type->size[1]] = '\x00';
     m2c_error(b_ksp);
     emxFree_char_T(&b_ksp);
   }
-
-  t_ksp = m2c_castdata(ksp->data);
+  t_ksp = *(KSP *)(&ksp->data->data[0]);
   a = NULL;
   *errCode = KSPSetResidualHistory(t_ksp, a, na, reset);
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }
-
   *toplevel = true;
 }
 

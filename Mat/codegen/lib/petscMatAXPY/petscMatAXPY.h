@@ -1,15 +1,29 @@
 #ifndef PETSCMATAXPY_H
 #define PETSCMATAXPY_H
+
+#include "petscMatAXPY_types.h"
+#include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-#include "rtwtypes.h"
-#include "petscMatAXPY_types.h"
 
-extern void petscMatAXPY(const struct0_T *Y, double a, const struct0_T *X, int
-  mstr, int *errCode, boolean_T *toplevel);
-extern void petscMatAXPY_3args(const struct0_T *Y, double a, const struct0_T *X,
-  int *errCode, boolean_T *toplevel);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern void petscMatAXPY(const M2C_OpaqueType *Y, double a,
+                         const M2C_OpaqueType *X, int mstr, int *errCode,
+                         boolean_T *toplevel);
+
+extern void petscMatAXPY_3args(const M2C_OpaqueType *Y, double a,
+                               const M2C_OpaqueType *X, int *errCode,
+                               boolean_T *toplevel);
+
 extern void petscMatAXPY_initialize(void);
+
 extern void petscMatAXPY_terminate(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif

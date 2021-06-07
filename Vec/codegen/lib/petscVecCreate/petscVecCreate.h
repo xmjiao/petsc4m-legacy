@@ -1,15 +1,27 @@
 #ifndef PETSCVECCREATE_H
 #define PETSCVECCREATE_H
+
+#include "petscVecCreate_types.h"
+#include "rtwtypes.h"
 #include <stddef.h>
 #include <stdlib.h>
-#include "rtwtypes.h"
-#include "petscVecCreate_types.h"
 
-extern void petscVecCreate(const struct0_T *comm, struct0_T *vec, int *errCode,
-  boolean_T *toplevel);
-extern void petscVecCreate_World(struct0_T *vec, int *errCode, boolean_T
-  *topleve);
+#ifdef __cplusplus
+extern "C" {
+#endif
+
+extern void petscVecCreate(const M2C_OpaqueType *comm, M2C_OpaqueType *vec,
+                           int *errCode, boolean_T *toplevel);
+
+extern void petscVecCreate_World(M2C_OpaqueType *vec, int *errCode,
+                                 boolean_T *topleve);
+
 extern void petscVecCreate_initialize(void);
+
 extern void petscVecCreate_terminate(void);
+
+#ifdef __cplusplus
+}
+#endif
 
 #endif
