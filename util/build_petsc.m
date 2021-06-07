@@ -18,8 +18,7 @@ lines = [grep_pattern('sys/petscInitialize.m', '\n%#codegen\s+-args'), ...
     grep_pattern('PC/petsc*.m', '\n%#codegen\s+-args')];
 files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
 
-mexdir = {'{''../mex/''}'};
-opts = [{'-petsc', ['-I' petscroot '/include'], '-O3', '-mex'} mexdir{:}, varargin{:}];
+opts = [{'-petsc', ['-I' petscroot '/include'], '-O3', '-mex'}, varargin{:}];
 for i=1:length(files)
     try
         m2c(opts{:}, files{i}{1});
@@ -53,8 +52,7 @@ for i=1:length(files)
 end
 
 %Compile top-level functions for CRS and time top-level KSP functions
-mexdir = {'{''../mex/''}'};
-opts = [{'-petsc', '-ckdep', '-exe', '{''../exe/''}', '-mex'}, mexdir{:}, ...
+opts = [{'-petsc', '-ckdep', '-mex'}, ...
     '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
 m2c(opts{:}, 'petscSolveCRS');
 
@@ -68,16 +66,14 @@ end
 % PCMGSetRestriction,
 % Optional work vectors for PC: PCMGSetRhs, PCMGSetX, PCMGSetR
 %
-% MatDiagonalScale, MatScale,
-% MatTranspose, MatZeroEntries, MatShift, MatZeroEntries,
+% MatDiagonalScale, MatTranspose, MatZeroEntries, MatZeroEntries,
 % MatCreateTranspose, MatCreateNormal, MatIsTranspose,
 % MatIsSymmetric, MatIsHermitian
 %
-% VecWAXPY, VecAXPBY, VecScale,
-% VecDot, VecTDot,  VecDotBegin, VecDotEnd, VecNormBegin,
-% VecNormEnd, VecSum, VecCopy, VecSwap, VecPointwiseMult,
+% VecWAXPY, VecAXPBY, VecTDot,  VecDotBegin, VecDotEnd, VecNormBegin,
+% VecNormEnd, VecSum, VecSwap, VecPointwiseMult,
 % VecPointwiseDivide, VecMDot, VecMTDOt, VecMAXPTY, VecMax, VecMin,
-% VecAbs, VecReciprocal, VecShift, VecSet.
+% VecAbs, VecReciprocal
 %
 % MatCholeskyFactor, MatLUFactor, MatGetFactor, MatReorderForNonzeroDiagonal
 %

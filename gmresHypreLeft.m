@@ -125,7 +125,7 @@ end
 
 % Make sure PETSc is initialized
 if ~petscInitialized
-  init_petsc('-force');
+  init_petsc;
 end
 
 % Create HYPRE preconditioner

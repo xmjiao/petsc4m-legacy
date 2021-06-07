@@ -40,10 +40,11 @@ addpath([petscroot '/CRS']);
 
 addpath([petscroot '/util'])
 addpath([petscroot '/sys'])
-addpath([petscroot '/exe'])
 
-if isoctave || ~usejava('jvm') || nargin>0
-    init_petsc(varargin{:})
+if isoctave || ~usejava('jvm')
+    % PETSc should not be initialized automatically in MATLAB
+    % if JAVA is enabled
+    init_petsc
 end
 
 % Show help message
