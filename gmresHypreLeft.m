@@ -51,6 +51,10 @@ function varargout = gmresHypreLeft(varargin)
 %    convergence test (typically preconditioned residual).
 %
 % SEE ALSO: bicgstabHypre
+%
+% Note: This function is for illustrating the use of HYPRE
+%   through PETSc. It should never be used for product runs
+%   since using left-preconditioning is problematic.
 
 if nargin==0
     help gmresHypreLeft
@@ -108,7 +112,7 @@ end
 if nargin >= next_index + 5 && ~isempty(varargin{next_index + 5})
     opts = [' -pc_hypre_boomeramg_coarsen_type ' varargin{next_index + 5}];
 else
-    opts = [' -pc_hypre_boomeramg_coarsen_type HMIS'];
+    opts = ' -pc_hypre_boomeramg_coarsen_type HMIS';
 end
 
 if nargin >= next_index + 6 && ~isempty(varargin{next_index + 6})
