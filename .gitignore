@@ -46,6 +46,11 @@ octave-core
 **/codegen/lib/*/examples
 **/codegen/lib/*/interface
 **/codegen/lib/*/*_emxAPI.[hc]
+**/codegen/lib/*/.gitignore
+**/codegen/lib/*/*.tmw
+**/codegen/lib/*/defines.txt
+**/codegen/lib/*/*.dmr
+**/codegen/lib/*/_*
 *.html
 run_*_exe.m
 eval_*_ptx.m
