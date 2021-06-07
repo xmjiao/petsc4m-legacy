@@ -14,10 +14,6 @@ function pc = hypreCreate(row_ptr, col_ind, val, opts)
 % SEE ALSO:
 %   hypreApply, hypreDestroy
 
-if ~petscInitialized
-    petscInitialize;
-end
-
 [pc, errCode] = petscPCCreate(MPI_COMM_WORLD); assert(errCode==0, 'petscPCCreate failed'); 
 errCode = petscPCSetType(pc, PETSC_PCHYPRE); assert(errCode==0, 'petscPCSetType failed'); 
 mat = petscMatCreateAIJFromCRS(row_ptr, col_ind, val);
