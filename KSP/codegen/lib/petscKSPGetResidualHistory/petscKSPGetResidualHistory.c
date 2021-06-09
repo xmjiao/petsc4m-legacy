@@ -44,7 +44,7 @@ void petscKSPGetResidualHistory(const M2C_OpaqueType *ksp,
 {
   static const char cv[3] = {'K', 'S', 'P'};
   KSP t_ksp;
-  PetscReal *a;
+  const PetscReal *a;
   emxArray_char_T *b_ksp;
   int i;
   int na;

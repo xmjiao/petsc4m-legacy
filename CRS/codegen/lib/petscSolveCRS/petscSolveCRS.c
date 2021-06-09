@@ -63,7 +63,7 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   PC pc;
   PCType c_type;
   PetscObject t_obj;
-  PetscReal *a;
+  const PetscReal *a;
   emxArray_char_T *side;
   double abstol;
   double b_rtol;
@@ -392,7 +392,7 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   PC pc;
   PCType c_type;
   PetscObject t_obj;
-  PetscReal *a;
+  const PetscReal *a;
   emxArray_char_T *side;
   double abstol;
   double bnrm;
@@ -1196,7 +1196,7 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   PC pc;
   PCType b_type;
   PetscObject t_obj;
-  PetscReal *a;
+  const PetscReal *a;
   Vec bVec;
   Vec t_vec;
   Vec x0;

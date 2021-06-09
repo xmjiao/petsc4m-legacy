@@ -19,9 +19,15 @@ lines = [grep_pattern('sys/petscInitialize.m', '\n%#codegen\s+-args'), ...
 files = regexp(lines, '([\.\/\\\w]+.m):', 'tokens');
 
 opts = [{'-petsc', ['-I' petscroot '/include'], '-O3', '-mex'}, varargin{:}];
+opts_nowarn = [{'-petsc', ['-I' petscroot '/include'], '-O3', '-mex', ...
+    '-cflags', '{''-Wno-incompatible-pointer-types''}'}, varargin{:}];
 for i=1:length(files)
     try
-        m2c(opts{:}, files{i}{1});
+        if strcmp(files{i}{1}, 'KSP/petscKSPGetResidualHistory.m')
+            m2c(opts_nowarn{:}, files{i}{1});
+        else
+            m2c(opts{:}, files{i}{1});
+        end
     catch ME
         if any(strcmp(varargin, '-force'))
             cd(curpath);
@@ -53,11 +59,13 @@ end
 
 %Compile top-level functions for CRS and time top-level KSP functions
 if isoctave
-    opts = [{'-petsc', '-ckdep', '-mex'}, ...
-        '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
+    opts = [{'-petsc', '-ckdep', '-mex', ...
+        '-cflags', '{''-Wno-incompatible-pointer-types''}', ...
+        '-time', '{''petscKSPSetup'', ''petscKSPSolve''}'}, varargin{:}];
 else
-    opts = [{'-petsc', '-ckdep', '-exe', '{''../exe/''}'}, ...
-        '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
+    opts = [{'-petsc', '-ckdep', '-exe', '{''../exe/''}', ...
+        '-cflags', '{''-Wno-incompatible-pointer-types''}', ...
+        '-time', '{''petscKSPSetup'', ''petscKSPSolve''}'}, varargin{:}];
 end
 m2c(opts{:}, 'petscSolveCRS');
 
