@@ -13,7 +13,7 @@ function [str, toplevel] = petscGetString(name)
 %     MATSEQAIJPERM, MATMPIAIJPERM, MATSHELL, MATDENSE,
 %     MATSEQDENSE, MATMPIDENSE, MATELEMENTAL, MATBAIJ,
 %     MATSEQBAIJ, MATMPIBAIJ, MATMPIADJ, MATSBAIJ, MATSEQSBAIJ,
-%     MATMPISBAIJ, MATDAAD, MATMFFD, MATNORMAL,
+%     MATMPISBAIJ, MATMFFD, MATNORMAL,
 %     MATNORMALHERMITIAN, MATLRC, MATSCATTER, MATBLOCKMAT,
 %     MATCOMPOSITE, MATFFT, MATFFTW, MATSEQCUFFT, MATTRANSPOSEMAT,
 %     MATSCHURCOMPLEMENT, MATPYTHON, MATHYPRESTRUCT, MATHYPRESSTRUCT,
@@ -55,7 +55,7 @@ function [str, toplevel] = petscGetString(name)
 coder.cinclude('petsc4m.h');
 
 if isempty(coder.target)
-    error('Function petscGetObject must be compiled.');
+    error('Function petscGetString must be compiled.');
 end
 
 if isequal(name, 'PETSC_NULL_STRING')
@@ -124,8 +124,6 @@ elseif isequal(name,  'MATSEQSBAIJ')
     [str, toplevel] = get_string('MatType', 'MATSEQSBAIJ', nargout>1);
 elseif isequal(name,  'MATMPISBAIJ')
     [str, toplevel] = get_string('MatType', 'MATMPISBAIJ', nargout>1);
-elseif isequal(name,  'MATDAAD')
-    [str, toplevel] = get_string('MatType', 'MATDAAD', nargout>1);
 elseif isequal(name,  'MATMFFD')
     [str, toplevel] = get_string('MatType', 'MATMFFD', nargout>1);
 elseif isequal(name,  'MATNORMAL')

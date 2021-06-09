@@ -11,7 +11,7 @@ function [val, toplevel] = petscGetEnum(name)
 %      VEC_SUBSET_OFF_PROC_ENTRIES
 %
 % MatOption: MAT_ROW_ORIENTED, MAT_SYMMETRIC, MAT_STRUCTURALLY_SYMMETRIC,
-%      MAT_NEW_DIAGONALS, MAT_IGNORE_OFF_PROC_ENTRIES,
+%      MAT_IGNORE_OFF_PROC_ENTRIES,
 %      MAT_USE_HASH_TABLE, MAT_KEEP_NONZERO_PATTERN,
 %      MAT_IGNORE_ZERO_ENTRIES, MAT_USE_INODES, MAT_HERMITIAN,
 %      MAT_SYMMETRY_ETERNAL, MAT_NEW_NONZERO_LOCATION_ERR,
@@ -112,8 +112,6 @@ switch name
         [val, toplevel] = get_val('MatOption', 'MAT_SYMMETRIC', nargin>1);
     case 'MAT_STRUCTURALLY_SYMMETRIC'
         [val, toplevel] = get_val('MatOption', 'MAT_STRUCTURALLY_SYMMETRIC', nargin>1);
-    case 'MAT_NEW_DIAGONALS'
-        [val, toplevel] = get_val('MatOption', 'MAT_NEW_DIAGONALS', nargin>1);
     case 'MAT_IGNORE_OFF_PROC_ENTRIES'
         [val, toplevel] = get_val('MatOption', 'MAT_IGNORE_OFF_PROC_ENTRIES', nargin>1);
     case 'MAT_USE_HASH_TABLE'
