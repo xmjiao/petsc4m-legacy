@@ -109,8 +109,6 @@ static boolean_T r_strcmp(const emxArray_char_T *a);
 
 static boolean_T rb_strcmp(const emxArray_char_T *a);
 
-static boolean_T rc_strcmp(const emxArray_char_T *a);
-
 static boolean_T s_strcmp(const emxArray_char_T *a);
 
 static boolean_T sb_strcmp(const emxArray_char_T *a);
@@ -168,17 +166,17 @@ static boolean_T ab_strcmp(const emxArray_char_T *a)
 
 static boolean_T ac_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[14] = {'M', 'A', 'T', '_', 'F', 'A', 'C',
-                              'T', 'O', 'R', '_', 'I', 'C', 'C'};
+  static const char cv[16] = {'M', 'A', 'T', '_', 'F', 'A', 'C', 'T',
+                              'O', 'R', '_', 'I', 'L', 'U', 'D', 'T'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 14) {
+  if (a->size[1] == 16) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 14) {
+      if (kstr < 16) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -248,17 +246,16 @@ static boolean_T bb_strcmp(const emxArray_char_T *a)
 
 static boolean_T bc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[16] = {'M', 'A', 'T', '_', 'F', 'A', 'C', 'T',
-                              'O', 'R', '_', 'I', 'L', 'U', 'D', 'T'};
+  static const char cv[6] = {'N', 'O', 'R', 'M', '_', '1'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 16) {
+  if (a->size[1] == 6) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 16) {
+      if (kstr < 6) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -329,7 +326,7 @@ static boolean_T cb_strcmp(const emxArray_char_T *a)
 
 static boolean_T cc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[6] = {'N', 'O', 'R', 'M', '_', '1'};
+  static const char cv[6] = {'N', 'O', 'R', 'M', '_', '2'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
@@ -411,16 +408,17 @@ static boolean_T db_strcmp(const emxArray_char_T *a)
 
 static boolean_T dc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[6] = {'N', 'O', 'R', 'M', '_', '2'};
+  static const char cv[14] = {'N', 'O', 'R', 'M', '_', 'F', 'R',
+                              'O', 'B', 'E', 'N', 'I', 'U', 'S'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 6) {
+  if (a->size[1] == 14) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 6) {
+      if (kstr < 14) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -465,17 +463,18 @@ static boolean_T e_strcmp(const emxArray_char_T *a)
 
 static boolean_T eb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[17] = {'M', 'A', 'T', '_', 'N', 'E', 'W', '_', 'D',
-                              'I', 'A', 'G', 'O', 'N', 'A', 'L', 'S'};
+  static const char cv[27] = {'M', 'A', 'T', '_', 'I', 'G', 'N', 'O', 'R',
+                              'E', '_', 'O', 'F', 'F', '_', 'P', 'R', 'O',
+                              'C', '_', 'E', 'N', 'T', 'R', 'I', 'E', 'S'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 17) {
+  if (a->size[1] == 27) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 17) {
+      if (kstr < 27) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -492,17 +491,17 @@ static boolean_T eb_strcmp(const emxArray_char_T *a)
 
 static boolean_T ec_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[14] = {'N', 'O', 'R', 'M', '_', 'F', 'R',
-                              'O', 'B', 'E', 'N', 'I', 'U', 'S'};
+  static const char cv[13] = {'N', 'O', 'R', 'M', '_', 'I', 'N',
+                              'F', 'I', 'N', 'I', 'T', 'Y'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 14) {
+  if (a->size[1] == 13) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 14) {
+      if (kstr < 13) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -546,18 +545,17 @@ static boolean_T f_strcmp(const emxArray_char_T *a)
 
 static boolean_T fb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[27] = {'M', 'A', 'T', '_', 'I', 'G', 'N', 'O', 'R',
-                              'E', '_', 'O', 'F', 'F', '_', 'P', 'R', 'O',
-                              'C', '_', 'E', 'N', 'T', 'R', 'I', 'E', 'S'};
+  static const char cv[18] = {'M', 'A', 'T', '_', 'U', 'S', 'E', '_', 'H',
+                              'A', 'S', 'H', '_', 'T', 'A', 'B', 'L', 'E'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 27) {
+  if (a->size[1] == 18) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 27) {
+      if (kstr < 18) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -574,17 +572,17 @@ static boolean_T fb_strcmp(const emxArray_char_T *a)
 
 static boolean_T fc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[13] = {'N', 'O', 'R', 'M', '_', 'I', 'N',
-                              'F', 'I', 'N', 'I', 'T', 'Y'};
+  static const char cv[12] = {'N', 'O', 'R', 'M', '_', '1',
+                              '_', 'A', 'N', 'D', '_', '2'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 13) {
+  if (a->size[1] == 12) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 13) {
+      if (kstr < 12) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -629,17 +627,18 @@ static boolean_T g_strcmp(const emxArray_char_T *a)
 
 static boolean_T gb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[18] = {'M', 'A', 'T', '_', 'U', 'S', 'E', '_', 'H',
-                              'A', 'S', 'H', '_', 'T', 'A', 'B', 'L', 'E'};
+  static const char cv[24] = {'M', 'A', 'T', '_', 'K', 'E', 'E', 'P',
+                              '_', 'N', 'O', 'N', 'Z', 'E', 'R', 'O',
+                              '_', 'P', 'A', 'T', 'T', 'E', 'R', 'N'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 18) {
+  if (a->size[1] == 24) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 18) {
+      if (kstr < 24) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -656,17 +655,17 @@ static boolean_T gb_strcmp(const emxArray_char_T *a)
 
 static boolean_T gc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[12] = {'N', 'O', 'R', 'M', '_', '1',
-                              '_', 'A', 'N', 'D', '_', '2'};
+  static const char cv[16] = {'K', 'S', 'P', '_', 'N', 'O', 'R', 'M',
+                              '_', 'D', 'E', 'F', 'A', 'U', 'L', 'T'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 12) {
+  if (a->size[1] == 16) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 12) {
+      if (kstr < 16) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -710,18 +709,18 @@ static boolean_T h_strcmp(const emxArray_char_T *a)
 
 static boolean_T hb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[24] = {'M', 'A', 'T', '_', 'K', 'E', 'E', 'P',
-                              '_', 'N', 'O', 'N', 'Z', 'E', 'R', 'O',
-                              '_', 'P', 'A', 'T', 'T', 'E', 'R', 'N'};
+  static const char cv[23] = {'M', 'A', 'T', '_', 'I', 'G', 'N', 'O',
+                              'R', 'E', '_', 'Z', 'E', 'R', 'O', '_',
+                              'E', 'N', 'T', 'R', 'I', 'E', 'S'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 24) {
+  if (a->size[1] == 23) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 24) {
+      if (kstr < 23) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -738,17 +737,17 @@ static boolean_T hb_strcmp(const emxArray_char_T *a)
 
 static boolean_T hc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[16] = {'K', 'S', 'P', '_', 'N', 'O', 'R', 'M',
-                              '_', 'D', 'E', 'F', 'A', 'U', 'L', 'T'};
+  static const char cv[13] = {'K', 'S', 'P', '_', 'N', 'O', 'R',
+                              'M', '_', 'N', 'O', 'N', 'E'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 16) {
+  if (a->size[1] == 13) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 16) {
+      if (kstr < 13) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -793,18 +792,17 @@ static boolean_T i_strcmp(const emxArray_char_T *a)
 
 static boolean_T ib_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[23] = {'M', 'A', 'T', '_', 'I', 'G', 'N', 'O',
-                              'R', 'E', '_', 'Z', 'E', 'R', 'O', '_',
-                              'E', 'N', 'T', 'R', 'I', 'E', 'S'};
+  static const char cv[14] = {'M', 'A', 'T', '_', 'U', 'S', 'E',
+                              '_', 'I', 'N', 'O', 'D', 'E', 'S'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 23) {
+  if (a->size[1] == 14) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 23) {
+      if (kstr < 14) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -821,17 +819,18 @@ static boolean_T ib_strcmp(const emxArray_char_T *a)
 
 static boolean_T ic_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[13] = {'K', 'S', 'P', '_', 'N', 'O', 'R',
-                              'M', '_', 'N', 'O', 'N', 'E'};
+  static const char cv[23] = {'K', 'S', 'P', '_', 'N', 'O', 'R', 'M',
+                              '_', 'P', 'R', 'E', 'C', 'O', 'N', 'D',
+                              'I', 'T', 'I', 'O', 'N', 'E', 'D'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 13) {
+  if (a->size[1] == 23) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 13) {
+      if (kstr < 23) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -875,17 +874,17 @@ static boolean_T j_strcmp(const emxArray_char_T *a)
 
 static boolean_T jb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[14] = {'M', 'A', 'T', '_', 'U', 'S', 'E',
-                              '_', 'I', 'N', 'O', 'D', 'E', 'S'};
+  static const char cv[13] = {'M', 'A', 'T', '_', 'H', 'E', 'R',
+                              'M', 'I', 'T', 'I', 'A', 'N'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 14) {
+  if (a->size[1] == 13) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 14) {
+      if (kstr < 13) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -902,18 +901,18 @@ static boolean_T jb_strcmp(const emxArray_char_T *a)
 
 static boolean_T jc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[23] = {'K', 'S', 'P', '_', 'N', 'O', 'R', 'M',
-                              '_', 'P', 'R', 'E', 'C', 'O', 'N', 'D',
+  static const char cv[25] = {'K', 'S', 'P', '_', 'N', 'O', 'R', 'M', '_',
+                              'U', 'N', 'P', 'R', 'E', 'C', 'O', 'N', 'D',
                               'I', 'T', 'I', 'O', 'N', 'E', 'D'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 23) {
+  if (a->size[1] == 25) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 23) {
+      if (kstr < 25) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -957,17 +956,17 @@ static boolean_T k_strcmp(const emxArray_char_T *a)
 
 static boolean_T kb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[13] = {'M', 'A', 'T', '_', 'H', 'E', 'R',
-                              'M', 'I', 'T', 'I', 'A', 'N'};
+  static const char cv[20] = {'M', 'A', 'T', '_', 'S', 'Y', 'M', 'M', 'E', 'T',
+                              'R', 'Y', '_', 'E', 'T', 'E', 'R', 'N', 'A', 'L'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 13) {
+  if (a->size[1] == 20) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 13) {
+      if (kstr < 20) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -984,18 +983,17 @@ static boolean_T kb_strcmp(const emxArray_char_T *a)
 
 static boolean_T kc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[25] = {'K', 'S', 'P', '_', 'N', 'O', 'R', 'M', '_',
-                              'U', 'N', 'P', 'R', 'E', 'C', 'O', 'N', 'D',
-                              'I', 'T', 'I', 'O', 'N', 'E', 'D'};
+  static const char cv[16] = {'K', 'S', 'P', '_', 'N', 'O', 'R', 'M',
+                              '_', 'N', 'A', 'T', 'U', 'R', 'A', 'L'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 25) {
+  if (a->size[1] == 16) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 25) {
+      if (kstr < 16) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1039,17 +1037,18 @@ static boolean_T l_strcmp(const emxArray_char_T *a)
 
 static boolean_T lb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[20] = {'M', 'A', 'T', '_', 'S', 'Y', 'M', 'M', 'E', 'T',
-                              'R', 'Y', '_', 'E', 'T', 'E', 'R', 'N', 'A', 'L'};
+  static const char cv[28] = {'M', 'A', 'T', '_', 'N', 'E', 'W', '_', 'N', 'O',
+                              'N', 'Z', 'E', 'R', 'O', '_', 'L', 'O', 'C', 'A',
+                              'T', 'I', 'O', 'N', '_', 'E', 'R', 'R'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 20) {
+  if (a->size[1] == 28) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 20) {
+      if (kstr < 28) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1066,17 +1065,16 @@ static boolean_T lb_strcmp(const emxArray_char_T *a)
 
 static boolean_T lc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[16] = {'K', 'S', 'P', '_', 'N', 'O', 'R', 'M',
-                              '_', 'N', 'A', 'T', 'U', 'R', 'A', 'L'};
+  static const char cv[7] = {'P', 'C', '_', 'L', 'E', 'F', 'T'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 16) {
+  if (a->size[1] == 7) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 16) {
+      if (kstr < 7) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1139,18 +1137,18 @@ static boolean_T m_strcmp(const emxArray_char_T *a)
 
 static boolean_T mb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[28] = {'M', 'A', 'T', '_', 'N', 'E', 'W', '_', 'N', 'O',
-                              'N', 'Z', 'E', 'R', 'O', '_', 'L', 'O', 'C', 'A',
-                              'T', 'I', 'O', 'N', '_', 'E', 'R', 'R'};
+  static const char cv[27] = {'M', 'A', 'T', '_', 'I', 'G', 'N', 'O', 'R',
+                              'E', '_', 'L', 'O', 'W', 'E', 'R', '_', 'T',
+                              'R', 'I', 'A', 'N', 'G', 'U', 'L', 'A', 'R'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 28) {
+  if (a->size[1] == 27) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 28) {
+      if (kstr < 27) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1167,16 +1165,16 @@ static boolean_T mb_strcmp(const emxArray_char_T *a)
 
 static boolean_T mc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[7] = {'P', 'C', '_', 'L', 'E', 'F', 'T'};
+  static const char cv[8] = {'P', 'C', '_', 'R', 'I', 'G', 'H', 'T'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 7) {
+  if (a->size[1] == 8) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 7) {
+      if (kstr < 8) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1220,18 +1218,18 @@ static boolean_T n_strcmp(const emxArray_char_T *a)
 
 static boolean_T nb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[27] = {'M', 'A', 'T', '_', 'I', 'G', 'N', 'O', 'R',
-                              'E', '_', 'L', 'O', 'W', 'E', 'R', '_', 'T',
-                              'R', 'I', 'A', 'N', 'G', 'U', 'L', 'A', 'R'};
+  static const char cv[26] = {'M', 'A', 'T', '_', 'E', 'R', 'R', 'O', 'R',
+                              '_', 'L', 'O', 'W', 'E', 'R', '_', 'T', 'R',
+                              'I', 'A', 'N', 'G', 'U', 'L', 'A', 'R'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 27) {
+  if (a->size[1] == 26) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 27) {
+      if (kstr < 26) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1248,16 +1246,17 @@ static boolean_T nb_strcmp(const emxArray_char_T *a)
 
 static boolean_T nc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[8] = {'P', 'C', '_', 'R', 'I', 'G', 'H', 'T'};
+  static const char cv[12] = {'P', 'C', '_', 'S', 'Y', 'M',
+                              'M', 'E', 'T', 'R', 'I', 'C'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 8) {
+  if (a->size[1] == 12) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 8) {
+      if (kstr < 12) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1301,8 +1300,8 @@ static boolean_T o_strcmp(const emxArray_char_T *a)
 
 static boolean_T ob_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[26] = {'M', 'A', 'T', '_', 'E', 'R', 'R', 'O', 'R',
-                              '_', 'L', 'O', 'W', 'E', 'R', '_', 'T', 'R',
+  static const char cv[26] = {'M', 'A', 'T', '_', 'G', 'E', 'T', 'R', 'O',
+                              'W', '_', 'U', 'P', 'P', 'E', 'R', 'T', 'R',
                               'I', 'A', 'N', 'G', 'U', 'L', 'A', 'R'};
   int exitg1;
   int kstr;
@@ -1329,17 +1328,17 @@ static boolean_T ob_strcmp(const emxArray_char_T *a)
 
 static boolean_T oc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[12] = {'P', 'C', '_', 'S', 'Y', 'M',
-                              'M', 'E', 'T', 'R', 'I', 'C'};
+  static const char cv[15] = {'P', 'E', 'T', 'S', 'C', '_', 'D', 'E',
+                              'T', 'E', 'R', 'M', 'I', 'N', 'E'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 12) {
+  if (a->size[1] == 15) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 12) {
+      if (kstr < 15) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1382,18 +1381,16 @@ static boolean_T p_strcmp(const emxArray_char_T *a)
 
 static boolean_T pb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[26] = {'M', 'A', 'T', '_', 'G', 'E', 'T', 'R', 'O',
-                              'W', '_', 'U', 'P', 'P', 'E', 'R', 'T', 'R',
-                              'I', 'A', 'N', 'G', 'U', 'L', 'A', 'R'};
+  static const char cv[7] = {'M', 'A', 'T', '_', 'S', 'P', 'D'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 26) {
+  if (a->size[1] == 7) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 26) {
+      if (kstr < 7) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1410,17 +1407,17 @@ static boolean_T pb_strcmp(const emxArray_char_T *a)
 
 static boolean_T pc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[15] = {'P', 'E', 'T', 'S', 'C', '_', 'D', 'E',
-                              'T', 'E', 'R', 'M', 'I', 'N', 'E'};
+  static const char cv[12] = {'P', 'E', 'T', 'S', 'C', '_',
+                              'D', 'E', 'C', 'I', 'D', 'E'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 15) {
+  if (a->size[1] == 12) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 15) {
+      if (kstr < 12) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1463,16 +1460,18 @@ static boolean_T q_strcmp(const emxArray_char_T *a)
 
 static boolean_T qb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[7] = {'M', 'A', 'T', '_', 'S', 'P', 'D'};
+  static const char cv[25] = {'M', 'A', 'T', '_', 'N', 'O', '_', 'O', 'F',
+                              'F', '_', 'P', 'R', 'O', 'C', '_', 'Z', 'E',
+                              'R', 'O', '_', 'R', 'O', 'W', 'S'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 7) {
+  if (a->size[1] == 25) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 7) {
+      if (kstr < 25) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1489,17 +1488,17 @@ static boolean_T qb_strcmp(const emxArray_char_T *a)
 
 static boolean_T qc_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[12] = {'P', 'E', 'T', 'S', 'C', '_',
-                              'D', 'E', 'C', 'I', 'D', 'E'};
+  static const char cv[13] = {'P', 'E', 'T', 'S', 'C', '_', 'D',
+                              'E', 'F', 'A', 'U', 'L', 'T'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 12) {
+  if (a->size[1] == 13) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 12) {
+      if (kstr < 13) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1543,45 +1542,18 @@ static boolean_T r_strcmp(const emxArray_char_T *a)
 
 static boolean_T rb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[25] = {'M', 'A', 'T', '_', 'N', 'O', '_', 'O', 'F',
-                              'F', '_', 'P', 'R', 'O', 'C', '_', 'Z', 'E',
-                              'R', 'O', '_', 'R', 'O', 'W', 'S'};
+  static const char cv[23] = {'M', 'A', 'T', '_', 'N', 'O', '_', 'O',
+                              'F', 'F', '_', 'P', 'R', 'O', 'C', '_',
+                              'E', 'N', 'T', 'R', 'I', 'E', 'S'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 25) {
+  if (a->size[1] == 23) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 25) {
-        if (a->data[kstr] != cv[kstr]) {
-          exitg1 = 1;
-        } else {
-          kstr++;
-        }
-      } else {
-        b_bool = true;
-        exitg1 = 1;
-      }
-    } while (exitg1 == 0);
-  }
-  return b_bool;
-}
-
-static boolean_T rc_strcmp(const emxArray_char_T *a)
-{
-  static const char cv[13] = {'P', 'E', 'T', 'S', 'C', '_', 'D',
-                              'E', 'F', 'A', 'U', 'L', 'T'};
-  int exitg1;
-  int kstr;
-  boolean_T b_bool;
-  b_bool = false;
-  if (a->size[1] == 13) {
-    kstr = 0;
-    do {
-      exitg1 = 0;
-      if (kstr < 13) {
+      if (kstr < 23) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1625,18 +1597,18 @@ static boolean_T s_strcmp(const emxArray_char_T *a)
 
 static boolean_T sb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[23] = {'M', 'A', 'T', '_', 'N', 'O', '_', 'O',
-                              'F', 'F', '_', 'P', 'R', 'O', 'C', '_',
-                              'E', 'N', 'T', 'R', 'I', 'E', 'S'};
+  static const char cv[30] = {'M', 'A', 'T', '_', 'N', 'E', 'W', '_', 'N', 'O',
+                              'N', 'Z', 'E', 'R', 'O', '_', 'A', 'L', 'L', 'O',
+                              'C', 'A', 'T', 'I', 'O', 'N', '_', 'E', 'R', 'R'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 23) {
+  if (a->size[1] == 30) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 23) {
+      if (kstr < 30) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1680,18 +1652,18 @@ static boolean_T t_strcmp(const emxArray_char_T *a)
 
 static boolean_T tb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[30] = {'M', 'A', 'T', '_', 'N', 'E', 'W', '_', 'N', 'O',
-                              'N', 'Z', 'E', 'R', 'O', '_', 'A', 'L', 'L', 'O',
-                              'C', 'A', 'T', 'I', 'O', 'N', '_', 'E', 'R', 'R'};
+  static const char cv[27] = {'M', 'A', 'T', '_', 'S', 'U', 'B', 'S', 'E',
+                              'T', '_', 'O', 'F', 'F', '_', 'P', 'R', 'O',
+                              'C', '_', 'E', 'N', 'T', 'R', 'I', 'E', 'S'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 30) {
+  if (a->size[1] == 27) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 30) {
+      if (kstr < 27) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1735,18 +1707,17 @@ static boolean_T u_strcmp(const emxArray_char_T *a)
 
 static boolean_T ub_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[27] = {'M', 'A', 'T', '_', 'S', 'U', 'B', 'S', 'E',
-                              'T', '_', 'O', 'F', 'F', '_', 'P', 'R', 'O',
-                              'C', '_', 'E', 'N', 'T', 'R', 'I', 'E', 'S'};
+  static const char cv[15] = {'M', 'A', 'T', '_', 'F', 'A', 'C', 'T',
+                              'O', 'R', '_', 'N', 'O', 'N', 'E'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 27) {
+  if (a->size[1] == 15) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 27) {
+      if (kstr < 15) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1790,17 +1761,17 @@ static boolean_T v_strcmp(const emxArray_char_T *a)
 
 static boolean_T vb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[15] = {'M', 'A', 'T', '_', 'F', 'A', 'C', 'T',
-                              'O', 'R', '_', 'N', 'O', 'N', 'E'};
+  static const char cv[13] = {'M', 'A', 'T', '_', 'F', 'A', 'C',
+                              'T', 'O', 'R', '_', 'L', 'U'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 15) {
+  if (a->size[1] == 13) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 15) {
+      if (kstr < 13) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1844,17 +1815,17 @@ static boolean_T w_strcmp(const emxArray_char_T *a)
 
 static boolean_T wb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[13] = {'M', 'A', 'T', '_', 'F', 'A', 'C',
-                              'T', 'O', 'R', '_', 'L', 'U'};
+  static const char cv[19] = {'M', 'A', 'T', '_', 'F', 'A', 'C', 'T', 'O', 'R',
+                              '_', 'C', 'H', 'O', 'L', 'E', 'S', 'K', 'Y'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 13) {
+  if (a->size[1] == 19) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 13) {
+      if (kstr < 19) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1897,17 +1868,17 @@ static boolean_T x_strcmp(const emxArray_char_T *a)
 
 static boolean_T xb_strcmp(const emxArray_char_T *a)
 {
-  static const char cv[19] = {'M', 'A', 'T', '_', 'F', 'A', 'C', 'T', 'O', 'R',
-                              '_', 'C', 'H', 'O', 'L', 'E', 'S', 'K', 'Y'};
+  static const char cv[14] = {'M', 'A', 'T', '_', 'F', 'A', 'C',
+                              'T', 'O', 'R', '_', 'I', 'L', 'U'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
   b_bool = false;
-  if (a->size[1] == 19) {
+  if (a->size[1] == 14) {
     kstr = 0;
     do {
       exitg1 = 0;
-      if (kstr < 19) {
+      if (kstr < 14) {
         if (a->data[kstr] != cv[kstr]) {
           exitg1 = 1;
         } else {
@@ -1952,7 +1923,7 @@ static boolean_T y_strcmp(const emxArray_char_T *a)
 static boolean_T yb_strcmp(const emxArray_char_T *a)
 {
   static const char cv[14] = {'M', 'A', 'T', '_', 'F', 'A', 'C',
-                              'T', 'O', 'R', '_', 'I', 'L', 'U'};
+                              'T', 'O', 'R', '_', 'I', 'C', 'C'};
   int exitg1;
   int kstr;
   boolean_T b_bool;
@@ -2113,8 +2084,6 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
     b_index = 64;
   } else if (qc_strcmp(name)) {
     b_index = 65;
-  } else if (rc_strcmp(name)) {
-    b_index = 66;
   } else {
     b_index = -1;
   }
@@ -2232,158 +2201,154 @@ void petscGetEnum(const emxArray_char_T *name, int *val, boolean_T *toplevel)
     *toplevel = false;
     break;
   case 28:
-    *val = (MAT_NEW_DIAGONALS);
-    *toplevel = false;
-    break;
-  case 29:
     *val = (MAT_IGNORE_OFF_PROC_ENTRIES);
     *toplevel = false;
     break;
-  case 30:
+  case 29:
     *val = (MAT_USE_HASH_TABLE);
     *toplevel = false;
     break;
-  case 31:
+  case 30:
     *val = (MAT_KEEP_NONZERO_PATTERN);
     *toplevel = false;
     break;
-  case 32:
+  case 31:
     *val = (MAT_IGNORE_ZERO_ENTRIES);
     *toplevel = false;
     break;
-  case 33:
+  case 32:
     *val = (MAT_USE_INODES);
     *toplevel = false;
     break;
-  case 34:
+  case 33:
     *val = (MAT_HERMITIAN);
     *toplevel = false;
     break;
-  case 35:
+  case 34:
     *val = (MAT_SYMMETRY_ETERNAL);
     *toplevel = false;
     break;
-  case 36:
+  case 35:
     *val = (MAT_NEW_NONZERO_LOCATION_ERR);
     *toplevel = false;
     break;
-  case 37:
+  case 36:
     *val = (MAT_IGNORE_LOWER_TRIANGULAR);
     *toplevel = false;
     break;
-  case 38:
+  case 37:
     *val = (MAT_ERROR_LOWER_TRIANGULAR);
     *toplevel = false;
     break;
-  case 39:
+  case 38:
     *val = (MAT_GETROW_UPPERTRIANGULAR);
     *toplevel = false;
     break;
-  case 40:
+  case 39:
     *val = (MAT_SPD);
     *toplevel = false;
     break;
-  case 41:
+  case 40:
     *val = (MAT_NO_OFF_PROC_ZERO_ROWS);
     *toplevel = false;
     break;
-  case 42:
+  case 41:
     *val = (MAT_NO_OFF_PROC_ENTRIES);
     *toplevel = false;
     break;
-  case 43:
+  case 42:
     *val = (MAT_NEW_NONZERO_ALLOCATION_ERR);
     *toplevel = false;
     break;
-  case 44:
+  case 43:
     *val = (MAT_SUBSET_OFF_PROC_ENTRIES);
     *toplevel = false;
     break;
-  case 45:
+  case 44:
     *val = (MAT_FACTOR_NONE);
     *toplevel = false;
     break;
-  case 46:
+  case 45:
     *val = (MAT_FACTOR_LU);
     *toplevel = false;
     break;
-  case 47:
+  case 46:
     *val = (MAT_FACTOR_CHOLESKY);
     *toplevel = false;
     break;
-  case 48:
+  case 47:
     *val = (MAT_FACTOR_ILU);
     *toplevel = false;
     break;
-  case 49:
+  case 48:
     *val = (MAT_FACTOR_ICC);
     *toplevel = false;
     break;
-  case 50:
+  case 49:
     *val = (MAT_FACTOR_ILUDT);
     *toplevel = false;
     break;
-  case 51:
+  case 50:
     *val = (NORM_1);
     *toplevel = false;
     break;
-  case 52:
+  case 51:
     *val = (NORM_2);
     *toplevel = false;
     break;
-  case 53:
+  case 52:
     *val = (NORM_FROBENIUS);
     *toplevel = false;
     break;
-  case 54:
+  case 53:
     *val = (NORM_INFINITY);
     *toplevel = false;
     break;
-  case 55:
+  case 54:
     *val = (NORM_1_AND_2);
     *toplevel = false;
     break;
-  case 56:
+  case 55:
     *val = (KSP_NORM_DEFAULT);
     *toplevel = false;
     break;
-  case 57:
+  case 56:
     *val = (KSP_NORM_NONE);
     *toplevel = false;
     break;
-  case 58:
+  case 57:
     *val = (KSP_NORM_PRECONDITIONED);
     *toplevel = false;
     break;
-  case 59:
+  case 58:
     *val = (KSP_NORM_UNPRECONDITIONED);
     *toplevel = false;
     break;
-  case 60:
+  case 59:
     *val = (KSP_NORM_NATURAL);
     *toplevel = false;
     break;
-  case 61:
+  case 60:
     *val = (PC_LEFT);
     *toplevel = false;
     break;
-  case 62:
+  case 61:
     *val = (PC_RIGHT);
     *toplevel = false;
     break;
-  case 63:
+  case 62:
     *val = (PC_SYMMETRIC);
     *toplevel = false;
     break;
-  case 64:
+  case 63:
     *val = (PETSC_DETERMINE);
     *toplevel = false;
     break;
-  case 65:
+  case 64:
     *val = (PETSC_DECIDE);
     *toplevel = false;
     break;
-  case 66:
+  case 65:
     *val = (PETSC_DEFAULT);
     *toplevel = false;
     break;
