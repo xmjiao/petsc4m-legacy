@@ -1,6 +1,7 @@
 *~
 *.dll
 *.bak
+*.asv
 *.mex*
 *.mat
 *.vtk
@@ -34,6 +35,7 @@ Thumbs.db
 .*.m.swp
 octave-core
 **/*.eps
+.MATLABDriveTag
 
 #Code generation
 **/codegen/mex
@@ -54,5 +56,3 @@ octave-core
 *.html
 run_*_exe.m
 eval_*_ptx.m
-octave-core
-.MATLABDriveTag
