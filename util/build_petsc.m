@@ -52,8 +52,13 @@ for i=1:length(files)
 end
 
 %Compile top-level functions for CRS and time top-level KSP functions
-opts = [{'-petsc', '-ckdep', '-mex'}, ...
-    '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
+if isoctave
+    opts = [{'-petsc', '-ckdep', '-mex'}, ...
+        '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
+else
+    opts = [{'-petsc', '-ckdep', '-exe', '{''../exe/''}'}, ...
+        '-time', '{''petscKSPSetup'', ''petscKSPSolve''}', varargin{:}];
+end
 m2c(opts{:}, 'petscSolveCRS');
 
 end
