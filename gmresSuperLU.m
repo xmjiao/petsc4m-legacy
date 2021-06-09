@@ -50,7 +50,7 @@ function [x, flag, iter, reshis, times] = gmresSuperLU(varargin)
 %          1 - outer iteration info
 %          2 - inner iteration info
 %
-%   'equil' [1]: whether to equilibrate matrix by using MC64.
+%   'equil' [0]: whether to equilibrate matrix by using MC64.
 %
 %   'droptol' [0.001]: Threshold for dropping small entries during the
 %    computation of the ILU factorization. Use droptol=0 for direct solver.
@@ -218,7 +218,7 @@ end
 function test %#ok<DEFNU>
 %!test
 %!shared A, b
-%! system('gd-get -q -O -p 0ByTwsK5_Tl_PemN0QVlYem11Y00 fem2d"*".mat');
+%! % system('gd-get -q -O -p 0ByTwsK5_Tl_PemN0QVlYem11Y00 fem2d"*".mat');
 %! s = load('fem2d_cd.mat');
 %! A = s.A;
 %! s = load('fem2d_vec_cd.mat');
