@@ -14,15 +14,15 @@ function pc = hypreCreate(row_ptr, col_ind, val, opts)
 % SEE ALSO:
 %   hypreApply, hypreDestroy
 
+if nargin >= 4 && ~isempty(opts)
+    errCode = petscOptionsInsert(opts); assert(errCode==0, 'petscOptionsInsert failed');
+end
+
 [pc, errCode] = petscPCCreate(MPI_COMM_WORLD); assert(errCode==0, 'petscPCCreate failed'); 
 errCode = petscPCSetType(pc, PETSC_PCHYPRE); assert(errCode==0, 'petscPCSetType failed'); 
 mat = petscMatCreateAIJFromCRS(row_ptr, col_ind, val);
 
 errCode = petscPCSetOperators(pc, mat, mat); assert(errCode==0, 'petscPCSetOperators failed');
-
-if nargin >= 4 && ~isempty(opts)
-    errCode = petscOptionsInsert(opts); assert(errCode==0, 'petscOptionsInsert failed');
-end
 
 errCode = petscPCSetUp(pc); assert(errCode==0, 'petscPCSetUp failed');
 
