@@ -12,13 +12,14 @@ function y = hypreApply(pc, x)
 %
 % SEE ALSO: hypreCreate, hypreApplyTranspose, hypreDestroy
 
+%#codegen -args {PetscPC, coder.typeof(0, [inf, 1])}
+
 xVec = petscVecCreateFromArray(x);
 yVec = petscVecDuplicate(xVec);
 
 errCode = petscPCApply(pc, xVec, yVec); assert(~errCode, 'petscPCApply failed');
 
 y = petscVecToArray(yVec);
-
 petscVecDestroy(xVec);
 petscVecDestroy(yVec);
 
