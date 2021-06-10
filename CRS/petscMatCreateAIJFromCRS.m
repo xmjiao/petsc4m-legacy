@@ -1,4 +1,4 @@
-function mat = petscMatCreateAIJFromCRS(row_ptr, col_ind, val, varargin)
+function [mat, toplevel] = petscMatCreateAIJFromCRS(row_ptr, col_ind, val, ncols, prefix)
 % Creates a sparse matrix in PETSc using AIJ format from the CRS arrays format.
 %
 %    mat = petscMatCreateAIJFromCRS(row_ptr, col_ind, val)
@@ -22,6 +22,18 @@ function mat = petscMatCreateAIJFromCRS(row_ptr, col_ind, val, varargin)
 %
 % SEE ALSO: petscMatDestroy, petscMatAIJToCRS, petscOptionsInsert
 
+%#codegen -args {coder.typeof(int32(0), [inf,1]),
+%#codegen        coder.typeof(int32(0), [inf,1]),
+%#codegen        coder.typeof(0, [inf,1]), int32(0),
+%#codegen        coder.typeof(char(0), [1,inf])}
+%#codegen petscMatCreateAIJFromCRS_3args -args {coder.typeof(int32(0), [inf,1]),
+%#codegen        coder.typeof(int32(0), [inf,1]),
+%#codegen        coder.typeof(0, [inf,1])}
+%#codegen petscMatCreateAIJFromCRS_4args -args {coder.typeof(int32(0), [inf,1]),
+%#codegen        coder.typeof(int32(0), [inf,1]),
+%#codegen        coder.typeof(0, [inf,1]), int32(0)}
+
+
 if nargin<3
     error('At least three arguments are required.');
 end
@@ -30,8 +42,6 @@ n = int32(length(row_ptr)-1);
 
 if nargin<4
     ncols = n;
-else
-    ncols = int32(varargin{1});
 end
 
 % Count the number of nonzeros per row
@@ -42,35 +52,40 @@ end
 
 if nargin<5
     % Create default matrix using petscMatCreateSeqAIJ
-    mat = petscMatCreateSeqAIJ(n, ncols, PETSC_DEFAULT, nnz);
+    t_mat = petscMatCreateSeqAIJ(n, ncols, PETSC_DEFAULT, nnz);
     first_row = int32(0);
 else
-    mat = petscMatCreate;
+    t_mat = petscMatCreate;
 
-    if isempty(varargin{2}) || ~varargin{2}(end)
-        prefix = varargin{2};
-    else
+    if ~isempty(prefix) && prefix(end)
         % Null-terminate the string
-        prefix = [varargin{2} char(0)];
+        prefix = [prefix char(0)];
     end
-    petscMatSetOptionsPrefix(mat, prefix);
-    petscMatSetFromOptions(mat);
-    petscMatSetSizes(mat, n, PETSC_DECIDE, PETSC_DETERMINE, ncols);
+    petscMatSetOptionsPrefix(t_mat, prefix);
+    petscMatSetFromOptions(t_mat);
+    petscMatSetSizes(t_mat, n, PETSC_DECIDE, PETSC_DETERMINE, ncols);
     % Since the matrix is may be parallel,
-    first_row = petscMatGetOwnershipRange(mat);
+    first_row = petscMatGetOwnershipRange(t_mat);
 end
 
 % Set values row by row
 for i=1:n
     jidx = col_ind(row_ptr(i):row_ptr(i+1)-1)-1;
     rowval = val(row_ptr(i):row_ptr(i+1)-1);
-    
-    petscMatSetValues(mat, int32(1), i+first_row-1, nnz(i), jidx, rowval);
+
+    petscMatSetValues(t_mat, int32(1), i+first_row-1, nnz(i), jidx, rowval);
 end
 
 % Call assembly
-petscMatAssemblyBegin(mat);
-petscMatAssemblyEnd(mat);
+petscMatAssemblyBegin(t_mat);
+petscMatAssemblyEnd(t_mat);
+
+toplevel = nargout>1;
+if ~coder.target('MATLAB')
+    mat = PetscMat(t_mat, toplevel);
+else
+    mat = t_mat;
+end
 
 end
 

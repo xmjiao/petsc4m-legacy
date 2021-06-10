@@ -557,7 +557,7 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
                                     const emxArray_int32_T *col_ind,
                                     const emxArray_real_T *val)
 {
-  Mat mat;
+  Mat t_mat;
   emxArray_int32_T *jidx;
   emxArray_int32_T *nnz;
   emxArray_real_T *rowval;
@@ -579,7 +579,7 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
   }
   nz = (PETSC_DEFAULT);
   MatCreateSeqAIJ(PETSC_COMM_SELF, row_ptr->size[0] - 1, row_ptr->size[0] - 1,
-                  nz, &nnz->data[0], &mat);
+                  nz, &nnz->data[0], &t_mat);
   emxInit_int32_T(&jidx, 1);
   emxInit_real_T(&rowval, 1);
   for (b_i = 0; b_i < n; b_i++) {
@@ -612,17 +612,17 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
       rowval->data[i] = val->data[nz + i];
     }
     iroa = (INSERT_VALUES);
-    MatSetValues(mat, 1, &b_i, nnz->data[b_i], &jidx->data[0], &rowval->data[0],
-                 iroa);
+    MatSetValues(t_mat, 1, &b_i, nnz->data[b_i], &jidx->data[0],
+                 &rowval->data[0], iroa);
   }
   emxFree_real_T(&rowval);
   emxFree_int32_T(&jidx);
   emxFree_int32_T(&nnz);
   type = (MAT_FINAL_ASSEMBLY);
-  MatAssemblyBegin(mat, type);
+  MatAssemblyBegin(t_mat, type);
   type = (MAT_FINAL_ASSEMBLY);
-  MatAssemblyEnd(mat, type);
-  return mat;
+  MatAssemblyEnd(t_mat, type);
+  return t_mat;
 }
 
 void petscSolveCRS(int *flag, double *relres, int *iter, double times[2])
