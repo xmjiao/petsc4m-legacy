@@ -18,9 +18,9 @@ if nargin >= 4 && ~isempty(opts)
     errCode = petscOptionsInsert(opts); assert(errCode==0, 'petscOptionsInsert failed');
 end
 
-[pc, errCode] = petscPCCreate(MPI_COMM_WORLD); assert(errCode==0, 'petscPCCreate failed'); 
-errCode = petscPCSetType(pc, PETSC_PCHYPRE); assert(errCode==0, 'petscPCSetType failed'); 
-errCode = petscPCSetFromOptions(pc); assert(errCode==0, 'PCSetFromOptions failed'); 
+[pc, errCode] = petscPCCreate(MPI_COMM_WORLD); assert(errCode==0, 'petscPCCreate failed');
+errCode = petscPCSetType(pc, PETSC_PCHYPRE); assert(errCode==0, 'petscPCSetType failed');
+errCode = petscPCSetFromOptions(pc); assert(errCode==0, 'PCSetFromOptions failed');
 
 mat = petscMatCreateAIJFromCRS(row_ptr, col_ind, val);
 
