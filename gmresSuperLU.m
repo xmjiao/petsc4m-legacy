@@ -1,4 +1,4 @@
-function [x, flag, iter, reshis, times] = gmresSuperLU(varargin)
+function [x, flag, relres, iter, reshis, times] = gmresSuperLU(varargin)
 % gmresSuperLU GMRES with SuperLU as right preconditioner
 %
 %    x = gmresSuperLU(A, b) solves a sparse linear system using SuperLU's
@@ -74,14 +74,16 @@ function [x, flag, iter, reshis, times] = gmresSuperLU(varargin)
 %          -9 - Got NaN
 %     see https://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPConvergedReason.html
 %
-%    [x, flag, iter] = gmresSuperLU(...) returns the relative
-%    residuala, iteraton counts, and 
+%    [x, flag, relres] = gmresSuperLU(...) returns the relative residual.
 %
-%    [x, flag, iter, resids] = gmresSuperLU(...) returns the relative
-%    residual in 2-norm at each iteration.
+%    [x, flag, relres, iter] = gmresSuperLU(...) returns the relative
+%    residual and iteraton counts.
 %
-%    [x, flag, iter, reshis, times] = gmresSuperLU(...) returns the setup
-%    time (times(1)) and solve time (times(2)) in seconds.
+%    [x, flag, relres, iter, resids] = gmresSuperLU(...) returns the
+%    relative residual in 2-norm at each iteration.
+%
+%    [x, flag, relres, iter, reshis, times] = gmresSuperLU(...) returns
+%    the setup time (times(1)) and solve time (times(2)) in seconds.
 
 if nargin == 0
     help gmresSuperLU
