@@ -22,8 +22,8 @@ function [errCode, toplevel] = petscKSPSetTolerances(ksp, rtol, abstol, dtol, ma
 %   PetscErrorCode  KSPSetTolerances(KSP ksp,PetscReal rtol,PetscReal abstol,PetscReal dtol,PetscInt maxits)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/KSP/KSPSetTolerances.html
 
-%#codegen -args {PetscKSP, 0, 0, 0, int32(0)}
-%#codegen petscKSPSetTolerances_2args -args {PetscKSP, 0}
+%#codegen -args {PetscKSP, PetscScalar(0), PetscScalar(0), PetscScalar(0), int32(0)}
+%#codegen petscKSPSetTolerances_2args -args {PetscKSP, PetscScalar(0)}
 
 errCode = int32(-1);
 
@@ -31,8 +31,8 @@ if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     
     if nargin==2
-        abstol = double(PETSC_DEFAULT);
-        dtol = double(PETSC_DEFAULT);
+        abstol = PetscReal(PETSC_DEFAULT);
+        dtol = PetscReal(PETSC_DEFAULT);
         maxits = PETSC_DEFAULT;
     end
     

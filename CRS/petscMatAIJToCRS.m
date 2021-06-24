@@ -16,7 +16,7 @@ nnz = int32(info.nz_used);
 
 row_ptr = coder.nullcopy(zeros(nrows+1, 1, 'int32'));
 col_ind = coder.nullcopy(zeros(nnz, 1, 'int32'));
-val = coder.nullcopy(zeros(nnz, 1));
+val = coder.nullcopy(PetscScalar(zeros(nnz, 1)));
 
 ind = int32(1);
 for row=1:nrows

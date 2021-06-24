@@ -121,7 +121,7 @@ end
 if nargin >= next_index + 4 && ~isempty(varargin{next_index + 4})
     x0 = varargin{next_index + 4};
 else
-    x0 = zeros(0, 1);
+    x0 = PetscScalar(zeros(0, 1));
 end
 
 if nargin >= next_index + 5 && ~isempty(varargin{next_index + 5})
@@ -160,13 +160,13 @@ if ~petscInitialized
 end
 
 % Create HYPRE preconditioner
-pc = hypreCreate(Arows, Acols, Avals, opts);
+pc = hypreCreate(Arows, Acols, PetscScalar(Avals), opts);
 
 % Create function handle to apply HYPRE preconditioner
-Mfun = @(x) hypreApply(pc, x);
+Mfun = @(x) hypreApply(pc, PetscScalar(x));
 
 % Invoke MATLAB's built-in gmres
-[varargout{1:nargout}] = gmres(Asparse, b, restart, rtol, maxiter, Mfun, [], x0);
+[varargout{1:nargout}] = gmres(Asparse, b, restart, PetscReal(rtol), maxiter, Mfun, [], x0);
 
 % Destroy HYPRE preconditioner context
 hypreDestroy(pc);
@@ -179,9 +179,9 @@ function test %#ok<DEFNU>
 %! tmp = load('data/494_bus.mat');
 %! A = tmp.Problem.A;
 %! b = A*ones(size(A, 1), 1);
-%! rtol = 1.e-10;
+%! rtol = 10*eps(class(PetscReal(0))).^(1/2);
 
 %! [x,flag,relres,iter,resvec] = gmresHypreLeft(A, b, [], rtol);
-%! assert(norm(b - A*x) < rtol * norm(b))
+%! assert(norm(b - A*double(x)) < rtol * norm(b))
 
 end

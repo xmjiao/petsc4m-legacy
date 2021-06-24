@@ -12,7 +12,7 @@ function [errCode, toplevel] = petscOptionsSetReal(iname, value)
 %
 % SEE ALSO: petscOptionsSetInt, petscOptionsSetValue, petscOptionsGetReal
 
-%#codegen -args {coder.typeof(char(0), [1,inf]), 0}
+%#codegen -args {coder.typeof(char(0), [1,inf]), PetscScalar(0)}
 
 errCode = int32(-1);
 

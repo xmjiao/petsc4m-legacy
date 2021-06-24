@@ -92,7 +92,7 @@ end
 if nargin >= next_index + 1 && ~isempty(varargin{next_index + 1})
     rtol = varargin{next_index + 3};
 else
-    rtol = 0;
+    rtol = PetscReal(0);
 end
 
 if nargin >= next_index + 2 && ~isempty(varargin{next_index + 2})
@@ -104,13 +104,19 @@ end
 if nargin >= next_index + 3 && ~isempty(varargin{next_index + 3})
     x0 = varargin{next_index + 3};
 else
-    x0 = zeros(0, 1);
+    x0 = PetscScalar(zeros(0, 1));
+end
+
+if isequal(class(PetscScalar(0)), 'single')
+    atol = '1.e-5';
+else
+    atol = '1.e-12';
 end
 
 if nargin >= next_index + 4 && ~isempty(varargin{next_index + 4})
-    opts = ['-ksp_atol 1.e-12 -pc_hypre_boomeramg_coarsen_type ' varargin{next_index + 4}];
+    opts = ['-ksp_atol ' atol ' -pc_hypre_boomeramg_coarsen_type ' varargin{next_index + 4}];
 else
-    opts = '-ksp_atol 1.e-12 -pc_hypre_boomeramg_coarsen_type HMIS';
+    opts = '-ksp_atol ' atol ' -pc_hypre_boomeramg_coarsen_type HMIS';
     % Use the default, which is HMIS
 end
 
@@ -137,8 +143,8 @@ else
     % Use the default, which is l1-Gauss-Seidel
 end
 
-[varargout{1:nargout}] = petscSolveCRS(Arows, Acols, Avals, ...
-    b, PETSC_KSPBCGS, rtol, maxiter, PETSC_PCHYPRE, 'right', x0, opts);
+[varargout{1:nargout}] = petscSolveCRS(Arows, Acols, PetscScalar(Avals), ...
+    PetscScalar(b), PETSC_KSPBCGS, PetscReal(rtol), maxiter, PETSC_PCHYPRE, 'right', PetscScalar(x0), opts);
 end
 
 function test %#ok<DEFNU>
@@ -149,9 +155,9 @@ function test %#ok<DEFNU>
 %! A = s.A;
 %! s = load('fem2d_vec_cd.mat');
 %! b = s.b;
-%! rtol = 1.e-5;
+%! rtol = 10*eps(class(PetscReal(0))).^(1/2);
 
 %! [x,flag,relres,iter,reshis,times] = bicgstabHypre(A, b, [], rtol);
-%! assert(norm(b - A*x) < rtol * norm(b))
+%! assert(norm(b - A*double(x)) < rtol * norm(b))
 
 end

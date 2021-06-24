@@ -19,8 +19,8 @@ function [errCode, toplevel] = petscVecSetValues(vec, ni, ix, y, iroa)
 %   PetscErrorCode  VecSetValues(Vec x,PetscInt ni,const PetscInt ix[],const PetscScalar y[],InsertMode iora)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecSetValues.html
 
-%#codegen -args {PetscVec, int32(0), coder.typeof(int32(0), [inf,1]), coder.typeof(0, [inf,1]), int32(0)}
-%#codegen petscVecSetValues_Insert -args {PetscVec, int32(0), coder.typeof(int32(0), [inf,1]), coder.typeof(0, [inf,1])}
+%#codegen -args {PetscVec, int32(0), coder.typeof(int32(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1]), int32(0)}
+%#codegen petscVecSetValues_Insert -args {PetscVec, int32(0), coder.typeof(int32(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1])}
 
 errCode = int32(-1);
 

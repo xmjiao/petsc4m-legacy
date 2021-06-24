@@ -9,7 +9,7 @@ function [errCode, toplevel] = petscVecSet(vec, val)
 %   PetscErrorCode  VecSet(Vec x,PetscScalar alpha)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecSet.html
 
-%#codegen -args {PetscVec, 0}
+%#codegen -args {PetscVec, PetscScalar(0)}
 
 errCode = int32(-1);
 

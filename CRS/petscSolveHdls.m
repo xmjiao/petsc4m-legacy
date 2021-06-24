@@ -63,7 +63,7 @@ function [flag, relres, iter, reshis, times] = petscSolveHdls(A, b, x, solver, .
 % Setup KSP
 if nargin<3; x = b; end
 if nargin<4; solver = ''; end
-if nargin<5; rtol = 0; end
+if nargin<5; rtol = PetscReal(0); end
 if nargin<6; maxit = int32(0); end
 if nargin<7; pctype = ''; end
 if nargin<8; pcopt = ''; end
@@ -82,7 +82,7 @@ if contains(opts, '-mat_superlu_printstat 1')
 end
 
 [flag, relres, iter, reshis, time_solve] = petscKSPDriver(ksp, b, x, ...
-    double(rtol), int32(maxit), x0);
+    PetscReal(rtol), int32(maxit), x0);
 
 if nargout>4
     times = [time_setup; time_solve];

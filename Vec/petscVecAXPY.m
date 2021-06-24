@@ -10,7 +10,7 @@ function [errCode, toplevel] = petscVecAXPY(y, a, x)
 %   PetscErrorCode VecAXPY(Vec y,PetscScalar a,Vec x)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecAXPY.html
 
-%#codegen -args {PetscVec, 0, PetscVec}
+%#codegen -args {PetscVec, PetscScalar(0), PetscVec}
 
 errCode = int32(-1);
 
@@ -39,5 +39,5 @@ function test %#ok<DEFNU>
 %! petscVecDestroy(vec_x);
 %! petscVecDestroy(vec_y);
 %!
-%! assert(errCode == 0 && norm(result - (y + a * x)) <= 1.e-12);
+%! assert(errCode == 0 && norm(result - (y + a * x)) <= eps(class(PetscReal(0))).^(3/4));
 end

@@ -1,5 +1,5 @@
 function [value, found, errCode, toplevel] = petscOptionsGetReal(pre, name)
-% Gets the double precision value for a particular option in the database.
+% Gets the real value for a particular option in the database.
 %
 %   [value, found, errCode, toplevel] = petscOptionsGetReal(pre, name)
 %   obtains a real value in the data base. The flag found is PETSC_TRUE
@@ -27,7 +27,7 @@ if ~isempty(coder.target)
         m2c_error('Petsc4m:petscOptionsGetInt:InputError', ...
             'Argument name must be a null-terminated character string.')
     end
-    value = 0;
+    value = PetscReal(0);
     b_flag = coder.opaque('PetscBool');
     
     errCode = coder.ceval('PetscOptionsGetReal', PETSC_NULL_OPTIONS, ...

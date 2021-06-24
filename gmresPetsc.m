@@ -74,7 +74,7 @@ end
 if nargin >= next_index + 2 && ~isempty(varargin{next_index + 2})
     rtol = varargin{next_index + 2};
 else
-    rtol = 0;
+    rtol = PetscReal(0);
 end
 
 if nargin >= next_index + 3 && ~isempty(varargin{next_index + 3})
@@ -86,7 +86,7 @@ end
 if nargin >= next_index + 4 && ~isempty(varargin{next_index + 4})
     x0 = varargin{next_index + 4};
 else
-    x0 = zeros(0, 1);
+    x0 = PetscScalar(zeros(0, 1));
 end
 
 if nargin >= next_index + 5 && ~isempty(varargin{next_index + 5})
@@ -99,8 +99,8 @@ if nargin >= next_index + 6 && ~isempty(varargin{next_index + 6})
     opts = [opts ' ' varargin{next_index + 6}];
 end
 
-[varargout{1:nargout}] = petscSolveCRS(Arows, Acols, Avals, ...
-    b, PETSC_KSPGMRES, rtol, maxiter, pctype, 'right', x0, opts);
+[varargout{1:nargout}] = petscSolveCRS(Arows, Acols, PetscScalar(Avals), ...
+    PetscScalar(b), PETSC_KSPGMRES, PetscReal(rtol), maxiter, pctype, 'right', PetscScalar(x0), opts);
 end
 
 function test %#ok<DEFNU>
@@ -111,9 +111,9 @@ function test %#ok<DEFNU>
 %! A = s.A;
 %! s = load('fem2d_vec_cd.mat');
 %! b = s.b;
-%! rtol = 1.e-5;
+%! rtol = 10*eps(class(PetscReal(0))).^(1/2);
 
 %! [x,flag,relres,iter,reshis,times] = gmresPetsc(A, b, [], rtol);
-%! assert(norm(b - A*x) < rtol * norm(b))
+%! assert(norm(b - A*double(x)) < rtol * norm(b))
 
 end

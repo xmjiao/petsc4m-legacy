@@ -35,7 +35,7 @@ if ~isempty(coder.target)
         str1 = zeros(1, n+1, 'uint8');
         coder.ceval('memcpy', coder.ref(str1), str0, n+1);
     else
-        str1 = zeros(1, 0, 'uint8');
+        str1 = zeros(1, int32(0), 'uint8');
     end
         
     str = char(str1);

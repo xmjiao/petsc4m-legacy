@@ -20,9 +20,9 @@ errCode = int32(-1);
 if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     
-    rtol = double(0);
-    abstol = double(0);
-    dtol = double(0);
+    rtol = PetscReal(0);
+    abstol = PetscReal(0);
+    dtol = PetscReal(0);
     maxits = int32(0);
     
     errCode = coder.ceval('KSPGetTolerances', t_ksp, coder.wref(rtol), ...

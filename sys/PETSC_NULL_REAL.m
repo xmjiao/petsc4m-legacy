@@ -1,5 +1,5 @@
 function obj = PETSC_NULL_REAL %#codegen
-% Obtain PETSC constant NULL of type double *
+% Obtain PETSC constant NULL of type PetscReal *
 
 coder.inline('always');
 

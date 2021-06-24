@@ -11,7 +11,7 @@ if nargin<1
 end
 
 n = petscVecGetLocalSize(vec);
-arr = coder.nullcopy(zeros(n, 1));
+arr = coder.nullcopy(PetscScalar(zeros(n, 1)));
 
 % Obtain values
 idx = int32(0:n-1)';

@@ -9,7 +9,7 @@ function [Y, errCode, toplevel] = petscMatShift(Y, a)
 %   PetscErrorCode MatShift(Mat Y,PetscScalar a)
 % https://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatShift.html
 
-%#codegen -args {PetscMat, 0}
+%#codegen -args {PetscMat, PetscScalar(0)}
 
 errCode = int32(-1);
 

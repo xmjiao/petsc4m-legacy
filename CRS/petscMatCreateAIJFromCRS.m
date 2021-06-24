@@ -24,14 +24,14 @@ function [mat, toplevel] = petscMatCreateAIJFromCRS(row_ptr, col_ind, val, ncols
 
 %#codegen -args {coder.typeof(int32(0), [inf,1]),
 %#codegen        coder.typeof(int32(0), [inf,1]),
-%#codegen        coder.typeof(0, [inf,1]), int32(0),
+%#codegen        coder.typeof(PetscScalar(0), [inf,1]), int32(0),
 %#codegen        coder.typeof(char(0), [1,inf])}
 %#codegen petscMatCreateAIJFromCRS_3args -args {coder.typeof(int32(0), [inf,1]),
 %#codegen        coder.typeof(int32(0), [inf,1]),
-%#codegen        coder.typeof(0, [inf,1])}
+%#codegen        coder.typeof(PetscScalar(0), [inf,1])}
 %#codegen petscMatCreateAIJFromCRS_4args -args {coder.typeof(int32(0), [inf,1]),
 %#codegen        coder.typeof(int32(0), [inf,1]),
-%#codegen        coder.typeof(0, [inf,1]), int32(0)}
+%#codegen        coder.typeof(PetscScalar(0), [inf,1]), int32(0)}
 
 
 if nargin<3

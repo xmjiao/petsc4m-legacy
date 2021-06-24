@@ -39,7 +39,7 @@ switch name
     case 'PETSC_NULL_INT'
         [obj, toplevel] = get_obj('int *', 'NULL', nargout>1);
     case 'PETSC_NULL_REAL'
-        [obj, toplevel] = get_obj('double *', 'NULL', nargout>1);
+        [obj, toplevel] = get_obj('PetscReal *', 'NULL', nargout>1);
     otherwise
         m2c_error('petscGetNum:UnknownConstant', 'Unknonw constant %s.', [name char(0)]);
         if nargout>1

@@ -12,7 +12,7 @@ function y = hypreApplyTranspose(pc, x)
 %
 % SEE ALSO: hypreCreate, hypreApply, hypreDestroy
 
-xVec = petscVecCreateFromArray(x);
+xVec = petscVecCreateFromArray(PetscSalar(x));
 yVec = petscVecDuplicate(xVec);
 
 errCode = petscPCApplyTranspose(pc, xVec, yVec); assert(~errCode, 'petscPCApplyTranspose failed');

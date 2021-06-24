@@ -65,29 +65,32 @@ function [x, flag, relres, iter, reshis, times] = petscSolveCRS(varargin)
 
 %#codegen -args {}
 %#codegen petscSolveCRS_4args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1])}
+%#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1])}
 %#codegen petscSolveCRS_5args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType}
+%#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1]), PetscKSPType}
 %#codegen petscSolveCRS_6args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType, 0}
+%#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1]), PetscKSPType, PetscScalar(0)}
 %#codegen petscSolveCRS_7args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType, 0, int32(0)}
+%#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1]), PetscKSPType, PetscScalar(0), int32(0)}
 %#codegen petscSolveCRS_8args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType, 0, int32(0), PetscPCType}
+%#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1]), PetscKSPType, PetscScalar(0), int32(0), PetscPCType}
 %#codegen petscSolveCRS_9args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType, 0, int32(0),
+%#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1]), PetscKSPType, PetscScalar(0), int32(0),
 %#codegen PetscPCType, PetscMatSolverType}
 %#codegen petscSolveCRS_10args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType, 0, int32(0),
-%#codegen PetscPCType, PetscMatSolverType, coder.typeof(0, [inf,1])}
+%#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1]), PetscKSPType, PetscScalar(0), int32(0),
+%#codegen PetscPCType, PetscMatSolverType, coder.typeof(PetscScalar(0), [inf,1])}
 %#codegen petscSolveCRS_11args -args {coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1]),
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(0, [inf,1]), PetscKSPType,
-%#codegen 0, int32(0), PetscPCType, PetscMatSolverType,
-%#codegen coder.typeof(0, [inf,1]), coder.typeof(char(0), [1, inf])}
+%#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1]), PetscKSPType,
+%#codegen PetscScalar(0), int32(0), PetscPCType, PetscMatSolverType,
+%#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(char(0), [1, inf])}
 
 if nargin==0
-    x = zeros(0,1); flag=int32(-1); relres=realmax;
-    iter=int32(0); reshis = zeros(0,1); times=[0;0];
+    x = PetscScalar(zeros(0, 1));
+    flag=int32(-1); relres=realmax;
+    iter=int32(0); 
+    reshis = PetscScalar(zeros(0, 1));
+    times=[double(0);double(0)];
     return;
 end
 
@@ -113,7 +116,7 @@ else
     solver = varargin{5};
 end % Use default
 if nargin<6
-    rtol = 0;
+    rtol = PetscReal(0);
 else
     rtol = varargin{6};
 end
@@ -152,7 +155,7 @@ else
 end
 
 [flag, relres, iter, reshis, times] = petscSolveHdls(AMat, bVec, xVec, solver, ...
-    double(rtol), int32(maxit), pctype, pcopt, x0Vec, opts);
+    PetscScalar(rtol), int32(maxit), pctype, pcopt, x0Vec, opts);
 
 petscMatDestroy(AMat);
 petscVecDestroy(bVec);

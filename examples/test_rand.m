@@ -9,7 +9,7 @@ b = rand(100,1);
 
 % Solve using GMRES with Jacobi preconditioner with default options
 [x,flag,relres,iter,reshist,times] = petscSolveCRS(rowptr, colind, val, b, ...
-    PETSC_KSPGMRES, 0, int32(0), PETSC_PCJACOBI);
+    PETSC_KSPGMRES, PetscScalar(0), int32(0), PETSC_PCJACOBI);
 
 % Solve using BiCGSTAB with Jacobi preconditioner as right preconditioner 
 % with relative tolerance 1.e-10 and a maximum of 100 iterations
@@ -24,4 +24,4 @@ b = rand(100,1);
 % and monitor the true residual
 [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, val, b, ...
     PETSC_KSPBCGS, 1.e-10, int32(100), PETSC_PCJACOBI, 'right', ...
-    zeros(0,1), '-ksp-monitor-true-residual');
+    PetscScalar(zeros(0, 1)), '-ksp-monitor-true-residual');

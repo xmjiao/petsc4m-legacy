@@ -19,7 +19,7 @@ function [v, errCode, toplevel] = petscMatGetValues(mat, ni, ix, nj, jx, v)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatGetValues.html
 
 %#codegen -args {PetscMat, int32(0), coder.typeof(int32(0), [inf,1]), int32(0),
-%#codegen coder.typeof(int32(0), [inf,1]), coder.typeof(0, [inf,1])}
+%#codegen coder.typeof(int32(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1])}
 %#codegen petscMatGetValues_Alloc -args {PetscMat, int32(0), coder.typeof(int32(0),
 %#codegen [inf,1]), int32(0), coder.typeof(int32(0), [inf,1])}
 
@@ -29,7 +29,7 @@ if ~isempty(coder.target)
     t_mat = PetscMat(mat);
     
     if nargin<6
-        v = coder.nullcopy(zeros(ni*nj, 1));
+        v = coder.nullcopy(PetscScalar(zeros(ni*nj, 1)));
     end
     
     errCode = coder.ceval('MatGetValues', t_mat, ni, coder.rref(ix), ...

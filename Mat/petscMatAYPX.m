@@ -16,8 +16,8 @@ function [errCode, toplevel] = petscMatAYPX(Y, a, X, mstr)
 %   PetscErrorCode MatAYPX(Mat Y,PetscScalar a,Mat X,MatStructure str)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatAYPX.html
 
-%#codegen -args {PetscMat, 0, PetscMat, int32(0)}
-%#codegen petscMatAYPX_3args -args {PetscMat, 0, PetscMat}
+%#codegen -args {PetscMat, PetscScalar(0), PetscMat, int32(0)}
+%#codegen petscMatAYPX_3args -args {PetscMat, PetscScalar(0), PetscMat}
 
 errCode = int32(-1);
 

@@ -45,8 +45,8 @@ else
     solver = PETSC_MATSOLVERUMFPACK;
 end
 
-[x, flag, ~, ~, ~, times]  = petscSolveCRS(Arows, Acols, Avals, ...
-    b, PETSC_KSPPREONLY, 0, int32(0), PETSC_PCLU, solver);
+[x, flag, ~, ~, ~, times]  = petscSolveCRS(Arows, Acols, petscScalar(Avals), ...
+    petscScalar(b), PETSC_KSPPREONLY, PetscReal(0), int32(0), PETSC_PCLU, solver);
 end
 
 function test %#ok<DEFNU>
@@ -59,6 +59,6 @@ function test %#ok<DEFNU>
 %! b = s.b;
 
 %! [x, flag, times] = directSolve(A, b);
-%! assert(norm(b - A*x) < 1.e-12 * norm(b))
+%! assert(norm(b - A*x) < eps(class(PetscReal(0))).^(3/4) * norm(b))
 
 end

@@ -7,7 +7,7 @@ function [v, errCode, toplevel] = petscVecScale(v, a)
 %   PetscErrorCode  VecScale(Vec x, PetscScalar alpha)
 % https://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecScale.html
 
-%#codegen -args {PetscVec, 0}
+%#codegen -args {PetscVec, PetscScalar(0)}
 
 errCode = int32(-1);
 

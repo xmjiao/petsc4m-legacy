@@ -119,10 +119,10 @@ restart = int32(30);
 x0 = cast([], class(b));
 nthreads = int32(1);
 droptol = 1.e-4;
-replacetinypivot = 0;
-modified = 0;
+replacetinypivot = int32(0);
+modified = int32(0);
 
-params_start = nargin;
+params_start = nargin+1;
 for i = next_index+1:nargin
     if ischar(varargin{i})
         params_start = i;
@@ -139,7 +139,7 @@ if params_start > next_index + 1 && ~ischar(varargin{next_index+1})
     end
 
     if params_start > next_index + 2 && ~ischar(varargin{next_index+2})
-        rtol = double(varargin{next_index+2});
+        rtol = PetscScalar(varargin{next_index+2});
 
         if params_start > next_index + 3 && ~ischar(varargin{next_index+3})
             maxiter = int32(varargin{next_index+3});
@@ -201,8 +201,8 @@ else
     end
 end
 
-[x, flag, relres, iter, reshis, times] = petscSolveCRS(Arows, Acols, Avals, ...
-    b, PETSC_KSPGMRES, rtol, maxiter, pctype, 'right', x0, opts);
+[x, flag, relres, iter, reshis, times] = petscSolveCRS(Arows, Acols, PetscScalar(Avals), ...
+    PetscScalar(b), PETSC_KSPGMRES, PetscReal(rtol), maxiter, pctype, 'right', PetscScalar(x0), opts);
 
 if verbose
     fprintf(1, 'Finished solve with residual %g in %d iterations and %.2f seconds.\n', ...
@@ -225,9 +225,9 @@ function test %#ok<DEFNU>
 %! A = s.A;
 %! s = load('fem2d_vec_cd.mat');
 %! b = s.b;
-%! rtol = 1.e-5;
+%! rtol = 10*eps(class(PetscReal(0))).^(1/2);
 
-%! [x,flag,relres,iter,reshis,times] = gmresSuperLU(A, b);
-%! assert(norm(b - A*x) < rtol * norm(b))
+%! [x,flag,relres,iter,reshis,times] = gmresSuperLU(A, b, [], rtol);
+%! assert(norm(b - A*double(x)) < rtol * norm(b))
 
 end

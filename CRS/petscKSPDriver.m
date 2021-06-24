@@ -34,7 +34,7 @@ bnrm = petscVecNorm(b, PETSC_NORM_2);
 t_ksp = PetscKSP(ksp);
 
 if nargout>4
-    time = 0;
+    time = double(0);
     comm = petscObjectGetComm(t_ksp);
     % When timing the run, use mpi_Barrier for more accurate results.
     mpi_Barrier(comm);
@@ -53,10 +53,10 @@ else
     % Set tolerances
     if nargin>=4
         if rtol==0
-            rtol = double(PETSC_DEFAULT);
+            rtol = PetscReal(PETSC_DEFAULT);
         end
-        petscKSPSetTolerances(t_ksp, double(rtol), double(PETSC_DEFAULT), ...
-            double(PETSC_DEFAULT), int32(maxits));
+        petscKSPSetTolerances(t_ksp, PetscScalar(rtol), PetscScalar(PETSC_DEFAULT), ...
+            PetscScalar(PETSC_DEFAULT), int32(maxits));
     end
     
     % Process initial guess

@@ -15,7 +15,7 @@ function [val, errCode, toplevel] = petscVecDot(x, y)
 errCode = int32(-1);
 
 if ~isempty(coder.target)
-    val = double(0);
+    val = PetscScalar(0);
     errCode = coder.ceval('VecDot', PetscVec(x), PetscVec(y), coder.wref(val));
 
     toplevel = nargout>2;
@@ -38,5 +38,5 @@ function test %#ok<DEFNU>
 %! petscVecDestroy(vec_x);
 %! petscVecDestroy(vec_y);
 %!
-%! assert(errCode == 0 && norm(result - x' * y) < 1.e-12);
+%! assert(errCode == 0 && norm(result - x' * y) < eps(class(PetscReal(0))).^(3/4));
 end

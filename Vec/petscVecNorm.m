@@ -15,14 +15,14 @@ function [nrm, errCode, toplevel] = petscVecNorm(x, type, nrm)
 %   PetscErrorCode  VecNorm(Vec x,NormType type,PetscReal *val)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecNorm.html
 
-%#codegen -args {PetscVec, int32(0), coder.typeof(0, [2,1])}
+%#codegen -args {PetscVec, int32(0), coder.typeof(PetscScalar(0), [2,1])}
 %#codegen petscVecNorm_2args -args {PetscVec, int32(0)}
 
 errCode = int32(-1);
 
 if ~isempty(coder.target)
     if nargin==2
-        nrm = double(0);
+        nrm = PetscReal(0);
     end
     errCode = coder.ceval('VecNorm', PetscVec(x), type, coder.wref(nrm));
 
@@ -44,5 +44,5 @@ function test %#ok<DEFNU>
 %!
 %! petscVecDestroy(vec_x);
 %!
-%! assert(errCode == 0 && norm(result - norm(x)) < 1.e-12);
+%! assert(errCode == 0 && norm(result - norm(x)) < eps(class(PetscReal(0))).^(3/4));
 end

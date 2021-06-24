@@ -11,10 +11,10 @@ function pc = hypreDestroy(pc)
 %
 %  SEE ALSO: hypreCreate, hypreApply, hypreApplyTranspose
 
-[mat, ~, errCode] = petscPCGetOperators(pc); assert(errCode==0, 'petscPCGetOperators failed');
+[mat, ~, errCode] = petscPCGetOperators(pc); assert(errCode==int(0), 'petscPCGetOperators failed');
 
-[~, errCode] = petscMatDestroy(mat); assert(errCode==0, 'petscMatDestroy failed');
+[~, errCode] = petscMatDestroy(mat); assert(errCode==int(0), 'petscMatDestroy failed');
 
-[pc, errCode] = petscPCDestroy(pc); assert(errCode==0, 'petscPCDestroy failed');
+[pc, errCode] = petscPCDestroy(pc); assert(errCode==int(0), 'petscPCDestroy failed');
 
 end

@@ -9,7 +9,7 @@ function [mat, errCode, toplevel] = petscMatScale(mat, a)
 %   PetscErrorCode MatScale(Mat mat,PetscScalar a)
 % https://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatScale.html
 
-%#codegen -args {PetscMat, 0}
+%#codegen -args {PetscMat, PetscScalar(0)}
 
 errCode = int32(-1);
 

@@ -81,7 +81,7 @@ end
 petscKSPSetFromOptions(ksp);
 
 if nargout>1
-    time = 0;
+    time = double(0);
     comm = petscObjectGetComm(ksp);
     % When timing the run, use mpi_Barrier for more accurate results.
     mpi_Barrier(comm);

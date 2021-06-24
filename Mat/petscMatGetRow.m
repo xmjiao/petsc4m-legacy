@@ -20,7 +20,7 @@ if ~isempty(coder.target)
     
     t_ncols = int32(0);
     t_cols = coder.opaque('const int *');
-    t_vals = coder.opaque('const double *');
+    t_vals = coder.opaque('const PetscScalar *');
     
     errCode = coder.ceval('MatGetRow', t_mat, row, coder.ref(t_ncols), ...
         coder.wref(t_cols), coder.wref(t_vals));
@@ -33,10 +33,10 @@ if ~isempty(coder.target)
     % Copy data out
     ncols = t_ncols;
     cols = coder.nullcopy(zeros(ncols, 1, 'int32'));
-    vals = coder.nullcopy(zeros(ncols, 1));
+    vals = coder.nullcopy(PetscScalar(zeros(ncols, 1)));
     
     coder.ceval('memcpy', coder.ref(cols), t_cols, ncols*4);
-    coder.ceval('memcpy', coder.ref(vals), t_vals, ncols*8);
+    coder.ceval('memcpy', coder.ref(vals), t_vals, ncols*4*(1+isa(PetscReal(0), 'double')));
 
     % Free PETSc internal storage
     errCode = coder.ceval('MatRestoreRow', t_mat, row, coder.ref(t_ncols), ...

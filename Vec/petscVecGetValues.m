@@ -16,14 +16,14 @@ function [y, errCode, toplevel] = petscVecGetValues(vec, ni, ix, y)
 %   PetscErrorCode  VecGetValues(Vec x,PetscInt ni,const PetscInt ix[],PetscScalar y[])
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecGetValues.html
 
-%#codegen -args {PetscVec, int32(0), coder.typeof(int32(0), [inf,1]), coder.typeof(0, [inf,1])}
+%#codegen -args {PetscVec, int32(0), coder.typeof(int32(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1])}
 %#codegen petscVecGetValues_Alloc -args {PetscVec, int32(0), coder.typeof(int32(0), [inf,1])}
 
 errCode = int32(-1);
 
 if ~isempty(coder.target)
     if nargin<4
-        y = coder.nullcopy(zeros(ni, 1));
+        y = coder.nullcopy(PetscScalar(zeros(ni, 1)));
     elseif length(y) < ni
         m2c_error('Output array y is too small.');
     end
@@ -44,7 +44,7 @@ function test %#ok<DEFNU>
 %! x = rand(10,1);
 %!
 %! vec_x = petscVecCreateFromArray(x);
-%! y = zeros(5, 1);
+%! y = PetscScalar(zeros(5, 1));
 %! idx = int32(5:9)';
 %!
 %! [y, errCode, toplevel] = petscVecGetValues(vec_x, int32(5),idx, y);

@@ -16,7 +16,7 @@ errCode = int32(-1);
 if ~isempty(coder.target)
     t_ksp = PetscKSP(ksp);
     
-    rnorm = 0;
+    rnorm = PetscScalar(0);
     errCode = coder.ceval('KSPGetResidualNorm', t_ksp, coder.wref(rnorm));
     
     toplevel = nargout>2;

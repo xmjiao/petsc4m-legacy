@@ -16,8 +16,8 @@ function [errCode, toplevel] = petscMatAXPY(Y, a, X, mstr)
 %   PetscErrorCode MatAXPY(Mat Y,PetscScalar a,Mat X,MatStructure str)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatAXPY.html
 
-%#codegen -args {PetscMat, 0, PetscMat, int32(0)}
-%#codegen petscMatAXPY_3args -args {PetscMat, 0, PetscMat}
+%#codegen -args {PetscMat, PetscScalar(0), PetscMat, int32(0)}
+%#codegen petscMatAXPY_3args -args {PetscMat, PetscScalar(0), PetscMat}
 
 errCode = int32(-1);
 

@@ -23,9 +23,9 @@ function [errCode, toplevel] = petscMatSetValues(mat, ni, ix, nj, jx, v, iroa)
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatSetValues.html
 
 %#codegen -args {PetscMat, int32(0), coder.typeof(int32(0), [inf,1]), int32(0),
-%#codegen coder.typeof(int32(0), [inf,1]), coder.typeof(0, [inf,1]), int32(0)}
+%#codegen coder.typeof(int32(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1]), int32(0)}
 %#codegen petscMatSetValues_Insert -args {PetscMat, int32(0), coder.typeof(int32(0),
-%#codegen [inf,1]), int32(0), coder.typeof(int32(0), [inf,1]), coder.typeof(0, [inf,1])}
+%#codegen [inf,1]), int32(0), coder.typeof(int32(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1])}
 
 errCode = int32(-1);
 if nargin<7;

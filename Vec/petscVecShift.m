@@ -7,7 +7,7 @@ function [v, errCode, toplevel] = petscVecShift(v, a)
 %   PetscErrorCode  VecShift(Vec v,PetscScalar shift)
 % https://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Vec/VecShift.html
 
-%#codegen -args {PetscVec, 0}
+%#codegen -args {PetscVec, PetscScalar(0)}
 
 errCode = int32(-1);
 

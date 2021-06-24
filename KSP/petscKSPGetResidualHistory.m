@@ -23,8 +23,8 @@ if ~isempty(coder.target)
     errCode = coder.ceval('KSPGetResidualHistory', t_ksp, ...
         coder.wref(a), coder.wref(na));
     
-    reshis = zeros(na, 1);
-    coder.ceval('memcpy', coder.ref(reshis), a, int32(na*8));
+    reshis = zeros(PetscReal(na, 1));
+    coder.ceval('memcpy', coder.ref(reshis), a, int32(na*4*(1+isa(PetscReal(0), 'double'))));
     
     toplevel = nargout>2;
     if errCode && (toplevel || m2c_debug)

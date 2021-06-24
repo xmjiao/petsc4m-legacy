@@ -18,7 +18,7 @@ function [errCode, toplevel] = petscMatMPIAIJSetPreallocationCSR(mat, ix, jx, vs
 % http://www.mcs.anl.gov/petsc/petsc-current/docs/manualpages/Mat/MatMPIAIJSetPreallocationCSR.html
 
 %#codegen -args {PetscMat, coder.typeof(int32(0), [inf,1]),
-%#codegen coder.typeof(int32(0), [inf,1]), coder.typeof(0, [inf,1])}
+%#codegen coder.typeof(int32(0), [inf,1]), coder.typeof(PetscScalar(0), [inf,1])}
 %#codegen petscMatMPIAIJSetPreallocationCSR_Indexonly -args {PetscMat,
 %#codegen coder.typeof(int32(0), [inf,1]), coder.typeof(int32(0), [inf,1])}
 
