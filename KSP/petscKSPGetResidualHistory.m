@@ -23,7 +23,7 @@ if ~isempty(coder.target)
     errCode = coder.ceval('KSPGetResidualHistory', t_ksp, ...
         coder.wref(a), coder.wref(na));
     
-    reshis = zeros(PetscReal(na, 1));
+    reshis = PetscReal(zeros(na, 1));
     coder.ceval('memcpy', coder.ref(reshis), a, int32(na*4*(1+isa(PetscReal(0), 'double'))));
     
     toplevel = nargout>2;

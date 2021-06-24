@@ -5,8 +5,6 @@ persistent loaded;
 % Load only once
 if ~isempty(loaded)
   return
-else
-  loaded = true;
 end
 
 % petsc4m depends on paracoder. Need to load it first
@@ -21,8 +19,7 @@ elseif ~exist('m2c.m', 'file')
 end
 
 % Set petscroot explicitly to bypass a bug in Octave 4.2.1
-petscroot = which('load_petsc');
-petscroot = petscroot(1:end-13);
+petscroot = fileparts(which('load_petsc'));
 if petscroot == '.'
     petscroot=pwd;
 end
@@ -41,6 +38,19 @@ addpath([petscroot '/CRS']);
 addpath([petscroot '/util'])
 addpath([petscroot '/sys'])
 
+[~,dir] = fileparts(petscroot);
+
+switch dir % Load type definitions
+case 'spetsc4m'
+    addpath([petscroot '/sys/spetsc'])
+case 'cpetsc4m'
+    addpath([petscroot '/sys/cpetsc'])
+case 'zpetsc4m'
+    addpath([petscroot '/sys/zpetsc'])
+otherwise
+    addpath([petscroot '/sys/petsc'])
+end
+
 if isoctave || ~usejava('jvm')
     % PETSc should not be initialized automatically in MATLAB
     % if JAVA is enabled
@@ -51,3 +61,5 @@ end
 if ~exist(['petscInitialized.' mexext], 'file')
     disp('Please run build_petsc to compile Petsc4m.');
 end
+
+loaded = true;

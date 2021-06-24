@@ -1,5 +1,22 @@
 function build_petsc(varargin)
 
+% Check PETSC_DIR
+PETSC_DIR=getenv('PETSC_DIR');
+if isempty(PETSC_DIR) && exist('/usr/lib/petsc', 'dir')
+    PETSC_DIR = '/usr/lib/petsc';
+end
+
+configure_file = fullfile(PETSC_DIR, 'lib', 'petsc', 'conf', 'petscvariables');
+try
+    conf = fileread(configure_file);
+catch
+    error('You must define $PETSC_DIR with a valid file $PETSC_DIR/lib/petsc/conf/petscvariables.');
+end
+if contains(conf, '--with-precision=single') ~= isa(PetscReal(0), 'single')
+    error(['Petsc4m is for ' class(PetscReal(0)) ' precision but PETSC_DIR points to an incompatible version.', newline, ...
+        'Please PETSC_DIR, e.g. by unloading petsc and loading a compatible module.']);
+end
+
 % Change to petsc's root directory to build.
 curpath = pwd;
 cd(petscroot);
