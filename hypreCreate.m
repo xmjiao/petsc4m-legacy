@@ -15,17 +15,17 @@ function pc = hypreCreate(row_ptr, col_ind, val, opts)
 %   hypreApply, hypreDestroy
 
 if nargin >= 4 && ~isempty(opts)
-    errCode = petscOptionsInsert(opts); assert(errCode==int(0), 'petscOptionsInsert failed');
+    errCode = petscOptionsInsert(opts); assert(errCode==int32(0), 'petscOptionsInsert failed');
 end
 
-[pc, errCode] = petscPCCreate(MPI_COMM_WORLD); assert(errCode==int(0), 'petscPCCreate failed');
-errCode = petscPCSetType(pc, PETSC_PCHYPRE); assert(errCode==int(0), 'petscPCSetType failed');
-errCode = petscPCSetFromOptions(pc); assert(errCode==int(0), 'PCSetFromOptions failed');
+[pc, errCode] = petscPCCreate(MPI_COMM_WORLD); assert(errCode==int32(0), 'petscPCCreate failed');
+errCode = petscPCSetType(pc, PETSC_PCHYPRE); assert(errCode==int32(0), 'petscPCSetType failed');
+errCode = petscPCSetFromOptions(pc); assert(errCode==int32(0), 'PCSetFromOptions failed');
 
-mat = petscMatCreateAIJFromCRS(row_ptr, col_ind, PetscSalar(val));
+mat = petscMatCreateAIJFromCRS(row_ptr, col_ind, PetscScalar(val));
 
-errCode = petscPCSetOperators(pc, mat, mat); assert(errCode==int(0), 'petscPCSetOperators failed');
+errCode = petscPCSetOperators(pc, mat, mat); assert(errCode==int32(0), 'petscPCSetOperators failed');
 
-errCode = petscPCSetUp(pc); assert(errCode==int(0), 'petscPCSetUp failed');
+errCode = petscPCSetUp(pc); assert(errCode==int32(0), 'petscPCSetUp failed');
 
 end

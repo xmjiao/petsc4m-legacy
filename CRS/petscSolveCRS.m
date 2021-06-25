@@ -94,7 +94,7 @@ if nargin==0
     return;
 end
 
-if isempty(coder.target) && ~exist(['petscSolveCRS.' mexext], 'file') && ...
+if isempty(coder.target) && ~isoctave && usejava('jvm') && ...
         exist('run_petscSolveCRS_exe', 'file')
     % Is running in MATLAB and mex files are not available
     [x, flag, relres, iter, reshis, times] = run_petscSolveCRS_exe(varargin{:});

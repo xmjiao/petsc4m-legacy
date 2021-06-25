@@ -1,7 +1,7 @@
-function pc = hypreDestroy(pc)
-% hypreDestroy Destroy the context of a hypre preconditioner
+function pc = pcDestroy(pc)
+% pcDestroy Destroy the context of a pc preconditioner
 %
-%   pc = hypreCreate(pc)
+%   pc = pcCreate(pc)
 %
 % Input Argument:
 %   pc: PETSc preconditoiner object
@@ -9,7 +9,7 @@ function pc = hypreDestroy(pc)
 % Output Argument:
 %   pc: Destroyed PC object
 %
-%  SEE ALSO: hypreCreate, hypreApply, hypreApplyTranspose
+%  SEE ALSO: pcCreate, pcApply, pcApplyTranspose
 
 [mat, ~, errCode] = petscPCGetOperators(pc); assert(errCode==int32(0), 'petscPCGetOperators failed');
 

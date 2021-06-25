@@ -48,7 +48,7 @@ case 'cpetsc4m'
 case 'zpetsc4m'
     addpath([petscroot '/sys/zpetsc'])
 otherwise
-    addpath([petscroot '/sys/petsc'])
+    addpath([petscroot '/sys/dpetsc'])
 end
 
 if isoctave || ~usejava('jvm')

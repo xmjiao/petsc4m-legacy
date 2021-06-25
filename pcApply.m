@@ -1,7 +1,7 @@
-function y = hypreApplyTranspose(pc, x)
-% hypreApplyTranspose Computes y=M^-T x
+function y = pcApply(pc, x)
+% pcApply Computes y=M^-1 x
 %
-%   y = hypreApplyTranspose(pc, x)
+%   y = pcApply(pc, x)
 %
 % Input Arguments:
 %   pc: The preconditioner object
@@ -10,15 +10,16 @@ function y = hypreApplyTranspose(pc, x)
 % Output Argument:
 %   y:  The output vecor
 %
-% SEE ALSO: hypreCreate, hypreApply, hypreDestroy
+% SEE ALSO: pcCreate, pcApplyTranspose, pcDestroy
+
+%#codegen -args {PetscPC, coder.typeof(PetscScalar(0), [inf, 1])}
 
 xVec = petscVecCreateFromArray(PetscScalar(x));
 yVec = petscVecDuplicate(xVec);
 
-errCode = petscPCApplyTranspose(pc, xVec, yVec); assert(~errCode, 'petscPCApplyTranspose failed');
+errCode = petscPCApply(pc, xVec, yVec); assert(~errCode, 'petscPCApply failed');
 
 y = petscVecToArray(yVec);
-
 petscVecDestroy(xVec);
 petscVecDestroy(yVec);
 
