@@ -5,7 +5,7 @@ persistent loaded;
 % Load only once
 if ~isempty(loaded)
   return
-elseif isoctave
+elseif exist('OCTAVE_VERSION', 'builtin')
     % Prevent Octave from loading it twice
     loaded = true;
 end
