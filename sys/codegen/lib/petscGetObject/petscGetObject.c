@@ -157,16 +157,17 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj,
                                'p', 't', 'i', 'o', 'n', 's'};
   static const char cv9[12] = {'P', 'E', 'T', 'S', 'C', '_',
                                'I', 'G', 'N', 'O', 'R', 'E'};
+  static const char cv8[11] = {'P', 'e', 't', 's', 'c', 'R',
+                               'e', 'a', 'l', ' ', '*'};
   static const char cv4[8] = {'M', 'P', 'I', '_', 'C', 'o', 'm', 'm'};
-  static const char cv8[8] = {'d', 'o', 'u', 'b', 'l', 'e', ' ', '*'};
   static const char cv5[6] = {'v', 'o', 'i', 'd', ' ', '*'};
   static const char cv7[5] = {'i', 'n', 't', ' ', '*'};
   MPI_Comm arg;
   Mat d_arg;
   PetscOptions c_arg;
+  PetscReal *g_arg;
   Vec e_arg;
   char *ptr;
-  double *g_arg;
   int *f_arg;
   void *b_arg;
   emxArray_char_T *b_name;
@@ -492,15 +493,15 @@ void petscGetObject(const emxArray_char_T *name, struct0_T *obj,
     break;
   case 9:
     g_arg = NULL;
-    sizepe = sizeof(double *);
+    sizepe = sizeof(PetscReal *);
     i = obj->data->size[0];
     obj->data->size[0] = sizepe;
     emxEnsureCapacity_uint8_T(obj->data, i);
     i = obj->type->size[0] * obj->type->size[1];
     obj->type->size[0] = 1;
-    obj->type->size[1] = 8;
+    obj->type->size[1] = 11;
     emxEnsureCapacity_char_T(obj->type, i);
-    for (i = 0; i < 8; i++) {
+    for (i = 0; i < 11; i++) {
       obj->type->data[i] = cv8[i];
     }
     obj->nitems = 1;

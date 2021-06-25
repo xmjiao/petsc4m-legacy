@@ -104,16 +104,16 @@ void petscKSPSetTolerances_2args(const M2C_OpaqueType *ksp, double rtol,
   emxArray_char_T *b_ksp;
   int loop_ub;
   int maxits;
-  int val;
+  int x;
   if (!isequal(ksp->type)) {
     emxInit_char_T(&b_ksp, 2);
-    val = b_ksp->size[0] * b_ksp->size[1];
+    x = b_ksp->size[0] * b_ksp->size[1];
     b_ksp->size[0] = 1;
     b_ksp->size[1] = ksp->type->size[1] + 1;
-    emxEnsureCapacity_char_T(b_ksp, val);
+    emxEnsureCapacity_char_T(b_ksp, x);
     loop_ub = ksp->type->size[1];
-    for (val = 0; val < loop_ub; val++) {
-      b_ksp->data[val] = ksp->type->data[val];
+    for (x = 0; x < loop_ub; x++) {
+      b_ksp->data[x] = ksp->type->data[x];
     }
     b_ksp->data[ksp->type->size[1]] = '\x00';
     m2c_error(b_ksp);
@@ -121,10 +121,9 @@ void petscKSPSetTolerances_2args(const M2C_OpaqueType *ksp, double rtol,
   }
   t_ksp = *(KSP *)(&ksp->data->data[0]);
   loop_ub = (PETSC_DEFAULT);
-  val = (PETSC_DEFAULT);
+  x = (PETSC_DEFAULT);
   maxits = (PETSC_DEFAULT);
-  *errCode =
-      KSPSetTolerances(t_ksp, rtol, (double)loop_ub, (double)val, maxits);
+  *errCode = KSPSetTolerances(t_ksp, rtol, (double)loop_ub, (double)x, maxits);
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }

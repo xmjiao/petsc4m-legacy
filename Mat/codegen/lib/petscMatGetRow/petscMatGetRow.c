@@ -55,7 +55,7 @@ void petscMatGetRow(const M2C_OpaqueType *mat, int row, int *ncols,
 {
   static const char cv[3] = {'M', 'a', 't'};
   Mat t_mat;
-  const double *t_vals;
+  const PetscScalar *t_vals;
   const int *t_cols;
   emxArray_char_T *b_mat;
   int i;

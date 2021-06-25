@@ -73,10 +73,10 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   double secs;
   double t;
   int b_maxits;
+  int b_x;
   int na;
   int switch_expression;
   int type;
-  int val;
   boolean_T b_b;
   type = (NORM_2);
   VecNorm(b, type, &bnrm);
@@ -92,8 +92,8 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
     rtol = type;
   }
   type = (PETSC_DEFAULT);
-  val = (PETSC_DEFAULT);
-  KSPSetTolerances(ksp, rtol, (double)type, (double)val, maxits);
+  b_x = (PETSC_DEFAULT);
+  KSPSetTolerances(ksp, rtol, (double)type, (double)b_x, maxits);
   type = !(x0);
   b_b = (type == 0);
   if (b_b) {
@@ -113,10 +113,10 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   emxInit_char_T(&side, 2);
   if ((*flag < 0) || (*relres > b_rtol)) {
     KSPGetPC(ksp, &pc);
-    val = (PC_LEFT);
+    b_x = (PC_LEFT);
     type = (PC_RIGHT);
     KSPGetPCSide(ksp, &switch_expression);
-    if (val == switch_expression) {
+    if (b_x == switch_expression) {
       type = 0;
     } else if (type == switch_expression) {
       type = 1;
@@ -401,11 +401,11 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   double rtol;
   double secs;
   double t;
-  int b_val;
+  int b_x;
+  int c_x;
   int maxits;
   int na;
   int type;
-  int val;
   boolean_T b_b;
   type = (NORM_2);
   VecNorm(b, type, &bnrm);
@@ -415,9 +415,9 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   t = MPI_Wtime();
   maxits = (PETSC_DEFAULT);
   type = (PETSC_DEFAULT);
-  val = (PETSC_DEFAULT);
-  b_val = (PETSC_DEFAULT);
-  KSPSetTolerances(ksp, (double)type, (double)val, (double)b_val, maxits);
+  b_x = (PETSC_DEFAULT);
+  c_x = (PETSC_DEFAULT);
+  KSPSetTolerances(ksp, (double)type, (double)b_x, (double)c_x, maxits);
   type = !(x0);
   b_b = (type == 0);
   if (b_b) {
@@ -437,12 +437,12 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   emxInit_char_T(&side, 2);
   if ((*flag < 0) || (*relres > rtol)) {
     KSPGetPC(ksp, &pc);
-    val = (PC_LEFT);
+    b_x = (PC_LEFT);
     type = (PC_RIGHT);
-    KSPGetPCSide(ksp, &b_val);
-    if (val == b_val) {
+    KSPGetPCSide(ksp, &c_x);
+    if (b_x == c_x) {
       type = 0;
-    } else if (type == b_val) {
+    } else if (type == c_x) {
       type = 1;
     } else {
       type = -1;
