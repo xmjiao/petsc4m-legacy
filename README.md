@@ -1,23 +1,25 @@
 OVERVIEW
 ========
 
-Petsc4m is an Octave Interface for PETSc. It supports solving large-scale
-sparse linear systems using PETSc in Octave. The data exchanges between Octave
-and PETSc are done through memory.
+Petsc4m is an interface of PETSc for MATLAB and GNU Octave. It supports
+solving large-scale sparse linear systems using PETSc in GNU Octave. Data
+exchanges between MATLAB/Octave and PETSc are done through memory.
 
 Petsc4m is flexible and easy to use. Its top-most functions are composed
 of `petscSolve` and `petscSolveCRS`, plus nine other helper functions.
-These functions support accessing iterative solvers in PETSc directly
-from Octave without much codingx.  Petsc4m also offers about 150 low-level
-PETSc API functions, so that you can also directly program in Octave using
-the PETSc API for prototyping. Petsc4m depends on
-[ParaCoder](http://github.com/fastsolve/paracoder) for some basic
-MPI calls.
+These functions support accessing iterative solvers and preconditioners
+in PETSc directly from MATLAB or GNU Octave without much coding. Petsc4m
+also offers about 150 low-level PETSc API functions, so that you can also
+directly program in MATLAB and Octave using the PETSc API for prototyping.
+It supports both double-precision and single-precision versions of PETSc.
+
+Petsc4m depends on [ParaCoder](http://github.com/fastsolve/paracoder) for
+some basic MPI calls.
 
 The high-level Petsc4m functions support two matrix formats: Sequential
 AIJ and MPI AIJ. These formats tend to deliver good performance and
-offer good interoperability with Octave. Other matrix formats, such as
-dense and MPI Block AIJ, are accessible through the low-level functions.
+offer good interoperability with MATLAB and Octave. Other matrix formats,
+such as dense and MPI Block AIJ, are accessible through the low-level functions.
 
 EXAMPLE
 =======
@@ -53,7 +55,7 @@ basic MATLAB/Octave features.
 TRYING OUT PETSC4M
 ==================
 
-Petsc4m is a very complicated piece of software with many dependencise. The
+Petsc4m is a very complicated piece of software with many dependencies. The
 easiest way to try it out is to use the Jupyter Notebook through Docker.
 It offers a very convenient way to try out different solvers in PETSc.
 
@@ -82,7 +84,7 @@ of MATLAB/Octave.
 For most users, `petscSolve` and `petscSolveCRS` are the only two
 function you need to use. The former uses Octave's built-in sparse
 matrix format, and the latter uses the CRS format stored in three
-different arrays: `rowptr`, `colind`, and `val`.
+different arrays: `row_ptr`, `col_ind`, and `val`.
 
 Low-Level Functions
 -----------------------
@@ -135,15 +137,15 @@ Additional MPI features are available through `ParaCoder`.
 NOTES ON PETSC4M IN MATLAB
 ==========================
 
-Bsides Octave, Petsc4m is also compatible without MATLAB. However, there seem
-to be some conflicts between MATLAB's and PETSc's memory managers.
-Therefore, data exchange between MATLAB and Petsc4m is done through
-files to avoid MATLAB from random crashings. For production runs, we
-strongly recommend using Petsc4m with Octave.
+When using MATLAB, it is important for you to preset PETSC_DIR and
+also set `LD_PRELOAD=/path/to/blas/libblas.so:/path/to/lapack/liblapack.so`
+to prevent MATLAB from overriding the BLAS and LAPACK libraries used by
+PETSc and its third-party modules. In addition, use `matlab -nojvm` to
+prevent random crashing due to some apparent conflict between PETSc and Java.
 
 LIMITATIONS
 ===========
 
 Virtually all features in PETSc are available through Petsc4m. However,
-Petsc4m does not yet support `KSPRegister` and `PCRegister`, so you
-cannot easily use Petsc4m to implement new solvers for PETSc.
+Petsc4m does not support `KSPRegister` and `PCRegister`, so you cannot
+use Petsc4m to implement new solvers or preconditioners for PETSc.
