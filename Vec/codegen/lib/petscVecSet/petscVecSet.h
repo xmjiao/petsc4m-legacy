@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-extern void petscVecSet(const M2C_OpaqueType *vec, double val, int *errCode,
+extern void petscVecSet(const M2C_OpaqueType *vec, float val, int *errCode,
                         boolean_T *toplevel);
 
 extern void petscVecSet_initialize(void);

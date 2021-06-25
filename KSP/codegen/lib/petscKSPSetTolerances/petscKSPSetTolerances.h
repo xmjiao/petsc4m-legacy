@@ -10,11 +10,11 @@
 extern "C" {
 #endif
 
-extern void petscKSPSetTolerances(const M2C_OpaqueType *ksp, double rtol,
-                                  double abstol, double dtol, int maxits,
+extern void petscKSPSetTolerances(const M2C_OpaqueType *ksp, float rtol,
+                                  float abstol, float dtol, int maxits,
                                   int *errCode, boolean_T *toplevel);
 
-extern void petscKSPSetTolerances_2args(const M2C_OpaqueType *ksp, double rtol,
+extern void petscKSPSetTolerances_2args(const M2C_OpaqueType *ksp, float rtol,
                                         int *errCode, boolean_T *toplevel);
 
 extern void petscKSPSetTolerances_initialize(void);

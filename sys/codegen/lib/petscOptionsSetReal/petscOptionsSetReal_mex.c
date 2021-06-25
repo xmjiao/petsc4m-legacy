@@ -23,7 +23,7 @@
 
 static void __petscOptionsSetReal_api(mxArray **plhs, const mxArray ** prhs) {
     emxArray_char_T      iname;
-    real64_T             value;
+    real32_T             value;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -36,13 +36,13 @@ static void __petscOptionsSetReal_api(mxArray **plhs, const mxArray ** prhs) {
             "Dimension 1 of iname should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[0], (emxArray__common *)(&iname), "iname", 2);
 
-    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscOptionsSetReal:WrongInputType",
-            "Input argument value has incorrect data type; double is expected.");
+            "Input argument value has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscOptionsSetReal:WrongSizeOfInputArg",
             "Argument value should be a scalar.");
-    value = *(real64_T*)mxGetData(prhs[1]);
+    value = *(real32_T*)mxGetData(prhs[1]);
 
     errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 

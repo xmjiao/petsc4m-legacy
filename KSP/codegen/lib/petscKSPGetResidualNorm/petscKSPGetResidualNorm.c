@@ -38,7 +38,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscKSPGetResidualNorm(const M2C_OpaqueType *ksp, double *rnorm,
+void petscKSPGetResidualNorm(const M2C_OpaqueType *ksp, float *rnorm,
                              int *errCode, boolean_T *toplevel)
 {
   static const char cv[3] = {'K', 'S', 'P'};

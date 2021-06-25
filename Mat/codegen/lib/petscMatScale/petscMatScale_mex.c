@@ -93,7 +93,7 @@ static mxArray *marshallout_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 
 static void __petscMatScale_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       mat;
-    real64_T             a;
+    real32_T             a;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -106,13 +106,13 @@ static void __petscMatScale_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument mat should be a scalar.");
     marshallin_M2C_OpaqueType(&mat, prhs[0], "mat");
 
-    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscMatScale:WrongInputType",
-            "Input argument a has incorrect data type; double is expected.");
+            "Input argument a has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscMatScale:WrongSizeOfInputArg",
             "Argument a should be a scalar.");
-    a = *(real64_T*)mxGetData(prhs[1]);
+    a = *(real32_T*)mxGetData(prhs[1]);
 
     errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 

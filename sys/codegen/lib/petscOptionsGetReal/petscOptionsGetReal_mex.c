@@ -24,7 +24,7 @@
 static void __petscOptionsGetReal_api(mxArray **plhs, const mxArray ** prhs) {
     emxArray_char_T      pre;
     emxArray_char_T      name;
-    real64_T            *value;
+    real32_T            *value;
     int32_T             *found;
     int32_T             *errCode;
     boolean_T           *toplevel;
@@ -46,7 +46,7 @@ static void __petscOptionsGetReal_api(mxArray **plhs, const mxArray ** prhs) {
             "Dimension 1 of name should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[1], (emxArray__common *)(&name), "name", 2);
 
-    value = (real64_T*)mxMalloc(sizeof(real64_T));
+    value = (real32_T*)mxMalloc(sizeof(real32_T));
 
     found = (int32_T*)mxMalloc(sizeof(int32_T));
 
@@ -60,7 +60,7 @@ static void __petscOptionsGetReal_api(mxArray **plhs, const mxArray ** prhs) {
     /* Deallocate input and marshall out function outputs */
     free_emxArray((emxArray__common*)(&pre));
     free_emxArray((emxArray__common*)(&name));
-    plhs[0] = move_scalar_to_mxArray(value, mxDOUBLE_CLASS);
+    plhs[0] = move_scalar_to_mxArray(value, mxSINGLE_CLASS);
     plhs[1] = move_scalar_to_mxArray(found, mxINT32_CLASS);
     plhs[2] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[3] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);

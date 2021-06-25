@@ -10,10 +10,10 @@
 extern "C" {
 #endif
 
-extern void petscVecNorm(const M2C_OpaqueType *x, int type, double nrm[2],
+extern void petscVecNorm(const M2C_OpaqueType *x, int type, float nrm[2],
                          int *errCode, boolean_T *toplevel);
 
-extern void petscVecNorm_2args(const M2C_OpaqueType *x, int type, double *nrm,
+extern void petscVecNorm_2args(const M2C_OpaqueType *x, int type, float *nrm,
                                int *errCode, boolean_T *toplevel);
 
 extern void petscVecNorm_initialize(void);

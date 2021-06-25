@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-extern void petscVecShift(const M2C_OpaqueType *v, double a, int *errCode,
+extern void petscVecShift(const M2C_OpaqueType *v, float a, int *errCode,
                           boolean_T *toplevel);
 
 extern void petscVecShift_initialize(void);

@@ -85,9 +85,9 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 
 static void __petscKSPSetTolerances_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       ksp;
-    real64_T             rtol;
-    real64_T             abstol;
-    real64_T             dtol;
+    real32_T             rtol;
+    real32_T             abstol;
+    real32_T             dtol;
     int32_T              maxits;
     int32_T             *errCode;
     boolean_T           *toplevel;
@@ -101,29 +101,29 @@ static void __petscKSPSetTolerances_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument ksp should be a scalar.");
     marshallin_const_M2C_OpaqueType(&ksp, prhs[0], "ksp");
 
-    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscKSPSetTolerances:WrongInputType",
-            "Input argument rtol has incorrect data type; double is expected.");
+            "Input argument rtol has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscKSPSetTolerances:WrongSizeOfInputArg",
             "Argument rtol should be a scalar.");
-    rtol = *(real64_T*)mxGetData(prhs[1]);
+    rtol = *(real32_T*)mxGetData(prhs[1]);
 
-    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscKSPSetTolerances:WrongInputType",
-            "Input argument abstol has incorrect data type; double is expected.");
+            "Input argument abstol has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[2]) != 1)
         mexErrMsgIdAndTxt("petscKSPSetTolerances:WrongSizeOfInputArg",
             "Argument abstol should be a scalar.");
-    abstol = *(real64_T*)mxGetData(prhs[2]);
+    abstol = *(real32_T*)mxGetData(prhs[2]);
 
-    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscKSPSetTolerances:WrongInputType",
-            "Input argument dtol has incorrect data type; double is expected.");
+            "Input argument dtol has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[3]) != 1)
         mexErrMsgIdAndTxt("petscKSPSetTolerances:WrongSizeOfInputArg",
             "Argument dtol should be a scalar.");
-    dtol = *(real64_T*)mxGetData(prhs[3]);
+    dtol = *(real32_T*)mxGetData(prhs[3]);
 
     if (mxGetNumberOfElements(prhs[4]) && mxGetClassID(prhs[4]) != mxINT32_CLASS)
         mexErrMsgIdAndTxt("petscKSPSetTolerances:WrongInputType",
@@ -153,7 +153,7 @@ static void __petscKSPSetTolerances_api(mxArray **plhs, const mxArray ** prhs) {
 
 static void __petscKSPSetTolerances_2args_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       ksp;
-    real64_T             rtol;
+    real32_T             rtol;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -166,13 +166,13 @@ static void __petscKSPSetTolerances_2args_api(mxArray **plhs, const mxArray ** p
             "Argument ksp should be a scalar.");
     marshallin_const_M2C_OpaqueType(&ksp, prhs[0], "ksp");
 
-    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscKSPSetTolerances_2args:WrongInputType",
-            "Input argument rtol has incorrect data type; double is expected.");
+            "Input argument rtol has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscKSPSetTolerances_2args:WrongSizeOfInputArg",
             "Argument rtol should be a scalar.");
-    rtol = *(real64_T*)mxGetData(prhs[1]);
+    rtol = *(real32_T*)mxGetData(prhs[1]);
 
     errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 

@@ -86,7 +86,7 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 static void __petscVecNorm_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       x;
     int32_T              type;
-    real64_T            *nrm;
+    real32_T            *nrm;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -107,16 +107,16 @@ static void __petscVecNorm_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument type should be a scalar.");
     type = *(int32_T*)mxGetData(prhs[1]);
 
-    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscVecNorm:WrongInputType",
-            "Input argument nrm has incorrect data type; double is expected.");
+            "Input argument nrm has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[0] != 2) 
         mexErrMsgIdAndTxt("petscVecNorm:WrongSizeOfInputArg",
             "Dimension 1 of nrm should be equal to 2.");
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[1] != 1) 
         mexErrMsgIdAndTxt("petscVecNorm:WrongSizeOfInputArg",
             "Dimension 2 of nrm should be equal to 1.");
-    nrm = (real64_T*)mxMalloc(sizeof(real64_T) * 2);
+    nrm = (real32_T*)mxMalloc(sizeof(real32_T) * 2);
     copy_mxArray_to_DataSize(nrm, 1, NULL, prhs[2], "nrm", 2);
 
     errCode = (int32_T*)mxMalloc(sizeof(int32_T));
@@ -129,7 +129,7 @@ static void __petscVecNorm_api(mxArray **plhs, const mxArray ** prhs) {
     /* Deallocate input and marshall out function outputs */
     destroy_M2C_OpaqueType(&x);
     /* Nothing to be done for type */
-    plhs[0] = move_ioArray_to_mxArray(nrm, mxDOUBLE_CLASS, prhs[2]);
+    plhs[0] = move_ioArray_to_mxArray(nrm, mxSINGLE_CLASS, prhs[2]);
     plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 
@@ -138,7 +138,7 @@ static void __petscVecNorm_api(mxArray **plhs, const mxArray ** prhs) {
 static void __petscVecNorm_2args_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       x;
     int32_T              type;
-    real64_T            *nrm;
+    real32_T            *nrm;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -159,7 +159,7 @@ static void __petscVecNorm_2args_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument type should be a scalar.");
     type = *(int32_T*)mxGetData(prhs[1]);
 
-    nrm = (real64_T*)mxMalloc(sizeof(real64_T));
+    nrm = (real32_T*)mxMalloc(sizeof(real32_T));
 
     errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
@@ -171,7 +171,7 @@ static void __petscVecNorm_2args_api(mxArray **plhs, const mxArray ** prhs) {
     /* Deallocate input and marshall out function outputs */
     destroy_M2C_OpaqueType(&x);
     /* Nothing to be done for type */
-    plhs[0] = move_scalar_to_mxArray(nrm, mxDOUBLE_CLASS);
+    plhs[0] = move_scalar_to_mxArray(nrm, mxSINGLE_CLASS);
     plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 

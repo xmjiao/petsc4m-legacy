@@ -85,7 +85,7 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 
 static void __petscKSPGetResidualNorm_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       ksp;
-    real64_T            *rnorm;
+    real32_T            *rnorm;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -98,7 +98,7 @@ static void __petscKSPGetResidualNorm_api(mxArray **plhs, const mxArray ** prhs)
             "Argument ksp should be a scalar.");
     marshallin_const_M2C_OpaqueType(&ksp, prhs[0], "ksp");
 
-    rnorm = (real64_T*)mxMalloc(sizeof(real64_T));
+    rnorm = (real32_T*)mxMalloc(sizeof(real32_T));
 
     errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
@@ -109,7 +109,7 @@ static void __petscKSPGetResidualNorm_api(mxArray **plhs, const mxArray ** prhs)
 
     /* Deallocate input and marshall out function outputs */
     destroy_M2C_OpaqueType(&ksp);
-    plhs[0] = move_scalar_to_mxArray(rnorm, mxDOUBLE_CLASS);
+    plhs[0] = move_scalar_to_mxArray(rnorm, mxSINGLE_CLASS);
     plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 

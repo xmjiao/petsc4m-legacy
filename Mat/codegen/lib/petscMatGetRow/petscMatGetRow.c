@@ -50,8 +50,8 @@ static void m2c_error(const emxArray_char_T *varargin_3)
 }
 
 void petscMatGetRow(const M2C_OpaqueType *mat, int row, int *ncols,
-                    emxArray_int32_T *cols, emxArray_real_T *vals, int *errCode,
-                    boolean_T *toplevel)
+                    emxArray_int32_T *cols, emxArray_real32_T *vals,
+                    int *errCode, boolean_T *toplevel)
 {
   static const char cv[3] = {'M', 'a', 't'};
   Mat t_mat;
@@ -106,9 +106,9 @@ void petscMatGetRow(const M2C_OpaqueType *mat, int row, int *ncols,
   emxEnsureCapacity_int32_T(cols, i);
   i = vals->size[0];
   vals->size[0] = t_ncols;
-  emxEnsureCapacity_real_T(vals, i);
+  emxEnsureCapacity_real32_T(vals, i);
   memcpy(&cols->data[0], t_cols, t_ncols << 2);
-  memcpy(&vals->data[0], t_vals, t_ncols << 3);
+  memcpy(&vals->data[0], t_vals, t_ncols << 2);
   *errCode = MatRestoreRow(t_mat, row, &t_ncols, &t_cols, &t_vals);
   if (*errCode != 0) {
     c_m2c_error(*errCode);

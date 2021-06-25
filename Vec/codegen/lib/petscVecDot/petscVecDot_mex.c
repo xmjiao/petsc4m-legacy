@@ -86,7 +86,7 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 static void __petscVecDot_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       x;
     M2C_OpaqueType       y;
-    real64_T            *val;
+    real32_T            *val;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -107,7 +107,7 @@ static void __petscVecDot_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument y should be a scalar.");
     marshallin_const_M2C_OpaqueType(&y, prhs[1], "y");
 
-    val = (real64_T*)mxMalloc(sizeof(real64_T));
+    val = (real32_T*)mxMalloc(sizeof(real32_T));
 
     errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
@@ -119,7 +119,7 @@ static void __petscVecDot_api(mxArray **plhs, const mxArray ** prhs) {
     /* Deallocate input and marshall out function outputs */
     destroy_M2C_OpaqueType(&x);
     destroy_M2C_OpaqueType(&y);
-    plhs[0] = move_scalar_to_mxArray(val, mxDOUBLE_CLASS);
+    plhs[0] = move_scalar_to_mxArray(val, mxSINGLE_CLASS);
     plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 

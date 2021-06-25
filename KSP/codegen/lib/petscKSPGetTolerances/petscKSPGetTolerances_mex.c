@@ -85,9 +85,9 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 
 static void __petscKSPGetTolerances_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       ksp;
-    real64_T            *rtol;
-    real64_T            *abstol;
-    real64_T            *dtol;
+    real32_T            *rtol;
+    real32_T            *abstol;
+    real32_T            *dtol;
     int32_T             *maxits;
     int32_T             *errCode;
     boolean_T           *toplevel;
@@ -101,11 +101,11 @@ static void __petscKSPGetTolerances_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument ksp should be a scalar.");
     marshallin_const_M2C_OpaqueType(&ksp, prhs[0], "ksp");
 
-    rtol = (real64_T*)mxMalloc(sizeof(real64_T));
+    rtol = (real32_T*)mxMalloc(sizeof(real32_T));
 
-    abstol = (real64_T*)mxMalloc(sizeof(real64_T));
+    abstol = (real32_T*)mxMalloc(sizeof(real32_T));
 
-    dtol = (real64_T*)mxMalloc(sizeof(real64_T));
+    dtol = (real32_T*)mxMalloc(sizeof(real32_T));
 
     maxits = (int32_T*)mxMalloc(sizeof(int32_T));
 
@@ -118,9 +118,9 @@ static void __petscKSPGetTolerances_api(mxArray **plhs, const mxArray ** prhs) {
 
     /* Deallocate input and marshall out function outputs */
     destroy_M2C_OpaqueType(&ksp);
-    plhs[0] = move_scalar_to_mxArray(rtol, mxDOUBLE_CLASS);
-    plhs[1] = move_scalar_to_mxArray(abstol, mxDOUBLE_CLASS);
-    plhs[2] = move_scalar_to_mxArray(dtol, mxDOUBLE_CLASS);
+    plhs[0] = move_scalar_to_mxArray(rtol, mxSINGLE_CLASS);
+    plhs[1] = move_scalar_to_mxArray(abstol, mxSINGLE_CLASS);
+    plhs[2] = move_scalar_to_mxArray(dtol, mxSINGLE_CLASS);
     plhs[3] = move_scalar_to_mxArray(maxits, mxINT32_CLASS);
     plhs[4] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[5] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);

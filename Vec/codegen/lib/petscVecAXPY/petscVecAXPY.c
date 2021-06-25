@@ -67,7 +67,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscVecAXPY(const M2C_OpaqueType *y, double a, const M2C_OpaqueType *x,
+void petscVecAXPY(const M2C_OpaqueType *y, float a, const M2C_OpaqueType *x,
                   int *errCode, boolean_T *toplevel)
 {
   Vec b_vec;

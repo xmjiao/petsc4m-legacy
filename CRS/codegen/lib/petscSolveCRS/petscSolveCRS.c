@@ -8,20 +8,20 @@ static const char cv[9] = {'s', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c'};
 
 static void b_m2c_error(int varargin_3);
 
-static void b_m2c_printf(double varargin_2, int varargin_3);
+static void b_m2c_printf(float varargin_2, int varargin_3);
 
-static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
-                             Vec x0, int *flag, double *relres, int *iter,
-                             emxArray_real_T *reshis, double *b_time);
+static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, float rtol, int maxits,
+                             Vec x0, int *flag, float *relres, int *iter,
+                             emxArray_real32_T *reshis, double *b_time);
 
 static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype,
                             const emxArray_char_T *pctype,
                             const emxArray_char_T *pcopt, KSP *ksp,
                             double *b_time);
 
-static void c_m2c_printf(double varargin_2, double varargin_3);
+static void c_m2c_printf(float varargin_2, float varargin_3);
 
-static void d_m2c_printf(int varargin_2, double varargin_3);
+static void d_m2c_printf(int varargin_2, float varargin_3);
 
 static void e_m2c_printf(void);
 
@@ -31,7 +31,7 @@ static void m2c_printf(KSPType varargin_2, PCType varargin_3,
                        const emxArray_char_T *varargin_4, int varargin_5);
 
 static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
-                           double *relres, int *iter, emxArray_real_T *reshis,
+                           float *relres, int *iter, emxArray_real32_T *reshis,
                            double *b_time);
 
 static void petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
@@ -39,7 +39,7 @@ static void petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
 
 static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
                                     const emxArray_int32_T *col_ind,
-                                    const emxArray_real_T *val);
+                                    const emxArray_real32_T *val);
 
 static void b_m2c_error(int varargin_3)
 {
@@ -47,15 +47,15 @@ static void b_m2c_error(int varargin_3)
             "PetscOptionsInsertString returned error code %d\n", varargin_3);
 }
 
-static void b_m2c_printf(double varargin_2, int varargin_3)
+static void b_m2c_printf(float varargin_2, int varargin_3)
 {
   M2C_printf("### The relative residual was %g after %d iterations.\n",
              varargin_2, varargin_3);
 }
 
-static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
-                             Vec x0, int *flag, double *relres, int *iter,
-                             emxArray_real_T *reshis, double *b_time)
+static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, float rtol, int maxits,
+                             Vec x0, int *flag, float *relres, int *iter,
+                             emxArray_real32_T *reshis, double *b_time)
 {
   static const char b_cv[5] = {'r', 'i', 'g', 'h', 't'};
   KSPType b_type;
@@ -65,13 +65,13 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   PetscObject t_obj;
   const PetscReal *a;
   emxArray_char_T *side;
-  double abstol;
-  double b_rtol;
-  double bnrm;
-  double dtol;
-  double res;
   double secs;
   double t;
+  float abstol;
+  float b_rtol;
+  float c_x;
+  float dtol;
+  float y;
   int b_maxits;
   int b_x;
   int na;
@@ -79,7 +79,7 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   int type;
   boolean_T b_b;
   type = (NORM_2);
-  VecNorm(b, type, &bnrm);
+  VecNorm(b, type, &y);
   t_obj = (PetscObject)(ksp);
   PetscObjectGetComm(t_obj, &comm);
   MPI_Barrier(comm);
@@ -87,13 +87,13 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   if (maxits == 0) {
     maxits = (PETSC_DEFAULT);
   }
-  if (rtol == 0.0) {
+  if (rtol == 0.0F) {
     type = (PETSC_DEFAULT);
-    rtol = type;
+    rtol = (float)type;
   }
   type = (PETSC_DEFAULT);
   b_x = (PETSC_DEFAULT);
-  KSPSetTolerances(ksp, rtol, (double)type, (double)b_x, maxits);
+  KSPSetTolerances(ksp, rtol, (float)type, (float)b_x, maxits);
   type = !(x0);
   b_b = (type == 0);
   if (b_b) {
@@ -106,9 +106,9 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   MPI_Barrier(comm);
   secs = MPI_Wtime();
   KSPGetConvergedReason(ksp, flag);
-  KSPGetResidualNorm(ksp, &res);
+  KSPGetResidualNorm(ksp, &c_x);
   KSPGetIterationNumber(ksp, iter);
-  *relres = res / bnrm;
+  *relres = c_x / y;
   KSPGetTolerances(ksp, &b_rtol, &abstol, &dtol, &b_maxits);
   emxInit_char_T(&side, 2);
   if ((*flag < 0) || (*relres > b_rtol)) {
@@ -165,11 +165,11 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   KSPGetResidualHistory(ksp, &a, &na);
   type = reshis->size[0];
   reshis->size[0] = na;
-  emxEnsureCapacity_real_T(reshis, type);
+  emxEnsureCapacity_real32_T(reshis, type);
   for (type = 0; type < na; type++) {
-    reshis->data[type] = 0.0;
+    reshis->data[type] = 0.0F;
   }
-  memcpy(&reshis->data[0], a, na << 3);
+  memcpy(&reshis->data[0], a, na << 2);
   *b_time = secs - t;
 }
 
@@ -337,13 +337,13 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype,
   *b_time = secs - t;
 }
 
-static void c_m2c_printf(double varargin_2, double varargin_3)
+static void c_m2c_printf(float varargin_2, float varargin_3)
 {
   M2C_printf("### The relative and absolute tolerances were %g and %g.\n",
              varargin_2, varargin_3);
 }
 
-static void d_m2c_printf(int varargin_2, double varargin_3)
+static void d_m2c_printf(int varargin_2, float varargin_3)
 {
   M2C_printf("### The divergence and max-iter tolerances were %d and %g.\n",
              varargin_2, varargin_3);
@@ -383,7 +383,7 @@ static void m2c_printf(KSPType varargin_2, PCType varargin_3,
 }
 
 static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
-                           double *relres, int *iter, emxArray_real_T *reshis,
+                           float *relres, int *iter, emxArray_real32_T *reshis,
                            double *b_time)
 {
   static const char b_cv[5] = {'r', 'i', 'g', 'h', 't'};
@@ -394,13 +394,13 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   PetscObject t_obj;
   const PetscReal *a;
   emxArray_char_T *side;
-  double abstol;
-  double bnrm;
-  double dtol;
-  double res;
-  double rtol;
   double secs;
   double t;
+  float abstol;
+  float d_x;
+  float dtol;
+  float rtol;
+  float y;
   int b_x;
   int c_x;
   int maxits;
@@ -408,7 +408,7 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   int type;
   boolean_T b_b;
   type = (NORM_2);
-  VecNorm(b, type, &bnrm);
+  VecNorm(b, type, &y);
   t_obj = (PetscObject)(ksp);
   PetscObjectGetComm(t_obj, &comm);
   MPI_Barrier(comm);
@@ -417,7 +417,7 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   type = (PETSC_DEFAULT);
   b_x = (PETSC_DEFAULT);
   c_x = (PETSC_DEFAULT);
-  KSPSetTolerances(ksp, (double)type, (double)b_x, (double)c_x, maxits);
+  KSPSetTolerances(ksp, (float)type, (float)b_x, (float)c_x, maxits);
   type = !(x0);
   b_b = (type == 0);
   if (b_b) {
@@ -430,9 +430,9 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   MPI_Barrier(comm);
   secs = MPI_Wtime();
   KSPGetConvergedReason(ksp, flag);
-  KSPGetResidualNorm(ksp, &res);
+  KSPGetResidualNorm(ksp, &d_x);
   KSPGetIterationNumber(ksp, iter);
-  *relres = res / bnrm;
+  *relres = d_x / y;
   KSPGetTolerances(ksp, &rtol, &abstol, &dtol, &maxits);
   emxInit_char_T(&side, 2);
   if ((*flag < 0) || (*relres > rtol)) {
@@ -489,11 +489,11 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   KSPGetResidualHistory(ksp, &a, &na);
   type = reshis->size[0];
   reshis->size[0] = na;
-  emxEnsureCapacity_real_T(reshis, type);
+  emxEnsureCapacity_real32_T(reshis, type);
   for (type = 0; type < na; type++) {
-    reshis->data[type] = 0.0;
+    reshis->data[type] = 0.0F;
   }
-  memcpy(&reshis->data[0], a, na << 3);
+  memcpy(&reshis->data[0], a, na << 2);
   *b_time = secs - t;
 }
 
@@ -555,12 +555,12 @@ static void petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
 
 static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
                                     const emxArray_int32_T *col_ind,
-                                    const emxArray_real_T *val)
+                                    const emxArray_real32_T *val)
 {
   Mat t_mat;
   emxArray_int32_T *jidx;
   emxArray_int32_T *nnz;
-  emxArray_real_T *rowval;
+  emxArray_real32_T *rowval;
   int b_i;
   int i;
   int i1;
@@ -581,7 +581,7 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
   MatCreateSeqAIJ(PETSC_COMM_SELF, row_ptr->size[0] - 1, row_ptr->size[0] - 1,
                   nz, &nnz->data[0], &t_mat);
   emxInit_int32_T(&jidx, 1);
-  emxInit_real_T(&rowval, 1);
+  emxInit_real32_T(&rowval, 1);
   for (b_i = 0; b_i < n; b_i++) {
     i = row_ptr->data[b_i + 1] - 1;
     if (row_ptr->data[b_i] > i) {
@@ -607,7 +607,7 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
     loop_ub = i - nz;
     i = rowval->size[0];
     rowval->size[0] = loop_ub;
-    emxEnsureCapacity_real_T(rowval, i);
+    emxEnsureCapacity_real32_T(rowval, i);
     for (i = 0; i < loop_ub; i++) {
       rowval->data[i] = val->data[nz + i];
     }
@@ -615,7 +615,7 @@ static Mat petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
     MatSetValues(t_mat, 1, &b_i, nnz->data[b_i], &jidx->data[0],
                  &rowval->data[0], iroa);
   }
-  emxFree_real_T(&rowval);
+  emxFree_real32_T(&rowval);
   emxFree_int32_T(&jidx);
   emxFree_int32_T(&nnz);
   type = (MAT_FINAL_ASSEMBLY);
@@ -636,11 +636,11 @@ void petscSolveCRS(int *flag, double *relres, int *iter, double times[2])
 
 void petscSolveCRS_10args(
     const emxArray_int32_T *Arows, const emxArray_int32_T *Acols,
-    const emxArray_real_T *Avals, const emxArray_real_T *b,
-    const emxArray_char_T *solver, double rtol, int maxiter,
+    const emxArray_real32_T *Avals, const emxArray_real32_T *b,
+    const emxArray_char_T *solver, float rtol, int maxiter,
     const emxArray_char_T *pctype, const emxArray_char_T *solpack,
-    const emxArray_real_T *x0, emxArray_real_T *x, int *flag, double *relres,
-    int *iter, emxArray_real_T *reshis, double times[2])
+    const emxArray_real32_T *x0, emxArray_real32_T *x, int *flag, float *relres,
+    int *iter, emxArray_real32_T *reshis, double times[2])
 {
   KSP ksp;
   KSP t_ksp;
@@ -734,7 +734,7 @@ void petscSolveCRS_10args(
   VecGetLocalSize(xVec, &n);
   k = x->size[0];
   x->size[0] = n;
-  emxEnsureCapacity_real_T(x, k);
+  emxEnsureCapacity_real32_T(x, k);
   if (n - 1 < 0) {
     b_n = 0;
   } else {
@@ -768,12 +768,12 @@ void petscSolveCRS_10args(
 
 void petscSolveCRS_11args(
     const emxArray_int32_T *Arows, const emxArray_int32_T *Acols,
-    const emxArray_real_T *Avals, const emxArray_real_T *b,
-    const emxArray_char_T *solver, double rtol, int maxiter,
+    const emxArray_real32_T *Avals, const emxArray_real32_T *b,
+    const emxArray_char_T *solver, float rtol, int maxiter,
     const emxArray_char_T *pctype, const emxArray_char_T *solpack,
-    const emxArray_real_T *x0, const emxArray_char_T *opts, emxArray_real_T *x,
-    int *flag, double *relres, int *iter, emxArray_real_T *reshis,
-    double times[2])
+    const emxArray_real32_T *x0, const emxArray_char_T *opts,
+    emxArray_real32_T *x, int *flag, float *relres, int *iter,
+    emxArray_real32_T *reshis, double times[2])
 {
   static const char in_str[25] = "-mat_superlu_printstat 0";
   static const char b_cv[24] = {'-', 'm', 'a', 't', '_', 's', 'u', 'p',
@@ -925,7 +925,7 @@ void petscSolveCRS_11args(
   VecGetLocalSize(xVec, &n);
   k = x->size[0];
   x->size[0] = n;
-  emxEnsureCapacity_real_T(x, k);
+  emxEnsureCapacity_real32_T(x, k);
   if (n - 1 < 0) {
     j = 0;
   } else {
@@ -959,9 +959,10 @@ void petscSolveCRS_11args(
 
 void petscSolveCRS_4args(const emxArray_int32_T *Arows,
                          const emxArray_int32_T *Acols,
-                         const emxArray_real_T *Avals, const emxArray_real_T *b,
-                         emxArray_real_T *x, int *flag, double *relres,
-                         int *iter, emxArray_real_T *reshis, double times[2])
+                         const emxArray_real32_T *Avals,
+                         const emxArray_real32_T *b, emxArray_real32_T *x,
+                         int *flag, float *relres, int *iter,
+                         emxArray_real32_T *reshis, double times[2])
 {
   KSP ksp;
   KSP t_ksp;
@@ -1045,7 +1046,7 @@ void petscSolveCRS_4args(const emxArray_int32_T *Arows,
   VecGetLocalSize(xVec, &n);
   k = x->size[0];
   x->size[0] = n;
-  emxEnsureCapacity_real_T(x, k);
+  emxEnsureCapacity_real32_T(x, k);
   if (n - 1 < 0) {
     b_n = 0;
   } else {
@@ -1079,10 +1080,11 @@ void petscSolveCRS_4args(const emxArray_int32_T *Arows,
 
 void petscSolveCRS_5args(const emxArray_int32_T *Arows,
                          const emxArray_int32_T *Acols,
-                         const emxArray_real_T *Avals, const emxArray_real_T *b,
-                         const emxArray_char_T *solver, emxArray_real_T *x,
-                         int *flag, double *relres, int *iter,
-                         emxArray_real_T *reshis, double times[2])
+                         const emxArray_real32_T *Avals,
+                         const emxArray_real32_T *b,
+                         const emxArray_char_T *solver, emxArray_real32_T *x,
+                         int *flag, float *relres, int *iter,
+                         emxArray_real32_T *reshis, double times[2])
 {
   KSP ksp;
   KSP t_ksp;
@@ -1147,7 +1149,7 @@ void petscSolveCRS_5args(const emxArray_int32_T *Arows,
   VecGetLocalSize(xVec, &n);
   k = x->size[0];
   x->size[0] = n;
-  emxEnsureCapacity_real_T(x, k);
+  emxEnsureCapacity_real32_T(x, k);
   if (n - 1 < 0) {
     b_n = 0;
   } else {
@@ -1181,10 +1183,11 @@ void petscSolveCRS_5args(const emxArray_int32_T *Arows,
 
 void petscSolveCRS_6args(const emxArray_int32_T *Arows,
                          const emxArray_int32_T *Acols,
-                         const emxArray_real_T *Avals, const emxArray_real_T *b,
-                         const emxArray_char_T *solver, double rtol,
-                         emxArray_real_T *x, int *flag, double *relres,
-                         int *iter, emxArray_real_T *reshis, double times[2])
+                         const emxArray_real32_T *Avals,
+                         const emxArray_real32_T *b,
+                         const emxArray_char_T *solver, float rtol,
+                         emxArray_real32_T *x, int *flag, float *relres,
+                         int *iter, emxArray_real32_T *reshis, double times[2])
 {
   static const char b_cv[5] = {'r', 'i', 'g', 'h', 't'};
   KSP ksp;
@@ -1204,14 +1207,14 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   emxArray_char_T *side;
   emxArray_int32_T *idx;
   emxArray_int32_T *y;
-  double abstol;
-  double b_rtol;
-  double bnrm;
-  double dtol;
-  double res;
   double secs;
   double t;
   double time_setup;
+  float abstol;
+  float b_rtol;
+  float b_x;
+  float b_y;
+  float dtol;
   int b_n;
   int iroa;
   int k;
@@ -1257,19 +1260,19 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   VecDuplicate(bVec, &xVec);
   petscKSPSetup(AMat, solver, &ksp, &time_setup);
   b_n = (NORM_2);
-  VecNorm(bVec, b_n, &bnrm);
+  VecNorm(bVec, b_n, &b_y);
   t_obj = (PetscObject)(ksp);
   PetscObjectGetComm(t_obj, &comm);
   MPI_Barrier(comm);
   t = MPI_Wtime();
   maxits = (PETSC_DEFAULT);
-  if (rtol == 0.0) {
+  if (rtol == 0.0F) {
     b_n = (PETSC_DEFAULT);
-    b_rtol = b_n;
+    b_rtol = (float)b_n;
   }
   b_n = (PETSC_DEFAULT);
   yk = (PETSC_DEFAULT);
-  KSPSetTolerances(ksp, b_rtol, (double)b_n, (double)yk, maxits);
+  KSPSetTolerances(ksp, b_rtol, (float)b_n, (float)yk, maxits);
   b_n = !(x0);
   b_b = (b_n == 0);
   if (b_b) {
@@ -1282,9 +1285,9 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   MPI_Barrier(comm);
   secs = MPI_Wtime();
   KSPGetConvergedReason(ksp, flag);
-  KSPGetResidualNorm(ksp, &res);
+  KSPGetResidualNorm(ksp, &b_x);
   KSPGetIterationNumber(ksp, iter);
-  *relres = res / bnrm;
+  *relres = b_x / b_y;
   KSPGetTolerances(ksp, &b_rtol, &abstol, &dtol, &maxits);
   emxInit_char_T(&side, 2);
   if ((*flag < 0) || (*relres > b_rtol)) {
@@ -1341,11 +1344,11 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   KSPGetResidualHistory(ksp, &a, &na);
   yk = reshis->size[0];
   reshis->size[0] = na;
-  emxEnsureCapacity_real_T(reshis, yk);
+  emxEnsureCapacity_real32_T(reshis, yk);
   for (yk = 0; yk < na; yk++) {
-    reshis->data[yk] = 0.0;
+    reshis->data[yk] = 0.0F;
   }
-  memcpy(&reshis->data[0], a, na << 3);
+  memcpy(&reshis->data[0], a, na << 2);
   times[0] = time_setup;
   times[1] = secs - t;
   t_ksp = ksp;
@@ -1357,7 +1360,7 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   VecGetLocalSize(xVec, &n);
   yk = x->size[0];
   x->size[0] = n;
-  emxEnsureCapacity_real_T(x, yk);
+  emxEnsureCapacity_real32_T(x, yk);
   if (n - 1 < 0) {
     b_n = 0;
   } else {
@@ -1391,11 +1394,11 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
 
 void petscSolveCRS_7args(const emxArray_int32_T *Arows,
                          const emxArray_int32_T *Acols,
-                         const emxArray_real_T *Avals, const emxArray_real_T *b,
-                         const emxArray_char_T *solver, double rtol,
-                         int maxiter, emxArray_real_T *x, int *flag,
-                         double *relres, int *iter, emxArray_real_T *reshis,
-                         double times[2])
+                         const emxArray_real32_T *Avals,
+                         const emxArray_real32_T *b,
+                         const emxArray_char_T *solver, float rtol, int maxiter,
+                         emxArray_real32_T *x, int *flag, float *relres,
+                         int *iter, emxArray_real32_T *reshis, double times[2])
 {
   KSP ksp;
   KSP t_ksp;
@@ -1460,7 +1463,7 @@ void petscSolveCRS_7args(const emxArray_int32_T *Arows,
   VecGetLocalSize(xVec, &n);
   k = x->size[0];
   x->size[0] = n;
-  emxEnsureCapacity_real_T(x, k);
+  emxEnsureCapacity_real32_T(x, k);
   if (n - 1 < 0) {
     b_n = 0;
   } else {
@@ -1494,11 +1497,12 @@ void petscSolveCRS_7args(const emxArray_int32_T *Arows,
 
 void petscSolveCRS_8args(const emxArray_int32_T *Arows,
                          const emxArray_int32_T *Acols,
-                         const emxArray_real_T *Avals, const emxArray_real_T *b,
-                         const emxArray_char_T *solver, double rtol,
-                         int maxiter, const emxArray_char_T *pctype,
-                         emxArray_real_T *x, int *flag, double *relres,
-                         int *iter, emxArray_real_T *reshis, double times[2])
+                         const emxArray_real32_T *Avals,
+                         const emxArray_real32_T *b,
+                         const emxArray_char_T *solver, float rtol, int maxiter,
+                         const emxArray_char_T *pctype, emxArray_real32_T *x,
+                         int *flag, float *relres, int *iter,
+                         emxArray_real32_T *reshis, double times[2])
 {
   KSP ksp;
   KSP t_ksp;
@@ -1635,7 +1639,7 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows,
   VecGetLocalSize(xVec, &n);
   k = x->size[0];
   x->size[0] = n;
-  emxEnsureCapacity_real_T(x, k);
+  emxEnsureCapacity_real32_T(x, k);
   if (n - 1 < 0) {
     b_n = 0;
   } else {
@@ -1669,12 +1673,13 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows,
 
 void petscSolveCRS_9args(const emxArray_int32_T *Arows,
                          const emxArray_int32_T *Acols,
-                         const emxArray_real_T *Avals, const emxArray_real_T *b,
-                         const emxArray_char_T *solver, double rtol,
-                         int maxiter, const emxArray_char_T *pctype,
-                         const emxArray_char_T *solpack, emxArray_real_T *x,
-                         int *flag, double *relres, int *iter,
-                         emxArray_real_T *reshis, double times[2])
+                         const emxArray_real32_T *Avals,
+                         const emxArray_real32_T *b,
+                         const emxArray_char_T *solver, float rtol, int maxiter,
+                         const emxArray_char_T *pctype,
+                         const emxArray_char_T *solpack, emxArray_real32_T *x,
+                         int *flag, float *relres, int *iter,
+                         emxArray_real32_T *reshis, double times[2])
 {
   KSP ksp;
   KSP t_ksp;
@@ -1739,7 +1744,7 @@ void petscSolveCRS_9args(const emxArray_int32_T *Arows,
   VecGetLocalSize(xVec, &n);
   k = x->size[0];
   x->size[0] = n;
-  emxEnsureCapacity_real_T(x, k);
+  emxEnsureCapacity_real32_T(x, k);
   if (n - 1 < 0) {
     b_n = 0;
   } else {

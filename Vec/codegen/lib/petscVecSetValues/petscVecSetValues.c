@@ -68,7 +68,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
 }
 
 void petscVecSetValues(const M2C_OpaqueType *vec, int ni,
-                       const emxArray_int32_T *ix, const emxArray_real_T *y,
+                       const emxArray_int32_T *ix, const emxArray_real32_T *y,
                        int iroa, int *errCode, boolean_T *toplevel)
 {
   Vec t_vec;
@@ -99,7 +99,7 @@ void petscVecSetValues(const M2C_OpaqueType *vec, int ni,
 
 void petscVecSetValues_Insert(const M2C_OpaqueType *vec, int ni,
                               const emxArray_int32_T *ix,
-                              const emxArray_real_T *y, int *errCode,
+                              const emxArray_real32_T *y, int *errCode,
                               boolean_T *toplevel)
 {
   Vec t_vec;

@@ -12,12 +12,12 @@ extern "C" {
 
 extern void petscVecSetValues(const M2C_OpaqueType *vec, int ni,
                               const emxArray_int32_T *ix,
-                              const emxArray_real_T *y, int iroa, int *errCode,
-                              boolean_T *toplevel);
+                              const emxArray_real32_T *y, int iroa,
+                              int *errCode, boolean_T *toplevel);
 
 extern void petscVecSetValues_Insert(const M2C_OpaqueType *vec, int ni,
                                      const emxArray_int32_T *ix,
-                                     const emxArray_real_T *y, int *errCode,
+                                     const emxArray_real32_T *y, int *errCode,
                                      boolean_T *toplevel);
 
 extern void petscVecSetValues_initialize(void);

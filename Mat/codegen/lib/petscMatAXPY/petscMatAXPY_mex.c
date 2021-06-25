@@ -85,7 +85,7 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 
 static void __petscMatAXPY_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       Y;
-    real64_T             a;
+    real32_T             a;
     M2C_OpaqueType       X;
     int32_T              mstr;
     int32_T             *errCode;
@@ -100,13 +100,13 @@ static void __petscMatAXPY_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument Y should be a scalar.");
     marshallin_const_M2C_OpaqueType(&Y, prhs[0], "Y");
 
-    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscMatAXPY:WrongInputType",
-            "Input argument a has incorrect data type; double is expected.");
+            "Input argument a has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscMatAXPY:WrongSizeOfInputArg",
             "Argument a should be a scalar.");
-    a = *(real64_T*)mxGetData(prhs[1]);
+    a = *(real32_T*)mxGetData(prhs[1]);
 
     if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxSTRUCT_CLASS)
         mexErrMsgIdAndTxt("petscMatAXPY:WrongInputType",
@@ -143,7 +143,7 @@ static void __petscMatAXPY_api(mxArray **plhs, const mxArray ** prhs) {
 
 static void __petscMatAXPY_3args_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       Y;
-    real64_T             a;
+    real32_T             a;
     M2C_OpaqueType       X;
     int32_T             *errCode;
     boolean_T           *toplevel;
@@ -157,13 +157,13 @@ static void __petscMatAXPY_3args_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument Y should be a scalar.");
     marshallin_const_M2C_OpaqueType(&Y, prhs[0], "Y");
 
-    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscMatAXPY_3args:WrongInputType",
-            "Input argument a has incorrect data type; double is expected.");
+            "Input argument a has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscMatAXPY_3args:WrongSizeOfInputArg",
             "Argument a should be a scalar.");
-    a = *(real64_T*)mxGetData(prhs[1]);
+    a = *(real32_T*)mxGetData(prhs[1]);
 
     if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxSTRUCT_CLASS)
         mexErrMsgIdAndTxt("petscMatAXPY_3args:WrongInputType",

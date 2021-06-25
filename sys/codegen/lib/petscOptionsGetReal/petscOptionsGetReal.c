@@ -37,7 +37,7 @@ static void m2c_error(void)
 }
 
 void petscOptionsGetReal(const emxArray_char_T *pre,
-                         const emxArray_char_T *name, double *value, int *found,
+                         const emxArray_char_T *name, float *value, int *found,
                          int *errCode, boolean_T *toplevel)
 {
   PetscBool b_flag;

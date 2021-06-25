@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-extern void petscVecAXPY(const M2C_OpaqueType *y, double a,
+extern void petscVecAXPY(const M2C_OpaqueType *y, float a,
                          const M2C_OpaqueType *x, int *errCode,
                          boolean_T *toplevel);
 

@@ -67,7 +67,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscMatAYPX(const M2C_OpaqueType *Y, double a, const M2C_OpaqueType *X,
+void petscMatAYPX(const M2C_OpaqueType *Y, float a, const M2C_OpaqueType *X,
                   int mstr, int *errCode, boolean_T *toplevel)
 {
   Mat b_mat;
@@ -110,7 +110,7 @@ void petscMatAYPX(const M2C_OpaqueType *Y, double a, const M2C_OpaqueType *X,
   }
 }
 
-void petscMatAYPX_3args(const M2C_OpaqueType *Y, double a,
+void petscMatAYPX_3args(const M2C_OpaqueType *Y, float a,
                         const M2C_OpaqueType *X, int *errCode,
                         boolean_T *toplevel)
 {

@@ -38,8 +38,8 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscKSPGetTolerances(const M2C_OpaqueType *ksp, double *rtol,
-                           double *abstol, double *dtol, int *maxits,
+void petscKSPGetTolerances(const M2C_OpaqueType *ksp, float *rtol,
+                           float *abstol, float *dtol, int *maxits,
                            int *errCode, boolean_T *toplevel)
 {
   static const char cv[3] = {'K', 'S', 'P'};

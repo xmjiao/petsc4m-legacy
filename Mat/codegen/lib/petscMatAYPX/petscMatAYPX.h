@@ -10,11 +10,11 @@
 extern "C" {
 #endif
 
-extern void petscMatAYPX(const M2C_OpaqueType *Y, double a,
+extern void petscMatAYPX(const M2C_OpaqueType *Y, float a,
                          const M2C_OpaqueType *X, int mstr, int *errCode,
                          boolean_T *toplevel);
 
-extern void petscMatAYPX_3args(const M2C_OpaqueType *Y, double a,
+extern void petscMatAYPX_3args(const M2C_OpaqueType *Y, float a,
                                const M2C_OpaqueType *X, int *errCode,
                                boolean_T *toplevel);
 

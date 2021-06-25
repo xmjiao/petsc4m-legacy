@@ -77,7 +77,7 @@ static void m2c_error(void)
 }
 
 void petscVecGetValues(const M2C_OpaqueType *vec, int ni,
-                       const emxArray_int32_T *ix, emxArray_real_T *y,
+                       const emxArray_int32_T *ix, emxArray_real32_T *y,
                        int *errCode, boolean_T *toplevel)
 {
   Vec t_vec;
@@ -110,7 +110,7 @@ void petscVecGetValues(const M2C_OpaqueType *vec, int ni,
 }
 
 void petscVecGetValues_Alloc(const M2C_OpaqueType *vec, int ni,
-                             const emxArray_int32_T *ix, emxArray_real_T *y,
+                             const emxArray_int32_T *ix, emxArray_real32_T *y,
                              int *errCode, boolean_T *toplevel)
 {
   Vec t_vec;
@@ -119,7 +119,7 @@ void petscVecGetValues_Alloc(const M2C_OpaqueType *vec, int ni,
   int loop_ub;
   i = y->size[0];
   y->size[0] = ni;
-  emxEnsureCapacity_real_T(y, i);
+  emxEnsureCapacity_real32_T(y, i);
   if (!isequal(vec->type)) {
     emxInit_char_T(&b_vec, 2);
     i = b_vec->size[0] * b_vec->size[1];

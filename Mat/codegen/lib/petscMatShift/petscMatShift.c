@@ -38,7 +38,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscMatShift(const M2C_OpaqueType *Y, double a, int *errCode,
+void petscMatShift(const M2C_OpaqueType *Y, float a, int *errCode,
                    boolean_T *toplevel)
 {
   static const char cv[3] = {'M', 'a', 't'};

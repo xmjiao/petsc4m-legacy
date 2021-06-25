@@ -38,7 +38,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscMatNorm(const M2C_OpaqueType *A, int type, double *nrm, int *errCode,
+void petscMatNorm(const M2C_OpaqueType *A, int type, float *nrm, int *errCode,
                   boolean_T *toplevel)
 {
   static const char cv[3] = {'M', 'a', 't'};

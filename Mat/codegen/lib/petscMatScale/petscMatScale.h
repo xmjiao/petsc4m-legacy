@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-extern void petscMatScale(const M2C_OpaqueType *mat, double a, int *errCode,
+extern void petscMatScale(const M2C_OpaqueType *mat, float a, int *errCode,
                           boolean_T *toplevel);
 
 extern void petscMatScale_initialize(void);

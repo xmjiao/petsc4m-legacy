@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-extern void petscMatShift(const M2C_OpaqueType *Y, double a, int *errCode,
+extern void petscMatShift(const M2C_OpaqueType *Y, float a, int *errCode,
                           boolean_T *toplevel);
 
 extern void petscMatShift_initialize(void);

@@ -87,7 +87,7 @@ static void __petscVecSetValues_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       vec;
     int32_T              ni;
     emxArray_int32_T     ix;
-    emxArray_real_T      y;
+    emxArray_real32_T    y;
     int32_T              iroa;
     int32_T             *errCode;
     boolean_T           *toplevel;
@@ -117,9 +117,9 @@ static void __petscVecSetValues_api(mxArray **plhs, const mxArray ** prhs) {
             "Dimension 2 of ix should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[2], (emxArray__common *)(&ix), "ix", 1);
 
-    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscVecSetValues:WrongInputType",
-            "Input argument y has incorrect data type; double is expected.");
+            "Input argument y has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[3]) && mxGetDimensions(prhs[3])[1] != 1) 
         mexErrMsgIdAndTxt("petscVecSetValues:WrongSizeOfInputArg",
             "Dimension 2 of y should be equal to 1.");
@@ -155,7 +155,7 @@ static void __petscVecSetValues_Insert_api(mxArray **plhs, const mxArray ** prhs
     M2C_OpaqueType       vec;
     int32_T              ni;
     emxArray_int32_T     ix;
-    emxArray_real_T      y;
+    emxArray_real32_T    y;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -184,9 +184,9 @@ static void __petscVecSetValues_Insert_api(mxArray **plhs, const mxArray ** prhs
             "Dimension 2 of ix should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[2], (emxArray__common *)(&ix), "ix", 1);
 
-    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscVecSetValues_Insert:WrongInputType",
-            "Input argument y has incorrect data type; double is expected.");
+            "Input argument y has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[3]) && mxGetDimensions(prhs[3])[1] != 1) 
         mexErrMsgIdAndTxt("petscVecSetValues_Insert:WrongSizeOfInputArg",
             "Dimension 2 of y should be equal to 1.");

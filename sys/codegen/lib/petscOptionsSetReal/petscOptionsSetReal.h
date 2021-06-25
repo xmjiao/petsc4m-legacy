@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-extern void petscOptionsSetReal(const emxArray_char_T *iname, double value,
+extern void petscOptionsSetReal(const emxArray_char_T *iname, float value,
                                 int *errCode, boolean_T *toplevel);
 
 extern void petscOptionsSetReal_initialize(void);

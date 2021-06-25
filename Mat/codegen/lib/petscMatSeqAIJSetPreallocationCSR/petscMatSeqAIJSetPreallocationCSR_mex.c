@@ -87,7 +87,7 @@ static void __petscMatSeqAIJSetPreallocationCSR_api(mxArray **plhs, const mxArra
     M2C_OpaqueType       mat;
     emxArray_int32_T     ix;
     emxArray_int32_T     jx;
-    emxArray_real_T      vs;
+    emxArray_real32_T    vs;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -116,9 +116,9 @@ static void __petscMatSeqAIJSetPreallocationCSR_api(mxArray **plhs, const mxArra
             "Dimension 2 of jx should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[2], (emxArray__common *)(&jx), "jx", 1);
 
-    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscMatSeqAIJSetPreallocationCSR:WrongInputType",
-            "Input argument vs has incorrect data type; double is expected.");
+            "Input argument vs has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[3]) && mxGetDimensions(prhs[3])[1] != 1) 
         mexErrMsgIdAndTxt("petscMatSeqAIJSetPreallocationCSR:WrongSizeOfInputArg",
             "Dimension 2 of vs should be equal to 1.");

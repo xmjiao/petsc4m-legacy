@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-extern void petscMatNorm(const M2C_OpaqueType *A, int type, double *nrm,
+extern void petscMatNorm(const M2C_OpaqueType *A, int type, float *nrm,
                          int *errCode, boolean_T *toplevel);
 
 extern void petscMatNorm_initialize(void);

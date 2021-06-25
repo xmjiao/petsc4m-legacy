@@ -38,7 +38,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscVecSet(const M2C_OpaqueType *vec, double val, int *errCode,
+void petscVecSet(const M2C_OpaqueType *vec, float val, int *errCode,
                  boolean_T *toplevel)
 {
   static const char cv[3] = {'V', 'e', 'c'};

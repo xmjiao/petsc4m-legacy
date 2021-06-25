@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 extern void petscOptionsGetReal(const emxArray_char_T *pre,
-                                const emxArray_char_T *name, double *value,
+                                const emxArray_char_T *name, float *value,
                                 int *found, int *errCode, boolean_T *toplevel);
 
 extern void petscOptionsGetReal_initialize(void);

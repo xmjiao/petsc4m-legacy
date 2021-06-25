@@ -69,7 +69,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
 
 void petscMatSetValues(const M2C_OpaqueType *mat, int ni,
                        const emxArray_int32_T *ix, int nj,
-                       const emxArray_int32_T *jx, const emxArray_real_T *v,
+                       const emxArray_int32_T *jx, const emxArray_real32_T *v,
                        int iroa, int *errCode, boolean_T *toplevel)
 {
   Mat t_mat;
@@ -102,7 +102,7 @@ void petscMatSetValues(const M2C_OpaqueType *mat, int ni,
 void petscMatSetValues_Insert(const M2C_OpaqueType *mat, int ni,
                               const emxArray_int32_T *ix, int nj,
                               const emxArray_int32_T *jx,
-                              const emxArray_real_T *v, int *errCode,
+                              const emxArray_real32_T *v, int *errCode,
                               boolean_T *toplevel)
 {
   Mat t_mat;

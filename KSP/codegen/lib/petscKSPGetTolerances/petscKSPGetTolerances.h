@@ -10,8 +10,8 @@
 extern "C" {
 #endif
 
-extern void petscKSPGetTolerances(const M2C_OpaqueType *ksp, double *rtol,
-                                  double *abstol, double *dtol, int *maxits,
+extern void petscKSPGetTolerances(const M2C_OpaqueType *ksp, float *rtol,
+                                  float *abstol, float *dtol, int *maxits,
                                   int *errCode, boolean_T *toplevel);
 
 extern void petscKSPGetTolerances_initialize(void);

@@ -10,7 +10,7 @@
 extern "C" {
 #endif
 
-extern void petscKSPGetResidualNorm(const M2C_OpaqueType *ksp, double *rnorm,
+extern void petscKSPGetResidualNorm(const M2C_OpaqueType *ksp, float *rnorm,
                                     int *errCode, boolean_T *toplevel);
 
 extern void petscKSPGetResidualNorm_initialize(void);

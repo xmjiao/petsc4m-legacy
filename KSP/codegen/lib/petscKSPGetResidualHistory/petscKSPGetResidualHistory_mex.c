@@ -85,7 +85,7 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 
 static void __petscKSPGetResidualHistory_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       ksp;
-    emxArray_real_T      reshis;
+    emxArray_real32_T    reshis;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -108,7 +108,7 @@ static void __petscKSPGetResidualHistory_api(mxArray **plhs, const mxArray ** pr
 
     /* Deallocate input and marshall out function outputs */
     destroy_M2C_OpaqueType(&ksp);
-    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)(&reshis), mxDOUBLE_CLASS);
+    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)(&reshis), mxSINGLE_CLASS);
     mxFree(reshis.size);
     plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);

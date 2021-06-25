@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 extern void petscKSPGetResidualHistory(const M2C_OpaqueType *ksp,
-                                       emxArray_real_T *reshis, int *errCode,
+                                       emxArray_real32_T *reshis, int *errCode,
                                        boolean_T *toplevel);
 
 extern void petscKSPGetResidualHistory_initialize(void);

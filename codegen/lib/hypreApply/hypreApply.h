@@ -10,8 +10,8 @@
 extern "C" {
 #endif
 
-extern void hypreApply(const M2C_OpaqueType *pc, const emxArray_real_T *x,
-                       emxArray_real_T *y);
+extern void hypreApply(const M2C_OpaqueType *pc, const emxArray_real32_T *x,
+                       emxArray_real32_T *y);
 
 extern void hypreApply_initialize(void);
 

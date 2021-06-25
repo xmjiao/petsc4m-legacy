@@ -67,8 +67,8 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscKSPSetTolerances(const M2C_OpaqueType *ksp, double rtol,
-                           double abstol, double dtol, int maxits, int *errCode,
+void petscKSPSetTolerances(const M2C_OpaqueType *ksp, float rtol, float abstol,
+                           float dtol, int maxits, int *errCode,
                            boolean_T *toplevel)
 {
   KSP t_ksp;
@@ -97,7 +97,7 @@ void petscKSPSetTolerances(const M2C_OpaqueType *ksp, double rtol,
   }
 }
 
-void petscKSPSetTolerances_2args(const M2C_OpaqueType *ksp, double rtol,
+void petscKSPSetTolerances_2args(const M2C_OpaqueType *ksp, float rtol,
                                  int *errCode, boolean_T *toplevel)
 {
   KSP t_ksp;
@@ -123,7 +123,7 @@ void petscKSPSetTolerances_2args(const M2C_OpaqueType *ksp, double rtol,
   loop_ub = (PETSC_DEFAULT);
   x = (PETSC_DEFAULT);
   maxits = (PETSC_DEFAULT);
-  *errCode = KSPSetTolerances(t_ksp, rtol, (double)loop_ub, (double)x, maxits);
+  *errCode = KSPSetTolerances(t_ksp, rtol, (float)loop_ub, (float)x, maxits);
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }

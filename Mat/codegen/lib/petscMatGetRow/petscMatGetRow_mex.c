@@ -88,7 +88,7 @@ static void __petscMatGetRow_api(mxArray **plhs, const mxArray ** prhs) {
     int32_T              row;
     int32_T             *ncols;
     emxArray_int32_T     cols;
-    emxArray_real_T      vals;
+    emxArray_real32_T    vals;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -126,7 +126,7 @@ static void __petscMatGetRow_api(mxArray **plhs, const mxArray ** prhs) {
     plhs[0] = move_scalar_to_mxArray(ncols, mxINT32_CLASS);
     plhs[1] = move_emxArray_to_mxArray((emxArray__common*)(&cols), mxINT32_CLASS);
     mxFree(cols.size);
-    plhs[2] = move_emxArray_to_mxArray((emxArray__common*)(&vals), mxDOUBLE_CLASS);
+    plhs[2] = move_emxArray_to_mxArray((emxArray__common*)(&vals), mxSINGLE_CLASS);
     mxFree(vals.size);
     plhs[3] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[4] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);

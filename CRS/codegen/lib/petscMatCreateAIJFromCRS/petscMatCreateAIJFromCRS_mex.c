@@ -46,7 +46,7 @@ static mxArray *marshallout_struct0_T(struct0_T *pStruct) {
 static void __petscMatCreateAIJFromCRS_api(mxArray **plhs, const mxArray ** prhs) {
     emxArray_int32_T     row_ptr;
     emxArray_int32_T     col_ind;
-    emxArray_real_T      val;
+    emxArray_real32_T    val;
     int32_T              ncols;
     emxArray_char_T      prefix;
     struct0_T            mat;
@@ -69,9 +69,9 @@ static void __petscMatCreateAIJFromCRS_api(mxArray **plhs, const mxArray ** prhs
             "Dimension 2 of col_ind should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[1], (emxArray__common *)(&col_ind), "col_ind", 1);
 
-    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateAIJFromCRS:WrongInputType",
-            "Input argument val has incorrect data type; double is expected.");
+            "Input argument val has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[1] != 1) 
         mexErrMsgIdAndTxt("petscMatCreateAIJFromCRS:WrongSizeOfInputArg",
             "Dimension 2 of val should be equal to 1.");
@@ -113,7 +113,7 @@ static void __petscMatCreateAIJFromCRS_api(mxArray **plhs, const mxArray ** prhs
 static void __petscMatCreateAIJFromCRS_3args_api(mxArray **plhs, const mxArray ** prhs) {
     emxArray_int32_T     row_ptr;
     emxArray_int32_T     col_ind;
-    emxArray_real_T      val;
+    emxArray_real32_T    val;
     struct0_T            mat;
     boolean_T           *toplevel;
 
@@ -134,9 +134,9 @@ static void __petscMatCreateAIJFromCRS_3args_api(mxArray **plhs, const mxArray *
             "Dimension 2 of col_ind should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[1], (emxArray__common *)(&col_ind), "col_ind", 1);
 
-    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateAIJFromCRS_3args:WrongInputType",
-            "Input argument val has incorrect data type; double is expected.");
+            "Input argument val has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[1] != 1) 
         mexErrMsgIdAndTxt("petscMatCreateAIJFromCRS_3args:WrongSizeOfInputArg",
             "Dimension 2 of val should be equal to 1.");
@@ -160,7 +160,7 @@ static void __petscMatCreateAIJFromCRS_3args_api(mxArray **plhs, const mxArray *
 static void __petscMatCreateAIJFromCRS_4args_api(mxArray **plhs, const mxArray ** prhs) {
     emxArray_int32_T     row_ptr;
     emxArray_int32_T     col_ind;
-    emxArray_real_T      val;
+    emxArray_real32_T    val;
     int32_T              ncols;
     struct0_T            mat;
     boolean_T           *toplevel;
@@ -182,9 +182,9 @@ static void __petscMatCreateAIJFromCRS_4args_api(mxArray **plhs, const mxArray *
             "Dimension 2 of col_ind should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[1], (emxArray__common *)(&col_ind), "col_ind", 1);
 
-    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscMatCreateAIJFromCRS_4args:WrongInputType",
-            "Input argument val has incorrect data type; double is expected.");
+            "Input argument val has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[2]) && mxGetDimensions(prhs[2])[1] != 1) 
         mexErrMsgIdAndTxt("petscMatCreateAIJFromCRS_4args:WrongSizeOfInputArg",
             "Dimension 2 of val should be equal to 1.");

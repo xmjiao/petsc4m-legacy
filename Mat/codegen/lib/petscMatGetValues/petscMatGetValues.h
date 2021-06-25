@@ -12,13 +12,13 @@ extern "C" {
 
 extern void petscMatGetValues(const M2C_OpaqueType *mat, int ni,
                               const emxArray_int32_T *ix, int nj,
-                              const emxArray_int32_T *jx, emxArray_real_T *v,
+                              const emxArray_int32_T *jx, emxArray_real32_T *v,
                               int *errCode, boolean_T *toplevel);
 
 extern void petscMatGetValues_Alloc(const M2C_OpaqueType *mat, int ni,
                                     const emxArray_int32_T *ix, int nj,
                                     const emxArray_int32_T *jx,
-                                    emxArray_real_T *v, int *errCode,
+                                    emxArray_real32_T *v, int *errCode,
                                     boolean_T *toplevel);
 
 extern void petscMatGetValues_initialize(void);

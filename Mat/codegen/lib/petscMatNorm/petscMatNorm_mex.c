@@ -86,7 +86,7 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 static void __petscMatNorm_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       A;
     int32_T              type;
-    real64_T            *nrm;
+    real32_T            *nrm;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -107,7 +107,7 @@ static void __petscMatNorm_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument type should be a scalar.");
     type = *(int32_T*)mxGetData(prhs[1]);
 
-    nrm = (real64_T*)mxMalloc(sizeof(real64_T));
+    nrm = (real32_T*)mxMalloc(sizeof(real32_T));
 
     errCode = (int32_T*)mxMalloc(sizeof(int32_T));
 
@@ -119,7 +119,7 @@ static void __petscMatNorm_api(mxArray **plhs, const mxArray ** prhs) {
     /* Deallocate input and marshall out function outputs */
     destroy_M2C_OpaqueType(&A);
     /* Nothing to be done for type */
-    plhs[0] = move_scalar_to_mxArray(nrm, mxDOUBLE_CLASS);
+    plhs[0] = move_scalar_to_mxArray(nrm, mxSINGLE_CLASS);
     plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
 

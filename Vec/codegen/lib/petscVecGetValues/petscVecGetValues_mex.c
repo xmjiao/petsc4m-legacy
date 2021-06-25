@@ -87,7 +87,7 @@ static void __petscVecGetValues_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       vec;
     int32_T              ni;
     emxArray_int32_T     ix;
-    emxArray_real_T      y;
+    emxArray_real32_T    y;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -116,9 +116,9 @@ static void __petscVecGetValues_api(mxArray **plhs, const mxArray ** prhs) {
             "Dimension 2 of ix should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[2], (emxArray__common *)(&ix), "ix", 1);
 
-    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[3]) && mxGetClassID(prhs[3]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscVecGetValues:WrongInputType",
-            "Input argument y has incorrect data type; double is expected.");
+            "Input argument y has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[3]) && mxGetDimensions(prhs[3])[1] != 1) 
         mexErrMsgIdAndTxt("petscVecGetValues:WrongSizeOfInputArg",
             "Dimension 2 of y should be equal to 1.");
@@ -135,7 +135,7 @@ static void __petscVecGetValues_api(mxArray **plhs, const mxArray ** prhs) {
     destroy_M2C_OpaqueType(&vec);
     /* Nothing to be done for ni */
     free_emxArray((emxArray__common*)(&ix));
-    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)(&y), mxDOUBLE_CLASS);
+    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)(&y), mxSINGLE_CLASS);
     mxFree(y.size);
     plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);
@@ -146,7 +146,7 @@ static void __petscVecGetValues_Alloc_api(mxArray **plhs, const mxArray ** prhs)
     M2C_OpaqueType       vec;
     int32_T              ni;
     emxArray_int32_T     ix;
-    emxArray_real_T      y;
+    emxArray_real32_T    y;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -187,7 +187,7 @@ static void __petscVecGetValues_Alloc_api(mxArray **plhs, const mxArray ** prhs)
     destroy_M2C_OpaqueType(&vec);
     /* Nothing to be done for ni */
     free_emxArray((emxArray__common*)(&ix));
-    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)(&y), mxDOUBLE_CLASS);
+    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)(&y), mxSINGLE_CLASS);
     mxFree(y.size);
     plhs[1] = move_scalar_to_mxArray(errCode, mxINT32_CLASS);
     plhs[2] = move_scalar_to_mxArray(toplevel, mxLOGICAL_CLASS);

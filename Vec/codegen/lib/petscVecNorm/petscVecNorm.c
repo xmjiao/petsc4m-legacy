@@ -67,8 +67,8 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void petscVecNorm(const M2C_OpaqueType *x, int type, double nrm[2],
-                  int *errCode, boolean_T *toplevel)
+void petscVecNorm(const M2C_OpaqueType *x, int type, float nrm[2], int *errCode,
+                  boolean_T *toplevel)
 {
   Vec vec;
   emxArray_char_T *b_x;
@@ -96,7 +96,7 @@ void petscVecNorm(const M2C_OpaqueType *x, int type, double nrm[2],
   }
 }
 
-void petscVecNorm_2args(const M2C_OpaqueType *x, int type, double *nrm,
+void petscVecNorm_2args(const M2C_OpaqueType *x, int type, float *nrm,
                         int *errCode, boolean_T *toplevel)
 {
   Vec vec;

@@ -85,7 +85,7 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 
 static void __petscVecAYPX_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       y;
-    real64_T             a;
+    real32_T             a;
     M2C_OpaqueType       x;
     int32_T             *errCode;
     boolean_T           *toplevel;
@@ -99,13 +99,13 @@ static void __petscVecAYPX_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument y should be a scalar.");
     marshallin_const_M2C_OpaqueType(&y, prhs[0], "y");
 
-    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscVecAYPX:WrongInputType",
-            "Input argument a has incorrect data type; double is expected.");
+            "Input argument a has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[1]) != 1)
         mexErrMsgIdAndTxt("petscVecAYPX:WrongSizeOfInputArg",
             "Argument a should be a scalar.");
-    a = *(real64_T*)mxGetData(prhs[1]);
+    a = *(real32_T*)mxGetData(prhs[1]);
 
     if (mxGetNumberOfElements(prhs[2]) && mxGetClassID(prhs[2]) != mxSTRUCT_CLASS)
         mexErrMsgIdAndTxt("petscVecAYPX:WrongInputType",

@@ -69,7 +69,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
 
 void petscMatGetValues(const M2C_OpaqueType *mat, int ni,
                        const emxArray_int32_T *ix, int nj,
-                       const emxArray_int32_T *jx, emxArray_real_T *v,
+                       const emxArray_int32_T *jx, emxArray_real32_T *v,
                        int *errCode, boolean_T *toplevel)
 {
   Mat t_mat;
@@ -101,7 +101,7 @@ void petscMatGetValues(const M2C_OpaqueType *mat, int ni,
 
 void petscMatGetValues_Alloc(const M2C_OpaqueType *mat, int ni,
                              const emxArray_int32_T *ix, int nj,
-                             const emxArray_int32_T *jx, emxArray_real_T *v,
+                             const emxArray_int32_T *jx, emxArray_real32_T *v,
                              int *errCode, boolean_T *toplevel)
 {
   Mat t_mat;
@@ -125,7 +125,7 @@ void petscMatGetValues_Alloc(const M2C_OpaqueType *mat, int ni,
   t_mat = *(Mat *)(&mat->data->data[0]);
   i = v->size[0];
   v->size[0] = ni * nj;
-  emxEnsureCapacity_real_T(v, i);
+  emxEnsureCapacity_real32_T(v, i);
   *errCode =
       MatGetValues(t_mat, ni, &ix->data[0], nj, &jx->data[0], &v->data[0]);
   if (*errCode != 0) {

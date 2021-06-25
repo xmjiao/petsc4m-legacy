@@ -13,7 +13,7 @@ extern "C" {
 extern void petscMatSeqAIJSetPreallocationCSR(const M2C_OpaqueType *mat,
                                               const emxArray_int32_T *ix,
                                               const emxArray_int32_T *jx,
-                                              const emxArray_real_T *vs,
+                                              const emxArray_real32_T *vs,
                                               int *errCode,
                                               boolean_T *toplevel);
 

@@ -85,8 +85,8 @@ static void destroy_M2C_OpaqueType(M2C_OpaqueType *pStruct) {
 
 static void __hypreApply_api(mxArray **plhs, const mxArray ** prhs) {
     M2C_OpaqueType       pc;
-    emxArray_real_T      x;
-    emxArray_real_T      y;
+    emxArray_real32_T    x;
+    emxArray_real32_T    y;
 
     /* Marshall in inputs and preallocate outputs */
     if (mxGetNumberOfElements(prhs[0]) && mxGetClassID(prhs[0]) != mxSTRUCT_CLASS)
@@ -97,9 +97,9 @@ static void __hypreApply_api(mxArray **plhs, const mxArray ** prhs) {
             "Argument pc should be a scalar.");
     marshallin_const_M2C_OpaqueType(&pc, prhs[0], "pc");
 
-    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[1]) && mxGetClassID(prhs[1]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("hypreApply:WrongInputType",
-            "Input argument x has incorrect data type; double is expected.");
+            "Input argument x has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[1]) && mxGetDimensions(prhs[1])[1] != 1) 
         mexErrMsgIdAndTxt("hypreApply:WrongSizeOfInputArg",
             "Dimension 2 of x should be equal to 1.");
@@ -112,7 +112,7 @@ static void __hypreApply_api(mxArray **plhs, const mxArray ** prhs) {
     /* Deallocate input and marshall out function outputs */
     destroy_M2C_OpaqueType(&pc);
     free_emxArray((emxArray__common*)(&x));
-    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)(&y), mxDOUBLE_CLASS);
+    plhs[0] = move_emxArray_to_mxArray((emxArray__common*)(&y), mxSINGLE_CLASS);
     mxFree(y.size);
 
 }

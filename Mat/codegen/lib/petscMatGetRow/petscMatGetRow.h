@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 extern void petscMatGetRow(const M2C_OpaqueType *mat, int row, int *ncols,
-                           emxArray_int32_T *cols, emxArray_real_T *vals,
+                           emxArray_int32_T *cols, emxArray_real32_T *vals,
                            int *errCode, boolean_T *toplevel);
 
 extern void petscMatGetRow_initialize(void);

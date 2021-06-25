@@ -25,7 +25,7 @@ static void m2c_error(void)
   M2C_error(msgid, fmt);
 }
 
-void petscOptionsSetReal(const emxArray_char_T *iname, double value,
+void petscOptionsSetReal(const emxArray_char_T *iname, float value,
                          int *errCode, boolean_T *toplevel)
 {
   PetscOptions obj;

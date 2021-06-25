@@ -28,8 +28,8 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxFree_char_T(&b_varargin_3);
 }
 
-void hypreApply(const M2C_OpaqueType *pc, const emxArray_real_T *x,
-                emxArray_real_T *y)
+void hypreApply(const M2C_OpaqueType *pc, const emxArray_real32_T *x,
+                emxArray_real32_T *y)
 {
   static const char cv[2] = {'P', 'C'};
   MPI_Comm comm;
@@ -115,7 +115,7 @@ void hypreApply(const M2C_OpaqueType *pc, const emxArray_real_T *x,
   VecGetLocalSize(yVec, &n);
   k = y->size[0];
   y->size[0] = n;
-  emxEnsureCapacity_real_T(y, k);
+  emxEnsureCapacity_real32_T(y, k);
   if (n - 1 < 0) {
     b_n = 0;
   } else {

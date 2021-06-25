@@ -89,7 +89,7 @@ static void __petscMatSetValues_api(mxArray **plhs, const mxArray ** prhs) {
     emxArray_int32_T     ix;
     int32_T              nj;
     emxArray_int32_T     jx;
-    emxArray_real_T      v;
+    emxArray_real32_T    v;
     int32_T              iroa;
     int32_T             *errCode;
     boolean_T           *toplevel;
@@ -135,9 +135,9 @@ static void __petscMatSetValues_api(mxArray **plhs, const mxArray ** prhs) {
             "Dimension 2 of jx should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[4], (emxArray__common *)(&jx), "jx", 1);
 
-    if (mxGetNumberOfElements(prhs[5]) && mxGetClassID(prhs[5]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[5]) && mxGetClassID(prhs[5]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscMatSetValues:WrongInputType",
-            "Input argument v has incorrect data type; double is expected.");
+            "Input argument v has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[5]) && mxGetDimensions(prhs[5])[1] != 1) 
         mexErrMsgIdAndTxt("petscMatSetValues:WrongSizeOfInputArg",
             "Dimension 2 of v should be equal to 1.");
@@ -177,7 +177,7 @@ static void __petscMatSetValues_Insert_api(mxArray **plhs, const mxArray ** prhs
     emxArray_int32_T     ix;
     int32_T              nj;
     emxArray_int32_T     jx;
-    emxArray_real_T      v;
+    emxArray_real32_T    v;
     int32_T             *errCode;
     boolean_T           *toplevel;
 
@@ -222,9 +222,9 @@ static void __petscMatSetValues_Insert_api(mxArray **plhs, const mxArray ** prhs
             "Dimension 2 of jx should be equal to 1.");
     alias_mxArray_to_emxArray(prhs[4], (emxArray__common *)(&jx), "jx", 1);
 
-    if (mxGetNumberOfElements(prhs[5]) && mxGetClassID(prhs[5]) != mxDOUBLE_CLASS)
+    if (mxGetNumberOfElements(prhs[5]) && mxGetClassID(prhs[5]) != mxSINGLE_CLASS)
         mexErrMsgIdAndTxt("petscMatSetValues_Insert:WrongInputType",
-            "Input argument v has incorrect data type; double is expected.");
+            "Input argument v has incorrect data type; single is expected.");
     if (mxGetNumberOfElements(prhs[5]) && mxGetDimensions(prhs[5])[1] != 1) 
         mexErrMsgIdAndTxt("petscMatSetValues_Insert:WrongSizeOfInputArg",
             "Dimension 2 of v should be equal to 1.");

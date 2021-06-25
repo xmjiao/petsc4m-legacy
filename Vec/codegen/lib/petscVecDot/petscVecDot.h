@@ -11,7 +11,7 @@ extern "C" {
 #endif
 
 extern void petscVecDot(const M2C_OpaqueType *x, const M2C_OpaqueType *y,
-                        double *val, int *errCode, boolean_T *toplevel);
+                        float *val, int *errCode, boolean_T *toplevel);
 
 extern void petscVecDot_initialize(void);
 

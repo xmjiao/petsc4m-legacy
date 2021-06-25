@@ -6,7 +6,7 @@
 
 void petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
                               const emxArray_int32_T *col_ind,
-                              const emxArray_real_T *val, int ncols,
+                              const emxArray_real32_T *val, int ncols,
                               emxArray_char_T *prefix, struct0_T *mat,
                               boolean_T *toplevel)
 {
@@ -15,7 +15,7 @@ void petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
   char *ptr;
   emxArray_int32_T *jidx;
   emxArray_int32_T *nnz;
-  emxArray_real_T *rowval;
+  emxArray_real32_T *rowval;
   int b_i;
   int first_row;
   int i;
@@ -47,7 +47,7 @@ void petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
   MatSetSizes(t_mat, row_ptr->size[0] - 1, last_row, iroa, ncols);
   MatGetOwnershipRange(t_mat, &first_row, &last_row);
   emxInit_int32_T(&jidx, 1);
-  emxInit_real_T(&rowval, 1);
+  emxInit_real32_T(&rowval, 1);
   for (b_i = 0; b_i < n; b_i++) {
     i = row_ptr->data[b_i + 1] - 1;
     if (row_ptr->data[b_i] > i) {
@@ -73,7 +73,7 @@ void petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
     iroa = i - last_row;
     i = rowval->size[0];
     rowval->size[0] = iroa;
-    emxEnsureCapacity_real_T(rowval, i);
+    emxEnsureCapacity_real32_T(rowval, i);
     for (i = 0; i < iroa; i++) {
       rowval->data[i] = val->data[last_row + i];
     }
@@ -82,7 +82,7 @@ void petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
     MatSetValues(t_mat, 1, &last_row, nnz->data[b_i], &jidx->data[0],
                  &rowval->data[0], iroa);
   }
-  emxFree_real_T(&rowval);
+  emxFree_real32_T(&rowval);
   emxFree_int32_T(&jidx);
   emxFree_int32_T(&nnz);
   last_row = (MAT_FINAL_ASSEMBLY);
@@ -109,15 +109,15 @@ void petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
 
 void petscMatCreateAIJFromCRS_3args(const emxArray_int32_T *row_ptr,
                                     const emxArray_int32_T *col_ind,
-                                    const emxArray_real_T *val, struct0_T *mat,
-                                    boolean_T *toplevel)
+                                    const emxArray_real32_T *val,
+                                    struct0_T *mat, boolean_T *toplevel)
 {
   MPI_Comm comm;
   Mat t_mat;
   char *ptr;
   emxArray_int32_T *jidx;
   emxArray_int32_T *nnz;
-  emxArray_real_T *rowval;
+  emxArray_real32_T *rowval;
   int b_i;
   int i;
   int i1;
@@ -137,7 +137,7 @@ void petscMatCreateAIJFromCRS_3args(const emxArray_int32_T *row_ptr,
   MatCreateSeqAIJ(comm, row_ptr->size[0] - 1, row_ptr->size[0] - 1, iroa,
                   &nnz->data[0], &t_mat);
   emxInit_int32_T(&jidx, 1);
-  emxInit_real_T(&rowval, 1);
+  emxInit_real32_T(&rowval, 1);
   for (b_i = 0; b_i < n; b_i++) {
     i = row_ptr->data[b_i + 1] - 1;
     if (row_ptr->data[b_i] > i) {
@@ -163,7 +163,7 @@ void petscMatCreateAIJFromCRS_3args(const emxArray_int32_T *row_ptr,
     loop_ub = i - iroa;
     i = rowval->size[0];
     rowval->size[0] = loop_ub;
-    emxEnsureCapacity_real_T(rowval, i);
+    emxEnsureCapacity_real32_T(rowval, i);
     for (i = 0; i < loop_ub; i++) {
       rowval->data[i] = val->data[iroa + i];
     }
@@ -171,7 +171,7 @@ void petscMatCreateAIJFromCRS_3args(const emxArray_int32_T *row_ptr,
     MatSetValues(t_mat, 1, &b_i, nnz->data[b_i], &jidx->data[0],
                  &rowval->data[0], iroa);
   }
-  emxFree_real_T(&rowval);
+  emxFree_real32_T(&rowval);
   emxFree_int32_T(&jidx);
   emxFree_int32_T(&nnz);
   iroa = (MAT_FINAL_ASSEMBLY);
@@ -198,7 +198,7 @@ void petscMatCreateAIJFromCRS_3args(const emxArray_int32_T *row_ptr,
 
 void petscMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr,
                                     const emxArray_int32_T *col_ind,
-                                    const emxArray_real_T *val, int ncols,
+                                    const emxArray_real32_T *val, int ncols,
                                     struct0_T *mat, boolean_T *toplevel)
 {
   MPI_Comm comm;
@@ -206,7 +206,7 @@ void petscMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr,
   char *ptr;
   emxArray_int32_T *jidx;
   emxArray_int32_T *nnz;
-  emxArray_real_T *rowval;
+  emxArray_real32_T *rowval;
   int b_i;
   int i;
   int i1;
@@ -226,7 +226,7 @@ void petscMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr,
   MatCreateSeqAIJ(comm, row_ptr->size[0] - 1, ncols, iroa, &nnz->data[0],
                   &t_mat);
   emxInit_int32_T(&jidx, 1);
-  emxInit_real_T(&rowval, 1);
+  emxInit_real32_T(&rowval, 1);
   for (b_i = 0; b_i < n; b_i++) {
     i = row_ptr->data[b_i + 1] - 1;
     if (row_ptr->data[b_i] > i) {
@@ -252,7 +252,7 @@ void petscMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr,
     loop_ub = i - iroa;
     i = rowval->size[0];
     rowval->size[0] = loop_ub;
-    emxEnsureCapacity_real_T(rowval, i);
+    emxEnsureCapacity_real32_T(rowval, i);
     for (i = 0; i < loop_ub; i++) {
       rowval->data[i] = val->data[iroa + i];
     }
@@ -260,7 +260,7 @@ void petscMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr,
     MatSetValues(t_mat, 1, &b_i, nnz->data[b_i], &jidx->data[0],
                  &rowval->data[0], iroa);
   }
-  emxFree_real_T(&rowval);
+  emxFree_real32_T(&rowval);
   emxFree_int32_T(&jidx);
   emxFree_int32_T(&nnz);
   iroa = (MAT_FINAL_ASSEMBLY);

@@ -39,7 +39,7 @@ static void m2c_error(const emxArray_char_T *varargin_3)
 }
 
 void petscKSPGetResidualHistory(const M2C_OpaqueType *ksp,
-                                emxArray_real_T *reshis, int *errCode,
+                                emxArray_real32_T *reshis, int *errCode,
                                 boolean_T *toplevel)
 {
   static const char cv[3] = {'K', 'S', 'P'};
@@ -86,11 +86,11 @@ void petscKSPGetResidualHistory(const M2C_OpaqueType *ksp,
   *errCode = KSPGetResidualHistory(t_ksp, &a, &na);
   i = reshis->size[0];
   reshis->size[0] = na;
-  emxEnsureCapacity_real_T(reshis, i);
+  emxEnsureCapacity_real32_T(reshis, i);
   for (i = 0; i < na; i++) {
-    reshis->data[i] = 0.0;
+    reshis->data[i] = 0.0F;
   }
-  memcpy(&reshis->data[0], a, na << 3);
+  memcpy(&reshis->data[0], a, na << 2);
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }
