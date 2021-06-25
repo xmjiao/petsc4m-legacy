@@ -98,10 +98,10 @@ end
 pc = pcCreate(Arows, Acols, PetscScalar(Avals), PETSC_MATSOLVERMUMPS, opts);
 
 % Create function handle to apply preconditioner
-Mfun = @(x) pcApply(pc, PetscScalar(x));
+Mfun = @(x) double(pcApply(pc, PetscScalar(x)));
 
 % Invoke MATLAB's built-in gmres
-[varargout{1:nargout}] = gmres(Asparse, b, restart, PetscReal(rtol), maxiter, Mfun, [], x0);
+[varargout{1:nargout}] = gmres(Asparse, b, restart, rtol, maxiter, Mfun, [], x0);
 
 % Destroy preconditioner context
 pcDestroy(pc);

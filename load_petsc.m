@@ -5,6 +5,9 @@ persistent loaded;
 % Load only once
 if ~isempty(loaded)
   return
+elseif isoctave
+    % Prevent Octave from loading it twice
+    loaded = true;
 end
 
 % petsc4m depends on paracoder. Need to load it first

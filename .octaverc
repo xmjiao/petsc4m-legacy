@@ -1,0 +1,2 @@
+% Set path for PETSc
+load_petsc
