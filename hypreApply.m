@@ -12,14 +12,12 @@ function y = hypreApply(pc, x)
 %
 % SEE ALSO: hypreCreate, hypreApplyTranspose, hypreDestroy
 
-% %#codegen -args {PetscPC, coder.typeof(PetscScalar(0), [inf, 1])}
+%#codegen -args {PetscPC, coder.typeof(PetscScalar(0), [inf, 1])}
 
 xVec = petscVecCreateFromArray(PetscScalar(x));
 yVec = petscVecDuplicate(xVec);
 
-%errCode = petscPCApply(pc, xVec, yVec); assert(~errCode, 'petscPCApply failed');
-t_ksp = PetscKSP(pc);
-petscKSPSolve(t_ksp, xVec, yVec);
+errCode = petscPCApply(pc, xVec, yVec); assert(~errCode, 'petscPCApply failed');
 
 y = petscVecToArray(yVec);
 petscVecDestroy(xVec);
