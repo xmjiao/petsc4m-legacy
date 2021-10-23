@@ -1,4 +1,5 @@
 #include "petscMatCreateAIJFromCRS.h"
+#include "petscMatCreateAIJFromCRS_emxutil.h"
 #include "petscMatCreateAIJFromCRS_types.h"
 #include "m2c.h"
 #include "mpi.h"
@@ -102,7 +103,7 @@ void petscMatCreateAIJFromCRS(const emxArray_int32_T *row_ptr,
   ptr = (char *)(&t_mat);
   for (b_i = 0; b_i < iroa; b_i++) {
     mat->data->data[b_i] = *(ptr);
-    ptr = ptr + 1;
+    ptr = M2C_OFFSET_PTR(ptr, 1);
   }
   *toplevel = true;
 }
@@ -191,7 +192,7 @@ void petscMatCreateAIJFromCRS_3args(const emxArray_int32_T *row_ptr,
   ptr = (char *)(&t_mat);
   for (b_i = 0; b_i < iroa; b_i++) {
     mat->data->data[b_i] = *(ptr);
-    ptr = ptr + 1;
+    ptr = M2C_OFFSET_PTR(ptr, 1);
   }
   *toplevel = true;
 }
@@ -280,7 +281,7 @@ void petscMatCreateAIJFromCRS_4args(const emxArray_int32_T *row_ptr,
   ptr = (char *)(&t_mat);
   for (b_i = 0; b_i < iroa; b_i++) {
     mat->data->data[b_i] = *(ptr);
-    ptr = ptr + 1;
+    ptr = M2C_OFFSET_PTR(ptr, 1);
   }
   *toplevel = true;
 }

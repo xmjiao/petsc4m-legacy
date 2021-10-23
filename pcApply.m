@@ -17,7 +17,8 @@ function y = pcApply(pc, x)
 xVec = petscVecCreateFromArray(PetscScalar(x));
 yVec = petscVecDuplicate(xVec);
 
-errCode = petscPCApply(pc, xVec, yVec); assert(~errCode, 'petscPCApply failed');
+% errCode = petscPCApply(pc, xVec, yVec); assert(~errCode, 'petscPCApply failed');
+
 
 y = petscVecToArray(yVec);
 petscVecDestroy(xVec);

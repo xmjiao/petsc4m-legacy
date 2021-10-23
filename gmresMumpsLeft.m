@@ -119,4 +119,16 @@ function test %#ok<DEFNU>
 %! [x,flag,relres,iter,resvec] = gmresMumpsLeft(A, b, [], rtol);
 %! assert(norm(b - A*double(x)) < 100*rtol * norm(b))
 
+%!test
+%!shared A, b
+%! % system('gd-get -q -O -p 0ByTwsK5_Tl_PemN0QVlYem11Y00 fem2d"*".mat');
+%! s = load('fem2d_cd.mat');
+%! A = s.A;
+%! s = load('fem2d_vec_cd.mat');
+%! b = s.b;
+%! rtol = 10*eps(class(PetscReal(0))).^(1/2);
+
+%! [x,flag,relres,iter,reshis] = gmresMumpsLeft(A, b, [], rtol);
+%! assert(norm(b - A*double(x)) < rtol * norm(b))
+
 end
