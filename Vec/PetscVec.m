@@ -1,4 +1,4 @@
-function vec = PetscVec(varargin) %#codegen
+function vec = PetscVec(varargin)
 %Map an opaque object into a PETSc Vec object
 %
 %  PetscVec() simply returns a definition of the m2c_opaque_type,

@@ -1,4 +1,4 @@
-function nullsp = PetscMatNullSpace(varargin) %#codegen
+function nullsp = PetscMatNullSpace(varargin)
 %Map an opaque object into a PETSc MatNullSpace object
 %
 %  PetscMatNullSpace() simply returns a definition of the m2c_opaque_type,

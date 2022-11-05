@@ -37,7 +37,7 @@ function [x, flag, relres, iter, reshis, times] = petscSolveCRS(varargin)
 %    specific solver, such as PETSC_KSPGMRES, PETSC_KSPBCGS, etc.
 %
 %    petscSolveCRS(Arows, Acols, Avals, b, solver, rtol) uses the given number
-%        of solvers and the relative tolerarance.
+%        of solvers and the relative tolerance.
 %
 %    petscSolveCRS(Arows, Acols, Avals, b, solver, rtol, maxit) solves with
 %        the given relative tolerances and maximum iteration count.
@@ -85,23 +85,23 @@ function [x, flag, relres, iter, reshis, times] = petscSolveCRS(varargin)
 %#codegen PetscScalar(0), int32(0), PetscPCType, PetscMatSolverType,
 %#codegen coder.typeof(PetscScalar(0), [inf,1]), coder.typeof(char(0), [1, inf])}
 
-if nargin==0
+if nargin == 0
     x = PetscScalar(zeros(0, 1));
-    flag=int32(-1); relres=realmax;
-    iter=int32(0); 
+    flag = int32(-1); relres = realmax;
+    iter = int32(0);
     reshis = PetscScalar(zeros(0, 1));
-    times=[double(0);double(0)];
+    times = [double(0); double(0)];
     return;
 end
 
-if isempty(coder.target) && ~isoctave && usejava('jvm') && ...
+if isempty(coder.target) && ~exist('OCTAVE_VERSION', 'builtin') && usejava('jvm') && ...
         exist('run_petscSolveCRS_exe', 'file')
     % Is running in MATLAB and mex files are not available
     [x, flag, relres, iter, reshis, times] = run_petscSolveCRS_exe(varargin{:});
     fprintf('KSP setup took %g seconds and solver took %g seconds\n', times(1), times(2));
     return;
 elseif isempty(coder.target) && ~exist(['petscVecDuplicate.' mexext], 'file')
-    error('You must have built either the executible built when running in MATLAB.');
+    error('You must have built either the executable built when running in MATLAB.');
 end
 
 Arows = varargin{1};
@@ -111,7 +111,7 @@ b = varargin{4};
 
 % Setup KSP
 if nargin<5
-    solver = ''; 
+    solver = '';
 else
     solver = varargin{5};
 end % Use default
@@ -133,7 +133,7 @@ end
 if nargin<9
     pcopt = '';
 else
-    pcopt = varargin{9}; 
+    pcopt = varargin{9};
 end
 
 AMat = petscMatCreateAIJFromCRS(Arows, Acols, Avals);
@@ -172,32 +172,32 @@ function test %#ok<DEFNU>
 %! A = A + speye(100);
 %! [rowptr, colind, vals] = crs_matrix(A);
 %! b = rand(100,1);
-
+%! 
 %! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
 %!     PETSC_KSPPREONLY, 1.e-6, int32(100), PETSC_PCLU, PETSC_MATSOLVERUMFPACK);
 %! assert(norm(b - A*x) < 1.e-10)
 
-%%!test
-%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b);
+%!test
+%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b);
 
-%%!test
-%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, '');
+%!test
+%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, '');
 
-%%!test
-%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%%!     '', 1.e-6);
-%%!test
-%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%%!     PETSC_KSPBCGS, 1.e-6, int32(100));
-%%!test
-%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%%!     PETSC_KSPTFQMR, 1.e-6, int32(100));
-%%!test
-%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%%!     PETSC_KSPBCGS, 1.e-10, int32(10), PETSC_PCJACOBI, 'right', ...
-%%!     zeros(0,1), '-ksp_monitor_true_residual');
-%%!test
-%%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
-%%!     PETSC_KSPBCGS, 1.e-6, int32(100), PETSC_PCILU, '');
+%!test
+%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%!     '', 1.e-6);
+%!test
+%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%!     PETSC_KSPBCGS, 1.e-6, int32(100));
+%!test
+%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%!     PETSC_KSPTFQMR, 1.e-6, int32(100));
+%!test
+%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%!     PETSC_KSPBCGS, 1.e-10, int32(10), PETSC_PCJACOBI, 'right', ...
+%!     zeros(0,1), '-ksp_monitor_true_residual');
+%!test
+%! [x,flag,relres,iter,reshis,times] = petscSolveCRS(rowptr, colind, vals, b, ...
+%!     PETSC_KSPBCGS, 1.e-6, int32(100), PETSC_PCILU, '');
 
 end

@@ -1,4 +1,4 @@
-function ksp = PetscKSP(varargin) %#codegen
+function ksp = PetscKSP(varargin)
 %Map an opaque object into a PETSc KSP object
 %
 %  PetscKSP() simply returns a definition of the m2c_opaque_type,

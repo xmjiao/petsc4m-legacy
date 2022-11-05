@@ -1,6 +1,7 @@
 function [errCode, toplevel] = petscBarrier(obj)
 %Blocks until this routine is executed by all processors owning the object obj.
 %
+%          errCode = petscBarrier
 %          errCode = petscBarrier(obj)
 %
 % PETSc C interface:
@@ -8,12 +9,16 @@ function [errCode, toplevel] = petscBarrier(obj)
 %
 % https://petsc.org/release/docs/manualpages/Sys/PetscBarrier/
 
-%#codegen -args {PetscObject}
+%#codegen -args {PetscObject} petscBarrier0 -args {}
 
 errCode = int32(-1);
 
 if ~isempty(coder.target)
-    coder.cinclude('petscsys.h');
+    coder.cinclude('petsc4m.h');
+
+    if nargin == 0
+        obj = PETSC_NULL;
+    end
 
     t_obj = PetscObject(obj);
 

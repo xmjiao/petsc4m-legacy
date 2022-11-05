@@ -37,8 +37,8 @@ if nargin>1
     if nargin>2
         hasPC = ~ischar(pctype) || ~isempty(pctype);
         hasOpt = nargin>3 && (~ischar(pcopt) || ~isempty(pcopt));
-        
-        if hasPC || hasOpt           
+
+        if hasPC || hasOpt
             if hasPC
                 if ischar(pctype) && pctype(end)~=char(0)
                     % null-terminate the string if not terminated properly
@@ -48,7 +48,7 @@ if nargin>1
                 end
                 petscPCSetType(t_pc, pctype0);
             end
-            
+
             if hasOpt
                 if isequal(pcopt, 'left')
                     petscKSPSetPCSide(ksp, PETSC_PC_LEFT);
@@ -60,7 +60,7 @@ if nargin>1
             end
         end
     end
-    
+
     if ischar(ksptype) && ~isempty(ksptype) && ksptype(end)~=0
         % null-terminate the string if not terminated properly
         ksptype0 = [ksptype char(0)];
@@ -82,17 +82,16 @@ petscKSPSetFromOptions(ksp);
 
 if nargout>1
     time = double(0);
-    comm = petscObjectGetComm(ksp);
-    % When timing the run, use mpi_Barrier for more accurate results.
-    mpi_Barrier(comm);
-    t = mpi_Wtime();
+    % When timing the run, use barrier for more accurate results.
+    petscBarrier(ksp);
+    t = petscGetCPUTime();
 end
 
 petscKSPSetUp(ksp);
 
 if nargout>1
-    % When timing the run, use mpi_Barrier for more accurate results.
-    mpi_Barrier(comm);
-    time = mpi_Wtime()-t;
+    % When timing the run, use barrier for more accurate results.
+    petscBarrier(ksp);
+    time = petscGetCPUTime()-t;
 end
 end

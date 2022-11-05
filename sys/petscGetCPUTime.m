@@ -13,7 +13,7 @@ function [t, errCode, toplevel] = petscGetCPUTime
 errCode = int32(-1);
 
 if ~isempty(coder.target)
-    coder.cinclude('petsctime.h');
+    coder.cinclude('petsc4m.h');
 
     t = double(0);
 

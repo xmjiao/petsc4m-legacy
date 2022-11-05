@@ -1,4 +1,4 @@
-function output = PetscVecArray(varargin) %#codegen
+function output = PetscVecArray(varargin)
 % Defines an array of PetscVec.
 %
 % PetscVecArray() returns a definition of m2c_opaque_type,

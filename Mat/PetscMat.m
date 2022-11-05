@@ -1,4 +1,4 @@
-function mat = PetscMat(varargin) %#codegen
+function mat = PetscMat(varargin)
 %Map an opaque object into a PETSc Mat object
 %
 %  PetscMat() simply returns a definition of the m2c_opaque_type,

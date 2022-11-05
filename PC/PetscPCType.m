@@ -1,4 +1,4 @@
-function type = PetscPCType(arg, wrap) %#codegen
+function type = PetscPCType(arg, wrap)
 %Map a null-terminated C string into a PETSc PCType handle
 %
 %  PetscPCType() simply returns a definition of a string,

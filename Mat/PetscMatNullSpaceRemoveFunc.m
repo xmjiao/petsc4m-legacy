@@ -1,4 +1,4 @@
-function rmv = PetscMatNullSpaceRemoveFunc(varargin) %#codegen
+function rmv = PetscMatNullSpaceRemoveFunc(varargin)
 %Map an opaque object into a PETSc MatNullSpaceRemoveFunc object
 %
 %  PetscMatNullSpaceRemoveFunc() simply returns a definition of the 

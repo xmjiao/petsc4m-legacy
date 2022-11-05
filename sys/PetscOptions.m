@@ -1,4 +1,4 @@
-function opts = PetscOptions(varargin) %#codegen
+function opts = PetscOptions(varargin)
 %Map an opaque object into a PETSc Options object
 %
 %  PetscOptions() simply returns a definition of the m2c_opaque_type,

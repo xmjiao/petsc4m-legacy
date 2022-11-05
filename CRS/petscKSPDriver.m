@@ -9,8 +9,8 @@ function [flag,relres,iter,reshis,time] = petscKSPDriver(ksp, b, x, rtol, maxits
 %    petscKSPDriver(ksp, b, x, rtol, maxits, x0)
 %
 %    [flag, relres, iter, reshis, time] = petscKSPDriver(...) returns the flag
-%       (KSPConvergedReason), relative residual, number of iterations, 
-%    history of residual used in convergence test (typically preconditioned 
+%       (KSPConvergedReason), relative residual, number of iterations,
+%    history of residual used in convergence test (typically preconditioned
 %    residual), and execution times.
 %
 % Description:
@@ -35,10 +35,9 @@ t_ksp = PetscKSP(ksp);
 
 if nargout>4
     time = double(0);
-    comm = petscObjectGetComm(t_ksp);
-    % When timing the run, use mpi_Barrier for more accurate results.
-    mpi_Barrier(comm);
-    t = mpi_Wtime();
+    % When timing the run, use barrier for more accurate results.
+    petscBarrier(t_ksp);
+    t = petscGetCPUTime();
 end
 
 if nargin<5 || maxits==0
@@ -58,7 +57,7 @@ else
         petscKSPSetTolerances(t_ksp, PetscScalar(rtol), PetscScalar(PETSC_DEFAULT), ...
             PetscScalar(PETSC_DEFAULT), int32(maxits));
     end
-    
+
     % Process initial guess
     nonzeroGuess = int32(nargin>=6 && ~petscIsNULL(x0));
     if nonzeroGuess
@@ -74,9 +73,9 @@ petscKSPSetInitialGuessNonzero(t_ksp, nonzeroGuess);
 petscKSPSolve(t_ksp, b, x);
 
 if nargout>4
-    % When timing the run, use mpi_Barrier for more accurate results.
-    mpi_Barrier(comm);
-    time = mpi_Wtime()-t;
+    % When timing the run, use barrier for more accurate results.
+    petscBarrier(t_ksp);
+    time = petscGetCPUTime()-t;
 end
 
 flag = petscKSPGetConvergedReason(t_ksp);
@@ -96,7 +95,7 @@ if flag < 0 || relres>rtol
         otherwise
             side = 'symmetric';
     end
-    
+
     m2c_printf('### %s with %s as %s preconditioner stopped with flag %d.\n', ...
         petscKSPGetType(t_ksp), petscPCGetType(pc), side, flag);
     m2c_printf('### The relative residual was %g after %d iterations.\n', relres, iter);

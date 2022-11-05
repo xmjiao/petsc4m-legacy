@@ -1,4 +1,4 @@
-function pc = PetscPC(varargin) %#codegen
+function pc = PetscPC(varargin)
 %Map an opaque object into a PETSc PC object
 %
 %  PetscPC() simply returns a definition of the m2c_opaque_type,

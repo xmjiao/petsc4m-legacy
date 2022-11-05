@@ -1,2 +1,2 @@
-function [errCode, toplevel] = petscPCSetOperators_AforP(ksp, Amat) %#codegen
+function [errCode, toplevel] = petscPCSetOperators_AforP(ksp, Amat)
 [errCode, toplevel] = petscPCSetOperators(ksp, Amat);

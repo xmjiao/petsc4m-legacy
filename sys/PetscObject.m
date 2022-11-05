@@ -1,4 +1,4 @@
-function obj = PetscObject(arg, wrap) %#codegen
+function obj = PetscObject(arg, wrap)
 %Map an opaque object into a PETSc PetscObject object
 %
 %  obj = PetscObject() simply returns a definition of the

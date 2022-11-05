@@ -1,2 +1,2 @@
-function [errCode, toplevel] = petscKSPSetResidualHistory_3args(ksp, na, reset) %#codegen
+function [errCode, toplevel] = petscKSPSetResidualHistory_3args(ksp, na, reset)
 [errCode, toplevel] = petscKSPSetResidualHistory(ksp, na, reset);

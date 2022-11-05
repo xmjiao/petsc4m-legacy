@@ -1,4 +1,4 @@
-function type = PetscVecType(arg, wrap) %#codegen
+function type = PetscVecType(arg, wrap)
 %Map a null-terminated C string into a PETSc VecType handle
 %
 %  PetscVecType() simply returns a definition of a string,

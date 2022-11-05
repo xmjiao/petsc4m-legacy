@@ -1,4 +1,4 @@
-function type = PetscMatSolverType(arg, wrap) %#codegen
+function type = PetscMatSolverType(arg, wrap)
 %Map a null-terminated C string into a PETSc MatSolverType handle
 %
 %  PetscMatSolverType() simply returns a definition of a string,

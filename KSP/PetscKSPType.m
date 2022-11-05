@@ -1,4 +1,4 @@
-function type = PetscKSPType(arg, wrap) %#codegen
+function type = PetscKSPType(arg, wrap)
 %Map a null-terminated C string into a PETSc KSPType handle
 %
 %  PetscKSPType() simply returns a definition of a string,

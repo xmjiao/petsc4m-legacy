@@ -1,2 +1,2 @@
-function varargout = petscBarrier0
-[varargout{:}] = petscBarrier(PETSC_NULL);
+function [errCode, topLevel] = petscBarrier0
+[errCode, topLevel] = petscBarrier(PETSC_NULL);
