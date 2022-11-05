@@ -43,16 +43,20 @@ void petscOptionsGetBool(const emxArray_char_T *pre,
   PetscBool b_flag;
   PetscBool b_value;
   PetscOptions obj;
+  const char *name_data;
+  const char *pre_data;
+  name_data = name->data;
+  pre_data = pre->data;
   *toplevel = true;
-  if ((pre->size[1] != 0) && (pre->data[pre->size[1] - 1] != '\x00')) {
+  if ((pre->size[1] != 0) && (pre_data[pre->size[1] - 1] != '\x00')) {
     m2c_error();
   }
-  if ((name->size[1] != 0) && (name->data[name->size[1] - 1] != '\x00')) {
+  if ((name->size[1] != 0) && (name_data[name->size[1] - 1] != '\x00')) {
     b_m2c_error();
   }
   obj = NULL;
-  *errCode = PetscOptionsGetBool(obj, &pre->data[0], &name->data[0], &b_value,
-                                 &b_flag);
+  *errCode =
+      PetscOptionsGetBool(obj, &pre_data[0], &name_data[0], &b_value, &b_flag);
   *value = (int)(b_value);
   *found = (int)(b_flag);
   if (*errCode != 0) {

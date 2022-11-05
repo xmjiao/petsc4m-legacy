@@ -46,16 +46,20 @@ void petscOptionsGetString(const emxArray_char_T *pre,
   PetscOptions obj;
   int i;
   char str0[21];
+  const char *name_data;
+  const char *pre_data;
   boolean_T exitg1;
+  name_data = name->data;
+  pre_data = pre->data;
   *toplevel = true;
-  if ((pre->size[1] != 0) && (pre->data[pre->size[1] - 1] != '\x00')) {
+  if ((pre->size[1] != 0) && (pre_data[pre->size[1] - 1] != '\x00')) {
     m2c_error();
   }
-  if ((name->size[1] != 0) && (name->data[name->size[1] - 1] != '\x00')) {
+  if ((name->size[1] != 0) && (name_data[name->size[1] - 1] != '\x00')) {
     b_m2c_error();
   }
   obj = NULL;
-  *errCode = PetscOptionsGetString(obj, &pre->data[0], &name->data[0], &str0[0],
+  *errCode = PetscOptionsGetString(obj, &pre_data[0], &name_data[0], &str0[0],
                                    20, &b_flag);
   *found = (int)(b_flag);
   str_size[0] = 1;
@@ -66,9 +70,7 @@ void petscOptionsGetString(const emxArray_char_T *pre,
     if ((unsigned char)str0[i] == 0) {
       str_size[0] = 1;
       str_size[1] = i + 1;
-      if (0 <= i) {
-        memcpy(&str_data[0], &str0[0], (i + 1) * sizeof(char));
-      }
+      memcpy(&str_data[0], &str0[0], (i + 1) * sizeof(char));
       exitg1 = true;
     } else {
       i++;

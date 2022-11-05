@@ -29,12 +29,14 @@ void petscOptionsInsertString(const emxArray_char_T *in_str, int *errCode,
                               boolean_T *toplevel)
 {
   PetscOptions obj;
+  const char *in_str_data;
+  in_str_data = in_str->data;
   *toplevel = true;
-  if ((in_str->size[1] != 0) && (in_str->data[in_str->size[1] - 1] != '\x00')) {
+  if ((in_str->size[1] != 0) && (in_str_data[in_str->size[1] - 1] != '\x00')) {
     m2c_error();
   }
   obj = NULL;
-  *errCode = PetscOptionsInsertString(obj, &in_str->data[0]);
+  *errCode = PetscOptionsInsertString(obj, &in_str_data[0]);
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }

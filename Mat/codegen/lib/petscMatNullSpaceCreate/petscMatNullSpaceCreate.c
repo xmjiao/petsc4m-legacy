@@ -11,18 +11,18 @@ static void b_m2c_error(const emxArray_char_T *varargin_3);
 
 static void c_m2c_error(int varargin_3);
 
-static boolean_T isequal(const emxArray_char_T *varargin_1);
-
 static void m2c_error(const emxArray_char_T *varargin_3);
 
 static void b_m2c_error(const emxArray_char_T *varargin_3)
 {
-  char varargin_4[4];
   const char *fmt;
   const char *msgid;
   emxArray_char_T *b_varargin_3;
   int i;
   int loop_ub;
+  const char *varargin_3_data;
+  char *b_varargin_3_data;
+  varargin_3_data = varargin_3->data;
   emxInit_char_T(&b_varargin_3, 2);
   msgid = "m2c_opaque_array:TypeMismatch";
   fmt = "Incorrect data type &s. Expected %s.\n";
@@ -30,15 +30,17 @@ static void b_m2c_error(const emxArray_char_T *varargin_3)
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
   emxEnsureCapacity_char_T(b_varargin_3, i);
+  b_varargin_3_data = b_varargin_3->data;
   loop_ub = varargin_3->size[1];
   for (i = 0; i < loop_ub; i++) {
-    b_varargin_3->data[i] = varargin_3->data[i];
+    b_varargin_3_data[i] = varargin_3_data[i];
   }
+  char varargin_4[4];
   varargin_4[0] = 'V';
   varargin_4[1] = 'e';
   varargin_4[2] = 'c';
   varargin_4[3] = '\x00';
-  M2C_error(msgid, fmt, &b_varargin_3->data[0], &varargin_4[0]);
+  M2C_error(msgid, fmt, &b_varargin_3_data[0], &varargin_4[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -51,33 +53,6 @@ static void c_m2c_error(int varargin_3)
   M2C_error(msgid, fmt, varargin_3);
 }
 
-static boolean_T isequal(const emxArray_char_T *varargin_1)
-{
-  static const char b_cv[8] = {'M', 'P', 'I', '_', 'C', 'o', 'm', 'm'};
-  int k;
-  boolean_T b_p;
-  boolean_T exitg1;
-  boolean_T p;
-  p = false;
-  b_p = false;
-  if (varargin_1->size[1] == 8) {
-    b_p = true;
-  }
-  if (b_p && (varargin_1->size[1] != 0)) {
-    k = 0;
-    exitg1 = false;
-    while ((!exitg1) && (k < 8)) {
-      if (!(varargin_1->data[k] == b_cv[k])) {
-        b_p = false;
-        exitg1 = true;
-      } else {
-        k++;
-      }
-    }
-  }
-  return b_p || p;
-}
-
 static void m2c_error(const emxArray_char_T *varargin_3)
 {
   const char *fmt;
@@ -85,6 +60,9 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   emxArray_char_T *b_varargin_3;
   int i;
   int loop_ub;
+  const char *varargin_3_data;
+  char *b_varargin_3_data;
+  varargin_3_data = varargin_3->data;
   emxInit_char_T(&b_varargin_3, 2);
   msgid = "m2c_opaque_obj:WrongInput";
   fmt = "Incorrect data type %s. Expected MPI_Comm.\n";
@@ -92,11 +70,12 @@ static void m2c_error(const emxArray_char_T *varargin_3)
   b_varargin_3->size[0] = 1;
   b_varargin_3->size[1] = varargin_3->size[1];
   emxEnsureCapacity_char_T(b_varargin_3, i);
+  b_varargin_3_data = b_varargin_3->data;
   loop_ub = varargin_3->size[1];
   for (i = 0; i < loop_ub; i++) {
-    b_varargin_3->data[i] = varargin_3->data[i];
+    b_varargin_3_data[i] = varargin_3_data[i];
   }
-  M2C_error(msgid, fmt, &b_varargin_3->data[0]);
+  M2C_error(msgid, fmt, &b_varargin_3_data[0]);
   emxFree_char_T(&b_varargin_3);
 }
 
@@ -104,40 +83,27 @@ void petscMatNullSpaceCreate(const M2C_OpaqueType *comm, int has_cnst, int n,
                              const M2C_OpaqueType *vecs, M2C_OpaqueType *nullsp,
                              int *errCode, boolean_T *toplevel)
 {
-  static const char b_cv[3] = {'V', 'e', 'c'};
+  static const char b_cv[8] = {'M', 'P', 'I', '_', 'C', 'o', 'm', 'm'};
+  static const char cv1[3] = {'V', 'e', 'c'};
   MPI_Comm t_comm;
   MatNullSpace arg;
   Vec *ptr;
-  char *b_ptr;
   emxArray_char_T *b_comm;
   int i;
   int sizepe;
-  boolean_T b_p;
+  const char *varargin_1_data;
+  char *b_ptr;
+  char *comm_data;
   boolean_T exitg1;
   boolean_T p;
   emxInit_char_T(&b_comm, 2);
-  if (!isequal(comm->type)) {
-    i = b_comm->size[0] * b_comm->size[1];
-    b_comm->size[0] = 1;
-    b_comm->size[1] = comm->type->size[1] + 1;
-    emxEnsureCapacity_char_T(b_comm, i);
-    sizepe = comm->type->size[1];
-    for (i = 0; i < sizepe; i++) {
-      b_comm->data[i] = comm->type->data[i];
-    }
-    b_comm->data[comm->type->size[1]] = '\x00';
-    m2c_error(b_comm);
-  }
-  t_comm = *(MPI_Comm *)(&comm->data->data[0]);
-  p = false;
-  if (vecs->type->size[1] == 3) {
-    p = true;
-  }
-  if (p && (vecs->type->size[1] != 0)) {
+  varargin_1_data = comm->type->data;
+  p = (comm->type->size[1] == 8);
+  if (p && (comm->type->size[1] != 0)) {
     sizepe = 0;
     exitg1 = false;
-    while ((!exitg1) && (sizepe < 3)) {
-      if (!(vecs->type->data[sizepe] == b_cv[sizepe])) {
+    while ((!exitg1) && (sizepe < 8)) {
+      if (varargin_1_data[sizepe] != b_cv[sizepe]) {
         p = false;
         exitg1 = true;
       } else {
@@ -145,17 +111,44 @@ void petscMatNullSpaceCreate(const M2C_OpaqueType *comm, int has_cnst, int n,
       }
     }
   }
-  b_p = (int)p;
-  if (!b_p) {
+  if (!p) {
+    i = b_comm->size[0] * b_comm->size[1];
+    b_comm->size[0] = 1;
+    b_comm->size[1] = comm->type->size[1] + 1;
+    emxEnsureCapacity_char_T(b_comm, i);
+    comm_data = b_comm->data;
+    sizepe = comm->type->size[1];
+    for (i = 0; i < sizepe; i++) {
+      comm_data[i] = comm->type->data[i];
+    }
+    comm_data[comm->type->size[1]] = '\x00';
+    m2c_error(b_comm);
+  }
+  t_comm = *(MPI_Comm *)(&comm->data->data[0]);
+  p = (vecs->type->size[1] == 3);
+  if (p && (vecs->type->size[1] != 0)) {
+    sizepe = 0;
+    exitg1 = false;
+    while ((!exitg1) && (sizepe < 3)) {
+      if (vecs->type->data[sizepe] != cv1[sizepe]) {
+        p = false;
+        exitg1 = true;
+      } else {
+        sizepe++;
+      }
+    }
+  }
+  if (!p) {
     i = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = vecs->type->size[1] + 1;
     emxEnsureCapacity_char_T(b_comm, i);
+    comm_data = b_comm->data;
     sizepe = vecs->type->size[1];
     for (i = 0; i < sizepe; i++) {
-      b_comm->data[i] = vecs->type->data[i];
+      comm_data[i] = vecs->type->data[i];
     }
-    b_comm->data[vecs->type->size[1]] = '\x00';
+    comm_data[vecs->type->size[1]] = '\x00';
     b_m2c_error(b_comm);
   }
   emxFree_char_T(&b_comm);
@@ -188,24 +181,44 @@ void petscMatNullSpaceCreate_2args(const M2C_OpaqueType *comm, int has_cnst,
                                    M2C_OpaqueType *nullsp, int *errCode,
                                    boolean_T *toplevel)
 {
+  static const char b_cv[8] = {'M', 'P', 'I', '_', 'C', 'o', 'm', 'm'};
   MPI_Comm t_comm;
   MatNullSpace arg;
   Vec *ptr;
-  char *b_ptr;
   emxArray_char_T *b_comm;
   int i;
   int sizepe;
-  if (!isequal(comm->type)) {
+  const char *varargin_1_data;
+  char *b_ptr;
+  char *comm_data;
+  boolean_T p;
+  varargin_1_data = comm->type->data;
+  p = (comm->type->size[1] == 8);
+  if (p && (comm->type->size[1] != 0)) {
+    boolean_T exitg1;
+    sizepe = 0;
+    exitg1 = false;
+    while ((!exitg1) && (sizepe < 8)) {
+      if (varargin_1_data[sizepe] != b_cv[sizepe]) {
+        p = false;
+        exitg1 = true;
+      } else {
+        sizepe++;
+      }
+    }
+  }
+  if (!p) {
     emxInit_char_T(&b_comm, 2);
     i = b_comm->size[0] * b_comm->size[1];
     b_comm->size[0] = 1;
     b_comm->size[1] = comm->type->size[1] + 1;
     emxEnsureCapacity_char_T(b_comm, i);
+    comm_data = b_comm->data;
     sizepe = comm->type->size[1];
     for (i = 0; i < sizepe; i++) {
-      b_comm->data[i] = comm->type->data[i];
+      comm_data[i] = comm->type->data[i];
     }
-    b_comm->data[comm->type->size[1]] = '\x00';
+    comm_data[comm->type->size[1]] = '\x00';
     m2c_error(b_comm);
     emxFree_char_T(&b_comm);
   }

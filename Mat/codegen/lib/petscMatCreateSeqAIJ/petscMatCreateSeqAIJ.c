@@ -21,10 +21,12 @@ void petscMatCreateSeqAIJ(int m, int n, int nz, const emxArray_int32_T *nnz,
   MPI_Comm comm;
   Mat arg;
   char *ptr;
+  const int *nnz_data;
   int i;
   int sizepe;
+  nnz_data = nnz->data;
   comm = PETSC_COMM_SELF;
-  *errCode = MatCreateSeqAIJ(comm, m, n, nz, &nnz->data[0], &arg);
+  *errCode = MatCreateSeqAIJ(comm, m, n, nz, &nnz_data[0], &arg);
   sizepe = sizeof(Mat);
   i = mat->data->size[0];
   mat->data->size[0] = sizepe;

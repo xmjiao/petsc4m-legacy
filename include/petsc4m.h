@@ -7,6 +7,7 @@
 
 #include "petscsys.h"
 #include "petscksp.h"
+#include "petsctime.h"
 
 typedef PetscErrorCode (*MatNullSpaceRemoveFunc)(MatNullSpace,Vec,void*);
 

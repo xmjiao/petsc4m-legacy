@@ -41,14 +41,18 @@ void petscOptionsSetValue(const emxArray_char_T *iname,
                           boolean_T *toplevel)
 {
   PetscOptions obj;
-  if ((iname->size[1] != 0) && (iname->data[iname->size[1] - 1] != '\x00')) {
+  const char *iname_data;
+  const char *value_data;
+  value_data = value->data;
+  iname_data = iname->data;
+  if ((iname->size[1] != 0) && (iname_data[iname->size[1] - 1] != '\x00')) {
     m2c_error();
   }
-  if ((value->size[1] != 0) && (value->data[value->size[1] - 1] != '\x00')) {
+  if ((value->size[1] != 0) && (value_data[value->size[1] - 1] != '\x00')) {
     b_m2c_error();
   }
   obj = NULL;
-  *errCode = PetscOptionsSetValue(obj, &iname->data[0], &value->data[0]);
+  *errCode = PetscOptionsSetValue(obj, &iname_data[0], &value_data[0]);
   *toplevel = true;
   if (*errCode != 0) {
     c_m2c_error(*errCode);

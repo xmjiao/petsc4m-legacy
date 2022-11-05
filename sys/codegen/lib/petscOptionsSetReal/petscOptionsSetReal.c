@@ -28,13 +28,14 @@ static void m2c_error(void)
 void petscOptionsSetReal(const emxArray_char_T *iname, double value,
                          int *errCode, boolean_T *toplevel)
 {
-  PetscOptions obj;
   int i;
   char str[32];
   unsigned char t_str[32];
+  const char *iname_data;
   char *ptr;
+  iname_data = iname->data;
   *toplevel = true;
-  if ((iname->size[1] != 0) && (iname->data[iname->size[1] - 1] != '\x00')) {
+  if ((iname->size[1] != 0) && (iname_data[iname->size[1] - 1] != '\x00')) {
     m2c_error();
   }
   ptr = (char *)(&t_str[0]);
@@ -42,8 +43,9 @@ void petscOptionsSetReal(const emxArray_char_T *iname, double value,
   for (i = 0; i < 32; i++) {
     str[i] = (signed char)t_str[i];
   }
+  PetscOptions obj;
   obj = NULL;
-  *errCode = PetscOptionsSetValue(obj, &iname->data[0], &str[0]);
+  *errCode = PetscOptionsSetValue(obj, &iname_data[0], &str[0]);
   if (*errCode != 0) {
     b_m2c_error(*errCode);
   }
