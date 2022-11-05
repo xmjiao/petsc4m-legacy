@@ -1,7 +1,7 @@
-function val = PETSC_PCCOMPOSITE %#codegen
+function val = PETSC_PCCOMPOSITE
 % Obtain PETSC constant PCCOMPOSITE
 
 coder.inline('always');
 
-val = petscGetString('PCCOMPOSITE');
+val = 'composite';
 end

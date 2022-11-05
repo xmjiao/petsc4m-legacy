@@ -1,7 +1,6 @@
-function val = PETSC_MATTRANSPOSEMAT %#codegen
+function val = PETSC_MATTRANSPOSEMAT
 % Obtain PETSC constant MATTRANSPOSEMAT
 
 coder.inline('always');
 
-val = petscGetString('MATTRANSPOSEMAT');
-end
+val = 'transposemat';end

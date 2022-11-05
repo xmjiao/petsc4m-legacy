@@ -1,7 +1,7 @@
-function val = PETSC_PCNONE %#codegen
+function val = PETSC_PCNONE
 % Obtain PETSC constant PCNONE
 
 coder.inline('always');
 
-val = petscGetString('PCNONE');
+val = 'none';
 end

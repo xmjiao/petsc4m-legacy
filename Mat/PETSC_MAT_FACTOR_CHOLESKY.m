@@ -1,7 +1,7 @@
-function val = PETSC_MAT_FACTOR_CHOLESKY %#codegen
+function val = PETSC_MAT_FACTOR_CHOLESKY
 % Obtain PETSC constant MAT_FACTOR_CHOLESKY
 
 coder.inline('always');
 
-val = petscGetString('MAT_FACTOR_CHOLESKY');
+val = petscGetEnum('MAT_FACTOR_CHOLESKY');
 end

@@ -1,7 +1,6 @@
-function val = PETSC_MATSEQDENSE %#codegen
+function val = PETSC_MATSEQDENSE
 % Obtain PETSC constant MATSEQDENSE
 
 coder.inline('always');
 
-val = petscGetString('MATSEQDENSE');
-end
+val = 'seqdense';end

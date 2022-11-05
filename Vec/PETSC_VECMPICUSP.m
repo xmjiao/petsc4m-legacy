@@ -1,4 +1,4 @@
-function val = PETSC_VECMPICUSP %#codegen
+function val = PETSC_VECMPICUSP
 % Obtain PETSC constant VECMPICUSP
 
 coder.inline('always');

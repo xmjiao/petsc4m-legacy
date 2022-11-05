@@ -1,7 +1,7 @@
-function val = PETSC_KSPCG %#codegen
+function val = PETSC_KSPCG
 % Obtain PETSC constant KSPCG
 
 coder.inline('always');
 
-val = petscGetString('KSPCG');
+val = 'cg';
 end

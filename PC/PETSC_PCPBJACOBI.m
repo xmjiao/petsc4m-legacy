@@ -1,7 +1,7 @@
-function val = PETSC_PCPBJACOBI %#codegen
+function val = PETSC_PCPBJACOBI
 % Obtain PETSC constant PCPBJACOBI
 
 coder.inline('always');
 
-val = petscGetString('PCPBJACOBI');
+val = 'pbjacobi';
 end

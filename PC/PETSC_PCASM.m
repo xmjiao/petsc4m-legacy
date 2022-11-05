@@ -1,7 +1,7 @@
-function val = PETSC_PCASM %#codegen
+function val = PETSC_PCASM
 % Obtain PETSC constant PCASM
 
 coder.inline('always');
 
-val = petscGetString('PCASM');
+val = 'asm';
 end

@@ -1,4 +1,4 @@
-function val = PETSC_MAT_LOCAL %#codegen
+function val = PETSC_MAT_LOCAL
 % Obtain PETSC constant MAT_LOCAL
 
 coder.inline('always');

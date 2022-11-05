@@ -1,4 +1,4 @@
-function val = PETSC_DEFAULT %#codegen
+function val = PETSC_DEFAULT
 % Obtain PETSC constant PETSC_DEFAULT
 
 coder.inline('always');

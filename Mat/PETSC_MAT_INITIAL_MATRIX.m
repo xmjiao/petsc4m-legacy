@@ -1,4 +1,4 @@
-function val = PETSC_MAT_INITIAL_MATRIX %#codegen
+function val = PETSC_MAT_INITIAL_MATRIX
 % Obtain PETSC constant MAT_INITIAL_MATRIX
 
 coder.inline('always');

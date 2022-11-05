@@ -1,4 +1,4 @@
-function val = PETSC_VECCUDA %#codegen
+function val = PETSC_VECCUDA
 % Obtain PETSC constant VECCUDA
 
 coder.inline('always');

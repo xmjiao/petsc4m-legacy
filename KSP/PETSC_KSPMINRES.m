@@ -1,7 +1,7 @@
-function val = PETSC_KSPMINRES %#codegen
+function val = PETSC_KSPMINRES
 % Obtain PETSC constant KSPMINRES
 
 coder.inline('always');
 
-val = petscGetString('KSPMINRES');
+val = 'minres';
 end

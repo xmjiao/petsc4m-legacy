@@ -1,7 +1,6 @@
-function val = PETSC_MATMPIADJ %#codegen
+function val = PETSC_MATMPIADJ
 % Obtain PETSC constant MATMPIADJ
 
 coder.inline('always');
 
-val = petscGetString('MATMPIADJ');
-end
+val = 'mpiadj';end

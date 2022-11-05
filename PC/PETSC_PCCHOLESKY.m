@@ -1,7 +1,7 @@
-function val = PETSC_PCCHOLESKY %#codegen
+function val = PETSC_PCCHOLESKY
 % Obtain PETSC constant PCCHOLESKY
 
 coder.inline('always');
 
-val = petscGetString('PCCHOLESKY');
+val = 'cholesky';
 end

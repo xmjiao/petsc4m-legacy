@@ -1,7 +1,7 @@
-function val = PETSC_PCGAMG %#codegen
+function val = PETSC_PCGAMG
 % Obtain PETSC constant PCGAMG
 
 coder.inline('always');
 
-val = petscGetString('PCGAMG');
+val = 'gamg';
 end

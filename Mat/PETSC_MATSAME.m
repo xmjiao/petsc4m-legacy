@@ -1,7 +1,6 @@
-function val = PETSC_MATSAME %#codegen
+function val = PETSC_MATSAME
 % Obtain PETSC constant MATSAME
 
 coder.inline('always');
 
-val = petscGetString('MATSAME');
-end
+val = 'same';end

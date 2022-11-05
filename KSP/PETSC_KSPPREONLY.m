@@ -1,7 +1,7 @@
-function val = PETSC_KSPPREONLY %#codegen
+function val = PETSC_KSPPREONLY
 % Obtain PETSC constant KSPPREONLY
 
 coder.inline('always');
 
-val = petscGetString('KSPPREONLY');
+val = 'preonly';
 end

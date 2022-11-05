@@ -1,7 +1,7 @@
-function val = PETSC_PCLU %#codegen
+function val = PETSC_PCLU
 % Obtain PETSC constant PCLU
 
 coder.inline('always');
 
-val = petscGetString('PCLU');
+val = 'lu';
 end

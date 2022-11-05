@@ -1,7 +1,6 @@
-function val = PETSC_MATMPIAIJCUSP %#codegen
+function val = PETSC_MATMPIAIJCUSP
 % Obtain PETSC constant MATMPIAIJCUSP
 
 coder.inline('always');
 
-val = petscGetString('MATMPIAIJCUSP');
-end
+val = 'mpiaijcusp';end

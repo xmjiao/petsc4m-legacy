@@ -1,4 +1,4 @@
-function val = PETSC_MAT_FLUSH_ASSEMBLY %#codegen
+function val = PETSC_MAT_FLUSH_ASSEMBLY
 % Obtain PETSC constant MAT_FLUSH_ASSEMBLY
 
 coder.inline('always');

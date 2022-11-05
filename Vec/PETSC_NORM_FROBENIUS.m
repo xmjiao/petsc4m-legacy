@@ -1,4 +1,4 @@
-function val = PETSC_NORM_FROBENIUS %#codegen
+function val = PETSC_NORM_FROBENIUS
 % Obtain PETSC constant NORM_FROBENIUS
 
 coder.inline('always');

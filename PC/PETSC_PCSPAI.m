@@ -1,7 +1,7 @@
-function val = PETSC_PCSPAI %#codegen
+function val = PETSC_PCSPAI
 % Obtain PETSC constant PCSPAI
 
 coder.inline('always');
 
-val = petscGetString('PCSPAI');
+val = 'spai';
 end

@@ -1,7 +1,6 @@
-function val = PETSC_MATMPIAIJCUSPARSE %#codegen
+function val = PETSC_MATMPIAIJCUSPARSE
 % Obtain PETSC constant MATMPIAIJCUSPARSE
 
 coder.inline('always');
 
-val = petscGetString('MATMPIAIJCUSPARSE');
-end
+val = 'mpiaijcusparse';end

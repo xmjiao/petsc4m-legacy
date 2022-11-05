@@ -1,7 +1,6 @@
-function val = PETSC_MATDENSE %#codegen
+function val = PETSC_MATDENSE
 % Obtain PETSC constant MATDENSE
 
 coder.inline('always');
 
-val = petscGetString('MATDENSE');
-end
+val = 'dense';end

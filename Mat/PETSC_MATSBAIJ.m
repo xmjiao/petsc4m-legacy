@@ -1,7 +1,6 @@
-function val = PETSC_MATSBAIJ %#codegen
+function val = PETSC_MATSBAIJ
 % Obtain PETSC constant MATSBAIJ
 
 coder.inline('always');
 
-val = petscGetString('MATSBAIJ');
-end
+val = 'sbaij';end

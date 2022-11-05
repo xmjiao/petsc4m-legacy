@@ -1,4 +1,4 @@
-function val = PETSC_NORM_INFINITY %#codegen
+function val = PETSC_NORM_INFINITY
 % Obtain PETSC constant NORM_INFINITY
 
 coder.inline('always');

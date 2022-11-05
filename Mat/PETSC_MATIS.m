@@ -1,7 +1,6 @@
-function val = PETSC_MATIS %#codegen
+function val = PETSC_MATIS
 % Obtain PETSC constant MATIS
 
 coder.inline('always');
 
-val = petscGetString('MATIS');
-end
+val = 'is';end

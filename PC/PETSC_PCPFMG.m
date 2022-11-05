@@ -1,7 +1,7 @@
-function val = PETSC_PCPFMG %#codegen
+function val = PETSC_PCPFMG
 % Obtain PETSC constant PCPFMG
 
 coder.inline('always');
 
-val = petscGetString('PCPFMG');
+val = 'pfmg';
 end

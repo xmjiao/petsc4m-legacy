@@ -1,4 +1,4 @@
-function val = PETSC_NORM_2 %#codegen
+function val = PETSC_NORM_2
 % Obtain PETSC constant NORM_2
 
 coder.inline('always');

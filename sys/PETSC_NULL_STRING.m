@@ -1,4 +1,4 @@
-function obj = PETSC_NULL_STRING %#codegen
+function obj = PETSC_NULL_STRING
 % Obtain PETSC constant NULL of type char *
 
 coder.inline('always');

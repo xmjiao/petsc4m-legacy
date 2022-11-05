@@ -1,7 +1,7 @@
-function val = PETSC_PCILU %#codegen
-% Obtain PETSC constant PCILU
+function val = PETSC_PCICC
+% Obtain PETSC constant PCICC
 
 coder.inline('always');
 
-val = petscGetString('PCILU');
+val = 'icc';
 end

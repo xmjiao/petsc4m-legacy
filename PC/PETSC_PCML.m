@@ -1,7 +1,7 @@
-function val = PETSC_PCML %#codegen
+function val = PETSC_PCML
 % Obtain PETSC constant PCML
 
 coder.inline('always');
 
-val = petscGetString('PCML');
+val = 'ml';
 end

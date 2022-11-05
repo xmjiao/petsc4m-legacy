@@ -1,4 +1,4 @@
-function val = PETSC_NULL %#codegen
+function val = PETSC_NULL
 % Obtain PETSC constant PETSC_NULL
 
 coder.inline('always');

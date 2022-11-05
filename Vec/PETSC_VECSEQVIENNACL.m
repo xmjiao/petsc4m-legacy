@@ -1,4 +1,4 @@
-function val = PETSC_VECSEQVIENNACL %#codegen
+function val = PETSC_VECSEQVIENNACL
 % Obtain PETSC constant VECSEQVIENNACL
 
 coder.inline('always');

@@ -1,7 +1,7 @@
-function val = PETSC_PCHYPRE %#codegen
+function val = PETSC_PCHYPRE
 % Obtain PETSC constant PCHYPRE
 
 coder.inline('always');
 
-val = petscGetString('PCHYPRE');
+val = 'hypre';
 end

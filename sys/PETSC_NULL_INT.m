@@ -1,4 +1,4 @@
-function obj = PETSC_NULL_INT %#codegen
+function obj = PETSC_NULL_INT
 % Obtain PETSC constant NULL of type int *
 
 coder.inline('always');

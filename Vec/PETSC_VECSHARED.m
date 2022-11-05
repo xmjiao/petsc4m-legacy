@@ -1,4 +1,4 @@
-function val = PETSC_VECSHARED %#codegen
+function val = PETSC_VECSHARED
 % Obtain PETSC constant VECSHARED
 
 coder.inline('always');

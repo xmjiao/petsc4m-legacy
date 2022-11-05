@@ -1,4 +1,4 @@
-function val = PETSC_DIFFERENT_NONZERO_PATTERN %#codegen
+function val = PETSC_DIFFERENT_NONZERO_PATTERN
 % Obtain PETSC constant DIFFERENT_NONZERO_PATTERN
 
 coder.inline('always');

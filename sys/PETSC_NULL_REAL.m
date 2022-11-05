@@ -1,4 +1,4 @@
-function obj = PETSC_NULL_REAL %#codegen
+function obj = PETSC_NULL_REAL
 % Obtain PETSC constant NULL of type PetscReal *
 
 coder.inline('always');

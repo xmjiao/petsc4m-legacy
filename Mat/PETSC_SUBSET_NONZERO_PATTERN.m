@@ -1,4 +1,4 @@
-function val = PETSC_SUBSET_NONZERO_PATTERN %#codegen
+function val = PETSC_SUBSET_NONZERO_PATTERN
 % Obtain PETSC constant SUBSET_NONZERO_PATTERN
 
 coder.inline('always');

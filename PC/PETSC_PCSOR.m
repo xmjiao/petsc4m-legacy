@@ -1,7 +1,7 @@
-function val = PETSC_PCSOR %#codegen
+function val = PETSC_PCSOR
 % Obtain PETSC constant PCSOR
 
 coder.inline('always');
 
-val = petscGetString('PCSOR');
+val = 'sor';
 end

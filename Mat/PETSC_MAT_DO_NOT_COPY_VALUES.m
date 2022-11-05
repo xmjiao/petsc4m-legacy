@@ -1,4 +1,4 @@
-function val = PETSC_MAT_DO_NOT_COPY_VALUES %#codegen
+function val = PETSC_MAT_DO_NOT_COPY_VALUES
 % Obtain PETSC constant MAT_DO_NOT_COPY_VALUES
 
 coder.inline('always');

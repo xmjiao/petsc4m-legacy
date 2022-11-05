@@ -1,7 +1,7 @@
-function val = PETSC_MAT_FACTOR_ILU %#codegen
+function val = PETSC_MAT_FACTOR_ILU
 % Obtain PETSC constant MAT_FACTOR_ILU
 
 coder.inline('always');
 
-val = petscGetString('MAT_FACTOR_ILU');
+val = petscGetEnum('MAT_FACTOR_ILU');
 end
