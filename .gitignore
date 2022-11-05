@@ -56,3 +56,4 @@ octave-core
 *.html
 run_*_exe.m
 eval_*_ptx.m
+.vscode/
