@@ -3,6 +3,7 @@
 #include "m2c.h"
 #include "mpi.h"
 #include "petsc4m.h"
+
 static const char cv[9] = {'s', 'y', 'm', 'm', 'e', 't', 'r', 'i', 'c'};
 
 static void b_m2c_error(int varargin_3);
@@ -673,7 +674,6 @@ void petscSolveCRS_10args(
   KSP t_ksp;
   Mat AMat;
   Mat t_mat;
-  PetscOptions t_opts;
   Vec bVec;
   Vec t_vec;
   Vec x0Vec;
@@ -759,8 +759,7 @@ void petscSolveCRS_10args(
     VecAssemblyEnd(x0Vec);
     xVec = x0Vec;
   }
-  t_opts = NULL;
-  PetscOptionsClear(&t_opts);
+  PetscOptionsClear(NULL);
   b_petscKSPSetup(AMat, solver, pctype, solpack, &ksp, &time_setup);
   b_petscKSPDriver(ksp, bVec, xVec, rtol, maxiter, x0Vec, flag, relres, iter,
                    reshis, &time_solve);
@@ -826,7 +825,6 @@ void petscSolveCRS_11args(
   KSP ksp;
   KSP t_ksp;
   Mat AMat;
-  PetscOptions t_opts;
   Vec bVec;
   Vec t_vec;
   Vec x0Vec;
@@ -918,8 +916,7 @@ void petscSolveCRS_11args(
     VecAssemblyEnd(x0Vec);
     xVec = x0Vec;
   }
-  t_opts = NULL;
-  PetscOptionsClear(&t_opts);
+  PetscOptionsClear(NULL);
   if (opts->size[1] != 0) {
     emxInit_char_T(&opts1, 2);
     if (opts_data[opts->size[1] - 1] != '\x00') {
@@ -1081,7 +1078,6 @@ void petscSolveCRS_4args(const emxArray_int32_T *Arows,
   Mat t_mat;
   PC t_pc;
   PetscObject t_obj;
-  PetscOptions t_opts;
   double b_t;
   double t;
   int iroa;
@@ -1090,8 +1086,7 @@ void petscSolveCRS_4args(const emxArray_int32_T *Arows,
   VecAssemblyBegin(bVec);
   VecAssemblyEnd(bVec);
   VecDuplicate(bVec, &xVec);
-  t_opts = NULL;
-  PetscOptionsClear(&t_opts);
+  PetscOptionsClear(NULL);
   t_obj = (PetscObject)(AMat);
   PetscObjectGetComm(t_obj, &t_comm);
   KSPCreate(t_comm, &ksp);
@@ -1212,15 +1207,13 @@ void petscSolveCRS_5args(const emxArray_int32_T *Arows,
   }
   KSP t_ksp;
   Mat t_mat;
-  PetscOptions t_opts;
   int iroa;
   iroa = (INSERT_VALUES);
   VecSetValues(bVec, b->size[0], &idx_data[0], &b_data[0], iroa);
   VecAssemblyBegin(bVec);
   VecAssemblyEnd(bVec);
   VecDuplicate(bVec, &xVec);
-  t_opts = NULL;
-  PetscOptionsClear(&t_opts);
+  PetscOptionsClear(NULL);
   petscKSPSetup(AMat, solver, &ksp, &time_setup);
   petscKSPDriver(ksp, bVec, xVec, NULL, flag, relres, iter, reshis,
                  &time_solve);
@@ -1345,7 +1338,6 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   for (yk = 0; yk < b_n; yk++) {
     idx_data[yk] = y_data[yk];
   }
-  PetscOptions t_opts;
   int iroa;
   iroa = (INSERT_VALUES);
   VecSetValues(bVec, b->size[0], &idx_data[0], &b_data[0], iroa);
@@ -1353,8 +1345,7 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   VecAssemblyEnd(bVec);
   x0 = NULL;
   VecDuplicate(bVec, &xVec);
-  t_opts = NULL;
-  PetscOptionsClear(&t_opts);
+  PetscOptionsClear(NULL);
   petscKSPSetup(AMat, solver, &ksp, &time_setup);
   b_n = (NORM_2);
   VecNorm(bVec, b_n, &bnrm);
@@ -1556,15 +1547,13 @@ void petscSolveCRS_7args(const emxArray_int32_T *Arows,
   }
   KSP t_ksp;
   Mat t_mat;
-  PetscOptions t_opts;
   int iroa;
   iroa = (INSERT_VALUES);
   VecSetValues(bVec, b->size[0], &idx_data[0], &b_data[0], iroa);
   VecAssemblyBegin(bVec);
   VecAssemblyEnd(bVec);
   VecDuplicate(bVec, &xVec);
-  t_opts = NULL;
-  PetscOptionsClear(&t_opts);
+  PetscOptionsClear(NULL);
   petscKSPSetup(AMat, solver, &ksp, &time_setup);
   b_petscKSPDriver(ksp, bVec, xVec, rtol, maxiter, NULL, flag, relres, iter,
                    reshis, &time_solve);
@@ -1684,15 +1673,13 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows,
   for (k = 0; k < yk; k++) {
     idx_data[k] = y_data[k];
   }
-  PetscOptions t_opts;
   int iroa;
   iroa = (INSERT_VALUES);
   VecSetValues(bVec, b->size[0], &idx_data[0], &b_data[0], iroa);
   VecAssemblyBegin(bVec);
   VecAssemblyEnd(bVec);
   VecDuplicate(bVec, &xVec);
-  t_opts = NULL;
-  PetscOptionsClear(&t_opts);
+  PetscOptionsClear(NULL);
   t_obj = (PetscObject)(AMat);
   PetscObjectGetComm(t_obj, &t_comm);
   KSPCreate(t_comm, &ksp);
@@ -1870,15 +1857,13 @@ void petscSolveCRS_9args(const emxArray_int32_T *Arows,
   }
   KSP t_ksp;
   Mat t_mat;
-  PetscOptions t_opts;
   int iroa;
   iroa = (INSERT_VALUES);
   VecSetValues(bVec, b->size[0], &idx_data[0], &b_data[0], iroa);
   VecAssemblyBegin(bVec);
   VecAssemblyEnd(bVec);
   VecDuplicate(bVec, &xVec);
-  t_opts = NULL;
-  PetscOptionsClear(&t_opts);
+  PetscOptionsClear(NULL);
   b_petscKSPSetup(AMat, solver, pctype, solpack, &ksp, &time_setup);
   b_petscKSPDriver(ksp, bVec, xVec, rtol, maxiter, NULL, flag, relres, iter,
                    reshis, &time_solve);

@@ -1,5 +1,5 @@
 function [opts, errCode, toplevel] = petscOptionsClear(opts)
-%Destroys an option database. 
+%Destroys an option database.
 %
 %  [opts, errCode] = petscOptionsClear(opts)
 %
@@ -17,9 +17,9 @@ if ~isempty(coder.target)
         opts = PETSC_NULL_OPTIONS;
     end
     t_opts = PetscOptions(opts);
-    
-    errCode = coder.ceval('PetscOptionsClear', coder.ref(t_opts));
-    
+
+    errCode = coder.ceval('PetscOptionsClear', t_opts);
+
     toplevel = nargout>2;
     opts = PetscOptions(t_opts, toplevel);
 
