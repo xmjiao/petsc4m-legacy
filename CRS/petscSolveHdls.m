@@ -69,6 +69,8 @@ if nargin<7; pctype = ''; end
 if nargin<8; pcopt = ''; end
 if nargin<9; x0 = PETSC_NULL_VEC; end
 
+petscOptionsClear;
+
 if nargin==10 && ~isempty(opts)
     petscOptionsInsert(opts);
 end
