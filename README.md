@@ -1,5 +1,5 @@
 NOTE:
-Petsc4m is deprecatd. Please consider using petsc4m-lite.
+Petsc4m is deprecated and no longer maintained. Please use [petsc4m-lite](https://github.com/hifirworks/petsc4m-lite) instead.
 
 OVERVIEW
 ========
