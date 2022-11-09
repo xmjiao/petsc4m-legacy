@@ -1,3 +1,6 @@
+NOTE:
+Petsc4m is deprecatd. Please consider using petsc4m-lite.
+
 OVERVIEW
 ========
 
