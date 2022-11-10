@@ -84,7 +84,7 @@ if nargout>1
     time = double(0);
     % When timing the run, use barrier for more accurate results.
     petscBarrier(ksp);
-    t = petscGetCPUTime();
+    t = petscTime();
 end
 
 petscKSPSetUp(ksp);
@@ -92,6 +92,6 @@ petscKSPSetUp(ksp);
 if nargout>1
     % When timing the run, use barrier for more accurate results.
     petscBarrier(ksp);
-    time = petscGetCPUTime()-t;
+    time = petscTime()-t;
 end
 end

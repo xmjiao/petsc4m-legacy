@@ -37,7 +37,7 @@ if nargout>4
     time = double(0);
     % When timing the run, use barrier for more accurate results.
     petscBarrier(t_ksp);
-    t = petscGetCPUTime();
+    t = petscTime();
 end
 
 if nargin<5 || maxits==0
@@ -75,7 +75,7 @@ petscKSPSolve(t_ksp, b, x);
 if nargout>4
     % When timing the run, use barrier for more accurate results.
     petscBarrier(t_ksp);
-    time = petscGetCPUTime()-t;
+    time = petscTime()-t;
 end
 
 flag = petscKSPGetConvergedReason(t_ksp);

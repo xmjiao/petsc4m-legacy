@@ -82,7 +82,7 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   VecNorm(b, type, &bnrm);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&t);
+  PetscTime(&t);
   if (maxits == 0) {
     maxits = (PETSC_DEFAULT);
   }
@@ -104,7 +104,7 @@ static void b_petscKSPDriver(KSP ksp, Vec b, Vec x, double rtol, int maxits,
   KSPSolve(ksp, b, x);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&b_t);
+  PetscTime(&b_t);
   KSPGetConvergedReason(ksp, flag);
   KSPGetResidualNorm(ksp, &res);
   KSPGetIterationNumber(ksp, iter);
@@ -332,11 +332,11 @@ static void b_petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype,
   KSPSetFromOptions(*ksp);
   t_obj = (PetscObject)(*ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&t);
+  PetscTime(&t);
   KSPSetUp(*ksp);
   t_obj = (PetscObject)(*ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&b_t);
+  PetscTime(&b_t);
   *b_time = b_t - t;
 }
 
@@ -419,7 +419,7 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   VecNorm(b, type, &bnrm);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&t);
+  PetscTime(&t);
   maxits = (PETSC_DEFAULT);
   type = (PETSC_DEFAULT);
   b_x = (PETSC_DEFAULT);
@@ -436,7 +436,7 @@ static void petscKSPDriver(KSP ksp, Vec b, Vec x, Vec x0, int *flag,
   KSPSolve(ksp, b, x);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&b_t);
+  PetscTime(&b_t);
   KSPGetConvergedReason(ksp, flag);
   KSPGetResidualNorm(ksp, &res);
   KSPGetIterationNumber(ksp, iter);
@@ -561,11 +561,11 @@ static void petscKSPSetup(Mat Amat, const emxArray_char_T *ksptype, KSP *ksp,
   KSPSetFromOptions(*ksp);
   t_obj = (PetscObject)(*ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&t);
+  PetscTime(&t);
   KSPSetUp(*ksp);
   t_obj = (PetscObject)(*ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&b_t);
+  PetscTime(&b_t);
   *b_time = b_t - t;
 }
 
@@ -1097,11 +1097,11 @@ void petscSolveCRS_4args(const emxArray_int32_T *Arows,
   KSPSetFromOptions(ksp);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&t);
+  PetscTime(&t);
   KSPSetUp(ksp);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&b_t);
+  PetscTime(&b_t);
   petscKSPDriver(ksp, bVec, xVec, NULL, flag, relres, iter, reshis,
                  &time_solve);
   times[0] = b_t - t;
@@ -1351,7 +1351,7 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   VecNorm(bVec, b_n, &bnrm);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&t);
+  PetscTime(&t);
   maxits = (PETSC_DEFAULT);
   if (rtol == 0.0) {
     b_n = (PETSC_DEFAULT);
@@ -1371,7 +1371,7 @@ void petscSolveCRS_6args(const emxArray_int32_T *Arows,
   KSPSolve(ksp, bVec, xVec);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&b_t);
+  PetscTime(&b_t);
   KSPGetConvergedReason(ksp, flag);
   KSPGetResidualNorm(ksp, &res);
   KSPGetIterationNumber(ksp, iter);
@@ -1745,11 +1745,11 @@ void petscSolveCRS_8args(const emxArray_int32_T *Arows,
   KSPSetFromOptions(ksp);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&t);
+  PetscTime(&t);
   KSPSetUp(ksp);
   t_obj = (PetscObject)(ksp);
   PetscBarrier(t_obj);
-  PetscGetCPUTime(&b_t);
+  PetscTime(&b_t);
   b_petscKSPDriver(ksp, bVec, xVec, rtol, maxiter, NULL, flag, relres, iter,
                    reshis, &time_solve);
   times[0] = b_t - t;
